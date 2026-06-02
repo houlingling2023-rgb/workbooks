@@ -1,0 +1,1157 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《ABtest与因果推断》交互练习册</title>
+<style>
+:root{
+  --paper:#faf6ec; --paper-2:#f4eedf; --card:#fffdf7;
+  --ink:#322e28; --ink-soft:#6f675a; --ink-faint:#9a9384;
+  --accent:#1f7a6b; --accent-deep:#16584d; --accent-tint:#eaf2ef;
+  --warn:#c0392b; --line:#e6ddcb; --line-soft:#efe8d8;
+  --maxread:720px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;}
+header.topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#f5efe0;
+  display:flex;align-items:center;gap:14px;padding:10px 18px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+.topbar .burger{display:none;background:none;border:none;color:#f5efe0;font-size:22px;cursor:pointer;line-height:1;}
+.topbar h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+.topbar .spine{font-size:12.5px;color:#cfe3dd;border-left:1px solid #3c7c70;padding-left:14px;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .progress{font-size:12.5px;background:#15504675;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.wrap{display:flex;align-items:flex-start;}
+nav.toc{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);overflow-y:auto;
+  width:255px;flex:0 0 255px;background:var(--paper-2);border-right:1px solid var(--line);padding:16px 10px 60px;}
+nav.toc .grp{font-size:12px;color:var(--ink-faint);font-weight:700;margin:16px 8px 6px;letter-spacing:.5px;}
+nav.toc a{display:flex;align-items:flex-start;gap:7px;text-decoration:none;color:var(--ink-soft);
+  font-size:13.5px;padding:6px 9px;border-radius:7px;margin:1px 0;line-height:1.45;}
+nav.toc a:hover{background:var(--accent-tint);color:var(--accent-deep);}
+nav.toc a.active{background:var(--accent-tint);color:var(--accent-deep);font-weight:700;box-shadow:inset 3px 0 0 var(--accent);}
+nav.toc a .ck{flex:0 0 auto;width:15px;color:var(--accent);font-weight:700;}
+nav.toc a.special{color:var(--accent-deep);font-weight:600;}
+nav.toc a.dim{opacity:.4;cursor:default;}
+nav.toc a.dim:hover{background:none;color:var(--ink-soft);}
+main{flex:1;min-width:0;padding:0 28px 120px;}
+.reader{max-width:var(--maxread);margin:0 auto;}
+section.sec{padding-top:30px;scroll-margin-top:60px;}
+.sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:10px;margin:8px 0 6px;}
+.sec-h h2{font-size:23px;margin:0;color:var(--accent-deep);font-weight:800;}
+.badge-time{font-size:12px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.badge-axis{font-size:12px;color:var(--accent-deep);background:var(--accent-tint);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.done-btn{margin-left:auto;font-size:12.5px;background:none;border:1px solid var(--line);color:var(--ink-soft);padding:4px 12px;border-radius:20px;cursor:pointer;}
+.done-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.step{margin:22px 0;}
+.step-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin:0 0 8px;}
+.step-h .ic{font-size:18px;}
+.step-body{padding-left:2px;}
+.step-body>p:first-child{margin-top:0;}
+p{margin:.55em 0;}
+strong{color:var(--ink);}
+.accent{color:var(--accent-deep);font-weight:700;}
+.blk{font-size:15.5px;font-weight:800;color:var(--ink);margin:18px 0 6px;}
+.quote{border-left:3px solid var(--line);background:var(--paper-2);border-radius:0 8px 8px 0;padding:10px 15px;margin:13px 0;}
+.quote>p:first-child{margin-top:0;} .quote>p:last-child{margin-bottom:0;}
+pre{background:#f3ecdb;color:#3b362d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;overflow-x:auto;
+  font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13px;line-height:1.65;margin:12px 0;}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);border-radius:8px;padding:12px 15px;margin:14px 0;font-size:15px;}
+.callout .c-h{font-weight:800;color:var(--accent-deep);margin-bottom:4px;}
+.callout.ok{border-left-color:var(--accent);background:var(--accent-tint);}
+.methodcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0;}
+.methodcard h4{margin:0 0 8px;color:var(--accent-deep);font-size:15px;}
+.methodcard ol{margin:0;padding-left:22px;} .methodcard li{margin:5px 0;}
+ul.check{list-style:none;padding-left:2px;margin:10px 0;}
+ul.check li{position:relative;padding-left:26px;margin:7px 0;}
+ul.check li::before{content:"❌";position:absolute;left:0;font-size:14px;}
+.warn-x{color:var(--warn);font-weight:700;}
+ul.selfck{list-style:none;padding-left:2px;margin:10px 0;}
+ul.selfck li{position:relative;padding-left:26px;margin:7px 0;}
+ul.selfck li::before{content:"☐";position:absolute;left:0;color:var(--ink-faint);font-size:16px;}
+.ta-label{font-size:13px;color:var(--ink-soft);margin:10px 0 5px;}
+textarea.ta{width:100%;min-height:74px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 13px;font-family:inherit;font-size:15px;line-height:1.7;color:var(--ink);resize:vertical;}
+textarea.ta:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint);}
+.saved-tag{font-size:11.5px;color:var(--accent);margin-left:8px;opacity:0;transition:opacity .3s;}
+.saved-tag.show{opacity:1;}
+.recall{background:var(--accent-tint);border:1px dashed var(--accent);border-radius:9px;padding:11px 14px;margin:12px 0;font-size:14.5px;}
+.recall .rh{font-weight:700;color:var(--accent-deep);font-size:13px;margin-bottom:4px;}
+.recall .rc{white-space:pre-wrap;color:var(--ink);}
+.recall.empty{border-style:dotted;}
+.recall.empty .rc{color:var(--ink-faint);font-style:italic;}
+details.fold{border:1px dashed var(--accent);border-radius:9px;margin:12px 0;background:var(--card);}
+details.fold>summary{cursor:pointer;list-style:none;padding:11px 15px;font-weight:700;color:var(--accent-deep);user-select:none;}
+details.fold>summary::-webkit-details-marker{display:none;}
+details.fold>summary::before{content:"▸ ";color:var(--accent);}
+details.fold[open]>summary{border-bottom:1px solid var(--line-soft);}
+details.fold[open]>summary::before{content:"▾ ";}
+details.fold .fold-in{padding:8px 16px 14px;}
+.map{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0;}
+.map .m-box{border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;background:var(--paper);}
+.map .m-box.lead{background:var(--accent-deep);color:#f1ece0;border-color:var(--accent-deep);}
+.map .m-box.lead b{color:#fff;}
+.map .m-cap{font-weight:800;color:var(--ink);margin:0 0 7px;font-size:13.5px;}
+.map .m-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0;}
+.map a.chip,.map span.chip{display:inline-block;text-decoration:none;font-size:12.5px;color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:3px 11px;}
+.map a.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.map .m-arrow{text-align:center;color:var(--ink-faint);font-size:15px;margin:2px 0;}
+.map .lyr{font-size:11px;color:var(--ink-faint);}
+.map .m-axis{flex:0 0 auto;font-weight:800;color:var(--accent-deep);width:30px;}
+.map .m-note{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;}
+.lead-callout{background:var(--accent-deep);color:#eef4f1;border-radius:10px;padding:13px 17px;margin:14px 0;}
+.lead-callout b{color:#fff;}
+.intro-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:18px 0;}
+.intro-card h3{margin:.2em 0 .4em;color:var(--accent-deep);}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.tbl-scroll{overflow-x:auto;margin:12px 0;}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--card);}
+th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;}
+thead th{background:var(--paper-2);color:var(--ink);font-weight:700;}
+tbody tr:nth-child(even){background:#fcf9f1;}
+.note{color:var(--ink-soft);font-size:14px;}
+.scrim{display:none;position:fixed;inset:48px 0 0;background:rgba(0,0,0,.3);z-index:25;}
+@media (max-width:820px){
+  nav.toc{position:fixed;top:48px;left:0;z-index:28;transform:translateX(-100%);transition:transform .2s;box-shadow:2px 0 14px rgba(0,0,0,.15);}
+  nav.toc.open{transform:translateX(0);}
+  .scrim.open{display:block;}
+  .topbar .burger{display:block;} .topbar .spine{display:none;}
+  main{padding:0 16px 100px;}
+}
+@media print{
+  header.topbar,nav.toc,.done-btn,.scrim,.saved-tag{display:none!important;}
+  main{padding:0;} textarea.ta{border-color:#bbb;} details.fold{border-color:#bbb;}
+  details.fold[open] .fold-in,details.fold>summary{display:block;}
+  body{font-size:12pt;background:#fff;}
+}
+</style>
+</head><body>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="目录">☰</button>
+  <h1>ABtest与因果推断 · 练习册</h1>
+  <div class="spine">8 步动线 · 先写后照 · 进度本地存档</div>
+  <div class="progress" id="progress">已学 0 / 20</div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav class="toc" id="toc">
+<a href="#map" class="special">🗺 全景图</a>
+<a href="#paths" class="special">📅 学习路径</a>
+<div class="grp">第一章　因果推断原理</div>
+<a href="#sec-1-1"><span class="ck" data-ck></span>第 1 节　1.1 什么是因果关系</a>
+<a href="#sec-1-2"><span class="ck" data-ck></span>第 2 节　1.2 如何发现因果关系</a>
+<a href="#sec-1-3"><span class="ck" data-ck></span>第 3 节　1.3 工作中的因果关系问题</a>
+<a href="#sec-1-4"><span class="ck" data-ck></span>第 4 节　1.4 随机实验解决因果问题的原理</a>
+<a href="#sec-1-5"><span class="ck" data-ck></span>第 5 节　1.5 3个随机实验的例子</a>
+<a href="#sec-1-6"><span class="ck" data-ck></span>第 6 节　1.6 直接观测的问题</a>
+<a href="#sec-1-7"><span class="ck" data-ck></span>第 7 节　1.7 分层法与控制变量</a>
+<a href="#sec-1-8"><span class="ck" data-ck></span>第 8 节　1.8 回归、匹配、双重差分</a>
+<a href="#sec-1-9"><span class="ck" data-ck></span>第 9 节　1.9 复杂现实问题的处理</a>
+<div class="grp">第二章　ABtest 实战</div>
+<a href="#sec-2-1"><span class="ck" data-ck></span>第 10 节　2.1 前置知识：埋点与用户行为</a>
+<a href="#sec-2-2"><span class="ck" data-ck></span>第 11 节　2.2 一个例子，看懂实验全流程</a>
+<a href="#sec-2-3"><span class="ck" data-ck></span>第 12 节　2.3 一个例子，看懂实验配置</a>
+<a href="#sec-2-4"><span class="ck" data-ck></span>第 13 节　2.4 复习：ABtest 统计学原理</a>
+<a href="#sec-2-5"><span class="ck" data-ck></span>第 14 节　2.5 一个例子，看懂三类实验问题</a>
+<a href="#sec-2-6"><span class="ck" data-ck></span>第 15 节　2.6 页面类实验设计</a>
+<a href="#sec-2-7"><span class="ck" data-ck></span>第 16 节　2.7 优惠类实验设计</a>
+<a href="#sec-2-8"><span class="ck" data-ck></span>第 17 节　2.8 策略类实验设计</a>
+<a href="#sec-2-9"><span class="ck" data-ck></span>第 18 节　2.9 为什么实验有效，上线后没有效果</a>
+<a href="#sec-2-10"><span class="ck" data-ck></span>第 19 节　2.10 缺少条件时，简单替代方案</a>
+<a href="#sec-2-11"><span class="ck" data-ck></span>第 20 节　2.11 ABtest 常见问题与对策</a>
+<a href="#capstone" class="special">🎓 结课大实战</a>
+</nav>
+<main><div class="reader">
+<div class="intro-card"><h3>怎么用这本练习册</h3><p>每节按 <strong>8 步动线</strong>把你"逼着先动手、最后真会做"：🎯先卡你 → 🔑一个动作 → 🧠高手怎么想 → ✍️跟着做 → 🪜换你做 → 🃏方法卡 → ⚠️易错+自测 → 🧭挂回全景。</p><p><strong>命根子是 🪜换你做 和 ⚠️自测</strong>：在输入框里<strong>先自己写</strong>，再点开"对照参考"——顶部会浮现你写的、下面才是参考。写的内容自动存浏览器，关了再开还在；点"标记学完"记进度。</p></div>
+<h2 id="mapttl" style="color:var(--accent-deep)">🗺 全景图</h2>
+<div class="map" id="map"><div class="m-box lead"><b>内核</b>：因果推断是逻辑课——先想清"问题/假设/办法"，再谈方法。两条主线：① 方法阶梯 感觉→观察→干预→反事实‖分层→回归/匹配/DID→ABtest；② 难度阶梯 yes-no→单因素→组合→多因素→地狱级。三层：理解原理→设计实验→排查翻车。</div><div class="m-box"><div class="m-cap">第一章 · 因果推断原理（为什么/怎么找/怎么验）</div><div class="m-row"><a class="chip" href="#sec-1-1">1.1 什么是因果</a><a class="chip" href="#sec-1-2">1.2 怎么找4步</a><a class="chip" href="#sec-1-3">1.3 难度分级</a><a class="chip" href="#sec-1-4">1.4 随机实验</a><a class="chip" href="#sec-1-5">1.5 三个例子</a><a class="chip" href="#sec-1-6">1.6 观测陷阱</a><a class="chip" href="#sec-1-7">1.7 分层法</a><a class="chip" href="#sec-1-8">1.8 回归匹配DID</a><a class="chip" href="#sec-1-9">1.9 复杂现实</a></div></div><div class="m-box"><div class="m-cap">第二章 · ABtest 实战（怎么落地/排错）</div><div class="m-row"><a class="chip" href="#sec-2-1">2.1 埋点</a><a class="chip" href="#sec-2-2">2.2 全流程</a><a class="chip" href="#sec-2-3">2.3 配置</a><a class="chip" href="#sec-2-4">2.4 统计复习</a><a class="chip" href="#sec-2-5">2.5 三类问题</a><a class="chip" href="#sec-2-6">2.6 页面</a><a class="chip" href="#sec-2-7">2.7 优惠</a><a class="chip" href="#sec-2-8">2.8 策略</a><a class="chip" href="#sec-2-9">2.9 上线无效</a><a class="chip" href="#sec-2-10">2.10 替代方案</a><a class="chip" href="#sec-2-11">2.11 问题对策</a></div></div><div class="m-note">怎么用：随时问"我在练哪条主线（方法/难度）、哪一层（理解→设计→排错）"，就知道这节在地图哪儿。卡住时回到 1.1（揪后门）和 1.3（先定难度级别）两个原点。</div></div>
+<h2 id="paths">📅 学习路径表</h2><div class="tbl-scroll"><table><thead><tr><th>路径</th><th>适合谁</th><th>学哪些节</th><th>建议节奏</th></tr></thead><tbody><tr><td><strong>最小可用</strong>（先上手）</td><td>时间紧、马上要做实验</td><td>1.1 → 1.2 → 1.3 → 2.1 → 2.2 → 2.11</td><td>每天 1 节，1 周读完</td></tr><tr><td><strong>完整深读</strong>（系统掌握）</td><td>想真正学会因果 + ABtest</td><td>1.1 ~ 2.11 全部 + 🎓 结课大实战</td><td>每天 1–2 节，2 周读完</td></tr><tr><td><strong>按角色加餐</strong></td><td>见下</td><td>—</td><td>—</td></tr></tbody></table></div>
+<p class="blk">按角色加餐</p>
+<ul><li><strong>互联网数据分析师</strong>：重 2.1–2.8（埋点/流程/配置/三类实验），1.6–1.8 速过</li><li><strong>传统行业（银行/电信/零售）</strong>：重 1.7–1.9（分层/匹配/DID/分而治之）+ 2.10（没平台的替代方案）</li><li><strong>面试备战</strong>：重 1.1–1.3（因果思维 + 难度分级）、2.4（统计原理一句话）、2.11（常见问题对策）</li></ul>
+<hr class="soft">
+<h2 style="color:var(--accent-deep);border-bottom:2px solid var(--line);padding-bottom:6px;margin-top:40px">第一章　因果推断原理</h2>
+<section class="sec" id="sec-1-1">
+<div class="sec-h"><h2>第 1 节　1.1 什么是因果关系</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">原理 · 理解</span><button class="done-btn" data-done="1-1">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>某 App 数据团队发现：<strong>每天点开推送通知的用户，月留存率比不点的高 20 个百分点</strong>。产品负责人当场拍板："那还等什么，给所有用户多发推送，留存肯定能涨上去！"</p>
+<p>先别往下看。给自己 1 分钟，在纸上回答三个问题：</p>
+<ol><li>这句话里的 X（原因）和 Y（结果）各是什么？</li><li>"多发推送"真能拉高留存吗？这中间是不是有个更根本的原因被跳过了？</li><li>如果让你拦下这位负责人，你会先问他哪一句话？</li></ol>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_1" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>拿到任何"X 影响 Y"的说法，先把它画成 X→Y，再追问一句"有没有别的箭头指向 X"——而不是急着去套 PSM/DID。</strong></p></div>
+<p>把这一个动作练成肌肉记忆，这节就拿下了，其余都是细节。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p>因果关系就是回答"为什么"，核心是五件事：</p>
+<pre>        ┌─ ① X ──→ Y                （没睡好 → 困：一句话因果）
+        │   ② 传递性：X→A→Y          （A=中介变量，链路可以很长，但不必穷尽）
+因果关系 ┤   ③ 交互作用：X1、X2 共同影响 Y（不能简单相加）
+        │   ④ 后门(最关键)：有没有 ?──→X（更根本的原因，揪不出就全错）
+        └─ ⑤ 不在 X→Y 链路上的因素 → 可以不管
+
+切入点决定成败：X、Y 是人选的，选错 → 整条路径和数据全错</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：念经流的"咕咚来了"</strong> 陈老师管那些只会背 "PSM、DID、Uplift" 的人叫"念经流"——他们把名词背得滚瓜烂熟，却像寓言里那群动物：听见"咕咚"一声就喊"咕咚来了、咕咚好厉害"，跟着一路狂奔，可咕咚到底是啥谁也不知道。因果推断不是四书五经、不是熟读并背诵，它是一门<strong>逻辑课</strong>：先搞清问题是什么、假设是什么、解决办法是什么，比背任何名词都重要。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范案例：</strong> "广告投入越多，销量越高，所以该给广告部多拨钱。" —— 高手会这样拆（认知节不算数，只走思路）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>步骤</th><th>怎么做</th><th>本例结论</th></tr></thead><tbody><tr><td>写 X→Y</td><td>把说法翻译成因果表达</td><td>广告投入(X) → 销量(Y)</td></tr><tr><td>找中介</td><td>X 和 Y 之间有没有传导环节</td><td>广告→曝光→进店→销量，曝光是中介</td></tr><tr><td><strong>揪后门</strong></td><td>有没有别的箭头<strong>指向 X</strong></td><td>旺季/大促(A) 同时抬高广告投入 <strong>和</strong> 销量</td></tr><tr><td>判断</td><td>X 是真因，还是被 A 带出来的假象</td><td>很可能是旺季造成的同涨，广告未必有独立作用</td></tr><tr><td>审切入点</td><td>X、Y 选得对不对、能不能影响</td><td>应先固定季节，再看广告的净效果</td></tr></tbody></table></div>
+<p>一句话：别看到"广告↑销量↑"就加钱，先把"旺季"这个后门揪出来。</p>
+<div class="recall empty" data-recall="q1_1"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某客服团队发现"<strong>响应速度越快的客服，客户满意度越高</strong>，所以应该多招客服、把响应压到更快"。请仿照上面的表，填出 X→Y、可能的中介、<strong>最该揪的那个后门</strong>、以及你的判断。</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_1" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><div class="tbl-scroll"><table><thead><tr><th>步骤</th><th>参考</th></tr></thead><tbody><tr><td>X→Y</td><td>客服响应速度(X) → 客户满意度(Y)</td></tr><tr><td>中介</td><td>响应快→问题更早被处理→情绪没恶化→满意度高</td></tr><tr><td><strong>后门</strong></td><td><strong>客户问题的复杂度/难易</strong>：简单问题天生回得快、客户也天生更满意；难问题回得慢、本就容易不满。问题难易同时指向"响应速度"和"满意度"</td></tr><tr><td>判断</td><td>"响应快"很可能只是"问题简单"的伴随结果，不一定是满意度的真因；盲目多招客服压响应，未必能提升满意度</td></tr><tr><td>切入点</td><td>应在<strong>相同难度</strong>的工单内，比较响应快慢对满意度的影响（控制后门）</td></tr></tbody></table></div>
+<p>要点：能揪出"问题难易"这个后门，就说明你掌握了这节的核心动作。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：给一个因果说法"祛魅"的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>给一个因果说法"祛魅"的 5 步</h4><ol><li><strong>写成 X→Y</strong>：把说法翻译成"谁是因、谁是果"，落笔写下假设</li><li><strong>理传递链</strong>：找出中介变量，锁定你真正能下手影响的那一环</li><li><strong>揪后门</strong>：问"有没有东西指向 X"，把更根本的原因挖出来</li><li><strong>砍干扰</strong>：剔除不在 X→Y 链路上的因素，别什么都往里塞</li><li><strong>审切入点</strong>：回头确认 X、Y 选得对不对，错了立刻重选</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>看到两件事一起涨就下因果结论（没揪后门，把同涨当因果）</li><li>把一个中介变量（响应速度、打卡天数）当成了真正的原因</li><li>一上来就想套 PSM/DID，却说不清自己的 X、Y 和假设是什么</li></ul><p><strong>自测（全新场景，判断题）：</strong> 下面四句话，请判断哪些犯了本节的错、分别错在"把中介当真因 / 没揪后门 / 相关当因果 / 切入点选错"中的哪一类：</p>
+<ol><li>"刷题越多的学生高考分越高，所以让所有人无脑刷题。"</li><li>"用我们 App 高级版的用户付费率更高，所以把所有人升到高级版就能多赚钱。"</li><li>"业绩差是因为你们态度不行，态度端正了业绩自然好。"</li><li>"便利店里雨伞卖得多的那天，关东煮也卖得多，所以雨伞带动了关东煮。"</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_1" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>没揪后门</strong>：学习自觉性/基础(A) 同时影响"刷题量"和"分数"，刷题未必是独立真因。</li><li><strong>把中介/结果当真因 + 选择偏差</strong>：本来就爱付费、需求强的人才会主动升高级版；"用高级版"是结果不是原因，强行全员升级不会凭空造出付费意愿。</li><li><strong>切入点选错</strong>："态度"是无法验证、无法影响的坏 X，选了它整条路径都没法做（正是 1.3 要讲的"地狱级"假设）。</li><li><strong>相关不等于因果（混淆变量）</strong>：下雨天(A) 同时让雨伞和关东煮都好卖，两者只是被天气同时带高，没有因果。</li></ol>
+<p>四句全中说明你已经能熟练"揪后门、辨中介、识假相关"了。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是整门课的<strong>地基</strong>：它站在"<strong>方法阶梯</strong>"的最起点、"<strong>理解原理</strong>"这一层。后面所有招式——观察、干预、反事实、分层、回归/匹配/DID、ABtest——都是在解决同一个问题："怎么把那个真正的 X→Y 找出来、并把指向 X 的后门控制住"。主导轴：第一章「因果推断原理」。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-2">
+<div class="sec-h"><h2>第 2 节　1.2 如何发现因果关系</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">原理 · 理解</span><button class="done-btn" data-done="1-2">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>某电商数据显示：<strong>用过站内搜索框的用户，客单价比没用过的高 40%</strong>。运营提议："那就把搜索框做大做显眼，引导所有人都去搜，客单价就能拉上来。"</p>
+<p>给自己 1 分钟：你会先信这个结论、还是先做点什么？你打算分几步、按什么顺序去验证它？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_2" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>发现一对因果，别急着上模型——按"我觉得 → 我看到 → 我试试 → 反事实"由浅入深地验，且时刻警惕"相关 ≠ 因果"。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>找因果四步（证据逐步加强）：
+① 我觉得  凭直觉提 X、Y（最稀缺的能力）
+② 我看到  描述统计支不支持？⚠️相关≠因果(混淆变量/人为扭曲)
+③ 我试试  能干预就干预，看 Y 是否朝预期变化
+④ 反事实  干预不了，就找"平行世界里的另一个我"做参照</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：龙脉梗</strong> 中国 GDP 年年涨、陈老师家门前的小树也年年长，相关系数一算高达 <strong>0.99</strong>——于是"证明"我家门前那棵树是中国龙脉，千万别砍，砍了中国就完了。这就是纯粹的数字游戏：统计量是人造的，只要两个数同涨同跌就能算出 0.99，跟有没有业务含义毫无关系。<strong>相关 ≠ 因果</strong>，这句话专治这种假象。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范案例：</strong> "会员等级越高的用户，年消费越高，所以多把用户升成高等级会员就能多赚钱。"</p>
+<div class="tbl-scroll"><table><thead><tr><th>步</th><th>怎么做</th><th>本例</th></tr></thead><tbody><tr><td>我觉得</td><td>提 X→Y</td><td>会员等级(X) → 年消费(Y)</td></tr><tr><td>我看到</td><td>查描述统计 + 防假相关</td><td>高等级消费确实高，但<strong>消费高的人本来就会被系统升成高等级</strong>——是 Y 带动了 X，因果反了</td></tr><tr><td>我试试</td><td>能不能干预</td><td>随机挑一批普通用户<strong>直接送高等级</strong>，看消费会不会涨</td></tr><tr><td>反事实</td><td>干预不了就找参照</td><td>找一批"消费水平相近、但一个被升级一个没升"的用户对比</td></tr></tbody></table></div>
+<p>结论：别看到"高等级↔高消费"就无脑升级——很可能是消费高才升级，反过来送等级未必有用。</p>
+<div class="recall empty" data-recall="q1_2"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> "<strong>安装了我们 App 桌面小组件的用户，月活跃天数明显更多</strong>，所以该弹窗引导所有人都装小组件。" 请用四步法走一遍：① 这个相关里最可能的"因果反向/混淆"是什么？② 你会设计一个什么"我试试"的干预？③ 干预不了时怎么构造反事实？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_2" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>我看到/防假相关</strong>：很可能是<strong>重度用户本来就活跃</strong>，他们才愿意装小组件——是"活跃"带来了"装组件"，而不是反过来（因果方向可能反了，也可能有"用户粘性"这个共同后门）。</li><li><strong>我试试</strong>：随机选一批用户<strong>默认帮他们装上</strong>小组件（另一批不装），过几周比月活跃天数。</li><li><strong>反事实</strong>：找一批活跃度、机型、使用时长都相近、但一组装了一组没装的用户做配对对比。</li></ul>
+<p>要点：能看出"可能是活跃带来装组件，而非装组件带来活跃"，就掌握了这节的核心警觉。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：发现并验证一对因果的 4 步</div><div class="step-body">
+<div class="methodcard"><h4>发现并验证一对因果的 4 步</h4><ol><li><strong>提（我觉得）</strong>：凭业务直觉写下 X→Y，先有再谈对错</li><li><strong>查（我看到）</strong>：拉描述统计；同时排查混淆变量、因果反向、人为扭曲</li><li><strong>试（我试试）</strong>：能干预就小范围干预，看 Y 是否朝预期动</li><li><strong>代（反事实）</strong>：干预不了，就找特征相似的样本做"平行世界的我"</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>初步提出 X、Y 就直接上 PSM/DID（跳过了"我看到""我试试"）</li><li>看到高相关系数就下因果结论（没排查混淆/反向）</li><li>把"被人为操纵出来的数据"当成真相</li></ul><p><strong>自测（全新场景，二选一 + 判断）：</strong> 一家书店发现"<strong>会员里买帆布袋周边的人，全年购书量是不买的人的 3 倍</strong>"。店长想"多推帆布袋来带动买书"。请回答：</p>
+<ol><li>这更可能是 ①帆布袋让人爱买书，还是 ②本来就爱书的铁杆才会顺手买周边？</li><li>如果要用"我试试"验证，你会怎么做？</li><li>这里的"共同后门"最可能是什么？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_2" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li>选 <strong>②</strong>：是"爱书的铁杆"这个共同原因，同时带来了"买周边"和"购书多"——典型的混淆/因果反向，帆布袋只是结果不是原因。</li><li>随机给一批普通会员<strong>免费送帆布袋</strong>（一批不送），过一段时间比两组购书量；若没差异，说明帆布袋无独立作用。</li><li>共同后门 = <strong>对书店的热爱/粘性（铁杆程度）</strong>，它同时拉高"买周边"和"购书量"。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"<strong>方法阶梯</strong>"的第一段——把"找因果"拆成四级证据（感觉→观察→干预→反事实），后面的随机实验（1.4–1.5）是"我试试"的极致，分层/回归/匹配/DID（1.7–1.8）是"反事实"的各种实现。主导轴：第一章「因果推断原理」，层次：理解原理。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-3">
+<div class="sec-h"><h2>第 3 节　1.3 工作中的因果关系问题</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">原理 · 理解</span><button class="done-btn" data-done="1-3">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你是数据分析师，一天内收到三个需求：</p>
+<ul><li>A：「把下单按钮从『立即购买』改成『马上抢』，转化会不会更高？」</li><li>B：「我们的会员费定 198 还是 268，哪个总收入高？」</li><li>C：「公司今年业绩没达标，到底是产品不行、还是市场不行、还是销售不行？」</li></ul>
+<p>给自己 1 分钟：这三个需求，哪个你今天就能开测、哪个你压根不该用 ABtest 去碰？为什么？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_3" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>拿到一个因果问题，先给它定难度级别（yes-no / 单因素多选 / 组合 / 多因素牵扯 / 地狱级），再决定能不能直接上 ABtest。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>难度阶梯：
+① yes/no       做了有没有用            → 直接测
+② 单因素多选    放左/右、红/蓝、10/20/30%  → 直接测
+③ 组合         多因素打包，复杂度爆炸     → 能测但要拆开一个个来
+④ 多因素牵扯    流程式(4部门) / 总分式(推B挤A) → 观察法/局部干预
+★ 地狱级       大环境/对手/产品/一线…互相甩锅 → 真相不重要，领导诉求最重要</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：诸葛亮从来不问刘备有多少兵</strong> 地狱级现场：业绩不好，有人甩锅大环境、有人怪对手、有人骂一线，最后老板一句"你们都是态度有问题——<strong>诸葛亮从来不问刘备有多少兵</strong>，你要问问自己行不行"。这句话一出，"态度"成了无法验证的坏假设，分析就此终结，结局只剩炒人。它提醒你：地狱级问题里真相和数据都不重要，领导想要什么才重要，<strong>方法越简单越能活</strong>。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 给开头三个需求定级 + 选招——</p>
+<div class="tbl-scroll"><table><thead><tr><th>需求</th><th>定级</th><th>该用什么</th></tr></thead><tbody><tr><td>A 改按钮文案</td><td>② 单因素多选</td><td>直接 ABtest，A/B 两版测转化</td></tr><tr><td>B 会员费 198/268</td><td>② 单因素多选（参数）</td><td>直接 ABtest，两组比总收入（注意看客单×转化的合力）</td></tr><tr><td>C 业绩为何没达标</td><td>★ 地狱级</td><td>别硬测：先读懂领导诉求，用最简单的观察先把战场从"互相甩锅"收敛到一个能测的点</td></tr></tbody></table></div>
+<div class="recall empty" data-recall="q1_3"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 给下面三个需求定级、并各写一句"该用什么招"：</p>
+<ol><li>「详情页同时改：主图换成视频 + 价格加划线 + 加『限量』标签，哪种组合卖得最好？」</li><li>「APP 推送要不要加表情符号，点击率会不会高？」</li><li>「我们大力推新品 B 之后，老品 A 的销量掉了，是不是 B 抢了 A 的客？」</li></ol>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_3" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>③ 组合</strong>（主图×价格×标签三因素打包）→ 能上 ABtest 但复杂度直线上升，建议一个一个来、先测最重要的（通常先价格）。</li><li><strong>① yes/no</strong>（加不加表情）→ 最容易，直接 A 组加 B 组不加测点击率。</li><li><strong>④ 多因素牵扯·总分式</strong>（推 B 挤 A）→ 很难 ABtest（只有"推/不推"没中间档）；先用观察法：看 A 流失的老客是不是流向了 B、B 有没有带来净增量。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：给因果问题定级选招的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>给因果问题定级选招的 5 步</h4><ol><li><strong>定级</strong>：yes/no？单因素多选？组合？多因素牵扯？地狱级？</li><li><strong>一二级</strong>：直接 ABtest</li><li><strong>三级</strong>：拆成单因素，先测最重要的</li><li><strong>四级</strong>：观察法找漏点/看分流，能局部干预就小范围试</li><li><strong>地狱级</strong>：读懂领导诉求，用最简单方法，别把自己变靶子</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>不分难度，一律想用 ABtest 解决（流程式/总分式根本测不动）</li><li>在地狱级问题里追求"用高级模型找真相说服所有人"</li><li>跟"大环境不好""态度有问题"这种无法验证的假设较劲</li></ul><p><strong>自测（全新场景，定级 + 选招）：</strong> 某连锁餐饮的四个问题，请分别定级并给出第一步该做什么：</p>
+<ol><li>「门口立牌换个颜色，进店率会变吗？」</li><li>「套餐定价 39/49/59 三档，哪档外卖单量×客单最优？」</li><li>「这家店业绩差，是选址不好、还是店长不行、还是菜品问题、还是外卖平台抽成太高？」</li><li>「同时调整：菜单首图 + 起送价 + 满减门槛，哪种组合 GMV 最高？」</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_3" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>① yes/no</strong> → 直接 ABtest（两版立牌比进店率）。</li><li><strong>② 单因素多选</strong> → 直接 ABtest 三档对比，注意看"单量×客单"的合力而非只看单量。</li><li><strong>★ 地狱级</strong>（选址/店长/菜品/平台互相甩锅，且"选址""抽成"基本无法验证）→ 别硬测；先读懂老板诉求，用观察法把能比的（如同商圈同店型对比）先拎出来。</li><li><strong>③ 组合</strong> → 能测但复杂度爆炸，拆开一个个来、先测影响最大的（起送价/满减这类价格因素优先）。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"<strong>难度阶梯</strong>"这条主线的总纲——它决定你后面到底走"直接 ABtest"还是"观察/干预"那条路。它和 1.2 的"方法阶梯"是两条交叉主线：1.2 讲"用什么招"，1.3 讲"问题有多难、配得上哪招"。主导轴：第一章「因果推断原理」，层次：理解原理 → 通向实战设计。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-4">
+<div class="sec-h"><h2>第 4 节　1.4 随机实验解决因果问题的原理</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">原理 · 理解</span><button class="done-btn" data-done="1-4">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>公司新上了一门销售培训课。HR 想知道它有没有用，说："简单啊，把<strong>报名参加</strong>的人和<strong>没报名</strong>的人，三个月后业绩一比不就知道了？"</p>
+<p>给自己 1 分钟：HR 这个对比错在哪？如果换你来设计，你会怎么分组？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_4" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>靠"随机分组 + 大样本"切断一切干扰、并构造出反事实；而且分组方式必须让参与者看不出自己在哪一组。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>为什么随机化能排干扰？—— 把整体"切碎再重组"
+  按年份/朝向分 → 一定残留系统偏差
+  切得越碎、随机分两堆 → 光照/水土/人力…正负因素相互抵消、两堆全均等
+  → 实现"苹果比苹果"，只剩你要验的那个处置(treatment)
+
+随机实验 = 随机分组 + 大样本抽样 → 处置组 vs 对照组 → 比 Y
+医学双盲 = 同一原理：医生病人都不知谁吃药/糖豆，连心理作用都抹平</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：费舍尔切碎一块地</strong> 现代统计学之父费舍尔，当年就是种豆子时琢磨出随机化的：一块地，今年种 A 明年种 B 不行（气候不同）、东种西种也不行（太阳东升西落光照偏）。他的解法是把地<strong>切成上百个碎块、随机撒种</strong>。很多人想不通"凭啥切碎就不用管土壤光照了"——因为切够碎再重组，正负因素自己抵消了，最后只剩种子的差异。这就是随机化的全部魔法。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 测"一款『护眼提醒 App』能否减缓学生近视加深"，高手这样设计随机实验——</p>
+<div class="tbl-scroll"><table><thead><tr><th>设计点</th><th>怎么做</th></tr></thead><tbody><tr><td>X / Y</td><td>X = 是否用护眼 App；Y = 一学期后近视度数加深量</td></tr><tr><td>随机分组</td><td><strong>全体学生编号、随机分两组</strong>（不是按班、按年级——那有天然差异），分完用历史视力校验两组起点相近</td></tr><tr><td>隔绝信息（盲）</td><td>对照组发一个<strong>外观一样、但不提醒的"假 App"</strong>，学生不知道自己装的是真是假 → 抹掉心理作用</td></tr><tr><td>防脱落</td><td>视力变差的学生家长可能中途让孩子退出 → 预估脱落、留补样本</td></tr></tbody></table></div>
+<p>一句话：HR 的"报名 vs 没报名"之所以错，是因为<strong>会主动报名培训的人本来就更上进</strong>——这不是随机分组，是拿两类不同的人在比。</p>
+<div class="recall empty" data-recall="q1_4"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某健身 App 想验证"它的『AI 配餐』功能能否帮用户减重"。请设计一个随机实验：① X、Y 各是什么？② 怎么分组才算随机、怎么校验两组起点一致？③ 怎么让对照组"看不出"自己没用到真功能？④ 最可能的脱落风险是什么？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_4" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>X/Y</strong>：X=是否使用 AI 配餐功能；Y=8 周后体重变化（kg）。</li><li><strong>随机分组</strong>：报名用户<strong>全体编号随机分两组</strong>（绝不能拿"自愿用配餐的"和"不用的"比——那是两类人）；分完用基线体重/BMI/年龄校验两组相近。</li><li><strong>隔绝信息</strong>：对照组给一份<strong>普通通用食谱</strong>（同样有"配餐"的外壳但非 AI 个性化），让两组都觉得自己在被"配餐"。</li><li><strong>脱落风险</strong>：减重慢的人容易放弃打卡退出 → 样本作废、要补；这正是"让差的人变更差很难留住"的典型脱落。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：设计一个靠谱随机实验的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>设计一个靠谱随机实验的 5 步</h4><ol><li><strong>定 X、Y</strong>：写清要施加的处置和要看的结果</li><li><strong>大样本随机分组</strong>：全体编号随机分，靠大数定律保证两组特征一致</li><li><strong>隔绝信息</strong>：让参与者看不出自己在哪组（向双盲看齐）</li><li><strong>盯脱落</strong>：预估谁会中途退出、退出后怎么补样本</li><li><strong>过三坎</strong>：成本能扛、脱落可控、信息能隔——三条都过才动手</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>用"自愿参加 vs 没参加"分组（这是两类人，不是随机）</li><li>让参与者看得出自己在哪组（招来安慰剂效应/人为干扰）</li><li>忽视实验脱落，等"会变差的人"退出后样本就废了</li></ul><p><strong>自测（全新场景，判断题）：</strong> 医院想测一种新降压药。下面四种分组方式，哪些是合格的随机实验、哪些有偏，分别说明：</p>
+<ol><li>让<strong>自愿试新药</strong>的病人当实验组，不愿意的当对照组。</li><li>把<strong>周一到周三</strong>来的病人当实验组，周四到周六的当对照组。</li><li>把所有病人<strong>编号后用随机数</strong>分两组，两组都发外观相同的药片（一组真药一组安慰剂），医生病人都不知情。</li><li>按<strong>身份证尾号单双</strong>分两组。</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_4" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>有偏</strong>：自愿试新药的人，病情认知/依从性天然不同，是两类人。</li><li><strong>有偏</strong>：就诊时间和病情轻重相关（重症随时来、轻症挑工作日），且对照组能看出差异。</li><li><strong>✅ 合格</strong>：编号随机 + 双盲，正是标准随机对照试验。</li><li><strong>基本合格但有隐患</strong>：尾号单双近似随机，但若某些群体（如特定地区批量办证）尾号有规律，会引入偏差——真随机数更稳。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"<strong>方法阶梯</strong>"的黄金顶点——随机实验是"我试试（干预）"的极致形态，能同时做到排干扰 + 造反事实。后面 1.5 教你怎么把它落到线上线下例子，1.6 之后讲"做不了随机实验时"的各种替代（分层/回归/匹配/DID）。主导轴：第一章「因果推断原理」，层次：理解原理。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-5">
+<div class="sec-h"><h2>第 5 节　1.5 3个随机实验的例子</h2><span class="badge-time">⏱ 预计时长 30–35 分钟（数据/案例节）</span><span class="badge-axis">原理 · 设计</span><button class="done-btn" data-done="1-5">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>某知识付费 App 的产品经理拍桌："数据显示，<strong>看完试听课的人付费率是没看完的 3 倍</strong>！那就强制——所有人必须看完试听课才能买！"</p>
+<p>给自己 1 分钟：这个"强制看完试听"的决策错在哪？如果让你来测，你真正该测的是什么？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_5" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>实验真正的核心是"测什么"——把 X/Y 抠清楚、识别伪命题、选对分流位置；统计计算平台早帮你做好了。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>实验设计要想全的四件事：
+① 抠 X/Y     对照组除处置外其余全一致；Y 要和处置直接相关
+② 随机抽样    全员编号随机分两等组，拿历史数据校验可比
+③ 排执行雷    信息隔绝 / 防聚堆暗示 / 防偷懒 / 贯穿周期
+④ 选分流位    效果页越深，分流点越靠后，否则样本被稀释
+
+⚠️ 伪命题识别：能被"逼"出来的中间指标(停留/看完)，多半是结果不是原因</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：停留 30 秒奖 100 块</strong> 有业务方要"测用户停留多久转化率最高、比如 6 秒"。陈老师怼：想让用户停留久还不简单？页面做个倒计时"停留 30 秒奖 100 元"，他绝对停够 30 秒——可他领完钱就走，根本不投保。<strong>停留是结果不是原因</strong>。所以开头那个"强制看完试听"也一样：本来就想买的人才会耐心看完试听，强制看完不会凭空造出购买欲。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 测"详情页加『猜你喜欢』模块能否提升点击"，各投 100 万曝光，全程算到底：</p>
+<div class="tbl-scroll"><table><thead><tr><th>组</th><th>曝光</th><th>点击</th><th>点击率</th></tr></thead><tbody><tr><td>A（无模块）</td><td>1,000,000</td><td>50,000</td><td>50000/1000000 = <strong>5.0%</strong></td></tr><tr><td>B（有模块）</td><td>1,000,000</td><td>62,000</td><td>62000/1000000 = <strong>6.2%</strong></td></tr></tbody></table></div>
+<ul><li>绝对提升 = 6.2% − 5.0% = <strong>1.2 个百分点</strong></li><li>相对提升 = 1.2% ÷ 5.0% = <strong>24%</strong></li></ul>
+<p>提升不算小、样本也够，B 版胜出。注意：这里 Y 选"点击率"而非 GMV——因为模块离最终成交远，中间还有选品、补贴等更强因素。</p>
+<div class="recall empty" data-recall="q1_5"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你（带着算）：</strong> 某 App 详情页改版，两组各 80,000 曝光：</p>
+<div class="tbl-scroll"><table><thead><tr><th>组</th><th>曝光</th><th>下单</th><th>下单转化率</th></tr></thead><tbody><tr><td>旧版</td><td>80,000</td><td>2,400</td><td>？</td></tr><tr><td>新版</td><td>80,000</td><td>3,000</td><td>？</td></tr></tbody></table></div>
+<p>请算出：① 两组下单转化率；② 绝对提升（百分点）；③ 相对提升（%）；④ 如果这个改动只出现在"支付页"，你会把分流放在哪、为什么？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_5" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>旧版转化率 = 2400 ÷ 80000 = <strong>3.0%</strong></li><li>新版转化率 = 3000 ÷ 80000 = <strong>3.75%</strong></li><li>绝对提升 = 3.75% − 3.0% = <strong>0.75 个百分点</strong></li><li>相对提升 = 0.75% ÷ 3.0% = <strong>25%</strong></li><li>分流位置：改动只在支付页，就该把<strong>分流点后移到详情页或支付页</strong>——若在首页早早分流，大量用户根本走不到支付页，效果会被严重稀释。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：把一个实验需求落地的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>把一个实验需求落地的 5 步</h4><ol><li><strong>抠 X/Y</strong>：逼自己做到"对照组除处置外其他全一致"，Y 和处置直接相关</li><li><strong>随机抽样 + 校验</strong>：全员编号分两等组，用历史数据验可比</li><li><strong>排执行雷</strong>：信息隔绝、防聚堆暗示、防偷懒、贯穿周期</li><li><strong>验真伪命题</strong>：这个指标是原因还是结果？能被"逼"出来的就是伪命题</li><li><strong>定分流位置</strong>：效果页越深、分流点越靠后</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>直接测"停留时长/看完率"这类能被逼出来的中间指标（伪命题）</li><li>处置组和对照组除了处置，其它条件没对齐</li><li>效果页藏得很深，却把分流放在最前面（样本被稀释）</li></ul><p><strong>自测（全新糊数据）：</strong> 某电商大促会场漏斗如下，请回答三问：</p>
+<div class="tbl-scroll"><table><thead><tr><th>环节</th><th>人数</th></tr></thead><tbody><tr><td>首页 banner 曝光</td><td>500,000</td></tr><tr><td>进入活动页</td><td>100,000</td></tr><tr><td>点击领券</td><td>20,000</td></tr><tr><td>最终下单</td><td>1,000</td></tr></tbody></table></div>
+<ol><li>算出三段转化率（曝光→活动页、活动页→领券、领券→下单）。</li><li>业务说"测一下让用户在活动页多停留就能提下单"——这是不是伪命题？为什么？</li><li>这个"下单立减 200"的优惠展示，你建议在哪一步做分流？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_5" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li>曝光→活动页 = 100000/500000 = <strong>20%</strong>；活动页→领券 = 20000/100000 = <strong>20%</strong>；领券→下单 = 1000/20000 = <strong>5%</strong>。</li><li><strong>是伪命题</strong>：停留时长是结果不是原因，做个抽奖/倒计时就能逼出停留，但换不来下单；真正该测的是"什么让用户领了券还愿意下单"（商品、优惠力度、门槛等）。</li><li>末段"领券→下单"只剩 5%、是最大卡点，且优惠出现在靠后环节——<strong>分流宜后移到活动页或领券页</strong>，避免大量没走到这步的人把效果稀释掉。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节把 1.4 的随机实验原理<strong>落到线上线下三个真实例子</strong>，是"理解原理 → 设计实验"的过桥节。它反复敲打的"实验设计 &gt;&gt; 统计计算""伪命题识别"，正是第二章 ABtest 实战的总开关。主导轴：第一章「因果推断原理」，层次：理解原理 → 设计实验。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-6">
+<div class="sec-h"><h2>第 6 节　1.6 直接观测的问题</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">原理 · 排错</span><button class="done-btn" data-done="1-6">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>HR 发现："<strong>参加过公司团建的员工，一年内离职率明显更低</strong>，所以多搞团建就能留住人。"</p>
+<p>给自己 1 分钟：这个结论可能踩了什么坑？是哪种坑——有个共同原因在背后，还是只看了一群有偏的人？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_6" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>识破两类假相关：① 混淆变量（找那个同时影响 X 和 Y 的共同因 A）；② 对撞/幸存者偏差（你是不是只盯着一个有偏的小样本）。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>陷阱一 · 混淆变量          陷阱二 · 对撞 / 幸存者偏差
+   A ──→ X                只观察了有偏的小样本
+   A ──→ Y   → 假相关       (去医院的人/返航的飞机)
+ 破解：控制 A、苹果比苹果    破解：扩大样本、补上"没返航"的那部分</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：返航飞机的弹孔</strong> 二战时工程师统计返航飞机，发现机翼弹孔最多，提议"加固机翼"。统计学家 Wald 一句话点醒：<strong>该加固的恰恰是弹孔最少的引擎和驾驶舱</strong>——因为打中那里的飞机根本没飞回来、没被你统计到。你只在"幸存者"这个有偏小样本里观察，结论就是反的。所以"参加团建离职率低"很可能也是幸存者偏差：本来就认同公司、不想走的人才会去参加团建。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> "用过优惠券的用户复购率更高，所以多发券能提复购。"——高手这样拆：</p>
+<div class="tbl-scroll"><table><thead><tr><th>步</th><th>怎么做</th><th>本例</th></tr></thead><tbody><tr><td>判类型</td><td>混淆还是对撞？</td><td>混淆变量</td></tr><tr><td>找共同因 A</td><td>谁同时影响"用券"和"复购"</td><td><strong>用户购物频次/粘性</strong>：高频用户既爱领券、本来也复购多</td></tr><tr><td>破解</td><td>控制 A、苹果比苹果</td><td>在<strong>相同购物频次</strong>的用户内，比较用券 vs 不用券的复购</td></tr><tr><td>结论</td><td>A 控制后 X 还有没有独立作用</td><td>很可能券只是被高频用户顺手领了，独立拉动复购的作用被高估</td></tr></tbody></table></div>
+<div class="recall empty" data-recall="q1_6"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> "<strong>看过我们直播的用户，月消费是没看过的 2 倍</strong>，所以要把直播入口做到最大、让所有人都看。" 请回答：① 这是混淆还是对撞/幸存者？② 那个共同原因 A（或有偏样本）是什么？③ 你会怎么破解？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_6" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>类型</strong>：混淆变量（也带幸存者味道）。</li><li><strong>共同因 A</strong>：<strong>用户对品牌的兴趣/忠诚度</strong>——本来就爱这个品牌的人，既愿意看直播、本来也消费高；不感兴趣的根本不会点开直播。</li><li><strong>破解</strong>：在<strong>兴趣/历史消费相近</strong>的用户内分层比较；或随机给一批用户<strong>推一次直播</strong>（一批不推）看消费是否真被拉动。把直播入口做大，对那些没兴趣的人多半无效。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：破解"可疑相关"的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>破解"可疑相关"的 5 步</h4><ol><li><strong>找 A</strong>：有没有一个共同因素同时影响 X 和 Y（混淆）？</li><li><strong>分层比</strong>：把 A 分开，在同样情况内重新比较</li><li><strong>查样本偏</strong>：我是不是只看了有偏的小样本（对撞/幸存者）？</li><li><strong>扩样本</strong>：补上流失/没返航的那部分</li><li><strong>正反验</strong>：正向反向都验；反向做不动就改"把坏的变好"</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>看到行为指标（看直播/用券/多点击）相关就让用户"多做"</li><li>只在"幸存者/高价值用户"里观察就下结论</li><li>用刷指标的方式（藏退出键逼停留）伪造效果</li></ul><p><strong>自测（全新场景，分类判断）：</strong> 下面四句话，请判断各属于「混淆变量」还是「对撞/幸存者偏差」，并说出那个 A 或有偏样本：</p>
+<ol><li>"我们的高分好评用户都很年轻，所以产品该主打年轻人。"</li><li>"夏天空调销量和冰淇淋销量高度正相关，所以卖空调时搭售冰淇淋。"</li><li>"急诊室里的病人，吸烟的反而比不吸烟的恢复快，所以吸烟有益康复。"</li><li>"用了我们 VIP 客服的客户续费率更高，所以给所有人配 VIP 客服。"</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_6" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>幸存者偏差</strong>：会留下来打高分的本就是喜欢你的人；不喜欢的早走了、没进入"好评用户"这个有偏样本。</li><li><strong>混淆变量</strong>：共同因 A = <strong>气温（夏天）</strong>，同时抬高空调和冰淇淋销量，两者无因果。</li><li><strong>对撞偏差</strong>（经典）：能进急诊室是被"病情严重"筛选过的——在"都已严重住院"这个被对撞筛过的小样本里，吸烟与恢复出现假关系，不代表整体。</li><li><strong>混淆变量</strong>：共同因 A = <strong>客户价值/付费意愿</strong>，高价值客户既会被分配 VIP 客服、本来也更愿续费。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"<strong>不能做随机实验时</strong>"的第一道防线——先认清直接观测的两大陷阱，下一节（1.7 分层）就教你动手破解混淆变量，1.8 再上回归/匹配/DID。主导轴：第一章「因果推断原理」，层次：理解原理 → 设计/排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-7">
+<div class="sec-h"><h2>第 7 节　1.7 分层法与控制变量</h2><span class="badge-time">⏱ 预计时长 30–35 分钟（数据/案例节）</span><span class="badge-axis">原理 · 排错</span><button class="done-btn" data-done="1-7">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>某 App 数据："<strong>老用户的付费率 12%，新用户只有 4%</strong>，所以多花钱召回老用户最划算。" 运营据此砍掉了拉新预算。</p>
+<p>给自己 1 分钟：只看这两个总数就下结论，可能漏了什么？如果加一个维度分层，结论会不会翻车？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_7" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>怀疑有混淆，就加一个维度做分层——揪出那个"指向 X、又影响 Y"的后门变量，分层后真相往往会翻转。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>分层法：加一个维度，把混淆/后门斩断
+        后门 A ──→ X ──→ Y
+                  └────────↗     A 才是更深层原因，X 只是中介
+做法：按 A 分层 → 每层内 A 一致 → 再比 X→Y
+⚠️ 不分层，整体结论可能和分层后完全相反（辛普森悖论）</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：女司机的"7% 里程、26% 事故"</strong> "女司机以 7% 的行车里程，造成了 26% 的事故 → 女司机就是开车差。" 听着数据确凿，但假设本身就错——该问的是"会不会开、开什么车、跑什么路"。按"有无驾驶经验"一分层就露馅：经验不足者事故率都高，而女司机里恰好老司机占比更少。<strong>差异来自层次结构，不是性别。</strong> 一个好分层，瞬间拆穿一个看似铁证的结论。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 两种疗法各治 100 人，整体看 B 更好，但加"病情"维度分层后翻转——</p>
+<div class="tbl-scroll"><table><thead><tr><th></th><th>轻症</th><th>重症</th><th>整体</th></tr></thead><tbody><tr><td>疗法 A</td><td>18/20 = <strong>90%</strong></td><td>20/80 = <strong>25%</strong></td><td>38/100 = <strong>38%</strong></td></tr><tr><td>疗法 B</td><td>40/50 = <strong>80%</strong></td><td>6/50 = <strong>12%</strong></td><td>46/100 = <strong>46%</strong></td></tr></tbody></table></div>
+<ul><li>只看整体：B(46%) &gt; A(38%)，似乎 B 好。</li><li>按病情分层：轻症 A(90%)&gt;B(80%)、重症 A(25%)&gt;B(12%)，<strong>两层 A 全赢！</strong></li><li>真相：A 接的重症占 80%、B 只占 50%，<strong>"病情"这个后门</strong>把 A 的整体拖低了。控制病情后，A 才是真的更好。</li></ul>
+<div class="recall empty" data-recall="q1_7"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你（带着算）：</strong> 甲、乙两个培训班各 100 人，整体通过率甲班更高。请按"入学基础"分层算一遍，看结论是否翻转：</p>
+<div class="tbl-scroll"><table><thead><tr><th></th><th>基础好</th><th>基础差</th><th>整体</th></tr></thead><tbody><tr><td>甲班</td><td>45/50</td><td>10/50</td><td>？</td></tr><tr><td>乙班</td><td>19/20</td><td>24/80</td><td>？</td></tr></tbody></table></div>
+<p>请算出：① 两班整体通过率；② 两班在"基础好""基础差"两层各自的通过率；③ 哪个班其实更会教？后门变量是什么？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_7" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_7"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>整体：甲 = (45+10)/100 = <strong>55%</strong>，乙 = (19+24)/100 = <strong>43%</strong> → 只看整体甲赢。</li><li>分层：基础好 甲 45/50=<strong>90%</strong> vs 乙 19/20=<strong>95%</strong>；基础差 甲 10/50=<strong>20%</strong> vs 乙 24/80=<strong>30%</strong> → <strong>两层都是乙更高！</strong></li><li><strong>乙班其实更会教</strong>。后门变量 = <strong>入学基础</strong>：乙班招的"基础差"学生占了 80%（甲班只占 50%），是生源结构把乙的整体拖低了。控制基础后乙反超——典型辛普森悖论。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：用分层法控制变量的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>用分层法控制变量的 5 步</h4><ol><li><strong>审假设</strong>：先确认你纠结的维度本身对不对</li><li><strong>加维度分层</strong>：把怀疑的因素分开，看真正的差异在哪层</li><li><strong>查穷尽</strong>：问"X 和 A 的组合穷尽了吗"，找被遗漏的变量</li><li><strong>判关系</strong>：新变量与 X 无关→随机化切断；有关→它是后门，要控制</li><li><strong>固后门</strong>：测目标因素前，先把商品/价格等后门固定住，分层抽样</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>只看整体总数就下结论（可能被辛普森悖论翻车）</li><li>在错误的假设上较劲（纠结性别而非"会不会开车"）</li><li>测某因素时不固定商品/价格这个最大后门</li></ul><p><strong>自测（全新场景，判断后门）：</strong> 你要分析"详情页改版(X) 是否提升了转化率(Y)"。手上有这些变量，请判断哪个是<strong>必须控制的后门</strong>、哪个可随机化忽略，并说明：</p>
+<ol><li>商品价格　2. 用户性别　3. 是否大促期间　4. 用户手机品牌</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_7" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_7"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>必须控制的后门</strong>：① <strong>商品价格</strong>——它既影响"哪些商品用了新版页(X)"（爆款/高价品常被优先改版），又强烈影响转化率(Y)，是典型后门，必须固定/分层。③ <strong>是否大促</strong>——大促同时影响流量结构和转化率，也要控制（避开或分层）。</li><li><strong>可随机化忽略</strong>：② 性别、④ 手机品牌——若它们与"是否用新版页"无关、只独立影响结果，随机分组就能切断，不必专门控制。</li><li>一句话：<strong>"指向 X、又影响 Y"的才是后门</strong>；只影响 Y、不影响 X 的，交给随机化。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是破解混淆变量最趁手的工具，也是"控制后门"思想的落点（"测文案先固定商品价格"这条会贯穿第二章）。下一节 1.8 把分层升级成回归/匹配/DID，处理多维度场景。主导轴：第一章「因果推断原理」，层次：设计/排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-8">
+<div class="sec-h"><h2>第 8 节　1.8 回归、匹配、双重差分</h2><span class="badge-time">⏱ 预计时长 30–35 分钟（数据/案例节）</span><span class="badge-axis">原理 · 排错</span><button class="done-btn" data-done="1-8">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>一位刚入职的分析师，拿各部门"人数 vs 业绩"跑了个回归，发现销售人数系数大、市场人数系数小，于是在周会上语出惊人："<strong>数据证明市场部没用，建议裁撤。</strong>"</p>
+<p>给自己 1 分钟：他这个回归结论最大的漏洞在哪？如果你是他领导，你会先问他哪一句？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_8" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>回归/匹配/DID 本质都是"找和自己相似的来比"，且共用一个死穴——一旦遗漏了"观测不到的强变量"，结论可能整个是错的。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>三件套 = 都在"找相似的"，只是找法不同：
+  回归   Y=θ+α·X+β·A   把混淆变量丢进方程，做因果【看系数】(不是R²)
+  匹配   给受处置者找协变量相同的人配对(样本小/非线性时用)
+  DID    两相似组、一个上政策 → (实验组前后差)−(对照组前后差)
+共同死穴：遗漏一个观测不到的强变量 → 现有系数全废、结论可能全错</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：北京的信用卡之谜</strong> 银行模型在北京地区预测奇差、怎么都解释不了。最后发现症结：北京大银行扎堆，<strong>人均持卡量远超别处</strong>，用户不响应营销是因为"早被别的行抢走了"。可"用户手里有几张别行的卡"这个变量，银行根本采不到——它极其重要却观测不到，于是所有对北京的预测全错。规律：<strong>业务渗透率越高的地方模型越准</strong>（小地方的移动你几乎掌握全部数据，就没有这个看不见的变量）。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范（双重差分 DID）：</strong> 某连锁在<strong>华东</strong>上了新陈列政策、<strong>华南</strong>没上，看月均销售额（万元）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>地区</th><th>政策前</th><th>政策后</th><th>自身前后差</th></tr></thead><tbody><tr><td>华东（实验组）</td><td>100</td><td>130</td><td>+30</td></tr><tr><td>华南（对照组）</td><td>100</td><td>110</td><td>+10</td></tr></tbody></table></div>
+<ul><li>华东涨了 30，但同期没上政策的华南也涨了 10（大盘自然增长）。</li><li><strong>DID = 30 − 10 = +20 万</strong> ← 这才是政策的净效果（扣掉了大盘）。</li><li>前提：两地政策前趋势原本平行。死穴提醒：若华东恰好同期开了新地铁带来客流，这个"看不到的变量"会让 +20 高估。</li></ul>
+<div class="recall empty" data-recall="q1_8"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你（带着算）：</strong> 某品牌在 <strong>A 市</strong>投了新广告、<strong>B 市</strong>没投，看周均销量（件）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>城市</th><th>投放前</th><th>投放后</th><th>自身前后差</th></tr></thead><tbody><tr><td>A 市（投放）</td><td>500</td><td>650</td><td>？</td></tr><tr><td>B 市（对照）</td><td>500</td><td>540</td><td>？</td></tr></tbody></table></div>
+<p>请算出：① 两市各自前后差；② 用 DID 求广告的净效果；③ 如果 A 市投放期正好赶上当地一个大型展会，你的净效果会被高估还是低估？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_8" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_8"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>A 市前后差 = 650 − 500 = <strong>+150</strong>；B 市前后差 = 540 − 500 = <strong>+40</strong>。</li><li><strong>DID = 150 − 40 = +110 件</strong> ← 广告净效果（扣掉了大盘自然增长 40）。</li><li>会被<strong>高估</strong>：展会是 A 市独有、且影响销量的"观测不到的强变量"，它把本属于展会的增量算到了广告头上——正是本节死穴。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：选用三件套做因果的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>选用三件套做因果的 5 步</h4><ol><li><strong>想清谁影响谁</strong>：先列因果关系，再决定丢哪些变量</li><li><strong>查遗漏</strong>：有没有影响大却观测不到的变量？有就承认结论有限</li><li><strong>选方法</strong>：样本小/非线性→匹配；有前后+对照组→DID；否则回归</li><li><strong>验前提</strong>：回归看线性假设、DID 看趋势平行</li><li><strong>读系数</strong>：因果只看系数（净效果），别被 R²/MSE 带偏</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>做因果却追求 R² 接近 1（应该看系数）</li><li>把一堆变量丢进 GMV 跑回归看显著就下结论（忽视遗漏强变量）</li><li>用 DID 不验"两组趋势原本平行"</li></ul><p><strong>自测（全新场景，判断 + 选方法）：</strong> 某教育公司"今年 3 月起在华北上线 AI 答疑、华南没上"，想评估它对续报率的影响。请回答：</p>
+<ol><li>开头那位"市场部没用"的分析师，最可能遗漏了什么观测不到的强变量？</li><li>这个 AI 答疑的评估，最适合用回归、匹配、还是 DID？为什么？</li><li>用这个方法前，你必须先验证什么前提？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_8" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_8"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li>最可能遗漏<strong>"市场部带来的品牌认知/线索质量"</strong>——市场的作用（让客户先知道、先信任）往往不体现在"人数"上，却强烈影响销售能否签单；只拿人数跑回归，等于漏了真正的强变量，结论站不住。</li><li>最适合 <strong>DID</strong>：有明确的"上线前/后"时间点 + "华北(实验)/华南(对照)"两组，正好做双重差分。</li><li>必须先验证<strong>"华北、华南两地的续报率在上线前趋势是平行的"</strong>——否则 DID 的差分会把本来就不同的增长趋势误算成 AI 答疑的效果。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"<strong>反事实</strong>"这条线的工程化顶峰——分层（1.7）管一个维度，回归/匹配/DID 管多维度。但它们都不解决"看不到的强变量"，所以第二章 ABtest（能随机化）才更彻底。主导轴：第一章「因果推断原理」，层次：设计/排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1-9">
+<div class="sec-h"><h2>第 9 节　1.9 复杂现实问题的处理</h2><span class="badge-time">⏱ 预计时长 30–35 分钟（数据/案例节）</span><span class="badge-axis">原理 · 综合</span><button class="done-btn" data-done="1-9">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>两家分店：<strong>旗舰店年营收 3000 万，社区店 1500 万</strong>。老板问你"为什么旗舰店强这么多"。你翻了三张表：旗舰店店长更资深、旗舰店大客户更多、旗舰店促销品卖得更好。</p>
+<p>给自己 1 分钟：你能不能只凭其中一张表回答老板？如果不能，你会怎么把这个问题拆开？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1_9" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>复杂问题别找"唯一答案"——分而治之：把它拆成几个独立维度，每个维度配最合适的手段（观察 / 匹配 / 干预 / 复制）。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>分而治之：每个维度配一种手段
+  基本特征(店长经验/年龄)     → 匹配法(找相似的人比)，结论好落地
+  相互绑定关系(大客户↔折扣)   → 直接看历史数据，不必建模
+  团队/客户构成              → 小范围干预("把坏的变好"试一试)
+  话术/促销品                → 直接复制(若不与政策绑定，照着做试)</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：东风本田的刀头</strong> 陈老师去东风本田做培训，发现他们的测试特别好做——测刀头切多久该换润滑剂、测感光效果，都有固定物理化学规律，能拖进实验室慢慢切到满意为止。可销售、体验、产品偏好这些<strong>社会科学问题</strong>多是感性的、难量化的，没法这么干。所以记住：<strong>没有最科学的方案，只有最适合业务的方案。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 把"旗舰店为何更强"拆成四个维度、各配一招——</p>
+<div class="tbl-scroll"><table><thead><tr><th>维度</th><th>现象</th><th>配什么手段</th><th>怎么做</th></tr></thead><tbody><tr><td>店长经验</td><td>旗舰店店长更资深</td><td><strong>匹配法</strong></td><td>找其它"店长经验相近"的店比营收，看经验是否真有独立作用</td></tr><tr><td>大客户↔折扣</td><td>大客户多、折扣也高</td><td><strong>看历史数据</strong></td><td>直接查政策：是不是规定大客户才能拿高折扣（绑定关系，不必建模）</td></tr><tr><td>团队/客户构成</td><td>旗舰店老员工/大客户多</td><td><strong>小范围干预</strong></td><td>给社区店派 1 个老员工 / 分 5 个大客户线索，看能否做起来</td></tr><tr><td>促销品话术</td><td>旗舰店促销品卖得好</td><td><strong>直接复制</strong></td><td>若话术与客户政策不绑定，让社区店照着卖、试能否起量</td></tr></tbody></table></div>
+<p>一句话：别纠结"到底哪个是真因"，把能观察的观察、能匹配的匹配、能干预的小范围干预、能复制的直接复制。</p>
+<div class="recall empty" data-recall="q1_9"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某连锁奶茶，<strong>商场店</strong>比<strong>街边店</strong>月均多卖 8 万。你发现：商场店店长更年轻能干、商场店新品上得更勤、商场店在大众点评排名更靠前。请给这三个维度各配一种手段，并说明怎么落地：</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1_9" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1_9"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>店长能力</strong>（基本特征）→ <strong>匹配法</strong>：找"店长年龄/经验相近"的店对比月销，看店长是否真有独立贡献；若是，落地为"招同类店长"。</li><li><strong>新品上新频率</strong>（可干预）→ <strong>小范围干预</strong>："把坏的变好"：让几家街边店也按商场店的节奏上新，看销量能否起来。</li><li><strong>点评排名</strong>（可能是结果而非原因）→ <strong>先看历史数据</strong>：排名靠前很可能是"卖得好→评价多→排名高"的结果，不一定是原因；拿历史数据看排名和销量谁先谁后，别急着花钱刷排名。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：处理复杂现实问题的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>处理复杂现实问题的 5 步</h4><ol><li><strong>拆维度</strong>：把纠缠的问题拆成几个可独立分析的维度</li><li><strong>配手段</strong>：每个维度选最合适的——观察 / 匹配 / 干预 / 复制</li><li><strong>先观察</strong>：能拿历史数据看清的关系，绝不绕圈建模</li><li><strong>小干预</strong>：高风险动作不硬测，改"把坏的变好"的小范围尝试</li><li><strong>挑落地</strong>：选最适合业务、结论能落地的方案，而非理论最严谨的</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>只看单一维度就下结论（会得出几个自相矛盾的答案）</li><li>对"动大客户/砍预算"这种高风险动作硬上大测试</li><li>能直接看历史数据的关系，非要建模绕圈</li></ul><p><strong>自测（全新场景，分而治之）：</strong> 某健身房：<strong>旗舰馆</strong>会员续费率 70%，<strong>社区馆</strong>只有 50%。你发现：旗舰馆私教更多、旗舰馆位于市中心写字楼区、旗舰馆器械更新。请回答：</p>
+<ol><li>"私教多→续费高"这个维度，你会用观察、匹配、干预里的哪一种、怎么做？</li><li>"地段"这个维度能不能做实验？该怎么处理？</li><li>哪个维度最适合"小范围把坏的变好"来验证？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1_9" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1_9"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>小范围干预</strong>最直接：给社区馆随机一批会员<strong>赠送几节私教</strong>（一批不送），看续费率是否被拉起来；若只看"买私教的人续费高"则是混淆（爱健身的人本来就既买私教又续费），需配合匹配相近会员对比。</li><li><strong>地段几乎不能做实验</strong>（你没法把馆搬来搬去）——只能用观察法：找"地段相近、但其它条件不同"的馆对比，把地段当作要控制的后门，别归功于其它因素。</li><li><strong>"私教/器械更新"</strong>最适合小范围干预（给社区馆也上几台新器械/送私教试），因为可改、可逆、风险小；地段不可改，只能观察。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是第一章的<strong>收口实战</strong>——把前面所有招（观察/分层/匹配/干预/反事实）放进一个乱糟糟的真实问题里，练"分而治之"。它也是通往第二章的桥：真实问题收敛清楚后，能测的那部分就交给 ABtest。主导轴：第一章「因果推断原理」，层次：设计/排错（综合）。</p>
+</div></div>
+</section>
+<hr class="soft">
+<h2 style="color:var(--accent-deep);border-bottom:2px solid var(--line);padding-bottom:6px;margin-top:40px">第二章　ABtest 实战</h2>
+<section class="sec" id="sec-2-1">
+<div class="sec-h"><h2>第 10 节　2.1 前置知识：埋点与用户行为</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 理解</span><button class="done-btn" data-done="2-1">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>面试官问："你们做 ABtest，A 版和 B 版的差异、以及后面要分析的转化率，<strong>靠什么记录下来</strong>？" 你卡住了——平时只会看现成的报表，从没想过这些数字从哪来。</p>
+<p>给自己 1 分钟：用"谁、做了什么、什么细节"这三个词，试着说清一次"用户加购物车"该被记录成什么。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_1" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>看懂"埋点 = 用户表 + 事件表 + 属性"——先懂它，才知道 ABtest 到底在测什么。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>埋点 = 记录"谁，做了什么事" = 用户表 + 事件表
+  用户表(谁)：user_id + 基础属性(手机号/VIP等级/地址…)
+  事件表(做了什么)：事件名(动作) + 事件属性(动作的细节)
+
+电商五步事件链 = 转化漏斗（属性逐步累加）：
+  浏览详情 → 加购物车 → 提交订单 → 选支付 → 支付成功
+埋点↔ABtest：① 用页面属性标 A/B 版  ② 所有分析指标都靠埋点埋下来</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：漏埋优惠券，全公司分析不出来</strong> 很多做零售的同学分析不出"钱去哪了"，根子是埋点时偷懒——下单事件里<strong>没把优惠券信息埋细</strong>，那一笔钱直接漏在订单里。结果想分析"优惠到底拉动了多少"，根本无从下手。<strong>埋点的属性必须细到能复盘</strong>：谁、用了哪张券、抵了多少钱，一个都不能少。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 给"用户加购物车"这个动作设计埋点——</p>
+<div class="tbl-scroll"><table><thead><tr><th>要素</th><th>内容</th></tr></thead><tbody><tr><td>谁（用户表）</td><td>user_id + VIP 等级</td></tr><tr><td>事件名</td><td><code>add_to_cart</code>（一个动作）</td></tr><tr><td>事件属性</td><td>商品 ID、商品分类、<strong>单价、选的规格（颜色/尺码）、数量</strong></td></tr></tbody></table></div>
+<p>一句话：事件名记"干了什么"，属性记"这件事的所有细节"——细节越全，后面越能分析。</p>
+<div class="recall empty" data-recall="q2_1"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 给"用户<strong>提交订单</strong>"这个动作设计埋点。请写出：① 谁（用户表至少 2 个字段）；② 事件名；③ 事件属性（至少 4 个，别忘了优惠相关）。</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_1" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>谁</strong>：user_id、收件人手机号（或 VIP 等级）。</li><li><strong>事件名</strong>：<code>submit_order</code>。</li><li><strong>事件属性</strong>：订单金额、商品清单（ID + 数量）、<strong>用了哪张优惠券 + 抵扣金额</strong>、收件地址、支付方式（待选）。</li><li>关键：优惠券 ID 和抵扣额一定要埋——这正是锚点故事里"漏埋导致分析不出来"的那一笔。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：看懂/对接埋点需求的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>看懂/对接埋点需求的 5 步</h4><ol><li><strong>拆主谓</strong>：把行为拆成"谁(用户表) + 做了什么(事件表)"</li><li><strong>列属性</strong>：每个事件要记哪些细节，尤其别漏优惠券这类</li><li><strong>标版本</strong>：确认 A/B 版靠哪个页面属性区分</li><li><strong>对指标</strong>：把要分析的每个指标，逐一对到"有没有埋点"</li><li><strong>追链路</strong>：产品/数据产品/前端/数仓哪环没就绪，去追它</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>不懂埋点就想搞懂 ABtest（地基没有，上层永远想不通）</li><li>事件漏记关键属性（优惠券/金额），后面想分析也分析不出</li><li>以为 ABtest 是你一个人从头做完（其实牵扯产品/前端/数仓多方）</li></ul><p><strong>自测（全新场景，判断 + 设计）：</strong> 一个视频 App 想做"播放页加『一键三连』按钮"的 ABtest。请回答：</p>
+<ol><li>下面哪些是<strong>事件</strong>、哪些是<strong>属性</strong>：点赞、视频 ID、投币、用户会员等级、收藏、视频时长？</li><li>A 版（无按钮）和 B 版（有按钮）的差异，该用哪个埋点信息来标记？</li><li>要分析"三连→7 日留存"，除了三连事件，你至少还需要什么数据？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_1" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>事件（动作）</strong>：点赞、投币、收藏（"一键三连"由这三个动作组成）。<strong>属性（细节）</strong>：视频 ID、用户会员等级、视频时长。</li><li>用<strong>页面/版本属性</strong>标记，如 <code>triple_button: on / off</code>，记录该用户看到的是有按钮还是没按钮的版本。</li><li>至少需要：每个用户的<strong>后续 7 天登录/活跃记录</strong>（来自登录事件），才能把"是否三连"和"7 日留存"关联起来——这通常要数仓出表配合。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是第二章 ABtest 实战的<strong>地基</strong>——埋点不懂，后面"配置实验、定指标、看结果"全是空中楼阁。它把第一章的"X、Y"具体落成了"事件、属性"。主导轴：第二章「ABtest 实战」，层次：理解原理 → 设计实验。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-2">
+<div class="sec-h"><h2>第 11 节　2.2 一个例子，看懂实验全流程</h2><span class="badge-time">⏱ 预计时长 30–35 分钟（数据/案例节）</span><span class="badge-axis">实战 · 设计</span><button class="done-btn" data-done="2-2">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>产品经理找你："排行榜点的人很多，但成交率特别低，你帮我做个 ABtest 提一提。" 你脱口而出："那……我测哪两个版本？"</p>
+<p>给自己 1 分钟：在"测哪两个版本"之前，你其实该先做什么？这两个版本应该从哪里冒出来？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_2" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>那"两个版本"不是凭空来的——先看漏斗、找卡点、下钻坑位、提假设，版本自然就有了；数据分析师只占完整流程的一环。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>ABtest 完整流程七环（你只占★这一环）：
+ ①发现问题(看漏斗) → ②产品经理提想法 → ③前端做页面+接平台
+ → ④数据产品提埋点+前端埋点 → ⑤数仓出数 → ⑥★分析师配置/定指标 → ⑦看结果
+
+发现问题 = 漏斗 + 坑位：先看卡在哪一步，再下钻哪个坑位浪费流量</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：藏在第三屏的杯子</strong> 家具排行榜里，曝光最高的两个储物盒成交寥寥，反而那个藏在第二、三屏才露脸的杯子成交最多——大半用户没翻到那儿就走了。于是优化方向自己浮现：把杯子前移、把"占着好位却不点不买"的斗柜下沉。<strong>版本不是拍脑袋想的，是从漏斗和坑位数据里"看"出来的。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 某榜单漏斗如下，跟着定位卡点——</p>
+<div class="tbl-scroll"><table><thead><tr><th>环节</th><th>人数</th><th>转化率</th></tr></thead><tbody><tr><td>榜单曝光</td><td>50,000</td><td>—</td></tr><tr><td>进详情页</td><td>10,000</td><td>10000/50000 = <strong>20%</strong></td></tr><tr><td>提交下单</td><td>100</td><td>100/10000 = <strong>1%</strong></td></tr></tbody></table></div>
+<ul><li>第一段就漏掉 80%，但更刺眼的是"详情→下单"只剩 <strong>1%</strong>——这才是最大卡点。</li><li>下钻坑位：曝光高的储物盒成交少、藏在后面的杯子成交多 → 方向：杯子前移、斗柜下沉。</li><li>定指标：北极星 = 沿榜单的成交率（<strong>要率不要量</strong>，衣架和沙发差价大）；过程指标 = 各环节转化。</li></ul>
+<div class="recall empty" data-recall="q2_2"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你（带着算）：</strong> 某 App"会员频道"漏斗：</p>
+<div class="tbl-scroll"><table><thead><tr><th>环节</th><th>人数</th></tr></thead><tbody><tr><td>入口曝光</td><td>40,000</td></tr><tr><td>进频道页</td><td>8,000</td></tr><tr><td>点击领券</td><td>2,000</td></tr><tr><td>最终下单</td><td>200</td></tr></tbody></table></div>
+<p>请算出：① 三段转化率；② 最大卡点在哪一步；③ 这个实验的北极星指标该定成什么、要"率"还是"量"？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_2" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>曝光→频道页 = 8000/40000 = <strong>20%</strong>；频道页→领券 = 2000/8000 = <strong>25%</strong>；领券→下单 = 200/2000 = <strong>10%</strong>。</li><li>最大卡点：<strong>入口曝光→频道页（只有 20%）</strong> 流失最狠，其次是末段领券→下单（10%）；先攻进入率或末段转化，性价比最高。</li><li>北极星：<strong>沿会员频道的下单转化率</strong>；通常<strong>要率</strong>（频道是为了筛出高意愿用户、提升转化质量，而非冲曝光量）。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：跑通一次完整 ABtest 的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>跑通一次完整 ABtest 的 5 步</h4><ol><li><strong>看漏斗</strong>：把转化问题画成漏斗，定位卡在哪一步</li><li><strong>钻坑位</strong>：找"曝光高成交低/位置差成交高"的，提优化方向</li><li><strong>定指标</strong>：确立北极星（要率/要量）+ 过程指标</li><li><strong>配版本</strong>：把产品经理的想法做成版本、接平台、配指标上线</li><li><strong>追链路</strong>：自己只占一环，缺前端/数据产品/数仓哪环就去追</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>对着统计量想实验，而不是对着业务漏斗想</li><li>一上来就纠结"两个版本"，不问它从哪来</li><li>目标只喊"提升 GMV"，不落到"改漏斗的哪一步"</li></ul><p><strong>自测（全新糊数据）：</strong> 某教育 App 试听课漏斗：</p>
+<div class="tbl-scroll"><table><thead><tr><th>环节</th><th>人数</th></tr></thead><tbody><tr><td>课程页曝光</td><td>60,000</td></tr><tr><td>点击"免费试听"</td><td>12,000</td></tr><tr><td>看完试听</td><td>6,000</td></tr><tr><td>付费报名</td><td>300</td></tr></tbody></table></div>
+<ol><li>算出三段转化率。2. 你会优先在哪一步做实验、为什么？3. 给这个实验定一个北极星指标。</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_2" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li>曝光→试听 = 12000/60000 = <strong>20%</strong>；试听→看完 = 6000/12000 = <strong>50%</strong>；看完→付费 = 300/6000 = <strong>5%</strong>。</li><li>优先攻<strong>"看完试听→付费"这 5%</strong> ——它是最大卡点，且离成交最近，改一点点都比拉前面的曝光划算（先做离钱最近、漏得最狠的环节）。</li><li>北极星：<strong>试听用户的付费报名转化率</strong>（要率）；过程指标：各段转化率。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节把第一章"先看数据、提假设"的思路，落成第二章可执行的<strong>七环流程</strong>，并反复强调"实验设计 &gt;&gt; 统计计算"。它是 2.3（配置）、2.5（三类问题）的总入口。主导轴：第二章「ABtest 实战」，层次：设计实验。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-3">
+<div class="sec-h"><h2>第 12 节　2.3 一个例子，看懂实验配置</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/操作节）</span><span class="badge-axis">实战 · 设计</span><button class="done-btn" data-done="2-3">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>同事第一次用实验平台，把每个按钮、每个选项都研究了一遍，越点越懵，跑来问你："这么多设置项，到底哪个最关键？我是不是得全搞懂？"</p>
+<p>给自己 1 分钟：实验配置里，真正决定成败的是哪几项？哪些其实按默认就行？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_3" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>配置真正重要的就两件事：标清谁是 A 版谁是 B 版、生成对的指标；其余按业务常识设，别瞎纠结。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>配置四步，真正重要的只有两个★：
+  绑埋点事件 → ★创建指标 → 创建实验 → 看结果
+创建实验四块：
+  基本信息(客户端=看得见 / 服务端=搜推推送)
+  生效策略(实验时长★ / 互斥 / 受众★ / 体验一致性)
+  配置版本★(标清 A/B：add_by_the_way=false/true，流量均分)
+  添加指标
+样本量 ∝ 改善幅度：改善大→几千够；改善微→要几十万上百万</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）："几百万样本也测不出"的真相</strong> 网上总说"ABtest 要几百万样本，根本测不出"。陈老师戳破：那只是因为<strong>你的改善幅度太小</strong>。字节自己有个例子，转化率绝对值只提升 0.0014、相对 1%，这种当然得几百万样本才压得下来；而提升大的（相对涨 40%），几千个样本就够了。<strong>样本量不是玄学，它跟着"你预期改善多大"走。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 判断两个实验各需"大样本"还是"小样本"——</p>
+<div class="tbl-scroll"><table><thead><tr><th>实验</th><th>转化率变化</th><th>绝对提升</th><th>相对提升</th><th>需要样本量</th></tr></thead><tbody><tr><td>甲：改大按钮</td><td>5% → 7%</td><td>+2 个百分点</td><td>2%÷5% = <strong>40%</strong></td><td>改善大 → <strong>几千就够</strong></td></tr><tr><td>乙：调字体颜色</td><td>2.00% → 2.02%</td><td>+0.02 个百分点</td><td>0.02%÷2% = <strong>1%</strong></td><td>改善极微 → <strong>几十万~百万</strong></td></tr></tbody></table></div>
+<p>一句话：看到"要几百万样本"先别慌，先问"我预期的改善幅度有多大"——幅度大，样本需求自然小。</p>
+<div class="recall empty" data-recall="q2_3"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你（带着算）：</strong> 你要测一个改动，预期点击率从 <strong>8% 提到 10%</strong>。请回答：① 绝对提升几个百分点？② 相对提升百分之几？③ 这属于"改善大、样本少"还是"改善小、样本多"？④ 如果实验和另一个"页面倒计时"实验在同一个页面跑，你必须设置什么？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_3" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>绝对提升 = 10% − 8% = <strong>2 个百分点</strong>。</li><li>相对提升 = 2% ÷ 8% = <strong>25%</strong>。</li><li>属于<strong>改善较大、样本需求小</strong>（相对 25% 是个不小的提升，几千样本通常够）。</li><li>同页面两个实验必须设<strong>互斥</strong>，否则用户同时受两个改动影响、体验混乱、数据被污染。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：配置一次 ABtest 的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>配置一次 ABtest 的 5 步</h4><ol><li><strong>绑事件</strong>：把"点击""提交"两个关键埋点事件绑上</li><li><strong>建指标</strong>：生成测试指标，塞进指标组</li><li><strong>标版本</strong>：写清 A/B 版区分参数，流量均分</li><li><strong>定时长/受众</strong>：电商≈14 天避大促；基础改动不加受众过滤</li><li><strong>反推样本</strong>：用"预计改善幅度"反推样本量，别被"几百万"吓到</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>一个按钮一个按钮研究配置（先看"测的是什么"）</li><li>实验时间太短（只进活跃用户，放全量翻车）/ 受众切太碎（样本不够）</li><li>看到"几百万样本"就慌（那只说明改善幅度太小）</li></ul><p><strong>自测（全新场景，配置判断）：</strong> 你要给一个 App 做实验，请回答：</p>
+<ol><li>"把首页推荐位的<strong>排序算法</strong>换一版" —— 这是客户端实验还是服务端实验？</li><li>"把登录按钮<strong>颜色</strong>从灰改成蓝" —— 客户端还是服务端？</li><li>某实验预期转化率从 3% 提到 3.06%（相对 +2%），它需要大样本还是小样本？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_3" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>服务端</strong>：搜索/推荐/推送这类"后台决定推什么"的，都是服务端实验。</li><li><strong>客户端</strong>：页面上看得见的文字/颜色/按钮，都是客户端实验。</li><li><strong>需要大样本</strong>：相对提升只有 2%、绝对仅 +0.06 个百分点，改善很小，得靠大样本才能压出显著。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"设计实验"到"跑起来"的操作落点——但它反复提醒：配置只是体力活，脑力要留给上游的实验设计（测什么、版本怎么来）。主导轴：第二章「ABtest 实战」，层次：设计实验。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-4">
+<div class="sec-h"><h2>第 13 节　2.4 复习：ABtest 统计学原理</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 设计</span><button class="done-btn" data-done="2-4">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>同事为了面试，花了整整两周手推双样本 t 检验公式、背 Z 值表，还是云里雾里。他问你："这些公式我到底要背到什么程度？"</p>
+<p>给自己 1 分钟：2025 年了，这些统计公式还值得你花两周去背吗？真正值得花时间的是什么？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_4" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>理论问 DeepSeek、记住名称就行；把精力留给实验设计。一句话原理：随机分组保证可比 + 假设检验看 P&lt;0.05。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>ABtest 原理（记名称，细节问 AI）：
+  随机分组 → 两组特征一致(对随机分完的组做检验应"不显著")
+       +
+  假设检验 → 原假设 H0：A、B 无差异
+            P &lt; 0.05 → 拒绝 H0 → "显著" = "有差异"
+2025 姿势：理论问 DeepSeek(准、给带数据例子)；实验设计自己动脑
+实操真坑：① 随机分流要对所有关键特征验  ② 隐藏强特征(采不到却强影响)</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：DeepSeek 比你脑子记得清</strong> 陈老师的态度很直接：现在是 2025 年，所有理论问题问 DeepSeek 超管用——你写"介绍 ABtest 原理并给一个带数据的例子"，它直接模拟出"某电商测蓝/绿按钮、各多少点击、用双样本 Z 检验、算出 Z 值和 P 值"，还顺带提醒你样本污染、新奇效应。它数学算得很准。<strong>别再背公式了，记住名称、让它给示例，把脑子腾出来想实验怎么设计。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 一个好的"问 AI"提示词 + 怎么读结果——</p>
+<p class="note">提示词：「请介绍双样本 Z 检验的原理，并给一个<strong>优惠券发放</strong>的带数据例子，写出原假设、Z 值和 P 值的计算过程。」</p>
+<p>它给出：B 组发券、A 组不发，两组各 1 万人，点击率 5% vs 6%……算出 P = 0.03。<strong>怎么读</strong>：P = 0.03 &lt; 0.05 → 拒绝原假设"两组无差异" → 说明发券<strong>确实带来了显著差异</strong>。你要会读这一步，公式让 AI 算。</p>
+<div class="recall empty" data-recall="q2_4"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 你跑了一个"新版列表页"的实验，平台给出结果 <strong>P = 0.21</strong>。请回答：① 原假设是什么？② P = 0.21 该拒绝还是不拒绝原假设？③ 所以结论是"有显著差异"还是"没有显著差异"？④ 如果你不懂背后的卡方/Z 公式，该怎么办？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_4" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>原假设 H0：新版和旧版列表页<strong>无显著差异</strong>。</li><li>P = 0.21 <strong>&gt; 0.05</strong> → <strong>不拒绝</strong>原假设。</li><li>结论：<strong>没有显著差异</strong>（这次改版没测出效果）。</li><li>不懂公式没关系：平台已经替你算好 P 值；想理解过程，直接问 DeepSeek「双样本检验请举例并写出计算过程」即可——你只需会读结论。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：高效搞定统计部分的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>高效搞定统计部分的 5 步</h4><ol><li><strong>记名称</strong>：随机分组、假设检验、t/Z/卡方、原假设——记住名字就行</li><li><strong>问 AI</strong>：让 DeepSeek 给"原理 + 带数据例子"，贴合你的业务</li><li><strong>判显著</strong>：P &lt; 0.05 即拒绝"无差异"，就是有显著差异</li><li><strong>验分流</strong>：对所有关键特征做检验，全不显著才算分组成功</li><li><strong>嗅隐藏</strong>：主动想"有没有采不到、却强影响结果的特征"</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>花大量精力背公式、手推统计量（平台和 AI 都替你做了）</li><li>只验性别年龄就以为分组成功（可能有隐藏强特征没验到）</li><li>把实验设计这种应用题也丢给 AI</li></ul><p><strong>自测（全新场景，判断）：</strong> 你做了"新版搜索结果页"的 ABtest，随机分组后验了性别、年龄、城市，三项检验都 P&gt;0.05，于是认为分组没问题。上线后两组转化差异却和测试不符。请回答：</p>
+<ol><li>P 值都 &gt;0.05 说明三个特征上两组怎么样？</li><li>"三项都不显著"能否充分证明分组没问题？</li><li>这个搜索场景最可能潜伏的"隐藏强特征"是什么（举一个）？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_4" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li>P&gt;0.05 = <strong>不拒绝"无差异"</strong>，说明在性别/年龄/城市这三个特征上，两组分布<strong>没有显著差异</strong>（这三项分得很均匀）。</li><li><strong>不能</strong>：你只验了手上有的三个特征，可能还有没采到、却强影响转化的隐藏特征没验。</li><li>比如<strong>"用户的购买意图强弱 / 历史消费层级 / 是否比价型用户"</strong>——这类强影响搜索转化、却常常没现成标签，正是隐藏强特征。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节给"统计学焦虑"松绑：原理记名称、计算交平台/AI，把省下的精力还给实验设计与"识别隐藏强特征"。后者会在 2.11（常见问题）里被反复点名。主导轴：第二章「ABtest 实战」，层次：设计/排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-5">
+<div class="sec-h"><h2>第 14 节　2.5 一个例子，看懂三类实验问题</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 设计</span><button class="done-btn" data-done="2-5">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>老板甩给你一句："想办法<strong>提升 GMV</strong>。" 然后就走了。</p>
+<p>给自己 1 分钟：你打算从哪下手？"提升 GMV"这五个字，你能不能把它翻译成几个<strong>具体能测</strong>的方向？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_5" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>ABtest 测的就三样——页面设计 / 推荐策略 / 价格优惠；页面放心测，策略和优惠先想清楚再测。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>ABtest 最常测的三样（按好测程度排）：
+① 页面设计  固定商品和优惠后，主图/文案/高亮/角标随便测  → 100% 适合
+② 推荐策略  推什么产品、定价档位                      → 往往前置，开始有坑
+③ 价格优惠  优惠力度 + 表现形式(立减/划线/减券)         → 往往后置，坑最多
+
+把"提升GMV"翻译： GMV = UV × 转化率 × 客单价
+  → 改页面/策略/优惠 分别拉不同杠杆，且要靠前期数据给方向
+不适合 ABtest：长期/续费/大促 → 用 SKU 重构等绕开</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：给女性产品页换俩壮汉</strong> 平台 80% 是女性用户，你却要做个实验、把女性舞蹈课页面换成两个大壮汉看转化——这就是"睁眼瞎"。前期数据明明已经给了方向（用户主要是女性），你还往反方向测，纯属浪费。<strong>先有前期数据给方向，再定要测的那个具体东西</strong>，别凭空乱试。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 把一个"女性舞蹈课详情页"的元素归到三类——</p>
+<div class="tbl-scroll"><table><thead><tr><th>元素</th><th>归类</th><th>说明</th></tr></thead><tbody><tr><td>主图（小蛮腰照片）、"坚持跳舞气质更好"文案、橙色高亮框</td><td><strong>页面设计</strong></td><td>固定商品和优惠后，随便测</td></tr><tr><td>为什么推舞蹈而不是减肥、定 1/3/12 月三档价</td><td><strong>推荐策略</strong>（含定价策略）</td><td>决定推什么、怎么排价</td></tr><tr><td>同样 576 元，写"立减 458""划线价""减券"</td><td><strong>价格优惠</strong></td><td>优惠力度定了，表现形式还能测</td></tr></tbody></table></div>
+<p>一句话：先把页面拆成这三类，你就知道"提升 GMV"具体能动哪几刀。</p>
+<div class="recall empty" data-recall="q2_5"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 把一个"健身私教课详情页"的下列元素，分别归到页面设计 / 推荐策略 / 价格优惠：</p>
+<ol><li>教练肌肉照 vs 学员蜕变前后对比图</li><li>推"减脂营"还是推"增肌营"</li><li>"首单立减 200" vs "划线价 1280→880"</li><li>"已有 5000 人报名"角标</li><li>课时包定 10 节 / 20 节 / 30 节</li></ol>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_5" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>页面设计</strong>：① 教练照 vs 蜕变图、④ "5000 人报名"角标（固定商品优惠后都可随便测）。</li><li><strong>推荐策略</strong>：② 推减脂营还是增肌营、⑤ 课时包档位（决定推什么、怎么排）。</li><li><strong>价格优惠</strong>：③ "首单立减 200" vs "划线价"——优惠力度一样、表现形式不同。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：把一个页面变成可测实验的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>把一个页面变成可测实验的 5 步</h4><ol><li><strong>归类元素</strong>：每个元素归到页面设计 / 推荐策略 / 价格优惠</li><li><strong>拆 GMV</strong>：用 UV×转化率×客单价 找可下手的杠杆</li><li><strong>定方向</strong>：用前期数据给方向，剔除"睁眼瞎"方案</li><li><strong>排好测序</strong>：页面先测、策略/优惠把方案定清再测</li><li><strong>绕长期</strong>：长期/续费问题改成 SKU 重构、看整体收益</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>只喊"提升 GMV"不落到页面/策略/优惠的具体方向</li><li>不看前期数据就上明显有偏的方案（睁眼瞎）</li><li>直接硬测一个跨年的 LTV/续费问题</li></ul><p><strong>自测（全新场景，归类 + 长期绕法）：</strong> 某知识付费 App 课程页想"提升 GMV"，元素有：讲师照片、课程大纲、"3 万人已学"角标、原价 ￥299 划线 ￥99、年卡/季卡/月卡三档。请回答：</p>
+<ol><li>把这些元素分别归到三类。</li><li>想知道"年卡 vs 月卡哪个带来的整体收益高"，为什么不适合直接做长周期 ABtest？该怎么用 SKU 思路绕？</li><li>这三类里，你会第一个拿来测哪一类、为什么？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_5" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>页面设计</strong>：讲师照片、课程大纲、"3 万人已学"角标。<strong>价格优惠</strong>：原价 299 划线 99。<strong>推荐策略</strong>：年/季/月卡三档（定价档位策略）。</li><li>直接测要等几年看完整生命周期，时间太长、必被大促/版本变化污染。<strong>SKU 绕法</strong>：把年/季/月卡做成 S1/S2/S3 三个 SKU，测"买了月卡的有多大概率升年卡""不同流量分配下整体收益高不高"，用短周期的升级/收益数据代替长周期 LTV。</li><li>第一个测<strong>页面设计</strong>——它 100% 适合 ABtest、风险最低、能快速见效；策略和优惠要先把具体方案定清楚再测。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是第二章实战的"分类总纲"——它把"提升 GMV"这种空话，拆成页面/策略/优惠三条可测主线，正好对应后面三节（2.6 页面、2.7 优惠、2.8 策略）。主导轴：第二章「ABtest 实战」，层次：设计实验。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-6">
+<div class="sec-h"><h2>第 15 节　2.6 页面类实验设计</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 设计</span><button class="done-btn" data-done="2-6">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>领导："把下单按钮文案从『立即购买』改成『马上抢』，再把按钮从橙色改成红色，测一下哪个好。"</p>
+<p>给自己 1 分钟：这个需求你能直接开测吗？测之前/测之中，有没有什么坑要先想到？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_6" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>纯页面改动（颜色/文案/位置/图）最不纠结，无脑上 ABtest；但务必记实验日志、并防大促/舆情等场景干扰。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>页面类 = 安全区（不涉策略/优惠就无脑测）
+两种工具：可视化实验(进URL在页面上点着改B版) / 多链接实验(两个链接分流，适合广告落地页)
+必备：实验日志(每版改了哪块、什么方向 → 才能横向比、择优放量)
+干扰源：电商=大促促销  内容=爆款/时事热点(地震全灰，你又把按钮变灰)</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：五个版本只改了一个词</strong> 陈老师吐槽某传统企业领导：让他做五个版本，结果只是把"坚持跳舞"改成"努力跳舞"、再把字变成蓝色——改动小得几乎看不出。测完领导还来问"为啥差异不大、统计学有没有更高级的方法"。<strong>改动太小，再高级的统计也测不出差异</strong>。页面随便测可以，但改动量得撑得起一个差异。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 开头那个"文案 + 颜色"的需求，高手这样开测——</p>
+<div class="tbl-scroll"><table><thead><tr><th>动作</th><th>怎么做</th></tr></thead><tbody><tr><td>判类型</td><td>纯页面改动（文案 + 颜色）→ 可无脑测</td></tr><tr><td>选工具</td><td>用<strong>可视化实验</strong>直接在页面上把文案/颜色改出 B 版</td></tr><tr><td><strong>记日志</strong></td><td>版本号 / 改了哪块（按钮文案+颜色）/ 方向（更紧迫的促销感）/ 实验时间</td></tr><tr><td>防干扰</td><td>看实验期是否撞大促；撞了就避开或延后，别让促销污染页面效果</td></tr></tbody></table></div>
+<div class="recall empty" data-recall="q2_6"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 下面四个需求，判断哪些是"纯页面、可无脑测"，哪些其实掺了策略/优惠、要先想清楚：</p>
+<ol><li>把首页 banner 的背景图从城市夜景换成产品特写</li><li>把"满 200 减 30"改成"满 200 打 85 折"</li><li>把"加入购物车"按钮从屏幕左下移到右下</li><li>把推荐位从"人工选品"换成"算法推荐"</li></ol>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_6" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>纯页面、可无脑测</strong>：① 换背景图、③ 挪按钮位置——只涉及视觉/布局，固定了商品和优惠，直接测。</li><li><strong>掺了优惠</strong>：② "满减 vs 打 85 折"——虽然展示形式像页面问题，但用户会当成不同优惠力度来感知，属优惠类，要先算清两者实际优惠是否等价。</li><li><strong>掺了策略</strong>：④ 人工选品 vs 算法推荐——这是推荐策略，属策略类，坑更多（见 2.8）。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：做一次页面类实验的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>做一次页面类实验的 5 步</h4><ol><li><strong>判类型</strong>：确认是纯页面改动（不涉策略/优惠），可无脑测</li><li><strong>搭版本</strong>：可视化实验点着改 B 版；广告落地页用多链接实验</li><li><strong>记日志</strong>：每个版本写清改了哪块、什么方向</li><li><strong>保证改动量</strong>：别只改一个字，改动太小测不出差异</li><li><strong>排场景</strong>：效果差先怀疑大促/舆情干扰，换场景重试</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>页面测试不记日志，多版本测完无法横向对比择优</li><li>改动太小（只换一个字）还期待出显著差异</li><li>忽视大促/热点舆情对页面效果的污染</li></ul><p><strong>自测（全新场景，判断 + 处理）：</strong> 你给一个 App 测"首页 banner 文案『限时秒杀』改成『今日必抢』，按钮橙改红"，计划测两周。请回答：</p>
+<ol><li>这是不是纯页面类、能不能无脑测？</li><li>你的实验日志至少要记哪几个字段？</li><li>恰好这两周赶上双 11，结果可能被怎样干扰、你会怎么处理？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_6" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>是纯页面类</strong>（文案 + 颜色），可无脑上 ABtest。</li><li>实验日志至少记：<strong>版本号、改了哪块（banner 文案 + 按钮颜色）、改动方向（更强的紧迫感）、实验起止时间、对应指标</strong>。</li><li>双 11 期间用户购买意愿、流量结构整体异常，会<strong>放大或污染</strong>两版差异，让结论无法推广到平时。处理：<strong>避开大促、延后到平销期再测</strong>，或大促期单独标注、不与平时结论混用。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"三类实验"里最简单的一类（页面），是新手最该先上手的安全区。它也埋了伏笔：优惠的不同展示其实是页面问题、却被用户当优惠感知——这通向 2.7。主导轴：第二章「ABtest 实战」，层次：设计实验。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-7">
+<div class="sec-h"><h2>第 16 节　2.7 优惠类实验设计</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 排错</span><button class="done-btn" data-done="2-7">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你要测一个"满 199 减 30"的优惠，纠结放哪：放<strong>首页</strong>能吸引更多人点进来，放<strong>支付页</strong>能临门一脚催付款。</p>
+<p>给自己 1 分钟：放首页和放支付页，各自最可能踩什么坑？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_7" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>优惠类最易惹乱子，盯住三个坑：曝光位置（太前被带跑 / 太后过度曝光）、策略叠加（用户算不清就跑）、推式响应率（样本少且偏）。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>优惠两形式：拉式(页面吸引) / 推式(主动推送)
+拉式三坑：
+  ① 曝光太前 → 拉起前一步，却被商品推荐带跑、中途跳出
+  ② 曝光太后 → 过度曝光：大部分人没走到那步，效果被低估
+  ③ 策略叠加 → 85折+满减+券 堆一起，用户算不清、跳出
+推式命门：响应率(电话5~8%、短信1%) → 样本少且结构偏(响应的多是缺钱的人)</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：实付 94 块 3，用户当场算懵</strong> 一个页面又"满 100 减 15"、又"全场 85 折"、又天天满减，用户点到最后实付 <strong>94 块 3</strong>，当场算懵——满 100 减 15 不该是 85 块吗？原价到底多少？算不清就直接跳出，甚至跑去搜索框重新查价。<strong>优惠堆叠太多，省了多少用户算不明白，反而流失。</strong> 宜家 App 的反例最清爽：划线价 / 实际价 / 到手价三个数一目了然。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 判断"满 199 减 30"放哪——</p>
+<div class="tbl-scroll"><table><thead><tr><th>位置</th><th>好处</th><th>踩的坑</th></tr></thead><tbody><tr><td>放首页（太前）</td><td>拉起"首页→列表"点击</td><td>用户进来被商品推荐带跑，没找到想要的就跳出，转化未必涨</td></tr><tr><td>放支付页（太后）</td><td>临门一脚催付款</td><td>过度曝光：很多人根本没走到支付页，效果被低估</td></tr><tr><td><strong>折中</strong></td><td>—</td><td>按"效果点深度"权衡，常在详情页/购物车露出，兼顾吸引与转化</td></tr></tbody></table></div>
+<p>一句话：优惠曝光位置没有标准答案，要按"用户走到哪一步"来权衡，别一味往前堆、也别藏太深。</p>
+<div class="recall empty" data-recall="q2_7"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某美妆 App 想做优惠实验，方案是：首页挂"满 300 减 50"券、详情页再叠加"会员额外 9 折"、支付页又弹"新人立减 20"。请回答：① 这个方案最可能踩三坑里的哪个？② 用户会遇到什么麻烦？③ 你会怎么改？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_7" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_7"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>踩的坑</strong>：③ <strong>策略叠加</strong>（满减 + 会员折 + 新人立减，三层堆在不同页面）。</li><li><strong>用户麻烦</strong>：到支付时算不清"到底省了多少、实付多少"，怀疑被套路，干脆跳出或跑去比价，流程拉长后流失。</li><li><strong>怎么改</strong>：学宜家<strong>三价清晰</strong>——直接在一个地方显示"原价 / 优惠明细 / 到手价"；或一次只主打一个最强优惠，别让用户做算术题。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：设计一次优惠实验的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>设计一次优惠实验的 5 步</h4><ol><li><strong>选形式</strong>：拉式还是推式，对应的坑先想到</li><li><strong>定曝光位</strong>：按效果点深度权衡，别太前（被带跑）也别太后（过度曝光）</li><li><strong>清展示</strong>：尽量三价清晰、少堆叠，让用户一眼算清省多少</li><li><strong>估响应</strong>：推式先估响应率、放大样本、防响应者结构偏差</li><li><strong>备排查</strong>：上线翻车按"过度曝光/多因素堆叠"拆分定位</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>优惠曝光一味往前堆（前一步转化起来了，中间被带跑流失）</li><li>一个页面叠满减 + 折扣 + 券（用户算不清就跳出）</li><li>用推式还无视响应率（样本不够、且响应者多是缺钱的人）</li></ul><p><strong>自测（全新场景，判断坑）：</strong> 某生鲜 App 用<strong>短信</strong>给全体用户推"今晚 8 点抢 9.9 元水果券"。一周后实验样本远不够、且入组用户里低消费人群异常多。请回答：</p>
+<ol><li>这是拉式还是推式？</li><li>"样本远不够"和"低消费人群异常多"分别对应什么问题？</li><li>你会怎么补救？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_7" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_7"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>推式</strong>（主动发短信触达）。</li><li>"样本不够" = <strong>响应率太低</strong>（短信能到 1% 都不错）；"低消费人群异常多" = <strong>响应者结构偏差</strong>——会为 9.9 元券专门点开短信的，多是价格敏感/缺钱的人，样本结构歪了。</li><li>补救：<strong>放大推送基数 / 拉长触达周期</strong>凑样本；分析时<strong>按消费层级分层</strong>看效果，别拿被低消费人群污染的整体结论去汇报；或改用 App 内触达提高响应、减少结构偏差。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"三类实验"里坑最多的一类（优惠）。它和 2.6（页面）常纠缠（同一优惠的不同展示是页面问题），也和 2.9（上线无效）呼应（曝光位置/堆叠正是上线翻车的常见元凶）。主导轴：第二章「ABtest 实战」，层次：设计/排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-8">
+<div class="sec-h"><h2>第 17 节　2.8 策略类实验设计</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 排错</span><button class="done-btn" data-done="2-8">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你给信息流测了一版新推荐策略，测试期点击率漂亮地提升了 3%。全量上线后，点击率却悄悄回落到和原来差不多。</p>
+<p>给自己 1 分钟：测试有效、上线打回原形，最可能是被什么"看不见的手"干扰了？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_8" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>策略（搜索/推荐/广告）验证本身很简单——拿版本号做分流对比即可；难的是排除环境干扰：多因素、虹吸、季节。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>策略 = 页面不变、推什么内容常变；都是服务端实验
+  分析师只验结果：拿策略版本号 → 分流对比 → 看点击/加购/GMV(视频加时长/留存)
+三大干扰：
+  ① 多因素：推荐结果 = 策略 + 价格 + 品类 + 周边商家 共同决定
+  ② 虹吸：好位置放个超值品，把周边坑位流量全吸走 → 必设护栏
+  ③ 季节：春季的草莓秒完就过季，追溯不了 → 只能重测、判断局势</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：一号位放 iPhone 立减 3000，吸走 99% 流量</strong> 左上角一号位是黄金位。你让运营随便放个"iPhone 立减 3000"，结果 99% 的流量全涌过去——太便宜了。看着这格点击爆表，可它把周边所有坑位的流量都吸干了，整体未必划算，万一这格转化还比别处低呢？<strong>所以一号位实验必须设护栏，盯住它对周边的虹吸，别只顾自己一格好看。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 给"首页运营位换新策略"设计指标（含护栏）——</p>
+<div class="tbl-scroll"><table><thead><tr><th>指标类型</th><th>指标</th><th>作用</th></tr></thead><tbody><tr><td>主指标</td><td>一号位点击率、转化率、GMV</td><td>看这格本身好不好</td></tr><tr><td><strong>护栏指标</strong></td><td>周边榜单/页面的点击与转化</td><td>防虹吸：别把别人流量吸干、自己转化还更低</td></tr><tr><td>判定</td><td>主指标涨 + 护栏不掉 才算真赢</td><td>二版若点击涨、又没损害周边，选它</td></tr></tbody></table></div>
+<p>一句话：策略实验不能只看自己那格涨没涨，要同时看"有没有把隔壁的流量抢走"。</p>
+<div class="recall empty" data-recall="q2_8"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某外卖 App 在"猜你爱吃"栏目测了新推荐策略，测试期该栏点击率涨了 4%，全量上线后回落。事后发现：① 测试期附近新开了一家网红奶茶店进了推荐流；② 隔壁"1 元秒杀"栏目那几天上了爆品。请判断这两件事分别是哪种干扰，并说该怎么应对：</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_8" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_8"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>① 新开网红店进推荐流 → <strong>多因素干扰</strong>：点击涨是这家店带来的、不是你策略的功劳；上线后这家店热度退去，效果就没了。应对：排查推荐结果里是否混入了强势新商家，把它的影响单独剥离。</li><li>② 隔壁"1 元秒杀"上爆品 → <strong>虹吸效应</strong>：秒杀爆品把流量吸走，冲击了你的栏目。应对：监控护栏指标、和秒杀部门对齐排期；这种大厂里"各干各的、没人通知你"，要主动抽数据排查。</li><li>若爆品有季节性（如时令水果），还叠加<strong>季节效应</strong>，只能重新测、判断当前局势。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：做一次策略实验的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>做一次策略实验的 5 步</h4><ol><li><strong>当服务端配</strong>：拿策略版本号做分流对比，不必懂算法</li><li><strong>配对指标</strong>：电商看点击/加购/GMV，视频加时长/转发/留存</li><li><strong>设护栏</strong>：上运营位必盯对周边坑位的虹吸效应</li><li><strong>查干扰</strong>：上线变样先排查周边商家/价格等多因素是否变了</li><li><strong>认季节</strong>：季节性策略接受"重新测、判断当前局势"</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>以为要懂推荐算法才能测策略（其实只验结果）</li><li>一号位只顾放个好东西冲点击（把周边流量全吸走）</li><li>把含季节/周边干扰的旧结论当长期有效</li></ul><p><strong>自测（全新场景，判断干扰类型）：</strong> 某视频 App 在首页第一刷测新推荐策略，测试期完播率 +5% 很漂亮，上线后回落。请判断下列各属于哪种干扰、怎么应对：</p>
+<ol><li>测试那几天恰好某顶流明星新综艺上线，相关视频霸屏。</li><li>第一刷把最爆的内容都堆上去，导致用户刷到第二、三刷就没好内容、整体时长反而降。</li><li>你用的"春节贺岁短片"这类内容，节后就没人看了。</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_8" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_8"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>多因素干扰</strong>：完播率涨是顶流综艺带来的，跟你的策略关系不大；应对：剔除该热点内容的影响再评估。</li><li><strong>虹吸效应</strong>（栏目内版）：第一刷把好内容榨干、损害了后续刷次的整体表现；应对：设"整体时长/后续刷次完播"护栏，别只看第一刷。</li><li><strong>季节效应</strong>：贺岁内容有时效，节后失效、追溯不了；应对：避开季节性内容做长期结论，或换常驻内容重测。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是"三类实验"里最依赖"判断局势"的一类（策略）。它验证简单、但环境干扰最重，直接通向 2.9（为什么上线无效）——多因素/虹吸/季节正是上线翻车的三大元凶。主导轴：第二章「ABtest 实战」，层次：设计/排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-9">
+<div class="sec-h"><h2>第 18 节　2.9 为什么实验有效，上线后没有效果</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 排错</span><button class="done-btn" data-done="2-9">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你的实验测试期显著有效，全量上线后效果却没了。业务阴阳怪气："是不是你统计学没学好、实验做错了？"</p>
+<p>给自己 1 分钟：上线无效，最可能的根子是统计学、还是业务？你会从哪几个方向去查？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_9" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>上线无效几乎都是业务问题，不是统计学——按"影响太小 / 撞时间 / 样本偏 / 隐藏强特征 / 多因素打架"逐项排查。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>上线无效的原因（几乎全是业务）：
+① 影响太小   测试就只提升1%~2% → 上线沧海一粟被淹
+② 撞时间     没避开大促/没躲开大事件
+③ 样本偏     测试时间短只进活跃用户 / 功能藏太深过度曝光
+④ 隐藏强特征 采不到却强影响(品牌意识) → 上线人群一变就没效
+⑤ 多因素打架 相互冲突(催快付+引导多逛) / 转化率↔客单价矛盾 / 前后叠加(折扣依赖)</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：秦王扫六合，要啥 ABtest</strong> 比亚迪秦 plus 直接降到 59800，外号"秦王扫六合"，把一众老牌国产整车厂打崩。你说降价有没有用？还做什么 ABtest——一锤子就夯死对手。陈老师借此点醒：<strong>影响幅度的大小是第一位的</strong>。测试阶段只提升 1%~2% 的东西，上线被各种因素一冲就没了太正常；真正够狠的改动，效果藏都藏不住。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 一个"详情页加倒计时"实验，测试有效、上线无效，高手这样排查——</p>
+<div class="tbl-scroll"><table><thead><tr><th>排查方向</th><th>问一句</th><th>本例可能</th></tr></thead><tbody><tr><td>影响大小</td><td>测试提升有多大</td><td>只提升 1.2%，本就微弱</td></tr><tr><td>撞时间</td><td>上线期撞大促了吗</td><td>上线正赶上行业大促，被淹没</td></tr><tr><td>多因素</td><td>同期还上了别的吗</td><td>同时上了"猜你喜欢"，和倒计时打架（一个催快付、一个引导多逛）</td></tr><tr><td>结论</td><td>—</td><td>不是统计错，是业务环境 + 因素冲突</td></tr></tbody></table></div>
+<div class="recall empty" data-recall="q2_9"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某 App 测"会员页放大优惠券"显著提升了领取率，上线后整体付费却没涨。请判断下列各属于哪类原因：</p>
+<ol><li>领券率涨了，但券大多被本来就会买的人领走，没带来新付费。</li><li>上线那周正好双 11。</li><li>测试只跑了 2 天，进来的全是高活跃用户。</li></ol>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_9" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_9"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>多因素/指标错位</strong>（也含混淆）：领取率 ≠ 付费，券被高意愿用户顺手领走，对增量付费无贡献——你优化了一个不直接带来钱的中间指标。</li><li><strong>撞时间</strong>：双 11 期间整体被大促淹没，两版差异无法显现。</li><li><strong>样本偏差</strong>：2 天只进高活跃用户，放全量后人群结构变了、效果不复现。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：排查"上线无效"的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>排查"上线无效"的 5 步</h4><ol><li><strong>量影响</strong>：测试阶段提升多大？太小就别指望上线</li><li><strong>看时间</strong>：是否撞大促/大事件</li><li><strong>比样本</strong>：测试人群和全量是否一致（时间/功能深度）</li><li><strong>嗅强特征</strong>：有没有采不到却强影响的隐藏特征</li><li><strong>理因素</strong>：多因素是否冲突/矛盾/叠加，一次只追一个目标</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>上线翻车就去折腾统计学（问题几乎在业务）</li><li>同时上相互冲突、或转化率/客单价矛盾的目标</li><li>发券发太多，把用户养成"等券再买"的折扣依赖</li></ul><p><strong>自测（全新场景，多原因排查）：</strong> 某教育 App 测"试听页加学员好评墙"显著提升了报名，全量上线后报名率回落。已知：上线期撞了暑期招生季、同期还把价格从 ￥199 降到 ￥99、测试只投放给了"已加购"用户。请回答：</p>
+<ol><li>列出至少三个可能导致上线无效的原因。</li><li>"降价 + 加好评墙"一起上，为什么会让你说不清是谁的功劳？</li><li>"只投给已加购用户"埋了什么样本隐患？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_9" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_9"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li>① <strong>撞时间</strong>（暑期招生季整体异常）；② <strong>多因素叠加</strong>（同期降价，分不清是好评墙还是降价起作用）；③ <strong>样本偏差</strong>（只投已加购用户＝高意愿人群，放全量后人群变了）。</li><li>两个改动同时上，<strong>效果混在一起无法归因</strong>——报名涨了到底是好评墙还是降价 99 元？该一个一个来。</li><li>"已加购"是高意愿样本，测试效果被高估；上线面向全量（含大量低意愿用户）时，自然回落。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是第二章的"翻车诊断书"——把前面页面/优惠/策略的坑，归纳成"上线无效"的五大业务原因。它把锅从统计学手里夺回来，交给业务策略设计。主导轴：第二章「ABtest 实战」，层次：排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-10">
+<div class="sec-h"><h2>第 19 节　2.10 缺少条件时，简单替代方案</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 排错</span><button class="done-btn" data-done="2-10">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>银行的产品不能随便降价、头上还压着监管，没有实验平台。领导却要你"测一下：对哪类客户、用什么话术，办分期的人最多"。</p>
+<p>给自己 1 分钟：没平台、产品又不能改，你还能怎么做一个"类 ABtest"？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_10" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>用 ABtest 两前提（随机分组 + 隔绝信息）判真伪；没平台就用短信/外呼/抽奖变相分流；状态会变的场景缩短周期、分状态设计。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>两前提：① 随机分组(两组特征同)  ② 隔绝信息(组间看不到)
+不算 AB 测：10群 123发券/456不发(非随机) · 城南降价城北(无法隔绝) · A降价B不(选品)
+变相分流：短信 / 电话外呼 / APP抽奖(奖池后台预设名单)
+状态会变的场景(流量包/欠费)：缩短周期、分状态配方案，别死守"14天"</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）：流量超了你也不提醒，用户就跑了</strong> 用户流量用超会被多收费、电信赚得更多——但"超了也不吭声"会让用户觉得被坑、转身就走。所以这个实验真正的目的<strong>不是提交易额（那干脆别提醒），而是减少投诉和流失</strong>。这一下点醒：做替代方案，先想清"我到底要的是什么指标"，别被"赚更多"带偏。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 电信"流量超量推流量包"实验，按用户状态设计——</p>
+<div class="tbl-scroll"><table><thead><tr><th>设计点</th><th>怎么做</th></tr></thead><tbody><tr><td>主指标</td><td><strong>次月投诉率 / 流失率</strong>（不是交易额）</td></tr><tr><td>关键维度</td><td>超了多少 / 月初还是月底超 / 套餐 ARPU</td></tr><tr><td>分状态</td><td>月初超→推大包；月底超→按剩余天数推日包；严重超量→先停服务再提醒</td></tr><tr><td>时长</td><td>不能等 14 天（状态会转移），<strong>观察 3 天</strong>可能就够</td></tr><tr><td>触达</td><td>名单分好 → 短信/外呼推 → 等响应（注意响应率偏差）</td></tr></tbody></table></div>
+<div class="recall empty" data-recall="q2_10"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某信用卡中心想测"对<strong>即将逾期</strong>的客户，发什么提醒最能降低逾期"，产品不能改、只能短信/外呼。请回答：① 这算不算真正的 ABtest？② 主指标该是"还款额"还是"逾期率/投诉率"，为什么？③ 客户状态（离账单日远近、欠款多少）会变，你会怎么分状态、周期定多久？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_10" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_10"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>算"类 ABtest"</strong>：只要名单是<strong>随机分组</strong>、且两组客户<strong>互相收不到对方的提醒（信息隔绝）</strong>，就近似满足两前提；但要注意短信/外呼<strong>响应率低带来的样本偏差</strong>。</li><li>主指标应是<strong>逾期率（兼顾投诉率）</strong>——目的是"少逾期、别激怒客户"，而不是单纯催出更多还款额；只盯还款额可能逼急客户、引发投诉。</li><li>按<strong>离账单日远近 + 欠款金额</strong>分状态：离账单日远→温和提醒；临近→加强提醒；欠款大→人工外呼。周期要短（<strong>3~5 天</strong>一看），因为客户状态随时间恶化，等太久状态早变了。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：没条件时做"类 ABtest"的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>没条件时做"类 ABtest"的 5 步</h4><ol><li><strong>判前提</strong>：随机分组了吗、信息隔绝了吗，先确认是不是真 AB</li><li><strong>找替代</strong>：短信/外呼/抽奖（后台预设名单）变相分流</li><li><strong>估响应</strong>：算响应率、放大样本、防响应者结构偏差</li><li><strong>分状态</strong>：状态会变的场景，按关键维度分状态、配不同方案</li><li><strong>调周期</strong>：按状态转移速度定观察时长，别套"14 天"</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>把"123 群发券 / 456 群不发"当成真 AB 测（群内非随机）</li><li>死守"必须测 14 天"（状态会变的场景等不了）</li><li>不剔除明显不合理的方案（给月初严重超量的人推三块钱日包）</li></ul><p><strong>自测（全新场景，判断 + 设计）：</strong> 某连锁超市想测"对快流失的会员，发什么权益最能召回"，只能用 App push 和短信。请回答：</p>
+<ol><li>怎么做才算满足"随机分组 + 隔绝信息"两前提？</li><li>这个实验的主指标该定成什么？</li><li>"10 家门店，5 家发券 5 家不发"——这算不算 AB 测，为什么？</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_10" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_10"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li>把快流失会员<strong>编号随机分两组</strong>，一组发权益一组不发，且<strong>两组互相看不到对方的 push/短信</strong>（线上触达天然隔绝）——即满足两前提。</li><li>主指标：<strong>召回率/回流后复购率</strong>（兼顾退订/投诉这种护栏指标），而非单纯的当次核销量。</li><li><strong>不算 AB 测</strong>：门店不是随机分的（5 家店的客群天然有差异），且同店内无法隔绝信息——这是"小范围测试"，更接近 DID 的思路，但不是 ABtest。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节回应第一章"做不了随机实验怎么办"，把因果验证拉回到传统行业的真实约束里（不能改产品、有监管、状态会变）。它和 1.4（随机实验前提）首尾呼应。主导轴：第二章「ABtest 实战」，层次：设计/排错。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2-11">
+<div class="sec-h"><h2>第 20 节　2.11 ABtest 常见问题与对策</h2><span class="badge-time">⏱ 预计时长 25–30 分钟（认知/方法论节）</span><span class="badge-axis">实战 · 排错</span><button class="done-btn" data-done="2-11">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你的实验定了跑两周。第 5 天主指标还不显著，业务催你："要不再多放点量？或者拆开看看是不是某类用户有效？" 一周后你果然在"35 岁以上女性"这个细分里测出了显著。</p>
+<p>给自己 1 分钟：业务这两个建议，分别踩了什么坑？那个"细分显著"的结论可信吗？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别急着算）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2_11" placeholder="换我，我会怎么回答 / 判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>记住六类问题的对策，守住一条铁律：买定离手、愿赌服输——做不行就回去改业务，别在统计上耍赖。</strong></p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>六类常见问题 → 对策：
+① AA 显著      = 分流有病，直接打回重做
+② 隐藏强特征    在该特征上随机分布，搞不定就限定人群内随机
+③ 过度曝光      实验藏太深，没标准答案(滴滴动态/美团提前分组)
+④ 多重比较      组多用方差分析；更怕因素堆叠相互施加影响
+⑤ 无限拆解      整体不显著就往下拆找显著 → 禁止(瞎猫碰死耗子)
+⑥ 偷看/拖延     显著就停、到点就停；不显著靠拖/放量 = 耍赖
+铁律：有没有差异是业务决定的，不是统计决定的 → 做不行，回去改业务</pre>
+<div class="callout"><div class="c-h">🪧 锚点故事</div><p><strong>锚点故事（只留这一个）："AA 显著也正常"，你信吗？</strong> AA 实验两组页面策略一模一样，本不该有差异。可某平台手册第一句就写"AA 即使显著也正常，请相信我们的分流统计很可靠"。陈老师反问：<strong>你信吗？</strong> 这明显违反统计学——AA 显著就是分流出了问题，该一脚踹回去让数据产品重做。这就是"尽信书不如无书"：连大厂手册都可能为自己开脱，别盲从。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<p><strong>示范：</strong> 处理两个最常见的问题——</p>
+<div class="tbl-scroll"><table><thead><tr><th>问题</th><th>现象</th><th>正确处理</th></tr></thead><tbody><tr><td>AA 显著</td><td>两组完全相同却测出差异</td><td><strong>打回重做分流</strong>，别信"也正常"</td></tr><tr><td>无限拆解</td><td>整体不显著，往下拆到"某细分显著"</td><td><strong>不许这么干</strong>：拆得越多越容易瞎猫碰死耗子，小概率事件再测就没了</td></tr></tbody></table></div>
+<p>回到开头：业务让你"放量"是想把微弱差异硬挤出来、"拆细分"是无限拆解找理由——两个都踩坑。</p>
+<div class="recall empty" data-recall="q2_11"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>轮到你：</strong> 某团队的实验做法如下，请逐条判断踩了六类问题里的哪一个、该怎么改：</p>
+<ol><li>实验定 14 天，第 6 天看到显著就提前上线了。</li><li>整体转化不显著，于是拆出"iOS + 一线城市 + 新用户"这个细分，显著了，当作结论。</li><li>随机分组只验了性别年龄，没验"是否老客"，而老客转化天然高得多。</li></ol>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2_11" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点我看参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2_11"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>偷看/提前停</strong>：定了 14 天就该跑满，第 6 天显著就停是"偷看结果"，结论不稳——到点再下结论。</li><li><strong>无限拆解</strong>：整体不显著、靠层层细分凑出一个显著，是典型瞎猫碰死耗子，再测大概率消失——不许这么干。</li><li><strong>隐藏强特征</strong>："是否老客"是强特征却没在分组时随机分布，两组结构可能失衡——应在该特征上做随机分布，或限定"老客/新客"分别做随机。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：ABtest 排雷与收尾的 5 步</div><div class="step-body">
+<div class="methodcard"><h4>ABtest 排雷与收尾的 5 步</h4><ol><li><strong>验入口</strong>：AA 显著立刻打回；分组在隐藏强特征上随机分布</li><li><strong>控复杂度</strong>：多组用方差分析，新手别堆叠因素，要验先验价格</li><li><strong>盯主指标</strong>：只看主指标，绝不无限拆解找理由</li><li><strong>守纪律</strong>：显著就停、到点就停，不偷看、不拖延、不靠放量凑</li><li><strong>认账</strong>：做不行就回去改业务，把"有没有差异"还给业务判断</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查</p>
+<ul class="check"><li>AA 显著还自我安慰"也正常"（违反统计学，分流一定有问题）</li><li>整体不显著就往下拆，拆到某指标显著就当结论</li><li>不显著就拖时间/加放量硬凑显著</li></ul><p><strong>自测（全册综合）：</strong> 某 App 做"新版下单页"实验，定两周。出现下列情况，请逐条给出处理：</p>
+<ol><li>还没正式开始，AA 测试就显示两组转化差异显著。</li><li>第 4 天主指标已显著，老板想立刻全量。</li><li>跑满两周仍不显著，业务说"再放大 10 倍流量肯定能显著"。</li><li>你怀疑"是否安装过竞品 App"会强影响转化，但你没有这个数据。</li></ol><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2_11" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点我看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2_11"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ol><li><strong>AA 显著 → 打回</strong>：分流有问题，让数据产品重做，别开始正式实验。</li><li><strong>偷看/提前停 → 不行</strong>：定了两周就跑满，第 4 天显著也可能是波动，到点再判。</li><li><strong>拖延/放量凑 → 耍赖</strong>：跑满仍不显著，说明改动太小、本就没显著差异；放量只会引入更多杂因素。差异有没有是业务决定的，回去改业务。</li><li><strong>隐藏强特征</strong>：拿不到"是否装竞品"的数据时，可在能拿到的近似特征（如机型/活跃度）上分层，或<strong>限定人群</strong>（如只在"未装竞品"的可识别子集内）做随机，降低它的干扰。</li></ol></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是全册的<strong>收官与纪律总纲</strong>——把所有实战坑收拢成六类对策，并立下"买定离手、愿赌服输"的铁律。它合上了第二章，也呼应第一章的起点：因果推断是逻辑课，做不行就回去改业务、改逻辑，而不是折腾统计。主导轴：第二章「ABtest 实战」，层次：排错（总纲）。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="capstone"><div class="sec-h"><h2>🎓 结课大实战：鲜丰汇生鲜电商</h2></div>
+<div class="quote"><p>把全册关键方法串一遍。下面是一份"糊"的综合资料（跨多个维度、藏着陷阱）。请依次完成 6 个任务，每题先自己写，再展开折叠对照。 ⏱ 预计 40–50 分钟。</p></div>
+<div class="step-body"><p>## 背景</p>
+<p>「鲜丰汇」是一家生鲜电商，最近 GMV 增长乏力，老板撂下一句"<strong>想办法提升 GMV</strong>"就走了。你手上有这么几份资料：</p>
+<p class="blk">资料 A · 主路径漏斗（近 30 天）</p>
+<div class="tbl-scroll"><table><thead><tr><th>环节</th><th>人数</th></tr></thead><tbody><tr><td>首页曝光</td><td>1,000,000</td></tr><tr><td>进入生鲜频道页</td><td>200,000</td></tr><tr><td>进入商品详情页</td><td>50,000</td></tr><tr><td>提交下单</td><td>5,000</td></tr></tbody></table></div>
+<p class="blk">资料 B · 两个投放渠道的加购转化（各 100 人）</p>
+<div class="tbl-scroll"><table><thead><tr><th></th><th>新客</th><th>老客</th><th>整体</th></tr></thead><tbody><tr><td>渠道 A</td><td>45/50</td><td>10/50</td><td>？</td></tr><tr><td>渠道 B</td><td>19/20</td><td>24/80</td><td>？</td></tr></tbody></table></div>
+<p>老板看了整体数，说"渠道 A 转化高，把预算全砸 A、砍掉 B"。</p>
+<p class="blk">资料 C · 三条业务观察</p>
+<ul><li>C1：用过优惠券的用户，月复购率是没用过的 2.5 倍 → 运营想"多发券提复购"。</li><li>C2：在详情页停留越久的用户下单率越高 → 产品想"测停留多久最好、做个倒计时拖住用户"。</li><li>C3：上个月推荐栏换了新策略，测试期点击率 +3% 很漂亮，全量上线后却回落如初。</li></ul></div>
+<div class="step"><div class="step-h"><span class="ic">🧩</span>任务 1 · 看方向（漏斗找卡点）</div><div class="step-body">
+<p>算出资料 A 三段转化率，指出最该先攻的环节。</p>
+<div class="ta-label">✍️ 写下你的处理：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="cap1" placeholder="先自己写，再点开参考…"></textarea>
+<details class="fold"><summary>👉 参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="cap1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>曝光→频道 = 200000/1000000 = <strong>20%</strong>；频道→详情 = 50000/200000 = <strong>25%</strong>；详情→下单 = 50000→5000 = <strong>10%</strong>。</li><li>最该先攻：<strong>首段 20%（流失 80 万）</strong> 体量最大，<strong>末段 10%</strong> 离钱最近、漏得最狠。性价比上优先打"详情→下单"这 10%（改一点都直接变成订单），同时排查首页为何 80% 不进频道。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧩</span>任务 2 · 换维度归因（辛普森陷阱）</div><div class="step-body">
+<p>把资料 B 的整体转化率算出来；再按新/老客分层，判断"砍掉 B、全砸 A"对不对。</p>
+<div class="ta-label">✍️ 写下你的处理：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="cap2" placeholder="先自己写，再点开参考…"></textarea>
+<details class="fold"><summary>👉 参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="cap2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>整体：渠道 A = (45+10)/100 = <strong>55%</strong>，渠道 B = (19+24)/100 = <strong>43%</strong> → 只看整体，A 确实更高。</li><li>分层：新客 A 45/50=<strong>90%</strong> vs B 19/20=<strong>95%</strong>；老客 A 10/50=<strong>20%</strong> vs B 24/80=<strong>30%</strong> → <strong>两层都是 B 更高！</strong></li><li>真相：<strong>B 的客群里老客占了 80%</strong>（A 只占 50%），老客转化天然低，把 B 的整体拖下去了。后门变量 = <strong>新老客结构</strong>。结论：<strong>不能砍 B</strong>——同等客群下 B 反而更强，砍了是误杀（典型辛普森悖论）。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧩</span>任务 3 · 揪后门（识破混淆）</div><div class="step-body">
+<p>C1"用券→复购高"能不能直接推"多发券"？后门是什么？怎么验证券的真实作用？</p>
+<div class="ta-label">✍️ 写下你的处理：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="cap3" placeholder="先自己写，再点开参考…"></textarea>
+<details class="fold"><summary>👉 参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="cap3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li>不能直接推。后门 = <strong>用户购物频次/粘性</strong>：高频铁杆用户既爱领券、本来也复购多——是"高频"同时带来了"用券"和"复购"。</li><li>验证：在<strong>相同购物频次</strong>的用户内比较用券 vs 不用券的复购；或随机给一批用户<strong>发券</strong>（一批不发）看复购是否真被拉动。很可能券只是被高频用户顺手领了，独立拉动复购的作用被高估。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧩</span>任务 4 · 识别伪命题</div><div class="step-body">
+<p>C2"测停留多久下单率最高、做倒计时拖住用户"——这是不是伪命题？真正该测什么？</p>
+<div class="ta-label">✍️ 写下你的处理：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="cap4" placeholder="先自己写，再点开参考…"></textarea>
+<details class="fold"><summary>👉 参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="cap4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>是伪命题</strong>：停留是结果不是原因。做个倒计时/抽奖就能逼出停留，但他领完奖就走、不会下单。</li><li>真正该测的是"<strong>什么让用户愿意下单</strong>"：商品是否新鲜划算、有没有产地/品质卖点、配送时效、价格优惠形式等——把这些拆成可测的 X，而不是测停留时长。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧩</span>任务 5 · 实验设计（落到可测）</div><div class="step-body">
+<p>针对任务 1 找到的"详情→下单 10%"卡点，设计一个 ABtest：写出 X、Y、属于页面/优惠/策略哪一类、分流位置放哪。</p>
+<div class="ta-label">✍️ 写下你的处理：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="cap5" placeholder="先自己写，再点开参考…"></textarea>
+<details class="fold"><summary>👉 参考（示例，言之成理即可） · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="cap5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>X</strong>：详情页是否新增"今日产地直发 + 30 分钟达"信息模块（页面设计类，固定商品和价格）。</li><li><strong>Y</strong>：详情页→下单转化率（主指标）；客单价作护栏（别为冲转化拉低客单）。</li><li><strong>类别</strong>：页面设计类——最适合无脑测。</li><li><strong>分流位置</strong>：效果点在详情页，<strong>分流就放在进入详情页时</strong>，别在首页早早分流（否则大量没到详情的人会稀释效果）。</li><li>注意：避开大促；改动量要够（别只改一个字）。</li></ul></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧩</span>任务 6 · 排错（上线无效）</div><div class="step-body">
+<p>C3 推荐策略"测试 +3%、上线回落"，请列出至少 3 个可能原因，并说怎么排查。</p>
+<div class="ta-label">✍️ 写下你的处理：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="cap6" placeholder="先自己写，再点开参考…"></textarea>
+<details class="fold"><summary>👉 参考 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="cap6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><ul><li><strong>多因素干扰</strong>：测试期推荐流里可能混入了某个强势爆品/新店，点击涨是它带来的、不是策略；排查推荐结果里有没有这种"看不见的强变量"。</li><li><strong>虹吸/季节</strong>：隔壁秒杀栏上了爆品把流量吸走，或测试用的是时令商品（如应季水果）过季就失效；排查周边坑位排期、内容时效。</li><li><strong>样本偏差/影响太小</strong>：测试期短只进了高活跃用户，或 +3% 本就微弱，上线被淹没；核对测试人群与全量是否一致、提升幅度够不够。</li><li><strong>纪律</strong>：别靠"放量/拖时间/拆细分"硬凑显著——做不行就回去改策略（买定离手）。</li></ul></div></details>
+</div></div>
+<div class="lead-callout">走完 6 题，对照你是否用上了全册主线：<strong>看方向（漏斗）→ 换维度归因（分层/辛普森）→ 揪后门（混淆）→ 识别伪命题 → 实验设计（页面/优惠/策略 + 分流）→ 排错（多因素/虹吸/季节 + 纪律）</strong>。六步都顺下来，这门课就真的会用了。</div>
+</section>
+</div></main></div>
+<script>
+(function(){
+  var LS = "abtest_pb_full_v1";   /* ← 改① 每份文件换唯一名，防不同页面串档 */
+  function load(){ try{ return JSON.parse(localStorage.getItem(LS)||"{}"); }catch(e){ return {}; } }
+  function save(d){ try{ localStorage.setItem(LS, JSON.stringify(d)); }catch(e){} }
+  var data = load();
+  document.querySelectorAll("textarea.ta").forEach(function(ta){
+    var key = ta.getAttribute("data-save");
+    if(data[key]) ta.value = data[key];
+    var tag = ta.parentElement.querySelector("[data-tag]") || (ta.previousElementSibling && ta.previousElementSibling.querySelector("[data-tag]"));
+    var timer;
+    ta.addEventListener("input", function(){
+      data[key] = ta.value; save(data); syncRecall(key, ta.value);
+      if(tag){ tag.classList.add("show"); clearTimeout(timer); timer=setTimeout(function(){ tag.classList.remove("show"); },1200); }
+    });
+  });
+  function syncRecall(key, val){
+    document.querySelectorAll('[data-recall="'+key+'"]').forEach(function(box){
+      var rc = box.querySelector(".rc");
+      if(val && val.trim()){ rc.textContent = val; box.classList.remove("empty"); }
+      else{ rc.textContent = "（你还没在上面写，写了这里会自动显示）"; box.classList.add("empty"); }
+    });
+  }
+  document.querySelectorAll("textarea.ta").forEach(function(ta){ syncRecall(ta.getAttribute("data-save"), ta.value); });
+  var doneSet = data.__done || {};
+  function refreshProgress(){
+    var n = Object.keys(doneSet).filter(function(k){return doneSet[k];}).length;
+    var p = document.getElementById("progress");
+    if(p) p.textContent = "已学 " + n + " / 20";   /* ← 改② 把 N 换成章节总数；不要进度就删本段 */
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){
+      var m = (a.getAttribute("href")||"").match(/^#sec-(.+)$/);
+      var ck = a.querySelector(".ck[data-ck]");
+      if(m && ck) ck.textContent = doneSet[m[1]] ? "✓" : "";
+    });
+  }
+  document.querySelectorAll(".done-btn").forEach(function(btn){
+    var id = btn.getAttribute("data-done");
+    if(doneSet[id]){ btn.classList.add("on"); btn.textContent="✓ 已学完"; }
+    btn.addEventListener("click", function(){
+      doneSet[id] = !doneSet[id];
+      btn.classList.toggle("on", doneSet[id]);
+      btn.textContent = doneSet[id] ? "✓ 已学完" : "标记学完";
+      data.__done = doneSet; save(data); refreshProgress();
+    });
+  });
+  refreshProgress();
+  var secs = [].slice.call(document.querySelectorAll("section.sec"));
+  var links = {};
+  document.querySelectorAll("nav.toc a[href]").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
+  function onScroll(){
+    var pos = window.scrollY + 90, cur = null;
+    secs.forEach(function(s){ if(s.offsetTop <= pos) cur = s.id; });
+    Object.keys(links).forEach(function(id){ links[id].classList.toggle("active", id===cur); });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  var toc=document.getElementById("toc"), scrim=document.getElementById("scrim");
+  if(toc&&scrim){
+    document.getElementById("burger").addEventListener("click", function(){ toc.classList.toggle("open"); scrim.classList.toggle("open"); });
+    scrim.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); });
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){ a.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); }); });
+  }
+})();
+</script>
+</body></html>

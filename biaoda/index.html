@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《能成事的表达课》学习训练册</title>
+<style>
+  :root{
+    --paper:#faf6ec; --paper-2:#f4eedf; --card:#fffdf7;
+    --ink:#322e28; --ink-soft:#6f675a; --ink-faint:#9a9384;
+    --accent:#1f7a6b; --accent-deep:#16584d; --accent-tint:#eaf2ef;
+    --warn:#c0392b; --line:#e6ddcb; --line-soft:#efe8d8;
+    --maxread:720px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;}
+
+  /* ===== 顶栏 ===== */
+  header.topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#f5efe0;
+    display:flex;align-items:center;gap:14px;padding:10px 18px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+  .topbar .burger{display:none;background:none;border:none;color:#f5efe0;font-size:22px;cursor:pointer;line-height:1;}
+  .topbar h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+  .topbar .spine{font-size:12.5px;color:#cfe3dd;border-left:1px solid #3c7c70;padding-left:14px;flex:1;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+  /* ===== 布局 ===== */
+  .wrap{display:flex;align-items:flex-start;}
+  nav.toc{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);overflow-y:auto;
+    width:258px;flex:0 0 258px;background:var(--paper-2);border-right:1px solid var(--line);padding:16px 10px 60px;}
+  nav.toc .grp{font-size:12px;color:var(--ink-faint);font-weight:700;margin:16px 8px 6px;letter-spacing:.5px;}
+  nav.toc a{display:flex;align-items:flex-start;gap:7px;text-decoration:none;color:var(--ink-soft);
+    font-size:13.5px;padding:6px 9px;border-radius:7px;margin:1px 0;line-height:1.45;}
+  nav.toc a:hover{background:var(--accent-tint);color:var(--accent-deep);}
+  nav.toc a.active{background:var(--accent-tint);color:var(--accent-deep);font-weight:700;box-shadow:inset 3px 0 0 var(--accent);}
+  nav.toc a .nx{flex:0 0 auto;width:20px;color:var(--accent);font-weight:700;text-align:right;}
+  nav.toc a.special{color:var(--accent-deep);font-weight:600;}
+
+  main{flex:1;min-width:0;padding:0 28px 120px;}
+  .reader{max-width:var(--maxread);margin:0 auto;}
+
+  /* ===== 章节通用 ===== */
+  section.sec{padding-top:30px;scroll-margin-top:60px;}
+  .sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);
+    padding-bottom:10px;margin:8px 0 6px;}
+  .sec-h h2{font-size:23px;margin:0;color:var(--accent-deep);font-weight:800;}
+  .badge-time{font-size:12px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);
+    padding:2px 10px;border-radius:20px;}
+  .sec-intro{color:var(--ink-soft);font-size:14.5px;margin:10px 0 4px;}
+
+  /* 步骤块 */
+  .step{margin:22px 0;}
+  .step-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin:0 0 8px;}
+  .step-h .ic{font-size:18px;}
+  .step-body{padding-left:2px;}
+  p{margin:.55em 0;}
+  strong{color:var(--ink);}
+  .accent{color:var(--accent-deep);font-weight:700;}
+  .blk{font-size:15.5px;font-weight:800;color:var(--ink);margin:18px 0 6px;}
+  .quote{border-left:3px solid var(--line);background:var(--paper-2);border-radius:0 8px 8px 0;padding:10px 15px;margin:13px 0;}
+  .quote>p:first-child{margin-top:0;} .quote>p:last-child{margin-bottom:0;}
+  .step-body>p:first-child{margin-top:0;}
+
+  /* 框架代码块 */
+  pre{background:#f3ecdb;color:#3b362d;border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:10px;padding:14px 16px;overflow-x:auto;white-space:pre-wrap;
+    font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13px;line-height:1.7;margin:12px 0;}
+
+  /* 锚点故事 / tip —— 靠图标+细边，不靠大色块 */
+  .callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);
+    border-radius:8px;padding:12px 15px;margin:14px 0;font-size:15px;}
+  .callout .c-h{font-weight:800;color:var(--accent-deep);margin-bottom:4px;}
+  .callout.ok{border-left-color:var(--accent);background:var(--accent-tint);}
+
+  /* 方法卡 */
+  .methodcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0;}
+  .methodcard ol{margin:0;padding-left:22px;} .methodcard li{margin:5px 0;}
+
+  /* checklist */
+  ul.check{list-style:none;padding-left:2px;margin:10px 0;}
+  ul.check li{position:relative;padding-left:26px;margin:7px 0;}
+  ul.check li::before{content:"☐";position:absolute;left:0;color:var(--ink-faint);font-size:16px;}
+
+  /* 折叠答案 */
+  details.fold{border:1px dashed var(--accent);border-radius:9px;margin:12px 0;background:var(--card);}
+  details.fold>summary{cursor:pointer;list-style:none;padding:11px 15px;font-weight:700;color:var(--accent-deep);user-select:none;}
+  details.fold>summary::-webkit-details-marker{display:none;}
+  details.fold>summary::before{content:"▸ ";color:var(--accent);}
+  details.fold[open]>summary{border-bottom:1px solid var(--line-soft);}
+  details.fold[open]>summary::before{content:"▾ ";}
+  details.fold .fold-in{padding:6px 16px 14px;}
+
+  /* 全景图 */
+  .map{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0;}
+  .map .m-box{border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;background:var(--paper);}
+  .map .m-box.lead{background:var(--accent-deep);color:#f1ece0;border-color:var(--accent-deep);}
+  .map .m-box.lead b{color:#fff;}
+  .map .m-arrow{text-align:center;color:var(--ink-faint);font-size:15px;margin:2px 0;}
+  .map .m-row{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;margin:11px 0;}
+  .map .m-axis{flex:0 0 72px;font-weight:800;color:var(--accent-deep);white-space:nowrap;
+    font-size:14px;letter-spacing:1px;padding-top:5px;}
+  .map .m-chips{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:9px;}
+  .map a.chip{display:inline-block;text-decoration:none;font-size:13px;color:var(--ink);background:var(--paper-2);
+    border:1px solid var(--line);border-radius:16px;padding:4px 13px;line-height:1.5;}
+  .map a.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .map .m-note{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;}
+  .map .m-cap{font-weight:800;color:var(--ink);margin:4px 0 2px;font-size:13.5px;}
+  .lead-callout{background:var(--accent-deep);color:#eef4f1;border-radius:10px;padding:13px 17px;margin:14px 0;}
+  .lead-callout b{color:#fff;}
+
+  .tbl-scroll{overflow-x:auto;margin:12px 0;}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--card);}
+  th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;}
+  thead th{background:var(--paper-2);color:var(--ink);font-weight:700;}
+  tbody tr:nth-child(even){background:#fcf9f1;}
+
+  hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+  .scrim{display:none;position:fixed;inset:48px 0 0;background:rgba(0,0,0,.3);z-index:25;}
+
+  @media (max-width:820px){
+    nav.toc{position:fixed;top:48px;left:0;z-index:28;transform:translateX(-100%);transition:transform .2s;box-shadow:2px 0 14px rgba(0,0,0,.15);}
+    nav.toc.open{transform:translateX(0);}
+    .scrim.open{display:block;}
+    .topbar .burger{display:block;}
+    .topbar .spine{display:none;}
+    main{padding:0 16px 100px;}
+  }
+  @media print{
+    header.topbar,nav.toc,.scrim{display:none!important;}
+    main{padding:0;} details.fold{border-color:#bbb;} details.fold[open]{} body{font-size:12pt;background:#fff;}
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="目录">☰</button>
+  <h1>《能成事的表达课》学习训练册</h1>
+  <div class="spine">内核·合作思维　|　表达输出 / 倾听输入 / 关系博弈</div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav class="toc" id="toc">
+  <a class="special" href="#map"><span class="nx"></span>🗺 全景图 & 路径</a>
+  <div class="grp">14 个训练单元</div>
+  <a href="#sec-1"><span class="nx">1</span>向上汇报·金字塔</a>
+  <a href="#sec-2"><span class="nx">2</span>向上沟通·赢信任</a>
+  <a href="#sec-3"><span class="nx">3</span>接任务·问对需求</a>
+  <a href="#sec-4"><span class="nx">4</span>应对批评与发火</a>
+  <a href="#sec-5"><span class="nx">5</span>提需求·谈加薪</a>
+  <a href="#sec-6"><span class="nx">6</span>高效开会</a>
+  <a href="#sec-7"><span class="nx">7</span>得体拒绝</a>
+  <a href="#sec-8"><span class="nx">8</span>处理冲突</a>
+  <a href="#sec-9"><span class="nx">9</span>倾听·让人愿意听</a>
+  <a href="#sec-10"><span class="nx">10</span>上台克服紧张</a>
+  <a href="#sec-11"><span class="nx">11</span>共情·说到心里</a>
+  <a href="#sec-12"><span class="nx">12</span>有效批评</a>
+  <a href="#sec-13"><span class="nx">13</span>生动表达</a>
+  <a href="#sec-14"><span class="nx">14</span>即兴表达</a>
+  <a class="special" href="#sec-cap"><span class="nx"></span>🎓 结课大实战</a>
+</nav>
+<main>
+<div class="reader">
+
+<section class="sec" id="map">
+  <div class="sec-h"><h2>🗺 全景图 & 学习路径</h2></div>
+  <p class="sec-intro">一张图看懂整门课。点任意单元直接跳过去。</p>
+  <div class="map">
+    <div class="m-box lead"><b>内核·合作思维</b>：你是关系里的 50%；沟通不是为了赢，是为了把事一起做成。每个单元都垫在它上面。</div>
+    <div class="m-arrow">↓ 三种沟通模式（每个单元有主导模式）</div>
+    <div class="m-box">
+      <div class="m-row"><span class="m-axis">表达输出</span><span class="m-chips"><a class="chip" href="#sec-1">1 汇报</a><a class="chip" href="#sec-2">2 赢信任</a><a class="chip" href="#sec-5">5 提需求</a><a class="chip" href="#sec-6">6 开会</a><a class="chip" href="#sec-10">10 克服紧张</a><a class="chip" href="#sec-13">13 生动表达</a><a class="chip" href="#sec-14">14 即兴</a></span></div>
+      <div class="m-row"><span class="m-axis">倾听输入</span><span class="m-chips"><a class="chip" href="#sec-3">3 问需求</a><a class="chip" href="#sec-9">9 倾听</a><a class="chip" href="#sec-11">11 共情</a></span></div>
+      <div class="m-row"><span class="m-axis">关系博弈</span><span class="m-chips"><a class="chip" href="#sec-4">4 应对批评</a><a class="chip" href="#sec-7">7 得体拒绝</a><a class="chip" href="#sec-8">8 处理冲突</a><a class="chip" href="#sec-12">12 有效批评</a></span></div>
+    </div>
+    <div class="m-arrow">↓</div>
+    <div class="m-box">
+      <div class="m-cap">纵深三层（颗粒度 粗 → 细）</div>
+      <div class="m-row"><span class="chip" style="cursor:default">心法（为什么）</span><span style="color:var(--ink-faint)">→</span><span class="chip" style="cursor:default">框架（怎么想）</span><span style="color:var(--ink-faint)">→</span><span class="chip" style="cursor:default">话术（那句话怎么说）</span></div>
+      <div class="m-note">例：合作思维 → 金字塔 / PREP / 接一半扔一半 / 忍·等·问 → "周四下午不上班" / "是这样的" / "我不希望…我希望…"</div>
+    </div>
+  </div>
+  <div class="lead-callout"><b>怎么用这张图给自己定位：</b><br>遇到一个沟通难题，先问两件事——① 它主要是"表达输出 / 倾听输入 / 关系博弈"里的哪一类？② 我卡在"心法（不敢/想不通）、框架（不知道怎么想）、还是话术（话到嘴边说不出）"哪一层？对号入座，直接翻对应单元。</div>
+
+  <h3 class="blk">📅 学习路径</h3>
+  <div class="tbl-scroll"><table><thead><tr><th>路径</th><th>适合谁</th><th>学哪些</th><th>节奏</th></tr></thead><tbody>
+  <tr><td><strong>最小可用</strong></td><td>时间紧、先救急</td><td>1 汇报 · 7 拒绝 · 8 冲突 · 9 倾听</td><td>每天 1 个，1 周</td></tr>
+  <tr><td><strong>完整深读</strong></td><td>系统练起来</td><td>全 14 单元 + 🎓 结课实战</td><td>每天 1 个，3 周</td></tr>
+  <tr><td><strong>按角色</strong></td><td>管理者 / 新人 / 对外岗</td><td>管理者重 9·11·12·6·4；新人重 1·3·7·14；对外岗重 5·8·13·2</td><td>先重点、再补全</td></tr>
+  </tbody></table></div>
+  <p class="sec-intro">用法：每个 🪜「换你做」和 ⚠️「自测」的参考答案都<strong>折叠</strong>着——先自己写/想，再点开对照。学过的例子不算练，所有练习都是全新场景。</p>
+</section>
+<hr class="soft">
+
+
+<section class="sec" id="sec-1">
+  <div class="sec-h"><h2>第 1 单元　向上汇报·金字塔表达</h2><span class="badge-time">⏱ 约 30 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 1 节。教材讲透了"为什么汇报讲不到重点"；这一单元只练一件事——开口第一句就把对方拉住。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你正埋头干活，老板突然站到你工位后面："上周让你跟进的那个客户投诉，处理得怎么样了？"</p>
+    <p>你脑子里一堆细节：投诉怎么来的、你联系了谁、对方什么态度、现在到哪一步了、还差什么……</p>
+    <p><strong>你张嘴的第一句话，会是什么？</strong></p></div>
+    <p>先别往下看，给自己 30 秒，把你"脱口而出的第一句"写下来——等下 ✍️「跟着做」我们就拿这个场景走一遍，你拿它对照。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>汇报开口的第一句，先抛"结论 / 对方要的那个点"，而且主语是"你（对方）"——而不是从"发生了什么"开始往上铺。</strong></p></div>
+    <p>（这是招牌动作；它的前置开关是：开口前先在心里<strong>爬到金字塔塔尖</strong>，想清"我到底要和对方实现什么"。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p>表达和思考，是同一座金字塔上<strong>两个相反的方向</strong>：</p>
+    <pre>              ▲ 塔尖：我要和你实现什么（需求 / 要你拍板的事）
+            ╱      我要做什么（方案）        ╲
+          ╱        我怎么看（分析）            ╲
+        ╱       发生了什么（事实 / 问题）        ╲
+        ────────────────────────────────────────
+   想清楚时：从底往上爬（主语是"我"，自己关起门来爬）
+   说出来时：从顶往下滑（主语是"你"，先讲跟对方有关的）</pre>
+    <p>底层原则：所有人都以自我为中心听话——想抓住对方注意力，<strong>第一句就得落在"他在乎的点"上</strong>。</p>
+    <div class="callout"><div class="c-h">🔖 锚点故事·电脑卡顿汇报</div>
+    <p>一个学员要跟老板汇报"公司电脑卡顿"。他下意识从塔底往上爬：先讲"很多同事反映电脑卡顿、拉低效率"（事实）→"我查了，是配置低"（分析）→"我找供应商出了升级方案"（方案）→ 最后才挤出一句"需要你拍个预算"（需求）。讲到一半，老板大概率打断："等你想清楚再说。"</p>
+    <p>把顺序整个倒过来、从塔尖往下滑，第一句就说：<strong>"老板，这件事得请你拍一笔预算，它直接关系到全公司的工作效率。"</strong> 内容一个字没变，老板却从打断你，变成愿意听你讲完。</p>
+    <p><strong>这告诉你</strong>：让人不耐烦的，往往不是你讲得不细，而是你逼着对方陪你从塔底爬了一路、迟迟没听到"跟我有什么关系"。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那个客户投诉）</div><div class="step-body">
+    <p>还记得 🎯 里老板问你"客户投诉处理得怎么样了"吗？跟着走一遍：</p>
+    <p><strong>① 先爬塔尖（想清我要和他实现什么）</strong>：他这一问，真正想要的是"心里有底 + 知道要不要他出手"。所以我的第一句，应该落在"结论 + 要不要你介入"上，而不是投诉的来龙去脉。</p>
+    <p><strong>② 从顶往下滑，主语换成"你/这件事"</strong>：</p>
+    <div class="quote"><p>"已经控制住了，客户情绪稳下来了，<strong>这周内能结案，暂时不用您出面</strong>（<strong>结论 + 跟你有关的点先给</strong>）。简单说就是：起因是发货延迟，我已经道歉并补了方案，对方基本接受（<strong>再补一句分析/方案</strong>）；唯一不确定的是赔偿额度，到时候可能需要您拍一下板（<strong>留出真正要你拍的点</strong>）。"</p></div>
+    <p>对照一下你在 🎯 写的第一句：是不是从"事情是这样的，上周三客户打电话来说……"开始讲起？那就是在塔底起步、拉着老板往上爬。而上面这句——<strong>先给结论、先讲跟他有关的、把要他拍板的点拎出来</strong>，他 5 秒就知道该不该操心。这就是"往下滑"。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（向老板要资源）</div><div class="step-body">
+    <div class="quote"><p>你想跟老板申请"给团队加一个实习生"。你心里的理由一大堆：最近活多、大家加班、有些杂活其实不用正式员工干、隔壁组就加了人……</p>
+    <p>请写出你<strong>开口的第一句</strong>（从塔尖往下滑，主语是"你/这件事"），别从"最近咱们活特别多……"开始铺。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"老板，我想申请加一个实习生，<strong>每月多花 X 千块，能把我们组从'天天加班赶杂活'里解放出来、把精力放回核心项目</strong>——你看能不能批？"</p></div>
+      <p>先抛"我要你拍的事（批一个实习生）+ 它对你/对业务的价值（精力回到核心项目）"，再视老板反应补"为什么、花多少、怎么安排"。</p>
+      <p><strong>反射</strong>：要资源时最容易犯的错，就是先讲一长串"我们多惨多忙"，把老板晾在那猜"所以你到底想要啥"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：汇报开口 4 步</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>先爬塔尖</strong>：开口前 3 秒问自己"我到底要和他实现什么"</li>
+      <li><strong>第一句抛结论/需求</strong>：把那个点当第一句说出来，别留到最后</li>
+      <li><strong>主语换成"你"</strong>：第一句是"这事跟你/需要你……"，不是"我做了……"</li>
+      <li><strong>再按需往下补</strong>：方案 / 分析 / 事实，对方想细问了再给</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>一开口就从"事情是这样的……"铺背景，迟迟不说目的？</li>
+      <li>把"想清楚"的苦差事推给老板，让他边听边帮你爬金字塔？</li>
+      <li>以为"没重点"是没讲到事情的重点——其实是没讲到"对方在乎的点"？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>下属给你发来这段周报开头：</p>
+    <p><strong>"领导，这周我对接了 3 家供应商，开了 2 次会，整理了报价表，还跟财务确认了预算流程，发现走完审批大概要 5 天，所以我觉得采购这块可能会延期……"</strong></p>
+    <p>请把它改写成"从塔尖往下滑"的版本（第一句就让领导知道最该知道的）。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <p>领导最该先知道的是"会延期"这个结论和"要不要他出手"：</p>
+      <div class="quote"><p><strong>"领导，采购可能要延期 3 天，主要卡在审批流程要走 5 天——需不需要您帮忙催一下审批？"</strong>（先给结论 + 影响 + 要不要你介入）"我这周已经对接完 3 家供应商、报价表也齐了，万事俱备，就差审批这一环。"（再补过程，证明不是没干）</p></div>
+      <p><strong>反射</strong>：原版把"延期"这个最重要的结论埋在了第四句，前面三句"我做了什么"其实是在塔底往上爬——领导听到一半就该急了。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>表达输出</strong>】模式；主要落在【<strong>框架 → 话术</strong>】层——"金字塔·从顶往下滑"是框架，"先抛结论、主语换成你"是话术；底下垫着的心法是【<strong>合作思维</strong>：所有人都以自我为中心听话，先讲他在乎的点】。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-2">
+  <div class="sec-h"><h2>第 2 单元　向上沟通·赢得信任</h2><span class="badge-time">⏱ 约 30 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 2 节。上一单元练"汇报开口怎么说"；这一单元练一件更要命的事——让你的汇报/记录"不可被录音笔替代"。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>老板让你去考察两家备选供应商，回来汇报。你笔记记了满满两页：A 家报价多少、账期多久、做过哪些案例；B 家报价多少、账期多久、有哪些资质……</p>
+    <p>你回来站到老板面前，<strong>第一句话会说什么？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍，你对照。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>任何"汇报 / 记录"，开口第一句先给【你的结论 + 你的建议】（"我推荐 A，建议签"），再用过程和事实去支撑它——而不是把考察过程一五一十念一遍。</strong></p></div>
+    <p>（心法：这就是<strong>合作思维</strong>——用对方乐于接受的方式，帮他实现目标；你的价值是"带着判断的人"，不是一支转写更快的录音笔。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p>合作思维一句话：<strong>用别人乐于接受的方式，实现你（和他）的目标。</strong> 任何表达都有"一个对方 + 一个目标"，脱离这俩，就是只有自己听得懂的自言自语。</p>
+    <p>落到汇报/记录上，就一个动作——<strong>先给判断，再给依据</strong>：</p>
+    <pre>第一句：结论 + 建议   →  "我推荐 A，建议签"（先把你的判断给出来）
+第二段：判断依据       →  分点说"我为什么这么判断"（报价/账期/风险…）
+第三段：只留支撑结论的事实  →  挑最能撑住结论的几条，不照搬全部过程</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·一份"最完美"的面试记录</div>
+    <p>翠翠见过一份她称为最完美的面试记录：开头第一句就是 <strong>"这个人 1 到 5 分，我给 4.5，建议复试。"</strong> 没有任何过程铺垫，结论和需求（请你复试）直接给。接着用三段分别从逻辑能力、抗压能力、产品方法论说清"我为什么给 4.5"，最后只摘录最能支撑判断的几段问答。</p>
+    <p>而大多数人会把面试过程像庭审实录一样事无巨细地记下来，看到结尾也看不出记录者的判断——可这种"全记录"，<strong>一支录音笔就能替代你</strong>，现在的转写软件比你记得更快更全。</p>
+    <p><strong>这告诉你</strong>：同样是记录，停在"发生了什么"做传声筒、还是加进你的结论和判断，决定了你在职场上是"可被替代"还是"不可替代"。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那两家供应商）</div><div class="step-body">
+    <p>还记得 🎯 里老板让你考察的 A、B 两家供应商吗？跟着走一遍：</p>
+    <p><strong>① 先定判断（合作思维：老板真正要的是"该签谁、能不能签"）</strong>：他不要一份对比流水账，他要的是"你的推荐 + 我能不能放心拍板"。</p>
+    <p><strong>② 第一句给结论 + 建议</strong>：</p>
+    <div class="quote"><p>"两家我都跑完了，<strong>我推荐 A，建议这周就签</strong>（<strong>结论 + 建议先给</strong>）。理由就三条：A 报价比 B 高 8%，但账期长一倍、还接过我们同行的大单，综合更稳；B 便宜，但资质和交付我打了问号（<strong>判断依据，分点</strong>）。要支撑这个判断，我重点确认了 A 的三个客户口碑和它的产能，都没问题（<strong>只留支撑结论的关键事实</strong>）。"</p></div>
+    <p>对照一下你在 🎯 写的第一句：是不是"A 家报价是……账期是……，B 家报价是……"？那就是在做对比流水账——老板听完还得自己在脑子里替你下结论。而上面这句，<strong>先给了你的推荐和理由</strong>，他 10 秒就能决定信不信你、要不要签。这就是"不可替代"和"录音笔"的区别。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（听完用户访谈回来汇报）</div><div class="step-body">
+    <div class="quote"><p>老板让你去旁听了 5 场用户访谈，想知道"我们产品到底哪儿出了问题"。你记了一大堆用户原话和吐槽。</p>
+    <p>请写出你回来汇报的<strong>第一句（结论 + 建议）</strong>，外加你接下来打算怎么组织（别一上来就念用户语录）。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p><strong>第一句</strong>："听完 5 场，我的判断是——问题不在功能，在'新用户前 3 分钟不知道这产品能干嘛'，<strong>我建议优先改首屏引导，而不是再加功能</strong>。"</p>
+      <p><strong>接下来</strong>：分 2–3 点讲"我凭什么这么判断"（比如 5 个人里 4 个卡在同一步），最后只摘那一两句最扎心的用户原话来佐证。</p></div>
+      <p><strong>反射</strong>：访谈汇报最容易变成"用户语录大串烧"，听完热闹、却没结论。老板要的是"所以我们该改什么"——那是你的判断，是录音笔给不了的。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：让汇报/记录不可替代的 3 步</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>先下判断</strong>：开口第一句＝"我的结论 + 我的建议"（推荐谁 / 该做什么 / 打几分）</li>
+      <li><strong>再给依据</strong>：分点说"我凭什么这么判断"，让结论站得住</li>
+      <li><strong>事实只挑支撑项</strong>：摘最能撑住结论的几条，别照搬全过程（全过程交给录音笔）</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>汇报/记录写成"事无巨细的全过程"，看完不知道你是什么判断？</li>
+      <li>怕担责，只摆事实不给结论——把下判断的活又推回给老板？</li>
+      <li>把"向上沟通"当成"说漂亮话/拍马屁"，忘了它是为了和老板达成一个共同目标？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>下属交来一份会议纪要，开头是：</p>
+    <p><strong>"今天 10 点开会，张总、李经理、我和小王参加。先讨论了 A 方案，张总说预算紧，李经理说时间来得及，然后又聊了 B 方案，小王觉得风险大……会开了一个半小时。"</strong></p>
+    <p>请把它改写成"先给结论和判断"的版本。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p><strong>"今天会上定了：走 A 方案、本月底启动（结论先给）。主要分歧在预算，张总担心紧、李经理认为时间够——最后按'先做最小版本试水'折中（判断/怎么定的）。需要您拍板的只有一件：A 方案的 5 万预算能否批（拎出要你做的事）。"</strong> 详细发言纪要附在下方备查。</p></div>
+      <p><strong>反射</strong>：原版是"庭审实录"——谁先说、谁后说、开了多久，老板根本不关心。他要的是"定了啥、还要不要我出手"。把结论和待办拎到最前面，过程沉到附录里。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>表达输出</strong>】模式（也是你"被看到、变得不可替代"的关键）；主要落在【<strong>心法 → 框架</strong>】层——心法是【<strong>合作思维</strong>：表达是为了和对方实现共同目标】，框架是"先给结论判断、再给依据"；它和上一单元的金字塔是一对——金字塔教你"顺序"，这里教你"你得是带判断的那个人"。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-3">
+  <div class="sec-h"><h2>第 3 单元　接任务·问对核心需求</h2><span class="badge-time">⏱ 约 30 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 3 + 4 + 5 节。这一单元只练一件事——接到任务别急着埋头干，先把"老板到底要什么"问出来。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>老板急匆匆走过来："你下午把那个竞品的资料给我整理一份出来，越快越好啊。"说完就走了。</p>
+    <p>你一听，立马打开电脑，准备搜资料、拉表格、做对比……</p>
+    <p><strong>等一下——在你动手之前，你该先问他哪一句？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍，你对照。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>接到任务先别急着接、急着干，先问清 3W，再多问一句 Why——把"老板要的工具"问成"老板要达成的目的"。</strong></p></div>
+    <p>（前置心法：老板不是给你出题的老师，他自己也在解题、也没标准答案，你俩是<strong>同一个战壕的战友</strong>——所以问 Why 不是质疑他，是为了把事做成。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p>接到任务，按两个层次提问：</p>
+    <pre>初级 · 3W   What  我的职责/角色是什么？     —— 别做错方向
+            How   有什么方法/经验可参考？    —— 别重复造轮子
+            When  什么时候要？             —— 别赶不上
+高阶 · Why  你要这个，到底是想实现什么？   —— 挖得越深，解题空间越大
+            （记住：指令可以撼动，目的不可撼动）</pre>
+    <p>为什么很多人不敢问 Why？因为带着"考试思维"——把任务当考题、把老板当出题老师，潜意识觉得"问 Why＝质疑老师、暴露我不会"。可现实是：商业难度没有上限，老板自己也在解题、也常常没答案。把他当"老师"，等他也搞不定时你会彻底慌；把他当"战友"，你才敢问、也才问得出真正的目的。</p>
+    <div class="callout"><div class="c-h">🔖 锚点故事·老板要的不是锤子</div>
+    <p>快下班了，老板急着说："赶紧给我一个锤子！"——</p>
+    <p>只会问 3W 的人："什么时候要、我去哪买？"可这会儿店都关门了，买不到，只能干等挨骂。</p>
+    <p>多问一句 Why 的人："你要锤子干嘛？"——"我要在墙上打个洞。""为什么打洞？"——"我想把公司大合照挂上墙。"原来他要的根本不是锤子，是"把照片挂上墙"。于是无痕胶、找颗钉子……方案一下子全有了。</p>
+    <p><strong>这告诉你</strong>：老板在乎的永远是任务背后的 Why（照片上墙），不是 What（一个锤子）。抓住 Why，你就从"买不到锤子的工具人"，变成"能解题的人"。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那份竞品资料）</div><div class="step-body">
+    <p>还记得 🎯 里老板让你"整理一份竞品资料"吗？跟着走一遍：</p>
+    <p><strong>① 先问 3W（30 秒，别埋头就干）</strong>：要哪几家竞品（What）？你手上有没有现成对标口径（How）？什么时候要（When）？</p>
+    <p><strong>② 关键是多问一句 Why</strong>：</p>
+    <div class="quote"><p>"老板，我马上整。<strong>不过想先跟您确认一下：这份资料您主要是想用来干嘛？</strong>（<strong>问 Why</strong>）是给投资人看融资材料，还是我们自己定价/做功能取舍要参考？"——他说："明天见客户，客户问起来我得能接得住。"</p></div>
+    <p><strong>③ 抓住 Why，方案就变了</strong>：原来他要的不是"一份大而全的对比表"，是"明天当着客户能对答如流的几个关键差异点"。于是你只做"3 个客户最可能问、我们最有优势的对比"，半小时搞定，还正中下怀。</p>
+    <p>对照一下你在 🎯 写的那句：是不是直接"好的，我下午给您"就埋头做了？那很可能做出一份大而全、却不是他要的表，白干半天。<strong>多问那一句 Why，省下的是你一下午的瞎忙。</strong></p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（订张高铁票）</div><div class="step-body">
+    <div class="quote"><p>老板路过你工位："帮我订张下周三去上海的高铁票。"</p>
+    <p>请写出你<strong>动手订之前先问的那句（含一个 Why）</strong>——想想"订票"背后可能藏着什么（行程会不会变？要不要可改签？是不是顺道还有别的安排？）。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"好嘞。<strong>先跟您确认下：这趟上海是固定行程，还是可能会变？</strong>（Why：摸清确定性）要是行程还没完全定，我帮您订可改签的票、顺便把回程也留个口子；当天几点的会，我按会议时间往前推、给您留出到场时间。"</p></div>
+      <p><strong>反射</strong>：只问"几点的、几等座"是 3W；问"行程定没定、去干嘛"是 Why。前者你是订票工具，后者你帮他把"别误事、别折腾改签"一起解决了。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：接任务 4 步</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>先别急着接</strong>：手别动，给自己 30 秒</li>
+      <li><strong>问清 3W</strong>：我的职责（What）/ 有啥方法可参考（How）/ 什么时候要（When）</li>
+      <li><strong>多问一句 Why</strong>：你要这个，是想实现什么目的？（往下挖一两层）</li>
+      <li><strong>突发回到 Why</strong>：现场来不及请示时，回到"他到底要什么"，自己拍板</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>心里没底却嘴上先接下来，回头用"果然干不成"证明自己？</li>
+      <li>按自己的理解就埋头干，交上去南辕北辙（白干的是你的工时）？</li>
+      <li>把老板当"有标准答案的老师"，他一搞不定你就跟着慌？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景）</h3>
+    <div class="quote"><p>老板甩给你一句："你弄个用户满意度调研问卷，下周一给我。"</p>
+    <p>请写出你动手设计问卷前，要问的 <strong>2 个 3W 问题 + 1 个 Why 问题</strong>，并说一句：问出 Why 后，问卷可能会怎么不一样。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <ul>
+        <li><strong>3W</strong>：① 调研哪部分用户、样本量多大（What）？② 公司以前有没有做过类似问卷、有没有模板（How）？③ 下周一是要初稿还是要回收完的数据（When）？</li>
+        <li><strong>Why</strong>："您拿这份调研主要想回答什么决策？"——
+          <ul>
+            <li>如果 Why 是"决定要不要砍掉某个功能"→ 问卷就该重点问那个功能的使用和依赖度；</li>
+            <li>如果 Why 是"给年度汇报凑一个满意度分数"→ 那一道总分题 + 几个关键维度就够了，不用大而全。</li>
+          </ul>
+        </li>
+      </ul>
+      <p><strong>反射</strong>：同样"做问卷"，Why 不同，问卷长得完全不一样。不问 Why 就开做，大概率做了一份"谁都能用、但谁都不真用"的问卷。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>倾听输入</strong>】模式（"问出对方真正要什么"是倾听的起点）；主要落在【<strong>心法 → 框架</strong>】层——心法是【把老板从"老师"换成"战友"，敢问 Why】，框架是"3W + 多问一句 Why"。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-4">
+  <div class="sec-h"><h2>第 4 单元　应对批评与发火</h2><span class="badge-time">⏱ 约 30 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 6 + 7 + 8 节。被老板当众批、被劈头一顿火——这是最容易当场翻车的时刻。这一单元练：先稳住自己，再把"批评"接成"具体要改的事"。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>周会上，老板当着全组的面把你的方案拍在桌上："这个方案做成这样？你到底有没有用心？"</p>
+    <p>你感觉一股血"轰"地涌上来——要么想立刻举证据反驳，要么想找个地缝钻进去。</p>
+    <p><strong>你会怎么回应这句话？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍，你对照。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>挨批、被发火的当下，你最容易把老板当"对手"、忙着证明自己没错。先在心里把他切回"战友"（我们有共同目标），稳住，再开口——听"事"、不护"脸"。</strong></p></div>
+    <p>（前置心法：被批评时心跳加速、想吵想逃，是<strong>杏仁核</strong>在绑架你，是生理反应、不是你人品差。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p>被批评时，大脑里在打一场仗：</p>
+    <pre>杏仁核（情绪脑）：把批评当攻击 → 想战斗 / 想逃跑   = 非合作思维
+前额叶（理性脑）：把批评当"基于合作的建议"        = 合作思维
+应对三步：① 换频道（认出"我被杏仁核绑架了"，先稳住，别吵别逃）
+          ② 问自己"我们共同的目标是什么"（把自己拉回合作频道）
+          ③ 把注意力从"他在否定我（人）"挪到"哪件事没做到（事）"，再回应</pre>
+    <p>（你会发现：这和后面"处理冲突""有效批评"是同一套底层——被批、批人、起冲突，靠的都是"把对方当战友、对事不对人"。）</p>
+    <div class="callout"><div class="c-h">🔖 锚点故事·莫琳在"米奇会议"上只顾证明自己对</div>
+    <p>香奈儿全球总监莫琳，早年在 Gap，为自己选的新款牛仔裤辩护。老板米奇说"只有经典款才行"，她声音发抖也要反驳、列一堆理由证明自己没错；米奇逼问"经典款一周卖 25000 条，你卖了几条"，她答"400 条，但断货了"，仍坚持自己对。米奇摔门："你根本不会听！"莫琳当场断定：我完了，要被开除。可老板转头打来一通电话："你很有潜力，能成为出色的商人……只是整个会议，你都在证明自己对，没听进我说的任何一句话。"</p>
+    <p><strong>这告诉你</strong>：让她差点出局的不是那条牛仔裤，是她把老板当成了"要分输赢的对手"、满脑子证明自己对，于是一个字都没听进去。把对方切回"战友"，你才听得见他真正在说什么。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到周会上那句"有没有用心"）</div><div class="step-body">
+    <p>还记得 🎯 里老板当众那句"你到底有没有用心"吗？跟着走一遍：</p>
+    <p><strong>① 换频道（先认出，再稳住）</strong>：心里默念一句"我现在被杏仁核绑架了，先别急着反驳"——给自己 3 秒，别让那股血冲出去。</p>
+    <p><strong>② 问自己"我们共同的目标是什么"</strong>：我和老板都想要"这个方案能成、能交付"。他发火，说明"方案没达到他要的"，不是"他要灭了我"。</p>
+    <p><strong>③ 对事回应、顺带问出真问题</strong>：</p>
+    <div class="quote"><p>"老板，我听出来这版离您的预期差挺远（<strong>接事，不辩护</strong>）。我也想把它做成（<strong>亮共同目标</strong>）。能不能帮我点一下——是方向不对，还是哪几块不到位？我今天就重做（<strong>把火转成具体的事</strong>）。"</p></div>
+    <p>对照一下你在 🎯 写的那句：是不是"这个方案我有我的考虑……"（举证据=战斗），或者闷头不吭声（逃跑）？而上面这句——<strong>没护脸、先接事，亮出共同目标，把"批评"接成"具体要改什么"</strong>，老板的火反而没处发，还会觉得你靠谱。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（被劈头一顿火）</div><div class="step-body">
+    <div class="quote"><p>你交的季度复盘报告，老板看完直接在工位上发火："这就是你熬了一周的东西？数据这么浅，让我怎么往上汇报？"周围同事都听见了，你脸一阵红。</p>
+    <p>请写出你的回应——用"换频道 + 问共同目标 + 听事不护脸"，<strong>不许辩解、不许顶回去，也不许闷头不吭声</strong>。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"（先稳住，不辩解）老板，我听明白了，这版深度不够、撑不住您往上汇报（<strong>接事，不护脸</strong>）。我也想让它能拿得出手（<strong>亮共同目标</strong>）。您能点我一下吗——是哪几个数据要再往下挖，还是结论的角度不对？我今晚就补出来（<strong>把火转成具体要改的事</strong>）。"</p></div>
+      <p><strong>反射</strong>：当众被吼，最难的是别让那股血冲出去（"我熬了一周你还嫌"＝战斗，或当场僵住＝逃跑）。换频道之后你会发现：他骂的是"报告不够深"这件事，先接住事、亮出共同目标，火就没处烧了，旁边同事反而觉得你稳。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：挨批 / 被发火 3 步</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>换频道</strong>：认出"我被杏仁核绑架了"，先稳 3 秒，别吵别逃</li>
+      <li><strong>问共同目标</strong>："我和他都想要什么"——把对方从对手切回战友</li>
+      <li><strong>听事不护脸</strong>：把火接成"具体哪件事没到位"，问清了就改</li>
+      <li><strong>守住一个底</strong>：他骂的几乎永远是"那件没办好的事"，不是要你认人品的错</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>一被批评就忙着举证据证明自己对（结果像莫琳，一个字没听进去）？</li>
+      <li>当场要么顶回去（战斗）、要么僵住不吭声（逃跑），两天后才后悔该怎么说？</li>
+      <li>心里默认"老板在针对我"，把本是"对事"的批评，当成了"对人"的否定？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>客户当面甩给你一句重话："你们这服务也太差了，找你们就是个错误！"你下意识想回的差版本是：<strong>"我们已经按合同做了，问题不在我们这边。"</strong></p>
+    <p>请用"换频道 + 问共同目标 + 听事不护脸"，把这句"防御反击"改写成一句"合作式回应"。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p>"听得出来这次确实让您很不满意，真的抱歉（<strong>先接情绪，不辩护</strong>）。咱们的目标是一样的——把这事顺顺当当办成（<strong>亮共同目标</strong>）。能不能具体说说是哪个环节出了问题？我现在就跟进、给您一个说法（<strong>听事、转成具体动作</strong>）。"</p></div>
+      <p><strong>反射</strong>："问题不在我们这边"是典型的杏仁核反击——赢了道理、输了客户。换频道之后你会发现：他骂的是"那件没办好的事"，不是要你认人品的错。先接事，关系和事都救得回来。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>关系博弈</strong>】模式；主要落在【<strong>心法 → 框架</strong>】层——心法是【<strong>合作思维</strong>：老板是战友、不是对手】，框架是"换频道 · 问共同目标 · 听事不护脸"。它和"有效批评"正好是一体两面（一个接批评、一个发批评），也和"处理冲突""得体拒绝"同属"有摩擦时把事谈成"。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-5">
+  <div class="sec-h"><h2>第 5 单元　提需求·谈加薪</h2><span class="badge-time">⏱ 约 30 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 9 + 10 节。加薪、要预算、要人、要配合——提需求是最不敢开口、也最容易绕圈子的事。这一单元练：先避开三个坑，再用"万能公式"正面提。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你们团队天天用的那套工具又老又卡，大家怨声载道。你想跟老板申请一笔预算换个新的，准备开口说：</p>
+    <p><strong>"老板，咱们那个工具太老了，大家都抱怨，能不能买个新的？"</strong></p>
+    <p><strong>这么提，你觉得老板会痛快批吗？哪儿不对？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下你的判断——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>提需求前，先过一遍"灵魂三连问"，再用三段句式说出来：① 你（对方）想要什么 → ② 我们共同的目标 → ③ 我这个需求，怎么帮我们实现那个目标。</strong></p></div>
+    <p>（前置：先用"魔法想象"挖到自己的深层需求，再找到"利益共同体"——除了我，谁也能从这件事获利。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p><strong>第一步·先认出三个坑</strong>（提需求最常踩，尤其谈加薪）：</p>
+    <pre>抱怨式："太难了、没人配合"      → 对方只听到你在叫苦
+暧昧式：没说清要什么、一被怼就改口 → 你的诉求被当作不重要
+威胁式："不答应我就不好好干"     → 赢了当下、输了关系
+根因：把自己当"越便宜越好的商品"，怕"提价"没人要，于是不断压低自己。</pre>
+    <p><strong>第二步·避开坑之后，用"灵魂三连问"正面提</strong>：</p>
+    <pre>① 我的深层需求是什么？   用"魔法想象"挖：假设它已被满足，我会怎样？
+                        （"加薪"底下，可能是"被认同"；"换工具"底下，可能是"团队产出翻倍"）
+② 利益共同体是谁？        除了我，谁也能从这件事获利？——他就是你的合作方
+③ 怎么说出来？（三段句式） a. 你想要什么  b. 我们共同的目标（越具体越好）
+                          c. 我的需求，怎么帮我们实现这个目标</pre>
+    <p>一句话：把"我要 X"翻译成"我们有共同目标，我这个 X 能推动它"——对方就从"凭什么给你"，变成"那我们一起想办法"。</p>
+    <div class="callout"><div class="c-h">🔖 锚点故事·萨萨的两次谈加薪</div>
+    <p>萨萨第一次跟老板提加薪，一句话同时踩了三个坑——"我们部门搞了这么大活动、公司也满意，但我真的太忙了，再这样下去我都担心撑不住了"：没说清要什么（暧昧）、通篇在叫累（抱怨）、暗示"再这样我就不干了"（威胁），老板毫无反应。第二次，他完整走了一遍三连问——①「假设加薪成功你会怎样？」→「我会觉得被认同、能力被肯定」（深层需求）；②「被认同之后呢？」→「我更有动力带团队冲业绩 → 公司获利 → 老板获利」（原来老板正是利益共同体）；③ 于是他说："我们共同的目标是完成今年预算；过去一年我带团队 110% 完成了 600 万；加薪会让我更被肯定、也激发我冲新目标。"</p>
+    <p>结果老板当月没直接加，却和他一起谈出"按季度完成度加提成"的方案——折算比例一样、风险更低。萨萨第一次觉得自己和老板是平等的合作关系。</p>
+    <p><strong>这告诉你</strong>：同样是"我要加薪"，翻译成"我们有共同目标、我的需求能推动它"，对方就从拒绝，变成了跟你一起想办法。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那笔换工具的预算）</div><div class="step-body">
+    <p>还记得 🎯 里你想申请预算换工具吗？跟着走一遍：</p>
+    <p><strong>① 魔法想象挖深层需求</strong>：换新工具→不卡了→团队不用天天等加载→产出能提上来。深层需求是"<strong>团队产出/效率</strong>"，不是"工具新不新"。</p>
+    <p><strong>② 找利益共同体</strong>：谁也想要团队产出更高？老板。他就是合作方。</p>
+    <p><strong>③ 三段句式说出来</strong>：</p>
+    <div class="quote"><p>"老板，您今年最看重的是咱们组的交付提速吧（<strong>① 你想要什么</strong>）。我也想把交付效率打上去（<strong>② 共同目标</strong>）。现在卡点很实在：旧工具每天让每个人白等差不多 1 小时，<strong>换一套新的、一次性 X 万，估算两个月就能从省下的工时里赚回来</strong>（<strong>③ 我的需求怎么推动那个目标</strong>）。您看值不值得投？"</p></div>
+    <p>对照一下 🎯 里那句"工具太老、大家抱怨、能不能买个新的"：那是把需求停在"我和同事的体感"上，老板只听到"你们嫌弃工具"。而上面这句——<strong>先点他在乎的（交付提速）、亮共同目标、再把'换工具'算成一笔能回本的投资</strong>，他批起来就有理由了。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（申请去参加一个培训）</div><div class="step-body">
+    <div class="quote"><p>有个对你工作很有帮助的行业培训，要花 5000 块、占两天工作日。你想申请公司出钱、给假。别说成"我想去学习、能不能批"。</p>
+    <p>请用"三段句式"写出你的申请（你想替老板/公司实现的是什么 → 共同目标 → 这个培训怎么帮到它）。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"老板，下季度咱们要啃下 X 这块新业务，对吧（<strong>① 你想要什么</strong>）？我也想成为能扛起这块的人（<strong>② 共同目标</strong>）。正好有个针对 X 的实战培训，两天、5000 块，<strong>学完我就能直接上手做 X 的方案，不用咱们再花钱找外部顾问</strong>（<strong>③ 需求怎么推动目标</strong>）。这两天的活我提前安排好不耽误。您看能不能支持？"</p></div>
+      <p><strong>反射</strong>："我想去学习、能不能批"是把培训当成"我个人的福利"，老板要从成本角度掂量。换成"它帮我们拿下下季度的新业务、还省了外部顾问钱"，培训就从"花钱"变成了"投资"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：提需求 4 步</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>先避三坑</strong>：别抱怨、别暧昧、别威胁；别把自己当"越便宜越好的商品"</li>
+      <li><strong>挖深层需求</strong>：魔法想象——"假设它已满足，我会怎样"，挖到表面诉求底下那个真需求</li>
+      <li><strong>找利益共同体</strong>：除我之外，谁也能从这件事获利？锁定那个合作方</li>
+      <li><strong>套三段句式</strong>：你想要什么 → 我们共同的目标 → 我的需求怎么帮我们实现它（谈未来、不翻旧账）</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>把表面诉求当深层需求（"我就是要 X"），没往下挖？</li>
+      <li>拿过去的功劳硬谈（"我没功劳也有苦劳"）——标准不统一时没说服力？</li>
+      <li>找错对象，跟一个对你的需求毫无兴趣的人使劲？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>你想跟隔壁产品组要一个人，临时支援你两周。你准备说：<strong>"你们最近不忙吧？借个人给我用两周呗，我这边实在忙不过来。"</strong></p>
+    <p>请用"三段句式"把它改写成对方愿意点头的版本。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p>"你们这季度也指着 A 项目上线拿结果吧（<strong>① 对方想要什么</strong>）？我手上这个活，恰恰是 A 上线前必须打通的一环（<strong>② 共同目标：A 成了，大家都好看</strong>）。所以想跟你借小李两周，<strong>他来帮我把这一环搞定，等于直接给 A 扫清障碍</strong>（<strong>③ 我的需求怎么帮到对方的目标</strong>）；两周后准还，期间他的活我帮你盯。"</p></div>
+      <p><strong>反射</strong>："你们不忙吧、借个人、我太忙了"——通篇是"我的难处"，对方凭什么为你的忙买单？翻译成"借人＝帮你们的 A 项目扫障碍"，他才有动力松手。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>表达输出 / 关系博弈</strong>】；主要落在【<strong>框架 → 话术</strong>】层——框架是"避三坑 + 灵魂三连问 + 三段句式"，话术是"你想要…我们的目标是…我这个需求能帮它…"；心法仍是【<strong>合作思维</strong>：提需求（含加薪）不是掏对方的钱，是请他投资一件双赢的事】。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-6">
+  <div class="sec-h"><h2>第 6 单元　高效开会</h2><span class="badge-time">⏱ 约 40 分钟（技能单元，重在动手设计 + 控场话术）</span></div>
+  <p class="sec-intro">对应详解版第 11 + 12 + 13 节。一个会开得好不好，80% 在会前就决定了。这一单元练：会前怎么定、会中怎么控、会后怎么收口。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你要拉个会，定下季度的营销方向。你打开工作群，准备发：</p>
+    <p><strong>"各位，明天下午 2 点开会，讨论一下下季度营销，会议室见。"</strong></p>
+    <p><strong>先别发——这么开会，大概率会开成什么样？问题出在哪？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下你的判断——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>开会的成败 80% 在会前：发起前先判断"这会非开不可吗"，要开就书面写清【主题 + 每个人的角色 + 时间 + 要准备什么】——让每个人上会之前就知道"我来干嘛、要带什么"。</strong></p></div>
+    <p>（会中靠"温和而坚定"控场，会后靠"追责画句号"收口——三位一体，缺一个会就白开。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p>一个完整的会＝<strong>会前 + 会中 + 会后</strong>：</p>
+    <pre>会前（决定成败的 80%）：
+  ① 判必要——开会成本＝所有人时薪×时间；一对一能解决就别开
+  ② 定主题议程——你心里先有七八成想好的方案，别指望开会解决一片空白
+  ③ 按类型准备——脑暴会备方向 / 决策会备观点 / 流程会备结构化模板（别开混）
+  ④ 书面发通知——议题＋角色＋要准备什么＋形式（让人没法溜号）
+  ⑤ 备硬件——投影/数据/动画
+会中（控场）：开场就定"主题·时间·流程·角色"；跑题了温和而坚定拉回；
+            用轮圈发言/yes and 让没有一个人闲着
+会后（收口）：三星开会三公式——开会不落实＝0；布置不检查＝0；
+            抓住不落实的事＋追究不落实的人＝落实</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·一个最离奇的会</div>
+    <p>翠翠做投资时参加过一个会：本来是个<strong>决策会</strong>，要拍板"做一场行业大活动、具体怎么做"。可开到一半，大家才发现——对这个活动的创意，根本没达成共识（会前谁都没想清楚）。主持人眼看越来越离谱，临时决定"那改成脑暴会吧"，于是手忙脚乱改流程，之前讨论的全半途而废，现场重新憋点子，又都没准备、憋出来的特别平庸。</p>
+    <p><strong>这告诉你</strong>：开会前没想清"这是个什么会、要怎么开"，再多人凑在一起也只是一起浪费时间——而开会的成本，是所有人的时薪相乘。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那条"明天 2 点开会"）</div><div class="step-body">
+    <p>还记得 🎯 里你要发的那条会议通知吗？跟着走一遍：</p>
+    <p><strong>① 先判必要</strong>：定下季度营销方向，是不是非得拉一屋子人开？——核心就营销、运营、我三个人，要不要先一对一对齐、把方案打到七八成，再开会拍板？（很多会这一步就砍掉了）</p>
+    <p><strong>② 要开，就把通知写清</strong>（别只有"几点+会议室"）：</p>
+    <div class="quote"><p>"【下季度营销方向·决策会】明天 14:00–15:00 会议室 A。</p>
+    <p>目的：拍板下季度营销主打方向（<strong>主题</strong>）。</p>
+    <p>我会先用 10 分钟讲 2 个备选方案的数据和我的倾向（<strong>我的角色：提报+主持</strong>）；</p>
+    <p>请 @运营 准备上季度各渠道转化数据、@设计 准备两个方向各一张概念图（<strong>每个人的角色 + 要准备什么</strong>）；</p>
+    <p>这是决策会，来之前请各自想好倾向哪个、为什么（<strong>会议类型 + 预期</strong>）。"</p></div>
+    <p>对照一下 🎯 里那句"明天 2 点开会、讨论下季度营销、会议室见"：没人知道自己来干嘛、要不要准备、是来拍板还是来听——结果必然是少数人发言、多数人玩手机。<strong>而上面这条，每个人上会前就知道自己的活，会自然就高效了。</strong></p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（把跑偏的会拉回来）</div><div class="step-body">
+    <div class="quote"><p>你主持一个产品评审会，议题是"敲定 V2 版要砍哪些功能"。可开了 20 分钟，大家聊嗨了，从"砍功能"一路聊到"明年要不要做海外市场"，越扯越远。</p>
+    <p>你作为主持人，<strong>写一句把会拉回正轨的话</strong>（要温和、但坚定，别让人下不来台）。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"海外市场这个点特别好，我先记下来，咱们另开一场专门聊（<strong>先肯定、给安放，不否定</strong>）。不过今天这一个小时，我们的目标是把'V2 砍哪些功能'定下来，时间有限，我们先拉回到功能清单上（<strong>温和而坚定地点明目标、拉回</strong>）。来，我们一个一个过——第一个，登录页的 X 功能，留还是砍？"</p></div>
+      <p><strong>反射</strong>：拉回跑题的关键不是"别聊了"，而是"<strong>先肯定那个话题、给它一个去处，再亮出本场目标把人领回来</strong>"。硬打断会让人难堪，会议主持人的活是"不偏题、专注解决任务"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：开一个不白开的会</div><div class="step-body">
+    <div class="methodcard">
+      <p><strong>会前（5 步）</strong>：① 判必要（一对一能不能解决）② 定主题议程 ③ 按类型准备（脑暴/决策/流程别混）④ 书面通知（议题+角色+准备什么+形式）⑤ 备硬件</p>
+      <p><strong>会中</strong>：开场先定"主题·时间·流程·角色"；跑题就"先肯定+亮目标+拉回"；轮圈发言让没人闲着</p>
+      <p><strong>会后</strong>：指定一人记"完成了什么、谁负责、截止哪天"；下次会先复盘上次 to do、追责到人</p>
+    </div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>一片空白就拉会，指望大家帮你想出方案（决策的活推给了会议）？</li>
+      <li>把脑暴会和决策会开混了——十个人给你十个决策，你听谁的？</li>
+      <li>开完会就散，没人记 to do、没人追责，下次又从头讨论一遍？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>同事发了这样一条会议通知：<strong>"周五上午 10 点全员开会，复盘一下这个月，大家都参加。"</strong></p>
+    <p>请把它改写成一条"让人不溜号"的通知（补上它缺的东西）。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p>"【10 月复盘·信息同步会】周五 10:00–11:00 大会议室。</p>
+      <p>目的：各组同步本月关键结果与卡点，定 11 月重点（<strong>主题 + 产出</strong>）。</p>
+      <p>形式：每组轮流 5 分钟，按'做成了什么 / 没做成什么 / 下月要什么支持'三段讲（<strong>形式 + 结构，杜绝流水账</strong>）。</p>
+      <p>请各组长今天下班前把这三段填进共享文档，会上照着讲（<strong>角色 + 要准备什么</strong>）。"</p></div>
+      <p><strong>反射</strong>：原版缺了三样致命的东西——<strong>每个人的角色、要准备什么、按什么结构讲</strong>。补上这三样，"全员开会"才不会变成"组长念流水账、其他人刷手机"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>表达输出</strong>】模式（兼带会中的"博弈控场"）；横跨【<strong>框架 → 话术</strong>】层——框架是"会前中后三位一体 + 会前五件事"，话术是开场定调和跑题拉回那几句；心法仍是【<strong>合作思维</strong>：开会是大家一起把事做成，你有义务让每个人的时间不被浪费】。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-7">
+  <div class="sec-h"><h2>第 7 单元　得体拒绝</h2><span class="badge-time">⏱ 约 35 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 14 + 15 节。不会拒绝、一开口就软？这一单元练：把"不敢说不"练成"接一半、扔一半"。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>周五下午快下班了，隔壁组的同事拎着电脑走到你工位前："这个报表我实在搞不定了，你帮我弄一下呗？你反正也快下班了。"</p>
+    <p>可你手上正赶一个<strong>周一一早要交、老板天天在盯</strong>的方案。</p>
+    <p>这句话，<strong>你会怎么接？</strong></p></div>
+    <p>先别往下看，给自己 1 分钟，把你"脱口而出的第一反应"写下来——等下 ✍️「跟着做」我们就拿这个场景走一遍，你拿它对照，看自己差在哪。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>把"不敢说不 / 硬邦邦说不"，换成"接一半、扔一半"：接住对方需求里你愿意给、能给的那一半，扔掉你给不了的那一半，让对方不受伤、事还能往前走。</strong></p></div>
+    <p>（"接一半扔一半"是这单元的<strong>招牌动作</strong>；"后果想象"是它的<strong>前置开关</strong>——开不了口时，先用它把勇气攒出来。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <h3 class="blk">一个前提：拒绝不是关系的坟墓</h3>
+    <p>很多人开不了口，是因为脑子里有个念头——"我一拒绝，关系就崩了"。但用合作思维看：<strong>你是这段合作里的 50%</strong>，连自己都一直委屈、没动力，谈何合作？所以<strong>拒绝是为了更好的合作</strong>，它不是把人推开，而是"一件可以谈的事"。</p>
+    <h3 class="blk">第一步：攒勇气——后果想象</h3>
+    <p>开不了口的时候，别硬挤勇气，倒过来想：</p>
+    <pre>如果我"不拒绝"，接下来会发生什么？——想得越细越好
+（细到具体的时间、身体状态、要付的代价；勇气会自己长出来）</pre>
+    <h3 class="blk">第二步：会表达——接一半扔一半（4 种 + 1 兜底）</h3>
+    <pre>① 只接一小部分     接住一点 + 给替代支持："客户我帮不了，但我帮你发朋友圈问问"
+② 接需求、拒方式   接住老板要的"结果/增收"，拒掉他不靠谱的"具体做法"
+③ 接擅长、拒不擅长  有理有据地认怂："这两点是我短板，我做 X 更能帮到结果"
+④ 有条件地接受     "我可以做，但需要…"——加上你的条件，保住能动性
+兜底·心智透明      实在不会接 → "我现在可能要拒绝你，这让我也挺纠结，但今天确实排满了"</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·一个被"后果想象"逼出来的拒绝</div>
+    <p>翠翠收到一位很尊敬的前辈邀请，去一个著名度假村讲课，碍于面子，怎么也开不了口拒绝。她没有硬扛，而是把"答应的后果"想到极细：前一天活动一结束，就要深夜开三个小时高速去赶场、凌晨才到，第二天一早讲课状态必然很差；而且那几天她还要交付线上课，连续出差会打乱更新节奏、得熬好几个通宵……想到这儿，那股"温和而坚定"的劲儿，自然就长出来了——她坦诚说明原因婉拒，同时提了下次合作。</p>
+    <p><strong>这告诉你</strong>：拒绝的底气不是硬挤出来的，是把"不拒绝的代价"想具体之后，自然冒出来的。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到开头那份报表）</div><div class="step-body">
+    <p>还记得 🎯 里那个场景吗——周五下班前，隔壁组同事让你帮他赶那份搞不定的报表，而你自己正赶周一要交、老板盯着的方案。跟着走一遍：</p>
+    <p><strong>① 后果想象（30 秒内心戏，先攒勇气）</strong>：要是抹不开面子全接下来 → 今晚得先弄完他这份、我自己的方案又得往后拖，周末大概率搭进去，周一交出来的东西还可能两边都糙……代价太大，这个得拒，但要拒得让他还愿意找我。</p>
+    <p><strong>② 选哪一招</strong>：他要的是"报表别开天窗"，我给不了的是"今晚替他做完整份"——典型的 <strong>① 只接一小部分</strong>：接住他最卡的那一点 + 给个替代。</p>
+    <p><strong>③ 说出来的话（示范话术）</strong>：</p>
+    <div class="quote"><p>"你这份我帮你想想（<strong>先接住，不甩脸</strong>）。不过今晚我真顶不了——我自己周一要交的方案还在火上，整份替你赶我做不到（<strong>明确扔掉给不了的，并给原因</strong>）。你最卡的是哪一块？<strong>现在我花十分钟，跟你一起把卡住的那一步弄通</strong>，剩下的你照着往下填；要是明早还有拿不准的，我一上班先帮你看（<strong>接住一小部分 + 给确定的替代</strong>）。"</p></div>
+    <p>对照一下你在 🎯 写下的那句：是不是要么"行行行我来"（全盘接、自己崩），要么"我没空"（硬扔、把人推开）？而上面这句——<strong>接住了他真正的需求（报表别开天窗）、扔掉了你给不了的（今晚整份）、还给了替代（教卡点 + 明早再看）</strong>，全程没有一个生硬的"不"字。这就是"接一半扔一半"。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（第三次被临时加塞）</div><div class="step-body">
+    <div class="quote"><p>你是设计，隔壁运营的小周这周<strong>第三次</strong>卡着点丢需求过来："这个 banner 今晚能出不？明早推送要用。"可你今晚有事，而且这种"临下班才提、还次次都急"已经不是头一回了。</p>
+    <p>请写出你的回应：既<strong>接住</strong>能接的、又<strong>扔掉</strong>今晚做不了的，<strong>还顺手把"次次临时加塞"这个根儿问题往桌面上放一放</strong>。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"小周，banner 我可以做，没问题（<strong>接</strong>）。但今晚我确实有事，赶不出来，最早明天上午给你（<strong>扔 + 给确定的替代时间</strong>，不空着）。另外有个事想跟你说一下——这周这已经是第三次临下班来急活了，我特别怕这么赶出来的东西对不起你们的推送。我们要不要约个十分钟，<strong>你把推送排期提前同步给我</strong>？这样我能排进去，你也不用每次都救火。（<strong>把"反复临时加塞"的根儿问题，温和而坚定地放到桌面上</strong>）"</p></div>
+      <p><strong>反射</strong>：得体拒绝 ≠ "这次又忍了"。它是"<strong>接住能接的 + 给确定的替代 + 把反复发生的根儿问题摆出来</strong>"——后面这一步，其实就是一次小小的"冲突前置"，省掉你下周的第四次救火。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：开不了口时，照这 5 步走</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>后果想象</strong>：先把"不拒绝的代价"想到极细，把底气攒出来</li>
+      <li><strong>判断接哪半、扔哪半</strong>：只接一小部分 / 接需求拒方式 / 接擅长拒不擅长 / 有条件接受</li>
+      <li><strong>先接后扔</strong>：开口先接住对方需求里合理的那部分（结果或情分），再说你给不了的</li>
+      <li><strong>给替代或条件</strong>：扔掉的同时，递一个替代方案或你的条件，别让对方空着手</li>
+      <li><strong>兜底·心智透明</strong>：实在不知道怎么接，就坦诚"我可能要拒绝你，也挺纠结，但今天确实排满了"</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>攒了勇气，结果硬邦邦甩一句"不行 / 没空"，把人推开了？（拒绝也要给支持）</li>
+      <li>脑子里只有"全盘答应"或"全盘拒绝"两个选项，从没想过"接一半扔一半"？</li>
+      <li>怕伤感情，先铺垫一堆"你做得挺好的，但是……"——对方一听到"但是"就知道你在等着拒绝？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>你的下属小林周五下午找你："周末有个行业沙龙我想去学习，能不能帮我报名、算调休？"可那个沙龙跟他的岗位<strong>八竿子打不着</strong>，预算也紧。你差点脱口而出的"差版本"是：<strong>"这个跟你工作没关系，不批。"</strong></p>
+    <p>请把这句"硬拒绝"改写成"接一半扔一半"的版本。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <p>先拆需求：他真正想要的是"<strong>学习成长</strong>"（这是好的，<strong>接住</strong>）；而"去这个不相关的沙龙 + 报销"是你给不了的（<strong>扔</strong>）。改写：</p>
+      <div class="quote"><p>"我特别支持你想学习这件事（<strong>接住需求/动机</strong>）。不过这个沙龙跟你现在的岗位关联不大，公司预算也紧，这一个我先不批，给你交个底（<strong>明确扔 + 给原因</strong>）。但你这股劲儿别浪费——你最近在做的 X 方向，我手上正好有两个更对口的课程和行业群，回头我推给你（<strong>给替代</strong>）。等哪天有跟岗位强相关的活动，我们再走报销，我帮你争取（<strong>留口子 + 给条件</strong>）。"</p></div>
+      <p><strong>反射</strong>：你拒的是"<strong>这一个不相关的沙龙</strong>"，接住的是"<strong>他想成长</strong>"——别因为要拒绝具体那件事，把人家好的动机也一起否定了。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>关系博弈</strong>】模式；主要落在【<strong>框架 → 话术</strong>】层——"接一半扔一半"是框架，"先接住……，我给不了的是……"是话术；底下垫着的心法是【<strong>合作思维</strong>：拒绝是为了更好的合作，你是这段关系里的 50%】。</p>
+  </div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-8">
+  <div class="sec-h"><h2>第 8 单元　处理冲突</h2><span class="badge-time">⏱ 约 40 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 16 + 17 + 18 节。冲突最考验当下的反应。这一单元练一条三拍流程——稳住 → 先处理人 → 再处理事。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你跟另一个部门的同事就"新功能什么时候上线"杠上了：你说市场答应了客户、本周必须上；他说质量没测完、坚决不行。会议室里气氛越来越僵，他声音也大了，你感觉一股血往上涌。</p>
+    <p><strong>这一刻，你会怎么做、怎么说？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>冲突来了，按三拍走：① 稳住别逃（心里默念"这是我的工作"）→ ② 先处理人、别急着掰道理（"我不希望…我希望…"）→ ③ 再处理事、找第三方案（A+B=C，从"你死我活的立场"抬到"各自真正的利益"）。</strong></p></div>
+    <p>（前置心法：冲突不是合作的坟墓，<strong>冲突就是合作的一部分</strong>——处理它本来就是你工作的一部分，不是飞来横祸。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <pre>第一拍·稳住（别被生理反应带走）
+   冲突当下大脑空白、想吵想逃，是杏仁核（系统一）在接管，是本能、不是你怂。
+   口诀"这是我的工作"——把理性（系统二）叫醒：站定，先不跑、不炸。
+
+第二拍·先处理人（情绪没顺，道理讲不进）
+   事情聊不下去，往往不在事、在情绪。先用"对比说明"安抚：
+   "我不希望你觉得我在针对你，我希望的是咱俩一起把这事弄成。"
+   自己也上头了？——按暂停："我需要十分钟冷静一下，等会儿接着聊。"
+
+第三拍·再处理事（找第三方案，不是分输赢）
+   别在"听你的 / 听我的"里二选一（强制 or 投降）。
+   把分歧从"行动"抬到"利益"：你真正要的是什么？我真正要的是什么？
+   在两个利益的交集处，找出让双方都满意的 A+B=C。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·巴黎小屋里的两只老鼠</div>
+    <p>一对夫妻吵翻了：妻子要丈夫打死公寓里窜来窜去的两只老鼠（怕传染病），丈夫是风险投资家、不忍心杀。"杀！""不能杀！"——典型的你死我活。第三种解法是什么？丈夫想明白：妻子真正要的（利益）不是"杀死老鼠"，是"别让老鼠出现在家里"。于是他找到老鼠进公寓的洞口，用灰泥把洞一封。A 是杀、B 是不杀，<strong>堵洞口是 C</strong>——妻子满意、丈夫满意，连老鼠也满意。</p>
+    <p><strong>这告诉你</strong>：死磕在"杀不杀"（行动）上永远没有赢家；把它抬到"我到底要什么"（利益），常常能找到一个谁都满意的第三方案。这就是 A+B=C。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那个上线时间之争）</div><div class="step-body">
+    <p>还记得 🎯 里"本周必须上 vs 坚决不行"吗？跟着走三拍：</p>
+    <p><strong>① 稳住</strong>：先别把"他在阻挠我"这句话喊出来。心里默念"处理这个本来就是我的活"，站定，深吸一口气。</p>
+    <p><strong>② 先处理人</strong>：</p>
+    <div class="quote"><p>"等一下——我能感觉到咱俩都有点上头了（<strong>点破情绪</strong>）。我不希望让你觉得我在逼你拿质量冒险（<strong>我不希望</strong>），我特别清楚出了问题是你背锅。我希望的是，咱俩一起想个既不砸口碑、又能给客户交代的办法（<strong>我希望</strong>）。"</p></div>
+    <p><strong>③ 再处理事（抬到利益、找 C）</strong>：</p>
+    <div class="quote"><p>"咱们各退一步看真正要的：你要的是'别带着没测完的风险上线'，我要的是'这周得给客户一个交代'——其实不冲突。<strong>能不能这周先给客户开放一个'内测版/小范围灰度'，把核心功能给到、风险可控；全量上线放到测试跑完？</strong>"（A：本周全量上 / B：测完再上 / <strong>C：本周灰度 + 测完全量</strong>）</p></div>
+    <p>对照一下你在 🎯 写的：是不是要么继续举证"市场已经答应客户了"（硬掰、强制），要么憋着"算了听他的吧"（投降）？而上面这三拍——<strong>先稳住、再接住他的情绪、最后从'上不上'抬到'各自怕什么/要什么'</strong>，一个灰度方案就把死结解开了。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（投放还是产品）</div><div class="step-body">
+    <div class="quote"><p>季度预算就一笔，你和搭档吵起来：你坚持"砸投放、先把量做起来"，他坚持"投产品、口碑才是根本"。两人都觉得对方短视，会越开越僵。</p>
+    <p>请用第三拍的思路写出你的破局话：先把双方从"投放 vs 产品"的立场，抬到各自真正的<strong>利益</strong>，再提一个 A+B=C 的第三方案。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"咱俩先别争钱花哪儿——说说各自到底图啥（<strong>抬到利益</strong>）。你要的是'别透支口碑、留住用户'，我要的是'这季度的增长数字能交代'，对吧？这俩其实是一件事的两头（<strong>点出利益不冲突</strong>）。<strong>要不这季度先拿一小笔做'小步投放 + 同步打磨那一两个最影响口碑的点'，用投放带来的真实反馈反推产品该改哪儿——一个月后看数据再决定加码哪边？</strong>（A 砸投放 / B 投产品 / <strong>C：小步投放 + 精准打磨，用数据再分配</strong>）"</p></div>
+      <p><strong>反射</strong>："投放 vs 产品"是行动层的死磕；"增长数字 vs 口碑留存"是利益层——一旦抬上去，你会发现俩人要的其实是同一件事的两面，C 方案自然就有了。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：处理冲突三拍</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>稳住</strong>：默念"这是我的工作"，站定，不跑不炸（杏仁核会骗你，理性叫得回来）</li>
+      <li><strong>先处理人</strong>：用"我不希望…我希望…"接住情绪；自己上头就喊暂停</li>
+      <li><strong>再处理事</strong>：别在"听谁的"里二选一；把分歧从"行动"抬到"利益"，找 A+B=C</li>
+      <li><strong>记住前提</strong>：冲突是合作的一部分，处理它＝你在认真合作，不是在吵架</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>情绪还在头上，就开始摆事实讲道理（道理全对，对方一个字没听进去）？</li>
+      <li>把冲突当成"听你的 or 听我的"——不是压倒对方（强制），就是憋屈忍下（投降）？</li>
+      <li>死磕在"行动"上（去不去、上不上、买不买），从没问过双方"到底要什么"？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景）</h3>
+    <div class="quote"><p>你和室友为"周末要不要把客厅借给你办朋友聚会"吵起来：你想办，他嫌吵、坚决反对，两人僵住。</p>
+    <p>请按"先处理人 + 把行动抬到利益 + 给 A+B=C"，写出你的破局思路和一句话。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <ul>
+        <li><strong>先处理人</strong>："我不希望搞得像我不顾你感受，我知道你周末就想好好休息（<strong>我不希望/接情绪</strong>）。"</li>
+        <li><strong>抬到利益</strong>：你真正要的是"周末有个安静的休息环境"，我要的是"有个地方招待朋友"——不一定非得抢同一个客厅同一个晚上。</li>
+        <li><strong>A+B=C</strong>："<strong>要不聚会挪到周六下午（你白天本来也常出门），晚上还你；或者我把场地换到附近那家咖啡馆，家里就不吵你了</strong>——你看哪个行？"</li>
+      </ul>
+      <p><strong>反射</strong>："借不借客厅"是行动死磕；"我要招待朋友 vs 你要安静休息"是利益——抬上去就发现，换个时间或换个地点，俩人都能满足。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>关系博弈</strong>】模式；横跨【<strong>心法 → 框架 → 话术</strong>】三层都全——心法是【<strong>冲突是合作的一部分</strong>，处理它是你的本职】，框架是"稳住→处理人→处理事（A+B=C）"，话术是"这是我的工作""我不希望…我希望…""咱俩各自到底要什么"。它和"得体拒绝""应对批评与发火"同属一家。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-9">
+  <div class="sec-h"><h2>第 9 单元　倾听·让人愿意听你的</h2><span class="badge-time">⏱ 约 35 分钟（技能单元，重在管住嘴、把话问出来）</span></div>
+  <p class="sec-intro">对应详解版第 19 + 20 + 21 节。一个反常识的真相：你说得越多，下属/对方反而越不听你的。这一单元练"忍·等·问"——先把对方真正想说的问出来。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>下属站在你面前，吞吞吐吐："我觉得这个项目……可能有点问题，我不太确定……就是那个排期吧……"</p>
+    <p>你已经听得有点不耐烦，心里那句话快冲出来了——"你别绕了，就按我说的来。"</p>
+    <p><strong>这一刻，你会怎么做、怎么开口？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>想反驳、想直接给建议的那一刻，先用"忍·等·问"：忍住自己的表达欲、等他把话说完、用提问把他真正想说的挖出来——而不是机关枪一样等他一停就突突突。</strong></p></div>
+    <p>（前置心法：倾听不会帮你赢得这一场对话，但会帮你赢得一个<strong>愿意跟你合作的盟友</strong>；人发起沟通的本能，是"渴望被看见"。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p>大多数人是"机关枪式倾听"——嘴上在听，心里只等对方一停就开火，还在他说话时就忙着给他贴标签（"这是借口""他就是不行"）。对方一感到被蔑视，就闭嘴了。</p>
+    <p>反应式倾听三步，专治这个：</p>
+    <pre>忍（对话前）：搁置自己的表达欲。一个画面——想象有一束光打在对方头上、
+             四周全黑，他是你此刻唯一要关注的人。忍不是憋屈，是给情绪留出空间。
+等（对话中）：想插话、想下判断时，再等一分钟让他说完。
+             先在心里给自己贴个标签："他说的，可能是有道理的。"
+问（互动里）：① 复述式——"所以你的意思是…，我理解得对吗？"（确认你真听懂了）
+             ② 开放式——"然后呢？""为什么你会这么想？""能再多说一点吗？"（请他说更多）</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·想当飞行员的小朋友</div>
+    <p>主持人问一个小朋友："如果你的飞机飞到太平洋上空、引擎全熄火了，你会怎么办？"小朋友说："我会让乘客都绑好安全带，然后我挂上降落伞跳出去。"全场哄笑，觉得这孩子真自私。可主持人没急着评判，只是注视着他、<strong>等他说完</strong>。小男孩停了停，眼睛一红："我要去拿燃料，再回来救大家。"</p>
+    <p><strong>这告诉你</strong>：我们总是太快给人贴标签（"自私"），其实只是没等他把话说完。多等那一分钟，你听到的，常常和你以为的完全相反。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那个吞吞吐吐的下属）</div><div class="step-body">
+    <p>还记得 🎯 里那个绕来绕去说"项目可能有问题"的下属吗？跟着走一遍：</p>
+    <p><strong>① 忍</strong>：把"你别绕了"那句话咽回去。心里那束光打在他头上——他绕，多半是有顾虑、没说出口的东西，不是在浪费你时间。</p>
+    <p><strong>② 等</strong>：别在他卡壳时替他下结论，等他把那句"排期吧……"说完。</p>
+    <p><strong>③ 问（先复述、再开放）</strong>：</p>
+    <div class="quote"><p>"你先别急（<strong>给空间</strong>）。我听下来，你是担心现在的排期有点风险，对吗？（<strong>复述式·确认</strong>）具体是哪一块让你不太确定——能展开说说吗？（<strong>开放式·请他多说</strong>）"</p></div>
+    <p>对照一下你在 🎯 想说的"按我说的来"：那是机关枪——你以为他在绕，其实他可能正想告诉你一个你没看到的坑。<strong>忍住、等他说完、问出来</strong>，你不光没漏掉风险，他还会觉得"原来你真的在听我"——下次他才敢早点跟你说真话。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（接住一个想辞职的人）</div><div class="step-body">
+    <div class="quote"><p>一个你挺看重的下属忽然找你："我最近状态特别差，可能……不太想干了。"你第一反应是想立刻劝："别冲动""你已经很好了""再坚持坚持"。</p>
+    <p>请先<strong>忍住劝说</strong>，写出你的回应——用一句"复述式提问"+ 一句"开放式提问"，把他真正卡在哪问出来（这一题，不许给任何建议）。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>（复述式）"听起来你最近是真的挺撑不住了，不是一时冲动，对吗？"</p>
+      <p>（开放式）"愿意跟我说说，到底是哪件事、哪个点，让你萌生了这个念头吗？我想先听明白。"</p></div>
+      <p><strong>反射</strong>：一上来就"别冲动、再坚持坚持"，是把他往外推——他会觉得"你根本没懂我多难"，于是更不想说真话。很多人辞职不是因为不爱这份工作，是"失去了被理解的欲望"。你先把他真正卡的点听出来，才有可能留住他。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：倾听·忍 / 等 / 问</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>忍</strong>：想反驳/给建议时，先把话咽回去——想象一束光打在对方头上，他是此刻唯一</li>
+      <li><strong>等</strong>：想插话再等一分钟，先信"他说的有道理"，别急着贴标签</li>
+      <li><strong>复述式问</strong>："你的意思是…，我理解对吗？"——确认你真听懂了</li>
+      <li><strong>开放式问</strong>："然后呢""为什么""能再多说点吗"——请他说更多</li>
+      <li><strong>听完要行动</strong>：认同的部分真去落实、过段时间回访——倾听有回响，才不是表演</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>对方还在说，你已经在打腹稿、等他一停就开火（机关枪式倾听）？</li>
+      <li>听了半句就给他贴标签（借口/玻璃心/不行），后面的话根本没进去？</li>
+      <li>习惯用"但是/不可能/你应该"接话——那是打断，不是倾听？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>同事跟你说："这个方案我反复改了好几版，老板还是不满意，我真的不知道该怎么办了。"</p>
+    <p>你差点脱口而出的差版本是：<strong>"那肯定是你没抓住老板的点，你应该先去问清楚他到底要什么。"</strong></p>
+    <p>请把这句"急着给建议"改写成"忍·等·问"的倾听式回应。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p>"改了好几版还被打回，那种挫败感我懂（<strong>接情绪、不评判</strong>）。我先听听——是每次老板的反馈都不一样，还是你心里其实也没太摸准他要什么？（<strong>复述/开放式提问，把卡点问出来</strong>）你先说说，咱们再一起看怎么弄。"</p></div>
+      <p><strong>反射</strong>："你应该先去问清楚"也许是对的建议，但在他还没被听见时甩出来，他只会觉得"你在教育我、嫌我蠢"。先忍住建议、把他卡的点问出来——很多时候问着问着，他自己就想通了。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>倾听输入</strong>】模式；主要落在【<strong>框架 → 话术</strong>】层——框架是"忍·等·问 + 听完要行动"，话术是复述式/开放式那几句问法；心法是【<strong>合作思维</strong>：倾听赢的不是这场对话，是一个愿意跟你合作的盟友】。它和"共情""接任务·问需求"同属"把话听进来"这一支。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-10">
+  <div class="sec-h"><h2>第 10 单元　上台克服紧张</h2><span class="badge-time">⏱ 约 30 分钟（技能单元，重在上台前真用）</span></div>
+  <p class="sec-intro">对应详解版第 22 + 23 节。紧张不是要消灭的敌人，是要管理的本能。这一单元练：身体上先稳住，脑子里把焦点从"我"挪到"听众"。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>明天你要在全公司大会上做一个 10 分钟的分享。一想到台下几十双眼睛盯着自己，你就手心冒汗、晚上翻来覆去睡不着，满脑子都是"万一讲砸了怎么办、万一忘词怎么办"。</p>
+    <p><strong>明天上台前和开口时，你会怎么让自己稳下来？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>上台紧张时，两手抓：身体上用"2-8-4 呼吸 + 一个高能量姿势"先把心率压下来；脑子里把焦点从"我表现得好不好（自我）"换成"我能给听众什么（利他）"。</strong></p></div>
+    <p>（前置认知：紧张是刻在基因里的本能，<strong>适度紧张反而是好事</strong>——它让思维更聚焦；你要的不是消灭它，是管住它。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <pre>认知先翻过来：紧张不是问题，"觉得紧张是问题"才是问题。毫不紧张往往是没状态。
+生理（立刻能用）：
+   · 2-8-4 呼吸：吸 2 秒、憋 8 秒、呼 4 秒。要平静就"短吸长呼"，要提神就"长吸短呼"
+   · 高能量姿势：上台前做组开合跳 / 双手高举过头，激活状态
+   · 放慢语速、敢停顿："水深则流缓，人贵则语迟"；讲完一个点停一下，气场反而出来
+心理（治本）：
+   · 利他：人在"索取（求你们给我好评）"时最没底气，在"给予（我来给你们有用的东西）"时最有底气
+     —— 林肯准备发言，花 2/3 时间想"听众想听什么"，只用 1/3 想"我要说什么"
+   · 做自己：没有"标准演讲风格"，按你的优势来（罗永浩靠理想主义、董卿靠共情，都动人）</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·连丘吉尔都当众卡壳过</div>
+    <p>丘吉尔，有史以来最著名的演讲家之一。可早年他在国会发言，明明做足了准备，站上去却突然大脑一片空白、一个字想不起来，最后只能默默坐回座位、把头埋进手里——这次失利让他比谁都怕上台。马克·吐温也说过：这世上只有两种演讲的人，一种是紧张的，一种是假装不紧张的骗子。</p>
+    <p><strong>这告诉你</strong>：大家起点都一样，没有人天生不紧张。你不是"特别怂"，你只是还没学会管理它——而这恰恰是能练的。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那个全公司分享）</div><div class="step-body">
+    <p>还记得 🎯 里让你睡不着的那个大会分享吗？跟着走一遍：</p>
+    <p><strong>① 上台前 1 分钟·身体稳住</strong>：找个没人的角落，做 5 组 2-8-4 呼吸（短吸长呼，把心率压下来）；再双手高举过头、伸个懒腰似的"胜利姿势"，给身体一个"我很稳"的信号。</p>
+    <p><strong>② 把开场心态从"自我"换成"利他"</strong>：别在心里念"千万别出丑"（那是盯着自我），换成念一句——"<strong>我今天是来给他们一个真能用上的东西的</strong>"。</p>
+    <p><strong>③ 开口第一句就落在"给听众什么"上</strong>：</p>
+    <div class="quote"><p>"今天这 10 分钟，我想给大家一个<strong>马上就能用、能帮你们少踩一个坑</strong>的东西——（停一下，扫一眼全场）就是……"</p></div>
+    <p>对照一下你在 🎯 写的：是不是全在想"我会不会忘词、我表现得怎么样"？那恰恰是越想越紧张的根源（焦点全在自我）。<strong>把焦点交给听众（我来给你们有用的东西），你就从'被打分的人'变成了'给予的人'</strong>——底气一下就回来了。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（一个让你发怵的产品演示）</div><div class="step-body">
+    <div class="quote"><p>下周你要给一群客户做产品演示，你不擅长当众讲、一紧张就语速飙快。</p>
+    <p>请写出：① 你上台前会做的 1–2 个<strong>生理动作</strong>；② 一句把焦点放在"听众/利他"上的<strong>开场白</strong>（不是"我来介绍一下我们的产品"，而是落在"客户能得到什么"上）。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <ul>
+        <li><strong>生理</strong>：开场前做几组 2-8-4 短吸长呼 + 双手高举的高能量姿势；上台后第一句<strong>故意放慢</strong>，讲完一句敢停半秒。</li>
+        <li><strong>利他式开场</strong>："各位最头疼的是不是 X 这件事天天耗时间？接下来 10 分钟，我就演示一下我们怎么帮你把这件事从半天压到 10 分钟——边看边问我都行。"（焦点全在"你们能得到什么"，不在"我们产品多牛"）</li>
+      </ul>
+      <p><strong>反射</strong>："我来介绍一下我们的产品功能"是把自己架在台上等打分；"我来帮你们解决 X"是把听众的需求扛在肩上——后者你越说越有底气，因为你不是在求他们听，是在给他们东西。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：上台稳住（生理 3 招 + 心理 2 招）</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>2-8-4 呼吸</strong>：上台前短吸长呼，把心率压下来</li>
+      <li><strong>高能量姿势</strong>：开合跳 / 双手高举，给身体"我很稳"的信号</li>
+      <li><strong>放慢 + 停顿</strong>：语速故意慢半拍，讲完一个点敢停一下</li>
+      <li><strong>换焦点（治本）</strong>：把"我表现好不好"换成"我能给听众什么"</li>
+      <li><strong>做自己</strong>：按你的优势定风格，别硬模仿"声音洪亮、气场强大"的标准模板</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>一心想"消灭紧张"——其实适度紧张是好事，你要的是管住它？</li>
+      <li>全程盯着"我表现得怎么样"（焦点在自我）——越盯越紧张？</li>
+      <li>硬套"标准演讲风格"，做不到就更慌——其实最适合你的风格才最好？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景）</h3>
+    <div class="quote"><p>你要在一个 20 人的部门会上，第一次主持并做开场。你一紧张就会语速飞快、声音发抖。</p>
+    <p>请写出你的"双重调整"：① 一个上台前的生理动作；② 一句把焦点从"别紧张/别出错"挪到"给在场的人提供价值"的自我暗示或开场话。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <ul>
+        <li><strong>生理</strong>：进会议室前做 3 组 2-8-4 短吸长呼；开口第一句刻意放慢、讲完停半秒，给自己定个神。</li>
+        <li><strong>换焦点</strong>：自我暗示——"我今天是来帮大家把这一个小时开得不浪费的"；开场话——"这一个小时，我尽量让每个人都带走一个能用的结论，咱们开始。"</li>
+      </ul>
+      <p><strong>反射</strong>：盯着"别发抖、别讲快"是把注意力锁在自我，越锁越抖。把它换成"我来让这场会对大家有用"，注意力一离开自己，身体反而松了。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>表达输出</strong>】模式；横跨【<strong>心法 → 框架</strong>】层——心法是【<strong>利他</strong>：把焦点从自我换到听众，紧张不是要消灭的问题】，框架是"2-8-4 呼吸 / 高能量姿势 / 做自己的风格"。它和"生动表达""即兴表达"同属"当众把话说出去"这一支。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-11">
+  <div class="sec-h"><h2>第 11 单元　共情·把话说到心里</h2><span class="badge-time">⏱ 约 30 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 24 + 25 节。共情不是"安慰几句"，是把对方此刻的感受替他说出来。这一单元练两步：停一停放一放 → 拿起来言语化。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>一个下属最近频频出错，今天又搞砸了一件事。他低着头站在你面前，一脸沮丧、一句话也不说。你心里也有点火，想说："你到底怎么回事？这么简单的事都做不好。"</p>
+    <p><strong>这一刻，你会怎么开口？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>想给建议、讲道理之前，先两步：① 停一停、放一放——把你的评判（"他不行"）和你的目标（"赶紧改完"）先搁下；② 拿起来、言语化——替对方把他此刻的感受说出来（"我看你挺难受的，是不是觉得最近怎么使劲都不对？"）。</strong></p></div>
+    <p>（前置心法：你做不到共情，往往是因为把对方当成了"挡我目标的麻烦/敌人"；把他放回"伙伴"，共情这个你本来就有的能力才会自己冒出来。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <p>最高级的共情，是"<strong>我给你的，恰好是你想要的</strong>"；最常见的失败，是"我给你的，恰好是你不想要的"——孩子打针哭，大人一句"不疼不疼、有什么好哭的"，就是后者。</p>
+    <p>怎么做到前者？两步：</p>
+    <pre>① 停一停、放一放：心里塞满了自己的 KPI 和"他怎么这么差"的评判，
+   就腾不出地方看见对方。先把评判和目标放下，给对方留出空间。
+② 拿起来、言语化：替对方把他说不出口的感受，用话说出来。
+   "方案总通不过，你也很着急、压力很大吧？"
+   —— 当一个人的感受被准确说出来，他会瞬间觉得"你懂我"，才愿意敞开。
+辅助三件套（不知道怎么接时）：描述问题 + 承认感受 + 问他打算怎么办；
+   实在不会，就一个"嗯"——接纳，胜过一句"但是"。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·女王陪他喂了 20 分钟狗</div>
+    <p>2014 年，刚从战地回来、患有 PTSD 的诺特医生受英国女王接见，却在白金汉宫病症发作、一句话说不出来。换作常人，要么慌忙呼救、要么不停追问"你怎么了、要不要紧"——这些只会让他更焦虑。可女王做了什么？她递给他一块饼干，说："我们一起喂会儿狗吧。"然后两人安安静静喂了 20 分钟狗，没人说话。20 分钟后，诺特平复下来，能开口了。这 20 分钟他记了一辈子。</p>
+    <p><strong>这告诉你</strong>：最高级的共情，不是给对方"你以为对的安慰"，而是给他"他此刻真正需要的东西"——而这，得先放下你自己的紧张和评判，才看得见。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那个低着头的下属）</div><div class="step-body">
+    <p>还记得 🎯 里那个搞砸了、低头不语的下属吗？跟着走一遍：</p>
+    <p><strong>① 停一停、放一放</strong>：把"你怎么这么差"咽回去，把"赶紧让他改完"的目标先放一边——他现在这个状态，你逼他改也改不好。</p>
+    <p><strong>② 拿起来、言语化（替他把感受说出来）</strong>：</p>
+    <div class="quote"><p>"先别急着说事（<strong>给空间</strong>）。我看你这几天状态挺沉的，<strong>是不是觉得最近不管怎么使劲，好像都差一口气、心里挺挫败的？</strong>（<strong>替他把感受说出来</strong>）"——多半他眼圈一红，话就出来了。</p></div>
+    <p><strong>③ 再用三件套往下走</strong>：</p>
+    <div class="quote"><p>"（描述问题）这件事确实没达到要求；（承认感受）但我知道你不是不上心，是卡住了；（问他怎么办）你觉得是哪一步最让你卡？我们一起看看。"</p></div>
+    <p>对照一下你在 🎯 想说的"你到底怎么回事"：那是把他的情绪当成了"挡我事的麻烦"，他只会更缩、更不敢说真问题。<strong>先替他把感受说出来</strong>，他从"被审问"变成"被看见"，才肯告诉你真正卡在哪——事才推得动。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（接住一个情绪低落的同事）</div><div class="step-body">
+    <div class="quote"><p>一个平时很拼的同事，今天负责的项目被客户当众否了，他回到工位一直阴着脸、闷不吭声。你想关心他，但又怕一开口就变成"别难过了，这没什么"那种没用的安慰。</p>
+    <p>请写出你的共情回应——用"承认 + 替他说出感受"，<strong>不许给建议、不许说"这没什么"</strong>。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"这个项目你前前后后熬了那么久，今天被当众否，<strong>搁谁心里都堵得慌，特别是当着那么多人的面</strong>（<strong>替他说出感受，且具体</strong>）。你先缓缓，不用急着跟我说什么。等你想说了，我都在。"</p></div>
+      <p><strong>反射</strong>："别难过了，这没什么"是"我给你的你不想要的"——它否定了他的感受，等于说"你这点事至于吗"。而"搁谁都堵得慌"是接住、是替他说出来——他会觉得"至少你懂"。共情第一步永远是承认情绪，不是消灭情绪。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：合作式共情两步 + 三件套</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>停一停、放一放</strong>：先放下"他不行"的评判和"赶紧办完"的目标，腾出空间</li>
+      <li><strong>拿起来、言语化</strong>：替对方把此刻的感受说出来（越具体越好）</li>
+      <li><strong>描述问题</strong>：客观说事，不带评判</li>
+      <li><strong>承认感受</strong>：点出他的情绪/难处（"我知道你不是不上心"）</li>
+      <li><strong>问他怎么办</strong>：把决定权还给他（"你觉得卡在哪？打算怎么弄？"）</li>
+      <li><strong>实在不会，就一个"嗯"</strong>：接纳，远胜过一句"但是"</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>给的是"我以为对的安慰"（别难过、这没什么），而不是他真正想要的？</li>
+      <li>嘴上共情，话里却夹着"但是"和建议（"你肯定急坏了，但你方法不对"）？</li>
+      <li>把对方的情绪当成"挡我目标的麻烦"，急着把它压下去、跳过去办事？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>你朋友失恋了，跟你哭诉。你差点脱口而出：<strong>"这种人不值得，早分早好，你看开点，下一个更好。"</strong></p>
+    <p>请把这句"急着讲道理"改写成"停一停 + 替他说出感受"的共情版本。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p>"你别急着看开——你们在一起这么久，说断就断，<strong>现在心里肯定又难受又有点不敢相信吧</strong>（<strong>替他说出感受，不评判对方好坏</strong>）。想哭就哭，想骂就骂，我陪着你。等你缓过来，咱们再聊别的。"</p></div>
+      <p><strong>反射</strong>："这种人不值得、下一个更好"是你在替他下结论、催他赶紧好起来——可他此刻要的不是道理，是"有人懂我现在多难受"。先承认情绪，道理是后面的事。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>倾听输入</strong>】模式；主要落在【<strong>心法 → 框架</strong>】层——心法是【<strong>合作思维</strong>：把对方从"麻烦/敌人"放回"伙伴"，共情才冒得出来】，框架是"停一停放一放 + 拿起来言语化 + 三件套"。它和"倾听"是一对——倾听把对方"想说的"问出来，共情把对方"没说出的感受"替他说出来。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-12">
+  <div class="sec-h"><h2>第 12 单元　有效批评</h2><span class="badge-time">⏱ 约 35 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 26 + 27 节。批评最容易把人逼到防御。这一单元练：把"批评"说成"反馈"——说观察、不说评论，并给出"对的做法"。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>下属交上来的方案做得很糙，明显没用心。你火一下就上来了，差点脱口而出：</p>
+    <p><strong>"你这做的什么玩意儿？太不走心了吧！"</strong></p>
+    <p><strong>这句话说出去会怎样？换成有效的批评，你该怎么说？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>把"批评"在心里换成"反馈"，然后说"观察"、不说"评论"——讲具体事实（"这版只列了 3 家竞品、没有数据来源"），不给人贴标签（"你太不用心"）；并且指出问题的同时，给出"对的做法"，或用"怎么才能…"引导他自己说出怎么改。</strong></p></div>
+    <p>（前置心法：你和他是<strong>平等的合作关系</strong>，反馈是为了把事做得更好，不是为了证明"我高你一等"。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <pre>先脱敏：批评 = 反馈。姿态是平等合作，不是"我审你"。
+事实是反馈（核心）：分清"观察"和"评论"——
+   评论（给人贴标签）：你不守时 / 你不配合 / 你不走心
+   观察（讲客观事实）：你上周迟到了 4 次 / 我组织的 3 次活动你都说没空 / 这版没写数据来源
+   观察更不容易激发防御，因为它对事、不对人。
+给"对的东西"：光指出问题不够，要给方向/方法，或——更高明——
+   用"机会型问题"引导他自己说：
+   把"你为什么总迟到？"（追责过去）换成"怎么做才能不迟到？"（启发未来）
+还有两种反馈：
+   求助式："我们落后三天了，我挺着急，一起想想办法？"——平等、激发他的动力
+   关怀式："最近状态有点下滑，一切还好吗？我有点担心你。"——关心人，不只盯产出</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·奥巴马只说了一句"你要意识到你话语的影响力"</div>
+    <p>奥巴马的副幕僚长爱丽莎，刚立了大功却被《纽约时报》贬低，气得群发一封尖锐邮件"我要让那个人下不来台"。奥巴马把她叫来，既没指责（"你太冲动了"会火上浇油），也没装没事（那是纵容），只平静地说了一句：<strong>"爱丽莎，你需要意识到你话语的影响力。"</strong> 姿态平等、态度坚定。爱丽莎在自传里说，这次批评让她心服口服，开始反省自己的脾气。</p>
+    <p><strong>这告诉你</strong>：有效的批评不是"强（压人）"也不是"弱（不敢）"——它是平等地把"事和影响"摆出来（你的话有影响力），而不否定这个人。这样的批评，人才接得住。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那份很糙的方案）</div><div class="step-body">
+    <p>还记得 🎯 里那份"没用心"的方案吗？跟着走一遍：</p>
+    <p><strong>① 先脱敏 + 摆平姿态</strong>：把"什么玩意儿"咽回去——这是反馈、不是发泄，我和他要的是"方案能用"。</p>
+    <p><strong>② 说观察、不说评论</strong>：</p>
+    <div class="quote"><p>"这版我看了，有几个具体的点（<strong>反馈，不贴标签</strong>）：竞品只列了 3 家、没写数据来源，结论那段也没有支撑（<strong>观察：客观事实，不是'你不用心'</strong>）。"</p></div>
+    <p><strong>③ 给对的做法 / 用机会型问题引导</strong>：</p>
+    <div class="quote"><p>"我要的是能直接拿去跟客户讲的版本。<strong>你觉得，要让它能说服客户，还差哪几块、怎么补？</strong>（<strong>机会型问题：让他自己说出怎么改，而不是我替他骂一遍</strong>）"</p></div>
+    <p>对照一下 🎯 里那句"你这做的什么玩意儿"：那是评论 + 贴标签，他立刻进入防御（找借口/顶嘴/闷头不服），方案下一版照样糙。而上面这套——<strong>对事不对人、给了标准、还让他自己想怎么改</strong>，他没法防御，只能去改对。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（提醒一个总拖 deadline 的下属）</div><div class="step-body">
+    <div class="quote"><p>你的下属这个月已经第三次拖了 deadline。你想认真跟他说一次，但不想说成"你太拖拉了、一点时间观念都没有"（评论、贴标签）。</p>
+    <p>请用"事实是反馈"写出你要说的话：① 说观察（具体事实），② 用机会型问题引导他自己说出怎么改。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"我想跟你聊个事（<strong>平等，不是兴师问罪</strong>）。这个月有三次交付都比约定晚了 1–2 天，分别是 X、Y、Z（<strong>观察：摆具体事实，不说"你拖拉"</strong>）。这几次都卡住了下游同事。<strong>你自己看，是哪个环节最容易让你延期？怎么调整能让你按时交？</strong>（<strong>机会型问题：让他自己找原因、给方案</strong>）我们一起想个办法。"</p></div>
+      <p><strong>反射</strong>："你太拖拉了"是评论，他会觉得被贴标签、忙着辩解；"三次晚了 1–2 天"是观察，无可辩驳。再用"怎么调整能按时"代替"你为什么总拖"，他就从"被骂"转成"解决问题"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：把批评变成有效反馈</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>先脱敏</strong>：心里把"批评"换成"反馈"，姿态平等，不居高临下</li>
+      <li><strong>说观察、不说评论</strong>：讲具体事实（迟到 4 次），别贴标签（你不守时）</li>
+      <li><strong>给对的东西</strong>：指出问题，同时给方向/方法</li>
+      <li><strong>机会型问题</strong>：用"怎么才能…"（启发未来）代替"你为什么总…"（追责过去）</li>
+      <li><strong>必要时换档</strong>：用求助式（一起想办法）或关怀式（先问"还好吗"），对有能力但状态下滑的人尤其有效</li>
+      <li><strong>别铺垫假客气</strong>：与其"你做得挺好，但是…"，不如直接"我给你几个直接的反馈"</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>张口就是评论、贴标签（不用心/不靠谱/没时间观念），对方立刻防御？</li>
+      <li>只顾着把问题骂出来，却没给"对的做法"，他根本不知道怎么改？</li>
+      <li>先铺垫一堆"你哪儿哪儿都挺好，但是……"——对方一听"但是"就知道你在等着批他？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>你要给一个同事反馈，你想说的差版本是：<strong>"你做事太毛躁了，老是出错，能不能细心点？"</strong></p>
+    <p>请把它改写成"说观察 + 给对的做法/机会型问题"的有效反馈。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p>"这周提交的两份报表，里面有 3 处数字对不上（<strong>观察：具体事实，不说"毛躁"</strong>）。这种错误如果到了客户那儿挺要命的。<strong>你觉得交之前加一道什么检查，能把这类错挡住？</strong>（<strong>机会型问题：引导他自己想防错机制</strong>）需要的话我们一起定个自查清单。"</p></div>
+      <p><strong>反射</strong>："太毛躁、能不能细心点"是评论 + 空泛要求，他听完也不知道具体改什么。换成"3 处数字对不上"（观察）+"加一道什么检查"（让他自己想办法），既不伤人，又真能解决问题。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>关系博弈</strong>】模式；横跨【<strong>心法 → 框架 → 话术</strong>】——心法是【批评＝反馈，姿态平等（为批评脱敏）】，框架是"观察 vs 评论 + 三种反馈（事实/求助/关怀）"，话术是"你上周迟到 4 次""怎么才能…""你需要意识到你话语的影响力"。它和"应对批评"正好是一体两面——这一单元教你怎么把批评给出去。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-13">
+  <div class="sec-h"><h2>第 13 单元　生动表达</h2><span class="badge-time">⏱ 约 35 分钟（技能单元，重在改写练）</span></div>
+  <p class="sec-intro">对应详解版第 28 + 29 节。你逻辑通畅、数据齐全，对方却无动于衷——因为你"在唱歌，但只敲了拍子"。这一单元练：把抽象的话，感官化成能看见的画面。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你想说服老板"客服人手严重不够、得赶紧加人"。你准备这么说：</p>
+    <p><strong>"老板，客服压力真的很大，再不加人，我们流失了很多客户。"</strong></p>
+    <p><strong>这么说，老板大概率会怎么反应？为什么打动不了他？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下你的判断——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>想打动人、让人听进去，别只抛抽象的结论和数据——把它"感官化"，换成对方脑子里能看见的画面，甚至带他亲眼看见。三层：① 语言成像 → ② 图像可视化 → ③ 带到现场。</strong></p></div>
+    <p>（前置心法："知识的诅咒"——你脑子里有画面，以为说一句结论别人就懂了；其实你只敲了拍子，没把歌唱出来。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <pre>先认出"知识的诅咒"：
+   敲桌子游戏——打拍子的人脑子里有完整旋律，以为对方一定猜得出，
+   实际平均敲 40 首、对方才猜中 1 首。你以为在唱歌，其实只在敲拍子。
+   → 对方"没被打动"，常常不是冷漠，是你只给了结论、没给画面。
+感官化三层（从轻到重）：
+   ① 语言成像：把抽象表述，换成能在脑中放电影的具体描述
+      "我们车噪音很小" → "时速 100 迈，你还能听见自己手表的滴答声"
+   ② 图像可视化：上照片、图表、实物（雾霾演讲：采样膜 24 小时从白变黑）
+   ③ 带到现场：直接让对方亲眼看见、亲身感受
+一句话：to show, not to tell —— 展示，而不是说服（契诃夫）。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·会议桌上的"手套塔"</div>
+    <p>一个制造业高管想推动采购改革、砍掉浪费，但他知道：光在会上甩一堆成本表格，没人会动。于是他让实习生把全公司各工厂用的工作手套都买来——竟有 424 种，同一种手套这家厂 35 块、那家厂 100 多块。他把这 424 种手套<strong>一一标上价格、堆满整张会议桌</strong>。各部门主管走进来，对着这座"手套塔"看了一分钟，全都哑口无言："我们真的买了这么多种？"——改革当场就推动了。</p>
+    <p><strong>这告诉你</strong>：同样一件事，列表格讲数据可能没人动；把它"摆到眼前、带到现场"，一下就把人说服了。这就是感官化的最高一层。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那句"客服压力很大"）</div><div class="step-body">
+    <p>还记得 🎯 里那句打动不了老板的"客服压力很大"吗？跟着把它感官化：</p>
+    <p><strong>① 语言成像（把"压力大/流失客户"变成画面）</strong>：</p>
+    <div class="quote"><p>"老板，昨天下午高峰期，<strong>3 个客服面前同时挂着 27 个未读、客户消息平均要等 8 分钟才有人回</strong>；我翻了下，光昨天就有 11 个人等不及，直接说'算了我退款'走了（<strong>把抽象的'压力大、流失'换成具体的画面和数字</strong>）。"</p></div>
+    <p><strong>② 图像可视化（再加一层）</strong>：把"客户等待时长曲线""每天流失订单数"做成一张图，红线一路飙升——比你说十句"压力大"都管用。</p>
+    <p><strong>③ 带到现场（最狠的一层）</strong>："您要不下午来客服工位坐 10 分钟？您亲眼看一眼那个消息一直跳、根本回不过来的状态。"</p>
+    <p>对照一下 🎯 里那句"压力很大、流失很多客户"：那是抽象结论（拍子），老板脑子里没有画面，只会"嗯，我知道了，再说"。而上面这些——<strong>27 个未读、等 8 分钟、11 个人扭头退款、一张飙升的红线、甚至请他来现场坐 10 分钟</strong>，他"看见"了，才会真的动。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（让公司重视"线下排队流失客户"）</div><div class="step-body">
+    <div class="quote"><p>你发现门店高峰期排队太长，很多顾客没买就走了。你手里只有一句结论和几个数字（"高峰期流失率约 30%"）。直接报这个数字，领导没感觉。</p>
+    <p>请分别用<strong>语言成像 / 图像可视化 / 带到现场</strong>三种方式，各设计一个能让领导"看见"这件事的做法。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <ul>
+        <li><strong>语言成像</strong>："上周六下午 3 点，收银台前排了 11 个人、队伍拐到了货架后面；我站那儿数了 10 分钟，有 6 个人把篮子往地上一放、扭头就走了。"</li>
+        <li><strong>图像可视化</strong>：放一张高峰时段的现场照片（长队）+ 一条"排队人数 / 流失率"随时间的曲线，峰值标红。</li>
+        <li><strong>带到现场</strong>："周六下午这个点，要不您来店里站 15 分钟？您亲眼看看那个队，和顾客放下篮子走人的样子。"</li>
+      </ul>
+      <p><strong>反射</strong>："流失率 30%"是一个让人无感的数字（拍子）；而"6 个人放下篮子扭头走"、一张长队照片、请他来现场站 15 分钟，是让他"看见"（唱出歌）。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：让表达"被看见"</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>先自省</strong>：对方没被打动？先问"我是不是只敲了拍子、没把歌唱出来"</li>
+      <li><strong>语言成像</strong>：把抽象词（压力大/很重要/差距大）换成具体场景 + 细节 + 数字</li>
+      <li><strong>图像可视化</strong>：能上照片/图表/实物，就别光靠嘴</li>
+      <li><strong>带到现场</strong>：能让对方亲眼看、亲身体验，就是最狠的一招</li>
+      <li><strong>口诀</strong>：to show, not to tell —— 展示，而不是说服</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>抛一堆抽象词和结论（压力大、很重要、潜力大），自以为说清楚了？</li>
+      <li>把对方"没反应"归为他冷漠/不重视——其实是你没给他画面？</li>
+      <li>重要的汇报/提案，从来不准备照片、图表，全靠一张嘴？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景·改写题）</h3>
+    <div class="quote"><p>你想跟老板说"我们的入职流程太繁琐，新人体验很差"。你准备说的差版本是：<strong>"咱们入职流程太繁琐了，新人体验特别不好，建议优化。"</strong></p>
+    <p>请把它"语言成像"，改写成一段能让老板看见画面的话。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <div class="quote"><p>"老板，我跟了一下上周新来的小张第一天：他光填表就填了 7 张、盖章跑了 4 个部门、装个办公软件等 IT 等了一下午——<strong>入职第一天，他大半天在走流程，到下班还没摸到自己的活</strong>。我问他感受，他笑笑说'有点怀疑自己是不是来错地方了'。"</p></div>
+      <p><strong>反射</strong>："流程繁琐、体验不好"是抽象结论；"填 7 张表、跑 4 个部门、第一天没摸到活、怀疑来错地方"是画面。老板看见了那个手足无措的新人，才会觉得"这真得改"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>表达输出</strong>】模式；主要落在【<strong>框架 → 话术</strong>】层——框架是"感官化三层（语言/图像/现实）"，话术是把抽象词换成画面的那些具体描述；心法是【跳出"知识的诅咒"：别拿自己脑子里的画面，当成对方也看得见】。它和"上台克服紧张""即兴表达"同属"当众/对外把话说出去"这一支。</p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-14">
+  <div class="sec-h"><h2>第 14 单元　即兴表达</h2><span class="badge-time">⏱ 约 35 分钟（技能单元，重在开口练）</span></div>
+  <p class="sec-intro">对应详解版第 30 + 31 节。被临时点名"说两句"就大脑空白？真相是——所有的即兴，都是准备过的。这一单元练：发表观点用 PREP，发表感言用现场取材。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>会开到一半，老板突然转向你："这个你怎么看？说两句。"全桌人齐刷刷看过来等你发言。</p>
+    <p>你脑子"嗡"地一片空白……</p>
+    <p><strong>这一刻，你会怎么开口？</strong></p></div>
+    <p>先别往下看，给自己 30 秒写下来——等下 ✍️「跟着做」拿这个场景走一遍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p><strong>被点名时：发表观点，用 PREP——第一句先抛观点，再给理由、案例，最后收回观点；发表感言，用"现场取材"——抓现场的人、细节、情绪、收获，别说空泛的"我很激动、谢谢大家"。</strong></p></div>
+    <p>（前置心法：即兴表达的底气，80% 来自平时的积累——肚子里有东西，临场才不慌。"即兴"是表象，"准备过"才是本质。）</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+    <pre>先认清：所有即兴都是准备过的。即兴的 80% 发生在过往（你的专业积累），
+        临场只是把它快速整理出来。没积累，再多技巧也救不了。
+被点名·发表观点 → PREP：
+   Point  先抛观点（"我觉得该选 A"）——千万别兜圈子，敢把观点放最前，说明你有把握
+   Reason 给理由（"因为时间紧、A 落地快"）
+   Example 给例子（"上次类似情况我们用 A，效果不错"）
+   Point  收回观点（"所以我建议 A"）
+   小技巧：开口前加一句"是这样的"——既显笃定，又给自己挤出 1 秒思考缓冲
+被点名·发表感言 → 现场取材（别用 PREP，太理性）：
+   从现场抓四样：人（在场的人）· 细节（具体的事）· 情绪（真实的感受）· 收获</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事·罗翔的获奖感言</div>
+    <p>罗翔拿 B 站年度人气 UP 主，获奖感言被网友"建议全文背诵"。他没有一句泛泛的"感谢平台、感谢大家"，而是说："这个奖项非常沉重，我搬不动，得千千万万的人才举得起来。我不过是用视频<strong>拨动了大家心里的正义感</strong>，这奖不是我的，是你们的……"——一句话把现场所有人都带上了领奖台，情绪拉满，最后落在"因为你们，我更相信温暖"。</p>
+    <p><strong>这告诉你</strong>：打动人的即兴感言，靠的不是华丽辞藻，是从现场取材的真实东西——他抓的是"在场的人 + 大家心里的正义感（情绪）+ 我的收获"，所以句句入心。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到老板那句"你怎么看"）</div><div class="step-body">
+    <p>还记得 🎯 里被点名、大脑空白的那一刻吗？跟着用 PREP 走一遍：</p>
+    <p><strong>①（争取 1 秒）先说"是这样的"</strong>：定个神，也显得你是经过思考的。</p>
+    <p><strong>② P—先抛观点</strong>："是这样的，我倾向于先上 A 方案。"</p>
+    <p><strong>③ R—给理由</strong>："因为现在时间最紧，A 落地最快、风险最低。"</p>
+    <p><strong>④ E—给例子</strong>："上个季度那个类似的活儿，我们就是用 A，两周就跑通了。"</p>
+    <p><strong>⑤ P—收回观点</strong>："所以我建议先 A，B 留作下一步。"</p>
+    <p>对照一下你在 🎯 写的：是不是要么"嗯…这个嘛…我觉得吧…"（兜圈子、显得没想清楚），要么干脆卡壳？而 PREP——<strong>第一句就把观点亮出来</strong>，后面理由、例子顺着补，逻辑一下就顺了，全场觉得你"早想好了"。其实你只是套了个公式。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（年会上被叫起来"说两句感言"）</div><div class="step-body">
+    <div class="quote"><p>公司年会，老板举着杯突然点你："来，老员工，上台说两句！"你不能又是那句"我很激动、感谢公司、感谢大家"。</p>
+    <p>请用"现场取材"（人 / 细节 / 情绪 / 收获）写一段 30 秒的即兴感言，<strong>至少包含一个具体的现场细节</strong>。</p></div>
+    <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
+      <div class="quote"><p>"其实我刚在台下还跟小李说（<strong>人 + 现场</strong>），今年最难忘的是 3 月那次通宵改方案——改到凌晨四点，咱们几个趴在会议室桌上睡着了，是行政的张姐第二天一早拿热豆浆把我们叫醒的（<strong>细节</strong>）。那一刻我特别确定，我不是一个人在扛（<strong>情绪</strong>）。这一年我最大的收获，不是做成了多少项目，是知道了身边这帮人靠得住（<strong>收获</strong>）。敬大家！"</p></div>
+      <p><strong>反射</strong>："我很激动、感谢大家"是空话，谁都能说、谁也记不住。而"凌晨四点趴桌睡着、张姐拿豆浆叫醒"是只属于你们的现场细节——这才让人鼻子一酸。感言的精髓在"感"，从现场取材才有"感"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：被点名不慌</div><div class="step-body">
+    <div class="methodcard"><ol>
+      <li><strong>平时攒料</strong>：在你的专业领域持续积累——即兴的 80% 在台下就准备好了</li>
+      <li><strong>"是这样的"</strong>：开口先加这四个字，显笃定、争取 1 秒缓冲</li>
+      <li><strong>观点用 PREP</strong>：观点 → 理由 → 例子 → 收回观点，第一句先抛观点别兜圈</li>
+      <li><strong>感言用现场取材</strong>：抓人 / 细节 / 情绪 / 收获，拒绝"我很激动谢谢大家"</li>
+      <li><strong>记住</strong>：即兴不是拼天赋，是拼积累 + 套对公式</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body">
+    <p><strong>三个常踩的坑</strong>：</p>
+    <ul class="check">
+      <li>以为即兴靠临场天赋——其实没有平时积累，再多技巧也撑不住？</li>
+      <li>发表观点先兜一大圈铺垫，迟迟不亮观点，显得没想清楚？</li>
+      <li>发表感言只会"我很激动、感谢大家"——空泛、没人记得住？</li>
+    </ul>
+    <h3 class="blk">自测一题（全新场景）</h3>
+    <div class="quote"><p>在一个行业交流会上，主持人突然请你"用一分钟谈谈你对'远程办公'的看法"。</p>
+    <p>请用 PREP 写出你这一分钟的发言框架（观点 → 理由 → 例子 → 收回观点），第一句要先亮观点。</p></div>
+    <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
+      <ul>
+        <li><strong>P（观点）</strong>："是这样的，我认为远程办公适合'结果导向'的岗位，但不适合刚入职的新人。"</li>
+        <li><strong>R（理由）</strong>："因为成熟员工靠产出说话、在家更专注；而新人需要在现场被带、被随时纠偏。"</li>
+        <li><strong>E（例子）</strong>："我们团队就是——老员工远程效率更高，但去年两个全远程的应届生，半年都没融进团队。"</li>
+        <li><strong>P（收回）</strong>："所以我主张'分人':骨干可远程，新人前半年尽量到岗。"</li>
+      </ul>
+      <p><strong>反射</strong>：没有 PREP，你大概率会从"远程办公嘛，有好有坏，要看情况……"开始绕，绕到最后也没立场。先抛观点，一分钟就立住了。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <p>本单元主导【<strong>表达输出</strong>】模式；主要落在【<strong>框架 → 话术</strong>】层——框架是"PREP（发表观点）+ 现场取材（发表感言）"，话术是"是这样的，我认为……"和那些抓人/细节/情绪的句子；心法是【即兴不是拼天赋，是拼平时的积累】。它和"上台克服紧张""生动表达"一起，凑齐了"当众把话说好"这一支——<strong>全册到此，14 个单元齐了。</strong></p>
+  </div></div>
+</section><hr class="soft">
+<section class="sec" id="sec-cap">
+  <div class="sec-h"><h2>🎓 结课大实战：新晋管理者的第一周</h2></div>
+  <p class="sec-intro">这是一个把全册技能串起来的综合剧本。别只读，拿起笔（或打开备忘录）真的写。每个任务先自己写出"你会怎么说"，再点开参考处理对照。</p>
+
+  <div class="callout"><div class="c-h">📋 背景</div>
+  <p>你叫小林，在一家做企业服务的公司干了三年，业务能力不错。本周一，你被提拔为"客户成功组"的负责人，手下 8 个人，其中有两个比你资历还老。第一周，你接连撞上五道沟通难题——</p></div>
+
+  <h3 class="blk">任务一·跟新老板要资源（用到：单元 1 金字塔 + 单元 5 提需求公式）</h3>
+  <div class="quote"><p>周一，新老板把季度目标压给你：客户续费率从 80% 提到 90%。你一算，现在 8 个人都忙不过来，这目标根本啃不下来——你至少得再要 2 个人。下午你要第一次和老板单独沟通。</p>
+  <p><strong>请写出：① 你开口的第一句（别从"咱们组最近特别忙"铺起）；② 你怎么把"要 2 个人"提成他愿意批的需求。</strong></p></div>
+  <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
+    <ul>
+      <li><strong>第一句（金字塔·从塔尖往下滑）</strong>："老板，90% 续费率我接，但要稳稳拿下，我需要您给我加 2 个人——这直接决定这个目标能不能落地。"（先抛"我要你拍的事 + 它对目标的意义"，不铺背景）</li>
+      <li><strong>提需求（灵魂三连问·三段句式）</strong>："您今年最看重的就是续费这块的增长吧（① 你想要什么）；我也想把它做成、证明这个组扛得起（② 共同目标）；现在 8 个人的人均服务量已经超载，<strong>再加 2 个人，我能把高价值客户的响应从'48 小时'压到'当天'，续费率才提得动</strong>（③ 我的需求怎么推动目标）。这 2 个人的产出，一个季度就能从续费的增量里赚回来。"</li>
+    </ul>
+    <p><strong>点评</strong>：用了金字塔（第一句先给结论和需求）+ 三段句式（把"要人"翻译成"我们共同目标的投资"）。最忌讳的是先诉苦"我们太忙了"——那只会让老板觉得你在叫累。</p>
+  </div></details>
+
+  <h3 class="blk">任务二·两个老员工吵翻了（用到：单元 9 倾听 + 单元 8 处理冲突）</h3>
+  <div class="quote"><p>周二，组里两个资历比你老的成员——小 A 和小 B，为"要不要给一个难缠的大客户降价续费"吵得不可开交，双双跑来找你评理，会议室气氛剑拔弩张。</p>
+  <p><strong>请写出：① 你不急着站队，先怎么"听"；② 怎么把这场"降不降价"的对立，往"第三方案"上引。</strong></p></div>
+  <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
+    <ul>
+      <li><strong>先倾听（忍·等·问）</strong>："你俩先别急着说服我（<strong>忍住自己评判</strong>）。小 A 你先说，你担心的到底是什么；小 B 你听完别打断，等下你说（<strong>让双方把话说完</strong>）。"——分别用"所以你真正担心的是……，对吗"复述确认。</li>
+      <li><strong>引向第三方案（处理冲突·把行动抬到利益）</strong>："你俩其实要的不冲突——小 A 要的是'别轻易降价、守住利润盘'，小 B 要的是'别丢了这个大客户'（<strong>抬到利益</strong>）。那有没有第三条路：<strong>不直接降价，但给他升级服务/加赠一个增值包，单价不动、感知到的价值上去</strong>？（A 降价 / B 不降 / <strong>C：不降价但加价值</strong>）"</li>
+    </ul>
+    <p><strong>点评</strong>：先用倾听（忍·等·问）把火压下来、让双方觉得被听见，再用处理冲突的"抬到利益、找 A+B=C"破局。新官上任最忌一来就拍板站队——那必得罪一个。</p>
+  </div></details>
+
+  <h3 class="blk">任务三·隔壁总监临时来借人（用到：单元 7 得体拒绝）</h3>
+  <div class="quote"><p>周三，隔壁产品组的总监（级别比你高）笑呵呵地来："你组里小 A、小 B 经验足，借我两周去支援我那个上线项目呗，反正你刚接手、应该还没那么忙。"——可你正缺人、还顶着续费目标。</p>
+  <p><strong>请写出你的回应：既不硬刚得罪人，又把这个会要了你命的"借人"挡回去。</strong></p></div>
+  <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
+    <div class="quote"><p>"您看得起我们组的人，我特别高兴（<strong>先接住、不甩脸</strong>）。不过实话实说，我刚接手就背了 90% 续费的硬指标，A、B 正是顶在一线的主力，这两周抽走我真扛不住（<strong>明确扔掉给不了的 + 给原因</strong>）。<strong>要不这样：他俩抽不开身，但我可以让 C 每天匀出两小时支援你那个项目最急的环节；或者等我这边续费冲刺过了这两周，再给你借人</strong>（<strong>给替代方案 + 留口子</strong>）。您看行不行？"</p></div>
+    <p><strong>点评</strong>：标准的"接一半扔一半"——接住"认可+愿意帮"，扔掉"借走主力两周"，给替代（匀部分工时/换时间）。对级别比你高的人，更要"温和而坚定"，而不是硬刚或硬吞。</p>
+  </div></details>
+
+  <h3 class="blk">任务四·能干的下属突然蔫了、还交了份糙活（用到：单元 11 共情 + 单元 12 批评 + 单元 4 关怀式反馈）</h3>
+  <div class="quote"><p>周四，组里最有潜力的小 C，这周已经第二次出错，今天又交了份明显敷衍的客户方案。你叫他来，他低着头、一脸沮丧、不吭声。你心里有火，但你知道他平时不是这样的。</p>
+  <p><strong>请写出：① 你怎么先"接住"他的状态（而不是劈头就批）；② 怎么把"方案很糙"这个批评，说成他接得住的反馈。</strong></p></div>
+  <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
+    <ul>
+      <li><strong>先共情（停一停放一放 + 言语化）</strong>："先别急着说工作（<strong>放下'赶紧批他'的冲动</strong>）。我看你这两天状态挺沉的，<strong>是不是遇到什么事了，还是觉得最近怎么使劲都不太对？</strong>（<strong>替他把感受说出来</strong>）"——很可能他这才说出真问题（家里的事/对方向的困惑）。</li>
+      <li><strong>再反馈（说观察不说评论 + 关怀式）</strong>："这份方案确实没到能给客户的程度——客户痛点那段空着、报价也没依据（<strong>观察：具体事实，不贴'敷衍'的标签</strong>）。我知道这不是你的真实水平（<strong>关怀：先肯定人</strong>）。你觉得是状态的事，还是哪块卡住了？需要我怎么搭把手？（<strong>机会型问题 + 给支持</strong>）"</li>
+    </ul>
+    <p><strong>点评</strong>：对"有能力但状态下滑"的人，先共情（接住情绪）、再用关怀式反馈（关心人 + 说观察不贴标签），而不是上来一顿"你怎么回事"。先处理人，再处理事。</p>
+  </div></details>
+
+  <h3 class="blk">任务五·周会被老板临时点名上台（用到：单元 14 即兴 + 单元 13 生动表达 + 单元 10 克服紧张）</h3>
+  <div class="quote"><p>周五全公司周会，老板忽然举杯："小林新官上任，上台说两句，顺便把你组下周的计划给大家讲讲！"几十双眼睛刷地看过来，你手心冒汗。</p>
+  <p><strong>请写出：① 上台前/开口你怎么稳住；② 用 PREP 讲"下周计划"的框架；③ 给"我们要提升续费率"加一个"看得见的画面"。</strong></p></div>
+  <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
+    <ul>
+      <li><strong>稳住（克服紧张）</strong>：上台前做两组 2-8-4 短吸长呼；开口第一句故意放慢、把焦点放在"给大家一个清楚的交代"，而不是"别出丑"。</li>
+      <li><strong>PREP 讲计划</strong>："是这样的，下周我们组就抓一件事——<strong>把高价值客户的响应做到当天</strong>（P 观点）。因为续费率上不去，卡点就在响应太慢（R 理由）；上周有个百万客户就是等了两天没人理、差点流失（E 例子）；所以下周我们先啃这一个点（P 收回）。"</li>
+      <li><strong>加画面（生动表达·语言成像）</strong>：别说"我们要提升续费率"，说"<strong>我希望下个月，没有一个大客户因为'等太久没人理'而走人</strong>"——把抽象指标变成一个能看见的场景。</li>
+    </ul>
+    <p><strong>点评</strong>：即兴被点名不慌（PREP 先抛观点 + 克服紧张的生理招），再用生动表达把干巴巴的指标变成画面——一段话同时用上三个单元。</p>
+    <div class="callout ok"><div class="c-h">🎉 五道难题走完，你已经把这本册子里大半的技能用了一遍</div>
+    <p>回头看：它们底下垫着的，始终是同一个东西——<strong>合作思维</strong>。把每一个人（老板、同事、下属、对手）都当成"要一起把事做成的伙伴"，话自然就找得到。</p></div>
+  </div></details>
+
+  <div class="lead-callout"><b>全册完。</b> 14 个单元 + 1 个结课实战，配套详解版（学习讲义·完整版）使用：卡在哪、就翻哪一单元，先看 🧠 想通，再做 🪜 和自测——<b>练到能开口，才算真的会。</b> 祝你用表达，把事做成。</div>
+</section>
+
+</div>
+</main>
+</div>
+
+<script>
+  // 仅保留导航类轻交互：移动端目录开合 + 当前单元高亮（无打卡、无本地存储）
+  var burger=document.getElementById('burger'), toc=document.getElementById('toc'), scrim=document.getElementById('scrim');
+  function closeToc(){toc.classList.remove('open');scrim.classList.remove('open');}
+  burger.addEventListener('click',function(){toc.classList.toggle('open');scrim.classList.toggle('open');});
+  scrim.addEventListener('click',closeToc);
+  toc.addEventListener('click',function(e){if(e.target.closest('a'))closeToc();});
+
+  var links=[].slice.call(toc.querySelectorAll('a[href^="#"]'));
+  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){
+      links.forEach(function(a){a.classList.remove('active');});
+      var a=map[en.target.id]; if(a)a.classList.add('active');
+    }});
+  },{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section.sec').forEach(function(s){obs.observe(s);});
+</script>
+</body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《游戏行业分析》交互练习册</title>
+<style>
+:root{
+  --paper:#faf6ec; --paper-2:#f4eedf; --card:#fffdf7;
+  --ink:#322e28; --ink-soft:#6f675a; --ink-faint:#9a9384;
+  --accent:#1f7a6b; --accent-deep:#16584d; --accent-tint:#eaf2ef;
+  --warn:#c0392b; --line:#e6ddcb; --line-soft:#efe8d8;
+  --maxread:720px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;}
+header.topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#f5efe0;
+  display:flex;align-items:center;gap:14px;padding:10px 18px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+.topbar .burger{display:none;background:none;border:none;color:#f5efe0;font-size:22px;cursor:pointer;line-height:1;}
+.topbar h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+.topbar .spine{font-size:12.5px;color:#cfe3dd;border-left:1px solid #3c7c70;padding-left:14px;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .progress{font-size:12.5px;background:#15504675;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.wrap{display:flex;align-items:flex-start;}
+nav.toc{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);overflow-y:auto;
+  width:255px;flex:0 0 255px;background:var(--paper-2);border-right:1px solid var(--line);padding:16px 10px 60px;}
+nav.toc .grp{font-size:12px;color:var(--ink-faint);font-weight:700;margin:16px 8px 6px;letter-spacing:.5px;}
+nav.toc a{display:flex;align-items:flex-start;gap:7px;text-decoration:none;color:var(--ink-soft);
+  font-size:13.5px;padding:6px 9px;border-radius:7px;margin:1px 0;line-height:1.45;}
+nav.toc a:hover{background:var(--accent-tint);color:var(--accent-deep);}
+nav.toc a.active{background:var(--accent-tint);color:var(--accent-deep);font-weight:700;box-shadow:inset 3px 0 0 var(--accent);}
+nav.toc a .ck{flex:0 0 auto;width:15px;color:var(--accent);font-weight:700;}
+nav.toc a.special{color:var(--accent-deep);font-weight:600;}
+nav.toc a.dim{opacity:.4;cursor:default;}
+nav.toc a.dim:hover{background:none;color:var(--ink-soft);}
+main{flex:1;min-width:0;padding:0 28px 120px;}
+.reader{max-width:var(--maxread);margin:0 auto;}
+section.sec{padding-top:30px;scroll-margin-top:60px;}
+.sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:10px;margin:8px 0 6px;}
+.sec-h h2{font-size:23px;margin:0;color:var(--accent-deep);font-weight:800;}
+.badge-time{font-size:12px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.badge-axis{font-size:12px;color:var(--accent-deep);background:var(--accent-tint);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.done-btn{margin-left:auto;font-size:12.5px;background:none;border:1px solid var(--line);color:var(--ink-soft);padding:4px 12px;border-radius:20px;cursor:pointer;}
+.done-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.step{margin:22px 0;}
+.step-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin:0 0 8px;}
+.step-h .ic{font-size:18px;}
+.step-body{padding-left:2px;}
+.step-body>p:first-child{margin-top:0;}
+p{margin:.55em 0;}
+strong{color:var(--ink);}
+.accent{color:var(--accent-deep);font-weight:700;}
+.blk{font-size:15.5px;font-weight:800;color:var(--ink);margin:18px 0 6px;}
+.quote{border-left:3px solid var(--line);background:var(--paper-2);border-radius:0 8px 8px 0;padding:10px 15px;margin:13px 0;}
+.quote>p:first-child{margin-top:0;} .quote>p:last-child{margin-bottom:0;}
+pre{background:#f3ecdb;color:#3b362d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;overflow-x:auto;
+  font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13px;line-height:1.65;margin:12px 0;}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);border-radius:8px;padding:12px 15px;margin:14px 0;font-size:15px;}
+.callout .c-h{font-weight:800;color:var(--accent-deep);margin-bottom:4px;}
+.callout.ok{border-left-color:var(--accent);background:var(--accent-tint);}
+.methodcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0;}
+.methodcard h4{margin:0 0 8px;color:var(--accent-deep);font-size:15px;}
+.methodcard ol{margin:0;padding-left:22px;} .methodcard li{margin:5px 0;}
+ul.check{list-style:none;padding-left:2px;margin:10px 0;}
+ul.check li{position:relative;padding-left:26px;margin:7px 0;}
+ul.check li::before{content:"❌";position:absolute;left:0;font-size:14px;}
+.warn-x{color:var(--warn);font-weight:700;}
+ul.selfck{list-style:none;padding-left:2px;margin:10px 0;}
+ul.selfck li{position:relative;padding-left:26px;margin:7px 0;}
+ul.selfck li::before{content:"☐";position:absolute;left:0;color:var(--ink-faint);font-size:16px;}
+.ta-label{font-size:13px;color:var(--ink-soft);margin:10px 0 5px;}
+textarea.ta{width:100%;min-height:74px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 13px;font-family:inherit;font-size:15px;line-height:1.7;color:var(--ink);resize:vertical;}
+textarea.ta:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint);}
+.saved-tag{font-size:11.5px;color:var(--accent);margin-left:8px;opacity:0;transition:opacity .3s;}
+.saved-tag.show{opacity:1;}
+.recall{background:var(--accent-tint);border:1px dashed var(--accent);border-radius:9px;padding:11px 14px;margin:12px 0;font-size:14.5px;}
+.recall .rh{font-weight:700;color:var(--accent-deep);font-size:13px;margin-bottom:4px;}
+.recall .rc{white-space:pre-wrap;color:var(--ink);}
+.recall.empty{border-style:dotted;}
+.recall.empty .rc{color:var(--ink-faint);font-style:italic;}
+details.fold{border:1px dashed var(--accent);border-radius:9px;margin:12px 0;background:var(--card);}
+details.fold>summary{cursor:pointer;list-style:none;padding:11px 15px;font-weight:700;color:var(--accent-deep);user-select:none;}
+details.fold>summary::-webkit-details-marker{display:none;}
+details.fold>summary::before{content:"▸ ";color:var(--accent);}
+details.fold[open]>summary{border-bottom:1px solid var(--line-soft);}
+details.fold[open]>summary::before{content:"▾ ";}
+details.fold .fold-in{padding:8px 16px 14px;}
+.map{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0;}
+.map .m-box{border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;background:var(--paper);}
+.map .m-box.lead{background:var(--accent-deep);color:#f1ece0;border-color:var(--accent-deep);}
+.map .m-box.lead b{color:#fff;}
+.map .m-cap{font-weight:800;color:var(--ink);margin:0 0 7px;font-size:13.5px;}
+.map .m-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0;}
+.map a.chip,.map span.chip{display:inline-block;text-decoration:none;font-size:12.5px;color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:3px 11px;}
+.map a.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.map .m-arrow{text-align:center;color:var(--ink-faint);font-size:15px;margin:2px 0;}
+.map .lyr{font-size:11px;color:var(--ink-faint);}
+.map .m-axis{flex:0 0 auto;font-weight:800;color:var(--accent-deep);width:30px;}
+.map .m-note{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;}
+.lead-callout{background:var(--accent-deep);color:#eef4f1;border-radius:10px;padding:13px 17px;margin:14px 0;}
+.lead-callout b{color:#fff;}
+.intro-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:18px 0;}
+.intro-card h3{margin:.2em 0 .4em;color:var(--accent-deep);}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.tbl-scroll{overflow-x:auto;margin:12px 0;}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--card);}
+th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;}
+thead th{background:var(--paper-2);color:var(--ink);font-weight:700;}
+tbody tr:nth-child(even){background:#fcf9f1;}
+.note{color:var(--ink-soft);font-size:14px;}
+.scrim{display:none;position:fixed;inset:48px 0 0;background:rgba(0,0,0,.3);z-index:25;}
+@media (max-width:820px){
+  nav.toc{position:fixed;top:48px;left:0;z-index:28;transform:translateX(-100%);transition:transform .2s;box-shadow:2px 0 14px rgba(0,0,0,.15);}
+  nav.toc.open{transform:translateX(0);}
+  .scrim.open{display:block;}
+  .topbar .burger{display:block;} .topbar .spine{display:none;}
+  main{padding:0 16px 100px;}
+}
+@media print{
+  header.topbar,nav.toc,.done-btn,.scrim,.saved-tag{display:none!important;}
+  main{padding:0;} textarea.ta{border-color:#bbb;} details.fold{border-color:#bbb;}
+  details.fold[open] .fold-in,details.fold>summary{display:block;}
+  body{font-size:12pt;background:#fff;}
+}
+</style>
+</head><body>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="目录">☰</button>
+  <h1>游戏行业分析 · 练习册</h1>
+  <div class="spine">8 步动线 · 先写后照 · 进度本地存档</div>
+  <div class="progress" id="progress">已学 0 / 9</div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav class="toc" id="toc">
+<a href="#map" class="special">🗺 全景图</a>
+<a href="#paths" class="special">📅 学习路径</a>
+<div class="grp">认知总纲（战略 · 看方向）</div>
+<a href="#sec-1"><span class="ck" data-ck></span>第 1 节　游戏业务逻辑与行业特点</a>
+<a href="#sec-2"><span class="ck" data-ck></span>第 2 节　3 种典型的游戏细分类型</a>
+<div class="grp">指标主线（战术看大盘 → 战斗下钻）</div>
+<a href="#sec-3"><span class="ck" data-ck></span>第 3 节　常规监控：拉新 / 活跃 / 留存 / 付费</a>
+<a href="#sec-4"><span class="ck" data-ck></span>第 4 节　特色监控：玩法参与 / 付费点</a>
+<div class="grp">阶段 × 专题（战术 / 战斗）</div>
+<a href="#sec-5"><span class="ck" data-ck></span>第 5 节　特色监控：从立项到公测，各阶段关注重点</a>
+<a href="#sec-6"><span class="ck" data-ck></span>第 6 节　研发专题：项目投资回报测算</a>
+<a href="#sec-7"><span class="ck" data-ck></span>第 7 节　渠道专题：推广与新用户留存</a>
+<a href="#sec-8"><span class="ck" data-ck></span>第 8 节　运营专题：运营活动与开服合服</a>
+<a href="#sec-9"><span class="ck" data-ck></span>第 9 节　产品专题：用户画像与版本更新</a>
+<a href="#capstone" class="special">🎓 结课大实战</a>
+</nav>
+<main><div class="reader">
+<div class="intro-card"><h3>怎么用这本练习册</h3><p>每节按 <strong>8 步动线</strong>把你"逼着先动手、最后真会做"：🎯先卡你 → 🔑一个动作 → 🧠高手怎么想 → ✍️跟着做 → 🪜换你做 → 🃏方法卡 → ⚠️易错+自测 → 🧭挂回全景。</p><p><strong>命根子是 🎯第一反应、🪜换你做 和 ⚠️自测</strong>：在输入框里<strong>先自己写</strong>，再点开"对照参考"——顶部会浮现你写的、下面才是参考。写的内容自动存浏览器，关了再开还在；点"标记学完"记进度。</p></div>
+<h2 id="mapttl" style="color:var(--accent-deep)">🗺 全景图</h2>
+<div class="map" id="map"><div class="m-box lead"><b>内核</b>：看一门游戏生意，先用两把尺子——①产业链分账（赚哪段钱）②研发 vs 销售费用率（靠产品还是靠买量）。两条主线：① 结果指标(拉新/活跃/留存/付费=Y) ⇆ 过程指标(玩法/付费点=X)；② 时间轴 立项→内测/公测→获客→运营→画像/改版。三层：战略看方向 → 战术看大盘 → 战斗下钻执行。</div><div class="m-box"><div class="m-cap">认知总纲（战略 · 看方向）</div><div class="m-row"><a class="chip" href="#sec-1">第1节 行业特点</a><a class="chip" href="#sec-2">第2节 三类游戏</a></div></div><div class="m-box"><div class="m-cap">指标主线（战术看大盘 → 战斗下钻）</div><div class="m-row"><a class="chip" href="#sec-3">第3节 常规监控</a><a class="chip" href="#sec-4">第4节 特色监控</a></div></div><div class="m-box"><div class="m-cap">阶段 × 专题（战术 / 战斗）</div><div class="m-row"><a class="chip" href="#sec-5">第5节 立项→公测</a><a class="chip" href="#sec-6">第6节 研发测算</a><a class="chip" href="#sec-7">第7节 渠道推广</a><a class="chip" href="#sec-8">第8节 运营活动</a><a class="chip" href="#sec-9">第9节 产品画像</a></div></div><div class="m-note">怎么用：随时问自己"我在练哪条主线（结果↔过程 / 时间轴）、哪一层（战略→战术→战斗）"，就知道这节在地图哪儿。卡住时回到第 1 节（产业链+驱动判断）和第 3 节（先看结果指标定位）两个原点。</div></div>
+<h2 id="paths">📅 学习路径表</h2><div class="tbl-scroll"><table><thead><tr><th>路径</th><th>适合谁</th><th>学哪些节</th><th>建议节奏</th></tr></thead><tbody><tr><td><strong>最小可用</strong>（先上手）</td><td>时间紧、只想快速能聊能做</td><td>第 1（认知）→ 第 3（主线指标）→ 第 4（玩法付费诊断）</td><td>3 天，每天 1 节</td></tr><tr><td><strong>完整深读</strong>（系统掌握）</td><td>想真正看懂游戏分析</td><td>第 1–9 全部 + 🎓 结课大实战</td><td>2 周，每天 1 节、周末做实战</td></tr><tr><td><strong>按角色加餐</strong></td><td>按岗位侧重</td><td>投放岗 +第7；运营岗 +第8；制作人/立项 +第5、6；数据分析岗 +第3、4、9</td><td>在完整深读基础上重点精读</td></tr></tbody></table></div>
+<hr class="soft">
+<h2 style="color:var(--accent-deep);border-bottom:2px solid var(--line);padding-bottom:6px;margin-top:40px">认知总纲（战略 · 看方向）</h2>
+<section class="sec" id="sec-1">
+<div class="sec-h"><h2>第 1 节　游戏业务逻辑与行业特点</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战略 · 认知地基</span><button class="done-btn" data-done="1">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你表弟想买游戏公司的股票，看中了两家，财报数字如下：</p>
+<div class="tbl-scroll"><table><thead><tr><th>公司</th><th>毛利率</th><th>净利率</th></tr></thead><tbody><tr><td>甲</td><td>89%</td><td>6%</td></tr><tr><td>乙</td><td>65%</td><td>24%</td></tr></tbody></table></div>
+<p>他拍板："当然买甲！毛利接近 90%，多猛的生意。"</p>
+<p>先别往下看——<strong>你该拦住他吗？甲的毛利那么高，钱到底去哪了？</strong> 给自己 1 分钟想清楚再继续。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q1" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>拿到一家游戏公司 / 一款游戏，判断它"赚的是哪段钱、靠什么赚"</strong>——看产业链分账定位它赚哪段，看研发 vs 销售费用率判断它是"产品驱动"还是"买量驱动"。</p></div>
+<p>其它（是不是新兴/高科技/创意行业、垄断格局、玩法题材）都是这个判断的注脚。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：两把尺子量一家游戏生意</p>
+<pre>尺子①  产业链分账（玩家付的钱叫"流水"，要层层分，离玩家越近分越多）
+   渠道 30~50% ＞ 发行/代理 35~50% ＞ 开发商 15~35% ＞ IP 方 5~10%
+   → 先定位：这家公司站在哪一层？赚的是大头(渠道/发行)还是小头(开发/IP)？
+
+尺子②  两个费用率（判断它靠什么活）
+   研发费用率 &gt;5% = 够"高科技"线；但若 销售费用率 ≫ 研发费用率 → 买量驱动
+   再叠加：高毛利 + 低净利 = 钱被销售/买量吃掉了（典型买量公司）</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：斗战神 → 黑神话</p>
+<p>冯骥团队在腾讯做斗战神，想法、剧本、创意都顶配，制作精良。可腾讯不满意——不挣钱、氪金能力不够。于是把冯骥赶走，往里塞充值、开箱子、皮肤，再烧十个亿搞营销，结果口碑崩塌、游戏完蛋。冯骥后来出走自己做了黑神话悟空。</p>
+<div class="quote"><p>这个故事点醒本节核心：在游戏行业，<strong>决定一款产品命运的常常不是"好不好玩"，而是"能不能氪金、买不买得动量"</strong>。所以看一家游戏公司，别盯着"产品多精良"，要去看它的钱花在哪、赚在哪。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q1"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>案例：A 游戏（发行商）</strong> 旗下一款手游，某月流水 <strong>1000 万</strong>。分账约定：渠道 40%、A 自己作为发行（含运营）30%、开发商 25%、IP 方 5%。A 公司财报：研发费用率 6%、销售费用率 35%。</p>
+<p class="blk">第一步：算各方分多少（产业链尺子）</p>
+<div class="tbl-scroll"><table><thead><tr><th>角色</th><th>比例</th><th>分得（万元）</th></tr></thead><tbody><tr><td>渠道</td><td>40%</td><td>1000 × 40% = <strong>400</strong></td></tr><tr><td>发行 A</td><td>30%</td><td>1000 × 30% = <strong>300</strong></td></tr><tr><td>开发商</td><td>25%</td><td>1000 × 25% = <strong>250</strong></td></tr><tr><td>IP 方</td><td>5%</td><td>1000 × 5% = <strong>50</strong></td></tr><tr><td>合计</td><td>100%</td><td>400+300+250+50 = <strong>1000</strong> ✓</td></tr></tbody></table></div>
+<p>→ A 站在"发行"层，分 300 万（中段大头），但还没扣它自己的投放/服务器/人力。</p>
+<p class="blk">第二步：判断靠什么赚（费用率尺子）</p>
+<p>研发费用率 6%（过了 5% 高科技线）但销售费用率 35% —— <strong>销售 ≫ 研发</strong>，A 是典型的<strong>买量驱动</strong>公司：钱主要砸在投流获客上，不是砸在做产品上。</p>
+<p><strong>结论</strong>：A 赚的是"发行运营"这段钱，活法是"买量"。要盯它，重点不是看它产品多好，而是看它的投放 ROI 盖不盖得住成本。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：B 游戏</strong> 旗下一款手游某月流水 <strong>800 万</strong>。分账：渠道 35%、发行 40%、开发商 20%、IP 方 5%。B 公司财报：研发费用率 15%、销售费用率 12%。</p>
+<p>请你填：①各方分得多少？②合计对得上 800 万吗？③B 是产品驱动还是买量驱动？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo1" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><div class="tbl-scroll"><table><thead><tr><th>角色</th><th>比例</th><th>分得（万元）</th></tr></thead><tbody><tr><td>渠道</td><td>35%</td><td>800 × 35% = <strong>280</strong></td></tr><tr><td>发行</td><td>40%</td><td>800 × 40% = <strong>320</strong></td></tr><tr><td>开发商</td><td>20%</td><td>800 × 20% = <strong>160</strong></td></tr><tr><td>IP 方</td><td>5%</td><td>800 × 5% = <strong>40</strong></td></tr><tr><td>合计</td><td>100%</td><td>280+320+160+40 = <strong>800</strong> ✓</td></tr></tbody></table></div>
+<p>③ 研发费用率 15% <strong>＞</strong> 销售费用率 12% —— 研发投入比营销还高，且 15% 远超 5% 高科技线，B 是<strong>产品驱动</strong>（更像吉比特那种靠产品口碑的公司）。</p>
+<div class="quote"><p>对比 A 和 B：同样是游戏公司，A 靠买量、B 靠产品，看两个费用率谁高就分得清。</p></div></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>三步看穿一家游戏公司"靠什么赚钱"：</p><ol><li><strong>定位产业链层级</strong>：它是 IP 方 / 开发 / 发行代理 / 渠道？对照分账（渠道 30-50%＞发行 35-50%＞开发 15-35%＞IP 5-10%），知道它赚的是哪段、大头还是小头；</li><li><strong>比两个费用率</strong>：研发率过 5% 算高科技，但若销售率明显更高 → 买量驱动；研发率更高 → 产品驱动；</li><li><strong>再用毛利/净利交叉验证</strong>：高毛利 + 低净利 = 利润被销售费用（买量）吃掉，坐实买量驱动；高毛利 + 高净利才是真"躺赚"。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>把"流水"当公司收入/利润——<span class="warn-x">流水要层层分账，离玩家越近分越多，IP 方反而最少；</span></li><li>只看毛利率高就判定是好生意——<span class="warn-x">要看净利率，毛利高净利低说明钱花在买量上了；</span></li><li>看到研发费用率过 5% 就夸"高科技"——<span class="warn-x">还要比销售费用率，营销往往才是大头。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>C 游戏新上一款手游，首月<strong>流水 1200 万</strong>；但翻它的财报，这款游戏记在"游戏收入"里的只有 <strong>720 万</strong>。另外查到：研发费用率 8%、销售费用率 40%、毛利率 82%、净利率 5%。</p>
+<p>问：①流水 1200 万和收入 720 万差的那部分去哪了？大约占流水多少？②C 是产品驱动还是买量驱动？③毛利率高达 82%、净利率却只有 5%，中间的钱被什么吃掉了？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice1" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 差额 = 1200 − 720 = <strong>480 万</strong>，约占流水 480÷1200 = <strong>40%</strong>。这部分是<strong>渠道 + 发行/代理在"流水"环节就分走了</strong>，所以落到公司账上的"收入"只剩 720 万。（陷阱：流水 ≠ 收入，别拿 1200 当公司赚的钱。）</p>
+<p>② 销售费用率 40% <strong>≫</strong> 研发费用率 8% —— 妥妥的<strong>买量驱动</strong>。</p>
+<p>③ 毛利率 82% 到净利率 5%，中间蒸发了 82 − 5 = <strong>77 个百分点</strong>。结合销售费用率 40%，可知大头是被<strong>销售/买量费用</strong>吃掉了——这正是买量公司的典型财务长相：账面毛利吓人，真到手没多少。</p>
+<div class="quote"><p>回头看 🎯 开场题：甲毛利 89%/净利 6%、乙毛利 65%/净利 24%——该拦住表弟。甲就是 C 这种"高毛利低净利"的买量型，钱都喂给了流量；乙净利率是甲的 4 倍，才是更能落袋的好生意。<strong>别只看毛利，要看净利。</strong></p></div></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是整门课的<strong>认知总纲 / 地基</strong>——讲的是"游戏这门生意到底长什么样"。在"战略 / 战术 / 战斗"的层次里，它落在最粗的<strong>战略（看方向）层</strong>：先建立"产业链分账 + 产品/买量驱动"这套行业认知，后面第 3–9 节的拉新、活跃、付费、玩法、运营分析才有地基可踩。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2">
+<div class="sec-h"><h2>第 2 节　3 种典型的游戏细分类型</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战略 · 分类</span><button class="done-btn" data-done="2">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>两款手游摆你面前，让你判断哪个"更能赚钱"：</p>
+<div class="tbl-scroll"><table><thead><tr><th>游戏</th><th>月活</th><th>月人均付费</th></tr></thead><tbody><tr><td>甲</td><td>5000 万</td><td>3 元</td></tr><tr><td>乙</td><td>50 万</td><td>800 元</td></tr></tbody></table></div>
+<p>同事说："甲有 5000 万人，乙才 50 万，肯定甲赚得多。"</p>
+<p>先别算——<strong>他这个判断靠谱吗？光看月活人数，能定一款游戏的赚钱能力吗？</strong> 想 1 分钟。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q2" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>把一款游戏归到三大类（竞技 / 休闲 / RPG），据此预判它的"人数–留存–付费"结构</strong>——归对了类，你不用看完整财报就知道它靠"量"还是靠"鲸鱼用户"赚钱。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：三类游戏的结构画像</p>
+<pre>            人数    留存    人均付费    靠什么赚
+竞技(MOBA)   多      略高    较少        皮肤+社交+活动带动（量×活动）
+休闲(棋牌)   最多    —       最少        广告+海量用户聚沙成塔（纯靠量）
+RPG(角色)    少      低      最高        鲸鱼用户沉浸式豪氪（靠少数大R）
+底层：玩法 × 题材 = 收入上限</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：王思聪那条评论</p>
+<p>有人把王思聪一个哥们的法拉利怼烂了，底下喊"不怕"，王思聪评论："不怕，这哥们昨天玩大话西游一把冲了 2000 万进去。"</p>
+<div class="quote"><p>这个段子点醒本节核心：<strong>RPG 类相当于给你造了一整个虚拟世界</strong>，战斗、故事、社交全方位满足，所以鲸鱼用户一掏钱就是天文数字。同样一句"游戏赚钱"，竞技靠几千万人各充几十块、RPG 靠少数人各充几百万——<strong>类型不同，赚钱的结构完全不同</strong>。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q2"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>案例：三款游戏的月度数据</strong>，请归类并算月流水（流水 = 月活 × 付费率 × 月 ARPPU）。</p>
+<div class="tbl-scroll"><table><thead><tr><th>游戏</th><th>类型线索</th><th>月活</th><th>付费率</th><th>月ARPPU</th><th>付费人数</th><th>月流水</th></tr></thead><tbody><tr><td>甲</td><td>5v5 对战、靠皮肤</td><td>4000 万</td><td>2%</td><td>60 元</td><td>4000万×2%=<strong>80万</strong></td><td>80万×60=<strong>4800 万</strong></td></tr><tr><td>乙</td><td>抽卡养成、剧情</td><td>50 万</td><td>20%</td><td>2000 元</td><td>50万×20%=<strong>10万</strong></td><td>10万×2000=<strong>2 亿</strong></td></tr><tr><td>丙</td><td>消除小游戏</td><td>8000 万</td><td>0.5%</td><td>10 元</td><td>8000万×0.5%=<strong>40万</strong></td><td>40万×10=<strong>400 万</strong></td></tr></tbody></table></div>
+<p class="blk">读结构</p>
+<ul><li>甲 = <strong>竞技类</strong>：人多、付费率低、人均低，靠量 + 皮肤，月流水 4800 万；</li><li>乙 = <strong>RPG 类</strong>：人最少（50 万）却流水最高（2 亿）！靠 20% 高付费率 × 高 ARPPU 的鲸鱼用户；</li><li>丙 = <strong>休闲类</strong>：人最多（8000 万）但流水最低（400 万），靠广告补，纯拼量。</li></ul>
+<div class="quote"><p>结论：<strong>人数和流水根本不成正比</strong>。乙的人是甲的 1/80，流水却是甲的 4 倍——这就是类型决定的结构差异。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：游戏丁</strong>——玩法是"造城、结盟、攻地"（SLG 策略），月活 600 万、付费率 8%、月 ARPPU 500 元。请你：①归类；②算付费人数和月流水；③它的赚钱结构更像甲、乙、丙里的哪个？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo2" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① SLG 策略类，付费点多、玩家投入重，<strong>结构最接近 RPG（乙）</strong>——靠少数重度玩家豪氪。</p>
+<p>② 付费人数 = 600万 × 8% = <strong>48 万</strong>；月流水 = 48万 × 500 = <strong>2.4 亿元</strong>。</p>
+<p>③ 像<strong>乙（RPG 型）</strong>：人数不算多（600 万，远少于休闲的 8000 万），但靠 8% 的高付费率 + 500 元高 ARPPU，月流水做到 2.4 亿，是典型"靠鲸鱼用户"的重度游戏结构。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>给一款陌生游戏"定性"三步：</p><ol><li><strong>看玩法归大类</strong>：对战/射击=竞技；消除/棋牌=休闲；角色养成/剧情=RPG；SLG/卡牌按"近 RPG"处理；</li><li><strong>套该类付费结构</strong>：竞技（人多、人均低、靠量+活动）/ 休闲（人最多、付费率最低、靠量+广告）/ RPG（人少、留存低、靠少数大 R 豪氪）；</li><li><strong>别拿人数当流水</strong>：人数 × 付费率 × ARPPU 才是流水，三类的乘积结构天差地别。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>看月活高就断定赚得多——<span class="warn-x">休闲类月活几千万、流水可能还不如 RPG 几十万人；</span></li><li>拿 RPG 的高付费率去要求竞技/休闲——<span class="warn-x">它们天生靠量、付费率低是正常的；</span></li><li>忽略"玩法 × 题材定上限"——<span class="warn-x">做棋牌的人均付费，结构上就追不过 RPG。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>游戏戊月活 <strong>3000 万</strong>（很唬人），付费率 0.3%、月 ARPPU 8 元。老板拍桌："3000 万月活！这游戏肯定赚翻了，赶紧追加买量！"</p>
+<p>问：①算出戊的月付费人数和月流水；②戊大概率是哪一类？③老板"月活高就赚翻"的判断错在哪？该不该无脑追加买量？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice2" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 付费人数 = 3000万 × 0.3% = <strong>9 万</strong>；月流水 = 9万 × 8 = <strong>72 万元</strong>。</p>
+<p>② 付费率仅 0.3%、ARPPU 仅 8 元——典型<strong>休闲类</strong>（小游戏/棋牌），靠海量用户、人均几乎不付费。</p>
+<p>③ 老板错在<strong>拿月活当赚钱能力</strong>：3000 万月活听着吓人，但休闲类付费结构太薄，月流水才 72 万。是否追加买量，要先算"多买来的用户能不能覆盖获客成本"——休闲类人均付费这么低，盲目买量很可能买一个亏一个。</p>
+<div class="quote"><p>回到 🎯 开场题：甲 5000 万人 × 3 元和乙 50 万人 × 800 元，乙月流水 = 50万×800 = 4 亿，甲 = 5000万×3 = 1.5 亿——<strong>乙这个"小不点"反而赚得多</strong>。同事错在只看了人数那一列。</p></div></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节仍是<strong>认知层</strong>：在第 1 节"行业特点"的地基上，给你一把"分类尺"。在"战略 / 战术 / 战斗"里属于<strong>战略（看方向）层</strong>——先会归类、会预判结构，第 3 节起的指标监控才知道"这一类该重点盯什么"。</p>
+</div></div>
+</section>
+<hr class="soft">
+<h2 style="color:var(--accent-deep);border-bottom:2px solid var(--line);padding-bottom:6px;margin-top:40px">指标主线（战术看大盘 → 战斗下钻）</h2>
+<section class="sec" id="sec-3">
+<div class="sec-h"><h2>第 3 节　常规监控：拉新 / 活跃 / 留存 / 付费</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战术 · 主线指标</span><button class="done-btn" data-done="3">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你刚接手一款大型 RPG 手游的数据，拉出留存表，看到<strong>7 日留存只有 5%</strong>。隔壁做电商的同事路过瞄了一眼："5%？这游戏要凉了吧，100 个人一周走 95 个。"</p>
+<p>先别慌——<strong>5% 的 7 日留存，对这款游戏一定是灾难吗？你该怎么判断它正不正常？</strong> 想 1 分钟。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q3" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>用"拉新 / 活跃 / 留存 / 付费"这套通用结果指标先定位问题，再决定深挖哪里</strong>——这套指标和普通 App 通用，有 App 分析经验就能上手。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：游戏主流程 ⇄ AARRR（中间通用，两侧才是游戏特色）</p>
+<pre>下载→注册→登录 →(玩游戏:各异)→ 充值→消耗
+对应：  拉新   ───  活跃/留存 ───  付费
+关键指标：拉新看 ROI回正/LTV/CAC；活跃看 DAU/PCU/ACU；留存看次/3/7/30日；付费=活跃×付费率×ARPU</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：游戏 ROI 会"持续爬升"，电商不会</p>
+<p>电商小黄车挂出来，用户买或不买，这一单就过去了——一锤子买卖。但游戏用户注册进来后，第一天付、第二天付、第三天付……同一批用户的 ROI 会<strong>越爬越高</strong>。</p>
+<div class="quote"><p>这点醒本节核心：游戏的指标要放到<strong>时间维度</strong>上看。一批用户今天 ROI 还没回正，别急着判死刑——它可能 30 天、60 天后才慢慢爬正。拿电商"当天算账"的思路套游戏，必然误判。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q3"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>案例：X 渠道</strong>某日投放 <strong>10 万元</strong>买量，回收数据如下（ROI = 累计回收 ÷ 投放成本）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>时点</th><th>累计回收</th><th>ROI</th><th>回正了吗</th></tr></thead><tbody><tr><td>首日</td><td>2 万</td><td>2÷10 = <strong>20%</strong></td><td>否</td></tr><tr><td>30 日</td><td>9 万</td><td>9÷10 = <strong>90%</strong></td><td>否（还差一口气）</td></tr><tr><td>60 日</td><td>12 万</td><td>12÷10 = <strong>120%</strong></td><td>✅ 回正且盈利</td></tr></tbody></table></div>
+<p><strong>读法</strong>：30 日看还亏（90%），按电商思路可能就把这渠道砍了；但游戏 ROI 会爬，到 60 日做到 120%——<strong>这是个好渠道</strong>。所以游戏评 ROI 必须放长看时间曲线。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：Y 渠道</strong>某日同样投 <strong>20 万元</strong>，60 日累计回收 <strong>16 万元</strong>。请你：①算 60 日 ROI；②回正了吗？③这个渠道该继续投还是该查问题？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo3" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 60 日 ROI = 16 ÷ 20 = <strong>80%</strong>。</p>
+<p>② <strong>没回正</strong>（只收回 80%，还亏 20%）。</p>
+<p>③ 都过了 60 天还没回正，说明这批拉新有问题（参照 ✍️ 的 X 渠道 60 日已 120%）。该去查：Y 这天用的什么素材、从哪个细分渠道进来的、是不是安卓某版本留存崩了——<strong>先定位再决定换不换素材/砍不砍渠道</strong>。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>游戏主线数据 4 步体检：</p><ol><li><strong>拉新看回正</strong>：算每批 ROI 曲线，60 天还没回正的批次回查素材/渠道；</li><li><strong>活跃看均衡</strong>：PCU/ACU 差距别太大（集中登录=服务器贵、难付费）；</li><li><strong>留存看同类</strong>：别用绝对值判生死，和同类型/历史批次纵向比；</li><li><strong>付费拆三项</strong>：付费 = 活跃 × 付费率 × 人均付费，哪项掉了挖哪项。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>拿单个留存率绝对值判生死——<span class="warn-x">大型/卡牌/RPG 留存 5% 可能很正常；</span></li><li>像电商一样只看当天 ROI——<span class="warn-x">游戏 ROI 随持续付费而爬升，要放长看；</span></li><li>只看总量不拆维度——<span class="warn-x">总 ROI 还行可能掩盖某个垃圾渠道在拖后腿。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>一款 RPG 手游，三个渠道某批用户数据：</p>
+<div class="tbl-scroll"><table><thead><tr><th>渠道</th><th>次日留存</th><th>7日留存</th><th>60日 ROI</th></tr></thead><tbody><tr><td>X</td><td>40%</td><td>8%</td><td>150%</td></tr><tr><td>Y</td><td>42%</td><td>9%</td><td>130%</td></tr><tr><td>Z</td><td>25%</td><td>3%</td><td>50%</td></tr></tbody></table></div>
+<p>老板看到"7 日留存全都只有个位数"，要求三个渠道一起停掉。问：①7 日留存 8%、9% 对 RPG 是不是一定有问题？②真正该停的是哪个渠道、依据是什么？③你会怎么劝老板别"一刀切"？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice3" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① <strong>不一定</strong>。RPG 类大量玩家会被淘汰，7 日留存 8%–9% 属正常区间——关键要<strong>做横向/同类对比</strong>，而不是看绝对值。X、Y 的留存和 ROI 都健康。</p>
+<p>② 该停的是 <strong>Z</strong>：次留 25%（明显低于 X/Y 的 40%+）、7 日留存 3%（不到一半）、60 日 ROI 仅 50%（远没回正）。Z 是垃圾流量。</p>
+<p>③ 劝法：把三个渠道<strong>横向摆一起对比</strong>——X、Y 留存虽是个位数但 ROI 已经 130%–150% 盈利，是好渠道；只有 Z 三项全差。一刀切会把赚钱的 X、Y 也误杀。<strong>该砍的是 Z，不是"个位数留存"。</strong></p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是<strong>战术层</strong>的主干：把"拉新→活跃→留存→付费"这条通用主线立起来。它是结果指标层——能告诉你"哪坏了"，但"为什么坏"要靠第 4 节的特色过程指标。挂在"看大盘 / 定位问题"这一环。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-4">
+<div class="sec-h"><h2>第 4 节　特色监控：玩法参与 / 付费点</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战斗 · 过程归因</span><button class="done-btn" data-done="4">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你管一款卡牌手游，运营慌慌张张跑来："这周付费掉了 20%！是不是抽卡概率被人骂了？还是 PVP 不平衡？要不要赶紧出新卡？"</p>
+<p>先别跟着他乱翻——<strong>付费一掉，你第一步该去看哪个指标，而不是上来就猜原因？</strong> 想 1 分钟。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q4" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>付费掉了，先看"钻石（核心资源）存量"做分叉诊断</strong>——存量高 = 没东西可买（让他花掉）；存量低 = 查是饱和还是卡关。所有玩法指标都不能单独看，必须挂着付费这条主线。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：卡牌循环 + "付费主线"诊断</p>
+<pre>抽卡→组队→[推图/爬塔/PK]→奖励→升级→(回到抽卡)
+付费点：痛点(卡关/排名低) + 痒点(强卡/皮肤/角色)
+诊断主线：付费掉了 → 看钻石存量
+   存量高 → 没消耗点 → 直接刺激(上新皮肤抽)/间接刺激(比赛/合服)
+   存量低 → 饱和(等级装备满→上新内容) or 卡关(某环节卡死→上折扣道具)</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：一切为充值服务</p>
+<p>讲师说：有同学听完这节"除了'充值'俩字别的啥都没记住"——那就对了。中国的游戏运营，进了公司就知道一切为充值服务。</p>
+<div class="quote"><p>这点醒本节核心：<strong>单看任何玩法指标都没意义</strong>（"这个阵容出场很多"说明不了啥）。只有把每个过程指标都挂到"付不付费"上，它才有诊断价值。付费好就别动，付费掉了再回查卡在哪。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q4"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p class="blk">案例：某卡牌游戏本周经济数据</p>
+<div class="tbl-scroll"><table><thead><tr><th>项</th><th>数值</th></tr></thead><tbody><tr><td>玩家本周获得钻石</td><td>1000 万</td></tr><tr><td>玩家本周消耗钻石</td><td>600 万</td></tr><tr><td>本周钻石净增（存量变化）</td><td>1000 − 600 = <strong>+400 万</strong></td></tr></tbody></table></div>
+<p><strong>读法</strong>：存量在<strong>净增 400 万</strong>——大量钻石攒在玩家手里花不出去。这说明<strong>没有足够的消耗点</strong>：玩家拿着资源却没想买的东西，自然没动力充钱。</p>
+<p class="blk">处方（存量高 → 让他花掉）</p>
+<ul><li>直接刺激：上一款新 SSR 皮肤/强卡，让玩家花钻石抽，把存量逼出去；</li><li>间接刺激：办一场 PK 大赛或合服，制造"打不过/掉名次"的紧迫感，逼着消耗。</li></ul>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：另一款卡牌游戏本周数据</strong>——获得钻石 800 万、消耗 750 万，但付费同样在下滑。请你：①算本周钻石净增；②存量是高还是低？③该走"让他花掉"还是"查饱和/卡关"路线？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo4" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 净增 = 800 − 750 = <strong>+50 万</strong>（基本花光了）。</p>
+<p>② 存量<strong>低</strong>——玩家拿到的钻石几乎都消耗掉了，不是"攒着没处花"。</p>
+<p>③ 走<strong>"查饱和 / 卡关"路线</strong>：钻石都花了、付费却还掉，说明问题不在"没东西买"。要去查——是<strong>饱和</strong>（主力卡都满级、装备齐了，没新东西可追，该上新内容/新卡），还是<strong>卡关</strong>（某关卡/某 PVP 段位卡死了大批人，该上限时折扣道具让他先过、再收口）。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>付费下滑时的过程指标诊断 5 步：</p><ol><li><strong>先确认是付费问题</strong>：付费率掉了还是人均付费掉了；</li><li><strong>看钻石存量分叉</strong>：高 → "让他花掉"；低 → "查饱和/卡关"；</li><li><strong>存量高就造消耗</strong>：上新皮肤（直接）或办比赛/合服（间接）；</li><li><strong>存量低就辨原因</strong>：等级/装备满级 = 饱和（上新内容）；某环节卡人 = 卡关（上折扣道具）；</li><li><strong>所有动作回看付费</strong>：调整后盯付费有没有回升，没回升就换假设。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>付费一掉就猜原因/乱出新卡——<span class="warn-x">先看钻石存量再分叉，别拍脑袋；</span></li><li>单独解读某个玩法指标——<span class="warn-x">必须挂着付费看；</span></li><li>让玩家免费玩太爽——<span class="warn-x">通关太轻松、奖励太多，他就没动力充钱。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>一款卡牌游戏付费连降两周。你拉到数据：本周钻石获得 900 万、消耗 880 万（净增仅 20 万）；爬塔玩法在"第 45 层"参与人数从上一层的 3 万骤降到 6000；高战力玩家的主力卡基本都满级了。</p>
+<p>问：①钻石存量是高还是低？该走哪条诊断路线？②数据里同时出现"45 层骤降"和"主力卡满级"两个线索，分别指向"卡关"还是"饱和"？③如果你只能先出一个动作，你会先救哪一类玩家、用什么手段？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice4" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 净增仅 20 万（900−880），存量<strong>低</strong>——走<strong>"查饱和/卡关"</strong>路线（不是"让他花掉"）。</p>
+<p>② 两个线索分别指向两类问题：</p>
+<ul><li>"第 45 层参与从 3 万→6000"= 典型<strong>卡关</strong>（一个明显的卡人阶梯，大批玩家卡在 45 层过不去）；</li><li>"高战玩家主力卡满级"= 典型<strong>饱和</strong>（头部玩家没东西可追了）。</li></ul>
+<p>③ 分层下药：</p>
+<ul><li>对<strong>卡在 45 层的大众玩家</strong>：上一个限时折扣的过关道具/活动，让他们先爽过这关，想继续爽就充钱（救活跃 + 付费）；</li><li>对<strong>已饱和的高战玩家</strong>：上新卡/新副本/新 PVP 赛季，给他们新的追求点。</li></ul>
+<p>陷阱：这份数据"两病并存"，只处理一个会漏掉另一拨人。先救哪类看你的付费大头来自哪——通常大众卡关影响活跃面更广，可先动它。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是<strong>战斗层</strong>（最细颗粒度）：处理"游戏内部、玩家具体卡在哪"的过程指标。它是第 3 节结果指标的"下钻层"——第 3 节告诉你"付费掉了"，本节告诉你"卡在抽卡/爬塔/PVP 的哪一环"。挂在"过程归因 / 动手处方"这一环。</p>
+</div></div>
+</section>
+<hr class="soft">
+<h2 style="color:var(--accent-deep);border-bottom:2px solid var(--line);padding-bottom:6px;margin-top:40px">阶段 × 专题（战术 / 战斗）</h2>
+<section class="sec" id="sec-5">
+<div class="sec-h"><h2>第 5 节　特色监控：从立项到公测，各阶段关注重点</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战略+战术 · 阶段决策</span><button class="done-btn" data-done="5">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你们公司自研的一款新游内测两周，数据出来：核心指标比同类略差一截，但美术口碑爆棚、玩家都说"好看"。项目组吵翻天——美术派喊"这么好看赶紧上线"，数据派喊"指标不行赶紧砍"。</p>
+<p>老板把你叫去："你说，<strong>这游戏该砍还是该救？凭什么？</strong>" 先别急着站队，想 1 分钟：你需要哪些信息才能下判断？</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q5" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>在"内测"这一关设红线，决定一款游戏该砍、该调、还是该上</strong>——内测是真实数据第一次回流的阶段，看留存和付费渗透，对照同类基准做"砍/调/上"的决策。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：四阶段 + 数据何时回流</p>
+<pre>立项 → 内测 → 公测 → 上线
+│      │       └ 现已≈上线：不删档、开始宣传上量
+│      └ 删档测试：测体验/bug + 留存/付费渗透 →【设红线，不行就砍】
+└ 最重要=预算(算钱)
+数据回流：早期靠市场调查+行业数据；公测后系统数据才大量回来</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：王者荣耀靠三处调整逆袭全民超神</p>
+<p>王者荣耀（前身霸三国→英雄战迹）和全民超神在腾讯内部"赛马"。全民超神先上、有热度，却被反超出局，靠的是三处调整：<strong>①产品功能</strong>——发现手机玩家其实爱复杂、爱社交，赶紧加回天赋装备+加好友；<strong>②氪金力度</strong>——王者荣耀因内测差点被砍，反而极克制、除皮肤几乎不卖战力，"大家都能公平玩"反而胜出；<strong>③运营思路</strong>——坚决做 DAU 靠量取胜。</p>
+<div class="quote"><p>这点醒本节核心：<strong>同样的立项想法、相似的玩法，成败落在内测后的几处关键调整</strong>。所以内测数据差不一定要砍——要判断"是产品功能、氪金、还是运营哪里能救"。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q5"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p class="blk">案例：自研游戏 A，内测两周数据 vs 同类基准</p>
+<div class="tbl-scroll"><table><thead><tr><th>指标</th><th>A 内测</th><th>同类基准</th><th>差距</th></tr></thead><tbody><tr><td>次日留存</td><td>35%</td><td>45%</td><td>略低（接近）</td></tr><tr><td>7 日留存</td><td>偏低</td><td>—</td><td>略低</td></tr><tr><td>付费渗透率</td><td>3%</td><td>8%</td><td><strong>明显偏低</strong></td></tr><tr><td>玩家定性反馈</td><td>"好看，但没什么想充钱的点"</td><td>—</td><td>—</td></tr></tbody></table></div>
+<p class="blk">决策推演</p>
+<ol><li><strong>该砍吗？</strong> 留存只是"略低、接近基准"，产品底子（美术）还很强——<strong>不该一砍了之</strong>；</li><li><strong>问题在哪？</strong> 致命项是<strong>付费渗透 3%（远低于 8%）</strong>，且玩家自己说"没想充钱的点"——指向<strong>氪金力度</strong>这一处；</li><li><strong>优先动哪处？</strong> 先动<strong>氪金/付费点设计</strong>（加合理的付费钩子，但别破坏体验），而不是动产品功能或重做美术。</li></ol>
+<p><strong>结论</strong>：调，不砍；优先补付费点。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：自研游戏 B，内测数据</strong>——次日留存 20%（同类 45%）、玩家反馈集中在"新手引导太绕、前 5 分钟操作卡顿、不知道干嘛"。请你判断：①B 该砍、该调、还是该上？②如果救，优先动"产品功能 / 氪金 / 运营"哪一处？③为什么和 A 的处方不一样？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo5" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 次留 20% vs 同类 45%——<strong>腰斩级差距</strong>，比 A 严重得多。先<strong>调、限期看效果，调不动就砍</strong>（别像 A 那样轻松判"救"）。</p>
+<p>② 优先动<strong>产品功能 / 新手引导</strong>：玩家反馈全集中在"引导绕、开局卡顿、不知道干嘛"——这是产品体验问题，直接压垮了次日留存。先把新手前 5 分钟的引导和流畅度修好。</p>
+<p>③ 和 A 不一样的原因：<strong>A 的病在"付费"（留存还行、就是不充钱）→ 动氪金</strong>；<strong>B 的病在"留存"（人进来就走）→ 动产品功能</strong>。先看哪个结果指标崩了，再决定动三处里的哪一处——这正是王者荣耀"对症调整"的思路。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>给一个新项目做"阶段化"决策 4 步：</p><ol><li><strong>立项先算账</strong>：流水→分账→扣成本→净利，算不过来别立项；</li><li><strong>查行业撞车</strong>：目标题材有没有大厂在做，撞车就比宣传费/玩法；</li><li><strong>内测设红线</strong>：盯留存 + 付费渗透，定"达不到就砍"的线；</li><li><strong>对症调三处</strong>：留存崩→动产品功能；付费崩→动氪金；大盘小→靠运营做量。公测后用真实数据修正立项模型。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>内测数据略差就一砍了之——<span class="warn-x">先分清崩的是留存还是付费，对症能救则救；</span></li><li>立项只凭热情不算账——<span class="warn-x">"赌立项"也要财务守现金流；</span></li><li>早期迷信系统数据——<span class="warn-x">这阶段几乎没数据，靠市场调查+行业数据+判断。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>自研游戏 C 内测数据：次日留存 <strong>44%</strong>（同类 45%，几乎持平）、7 日留存正常、付费渗透率 <strong>9%</strong>（同类 8%，还略高）、玩家口碑也不错。<strong>唯一的问题</strong>：研发已严重超期，预算烧掉了立项时的 1.8 倍，且现金流紧张；同时行业里两家大厂下个月要上同题材同玩法的竞品。</p>
+<p>问：①光看留存和付费，C 该不该上？②但综合"超期烧钱 + 大厂同题材撞车"，你的决策会变吗？③这道题想考你什么？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice5" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 光看<strong>产品数据</strong>：留存持平、付费还略高——C 是一款<strong>合格的产品</strong>，单看这两项该上。</p>
+<p>② <strong>决策要变（或至少高度警惕）</strong>：</p>
+<ul><li><strong>超期 1.8 倍 + 现金流紧张</strong>：财务红线亮了，王者荣耀那套"该砍就砍、守现金流"在这里适用——继续烧可能拖垮公司；</li><li><strong>大厂下月上同题材同玩法竞品</strong>：第 5 节强调"行业数据非常重要"——就算你玩法过关，<strong>宣传费拼不过大厂</strong>，正面撞车大概率打不过。</li></ul>
+<p>综合：产品本身没问题，但<strong>外部（撞车）+ 财务（超期烧钱）两个非产品因素</strong>可能让它"生不逢时"。要么抢在大厂前赶紧上、要么调整题材差异化、要么及时止损——不能只盯留存付费就拍板上线。</p>
+<p>③ 这道题考的是<strong>"别只看产品数据"</strong>：内测决策不只是留存/付费，还要叠加<strong>行业撞车</strong>和<strong>财务现金流</strong>两把尺子。陷阱就是前两项数据太漂亮，容易让你忽略后面致命的外部条件。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节横跨<strong>战略（立项算账、行业撞车）+ 战术（内测设红线、对症调整）</strong>：它把前面几节的指标"按时间轴"组织起来，是连接"立项决策"和"上线运营"的枢纽。挂在"阶段决策 / 何时看什么"这一环。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-6">
+<div class="sec-h"><h2>第 6 节　研发专题：项目投资回报测算</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战略 · 立项测算</span><button class="done-btn" data-done="6">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>老板兴冲冲拿来一款海外手游，想签国内代理："这游戏在国外火爆，月流水能做 1000 万！代理它稳赚。" 你翻了翻合同：对方（开发方）要分流水的 <strong>40%</strong>，渠道还要再分 <strong>35%</strong>。</p>
+<p>先别被"月流水 1000 万"晃花眼——<strong>渠道和开发方先分走 75%，剩给你的够不够付运营成本？这单代理到底赚不赚？</strong> 想 1 分钟。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q6" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>用利润测算公式，从"流水"一路算到"净利"，判断一个项目值不值得做</strong>——流水不是你的钱，分账、税、投放、服务器、人力全扣完，剩下才是净利。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：利润测算公式</p>
+<pre>活跃用户 × 付费率 × ARPU = 流水（不是收入！）
+流水 − 渠道/代理分账 − 研发分成 − 税 − 投放 − 服务器 − 人力杂费 = 净利润
+自研：不分研发成、但要分渠道；代理：省研发、但要分给开发方</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：腾讯的"狠"=及时止损</p>
+<p>游戏立项业内俗称"赌立项"，基本靠赌。但腾讯赚钱多，靠的是<strong>进度把控狠、内测不过就砍项目</strong>——绝不让一个项目没做完就把现金流烧光。黑神话研发六七年、一百多人，光工资就是天文数字，进度一拖成本就爆。</p>
+<div class="quote"><p>这点醒本节核心：测算的价值不是算出"一定赚"，而是<strong>让这场赌尽量不输光</strong>——算清回本周期、设好止损线，财务才能守住现金流。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q6"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p class="blk">案例：一款自研手游的投资测算</p>
+<p>预计：月活 50 万、付费率 4%、月 ARPU(注：此处按月人均付费口径) 300 元；渠道分 30%；每月运营成本 = 投放 150 万 + 服务器 30 万 + 人力 80 万；研发投入 = 开发 10 个月 × 人力 80 万/月 + 外包 200 万。</p>
+<p class="blk">第一步：算月流水</p>
+<ul><li>月付费人数 = 50万 × 4% = <strong>2 万人</strong></li><li>月流水 = 2万 × 300 = <strong>600 万元</strong></li></ul>
+<p class="blk">第二步：算月净利</p>
+<ul><li>扣渠道 30%：600 × 30% = 180 万 → 到手 600 − 180 = <strong>420 万</strong></li><li>扣运营成本：150 + 30 + 80 = <strong>260 万</strong></li><li>月净利 = 420 − 260 = <strong>160 万元</strong></li></ul>
+<p class="blk">第三步：算回本周期</p>
+<ul><li>研发一次性投入 = 10 × 80 + 200 = <strong>1000 万元</strong></li><li>回本周期 = 1000 ÷ 160 ≈ <strong>6.25 个月</strong></li></ul>
+<p><strong>结论</strong>：月赚 160 万、约 6.25 个月回本——值得做（前提是月活/付费率/ARPU 这几个估值在内测能兑现）。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p>回到 🎯 那单代理：月流水 <strong>1000 万</strong>，渠道分 35%、开发方分 40%，剩下归你（发行）；你每月运营成本 = 投放 200 万 + 服务器 40 万 + 人力 60 万。请你：①算渠道、开发方各分多少、你的发行份额是多少；②扣完运营，你这单月净利是多少；③该签吗？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo6" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 分账：</p>
+<ul><li>渠道 = 1000 × 35% = <strong>350 万</strong></li><li>开发方 = 1000 × 40% = <strong>400 万</strong></li><li>你的发行份额 = 1000 − 350 − 400 = <strong>250 万</strong></li></ul>
+<p>② 扣运营：运营成本 = 200 + 40 + 60 = <strong>300 万</strong>；月净利 = 250 − 300 = <strong>−50 万</strong>（亏损！）</p>
+<p>③ <strong>不该签</strong>（至少不能按这个分润签）。流水 1000 万听着大，但渠道+开发方先拿走 75%，你只剩 250 万，还不够付 300 万运营成本，每月倒亏 50 万。要签就得<strong>压低开发方的 40%、或砍运营（尤其投放 200 万）成本</strong>，否则"月流水 1000 万"就是个赔本买卖。</p>
+<div class="quote"><p>对比 ✍️ 的自研（月赚 160 万）和这单代理（月亏 50 万）——<strong>同样的测算公式，分润结构一变，赚钱变赔钱</strong>。这就是"先算账再立项"的意义。</p></div></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>给一个游戏项目算"值不值得做"5 步：</p><ol><li><strong>估三个量</strong>：参考同行/历史，估活跃、付费率、ARPU；</li><li><strong>算流水</strong>：活跃 × 付费率 × ARPU；</li><li><strong>逐层扣</strong>：流水 − 分账 − 税 − 投放 − 服务器 − 人力 = 净利；</li><li><strong>算回本</strong>：研发一次性投入 ÷ 月净利 = 回本月数；</li><li><strong>定身份</strong>：自研不分研发成、代理省研发但要分开发方，结构不同结果天差地别。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>把"流水"当净利——<span class="warn-x">分账+成本扣完才是净利；</span></li><li>被高流水晃花眼——<span class="warn-x">分润结构苛刻时，高流水也能亏钱；</span></li><li>不算回本周期/不设止损线——<span class="warn-x">"赌立项"也要守现金流。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>某发行公司测算一款代理游戏，给老板的汇报是："月流水 800 万，净赚 800 万，半年就回本！" 你接手细看，扒出真实条件：渠道分 30%、开发方分 35%；公司自己每月运营成本（投放+服务器+人力）合计 180 万；代理签约金（一次性）900 万。</p>
+<p>问：①汇报里"月流水 800 万 = 月净赚 800 万"错在哪？②请你重算真实的月净利。③按你的净利，回本要几个月？和"半年回本"差多少？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice6" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 错在<strong>把流水当净利</strong>——流水 800 万里，渠道和开发方先分走了一大半，根本不是公司净赚的钱。</p>
+<p>② 重算月净利：</p>
+<ul><li>渠道分 30% = 800 × 30% = 240 万；开发方分 35% = 800 × 35% = 280 万</li><li>你的发行份额 = 800 − 240 − 280 = <strong>280 万</strong></li><li>扣运营 180 万：月净利 = 280 − 180 = <strong>100 万元</strong></li></ul>
+<p>③ 回本周期 = 签约金 900 ÷ 月净利 100 = <strong>9 个月</strong>。和汇报里"半年（6 个月）回本"差了整整 3 个月——而且这还没算税。</p>
+<p>陷阱：①"流水=净赚"是最常见的坑；②回本要拿"一次性投入÷月净利"，不是拿流水去除。把流水当净利，会让一个 9 个月回本的项目看起来像半年回本，决策就被带偏了。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是<strong>战略层</strong>的"算账"环节：发生在立项阶段，决定"做不做、投多少、几个月回本"。它和第 5 节的"阶段决策"是一对——第 5 节判断"该不该上/调"，本节回答"值不值得投钱"。挂在"立项决策 / 投资测算"这一环。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-7">
+<div class="sec-h"><h2>第 7 节　渠道专题：推广与新用户留存</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战斗 · 获客执行</span><button class="done-btn" data-done="7">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>市场部兴奋地汇报："A 渠道单个获客成本只要 5 块钱，全渠道最低！我们把预算全砸 A 吧！" 你拉了一眼后续数据，A 渠道进来的用户<strong>次日留存只有别家的一半、30 天几乎没人付费</strong>。</p>
+<p>先别批预算——<strong>获客成本最低的渠道，就是最值得加码的渠道吗？只看"买进来多便宜"够不够？</strong> 想 1 分钟。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q7" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>投放别只看获客成本，要顺着"成本 → ROI → 留存 → 付费漏斗"一路看到底</strong>——便宜买进来、却留不住不付费的渠道，是在烧钱。数据管结果，反向建议业务调整。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：进来之后的漏斗</p>
+<pre>投放(成本/各渠道ROI) → 新增 → 新手引导漏斗(逐步转化) → 留存曲线 → 付费漏斗(多路径)
+评 ROI 三招：拿老游戏60日ROI参考 / 7日低于阈值即停 / Excel趋势线拟合60日收益</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：抖音一天给你推三百条素材</p>
+<p>最疯狂时，一款游戏（征途怀旧版）上线，一天之内给一个人推了两三百条素材，刷两条视频就推一个。你只要刷到一条游戏素材点个收藏，憨憨的推荐算法立刻给你推十条同款——方便你"抄作业"。</p>
+<div class="quote"><p>这点醒本节核心：游戏投放是<strong>素材的海量战争</strong>，本质是个"拿钱喂、靠经验筛"的业务动作，平台还是黑箱。数据分析能做的，是回收结果（哪条素材/哪个渠道的留存付费好），反向告诉业务"该停哪个、该放量哪个"。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q7"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>案例：某游戏新手引导漏斗</strong>（看哪一步流失最多）</p>
+<div class="tbl-scroll"><table><thead><tr><th>步骤</th><th>人数</th><th>转化率（相对上一步）</th></tr></thead><tbody><tr><td>进入游戏</td><td>10000</td><td>—</td></tr><tr><td>完成首次抽卡</td><td>6000</td><td>6000÷10000 = <strong>60%</strong></td></tr><tr><td>完成组队</td><td>5400</td><td>5400÷6000 = <strong>90%</strong></td></tr><tr><td>打赢首胜</td><td>4860</td><td>4860÷5400 = <strong>90%</strong></td></tr></tbody></table></div>
+<p><strong>读法</strong>：组队、首胜两步转化都有 90%，很健康；<strong>最大的漏在"进入→首次抽卡"这一步，掉了 40%</strong>。说明新手一进来、还没抽到第一张卡就走了一大批——可能是抽卡引导太绕、或开场加载/操作卡顿。</p>
+<p><strong>动作</strong>：优先优化"进入 → 首次抽卡"这一步（简化引导、加速开场体验），把这 60% 往上拉，整条漏斗的留存都会受益。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：另一款游戏的付费漏斗</strong>（首充路径）</p>
+<div class="tbl-scroll"><table><thead><tr><th>步骤</th><th>人数</th></tr></thead><tbody><tr><td>打开充值页</td><td>8000</td></tr><tr><td>选择首充礼包</td><td>5000</td></tr><tr><td>完成支付</td><td>1500</td></tr></tbody></table></div>
+<p>请你：①算"打开→选礼包""选礼包→支付"两步的转化率；②哪一步是最大卡点？③你会先去查/改什么？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo7" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo7"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 转化率：</p>
+<ul><li>打开 → 选礼包 = 5000 ÷ 8000 = <strong>62.5%</strong></li><li>选礼包 → 支付 = 1500 ÷ 5000 = <strong>30%</strong></li></ul>
+<p>② 最大卡点是<strong>"选礼包 → 完成支付"</strong>（只剩 30%，掉了 70%）——大量玩家选好了礼包却没付钱。</p>
+<p>③ 优先查这一步：是支付方式太少/不顺？价格临门一脚太贵？还是有什么提示吓退了用户？相比之下"打开→选礼包"62.5% 还算正常，先集中火力修"支付"这步的体验/价格。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>投放数据监控与优化 4 步：</p><ol><li><strong>先看成本</strong>：每日买量成本 + 各平台分布；</li><li><strong>再看 ROI</strong>：分渠道看回正（老游戏参考 / 阈值即停 / 趋势线预测）；</li><li><strong>留存做漏斗</strong>：新手引导逐步转化，砍冗余步骤、修卡住环节，差渠道直接换；</li><li><strong>付费做漏斗</strong>：多条充值路径分别看转化，定位卡点改体验。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>只看获客成本低就加码——<span class="warn-x">留存差的便宜渠道是在烧钱；</span></li><li>像电商一样只看当天 ROI——<span class="warn-x">游戏 ROI 会随时间爬升，要放长看；</span></li><li>漏斗只看总转化——<span class="warn-x">要逐步拆，找出掉得最多的那一步。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>三个渠道某批用户数据：</p>
+<div class="tbl-scroll"><table><thead><tr><th>渠道</th><th>单个获客成本</th><th>次日留存</th><th>60日 ROI</th></tr></thead><tbody><tr><td>A</td><td>5 元</td><td>18%</td><td>60%</td></tr><tr><td>B</td><td>12 元</td><td>40%</td><td>145%</td></tr><tr><td>C</td><td>9 元</td><td>38%</td><td>130%</td></tr></tbody></table></div>
+<p>市场部说："A 最便宜（5 元），预算应该向 A 倾斜。" 问：①只看获客成本，该选谁？综合看呢？②A 的问题是什么？③你给市场部的建议是？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice7" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice7"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 只看获客成本：A 最便宜（5 元）。但<strong>综合看，B、C 才是好渠道</strong>——B、C 次日留存 38%–40%、60 日 ROI 都已回正盈利（130%–145%）；A 虽便宜，但次留只有 18%（不到 B/C 的一半）、60 日 ROI 才 60%（远没回正）。</p>
+<p>② A 的问题：<strong>买得便宜，却留不住、不回本</strong>——典型的垃圾/低质流量。便宜是因为这批用户根本不精准，5 块钱买一个 60 天还亏 40% 的用户，越买越亏。</p>
+<p>③ 建议：<strong>预算向 B、C 倾斜，而不是 A</strong>。评渠道要看"进来之后的留存和 ROI"，不是看"买进来多便宜"。A 要么换素材/定向重测、要么直接砍。</p>
+<p>陷阱：获客成本低 ≠ 划算。这道题就是 🎯 开场的延续——便宜的 A 恰恰是最该警惕的。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是<strong>战斗层</strong>（执行端）：处理"怎么把用户买进来、并让他留下付费"。它衔接第 3 节的拉新（ROI/留存）和第 4 节的付费（漏斗），是把"大盘指标"落到"投放与新手体验"的执行环节。挂在"获客执行 / 漏斗优化"这一环。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-8">
+<div class="sec-h"><h2>第 8 节　运营专题：运营活动与开服合服</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战术 · 运营撬动</span><button class="done-btn" data-done="8">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你做了个 7 天活动，复盘时发现：<strong>第 7 天的参与人数比第 1 天少了一大截</strong>。同事一看就下结论："衰减这么厉害，活动失败了。"</p>
+<p>先别认栽——<strong>"最后一天参与少"一定是问题吗？你得先知道这是个什么活动，才能判断它好不好。</strong> 想 1 分钟。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q8" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>看活动数据前，先定性它是"促活"还是"转化"</strong>——促活（拉留存/DAU）希望完成率越高越好；转化（拉付费）反而要把完成率压到约一半，才逼得出钱。定性错了，指标的好坏就看反了。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：活动两类 + 开合服</p>
+<pre>"产品不够，运营凑" → 高频做活动
+促活类(签到/新手七天/节日福利) → 目标 DAU/留存 → 完成率越高越好
+转化类(PK冲榜/王者争霸)        → 目标 付费    → 完成率压到约一半才有人掏钱
+开服(太慢会流失) / 合服(活跃跌到阈值就合，让大哥重新PK掏钱)</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：魔兽世界从不做活动，我们运营忙得跟狗</p>
+<p>2010 年腾讯大讲堂讲运营，一上来就灵魂拷问：当时世界上最受欢迎的魔兽世界<strong>从不做运营活动</strong>，可我们的运营为什么天天忙得跟狗、要搞各种活动？</p>
+<div class="quote"><p>答案点醒本节核心：<strong>产品力够强就不靠活动；产品不够，才"运营来凑"</strong>。所以做活动前先想清楚——我这个活动到底是来补"留存"还是补"付费"的，目的不同，指标的判读标准完全相反。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q8"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>案例：一个"7 日签到"活动</strong>（目的：提升新手留存）</p>
+<ul><li>第 1 天参与：5 万人</li><li>坚持完成全部 7 天：2 万人</li><li>完成率 = 2万 ÷ 5万 = <strong>40%</strong></li></ul>
+<p><strong>读法（先定性）</strong>：这是<strong>促活类</strong>活动（签到拉留存）。促活希望大家尽量都来、都完成——<strong>完成率越高越好</strong>。现在只有 40%，<strong>偏低</strong>：说明 7 天的奖励吸引力不够，玩家中途就懒得签了。</p>
+<p><strong>动作</strong>：加码——把第 7 天的大奖前置一部分到中段、或整体提高奖励力度，把完成率往上拉（促活就是要参与越多越好，但别送到没人充钱）。</p>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：一个"PK 冲榜"活动</strong>（目的：拉付费），配套卖战力礼包。数据：参与冲榜 8 万人，购买礼包 1.2 万人。请你：①算礼包的购买转化率；②这是促活还是转化活动？③转化率/完成率该追求"越高越好"吗？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo8" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo8"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 礼包购买转化率 = 1.2万 ÷ 8万 = <strong>15%</strong>。</p>
+<p>② 这是<strong>转化类</strong>活动（PK 冲榜 + 卖礼包，目的是拉付费）。</p>
+<p>③ <strong>不该一味追求越高越好</strong>。转化/付费类活动的逻辑是"得有人胜出、当老大的人才肯大把掏钱"——如果人人都能轻松登顶、人人都买得起，反而没人愿意为"赢"砸钱。所以 PK 类的<strong>完成率/达标率往往要故意压到约一半</strong>（接近一半人成、一半人不成），制造竞争紧张感，才逼得出付费。15% 买礼包是否合适，要结合付费总额看，但绝不是"转化率越高越成功"。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>做一个活动分析 4 步：</p><ol><li><strong>先定性</strong>：促活（要 DAU/留存）还是转化（要付费）？</li><li><strong>看结果</strong>：促活看 DAU/留存提升，转化看付费提升；</li><li><strong>看过程</strong>：参与、完成率、充值——促活完成率越高越好，转化压到约一半；</li><li><strong>调门槛</strong>：效果不够就提高/降低门槛或加刺激，AB test 验证，警惕送太多致饱和。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>不分促活/转化就看完成率高低——<span class="warn-x">两者的好坏标准相反；</span></li><li>免费送太多——<span class="warn-x">玩家饱和、付费意愿下降，反伤运营；</span></li><li>不写评估逻辑就开干——<span class="warn-x">细节指标太多，容易迷失。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>运营上线了一个"巅峰对决"活动：玩家充值买装备冲分、赛季末按排名发豪华奖励，目的是拉一波大额付费。复盘数据：参与 10 万人、达标（拿到奖励档）<strong>4.5 万人</strong>，达标率 45%；活动期付费额比平时涨了 60%。运营组长却皱眉："达标率才 45%，一多半人没拿到奖励，活动是不是设计失败了？要不要下次把门槛调低让大家都能达标？"</p>
+<p>问：①这是促活还是转化活动？②"达标率 45%"对这个活动是好是坏？③组长"把门槛调低让大家都达标"的建议对吗？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice8" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice8"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① <strong>转化类</strong>（充值冲分、拉大额付费），不是促活。</p>
+<p>② "达标率 45%"对转化活动是<strong>好事</strong>——接近一半人达标、一半人差一口气，正是"既有人尝到甜头、又有人想再充一把够上去"的理想竞争态。佐证是：活动期付费涨了 60%，目的达成了。</p>
+<p>③ 组长的建议<strong>错了</strong>。如果把门槛调低让人人都达标，就失去了"为了赢/为了排名再充一笔"的紧张感——大家轻松拿奖，反而没人愿意为冲分砸钱，付费会掉。转化活动<strong>不能用"让大家都满意"的促活思路去优化</strong>。</p>
+<p>陷阱：45% 这个数，用促活标准看是"才一半人完成、太低"，用转化标准看是"正合适"。组长就栽在没先给活动定性——这正是 🎯 开场"最后一天参与少 ≠ 失败"的同一个坑。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节是<strong>战术层</strong>：在产品改版慢的现实下，用高频运营活动撬动 DAU 和付费。它和第 4 节（玩法付费点）配合——第 4 节诊断"卡在哪、该不该刺激"，本节负责"用什么活动去刺激、怎么评估"。挂在"运营撬动 / 活动评估"这一环。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-9">
+<div class="sec-h"><h2>第 9 节　产品专题：用户画像与版本更新</h2><span class="badge-time">⏱ 预计时长：30–35 分钟</span><span class="badge-axis">战术+战斗 · 画像改版</span><button class="done-btn" data-done="9">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+<p>你的 RPG 手游上线了一个新版本。一周后看数据：玩家<strong>日均在线时长涨了 20%</strong>。产品经理乐开花："大家玩得更久了，版本成功！"可你翻到隔壁一栏——<strong>同期老玩家流失也涨了</strong>。</p>
+<p>先别一起庆祝——<strong>"在线时长变长"一定是好事吗？为什么时长涨了、人反而走得更多？</strong> 想 1 分钟。</p>
+<div class="ta-label">✍️ 先写下你的第一反应（先别看答案）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="q9" placeholder="换我，我会怎么判断…（待会儿回来对照）"></textarea>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body">
+<div class="quote"><p><strong>用户画像先按"付费 / 活跃"分层，再看细节；评估改版要列清"改了什么 X → 该影响哪个 Y"</strong>——不分层的画像（一堆性别年龄）什么都说明不了；不写 X→Y 的改版评估，涨跌都说不清是谁的功劳。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<p class="blk">框架：先分层 → 看细节；改版 X→Y</p>
+<pre>分层：付费(大/中/小R + 免费) × 活跃(高/低战力) → 每层定一个目标
+看细节：单维度指标(累计充值/生命周期/PVP胜率/在线时长)【必须结合付费/活跃】才有含义
+改版评估：列"改了什么X → 影响哪个Y"(包大小→推广; 新手流程→留存; 平衡性→职业分布/流失)</pre>
+<p class="blk">锚点故事（本节最该记住的一个）：魔兽世界"大灾变"自掘坟墓</p>
+<p>前作"巫妖王之怒"玩的人超多、付费和交易极旺，人人身上揣几十万金币。结果新版本叫"大灾变"——名字就不吉利——数值一开始冲得很高，但下降极快：太难了、打不下去，玩家跑光。</p>
+<div class="quote"><p>这点醒本节核心：<strong>版本更新能救命也能掘墓</strong>。判断一次改版别只看"数据涨没涨"，要先写清"改了什么 → 该影响哪个指标"，再看那个指标是不是真往好的方向走——否则你连"涨"是不是真受改版影响都说不清。</p></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+<div class="recall empty" data-recall="q9"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>案例：某 RPG 的用户分层</strong>（本月总流水 1000 万）</p>
+<div class="tbl-scroll"><table><thead><tr><th>层级</th><th>人数占比</th><th>贡献流水</th><th>占流水比</th></tr></thead><tbody><tr><td>大 R（充值 &gt;5000）</td><td>2%</td><td>600 万</td><td><strong>60%</strong></td></tr><tr><td>中 R</td><td>8%</td><td>300 万</td><td><strong>30%</strong></td></tr><tr><td>小 R + 免费</td><td>90%</td><td>100 万</td><td><strong>10%</strong></td></tr><tr><td>合计</td><td>100%</td><td>600+300+100 = <strong>1000 万</strong></td><td>100%</td></tr></tbody></table></div>
+<p><strong>读法</strong>：<strong>2% 的大 R 贡献了 60% 的流水</strong>——这款游戏的命脉攥在极少数鲸鱼用户手里。</p>
+<p class="blk">定目标（分层下药）</p>
+<ul><li>大 R（2% 贡献 60%）：<strong>最该盯</strong>——他们一旦流失或停充，流水立刻塌半边。要看他们有没有持续付费、是不是饱和了，及时上新内容/合服刺激；</li><li>中 R（8% 贡献 30%）：重点挽留+往上转化；</li><li>小 R+免费（90% 贡献 10%）：维持活跃、撑大盘和社交氛围即可，别在他们身上投入过多付费引导。</li></ul>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+<p><strong>案例：另一款 RPG 的分层</strong>（本月总流水 1000 万）——大 R 占人数 1%、贡献 500 万；中 R 占 5%、贡献 300 万；小 R+免费占 94%、贡献 200 万。请你：①验算流水合计；②这款游戏的付费集中度比 ✍️ 那款更高还是更低？③你最该死盯哪一层、为什么？</p>
+<div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="luo9" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开对答案 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="luo9"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 合计 = 500 + 300 + 200 = <strong>1000 万</strong> ✓；人数占比 1%+5%+94% = 100% ✓。</p>
+<p>② 付费集中度<strong>更高、更极端</strong>：这里 <strong>1% 的大 R 就贡献了 50% 流水</strong>（✍️ 那款是 2% 贡献 60%）。单个大 R 的份量更重——人数更少、贡献占比的"人均杠杆"更大。</p>
+<p>③ 最该死盯<strong>大 R 这 1%</strong>：他们人数极少但扛着一半流水，<strong>任何一个头部大 R 流失都是大事</strong>。要紧盯他们的持续付费、饱和度（卡牌/装备是否满级）、PVP 体验（胜率别太低也别太高），一有异动立刻用新内容/合服/专属活动稳住。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+<div class="methodcard"><h4>随身方法卡</h4><p>用户画像 + 改版评估 5 步：</p><ol><li><strong>先分层</strong>：按付费（大中小 R/免费）和活跃（高/低战力）切人群；</li><li><strong>每层定目标</strong>：大 R 保付费、中 R 挽留转化、不活跃清理；</li><li><strong>细节结合付费读</strong>：累计充值跟同行比、生命周期配饱和度、胜率别太高太低；</li><li><strong>改版先写因果</strong>：列"改了什么 X → 该影响哪个 Y"；</li><li><strong>测试→上线对照</strong>：上线后看那个 Y 是否向好，不向好就复盘假设。</li></ol></div>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+<p class="blk">3 条易错自查：</p>
+<ul class="check"><li>脱离结果指标堆画像（性别年龄一大堆）——<span class="warn-x">先分层、先定目标；</span></li><li>单看一个过程指标下结论——<span class="warn-x">在线时长、PVP 胜率都得连着付费/流失看；</span></li><li>改版只看"数据涨没涨"——<span class="warn-x">不写 X→Y，说不清是不是改版的功劳。</span></li></ul><p class="blk">自测（一份"糊"数据，含陷阱）：</p>
+<p>某 RPG 上线"新地图 + 新职业"大版本。数据：首周老玩家<strong>回流 +30%、付费 +25%</strong>，一片叫好；但<strong>第三周起</strong>：老玩家<strong>流失率升高</strong>、日均<strong>在线时长却变长</strong>、论坛大量帖子骂"新职业太强，其他职业根本没法玩"。</p>
+<p>问：①"在线时长变长 + 流失升高"同时出现，最可能是什么问题？②要验证"新职业过强逼走其他职业玩家"，你会看哪几个画像维度？③这次改版的"X→Y"哪里出了偏差、下一步怎么修？</p><div class="ta-label">✍️ 写下你的解答：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="zice9" placeholder="先想想陷阱在哪，再写完整步骤…"></textarea><details class="fold"><summary>👉 点开看解析 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="zice9"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① 最可能是两个问题叠加：</p>
+<ul><li><strong>"太肝"</strong>：在线时长变长不一定是好事——新地图内容堆太多、逼玩家长时间刷，体验变累，时长涨、人却被熬走（流失升高）；</li><li><strong>职业失衡</strong>：结合论坛反馈，新职业过强，玩其他职业的人打不过、体验崩，被逼流失。</li></ul>
+<p>② 验证"新职业过强"看这几个维度：</p>
+<ul><li><strong>职业分布</strong>：新职业占比是不是异常飙高、其他职业占比骤降；</li><li><strong>分职业的 PVP 胜率</strong>：新职业胜率是不是碾压、其他职业胜率塌方（胜率太高/太低都是问题）；</li><li><strong>流失用户的职业构成</strong>：流失的是不是集中在"非新职业"的玩家；</li><li>交叉<strong>付费</strong>：被逼走的里有没有中大 R（那就更危险）。</li></ul>
+<p>③ X→Y 偏差：这次改了两个 X——"新地图（内容量）"和"新职业（平衡性）"。</p>
+<ul><li>新地图 X → 本想拉"在线时长/留存"Y，结果内容过载变"肝"，把 Y 做反了；</li><li>新职业 X → 本想拉"回流/付费"Y，结果平衡性没调好，触发了"其他职业流失"这个没预料到的 Y。</li></ul>
+<p>修法：<strong>给新职业做数值削弱（平衡性补丁）</strong>恢复职业生态，<strong>给新地图减负</strong>（降低强制刷的肝度）。修完继续盯"职业分布回正、其他职业胜率回升、流失率回落"这几个 Y。</p>
+<p>陷阱：①"在线时长涨"被当成纯利好（其实可能是太肝）；②首周回流付费大涨的漂亮数据，掩盖了第三周才暴露的职业失衡——评改版要看够长的时间窗，别被首周冲高骗了（正是锚点里"大灾变"先冲高后跳水的同款坑）。</p></div></details>
+</div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+<p>本节横跨<strong>战术 + 战斗层</strong>：用户画像（分层诊断）偏战术，版本改版评估（X→Y）落到具体执行偏战斗。它是整门课的"收口"——把前面所有结果/过程指标，汇到"分层看人 + 评估改版"这两件最常落地的事上。挂在"画像诊断 / 改版评估"这一环。</p>
+</div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="capstone"><div class="sec-h"><h2>🎓 结课大实战：诊断《幻塔纪元》</h2></div>
+<div class="step-body"><div class="quote"><p>一个虚构但贴近真实的综合案例，把全册 9 节的方法串起来用一遍。先自己做，再展开看参考诊断。建议留 40–60 分钟。</p></div>
+<p class="blk">背景资料（故意"糊"，含噪声与陷阱）</p>
+<p>星澜游戏旗下卡牌 RPG 手游《幻塔纪元》，运营第 8 个月，数据如下（口径混杂，请自行甄别）：</p>
+<p class="blk">A. 大盘 / 财报</p>
+<ul><li>月活 80 万、付费率 6%、月人均付费（ARPU 口径）400 元</li><li>财报：研发费用率 7%、销售费用率 38%、毛利率 80%、净利率 6%</li><li>分账：渠道分走流水的 30%</li></ul>
+<p class="blk">B. 获客</p>
+<ul><li>主投的 D 渠道：单个获客成本 8 元、次日留存 35%、60 日 ROI 70%</li></ul>
+<p class="blk">C. 玩法 / 经济</p>
+<ul><li>本周钻石：玩家获得 1200 万、消耗 700 万</li></ul>
+<p class="blk">D. 用户分层（按贡献流水占比）</p>
+<ul><li>大 R（占人数 2%）→ 贡献 65% 流水</li><li>中 R（占人数 10%）→ 贡献 25% 流水</li><li>小 R + 免费（占人数 88%）→ 贡献 10% 流水</li></ul>
+<p class="blk">E. 运营 / 改版</p>
+<ul><li>上周做了个"7 日签到"活动：第 1 天参与 4 万人、完整签满 7 天 1.4 万人</li><li>刚上线"新地图 + 新职业"大版本：在线时长 +15%，但老玩家流失 +10%，论坛在骂"新职业太强"</li><li>财务给的每月运营成本（投放 + 服务器 + 人力）合计 900 万</li></ul>
+<p class="blk">任务（依次用到各节方法）</p>
+<ol><li><strong>【第 1 节·行业认知】</strong> 看财报的两个费用率和毛利/净利，判断《幻塔纪元》是"产品驱动"还是"买量驱动"？毛利 80% 却净利 6%，钱去哪了？</li><li><strong>【第 2 节·分类】</strong> 它是卡牌 RPG，按三类结构，它的流水主要该靠"量"还是靠"鲸鱼用户"？</li><li><strong>【第 3 节·主线指标 + 第 7 节·渠道】</strong> 算 D 渠道值不值得继续投；它的问题是什么？</li><li><strong>【第 4 节·玩法付费】</strong> 用钻石数据判断：若近期付费下滑，该走"让他花掉"还是"查饱和/卡关"？</li><li><strong>【第 6 节·投资测算】</strong> 已知月流水，扣渠道 30% 和每月运营 900 万，算这款游戏当前的月净利。</li><li><strong>【第 8 节·运营】</strong> "7 日签到"完成率多少？这个活动该判"好"还是"该加码"？</li><li><strong>【第 9 节·画像 + 改版】</strong> 该死盯哪一层用户？"新版本上线后在线时长涨、流失也涨"该怎么解读、怎么修？</li></ol></div>
+<div class="ta-label">✍️ 写下你对《幻塔纪元》的综合诊断（7 个任务依次作答）：<span class="saved-tag" data-tag>已存本地</span></div><textarea class="ta" data-save="cap1" placeholder="先把 7 个任务逐条写完，再点开参考诊断…"></textarea>
+<details class="fold"><summary>👉 点开看参考诊断 · 先写再对照</summary><div class="fold-in"><div class="recall empty" data-recall="cap1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p><strong>任务 1（行业认知）</strong>：研发费用率 7% vs 销售费用率 38%——<strong>销售≫研发 → 买量驱动</strong>。毛利 80% 却净利 6%，中间蒸发 74 个百分点，主要被<strong>销售费用（买量）</strong>吃掉了——典型买量型公司：账面毛利高、真到手薄。</p>
+<p><strong>任务 2（分类）</strong>：卡牌 RPG → 靠<strong>鲸鱼用户（大 R）</strong>，不是靠量。这和任务 7 的分层数据吻合（2% 大 R 贡献 65%）。</p>
+<p><strong>任务 3（渠道）</strong>：D 渠道获客成本 8 元看着不贵，但<strong>次日留存 35%、60 日 ROI 仅 70%（没回正）</strong>——过了 60 天还亏 30%，是<strong>该换素材/砍掉</strong>的问题渠道。别被"获客成本低"骗（第 7 节核心坑）。</p>
+<p><strong>任务 4（玩法付费）</strong>：本周钻石获得 1200 万、消耗 700 万，<strong>净增 +500 万 → 存量高</strong>。若付费下滑，走<strong>"让他花掉"</strong>路线：上新 SSR/皮肤（直接刺激）或办比赛/合服（间接刺激），把攒着的钻石逼出去。</p>
+<p class="blk">任务 5（投资测算）</p>
+<ul><li>月流水 = 80万 × 6% × 400 = <strong>1920 万元</strong></li><li>扣渠道 30%：1920 × 30% = 576 万 → 到手 1920 − 576 = <strong>1344 万</strong></li><li>扣运营 900 万：月净利 = 1344 − 900 = <strong>444 万元</strong>（赚钱，但注意销售费用率 38% 很高，买量一旦失效利润会快速变薄）。</li></ul>
+<p><strong>任务 6（运营）</strong>："7 日签到"完成率 = 1.4万 ÷ 4万 = <strong>35%</strong>。这是<strong>促活类</strong>活动（签到拉留存），促活希望完成率越高越好——35% <strong>偏低，该加码</strong>（提高奖励力度/前置大奖），别因"参与衰减"就判失败（第 8 节核心坑）。</p>
+<p class="blk">任务 7（画像 + 改版）</p>
+<ul><li><strong>死盯大 R</strong>：2% 的大 R 贡献 65% 流水，命脉在他们手里，要紧盯其持续付费与饱和度；</li><li><strong>新版本解读</strong>：在线时长 +15% 但流失 +10% + 论坛骂"新职业太强"——大概率是<strong>"太肝"+ 职业失衡</strong>叠加。看<strong>职业分布、分职业 PVP 胜率、流失用户的职业构成</strong>验证；</li><li><strong>修法</strong>：给新职业做<strong>平衡性削弱补丁</strong>、给新地图<strong>减负</strong>（降肝度），再盯"职业分布回正、其他职业胜率回升、流失率回落"。别被首周"回流+25% 付费"的漂亮数据骗了，要看够长的时间窗（魔兽"大灾变"先冲高后跳水同款坑）。</li></ul>
+<p><strong>一句话总诊断</strong>：《幻塔纪元》是一款<strong>买量驱动、靠大 R 撑流水</strong>的卡牌 RPG，当前月净利约 444 万但利润结构脆弱（高度依赖买量）；眼下三个抓手——①砍掉/重测亏损的 D 渠道、②把高存量钻石用活动逼成付费、③紧急修复新职业失衡止住老玩家流失，同时盯死那 2% 的大 R。</p></div></details>
+</section>
+</div></main></div>
+<script>
+(function(){
+  var LS = "hangye_game_pb_full_v1";   /* ← 改① 每份文件换唯一名，防不同页面串档 */
+  function load(){ try{ return JSON.parse(localStorage.getItem(LS)||"{}"); }catch(e){ return {}; } }
+  function save(d){ try{ localStorage.setItem(LS, JSON.stringify(d)); }catch(e){} }
+  var data = load();
+  document.querySelectorAll("textarea.ta").forEach(function(ta){
+    var key = ta.getAttribute("data-save");
+    if(data[key]) ta.value = data[key];
+    var tag = ta.parentElement.querySelector("[data-tag]") || (ta.previousElementSibling && ta.previousElementSibling.querySelector("[data-tag]"));
+    var timer;
+    ta.addEventListener("input", function(){
+      data[key] = ta.value; save(data); syncRecall(key, ta.value);
+      if(tag){ tag.classList.add("show"); clearTimeout(timer); timer=setTimeout(function(){ tag.classList.remove("show"); },1200); }
+    });
+  });
+  function syncRecall(key, val){
+    document.querySelectorAll('[data-recall="'+key+'"]').forEach(function(box){
+      var rc = box.querySelector(".rc");
+      if(val && val.trim()){ rc.textContent = val; box.classList.remove("empty"); }
+      else{ rc.textContent = "（你还没在上面写，写了这里会自动显示）"; box.classList.add("empty"); }
+    });
+  }
+  document.querySelectorAll("textarea.ta").forEach(function(ta){ syncRecall(ta.getAttribute("data-save"), ta.value); });
+  var doneSet = data.__done || {};
+  function refreshProgress(){
+    var n = Object.keys(doneSet).filter(function(k){return doneSet[k];}).length;
+    var p = document.getElementById("progress");
+    if(p) p.textContent = "已学 " + n + " / 9";   /* ← 改② 把 N 换成章节总数；不要进度就删本段 */
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){
+      var m = (a.getAttribute("href")||"").match(/^#sec-(.+)$/);
+      var ck = a.querySelector(".ck[data-ck]");
+      if(m && ck) ck.textContent = doneSet[m[1]] ? "✓" : "";
+    });
+  }
+  document.querySelectorAll(".done-btn").forEach(function(btn){
+    var id = btn.getAttribute("data-done");
+    if(doneSet[id]){ btn.classList.add("on"); btn.textContent="✓ 已学完"; }
+    btn.addEventListener("click", function(){
+      doneSet[id] = !doneSet[id];
+      btn.classList.toggle("on", doneSet[id]);
+      btn.textContent = doneSet[id] ? "✓ 已学完" : "标记学完";
+      data.__done = doneSet; save(data); refreshProgress();
+    });
+  });
+  refreshProgress();
+  var secs = [].slice.call(document.querySelectorAll("section.sec"));
+  var links = {};
+  document.querySelectorAll("nav.toc a[href]").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
+  function onScroll(){
+    var pos = window.scrollY + 90, cur = null;
+    secs.forEach(function(s){ if(s.offsetTop <= pos) cur = s.id; });
+    Object.keys(links).forEach(function(id){ links[id].classList.toggle("active", id===cur); });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  var toc=document.getElementById("toc"), scrim=document.getElementById("scrim");
+  if(toc&&scrim){
+    document.getElementById("burger").addEventListener("click", function(){ toc.classList.toggle("open"); scrim.classList.toggle("open"); });
+    scrim.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); });
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){ a.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); }); });
+  }
+})();
+</script>
+</body></html>

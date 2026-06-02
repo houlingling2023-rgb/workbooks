@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《详解·销售分析》学习训练册</title>
+<style>
+  :root{
+    --paper:#faf6ec; --paper-2:#f4eedf; --card:#fffdf7;
+    --ink:#322e28; --ink-soft:#6f675a; --ink-faint:#9a9384;
+    --accent:#1f7a6b; --accent-deep:#16584d; --accent-tint:#eaf2ef;
+    --warn:#c0392b; --line:#e6ddcb; --line-soft:#efe8d8;
+    --maxread:720px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;}
+
+  /* ===== 顶栏 ===== */
+  header.topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#f5efe0;
+    display:flex;align-items:center;gap:14px;padding:10px 18px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+  .topbar .burger{display:none;background:none;border:none;color:#f5efe0;font-size:22px;cursor:pointer;line-height:1;}
+  .topbar h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+  .topbar .spine{font-size:12.5px;color:#cfe3dd;border-left:1px solid #3c7c70;padding-left:14px;flex:1;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .topbar .progress{font-size:12.5px;background:#15504675;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+
+  /* ===== 布局 ===== */
+  .wrap{display:flex;align-items:flex-start;}
+  nav.toc{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);overflow-y:auto;
+    width:255px;flex:0 0 255px;background:var(--paper-2);border-right:1px solid var(--line);padding:16px 10px 60px;}
+  nav.toc .grp{font-size:12px;color:var(--ink-faint);text-transform:none;font-weight:700;
+    margin:16px 8px 6px;letter-spacing:.5px;}
+  nav.toc a{display:flex;align-items:flex-start;gap:7px;text-decoration:none;color:var(--ink-soft);
+    font-size:13.5px;padding:6px 9px;border-radius:7px;margin:1px 0;line-height:1.45;}
+  nav.toc a:hover{background:var(--accent-tint);color:var(--accent-deep);}
+  nav.toc a.active{background:var(--accent-tint);color:var(--accent-deep);font-weight:700;
+    box-shadow:inset 3px 0 0 var(--accent);}
+  nav.toc a .ck{flex:0 0 auto;width:15px;color:var(--accent);font-weight:700;}
+  nav.toc a.special{color:var(--accent-deep);font-weight:600;}
+
+  main{flex:1;min-width:0;padding:0 28px 120px;}
+  .reader{max-width:var(--maxread);margin:0 auto;}
+
+  /* ===== 章节通用 ===== */
+  section.sec{padding-top:30px;scroll-margin-top:60px;}
+  .sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);
+    padding-bottom:10px;margin:8px 0 6px;}
+  .sec-h h2{font-size:23px;margin:0;color:var(--accent-deep);font-weight:800;}
+  .badge-time{font-size:12px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);
+    padding:2px 10px;border-radius:20px;}
+  .done-btn{margin-left:auto;font-size:12.5px;background:none;border:1px solid var(--line);color:var(--ink-soft);
+    padding:4px 12px;border-radius:20px;cursor:pointer;}
+  .done-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  /* 步骤块 */
+  .step{margin:22px 0;}
+  .step-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin:0 0 8px;}
+  .step-h .ic{font-size:18px;}
+  .step-h .tag{font-size:11px;font-weight:600;color:var(--accent-deep);background:var(--accent-tint);
+    border-radius:5px;padding:1px 7px;}
+  .step-body{padding-left:2px;}
+  p{margin:.55em 0;}
+  strong{color:var(--ink);}
+  .accent{color:var(--accent-deep);font-weight:700;}
+
+  /* 框架代码块 */
+  pre{background:#f3ecdb;color:#3b362d;border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:10px;padding:14px 16px;overflow-x:auto;
+    font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13px;line-height:1.65;margin:12px 0;}
+
+  /* 锚点故事 / tip 引文式 callout —— 靠图标+细边，不靠大色块 */
+  .callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);
+    border-radius:8px;padding:12px 15px;margin:14px 0;font-size:15px;}
+  .callout .c-h{font-weight:800;color:var(--accent-deep);margin-bottom:4px;}
+  /* 提示(💡)与故事(🔖)共用同一描边，靠图标区分、不靠颜色 —— 守"1主题色" */
+  .callout.ok{border-left-color:var(--accent);background:var(--accent-tint);}
+
+  /* 表格 */
+  .tbl-scroll{overflow-x:auto;margin:12px 0;}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--card);}
+  th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;}
+  thead th{background:var(--paper-2);color:var(--ink);font-weight:700;}
+  tbody tr:nth-child(even){background:#fcf9f1;}
+
+  /* 方法卡 */
+  .methodcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0;}
+  .methodcard h4{margin:0 0 8px;color:var(--accent-deep);font-size:15px;}
+  .methodcard ol{margin:0;padding-left:22px;}
+  .methodcard li{margin:5px 0;}
+
+  /* checklist */
+  ul.check{list-style:none;padding-left:2px;margin:10px 0;}
+  ul.check li{position:relative;padding-left:26px;margin:7px 0;}
+  ul.check li::before{content:"☐";position:absolute;left:0;color:var(--ink-faint);font-size:16px;}
+  .warn-x{color:var(--warn);font-weight:700;}
+
+  /* 折叠答案 */
+  details.fold{border:1px dashed var(--accent);border-radius:9px;margin:12px 0;background:var(--card);}
+  details.fold>summary{cursor:pointer;list-style:none;padding:11px 15px;font-weight:700;color:var(--accent-deep);
+    user-select:none;}
+  details.fold>summary::-webkit-details-marker{display:none;}
+  details.fold>summary::before{content:"▸ ";color:var(--accent);}
+  details.fold[open]>summary{border-bottom:1px solid var(--line-soft);}
+  details.fold[open]>summary::before{content:"▾ ";}
+  details.fold .fold-in{padding:6px 16px 14px;}
+  details.fold .fold-in table{font-size:13.5px;}
+
+  /* 全景图 */
+  .map{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0;}
+  .map .m-box{border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;background:var(--paper);}
+  .map .m-box.lead{background:var(--accent-deep);color:#f1ece0;border-color:var(--accent-deep);}
+  .map .m-box.lead b{color:#fff;}
+  .map .m-arrow{text-align:center;color:var(--ink-faint);font-size:15px;margin:2px 0;}
+  .map .m-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0;}
+  .map .m-axis{flex:0 0 auto;font-weight:800;color:var(--accent-deep);width:30px;}
+  .map a.chip{display:inline-block;text-decoration:none;font-size:13px;color:var(--ink);background:var(--paper-2);
+    border:1px solid var(--line);border-radius:16px;padding:3px 11px;}
+  .map a.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .map .m-note{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;}
+  .map .m-cap{font-weight:800;color:var(--ink);margin:4px 0 2px;font-size:13.5px;}
+
+  .lead-callout{background:var(--accent-deep);color:#eef4f1;border-radius:10px;padding:13px 17px;margin:14px 0;}
+  .lead-callout b{color:#fff;}
+
+  .placeholder{color:var(--ink-faint);font-style:italic;padding:40px 0;text-align:center;}
+  .intro-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:18px 0;}
+  .intro-card h3{margin:.2em 0 .4em;color:var(--accent-deep);}
+  hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+
+  /* 遮罩（窄屏） */
+  .scrim{display:none;position:fixed;inset:48px 0 0;background:rgba(0,0,0,.3);z-index:25;}
+
+  @media (max-width:820px){
+    nav.toc{position:fixed;top:48px;left:0;z-index:28;transform:translateX(-100%);transition:transform .2s;
+      box-shadow:2px 0 14px rgba(0,0,0,.15);}
+    nav.toc.open{transform:translateX(0);}
+    .scrim.open{display:block;}
+    .topbar .burger{display:block;}
+    .topbar .spine{display:none;}
+    main{padding:0 16px 100px;}
+  }
+
+  @media print{
+    header.topbar,nav.toc,.done-btn,.scrim{display:none!important;}
+    main{padding:0;}
+    details.fold{border-color:#bbb;}
+    .map a.chip{border-color:#ccc;}
+    body{font-size:12pt;background:#fff;}
+  }
+
+  .blk{font-size:15.5px;font-weight:800;color:var(--ink);margin:18px 0 6px;}
+  .quote{border-left:3px solid var(--line);background:var(--paper-2);border-radius:0 8px 8px 0;padding:10px 15px;margin:13px 0;}
+  .quote>p:first-child{margin-top:0;} .quote>p:last-child{margin-bottom:0;}
+  .step-body>p:first-child{margin-top:0;}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="目录">☰</button>
+  <h1>《详解·销售分析》学习训练册</h1>
+  <div class="spine">主线：人 × 货 × 场　·　战略 / 战术 / 战斗</div>
+  <div class="progress" id="progress">已学 0 / 19</div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav class="toc" id="toc">
+    <a class="special" href="#map"><span class="ck"></span>🗺 全景图</a>
+    <div class="grp">第一章　基础（认知 + 六大渠道）</div>
+    <a href="#sec-1.1"><span class="ck" data-ck></span>1.1 销售分析的重要意义</a>
+    <a href="#sec-1.2"><span class="ck" data-ck></span>1.2 销售分析的基本思路</a>
+    <a href="#sec-1.3"><span class="ck" data-ck></span>1.3 渠道一：门店</a>
+    <a href="#sec-1.4"><span class="ck" data-ck></span>1.4 渠道二：业务员</a>
+    <a href="#sec-1.5"><span class="ck" data-ck></span>1.5 渠道三：电话销售</a>
+    <a href="#sec-1.6"><span class="ck" data-ck></span>1.6 渠道四：站外推广</a>
+    <a href="#sec-1.7"><span class="ck" data-ck></span>1.7 渠道五：站内转化</a>
+    <a href="#sec-1.8"><span class="ck" data-ck></span>1.8 渠道六：分销</a>
+    <a href="#sec-1.9"><span class="ck" data-ck></span>1.9 看懂基本操作</a>
+    <div class="grp">第二章　系统的销售分析</div>
+    <a href="#sec-2.1"><span class="ck" data-ck></span>2.1 看懂业务逻辑</a>
+    <a href="#sec-2.2"><span class="ck" data-ck></span>2.2 三个层次</a>
+    <a href="#sec-2.3"><span class="ck" data-ck></span>2.3 战略层</a>
+    <a href="#sec-2.4"><span class="ck" data-ck></span>2.4 战术层</a>
+    <a href="#sec-2.5"><span class="ck" data-ck></span>2.5 战斗层</a>
+    <a href="#sec-2.6"><span class="ck" data-ck></span>2.6 货/场：实体店</a>
+    <a href="#sec-2.7"><span class="ck" data-ck></span>2.7 人/货：toB</a>
+    <a href="#sec-2.8"><span class="ck" data-ck></span>2.8 人/场：线上推广</a>
+    <a href="#sec-2.9"><span class="ck" data-ck></span>2.9 多因素找关键</a>
+    <a class="special" href="#sec-cap"><span class="ck" data-ck></span>🎓 结课大实战</a>
+  </nav>
+<main>
+<div class="reader">
+<section class="sec" id="map">
+        <div class="sec-h"><h2>🗺 全景图</h2></div>
+        <p style="color:var(--ink-soft);font-size:14.5px;">一张图看懂整门课。点任意节点直接跳到那一节。</p>
+        <div class="map">
+          <div class="m-box lead"><b>序</b>：销售为什么值得学（1.1）　|　<b>总纲</b>：四问 + 人货厂 + 先理链路（1.2）</div>
+          <div class="m-arrow">↓ 套在每一个渠道上</div>
+          <div class="m-box">
+            <div class="m-cap">人 × 货 × 场（脊柱）</div>
+            <div class="m-row"><span class="m-axis">人</span><a class="chip" href="#sec-1.4">业务员 1.4</a><a class="chip" href="#sec-1.5">电话销售 1.5</a></div>
+            <div class="m-row"><span class="m-axis">货</span><a class="chip" href="#sec-1.8">分销 1.8</a></div>
+            <div class="m-row"><span class="m-axis">场</span><a class="chip" href="#sec-1.3">门店 1.3</a><a class="chip" href="#sec-1.6">站外 1.6</a><a class="chip" href="#sec-1.7">站内 1.7</a></div>
+            <div class="m-note">第二章综合例（两两组合）：<a class="chip" href="#sec-2.6">货×场 实体店 2.6</a> <a class="chip" href="#sec-2.7">人×货 toB 2.7</a> <a class="chip" href="#sec-2.8">人×场 线上 2.8</a></div>
+            <div class="m-note">综合操作演示：<a class="chip" href="#sec-1.9">先理流程再提假设 1.9</a></div>
+          </div>
+          <div class="m-arrow">↓</div>
+          <div class="m-box">
+            <div class="m-cap">三个层次（颗粒度 粗 → 细）　总图 <a class="chip" href="#sec-2.2">2.2</a></div>
+            <div class="m-row"><a class="chip" href="#sec-2.3">战略层 2.3 · 看方向</a><a class="chip" href="#sec-2.4">战术层 2.4 · 打标签</a><a class="chip" href="#sec-2.5">战斗层 2.5 · 圈标杆</a></div>
+          </div>
+          <div class="m-arrow">↓</div>
+          <div class="m-row" style="justify-content:center;"><a class="chip" href="#sec-2.9">在一堆原因里找关键 2.9</a><a class="chip" href="#sec-cap">🎓 结课大实战</a></div>
+        </div>
+        <div class="lead-callout">
+          <b>两条主线，记住就不会迷路：</b><br>
+          ① <b>横轴｜人 × 货 × 场</b>——第一章每个渠道有一个主导轴，第二章综合例（2.6–2.8）是两两组合。<br>
+          ② <b>纵轴｜战略 / 战术 / 战斗</b>——同一件事看多粗、多细，先定位在哪一层使劲。
+        </div>
+      </section>
+<hr class="soft">
+<section class="sec" id="howto">
+<div class="sec-h"><h2>📖 怎么用</h2></div>
+<p>这是配套《详解版》的「练习册」：详解版负责讲透、可查，本册负责<strong>会做、能上手</strong>。每节先合上详解版、跟着动线走一遍；卡住了再回详解版翻对应节。</p>
+<p>每节动线：🎯 先卡你一下 → 🔑 这节只攻一个动作 → 🧠 高手怎么想 → ✍️ 跟着做一遍 → 🪜 换你做 → 🃏 随身方法卡 → ⚠️ 易错+自测 → 🧭 挂回全景图。折叠的「👉 对答案」<strong>先自己做完再点开</strong>；右上角「标记学完」会记进度（存本地）。</p>
+<h3 class="blk">📅 学习路径</h3>
+<div class="tbl-scroll"><table><thead><tr><th>路径</th><th>适合谁</th><th>必学</th><th>建议节奏</th></tr></thead><tbody>
+<tr><td><strong>最小可用</strong></td><td>时间紧、想先上手</td><td>1.1 · 1.2 · 1.9 · 2.2 · 2.4 · 2.9</td><td>1 周，每天 1 节</td></tr>
+<tr><td><strong>完整深读</strong></td><td>想系统掌握</td><td>全部 18 节 + 结课实战</td><td>2–3 周，每天 1 节，周末做实战</td></tr>
+<tr><td><strong>按角色加餐</strong></td><td>—</td><td>数据分析师重 2.3–2.5；运营重 1.3–1.8；财务重 2.2–2.3</td><td>在完整路径上侧重</td></tr>
+</tbody></table></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.1">
+<div class="sec-h"><h2>第 1.1 节　销售分析的重要意义</h2>
+<span class="badge-time">⏱ 约 25 分钟（认知节，重在想通，不在动手）</span>
+<button class="done-btn" data-done="1.1">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你有个朋友在某 SaaS 公司做售前，月薪不错。他最近天天纠结：要不要辞职，<strong>从零开始转"纯数据分析"，去卷 ABtest、用户行为分析</strong>？他来问你意见。</p>
+<p>你会劝他转，还是劝他别转？<strong>凭什么？</strong></p></div>
+<p>先给个判断，再往下看——这节学完，你回答这种问题会很有底气。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>学会两把尺子：① 用"高薪三选一 + toB/toC + 产品复杂度"判断一个销售岗值不值钱；② 用"都是不拿提成的后台岗"判断自己/别人该不该盲目转数据分析。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">一个底层认知：销售才是企业最重要的事</h3>
+<p>一个企业可以没研发、没产品，什么都可以没有，但<strong>不能没有销售</strong>——只要能把货卖出去、把钱弄进来，没货可以去进货。打工也一样，最有钱的往往不是程序员，是销售（有的销售总监一年差旅补贴就 50 万）。</p>
+<h3 class="blk">尺子一：高薪三选一</h3>
+<p>一个岗位工资高，原因一定是三选一：</p>
+<pre>① 技术门槛高     ② 要死很多人才坐得上去（成功率低）     ③ 有权力 / 身份壁垒</pre>
+<p>销售属于"门槛低、但成功率也低"——所以才"一将功成万骨枯"。</p>
+<h3 class="blk">破掉对销售的四个误解</h3>
+<div class="tbl-scroll"><table><thead><tr><th>误解</th><th>真相</th></tr></thead><tbody><tr><td>销售 = 柜台店员</td><td>那是最 low 的。高薪销售几乎都是 <strong>toB 商务谈判</strong>，越大的项目规格越高</td></tr><tr><td>销售 = 两条腿跑单/握手</td><td>线上的<strong>买量、投手、商业化、商家运营</strong>本质都是销售，只是换了名字</td></tr><tr><td>销售 = 靠喝酒</td><td>越专业的产品越要专业销售；真喝酒的反而是<strong>权力垄断型</strong>（喝的是"服从"）</td></tr><tr><td>互联网不需要销售</td><td>字节巨量引擎养过十万销售、阿里中供铁军——没销售公司都饿死</td></tr></tbody></table></div>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·卖 ERP 卖到人民大会堂</strong></div><p>陈老师本科同学里第一个发财的，卖 ERP（典型复杂 toB 产品），卖给国家水利部，签约在人民大会堂。2006 年毕业，2008 年就在北京买房了——而你还在拿程序员工资跟人家比。 <strong>这告诉你</strong>：真正赚钱的销售不是站柜台、不是陪酒，是能拿下大客户的专业商务谈判。</p></div>
+<h3 class="blk">尺子二：该不该转数据分析</h3>
+<p>商业化 / B 端运营 / 销售运营 / 用户增长 / 买量，和数据分析<strong>都是不拿提成的后台岗，等级上去工资一样高</strong>。所以：有这些经验的人，<strong>没必要丢掉经验从零转数据分析</strong>，而该把数据当成"强化工具"，去谋一个更高的运营岗。盲目去卷 ABtest / 用户行为，你没买点经验，是拿短板挤红海。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（判断三个岗位值不值钱）</div><div class="step-body"><p>用"三选一 + toB/toC + 复杂度"逐个判：</p>
+<div class="tbl-scroll"><table><thead><tr><th>岗位</th><th>判断</th></tr></thead><tbody><tr><td>商场化妆品柜台导购</td><td>toC、门槛低、可被电商/无人店替代 → <strong>不值钱</strong></td></tr><tr><td>卖工业 MES 系统的售前/商务</td><td>toB 复杂产品、要专业谈判、成功率低 → <strong>值钱</strong>（命中①技术 +②成功率低）</td></tr><tr><td>给国企供货、靠"陪标关系"拿单的销售</td><td>看着 low，其实是<strong>权力/身份壁垒型</strong>（命中③）→ 值钱，但靠的是壁垒不是技术</td></tr></tbody></table></div>
+<div class="callout ok"><div class="callout ok">✅ 同样叫"销售"，含金量天差地别——关键看它命中了"三选一"里的哪条。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（二选一 offer）</div><div class="step-body"><div class="quote"><p>你之前做过 2 年电商运营，现在拿到两个 offer：</p>
+<ul><li><strong>A</strong>：某大厂"商家运营"（给中小商家做增长，后台岗、不拿提成）</li><li><strong>B</strong>：某创业公司"纯数据分析"，主做用户行为 / ABtest</li></ul>
+<p>你选哪个？<strong>用本节两把尺子说理由。</strong></p></div>
+<details class="fold"><summary>👉 参考答案</summary><div class="fold-in"><p><strong>选 A（商家运营）</strong>。理由：</p>
+<ol><li>商家运营 = 商业化/销售类后台岗，和数据分析一样不拿提成、<strong>等级上去工资一样高</strong>，还能直接用上你 2 年电商运营的业务经验（这是稀缺的"买点经验"）。</li><li>B 的纯 ABtest / 用户行为，你恰恰<strong>没有买点经验</strong>，是从零卷红海——拿短板去拼。</li><li>正确姿势是：进 A，把数据当强化工具来包装工作质量、体现能力，去谋更高的运营岗。</li></ol>
+<p><strong>反射</strong>：别一听"数据分析"就觉得高级要转过去；先问"我手上的经验在哪个赛道更值钱"。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：30 秒看懂一个销售岗值不值钱</div><div class="step-body"><div class="methodcard"><ol><li><strong>套三选一</strong>：技术门槛高 / 要死很多人才上得去 / 有权力身份壁垒</li><li><strong>看 toB 还是 toC</strong>：工资高的几乎都是 toB，项目越大规格越高</li><li><strong>看产品复杂度</strong>：越专业/复杂越需要专业销售，跟会不会喝酒无关</li><li><strong>对照自己</strong>：有商业化/B端/流量经验，就用数据当强化工具去谋更高运营岗，别盲目转行</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>还停留在"酒香不怕巷子深"，低估了"说"和表达的价值？</li><li>判断岗位/机会，是用"高薪三选一"还是凭感觉？</li><li>因为"销售=陪酒/店员"的刻板印象，错过了 toB 商业化这类高价值方向？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你表弟说："销售就是站柜台、陪酒喝酒，没技术含量，我才不干。" 用本节"高薪三选一 + 四个误解"反驳他，并举一个<strong>高含金量销售岗</strong>的例子。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p>反驳四点：</p>
+<ol><li>柜台、陪酒是<strong>最 low 的销售</strong>；高薪销售是 toB 商务谈判（卖 ERP/MES、卖煤、卖广告）。</li><li>套<strong>三选一</strong>：高薪岗要么技术门槛高、要么成功率低、要么有壁垒——专业 toB 销售门槛和淘汰率都不低。</li><li>真喝酒的反而是<strong>权力垄断型</strong>（壁垒③），那是垄断资源、不是没技术。</li><li><strong>互联网全是销售</strong>：字节十万销售、阿里中供铁军，只是叫商业化/买量/商家运营。</li></ol>
+<p>高含金量例子：卖企业软件的商务、字节巨量引擎的商业化、医药 toB 大客户销售。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>1.1 不挂在"人/货/场"的某个轴上——它是整张全景图的<strong>"序"</strong>：先让你相信"销售值得认真学、销售分析不 low"，后面那张人货场的网才学得进去。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.2">
+<div class="sec-h"><h2>第 1.2 节　销售分析的基本思路</h2>
+<span class="badge-time">⏱ 约 30 分钟</span>
+<button class="done-btn" data-done="1.2">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>老板说"这个月销售没完成目标，你分析一下"。你打开系统：有业务员、有商品、有地区、有渠道……几十个维度摆在面前。</p>
+<p>你写的<strong>第一句结论</strong>该是什么？是"A、B 团队都没完成，要加强"吗？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>用"四个核心问题 + 人货厂六点 + 先理销售链路"给一次销售分析定位，并学会"换维度找影响最大的那个、只讲它"。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">四个核心问题（背下来）</h3>
+<pre>① 业绩完成了没有？  ② 谁完成得好/差？  ③ 好的能不能更好？  ④ 差的能不能变好？</pre>
+<p>业绩一般指<strong>销售收入</strong>（2B 再加毛利、回款）。任何销售业绩分析，都被这四问框住。</p>
+<h3 class="blk">没思路就过"人货厂"六点</h3>
+<ul><li><strong>人</strong>：哪些业务员、哪些顾客不行</li><li><strong>货</strong>：哪些商品卖得不好，打不打折</li><li><strong>厂（渠道）</strong>：哪些渠道不行，要不要扩渠道/促销</li></ul>
+<h3 class="blk">关键手法：人货厂"交替使用"——换个维度，归因可能完全变</h3>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·AB 团队 vs 新旧品</strong></div><p>按团队看：A、B 团队都没完成任务，直觉结论"AB 团队都要加强"。但换个维度按新旧品看——发现 AB 团队的<strong>旧品都完成了、新品都没完成</strong>。问题根本跟团队没关系，是<strong>新品</strong>卖不动（质量？推广？定价？）。 <strong>这告诉你</strong>：同一份数据，换个维度归因天差地别。<strong>先找影响最大的那个维度，只讲它，别人货厂全堆上。</strong>（尤其别学财务写几百页 PPT 却找不到结论。）</p></div>
+<h3 class="blk">数据多少，决定你能分析多深</h3>
+<pre>线下零售（数据最少） &lt; 电话 / 业务员（看数字化程度） &lt; 线上零售（数据最全）</pre>
+<p>所有销售本质都是<strong>转化漏斗</strong>，只是数据多少不同。</p>
+<h3 class="blk">结果呈现的固定顺序</h3>
+<pre>总业绩完成没 →（线下：按地区拆 / 线上：按漏斗拆——流量·转化率·客单价）</pre>
+<h3 class="blk">第一步永远是：先梳理本公司销售链路</h3>
+<p>画流程图 + 标出促销/激励 + 列出报表表头。很多人分析不出来，是因为根本没想清楚自己公司的货是怎么卖的。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（人货厂交替使用）</div><div class="step-body"><p>总业绩没达标。先按团队看，再换新旧品看：</p>
+<div class="tbl-scroll"><table><thead><tr><th>团队</th><th>旧品达成率</th><th>新品达成率</th></tr></thead><tbody><tr><td>A</td><td>105%</td><td>60%</td></tr><tr><td>B</td><td>102%</td><td>55%</td></tr></tbody></table></div>
+<ul><li><strong>按团队看</strong>：A、B 都没完成总任务 → 直觉"AB 团队都要加强"。</li><li><strong>换维度（新旧品）</strong>：两队旧品都超额（105%/102%）、新品都没完成（60%/55%）→ 问题在<strong>货（新品）</strong>，不在<strong>人（团队）</strong>。</li></ul>
+<div class="callout ok"><div class="callout ok">✅ 该写的结论：<strong>"新品普遍卖不动（两队新品达成仅 55–60%），与团队无关——去查新品是质量、推广还是定价。"</strong> 而不是"AB 团队都要加强"。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（换维度找真因）</div><div class="step-body"><p>某连锁，总业绩没达标。先按地区看，华东、华南都没完成。再给你一个"新客/老客"维度：</p>
+<div class="tbl-scroll"><table><thead><tr><th>地区</th><th>老客达成率</th><th>新客达成率</th></tr></thead><tbody><tr><td>华东</td><td>110%</td><td>45%</td></tr><tr><td>华南</td><td>108%</td><td>40%</td></tr></tbody></table></div>
+<p><strong>问题</strong>：直觉结论是什么？换维度后真正的问题在哪？该写什么结论？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li><strong>直觉结论</strong>："华东、华南两个区都要加强。"（错）</li><li><strong>换维度后</strong>：两区<strong>老客都超额</strong>（110%/108%）、<strong>新客都崩</strong>（45%/40%）→ 问题在<strong>拉新质量 / 新客承接</strong>，跟地区无关。</li><li><strong>该写的结论</strong>："新客达成普遍只有 40–45%，是拉新或新客转化出了问题，与区域无关——去查拉新渠道质量和新客承接链路。"</li></ul>
+<p><strong>反射</strong>：业绩问题别在"地区/团队"上空耗，一定换几个维度（新旧品、新老客、渠道）验证，找到差异最大的那个再下结论。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：给一次销售业绩分析定位的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>套四问</strong>：业绩完成没、谁好谁差、好的能否更好、差的能否变好</li><li><strong>过人货厂</strong>：六点逐条筛，标出每个维度的达成率差异</li><li><strong>挑主因</strong>：哪个维度差异最大就先讲它，其余先放</li><li><strong>按序呈现</strong>：总业绩 →（线下分地区 / 线上拆漏斗：流量·转化率·客单价）</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>说"人"就甩客户名单、说"货"就甩商品名——有没有打标签、分类？</li><li>有没有换维度验证过归因（新旧品 vs 团队、新客 vs 老客）？</li><li>清不清楚自己渠道的数字化程度、知道能分析到多深？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你是一家<strong>线下连锁奶茶</strong>的分析师，这个月总销售没达标。老板甩给你一张"各门店达成率"表就要结论。 用本节"四问 + 人货厂 + 先理链路"，说说你<strong>动手前</strong>会先做什么、可能先换哪几个维度看。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ol><li><strong>先套四问</strong>：总业绩差多少？哪些店好/差？好的店能更好、差的店能变好吗？</li><li><strong>别只在"门店"维度耗</strong>，换维度看：是不是某几款<strong>新品（货）</strong>普遍不行？是不是<strong>外卖/堂食某个渠道（厂）</strong>掉了？是不是某<strong>地区</strong>集中下滑？</li><li><strong>线下数据少，先理链路</strong>：消费 = 客户数 × 消费率 × 客单价，客户数 = 门前人流 × 进店率。先确认是<strong>人流少了</strong>（选址/天气/竞品），还是<strong>进店/转化掉了</strong>（产品/服务/价格）。</li><li>一句话：<strong>先梳理销售链路、再换维度定位，最后才下手拆数。</strong></li></ol></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>1.2 是整张全景图的<strong>"操作总纲"</strong>：它给的"人 · 货 · 厂（渠道）"四问框架，就是后面所有节的脚手架。</p>
+<div class="callout link"><p>🔗 <strong>一个衔接</strong>：1.2 叫"人货<strong>厂</strong>"（厂＝渠道），到第二章会进化成"人货<strong>场</strong>"（场＝终端场景）——是同一个三元组，只是把"渠道"细化成了"场景"。1.3–1.8 每个渠道，都是在这套总纲下、针对某个<strong>主导轴</strong>（人/货/场）的展开。</p></div></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.3">
+<div class="sec-h"><h2>第 1.3 节　销售基本渠道之一：门店</h2>
+<button class="done-btn" data-done="1.3">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下（先别往下看，给自己 1 分钟）</div><div class="step-body"><div class="quote"><p>你是一家连锁便利店的数据分析师。老板甩给你两家店的上月数据：</p>
+<div class="tbl-scroll"><table><thead><tr><th></th><th>A 店</th><th>B 店</th></tr></thead><tbody><tr><td>月收入</td><td>18 万</td><td><strong>22 万</strong></td></tr><tr><td>房租</td><td>3 万</td><td>12 万</td></tr></tbody></table></div>
+<p>老板问："B 店收入更高，是不是该多复制几家 B 这样的店？"</p>
+<p><strong>你会怎么回答？</strong> 你手上的数据，够不够回答这个问题？缺什么？</p></div>
+<p>先在心里给个答案，再往下看。这一节就是教你把"凭感觉"变成"算得出、说得清"。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>给一家门店搭一张「单店模型」，再配上「现场标签」，判断它到底行不行、值不值得复制。</strong></p></div>
+<p>只要拿下这一个动作，门店这条渠道你就会分析了。其余都是细节。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">底层规律：位置即流量</h3>
+<p>零售的第一性原理就一句话——<strong>位置即流量</strong>。当年李嘉诚被问什么是零售，答案是：location, location, location（位置、位置，还是位置）。</p>
+<p>位置一旦选定，客流就基本固定了；之后你能调的，主要是<strong>货</strong>（陈列、面位、活动）。所以门店分析的优先级是：</p>
+<pre>选址  &gt;  陈列货架（摆什么、怎么摆）  &gt;  店员水平</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·六米生死线</strong></div><p>陈老师市区房楼下，一条两车道小马路，两侧各一家早餐店，隔了才<strong>六米</strong>，卖的也差不多——结果一侧活得好好的，另一侧倒闭了。 为什么？倒闭那侧的楼被酒店包了大半、住的是<strong>游客</strong>；活下来那侧住的全是<strong>住户</strong>——住户才是早餐的稳定客流。更要命的是，<strong>路中间有栅栏</strong>，对面客人过不来，六米宽的小路把客流彻底切成两半。 「六米之差」变成了「生死之差」。（广州整治交通修栅栏，哪修栅栏哪条街的路边店就倒——客人直接不从你这走了。）</p>
+<p><strong>这个故事告诉你</strong>：决定门店生死的，常常是位置、客群、一道栅栏这些<strong>数据库里查不到</strong>的现场因素。不去现场，你对着报表永远想不明白这家店为什么不行。</p></div>
+<h3 class="blk">分析框架：左边标签 ✕ 右边模型，两边凑齐才够深</h3>
+<pre>门店分析 = 【左·现场标签】  ✕  【右·单店模型】
+
+左侧（库里通常没有，得去现场打标签）
+  位置（路宽 / 公交站远近 / 先前租户 / 相邻铺开关张 / 有无栅栏）
+    → 门头装修 → 店员 → 面位·陈列·动线
+
+右侧（库里有，或一问就有）
+  固定成本（房租＋水电＋人工）  +  变动成本（进货）
+    收入 − 变动成本 = 边际收益
+    边际收益 − 固定成本 = 净利润</pre>
+<ul><li><strong>左边</strong>是大多数人缺的：不了解位置、不了解店长水平、不了解装修，就没法解释"它为什么行"。</li><li><strong>右边</strong>大家也常缺成本：只盯收入，不算房租。普通零售毛利撑死 40%、低的才 25%——一个月租 12 万的店，你得卖到 30 万以上才把租金挣回来，还没算人工。</li></ul>
+<p><strong>诊断口诀</strong>：先挑标杆（收入高 / 成本低的店）→ 给它打现场标签 → 才解释得清"它为什么行" → 再拿它当尺子去量别的店。</p>
+<h3 class="blk">两类决策别混</h3>
+<ul><li><strong>能不能继续经营</strong>：只看每月净利润，正的就能继续开，<strong>前期投入先不管</strong>。</li><li><strong>该不该开新店</strong>：净利润之外，还要看前期投入（装修几十万、加盟费上百万）多久回本。</li></ul></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（A 店标杆，全程示范）</div><div class="step-body"><p>把开场那张表补全，按右侧模型算 A 店（社区便利店，普通零售毛利率取 <strong>40%</strong>）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>科目</th><th>数值</th><th>怎么来的</th></tr></thead><tbody><tr><td>月收入</td><td>18 万</td><td>数据库</td></tr><tr><td>变动成本（进货）</td><td>10.8 万</td><td>收入 ✕ (1 − 40%) = 18 ✕ 0.6</td></tr><tr><td><strong>边际收益</strong></td><td><strong>7.2 万</strong></td><td>收入 − 变动成本 = 18 − 10.8</td></tr><tr><td>固定成本</td><td>4.7 万</td><td>房租 3 ＋ 水电 0.5 ＋ 人工 3人✕0.4 = 1.2</td></tr><tr><td><strong>净利润</strong></td><td><strong>＋2.5 万 / 月</strong></td><td>边际收益 − 固定成本 = 7.2 − 4.7</td></tr></tbody></table></div>
+<p>数字算完只是一半。<strong>去现场打标签</strong>，解释它为什么稳：</p>
+<ul><li>位置：临小区正门、两车道<strong>无栅栏</strong>、住户为主 → 客流天生稳（位置即流量）</li><li>门头亮、动线顺、热销品在齐眉货架且面位足 → 转化高</li></ul>
+<div class="callout ok"><div class="callout ok">✅ A 店净赚、且现场标签都解释得通 → <strong>它就是标杆店</strong>，接下来拿它当尺子。</div></div>
+<div class="callout tip">💡 <strong>回到开场那个问题</strong>：老板只给你"收入 + 房租"两个数，<strong>根本不够</strong>——你至少还得拿到<strong>毛利率</strong>（才能算变动成本）、<strong>水电、人工</strong>（才能算全固定成本），最后再补<strong>现场标签</strong>。能不能下结论，先看数据齐不齐。</div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（B 店，自己填空）</div><div class="step-body"><p>B 店：富人区临街旺铺，月收入 22 万，房租 12 万，水电 0.8 万，人工 5 人 ✕ 4500 元，毛利率 38%。</p>
+<p>先别看答案，把这张表填完，再回答老板的问题：</p>
+<div class="tbl-scroll"><table><thead><tr><th>科目</th><th>数值</th><th>怎么算</th></tr></thead><tbody><tr><td>月收入</td><td>22 万</td><td>—</td></tr><tr><td>变动成本</td><td>＿＿</td><td>22 ✕ (1 − 38%)</td></tr><tr><td>边际收益</td><td>＿＿</td><td>收入 − 变动成本</td></tr><tr><td>固定成本</td><td>＿＿</td><td>房租＋水电＋人工</td></tr><tr><td><strong>净利润</strong></td><td>＿＿</td><td>边际收益 − 固定成本</td></tr></tbody></table></div>
+<p><strong>老板那句"B 收入更高、该多复制"，对吗？为什么？</strong></p>
+<details class="fold"><summary>👉 算完再点开对答案</summary><div class="fold-in"><div class="tbl-scroll"><table><thead><tr><th>科目</th><th>数值</th></tr></thead><tbody><tr><td>变动成本</td><td>22 ✕ 0.62 = <strong>13.64 万</strong></td></tr><tr><td>边际收益</td><td>22 − 13.64 = <strong>8.36 万</strong></td></tr><tr><td>固定成本</td><td>12 ＋ 0.8 ＋ 2.25 = <strong>15.05 万</strong></td></tr><tr><td><strong>净利润</strong></td><td>8.36 − 15.05 = <strong>−6.69 万 / 月（亏损！）</strong></td></tr></tbody></table></div>
+<p><strong>结论</strong>：B 店收入更高，<strong>但每月亏近 7 万</strong>——12 万的房租把利润全吃光了。收入是个幌子，<strong>先算成本、看净利润</strong>才是真相。多复制 B 这样的店，等于多开几个吞钱机器。</p>
+<p>这正是门店分析最大的坑：<strong>只看收入不看成本</strong>。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：诊断一家门店的 5 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>搭单店模型</strong>：房租＋水电＋人工（固定）＋ 进货（变动），算出<strong>边际收益</strong>和<strong>净利润</strong></li><li><strong>挑标杆</strong>：按"收入高 / 成本低"，选出最赚钱、最不赚钱的店各一家</li><li><strong>去现场打标签</strong>：实地看这两家的位置、路宽、门头、动线、面位，记下差异</li><li><strong>对位归因</strong>：把差异落到"位置/装修（左侧标签）"还是"成本结构（右侧模型）"</li><li><strong>开新店另算</strong>：能不能继续经营看净利润；该不该开新店，还要看前期投入回本速度</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个最常踩的坑</strong>（自查一遍）：</p>
+<ul class="check"><li>只看收入、没算成本（尤其房租）——B 店就是这么"看着风光实则亏损"的</li><li>位置/装修/店长这些现场标签，是真去看过、还是凭空想的？</li><li>用"卖几件 ✕ 单价"硬套，却没解释清楚<strong>客流到底从哪来</strong></li></ul>
+<h3 class="blk">自测一题（全新糊数据，动手）</h3>
+<p>你是社区生鲜连锁的分析师，手上是门店组随手发来的一张<strong>乱表</strong>：</p>
+<div class="tbl-scroll"><table><thead><tr><th>店</th><th>月收入</th><th>房租</th><th>人工</th><th>毛利率</th><th>备注</th></tr></thead><tbody><tr><td>甲</td><td>25 万</td><td>4 万</td><td>1.6 万</td><td>22%</td><td>临菜市场口</td></tr><tr><td>乙</td><td>9 万</td><td>1.5 万</td><td>（没填）</td><td>28%</td><td>巷子里，门口有台阶</td></tr><tr><td>丙</td><td>31 万</td><td>3 万</td><td>1.8 万</td><td>（空）</td><td>新店，开了 1 个月</td></tr><tr><td>丁</td><td>14 万</td><td>2 万</td><td>1.2 万</td><td>26%</td><td>老店，最近收入往下掉</td></tr></tbody></table></div>
+<p><strong>请回答：</strong></p>
+<ol><li>哪些店现在就能算出净利润？哪些算不出、缺什么？</li><li>谁最可能是标杆店？（小心收入最高的那个）</li><li>你接下来要去现场，给"标杆店"和"在掉的店"分别打哪些<strong>现场标签</strong>？</li></ol>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ol><li><strong>甲、丁能算出净利</strong>（毛利率/房租/人工都有）；<strong>乙缺人工</strong>（问物业、按人头数就有）；<strong>丙缺毛利率、且只开 1 个月</strong>——新店爬坡期，单月数据不能下结论，得再观察。<ul><li>⚠️ 注意：这张表<strong>四家都没给水电</strong>——这正是门店数据"总缺一两项"的常态。水电金额小，先按几千估、或备注"待补"，不影响下面的结论；但你心里要清楚自己是估的。</li><li>甲：变动 25✕0.78=19.5，边际 5.5，固定 4＋1.6=5.6 → 净利 <strong>−0.1 万</strong>，几乎打平，毛利率才 22% 是隐患。</li><li>丁：变动 14✕0.74=10.36，边际 3.64，固定 3.2 → 净利 <strong>＋0.44 万</strong>，还在赚但很薄。</li></ul></li><li><strong>别选收入最高的丙</strong>（新店、且毛利率没填，算不出）。真正能当尺子的标杆要"净利稳、数据全"——甲收入虽高却几乎不赚（低毛利＋高人工），更像"虚假繁荣"。<strong>丁虽小但净利为正、数据可比</strong>，更适合先当参照；同时把甲列为"待查：为什么毛利这么低"。</li><li><strong>打标签方向</strong>：<ul><li>甲（临菜市场口）：去看是不是"客流大但客单低/损耗高"，毛利 22% 是品类问题还是定价问题。</li><li>丁（收入在掉）：先分清是<strong>位置一直不行</strong>（那从开店起就该一直低，不会"最近才掉"）还是<strong>经营出问题</strong>（某爆品断货？相邻铺关张？门口新修了栅栏/台阶？）——"最近才掉"强烈指向后者。</li><li>乙（巷子里＋台阶）：典型位置劣势，验证"位置即流量"，大概率不值得复制。</li></ul></li></ol>
+<p><strong>这题想让你形成的反射</strong>：收入最高 ≠ 标杆；缺数据先标出来再说；"一直低"和"最近掉"指向完全不同的原因。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>门店是「<strong>场</strong>」这条线的第一种形态——也是最依赖"位置即流量"的一种。</p>
+<pre>人 × 货 × 场
+              └─ 场：门店(1.3) · 站外推广(1.6) · 站内转化(1.7) …（线上推广 2.8 是"人×场"组合）
+                  └─ 门店：位置即流量 = 场的客流，大半在「开店那一刻」就定了</pre>
+<div class="quote"><p>学完后面几节你会发现：电销、站外、站内……换的只是"怎么把客流弄进来"，但<strong>先算账（单店/单渠道模型）＋ 再补现场/行为标签</strong>这套打法是通用的。门店是你练这套打法的第一站。</p>
+<p>👉 完整的「人×货×场 + 战略/战术/战斗」全景图见本册最前面的 <strong>🗺 全景图</strong>，随时回去对照自己学到哪了。</p></div></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.4">
+<div class="sec-h"><h2>第 1.4 节　销售基本渠道之二：业务员</h2>
+<span class="badge-time">⏱ 约 30 分钟</span>
+<button class="done-btn" data-done="1.4">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>同样是"卖东西"，下面三个谁离得开业务员、谁离不开？凭什么分？ ① 卖瓶装矿泉水　② 卖二手挖掘机给工地老板　③ 卖一套企业 ERP 系统</p>
+<p>先给个判断和理由，再往下看。<strong>注意：别用"产品贵不贵"来分。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>拿到一个销售场景，先判断它是简单 2C / 复杂 2C / 还是 2B，再决定怎么分析：复杂 2C 用三色归因，2B 抓客户关系＋预算。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">判据：看"销售过程麻烦不麻烦"，不看产品/生产复杂度</h3>
+<ul><li><strong>空调</strong>：制造很复杂，但你买的那一刻很简单——看参数、网上下单、京东上门售后。→ 简单产品，业务员可被取代。</li><li><strong>煤炭</strong>：看着简单，其实极复杂——卖给发电/钢铁/化工，要认识人、要分等级、要装车过磅运输。→ 复杂产品，离不开业务员。</li></ul>
+<div class="quote"><p>结论：<strong>判断简单/复杂，看销售过程有多少麻烦事要处理。</strong> 简单 2C（瓜子矿泉水）能被无人店/电商取代；复杂 2C（车、房）和 2B（软件、煤）必须业务员。</p></div>
+<h3 class="blk">复杂 2C：把因素分三色，先看能改的</h3>
+<p>以买车为例（渠道了解→到店接待→推主推品→试驾→选装→金融方案→成交）：</p>
+<pre>🟢 绿（总部可控）：主推产品比例、优惠力度    ← 订单里看得到，先看这个
+🟡 黄（销售个人能力）：接待引导、要不要约试驾、成功案例   ← 销售运营发力处
+🟠 橙（用户变量）：用户需求、付费能力        ← 只能初步判断，全程都在影响</pre>
+<h3 class="blk">2B：先找行业大客户，胜负手是"关系/资源"</h3>
+<ul><li>一定找固定大客户：<strong>发电、钢铁、化工、建材</strong>；按规模排：央企 → 国企 → 地方大户 → 散户。</li><li><strong>别套 RFM</strong>——"消费一个亿、优惠十块"很可笑。要看：客户关系、预算、我占的份额。</li></ul>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·能围标的嫂子</strong></div><p>陈老师嫂子是个做国企生意的牛销售，能直接撂话："你想要这个单吗？我知道他们怎么打分，能帮你围下来。" <strong>这告诉你</strong>：2B 的胜负手是客户关系和销售资源这类"数据库里没有、要人工打标签"的东西，2C 那套优惠券打法在这儿没用。</p></div>
+<p><strong>业务员渠道一定有的三个结果数</strong>：签约收入 / 毛利 / 回款。2B 还要乘一个<strong>兑现率</strong>（签约≠提货）。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（复杂 2C·三色归因）</div><div class="step-body"><p>某 4S 店本月发现"成交在掉"，三条线索，逐条归色、找谁能改：</p>
+<div class="tbl-scroll"><table><thead><tr><th>发现</th><th>归色</th><th>谁能改 / 怎么办</th></tr></thead><tbody><tr><td>电车主推占比 60%（总部要求 70%）</td><td>🟢 绿</td><td>总部政策没执行到位 → 抓执行、考核主推比例</td></tr><tr><td>约了试驾的成交 45%、没约的只 12%</td><td>🟡 黄</td><td>销售能力差异 → 要求"逢客必约试驾"，复制高手话术</td></tr><tr><td>到店客里"换购升级"人群占比上升</td><td>🟠 橙</td><td>用户变量，改不了 → 顺势多推高配/金融方案</td></tr></tbody></table></div>
+<div class="callout ok"><div class="callout ok">✅ 归色之后，行动就清楚了：先抓 🟢 能直接管的（主推执行），再用 🟡 提升销售动作，🟠 只能顺势。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（2B·算兑现量 + 排优先级）</div><div class="step-body"><p>你是工业设备厂销售运营，四条 2B 线索。<strong>先算兑现量（＝已签约 × 历史兑现率），再决定先盯谁。</strong></p>
+<div class="tbl-scroll"><table><thead><tr><th>线索</th><th>行业</th><th>规模</th><th>已签约</th><th>历史兑现率</th><th>兑现量</th></tr></thead><tbody><tr><td>甲</td><td>发电</td><td>央企</td><td>2000 万</td><td>90%</td><td>＿＿</td></tr><tr><td>乙</td><td>建材</td><td>地方大户</td><td>1500 万</td><td>50%</td><td>＿＿</td></tr><tr><td>丙</td><td>餐饮连锁</td><td>小户</td><td>800 万</td><td>95%</td><td>＿＿</td></tr><tr><td>丁</td><td>钢铁</td><td>国企</td><td>1200 万</td><td>80%</td><td>＿＿</td></tr></tbody></table></div>
+<p>先算完、排个序，再回答：<strong>先盯谁？谁要警惕？谁不值得倾斜资源？</strong></p>
+<details class="fold"><summary>👉 算完再点开对答案</summary><div class="fold-in"><div class="tbl-scroll"><table><thead><tr><th>线索</th><th>兑现量</th></tr></thead><tbody><tr><td>甲</td><td>2000 × 0.9 = <strong>1800 万</strong></td></tr><tr><td>乙</td><td>1500 × 0.5 = <strong>750 万</strong></td></tr><tr><td>丙</td><td>800 × 0.95 = <strong>760 万</strong></td></tr><tr><td>丁</td><td>1200 × 0.8 = <strong>960 万</strong></td></tr></tbody></table></div>
+<p><strong>排序（兑现量）</strong>：甲 1800 ＞ 丁 960 ＞ 丙 760 ＞ 乙 750。</p>
+<p><strong>但 2B 不能只看数字</strong>：</p>
+<ul><li><strong>先盯甲、丁</strong>：发电央企＋钢铁国企，正是四大行业大客户，兑现量又高又稳。</li><li><strong>乙要警惕</strong>：兑现率才 50%——签了一半提不了货，多半是关系不稳/资金问题，派人去摸底，别空欢喜。</li><li><strong>丙不倾斜</strong>：餐饮小户、非核心行业，兑现率虽高但量小、不是战略客户。</li></ul>
+<p><strong>反射</strong>：2B 先按"行业大客户 + 兑现量"排，兑现率异常低的要去查关系，别被签约额骗了。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：给业务员渠道做分析的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>判类型</strong>：复杂 2C 还是 2B？（看销售过程麻烦多不多）</li><li><strong>2C 拆三色</strong>：分总部绿 / 销售黄 / 用户橙，先看总部可控的</li><li><strong>2B 抓两栏</strong>：先看客户行业 + 预算，锁定优势行业大客户</li><li><strong>补过程</strong>：把试驾/送 demo/报价变成数据；难量化的（关系/资源）人工打标签</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>判断复杂度，看的是"销售麻烦"还是误看了"生产/产品"？</li><li>2B 有没有先看客户行业和预算，而不是直接套 RFM？</li><li>只盯签约结果、丢了过程数据（试驾/跟进/兑现）？</li></ul>
+<h3 class="blk">自测一题（全新糊数据）</h3>
+<p>你是工业机器人厂的销售运营，手上一张乱线索表：</p>
+<div class="tbl-scroll"><table><thead><tr><th>线索</th><th>行业</th><th>预算</th><th>当前阶段</th><th>备注</th></tr></thead><tbody><tr><td>A</td><td>风电场</td><td>（没填）</td><td>已报价</td><td>老客户复购</td></tr><tr><td>B</td><td>房地产</td><td>大</td><td>初步接触</td><td>该行业在收缩</td></tr><tr><td>C</td><td>食品厂</td><td>中</td><td>已试用 demo</td><td>第一次合作</td></tr><tr><td>D</td><td>钢铁集团</td><td>大</td><td>招投标中</td><td>有熟识的评委</td></tr></tbody></table></div>
+<p><strong>回答</strong>：① 先盯谁？② 谁要警惕？③ 哪些数据缺、得怎么补？</p>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p>① <strong>先盯 D</strong>：钢铁大客户 + 招投标 + 有关系——2B 的胜负手全占。<strong>A 紧随</strong>：老客户复购、阶段靠后，关系在，预算虽缺也值得快速推进。 ② <strong>B 要警惕</strong>：预算虽大，但行业在收缩，可能签了也兑现不了；<strong>C</strong> 第一次合作、刚试用，有培养价值但别期望过高，持续跟进。 ③ 缺 <strong>A 的预算</strong>（问一下就有）；<strong>所有线索都缺"销售资源/关系"标签</strong>——这类靠人工打，别指望数据库自己有。D 的"有熟识评委"就是关键标签，要正式记下来。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>业务员的<strong>主导轴 = 【人】</strong>：复杂 2C 靠销售引导、2B 靠销售资源与关系。这也是为什么它的关键标签最缺、最依赖人工打。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.5">
+<div class="sec-h"><h2>第 1.5 节　销售基本渠道之三：电话销售</h2>
+<span class="badge-time">⏱ 约 28 分钟</span>
+<button class="done-btn" data-done="1.5">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你接手一个电销团队，接通率只有 <strong>1.5%</strong>。老板说："优化一下话术，把转化拉一倍。" 你会先做什么？<strong>直接去改话术 / AB 测话术，是不是好主意？</strong></p></div>
+<p>先想 1 分钟。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>先判断电销是"盲打"还是"后置"；盲打先想办法把体验前置（变盲打为跟进），再谈精细分析。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">先认清业绩公式和那个死穴</h3>
+<pre>电销业绩 = 坐席数 × 拨打次数 × 接通率 × 有效通话率 × 成交率 × 客单价</pre>
+<p>死穴是<strong>接通率太低</strong>（约 1.5%，历史从 10% 一路降到 4% 出头）。接通率这么低时，电话三秒就挂、有效通话不到 10 秒——<strong>死磕话术毫无意义</strong>，那是时间/人群问题，不是话术问题。盲打模式下，分析基本白费，只能人海战术。</p>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·外呼现场的红灯</strong></div><p>外呼现场拉横幅："要底薪是无能的表现，承单才有尊严。" 字节巨量引擎当年的 SMB 团队搞过臭名昭著的"双 100"：每个坐席头上挂盏灯，每天必须呼 100 个电话、有效通话 100 分钟，话筒一放下超时红灯就亮、主管冲过来喊"为什么不打"。 <strong>这告诉你</strong>：盲打模式下没有分析可言，就是堆人、堆拨打量瞎猫碰死耗子——能离开这种公司就早点离开。</p></div>
+<h3 class="blk">该"大力出奇迹"还是"复制天才"？看销售表现稳不稳</h3>
+<ul><li><strong>头热型</strong>（头几天/几个月猛、后面懈怠跑路）→ 大力出奇迹，拼命招人</li><li><strong>随机型</strong>（时好时坏没规律）→ 也大力出奇迹，多招总有好的</li><li><strong>稳定天才型</strong>（一直牛）→ 不是堆人，是<strong>复制他的做法 / 复制这个人</strong></li></ul>
+<h3 class="blk">翻盘：变盲打为跟进、售前转售后</h3>
+<p>先用 <strong>页面 / 社群 / 试用 / 一次消费</strong> 跟客户建立关系，再联系——筛"已有消费"的客户去打，接通率能到 <strong>80%</strong>。这时漏斗分析才有意义，用户分群、利益点测试、打标签才发挥作用。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（后置场景·带着诊断去聊）</div><div class="step-body"><p>你是大厂商家运营，要让一个在你平台卖零食的商家<strong>多投广告</strong>（你已掌握他的消耗数据）。照着分支走：</p>
+<div class="tbl-scroll"><table><thead><tr><th>你看到</th><th>你就这么聊</th></tr></thead><tbody><tr><td>消耗没少</td><td>"三月女神节快到了，建议多投点——这节点有营销机会" / "同行出了爆款打法，学一下、充值试试，别被比下去"</td></tr><tr><td>消耗降了 + <strong>投产比也降</strong></td><td>帮诊断："最近效果差，是出价方式不对，还是素材太 low 了？有好案例你学学"</td></tr><tr><td>消耗降了 + <strong>投产比没降</strong></td><td>吹机会："我看到一个新机会点，继续投投试试，这平台肯赚钱"</td></tr></tbody></table></div>
+<div class="callout ok"><div class="callout ok">✅ 一旦销售后置、拿到数据，电话就从"盲打挨骂"变成"带着诊断和机会去聊"——这正是大厂商业化/商家运营要的能力。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（判断销售表现形态 → 定策略）</div><div class="step-body"><p>三个新人三个月的成交单数，先判断各属哪种形态，再定团队策略：</p>
+<div class="tbl-scroll"><table><thead><tr><th>销售</th><th>第 1 月</th><th>第 2 月</th><th>第 3 月</th><th>形态？</th></tr></thead><tbody><tr><td>小王</td><td>8</td><td>3</td><td>1</td><td>＿＿</td></tr><tr><td>小李</td><td>2</td><td>7</td><td>3</td><td>＿＿</td></tr><tr><td>小张</td><td>6</td><td>7</td><td>6</td><td>＿＿</td></tr></tbody></table></div>
+<p><strong>问题</strong>：团队该"大力出奇迹（多招人）"还是"复制天才"？还是两手都要？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li>小王 = <strong>头热型</strong>（头猛、后掉）→ 可大力出奇迹</li><li>小李 = <strong>随机型</strong>（忽高忽低）→ 也可大力出奇迹</li><li>小张 = <strong>稳定天才型</strong>（一直稳）→ 不靠堆人，要<strong>复制他的做法、甚至复制这个人</strong></li></ul>
+<p><strong>策略</strong>：王、李这种占多数 → 一边多招人（大力出奇迹）；同时把小张的打法（他怎么拿名单、怎么开口、怎么跟进）拆出来做成 SOP，争取复制。<strong>两手都要</strong>。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：让电销变得可分析的 3 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>判模式</strong>：盲打还是后置？盲打先想办法把体验前置</li><li><strong>建关系</strong>：用页面/社群/试用/消费记录，把客户从陌生变"跟进"</li><li><strong>打标签做分群</strong>：按历史行为分群，测不同利益点，再做漏斗</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>我的电销是盲打还是后置？接通率撑得起精细分析吗？</li><li>给客户打历史行为标签、做分群了吗？</li><li>判断"要不要堆人"时，看了销售表现稳不稳？</li></ul>
+<h3 class="blk">自测一题（全新糊数据）</h3>
+<p>两个销售上月的电销漏斗：</p>
+<div class="tbl-scroll"><table><thead><tr><th>销售</th><th>拨打</th><th>接通</th><th>有效通话&gt;30 秒</th><th>成交</th></tr></thead><tbody><tr><td>甲</td><td>500</td><td>8</td><td>1</td><td>0</td></tr><tr><td>乙</td><td>480</td><td>75</td><td>40</td><td>6</td></tr></tbody></table></div>
+<p><strong>回答</strong>：① 各自接通率多少？② 谁像盲打、谁像后置？③ 你会让全队学谁、先补什么数据？</p>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p>① 甲接通率 8/500 = <strong>1.6%</strong>；乙 75/480 ≈ <strong>15.6%</strong>。 ② <strong>甲像盲打</strong>（接通率 1.6%，纠话术没用）；<strong>乙像后置</strong>（接通率 15.6%、有效通话也高，说明名单是筛过的）。 ③ 让全队学的不是乙的"话术"，而是乙的<strong>获取名单方式</strong>——他怎么拿到有消费/有行为的客户。要补的数据是<strong>客户的前置行为标签</strong>（有没有消费过/留过资/用过产品），没有标签就没法分群、没法把接通率拉起来。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>电话销售的<strong>主导轴 = 【人】</strong>：靠坐席去触达。翻盘的本质，是把"人海盲打"升级成"基于数据的人去跟进"。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.6">
+<div class="sec-h"><h2>第 1.6 节　销售基本渠道之四：站外推广</h2>
+<span class="badge-time">⏱ 约 32 分钟</span>
+<button class="done-btn" data-done="1.6">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你投信息流推一个 APP：</p>
+<ul><li>A 计划：注册成本 <strong>20 元</strong></li><li>B 计划：注册成本 <strong>45 元</strong>，但曝光更高、点击率也更好看</li></ul>
+<p>老板说"B 曝光高，多投 B"。<strong>对吗？你该看哪个数说话？</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>看任何投放数据，从右往左看：先看最终转化成本，再回头看点击率、出价，决定每个词/计划是扩量、改素材、还是降价。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">线上分两段，站外的特点是"看不到过程"</h3>
+<p>线上交易 = <strong>站外</strong>（从百度/抖音手里买流量，花钱、看不到过程数据）+ <strong>站内</strong>（自家数据全）。站外你只能看到广告费出去了、进来一些点击和线索。</p>
+<h3 class="blk">SEM：链路从左往右发生，解读要从右往左</h3>
+<pre>关键词 → 出价 → 排名 → 点击 → 落地页转化 → 转化成本
+解读顺序（反着来）：① 看最终成本 → ② 看点击率行不行 → ③ 看出价能不能调</pre>
+<p><strong>为什么反着看</strong>：企业不关心过程，只关心"一个注册/购买到底花了多少钱"。</p>
+<h3 class="blk">信息流：ECPM 决定给不给你量</h3>
+<pre>曝光看 ECPM = f(出价, 预估点击率)</pre>
+<p>不光出价要高，<strong>素材吸不吸引人点同样决定能不能拿到量</strong>——所以同款游戏要换几十个素材来回测。</p>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·7999 的总裁班</strong></div><p>网上那些 7999 的"抖音总裁班/电商总裁班"，号称懂平台规则、能帮你低价买量。其实他们的做法不复杂，就是靠海量测试猜出来的组合。所以招投手最简单的判断：<strong>别听他吹 ROI，看他投过多少钱</strong>——投过一个亿的，比 5000 万的牛逼，5000 万比 2000 万牛逼。优秀的投手都是烧钱养出来的。 ⚠️ 别迷信"复杂人群标签 = 精准营销"——平台搞复杂标签，是想让你多试、多花钱，不是为你准（卖家没有买家精）。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（SEM·从右往左看三个词）</div><div class="step-body"><div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>转化成本</th><th>点击率</th><th>出价</th><th>实际成交价</th><th>平均排名</th></tr></thead><tbody><tr><td>C</td><td>8 元（最低）</td><td>高</td><td>2.1</td><td>2.0</td><td>1.12</td></tr><tr><td>A</td><td>18 元（最高）</td><td>低</td><td>—</td><td>—</td><td>—</td></tr><tr><td>B</td><td>16 元</td><td>还行</td><td>3.0</td><td>1.8</td><td>4.5</td></tr></tbody></table></div>
+<p>从右往左逐个看：</p>
+<ul><li><strong>C</strong>：成本最低 → 想扩量。但排名 1.12（已接近第一）、出价 2.1 实际成交 2.0（对手咬得紧）→ <strong>扩量空间很小</strong>，小幅加价试试就好。</li><li><strong>A</strong>：成本最高、<strong>点击率低</strong> → 弹出来的文案/素材吸引力不够 → <strong>优先改素材/创意</strong>。</li><li><strong>B</strong>：成本中等、点击率还行，但排名 4.5、出价 3.0 实际只成交 1.8（下一名离得远）→ <strong>出价虚高，可往下调</strong>降成本。</li></ul>
+<div class="callout ok"><div class="callout ok">✅ 同一张表，三个词三种动作：C 加价试、A 改素材、B 降价。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（信息流·算注册成本，定取舍）</div><div class="step-body"><p>四条信息流计划，<strong>先算注册成本（＝消耗 ÷ 注册），再决定砍谁、扩谁。</strong></p>
+<div class="tbl-scroll"><table><thead><tr><th>计划</th><th>曝光</th><th>点击率</th><th>注册数</th><th>消耗（元）</th><th>注册成本</th></tr></thead><tbody><tr><td>甲</td><td>10 万</td><td>3%</td><td>200</td><td>4000</td><td>＿＿</td></tr><tr><td>乙</td><td>8 万</td><td>5%</td><td>100</td><td>4500</td><td>＿＿</td></tr><tr><td>丙</td><td>5 万</td><td>2%</td><td>250</td><td>3000</td><td>＿＿</td></tr><tr><td>丁</td><td>12 万</td><td>6%</td><td>80</td><td>4800</td><td>＿＿</td></tr></tbody></table></div>
+<p>算完排序，再回答：<strong>该砍谁、扩谁？回到开场那道题，老板"曝光高多投 B"的逻辑错在哪？</strong></p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><div class="tbl-scroll"><table><thead><tr><th>计划</th><th>注册成本</th></tr></thead><tbody><tr><td>甲</td><td>4000/200 = <strong>20 元</strong></td></tr><tr><td>乙</td><td>4500/100 = <strong>45 元</strong></td></tr><tr><td>丙</td><td>3000/250 = <strong>12 元</strong></td></tr><tr><td>丁</td><td>4800/80 = <strong>60 元</strong></td></tr></tbody></table></div>
+<p><strong>排序</strong>：丙 12 ＜ 甲 20 ＜ 乙 45 ＜ 丁 60。</p>
+<ul><li><strong>砍丁、乙</strong>（成本 60、45 最贵）：尤其<strong>丁——曝光、点击率都最高，注册却最少</strong>，点进来不注册，是落地页/货不对版的问题，先别砸钱。</li><li><strong>扩丙、甲</strong>（12、20 最低）。</li></ul>
+<p><strong>老板错在哪</strong>：曝光高、点击率高 ≠ 最终成本低（丁就是反例）。<strong>只有从右往左、先看注册成本，才不会被"曝光点击的虚假繁荣"骗</strong>——这正是开场那道题：B 注册成本 45＞A 的 20，曝光再高也不该多投 B。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：优化一条站外投放的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>先看成本</strong>：算每个词/渠道的最终转化成本，按成本排序</li><li><strong>成本低的扩量</strong>：但先确认排名/出价还有没有空间</li><li><strong>成本高的诊断</strong>：点击率低→改素材；转化率低→改落地页；出价虚高→往下调</li><li><strong>沉淀案例</strong>：把跑通的"素材+出价+投放节奏"记下来，复制到别的项目</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>是从最终成本倒着看，还是顺着过程指标看？</li><li>信息流有没有把素材当成和出价同等重要的事来测？</li><li>测素材/人群时编号、打标签了吗？</li></ul>
+<h3 class="blk">自测一题（全新糊数据）</h3>
+<p>你接手一个"少儿编程"信息流账户：</p>
+<div class="tbl-scroll"><table><thead><tr><th>计划</th><th>曝光</th><th>点击率</th><th>表单留资</th><th>消耗（元）</th><th>素材</th></tr></thead><tbody><tr><td>P1</td><td>20 万</td><td>4.5%</td><td>90</td><td>7200</td><td>美女老师</td></tr><tr><td>P2</td><td>6 万</td><td>2%</td><td>120</td><td>3600</td><td>课程效果对比</td></tr><tr><td>P3</td><td>15 万</td><td>6%</td><td>30</td><td>6000</td><td>"9.9 元体验"</td></tr></tbody></table></div>
+<p><strong>回答</strong>：① 各自留资成本？② 砍谁、扩谁？③ P3 点击率最高、留资却最差，最可能什么问题？</p>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p>① 留资成本（＝消耗 ÷ 留资）：P1 7200/90 = <strong>80 元</strong>；P2 3600/120 = <strong>30 元</strong>；P3 6000/30 = <strong>200 元</strong>。 ② <strong>扩 P2</strong>（30 元最低、最划算）；<strong>砍 P3</strong>（200 元最贵）；P1（80 元）观察、优化素材。 ③ P3 用"9.9 元体验"做钩子，<strong>点击率最高（6%）但留资最差</strong>——典型的<strong>噱头拉点击、货不对版</strong>：低价噱头骗来一堆点击，进来发现不是真 9.9 或门槛高，大量跳出。该换更诚实的素材或调整承诺。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>站外推广的<strong>主导轴 = 【场】</strong>：你在别人的流量场（百度/抖音）里买曝光，平台怎么推你、规则怎么变，你控制不了——所以分析用处有限，更多靠"拆解成功投放案例"积累打法。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.7">
+<div class="sec-h"><h2>第 1.7 节　销售基本渠道之五：站内转化</h2>
+<span class="badge-time">⏱ 约 33 分钟</span>
+<button class="done-btn" data-done="1.7">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>老板说"咱们 APP 最近销售掉了，你查查原因"。你打开后台，<strong>几百条交易路径密密麻麻</strong>。 你的第一步该干嘛？<strong>直接一条条路径去抠转化率，对吗？</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>拿到"卖不动"先归类——是全站、某资源位、还是某单品？三类用三种完全不同的拆法。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">三类问题，三种拆法（千万别混）</h3>
+<pre>① 全站微降   → 先做用户分层（新客/老客/核心客）；大站看体量，小站锁核心用户
+② 资源位卖不动 → 总分式漏斗：入口流量够吗 → 栏目内怎么分流 → 有没有到支付
+③ 单品卖不动 → 先看全局变量（商品本身＋定价），再看局部变量（曝光/广告页/详情/下单）</pre>
+<p><strong>单品口诀</strong>：先和同款 / 同定位 / 上一款比<strong>全流程转化率</strong>，先定位"是不是这款货不行"，再小修小补。</p>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·蹭地铁的老头老太太</strong></div><p>某互联网金融 APP 的"升级贷"资源位点击和办理双双暴跌。负责人差点直接去拆这一格，但贷款是特定品类（不是人人有需求）→ 该先做用户分层。一查大盘活跃居然还涨了，可连"存款"位都在掉。原因：他们在搞"下载 APP 免费坐地铁三次"，拉来一堆蹭地铁的老人——活跃涨了，可这帮人<strong>既不存也不贷</strong>。 <strong>这告诉你</strong>：站内问题先归类、先分层；<strong>活跃涨了不代表对，要看进来的是不是你要的客群。</strong></p></div>
+<div class="callout warnnote">⚠️ 顺带记住：淘宝/抖音/美团这种巨兽，GMV 一天降 30% <strong>只可能是数据错</strong>（淘宝一天 2000 亿、150 万活跃商家，单一波动撼不动）。练习别拿它们当对象。</div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（资源位·总分式漏斗）</div><div class="step-body"><p>"直播"栏目卖不动，拉这条链路出来，和上月对比：</p>
+<div class="tbl-scroll"><table><thead><tr><th>环节</th><th>上月</th><th>本月</th><th>转化率（本月）</th></tr></thead><tbody><tr><td>首页 → 点直播入口</td><td>10000</td><td>10000</td><td>入口持平</td></tr><tr><td>→ 点进某场直播</td><td>4500</td><td>3000</td><td>3000/10000 = <strong>30%</strong>（上月 45%）</td></tr><tr><td>→ 下单</td><td>—</td><td>600</td><td>600/3000 = 20%</td></tr><tr><td>→ 支付</td><td>—</td><td>550</td><td>550/600 ≈ <strong>92%</strong>（正常）</td></tr></tbody></table></div>
+<p>按总分式逐层看：① 入口流量没少（持平）→ 不是大盘问题；② 入口→进直播间这步<strong>从 45% 掉到 30%</strong>，漏人最多 → 栏目内推荐的几场不行；③ 支付率 92% 正常，不是最后一步问题。</p>
+<div class="callout ok"><div class="callout ok">✅ 定位：问题在<strong>"列表→进直播间"的栏目内分流</strong>（推荐策略），不是入口、不是支付 → 改推荐/换场次。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（单品·和同款比，定"货行不行"）</div><div class="step-body"><p>新品 A 卖不动。给它的流量/曝光和同款一样，但全流程转化差一截：</p>
+<div class="tbl-scroll"><table><thead><tr><th>对象</th><th>给的曝光</th><th>全流程转化率</th></tr></thead><tbody><tr><td>新品 A</td><td>10 万</td><td>6%</td></tr><tr><td>同款（上一代）</td><td>10 万</td><td>15%</td></tr><tr><td>同定位主打品（均值）</td><td>—</td><td>10.5%</td></tr></tbody></table></div>
+<p><strong>问题</strong>：这是"货不行"还是"广告页问题"？下一步该回炉做市场调查，还是改广告页搞噱头？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><p>流量分配一样（都 10 万曝光），A 的全流程转化 <strong>6%</strong>，远低于同款 15%、也低于同定位均值 10.5% → <strong>大概率是选品本身不行（货的问题）</strong>，不是改广告页能救的。</p>
+<p>下一步：<strong>做市场调查 / 回炉</strong>，而不是去广告页搞噱头。因为广告页拉点击太容易（美女、"9.9 元"），但<strong>货不对版后面转化只会更崩</strong>——"按下葫芦浮起瓢"。先排硬伤（质量/退货率、价格带是否小众、竞品差异），再谈小修小补。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：拆一个站内问题的 3 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>归类</strong>：先判断是全站 / 资源位 / 单品哪一类</li><li><strong>选拆法</strong>：全站→用户分层；资源位→总分式漏斗看哪步漏人；单品→先全局后局部</li><li><strong>先排硬伤</strong>：单品先和同款比全流程转化、排除流量分配不够，再调广告页/价格</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有先把问题归到全站/资源位/单品，再动手？</li><li>全站问题做用户分层了吗？</li><li>单品有没有先看全局变量（商品+定价），再看局部？</li></ul>
+<h3 class="blk">自测一题（全新糊数据）</h3>
+<p>你负责一个母婴 APP 的"宝妈拼团"资源位，本周成交掉了约 40%。漏斗如下：</p>
+<div class="tbl-scroll"><table><thead><tr><th>环节</th><th>上周</th><th>本周</th></tr></thead><tbody><tr><td>首页 → 点拼团入口</td><td>20000</td><td>19500</td></tr><tr><td>→ 进某拼团商品页</td><td>12000</td><td>5000</td></tr><tr><td>→ 成团下单</td><td>3000</td><td>2400</td></tr><tr><td>→ 支付</td><td>2850</td><td>2300</td></tr></tbody></table></div>
+<p><strong>回答</strong>：按总分式漏斗，哪一步漏人最多？问题最可能在哪？</p>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p>逐层算转化率：</p>
+<ul><li>入口点击：20000 → 19500，<strong>基本没变</strong>（不是流量问题）。</li><li>入口 → 商品页：上周 12000/20000 = <strong>60%</strong>，本周 5000/19500 ≈ <strong>25.6%</strong> → <strong>这步暴跌！漏人最多。</strong></li><li>商品页 → 下单：本周 2400/5000 = 48%，比上周 3000/12000 = 25% 反而更高（不是这步的锅）。</li><li>支付率正常。</li></ul>
+<p><strong>结论</strong>：问题出在<strong>"入口→拼团商品页"的栏目内分流</strong>——本周推的拼团商品大家不点。该换推荐的拼团品/改栏目内排序，而不是动入口或支付。<strong>两头没问题，问题在中间分流。</strong></p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>站内转化的<strong>主导轴 = 【场】</strong>：自家 APP 这个"场"内部的流量分配之争。和门店一样是"场"，区别是这里数据极全、反而容易迷路——所以先归类才不慌。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.8">
+<div class="sec-h"><h2>第 1.8 节　销售基本渠道之六：分销</h2>
+<span class="badge-time">⏱ 约 30 分钟</span>
+<button class="done-btn" data-done="1.8">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你是品牌方数据分析，发现某大经销商这季度<strong>进货量翻倍</strong>。 该高兴吗？在拍手之前，你会先去查哪两个数？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>分析经销商，只抓两个核心数：他的库存 + 终端成交价；再用订货行为给经销商分类、区别对待。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">分销 = 借别人的手卖货，层级越多终端越贵</h3>
+<p>多层代理（总代 → 各级经销商 → 消费者），每多一层就要多让一份利 → 终端价被抬高（格力比美的贵，很大原因是经销层级多）。</p>
+<h3 class="blk">经销商忠诚度低，链条会自己崩</h3>
+<pre>趁活动囤货 → 年尾资金紧 → 打折甩货 → 串货 → 价格崩 → 牌子完蛋</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·茅台 vs 五粮液（2013）</strong></div><p>2013 年塑化剂 + 反腐，白酒集体难过。五粮液一直比茅台卖得好，但这一波没扛住——<strong>经销商甩货、品牌崩盘</strong>。茅台铁腕控价："谁敢降价甩货，撸掉谁的经销资格"，还逆势扩产防假酒，于是逆势超车成了国酒。 <strong>这告诉你</strong>：经销商渠道的命门就是<strong>库存 + 终端价</strong>。管住价格，品牌就稳；管不住，囤货甩货就能把牌子拖垮。</p></div>
+<h3 class="blk">两个核心数，难易不同</h3>
+<ul><li><strong>终端成交价</strong>：相对好查——派业务员/员工去市场调查、抄价。</li><li><strong>经销商库存</strong>：难——靠自建提货平台（如立白给小商户建提货平台，至少看得到一级大商的库存）。</li></ul>
+<h3 class="blk">铁律：经销商 ≠ 消费者</h3>
+<p>消费者肚皮有限、钱有限；<strong>经销商有仓库能囤几年、能融资资金近乎无上限</strong>。你对他打折打太狠，他直接融资把货拿光、低价甩到市场上，反把你的价格体系砸了。<strong>所以绝不能用 RFM / 优惠券那套对付经销商。</strong></p></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（用订货行为 + 库存定对策）</div><div class="step-body"><div class="tbl-scroll"><table><thead><tr><th>经销商</th><th>门店数</th><th>当前库存</th><th>本季订货</th><th>申请配额</th></tr></thead><tbody><tr><td>A</td><td>2</td><td>800</td><td>一次性 1000</td><td>1000</td></tr><tr><td>B</td><td>10</td><td>很少</td><td>很少</td><td>—</td></tr></tbody></table></div>
+<ul><li><strong>A</strong>：只有 2 个店却囤 800 还要再进 1000 → <strong>冲大头/投机囤货</strong> → <strong>压配额</strong>，别给；等他门店多了、有实力了再放。</li><li><strong>B</strong>：10 个店却进得很少 → 财大气粗、没看上你 → 派业务员去<strong>公关</strong>，争取多进。</li></ul>
+<div class="callout ok"><div class="callout ok">✅ 同样是"订货数据"，结合门店数和库存一看，对策完全相反：A 要压、B 要争。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（分类 + 终端价警报）</div><div class="step-body"><p>四个经销商，指导价 100 元。<strong>先判断谁在"囤货等甩"，谁最危险，谁稳，谁可以不管。</strong></p>
+<div class="tbl-scroll"><table><thead><tr><th>经销商</th><th>类型线索</th><th>本季订货</th><th>上季订货</th><th>终端价</th></tr></thead><tbody><tr><td>甲</td><td>持续大商</td><td>5000</td><td>4800</td><td>100</td></tr><tr><td>乙</td><td>一次性大批</td><td>6000</td><td>0</td><td>85</td></tr><tr><td>丙</td><td>小户</td><td>50</td><td>60</td><td>100</td></tr><tr><td>丁</td><td>大商</td><td>3000</td><td>5000</td><td>88</td></tr></tbody></table></div>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li><strong>乙最危险</strong>：上季 0、这季一次性囤 6000，且终端价砸到 <strong>85（低于指导价 15%）</strong> → 典型"趁活动囤货 → 低价甩货"，价格在崩，<strong>必须立刻干预</strong>（控价/警告/查库存）。</li><li><strong>丁也危险</strong>：订货从 5000 掉到 3000（下滑）+ 终端价 88（在甩货）→ 可能资金紧在甩货、或被竞品挖走 → 派业务员问 + 查终端。</li><li><strong>甲稳</strong>：持续订货、终端价守住 100 → 健康大商，稳住、别折腾。</li><li><strong>丙可放</strong>：小户，订货 50~60 波动小 → 看个存活数就行，不用太操心。</li></ul>
+<p><strong>反射</strong>：别只盯订货额（乙订得最多反而最危险）；<strong>终端价跌破指导价 = 价格在崩的前兆</strong>，那两个（乙、丁）才是要盯的。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：诊断经销商渠道的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>抓两个核心数</strong>：想办法看库存（提货平台）+ 终端价（市场调查）</li><li><strong>按订货分类</strong>：持续大商 / 投机一次性 / 小户 / 冲大头，各自不同对策</li><li><strong>配额按实力给</strong>：门店多、生意好的升级、给好政策；实力不够的压配额</li><li><strong>拿不到数就要替代信息</strong>：让一线返回门店数和卖场生意</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>能不能看到经销商的库存和终端成交价？看不到先想办法补</li><li>有没有把经销商当消费者，错用了优惠券/RFM 那套？</li><li>是不是只看订货进货额，忽略了串货和价格崩的风险？</li></ul>
+<h3 class="blk">自测一题（全新糊数据）</h3>
+<p>你是一个区域休闲食品（辣条）品牌的数据分析，指导价 10 元。乱表如下：</p>
+<div class="tbl-scroll"><table><thead><tr><th>经销商</th><th>区域</th><th>本月订货</th><th>上月订货</th><th>库存</th><th>终端价</th></tr></thead><tbody><tr><td>甲</td><td>A 省</td><td>8000（翻倍）</td><td>4000</td><td>看不到</td><td>8.5</td></tr><tr><td>乙</td><td>B 省</td><td>持平</td><td>—</td><td>6000（提货平台）</td><td>10</td></tr><tr><td>丙</td><td>C 省</td><td>0</td><td>2000</td><td>看不到</td><td>（缺）</td></tr></tbody></table></div>
+<p><strong>回答</strong>：① 甲翻倍该不该高兴？先查什么？② 谁的数据最全、判断最有底气？③ 丙这种 0 订货，你怎么进一步查？</p>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p>① <strong>别急着高兴</strong>：甲订货翻倍，但终端价已砸到 <strong>8.5（低于指导价 15%）</strong>、库存还看不到 → 典型囤货 + 甩货前兆。先想办法<strong>查库存</strong>（是不是囤了一大堆）+ 核实终端价为什么低 → 大概率在低价甩货，价格要崩。 ② <strong>乙最有底气</strong>：有提货平台能看库存（6000，合理）、终端价守住 10、订货持平 → 三个信号都健康。 ③ <strong>丙 0 订货 + 终端价缺 + 库存看不到</strong> → 让一线业务员去查"替代信息"：还在不在经营、当地卖场生意怎么样、门店数还剩几家。可能是死掉了、被竞品挖走了、或之前有矛盾，得人去问。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>分销的<strong>主导轴 = 【货】</strong>：货在别人的渠道里流动，命门是"库存 + 终端价"。管不住货的流向和价格，再大的经销商也能把牌子拖垮。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-1.9">
+<div class="sec-h"><h2>第 1.9 节　一个例子，看懂销售分析的基本操作</h2>
+<span class="badge-time">⏱ 约 30 分钟（综合操作演示）</span>
+<button class="done-btn" data-done="1.9">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>有人问你："为什么我们 APP 华东用户的客单价特别高？"</p>
+<p>你会<strong>马上套</strong> GMV = UV × 转化率 × 客单价 吗？还是先反问点什么？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>接到模糊的销售问题，先补前提（2B/2C + 卖什么品类）、再画真实流程、让拆解结构随流程升级、对每个"高/低"提一条可验证的假设——而不是套模板。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p>拿到"广东 GMV 为什么高"——<strong>先问两件事</strong>：2B 还是 2C？卖什么？（答：2C、保健品）然后随着信息增加，分析结构一层层长出来：</p>
+<pre>v1 什么都不知道 → 只能指标拆解：GMV = 用户数 × 转化率 × 客单价
+v2 知道有漏斗   → 投放→线索→私聊跟进→下单→发货，分"投放段 / 转化段"看
+v3 知道分三次成交 → GMV 拆成 首购 + 二购 + 三购
+        首购 = 投放线索 × 转化率 × 客单价
+        二/三购 = 上一档存量 × 转化率
+解读顺序：先看首购多还是二三购多 → 再看是线索多还是转化率高 → 提假设验证</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·"广东转化率高"的两个假设</strong></div><p>同样发现"广东转化率高"，可以是两个完全不同的原因：① 广东购买力强、买得起贵的保健品；② 我们的销售和客户都是广东本地人、会讲粤语、和老人好沟通。这是<strong>两个不同的业务假设</strong>——如果是②，那福建、湖南、四川也是方言区，都可以找本地销售复制。 <strong>这告诉你</strong>：看到"某指标高"别停，继续追问"为什么高"，落成一条能验证的假设。停在"广东就是高、同行都这么认为"，工资过不了一万五。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（拆解结构随流程升级）</div><div class="step-body"><p>同一个问题"广东 GMV 高"，随你了解的流程越多，分析表越长：</p>
+<div class="tbl-scroll"><table><thead><tr><th>你掌握的信息</th><th>你能做的分析</th></tr></thead><tbody><tr><td>只有一句话</td><td>GMV = 用户数 × 转化率 × 客单价，广东 vs 其他地区比</td></tr><tr><td>+ 知道有投放漏斗</td><td>分两段：广东是<strong>线索本来就多</strong>，还是<strong>投放回来转化率更高</strong>？</td></tr><tr><td>+ 知道分三次成交</td><td>拆首/二/三购：高在首购 = 获客强；高在二三购 = 购买力强 or 存量线索多？</td></tr></tbody></table></div>
+<div class="callout ok"><div class="callout ok">✅ 对比第一行和最后一行——同一个问题，分析深度天差地别，差距全来自"你对业务流程了解多少"。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（高在哪一档 + 提假设）</div><div class="step-body"><p>保健品品牌，广东 vs 全国均值：</p>
+<div class="tbl-scroll"><table><thead><tr><th>成交档</th><th>广东 GMV</th><th>全国均值</th></tr></thead><tbody><tr><td>首购</td><td>200 万</td><td>180 万</td></tr><tr><td>二购</td><td>300 万</td><td>120 万</td></tr><tr><td>三购</td><td>250 万</td><td>80 万</td></tr></tbody></table></div>
+<p><strong>问题</strong>：广东 GMV 高，主要高在哪一档？给两个<strong>不同</strong>的业务假设。</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li><strong>高在二三购</strong>：首购广东 200 vs 全国 180，差不多 → 获客能力<strong>不是</strong>主因；二购（300 vs 120）、三购（250 vs 80）远超全国 → 广东高在<strong>复购档</strong>。</li><li><strong>两个不同假设</strong>：① 广东购买力强，买得起高客单的二三购套餐；② 转化率其实没更高，只是广东是<strong>最早做的市场、首购存量大</strong>，导致二三购基数大。</li><li><strong>怎么分辨</strong>：假设① 去看二三购的<strong>转化率</strong>是不是真比别处高；假设② 去看广东的<strong>首购存量线索数</strong>是不是远多于别处。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：把一个模糊销售问题做深的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>补前提</strong>：先问 2B/2C、卖什么品类</li><li><strong>画流程</strong>：把真实的投放→跟进→成交→复购链路画出来</li><li><strong>配结构</strong>：拆解结构随流程升级（如按首/二/三购拆）</li><li><strong>提假设</strong>：对每个"高/低"追问为什么，落成可验证的业务假设</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有先问清 2B/2C 和品类，再动手拆？</li><li>拆解结构跟上真实业务流程的复杂度了吗？</li><li>看到"某指标高/低"，有没有继续追问为什么、提假设？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>有人问你："为什么我们 APP 北方用户的退款率特别低？" 套公式之前，你会先反问哪两个问题？先理哪条流程？再提哪些<strong>可验证</strong>的假设？</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ol><li><strong>先反问</strong>：① 2B/2C、卖什么品类（退款率口径差异极大）；② 退款流程长什么样（7 天无理由？签收后退？）。</li><li><strong>理流程</strong>：下单 → 发货 → 签收 → 申请退款 → 审核 → 退款，看北方在哪一环更少。</li><li><strong>可验证假设</strong>（任选去验）：① 北方客单价低/买的品类本就退款少；② 北方物流近、破损率低；③ 北方客群年龄偏大、退款意识弱。</li><li><strong>别停在</strong>"北方人实在"这种经验主义——它不可验证、证明不了你的能力。</li></ol></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>1.9 是第一章的<strong>收口</strong>：把 1.2 的总纲（四问 / 人货厂 / 先理流程）在一个真实问题上跑了一遍，演示"拆解结构随业务流程升级"。它也是从"分渠道"过渡到第二章"系统化"的桥。</p>
+<div class="quote"><p>第一章按渠道横着看，第二章竖着看：先理解<strong>商业逻辑</strong>（2.1），再认识<strong>三个层次</strong>（2.2→2.3/2.4/2.5），最后看<strong>人货场两两组合</strong>的综合案例（2.6/2.7/2.8），用<strong>找关键</strong>收尾（2.9）。</p></div></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.1">
+<div class="sec-h"><h2>第 2.1 节　一个例子，看懂销售的业务逻辑</h2>
+<span class="badge-time">⏱ 约 28 分钟（认知节）</span>
+<button class="done-btn" data-done="2.1">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>楼下两家水果店：A 装修漂亮、车厘子卖 49.9；B 箱子都不拆、货摆路面、车厘子卖 25。</p>
+<p>哪家打法对？<strong>是不是卖 49.9 的那家更赚？</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>分析任何生意，先判断它走"高毛利"还是"薄利多销"，再看它的打法（选址/装修/陈列/客群）配不配；做 2B 先锁定固定下游客户。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><h3 class="blk">商业底层逻辑</h3>
+<p>东西能卖出去 = 先有人有需求，然后<strong>二选一</strong>：</p>
+<pre>薄利多销（毛利低·量大）：必须把量做起来 → 选址贴客流、省仓储省费用（货直接摆路面）
+高毛利：必须多花钱让人觉得"值" → 更好的位置/装修(营销) 或 产品设计(研发) 或 服务(人力)</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·两家水果店</strong></div><p>A 在高档小区，装修漂亮、车厘子 49.9——<strong>高毛利</strong>，代价是房租贵、装修贵、启动资金大。B 在城中村，箱子不拆、货摆路面、车厘子 25——<strong>薄利多销</strong>，代价是必须走量、省掉一切仓储和陈列费用。住高档小区的人，不会开车十几公里去城中村买便宜货。 <strong>这告诉你</strong>：没有绝对好的打法，只有跟客群匹配的打法。<strong>所有高毛利都有代价，薄利多销也有代价</strong>——关键是自洽。</p></div>
+<h3 class="blk">2B：一定有固定下游客户</h3>
+<p>2B 不会独立存在却没有客户。剪映 → 网红/企业小编；酒店用品 → 按房间数、楼层数、前台台数算需求。<strong>理解业务 &gt; 套理论</strong>：先想清"谁在买、买什么、为什么买"，别张口就要模型。</p></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（判断打法自不自洽）</div><div class="step-body"><p>回到那两家水果店，逐项看它们的打法对不对：</p>
+<div class="tbl-scroll"><table><thead><tr><th></th><th>A 店（高毛利）</th><th>B 店（薄利多销）</th></tr></thead><tbody><tr><td>选址</td><td>高档小区（贵但客群对） ✅</td><td>城中村（贴近走量客群） ✅</td></tr><tr><td>装修</td><td>漂亮、能撑高价 ✅</td><td>不拆箱、省成本 ✅</td></tr><tr><td>定价</td><td>49.9，靠档次 ✅</td><td>25，靠便宜 ✅</td></tr><tr><td>代价</td><td>房租/装修/启动资金大</td><td>必须量大、费用全省</td></tr></tbody></table></div>
+<div class="callout ok"><div class="callout ok">✅ 两家<strong>各自自洽</strong>——都没错。错的是"在高档小区搞薄利多销"或"在城中村搞豪华装修"，那才是打法和客群错配。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（精品咖啡）</div><div class="step-body"><div class="quote"><p>楼下新开一家精品咖啡：装修很贵、单杯 38 元、开在写字楼一层。 用本节"高毛利必有代价 + 客群匹配"判断：它走哪条路？靠什么撑得住？最该担心什么？</p></div>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li><strong>走高毛利</strong>。代价 = 写字楼高房租 + 贵装修 +（可能）好豆好师傅。</li><li><strong>靠什么撑</strong>：把白领的"日常 / 身份感"做成复购，用空间、品质、品牌让人觉得"值 38"。</li><li><strong>最该担心</strong>：① 写字楼客流单一（周末/节假日空场）；② 隔壁瑞幸 9.9 的降维打击——如果 38 的高毛利<strong>没有对应的"值 38"体验</strong>支撑，很容易被薄利多销打垮。高毛利一旦失去代价对应的价值，就站不住。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：想透一门生意的 3 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>定模式</strong>：靠高毛利还是薄利多销？</li><li><strong>查代价</strong>：高毛利→营销/设计/服务花够没；薄利多销→量够不够、费用省没省</li><li><strong>找客户</strong>：2B 锁定固定下游客户，按客户规模（房间/前台/产线）算需求</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>我是在钻"谁在买/买什么/为什么"，还是张口要模型？</li><li>这门生意的打法（高毛利/薄利多销）和它的客群、位置配不配？</li><li>分析 2B，是不是错把它当成了大众消费品？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>一个做工业刀具的厂找你："我们东西比同行贵 30% 还有人买，该不该降价？" 用本节"高毛利必有代价 + 2B 固定客户"分析。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ul><li>贵 30% 还能卖 = 走<strong>高毛利</strong>，代价应体现在<strong>更好的产品</strong>（寿命长/精度高/研发）或<strong>服务</strong>（技术支持/快速换货）。</li><li>该不该降，先问：这 30% 溢价对应的"值"在哪、客户买的是不是这个？</li><li><strong>2B 客户是固定的</strong>（按行业/产线算）：高端制造愿为"寿命/精度"付费 → 别降（降了反显得不值）；低端代工只看价 → 要么不做，要么出一个走量低配款。<strong>别一刀切降价。</strong></li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.1 是第二章的<strong>地基</strong>——做系统分析前先理解业务逻辑。它不挂在某个主导轴上，是"人货场"之上的商业常识层。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.2">
+<div class="sec-h"><h2>第 2.2 节　销售分析的三个层次</h2>
+<span class="badge-time">⏱ 约 28 分钟（框架节）</span>
+<button class="done-btn" data-done="2.2">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>老板问："我们整个华南区今年还要不要扩销售团队？"</p>
+<p>你会用哪种数据回答——是去翻每个业务员的拜访记录，还是看财报级的那几个大数？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>接到任务先定位它属于战略 / 战术 / 战斗哪一层，用对应颗粒度的数据回答——别用粗数据答细问题，也别用细数据答粗问题。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>三个层次（颗粒度 粗 → 细）：
+  战略层：全公司几个数（财报口径） → 和同行对比、看方向对不对
+  战术层（做得最多）：人货厂明细 → 打标签、做策略性调整
+  战斗层：具体到一家店 / 一个业务员 / 一条投放 / 一条转化路径 → 一线最想要、但最缺数据
+规律：越往下越缺数；战斗层靠"找典型 + 个案"，总部至少守住战术层（保证策略不错）</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·喝茶聊了啥，没数据</strong></div><p>2B 销售陪客户喝茶，具体聊了什么、客户满不满意，全靠这哥们回来口头反馈——而且往往不是结构化数据，就一句纯文本"人家不喜欢我们的产品"，到这就结束了。 <strong>这告诉你</strong>：一线最想要战斗层的细节，但那一层恰恰最缺结构化数据——所以要靠找典型、做个案来补。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（给问题定层）</div><div class="step-body"><div class="tbl-scroll"><table><thead><tr><th>问题</th><th>哪一层</th><th>用什么数据</th></tr></thead><tbody><tr><td>我司收入增速比同行慢，方向错了吗？</td><td>战略</td><td>财报 + 同行对比</td></tr><tr><td>新品在广东不打折也卖得好，要不要把人字拖都铺华南？</td><td>战术</td><td>人货厂明细打标签</td></tr><tr><td>这家店店员该跟进店客人说什么话才成交？</td><td>战斗</td><td>几乎没数据 → 找标杆店做个案</td></tr></tbody></table></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（4 个问题定层）</div><div class="step-body"><div class="tbl-scroll"><table><thead><tr><th>问题</th><th>哪一层？</th><th>用什么数据？</th></tr></thead><tbody><tr><td>我司毛利率是不是低于行业？</td><td>＿＿</td><td>＿＿</td></tr><tr><td>哪个城市等级、哪个渠道卖得好？</td><td>＿＿</td><td>＿＿</td></tr><tr><td>这个业务员见客户具体怎么谈成的？</td><td>＿＿</td><td>＿＿</td></tr><tr><td>要不要进入"预制菜"这个新赛道？</td><td>＿＿</td><td>＿＿</td></tr></tbody></table></div>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><div class="tbl-scroll"><table><thead><tr><th>问题</th><th>层</th><th>数据</th></tr></thead><tbody><tr><td>毛利率是否低于行业</td><td><strong>战略</strong></td><td>财报 + 同行毛利对比</td></tr><tr><td>哪个城市等级/渠道好卖</td><td><strong>战术</strong></td><td>人货厂明细，打城市/渠道标签</td></tr><tr><td>业务员具体怎么谈成的</td><td><strong>战斗</strong></td><td>CRM/口头反馈，多半缺数 → 找标杆个案</td></tr><tr><td>要不要进预制菜新赛道</td><td><strong>战略</strong></td><td>行业格局/头部集中度/财报</td></tr></tbody></table></div>
+<p><strong>反射</strong>：别拿财报粗数去答第三个细问题，也别指望大数据告诉你业务员每句话怎么说。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：给一个销售分析任务定层的 3 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>定层</strong>：战略（看方向）/ 战术（打标签调策略）/ 战斗（具体到店、人）？</li><li><strong>配数据</strong>：战略用财报、战术用人货厂明细、战斗找典型个案</li><li><strong>守战术</strong>：总部至少做到分产品/客户/价格/地区，保证策略不错</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>清楚这个问题属于战略/战术/战斗哪一层吗？</li><li>有没有用粗数据硬答细问题（或反过来）？</li><li>在一线，是不是没了解上层政策和同行就闷头干？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你是连锁健身房的分析师，老板连珠炮三问：① 我们和乐刻比，赚钱能力如何？② 哪个城市的店续费率高？③ 金牌教练李教练到底怎么把私教卖那么好的？ 分别是哪一层？各用什么数据？</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ul><li>① <strong>战略</strong>：财报/同行净利率、毛利率对比。</li><li>② <strong>战术</strong>：分城市/分店打标签，看续费率。</li><li>③ <strong>战斗</strong>：李教练的话术/带教细节几乎无结构化数据 → 把他立成标杆，做个案、写学习材料让别人抄。</li></ul>
+<p><strong>提醒</strong>：别拿财报粗数答 ③，也别指望大数据穷尽李教练每句话。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.2 是第二章的<strong>纵轴总图</strong>：战略/战术/战斗三层 × 人货场三轴。后面 2.3/2.4/2.5 分别讲三层，2.6/2.7/2.8 分别讲人货场的两两组合。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.3">
+<div class="sec-h"><h2>第 2.3 节　战略层的销售分析</h2>
+<span class="badge-time">⏱ 约 32 分钟</span>
+<button class="done-btn" data-done="2.3">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你们公司是行业第三，增长比第一名慢，但净利率高一截。老板看着对手的增速眼红，让你分析"要不要也烧钱抢增长"。</p>
+<p>你会先比哪几个数？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>拿财报和同行横向对比，确认方向没错——盯三件事：增长是否比对手慢、毛利净利是否比同行低、应收库存有没有雷。别纠结战略层深不深。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>战略层 = 和同行横向对比，确认方向没错（不纠结深不深）
+  看三件事：① 增长 vs 对手  ② 毛利/净利 vs 同行  ③ 应收/库存有没有雷
+隐形雷：销售额冲高但 应收账款一堆(纸面富贵) / 库存滞销(钱烂仓库)——都不进销售报表
+高增长有代价：线上烧推广、线下开店，净利可能很薄（净利率 4% vs 16%）</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·洽洽 vs 三只松鼠</strong></div><p>洽洽是老牌子、增长慢、丢了老大位；但它自有工厂，毛利反而更好、净利率能到 16%（对手才 4%），而且销售涨、库存反而降。三只松鼠靠烧推广、开直营店冲得很高，结果连跌几年、关了很多店。 <strong>这告诉你</strong>：战略层不比谁深，比的是"方向对不对"。增长慢但赚得多、底子稳，就不必眼红别人冲得高、摔得惨。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（同行对比判方向）</div><div class="step-body"><div class="tbl-scroll"><table><thead><tr><th></th><th>洽洽</th><th>三只松鼠</th></tr></thead><tbody><tr><td>收入增速</td><td>慢、稳</td><td>冲高后连跌</td></tr><tr><td>净利率</td><td>16%</td><td>4%</td></tr><tr><td>库存周转</td><td>销售涨、库存反降</td><td>—</td></tr><tr><td>应收账期</td><td>&lt;30 天</td><td>&lt;30 天</td></tr></tbody></table></div>
+<div class="callout ok"><div class="callout ok">✅ 结论：洽洽<strong>方向没错</strong>（慢但稳、赚得多、底子健康）——不必 all-in 烧钱去追增长，那样净利会崩、还可能像三只松鼠一样玩崩。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（揪出崩盘前的雷）</div><div class="step-body"><p>某消费品公司财报趋势：</p>
+<div class="tbl-scroll"><table><thead><tr><th>年</th><th>收入</th><th>库存周转天数</th><th>应收账期</th></tr></thead><tbody><tr><td>2016</td><td>50 亿</td><td>60 天</td><td>20 天</td></tr><tr><td>2018</td><td>70 亿（涨）</td><td>120 天（飙）</td><td>25 天</td></tr><tr><td>2019</td><td>崩到 40 亿</td><td>150 天</td><td>230 天</td></tr></tbody></table></div>
+<p><strong>问题</strong>：它 2019 崩盘前，哪些信号早就预警了？这些信号在<strong>销售报表</strong>里看得到吗？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><p>两个雷，<strong>都不在销售报表里</strong>：</p>
+<ul><li><strong>库存周转 60 → 120 天一路飙</strong>（2018 收入还在涨时就飙了）= 收入是靠<strong>压库存、多生产摊低成本</strong>换来的纸面好看，钱烂在仓库。</li><li><strong>应收账期 2019 飙到 230 天</strong> = 钱收不回、渠道崩了（经销商跑路、追债）。</li></ul>
+<p>只看销售额（70 亿、涨了！）会被"纸面富贵"骗——所以<strong>看销售一定连着看应收和库存</strong>。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：做一次战略层诊断的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>拉同行</strong>：找头部 / 同体量几家的财报</li><li><strong>比三样</strong>：增长、毛利净利、应收库存，逐项和同行对位</li><li><strong>判方向</strong>：是方向错了，还是只是模式不同（慢但稳）</li><li><strong>给建议</strong>：要不要学对手模式，连同风险一起摆给老板定夺</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有把公司放到同行里横向比，而不是只看自己？</li><li>看销售时，连着看应收和库存了吗？</li><li>有没有被"增长快"迷惑，忽略了人家净利其实很薄？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你是一家国产美妆品牌（行业第二）的分析师。老板说："对手今年收入涨了 50%，我们才涨 10%，太丢人，必须砸钱追！" 用战略层逻辑回应：你要对比哪几个数、提醒什么风险？</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p>要对比：① 双方<strong>净利率</strong>（美妆毛利普遍高，对手收入涨 50% 很可能净利被营销费砸到很低）；② <strong>应收/库存</strong>（对手是不是靠给经销商压货冲收入、库存周转有没有飙）；③ <strong>销售费用率</strong>（对手是不是在烧投放/直播）。</p>
+<p>提醒：<strong>增长有代价</strong>——对手可能在烧钱换收入、净利薄、应收库存有雷。我们若 all-in 追，净利会崩，可能像某些网红美妆一样昙花一现。把风险摆给老板定夺，别盲目追。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.3 = 三个层次里的<strong>最上层（战略层）</strong>，主看"方向"。它俯瞰整盘，不分人货场。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.4">
+<div class="sec-h"><h2>第 2.4 节　战术层的销售分析</h2>
+<span class="badge-time">⏱ 约 33 分钟</span>
+<button class="done-btn" data-done="2.4">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>给你一张订单表（客户 ID / 商品 / 城市 / 金额 / 折扣），老板问："我们到底靠什么挣钱？"</p>
+<p>你会回答"最畅销的是 A001、A002"吗？——这能回答老板吗？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>战术层的灵魂 = 打标签 + 给判断：人先算 RFM 做描述统计、货打"价格带/定位/毛利/折扣"标签、厂打"城市等级/渠道"标签，把冷数字翻译成业务语言。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>人：先算 RFM 做描述统计（看大小客户/会员占比）→ 靠少数大客户(28分) 还是 大量散客(二四分)
+    28分 → 服务好金主、拉新重质、产品线丰富
+    二四分 → 拉新重量、爆款+搭配、做复购
+货：价格带(绝对高中低) / 定位(相对·对标谁) / 毛利率(60%高·40%以下低) / 折扣力度 → 推出"举高打低"等
+厂：城市分一二三线、门店分高中低端、线上看推广费/流量/转化
+目的：把"A001 卖了 5 件"翻译成"对标国际大牌走亲民路线、举高打低"这种业务语言</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·高档餐厅 vs 黄焖鸡</strong></div><p>吃一顿上百万的高档餐厅（靠少数大客户·28 分）：厨师菜谱定制、产品线极丰富，一晚伺候一桌就够。黄焖鸡米饭（靠大量散客·二四分）：标品、压成本、一个爆款加几个搭配，靠人多、靠复购。 <strong>这告诉你</strong>：同是餐饮，标签不同，打法南辕北辙——战术层先用标签认清"靠谁挣钱"，再定拉新/产品线/复购。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（把货标签推成业务策略）</div><div class="step-body"><p>某品牌一款包：对标 Coach（钱包 700 元），自己卖 500；平时月销很少，但 618 期间销量暴涨；折扣力度大。</p>
+<p>打标签 → 推结论：</p>
+<ul><li>定位：对标大牌、相对偏低端（500 vs 700）</li><li>折扣力度大 + 平时非折扣销量少 + 大促暴涨 → <strong>"举高打低"策略</strong>（平时装高冷定高价，大促一波把半年任务做掉）</li></ul>
+<div class="callout ok"><div class="callout ok">✅ 报告别写"A001 卖得好"，要写"<strong>我司对标国际大牌走亲民路线、举高打低</strong>"——这才是把数字变业务。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（28 分还是二四分）</div><div class="step-body"><p>某店一年 RFM 描述统计：</p>
+<div class="tbl-scroll"><table><thead><tr><th>指标</th><th>数值</th></tr></thead><tbody><tr><td>总客户</td><td>1000</td></tr><tr><td>前 10% 大客户贡献收入占比</td><td>75%</td></tr><tr><td>大客户人均消费</td><td>是普通客户的 8 倍</td></tr></tbody></table></div>
+<p><strong>问题</strong>：这家靠少数大客户还是大量散客？拉新该重质还是重量？产品线该宽还是窄？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li>前 10% 贡献 75% + 人均 8 倍 → 典型 <strong>28 分，靠少数大客户（金主）</strong>。</li><li>拉新<strong>重质</strong>（能不能捞到金主，比数量重要）；产品线<strong>宜宽</strong>（金主下单多，偶尔做几款不赚钱的让金主买也行）；普通用户活跃不重要，盯紧那 20% 金主在不在。</li><li>对照：若"大客户只比普通客户多 1 倍、人均差不多"= 二四分 → 拉新<strong>重量</strong>、爆款 + 搭配、做复购、产品线别太宽。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：把战术层数据做出业务味的 3 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>算 RFM 做描述统计</strong>：先看大小客户、会员占比，判断 28 分还是二四分</li><li><strong>给货打标签</strong>：价格带/定位/毛利/折扣，识别流量款、利润款、举高打低</li><li><strong>给厂打标签</strong>：城市等级/线上线下/店位置，把"哪里好卖"翻成可复制的业务结论</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>给人、货、厂都打标签了吗，还是在甩清单？</li><li>算完 RFM，是先做描述统计，还是急着聚类？</li><li>结论是业务语言（亲民路线/举高打低），还是"A001 卖得好"？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>一张卖五金扳手的订单表：河南信阳一个五金店进了 10 把扳手，字段有 商品 ID / 价格 / 城市 / 折扣。老板问"我们靠什么挣钱、该怎么调"。 用本节"人 / 货 / 厂打标签"说你前三步做什么。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ul><li><strong>人</strong>：这是 2B（五金店是下游经销商），先看是靠少数大五金店（28 分）还是大量散店（二四分）→ 按累计进货分层。</li><li><strong>货</strong>：给扳手打价格带（高中低）/ 定位（对标什么品牌）/ 毛利 / 折扣标签，分清流量款、利润款。</li><li><strong>厂</strong>：城市打标签（信阳 = 中部低收入地区）→ 若中部低价区好卖，可复制到湖广赣豫等同类地区。</li></ul>
+<p>结论说业务语言（"中部低收入地区走量、靠低价款引流"），别说"A001 卖得好"。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.4 = 三层里的<strong>战术层</strong>（日常做得最多）。它把人、货、场三轴都打上标签——是连接"三层"和"三轴"的枢纽。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.5">
+<div class="sec-h"><h2>第 2.5 节　战斗层的销售分析</h2>
+<span class="badge-time">⏱ 约 32 分钟</span>
+<button class="done-btn" data-done="2.5">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你管 20 家便利店，想找出"为什么有几家就是卖得特别好"。数据库里只有营业额、租金、SKU 数——没有店内动线、没有店员话术。</p>
+<p>你怎么下手？是放弃，还是？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>战斗层缺数据 → 三步：圈标杆（用结果指标挑收入高、成本低的）→ 提可验证假设（可量化、可验证、指向动作）→ 有数据打标签对比、没数据照标杆抄。目标不是 100% 成功，是大概率成功。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>战斗层最大难点：缺数据、细节无法被数据穷尽 → 三步法
+  ① 圈标杆：用结果指标(收入/利润/成本)挑出收入高、成本低的 店/投放/业务员
+  ② 提假设：为什么它好？提"可量化、可验证、指向动作"的假设
+  ③ 标签对比：有数据就打标签对比验证；没数据就定性写学习材料、照标杆抄
+圈标杆的结果指标：
+  实体店 = 收入/毛利 −（店租+人工+水电+赠品）
+  线上推广 = (GMV−退货) × 毛利率 −（推广费+物流+扣点+工资）  ← 退货高时务必先减退货
+  业务员 = 签约收入/毛利率/回款  ← 特别看回款，别只考核签约</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·小超市的三个假设</strong></div><p>小区超市卖不好，三种假设：① "服务不好"——小超市服务没那么重要、个案难量化，<strong>扔</strong>；② "价格没竞争力"——方向对，但要抄同行价、采集成本高，<strong>半好</strong>；③ "门前陈列不吸引人"——有商品编号 + 陈列位就能从 POS 流水验证，且直接指向"换陈列"这个动作，<strong>好假设</strong>。 <strong>这告诉你</strong>：好假设 = 可量化、可验证、指向一个能改的动作。提"品牌形象不好"这种虚的，不但没法分析，还会把会开成吵架。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（判断假设好坏）</div><div class="step-body"><div class="tbl-scroll"><table><thead><tr><th>假设</th><th>判定</th><th>为什么</th></tr></thead><tbody><tr><td>超市服务不好</td><td>❌ 坏</td><td>个案难量化、小超市服务不是主因</td></tr><tr><td>价格没竞争力</td><td>⚠️ 半好</td><td>方向对，但抄同行价采集成本高</td></tr><tr><td>门前陈列不吸引人</td><td>✅ 好</td><td>有商品编号+陈列位可验证，直接指向"换陈列"</td></tr></tbody></table></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（圈标杆 + 提好假设）</div><div class="step-body"><p>20 家便利店里挑 3 家看：</p>
+<div class="tbl-scroll"><table><thead><tr><th>店</th><th>月营业额</th><th>租金</th><th>SKU</th></tr></thead><tbody><tr><td>店1</td><td>30 万</td><td>3 万</td><td>2000</td></tr><tr><td>店2</td><td>18 万</td><td>3.2 万</td><td>2100</td></tr><tr><td>店3</td><td>32 万</td><td>8 万</td><td>3000</td></tr></tbody></table></div>
+<p><strong>问题</strong>：① 谁最可能是标杆（小心别只看营业额）？② 提一个"可验证、指向动作"的假设解释它为什么好。</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><p>① 别只看营业额选店3（营业额 32 万虽最高，但租金也最高、8 万）。先算"营业额 − 租金"（其他成本相近时的快速排序口径）：店1 = <strong>27 万</strong>、店3 = 24 万、店2 ≈ 14.8 万 → <strong>店1 才是标杆</strong>（营业额高、租金低）。 ② 可验证好假设举例："<strong>店1 的引流爆款（鸡蛋/牛奶）陈列在门口黄金位</strong>"——有商品编号 + 陈列位就能从 POS 流水验证，且直接指向"其他店照搬这个陈列"。别提"店1 服务好"（难量化、个案）。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：做战斗层个案诊断的 3 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>圈标杆</strong>：用结果指标挑出收入高 / 成本低的店、投放、业务员</li><li><strong>提好假设</strong>：可量化、可验证、指向具体动作（如"换门前陈列"）</li><li><strong>验证或照抄</strong>：有数据打标签对比；没数据就定性写学习材料照标杆抄</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有先圈标杆，再去找它为什么好？</li><li>提的假设可量化、可验证、指向具体动作吗？</li><li>有没有被数据形态误导（如在接不通的前提下谈话术）？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你管 30 个线上投放计划，想找"为什么有几条素材就是跑得好"。只有素材编号 / 消耗 / 曝光 / 点击 / 转化。 用"圈标杆 → 提可验证假设 → 标签对比"说你怎么做。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ol><li><strong>圈标杆</strong>：算每条转化成本 = 消耗 ÷ 转化，挑成本最低的几条（若有退货先减退货）。</li><li><strong>提可验证假设</strong>：别提"这条素材调性好"（没法验证），提"<strong>单人物出镜比群像转化高</strong>"或"<strong>带价格的标题点击率高</strong>"——这些能给素材打标签验证。</li><li><strong>标签对比</strong>：给 30 条素材打标签（单人/群像、有无价格、有无优惠），对比标杆和差的，找出大概率管用的组合（如"单人物 + 带价格"成本最低）→ 提建议照抄。</li></ol>
+<p>目标是大概率成功，不求穷尽每条文案。</p></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.5 = 三层里的<strong>战斗层</strong>（最底层，一线最想要、最缺数据）。三层（2.3 战略 / 2.4 战术 / 2.5 战斗）讲完，接下来 2.6–2.8 讲人货场三轴的两两组合。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.6">
+<div class="sec-h"><h2>第 2.6 节　货 / 场，综合分析的例子：实体店销售</h2>
+<span class="badge-time">⏱ 约 32 分钟</span>
+<button class="done-btn" data-done="2.6">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>一家社区生鲜店开业两个月，营业额一路下滑。开业时送米送油很热闹啊，怎么就掉了？</p>
+<p>你会先看哪一类商品的数据？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>实体店位置定了人就基本固定 → 主要看"货和场"；社区超市分清"生鲜 = 引流款、粮油 = 首购款"，盯主力品类量、价格带、客户覆盖。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>实体店：位置定了，人就基本固定 → 主要分析 货 和 场（陈列/面位/活动/堆头）
+社区超市的货分两个角色：
+  生鲜（鲜果鲜菜冻品）= 引流款：线上替代不了、卖给社区老人、吸引日常进店
+  粮油（米油蛋）     = 首购/硬通货：能囤，适合首次拉新
+诊断信号：主力品类(生鲜/肉禽)量起来没有？价格带乱不乱？客户覆盖够不够？</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·倒闭的苏宁小店</strong></div><p>开业时给老人加微信、送米送油，粮油数据冲得很高；但生鲜菜品少、没有 1–2 块的廉价爆款，靠 9.9 的鲜椰子吸引来的是陈老师这种白领、不是社区老人——客户量做不起来，很快倒闭。 <strong>这告诉你</strong>：实体店"货和场"分析的核心，是看引流款对不对客群、价格带健不健康，而不是看开业那波热闹。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（读懂品类走势）</div><div class="step-body"><p>某社区超市开业后：</p>
+<div class="tbl-scroll"><table><thead><tr><th>品类</th><th>角色</th><th>走势</th><th>读出什么</th></tr></thead><tbody><tr><td>粮油</td><td>首购</td><td>开业冲高后回落</td><td>正常（能囤、吃几个月）</td></tr><tr><td>生鲜蔬果</td><td>引流</td><td>一直没起量</td><td>❌ 引流主力没起来</td></tr><tr><td>肉禽</td><td>引流</td><td>比菜还低</td><td>❌ 最有吸引力的品类垫底，得检讨</td></tr><tr><td>酒</td><td>—</td><td>2 月（过年）高峰</td><td>节令性，不可持续</td></tr></tbody></table></div>
+<div class="callout ok"><div class="callout ok">✅ 该救的是<strong>生鲜/肉禽</strong>（引流主力），不是去盯粮油或被过年那波酒的高峰骗了。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（诊断新店下滑）</div><div class="step-body"><p>新店两个月品类数据 + 客户数据：</p>
+<div class="tbl-scroll"><table><thead><tr><th>品类</th><th>角色</th><th>2 月销额</th><th>4 月销额</th></tr></thead><tbody><tr><td>粮油</td><td>首购</td><td>8 万</td><td>2 万</td></tr><tr><td>生鲜蔬果</td><td>引流</td><td>3 万</td><td>2.5 万</td></tr><tr><td>肉禽</td><td>引流</td><td>1 万</td><td>0.8 万</td></tr></tbody></table></div>
+<div class="quote"><p>另：累计覆盖用户 1800（小区约 6000 户），复购率很低。</p></div>
+<p><strong>问题</strong>：问题出在哪？该先救什么？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li>粮油 8 → 2 万<strong>正常</strong>（开业囤货、能吃几个月）；</li><li>真正该当引流主力的<strong>生鲜蔬果（3 → 2.5）、肉禽（1 → 0.8）量根本没起来、还在掉</strong>——引流款缺位；</li><li>覆盖 1800 / 6000 户不到三成、复购低 = <strong>没培养出核心用户</strong>。</li><li><strong>先救生鲜/肉禽</strong>：配 1–2 块的当季便宜引流爆款、把价格带理顺，把社区老人拉进来形成复购——而不是盯着粮油，也别被开业热闹骗。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：诊断一家社区超市的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>分角色</strong>：把品类分成引流款（生鲜）和首购款（粮油）</li><li><strong>看主力量</strong>：生鲜/肉禽的量起来没有，没起来先救它</li><li><strong>查价格带</strong>：每季有没有便宜引流 + 贵的提客单，价格乱不乱</li><li><strong>看覆盖复购</strong>：覆盖了多少户、复购多少，有没有核心用户</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有抓住"生鲜引流、粮油首购"这两类角色？</li><li>这家店价格带健康吗（有引流款也有提客单款）？</li><li>客户覆盖和复购够不够，培养出核心用户了吗？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你是社区水果店分析师，一家店生意平平。数据：车厘子价格从 25 → 39 → 59 都有，且<strong>越贵卖得越多</strong>；月覆盖 1200 户。 用"引流款 / 价格带 / 覆盖"诊断：这家店选品、定价哪里出了问题？</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ul><li><strong>价格带异常</strong>：正常应该便宜的卖得多，这家"越贵卖得越多" → 典型"进高端货、卖不动慢慢打折"（59 进的 → 降 39 → 再降 25），不是健康的引流逻辑。</li><li><strong>缺廉价引流爆款</strong>：没有 1–2 块的当季平价水果把社区老人拉进店。</li><li><strong>覆盖 1200 户偏低、没核心用户</strong>。</li><li>建议：配便宜引流款（应季平价）走量、用贵的提客单，把价格带理顺；别靠"高端慢慢打折"，那样量永远起不来。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.6 = 人货场里的<strong>【货 × 场】组合</strong>（实体店）。人被位置锁定，所以聚焦"货"（选品/价格带）和"场"（陈列/活动）。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.7">
+<div class="sec-h"><h2>第 2.7 节　人 / 货，综合分析的例子：toB 销售</h2>
+<span class="badge-time">⏱ 约 33 分钟</span>
+<button class="done-btn" data-done="2.7">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你是 SaaS 公司销售运营，发现公司在金融行业<strong>老是输给同一个对手</strong>。</p>
+<p>你会去查什么？是先怪自己产品不行，还是先看别的？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>2B 数据少、关键信息靠销售反馈：先看客户行业 + 预算锁优势大客户，用足硬数据（评分/账期/霸王条款），总部层面做方向性指导（优势行业/预算/产品成交率/老对手打标习惯）。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>2B 两段：获取线索（熟客自带/展会最管用）→ 跟进（需求→方案POC→商务谈判→投标→中标）
+固定的丢单原因：陪标 / 骗方案 / 需求不合理 / 功能不满 / 不是最优选 / 商务谈不拢 / 投标价高
+能拿到的硬数据少：评分结果、霸王条款、账期要求（白纸黑字）；其余全靠销售口头反馈
+总部能做 = 方向性指导：盯优势行业、看预算大小、推成交率高的产品、研究老对手打标习惯</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·围标高手搭档</strong></div><p>陈老师搭档过一个特别厉害的销售，是围标高手——他吃透几个大企业的评标流程和评分规则、甚至摸清关键决策人，即使我们产品不占上风，他靠猜准对手报价、比他低一点点就能中标。 <strong>这告诉你</strong>：2B 真正的胜负手是吃透招标流程和评分规则，而不是"喝不喝酒、搞不搞情商"。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（从评分看输在哪）</div><div class="step-body"><p>两单都在金融行业、对手都是 X 公司：</p>
+<div class="tbl-scroll"><table><thead><tr><th>单</th><th>技术分</th><th>价格分</th><th>结果</th></tr></thead><tbody><tr><td>甲</td><td>38/40</td><td>30/60</td><td>输</td></tr><tr><td>乙</td><td>36/40</td><td>55/60</td><td>赢</td></tr></tbody></table></div>
+<ul><li>甲技术分更高（38），却输了 → 输在<strong>价格分太低（30/60）</strong>；价格分占大头（60 分），甲多半报价偏高。</li><li>乙技术差不多（36）、靠价格分（55）赢 → 问题在<strong>价格策略</strong>，不在技术。</li></ul>
+<div class="callout ok"><div class="callout ok">✅ 结论：在金融行业输给 X，多半是<strong>报价习惯</strong>问题，不是产品不行——别一上来怪技术。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（锁定问题 + 给方向）</div><div class="step-body"><p>承上，你拿到更多金融行业的失单评分，发现<strong>几乎都是技术分高、价格分低而输</strong>。</p>
+<p><strong>问题</strong>：① 真问题在哪？② 给总部三条方向性建议。</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><p>① 真问题：<strong>报价策略</strong>——技术够硬，但价格总比对手 X 高，在"价格分占大头"的金融招标里吃亏。 ② 方向建议：</p>
+<ul><li>研究 <strong>X 在金融行业的报价习惯</strong>（历次中标价区间），优化我方报价结构，别盲目高报；</li><li>把<strong>回款/账期</strong>纳入考量，别为压价签下苛刻账期；</li><li>若某些标的技术确实是我方强项，主攻"技术分门槛高、价格分占比低"的标，扬长避短。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：做 2B 销售分析的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>看两栏</strong>：先看客户行业 + 预算，锁优势行业大客户</li><li><strong>定阶段</strong>：看每单处在哪个阶段、赢面多大</li><li><strong>用硬数据</strong>：评分结果/账期/霸王条款用足，过程靠销售反馈补</li><li><strong>总部四看</strong>：优势行业、预算、产品成交率、老对手打标习惯</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有先看客户行业和预算？</li><li>把能拿到的硬数据（评分/账期）用足了吗？</li><li>考核业务员，看回款了吗，还是只看签约？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你是工业自动化设备厂销售运营，发现"汽车行业的单子签约额很高，但回款总是拖、有几单还黄了"。 用"硬数据 + 回款 + 固定丢单原因"分析该查什么、提什么建议。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ul><li><strong>别只看签约额</strong>——查<strong>回款</strong>（2B 命门，"管杀不管埋"会出大事）。</li><li>查<strong>硬数据</strong>：账期要求（是不是汽车客户都压超长账期、白纸黑字）、霸王条款（先做后付？）。</li><li>黄掉的单落在哪种<strong>固定丢单原因</strong>（商务谈不拢/需求不合理/价高）。</li><li>建议：把回款纳入业务员考核（不只签约）；对账期过苛的客户提高门槛或要预付款；复盘黄单原因，该 pass 的早 pass，别在假需求上耗。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.7 = 人货场里的<strong>【人 × 货】组合</strong>（toB）。胜负手是"人"（销售资源、吃透评分）和"货"（产品方案匹配）。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.8">
+<div class="sec-h"><h2>第 2.8 节　人 / 场，综合分析的例子：线上推广</h2>
+<span class="badge-time">⏱ 约 33 分钟</span>
+<button class="done-btn" data-done="2.8">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>你用 5 个公众号、3 个文案版本、不同时间投一门课，报名成本忽高忽低，几十个因素缠在一起。</p>
+<p>你会一股脑全混着看吗？还是先做什么？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>多因素交织 → 先分"全局变量（影响所有人：商品/公众号）"和"局部变量（只影响成功率：版本/时间）"→ 定主指标（获客成本）做二分类 → 先单因素挑好坏 → 再看交叉效应。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>线上推广 = 人和场为主，难在多因素交织（公众号/文案版本/时间/客服…）
+拆法：先分 全局变量(影响所有人：商品、公众号类型) 和 局部变量(只影响成功率：版本/时间)
+  ① 定主指标：获客成本 = 消耗 ÷ 报名，先把每次投放标"好/不好"（二分类）
+  ② 先单因素：分别看 公众号、版本、星期几 谁好谁坏
+  ③ 再看交叉：A + B 组合可能反常</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·白色 SUV</strong></div><p>单因素看：大家都喜欢黑色车、不喜欢白色；都喜欢轿车、不喜欢 SUV。但交叉起来——<strong>白色的 SUV 反而好卖</strong>。这就是统计学说的交叉效应：A+B 会产生单看 A、单看 B 都看不出的化学反应。 <strong>这告诉你</strong>：所有局部变量都可能有交叉效应，所以<strong>先单因素、再交叉</strong>。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（定主指标 + 二分类）</div><div class="step-body"><p>几十次公众号投放，先算平均获客成本 ≈ <strong>3300 元/人</strong>，再逐次标好坏：</p>
+<div class="tbl-scroll"><table><thead><tr><th>某次投放</th><th>报名</th><th>理论成本(3300×报名)</th><th>实际花费</th><th>标记</th></tr></thead><tbody><tr><td>第 1 次</td><td>1 人</td><td>3300</td><td>5000</td><td>❌ 不好（高于平均）</td></tr><tr><td>第 2 次</td><td>0 人</td><td>0</td><td>1800</td><td>❌ 不好（白花）</td></tr></tbody></table></div>
+<p>标完后按公众号汇总"判为好的概率"：Q8 好的 62%、Q5 好的 20% → 先把好坏号挑出来。</p>
+<div class="callout ok"><div class="callout ok">✅ 先用一个主指标（获客成本）把每次投放二分类，再去看一堆因素里谁影响最大。</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（交叉效应：哪个渠道该留/该弃）</div><div class="step-body"><p>"渠道 × 是否好日期"交叉表：</p>
+<div class="tbl-scroll"><table><thead><tr><th>渠道</th><th>好日子（推/其中好）</th><th>坏日子（推/其中好）</th></tr></thead><tbody><tr><td>Q8</td><td>7 次 / 5 好</td><td>6 次 / 3 好</td></tr><tr><td>Q5</td><td>7 次 / 2 好</td><td>3 次 / 0 好</td></tr></tbody></table></div>
+<p><strong>问题</strong>：哪个渠道坚挺、有改进空间？哪个该放弃？为什么？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li><strong>Q8 坚挺、有改进空间</strong>：好日子 7 次 5 好（71%），连<strong>坏日子 6 次都有 3 好（50%）</strong>——整体抗造。那几次踩了坏日子的，把时间调到好日子还能再提升。</li><li><strong>Q5 该放弃</strong>：好日子 7 次才 2 好（29%）、坏日子 3 次 0 好——<strong>它的好日子都比 Q8 的坏日子还差</strong>。顶多把坏日子那 3 次挪到好日子，再给最后一次机会。</li><li>单看渠道不够，<strong>叠加"日期"这个交叉因素</strong>才看清 Q8 真好、Q5 没救。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：拆一个多因素投放漏斗的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>分变量</strong>：先分全局变量（商品/公众号）和局部变量（版本/时间）</li><li><strong>定主指标</strong>：用获客成本把每次投放标成好/不好</li><li><strong>先单因素</strong>：分别看各因素谁好谁坏</li><li><strong>再交叉</strong>：叠加两个因素（渠道 × 好日期）看能否进一步区分</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有先分全局变量和局部变量？</li><li>有没有一个主指标（获客成本）来判断好坏？</li><li>单因素之后，有没有再看交叉效应？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你投信息流推一个"少儿英语"，变量有：3 个素材、2 种人群（宝妈 / 泛人群）、周中 vs 周末。报名成本波动很大。 用"分全局/局部 → 定主指标 → 单因素 → 交叉"说你怎么一步步找最优组合。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ol><li><strong>分变量</strong>：全局 = 素材内容、人群（影响所有人、定上限）；局部 = 周中/周末（只影响成功率）。</li><li><strong>定主指标</strong>：报名成本 = 消耗 ÷ 报名，每条投放按是否低于平均标好/不好。</li><li><strong>先单因素</strong>：分别看 3 个素材、2 种人群、周中/周末，各自"判好"的概率，挑出好坏（如宝妈人群好、素材 A 好）。</li><li><strong>再交叉</strong>：把"人群 × 素材"或"素材 × 周末"交叉看有没有化学反应（可能素材 A 单独一般，但"素材 A × 周末"特别好）。最终锁定大概率最优组合。</li></ol></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.8 = 人货场里的<strong>【人 × 场】组合</strong>（线上推广）。货已固定，变量在"人"（人群定向）和"场"（渠道/时间）的交叉。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2.9">
+<div class="sec-h"><h2>第 2.9 节　多因素影响下，如何找到关键</h2>
+<span class="badge-time">⏱ 约 30 分钟（收尾方法论）</span>
+<button class="done-btn" data-done="2.9">标记学完</button></div>
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><div class="quote"><p>部门没完成目标，复盘会上：有人怪大环境、有人怪产品、有人怪新人不行、有人拍桌子说"就是你们态度有问题"。一屋子人吵成一锅粥。</p>
+<p>你作为分析，<strong>先从哪个开始拆</strong>？</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这节只攻一个动作</div><div class="step-body"><div class="quote"><p><strong>一堆原因 → 先分层（外部/内部、总部/个人）再排除（像剥洋葱）：先扔"对人不对事"，排大环境（有人行就排除）、排对手（是否针对你），内部用找反例证伪，剩下的做测试。</strong></p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><pre>一堆人扯一堆原因 → 先分层再排除：
+  先扔"对人不对事"（态度问题）——一针对人就变立场之争，没法分析
+  分清 外部(大环境/对手) vs 内部(总部产品/个人执行)，不在一个层面解决
+  排除顺序：① 大环境（有人行就不是大环境）② 对手（是否针对你）
+            ③ 内部用"找反例"证伪 ④ 剩下的做测试
+证伪 &gt; 自证：找一个反例就能推翻；想自证清白却很难（所以老板都不爱表态）</pre>
+<div class="callout story"><div class="c-h">🔖 <strong>锚点故事·银行复盘会的六张嘴</strong></div><p>A：有钱人不扩张、没钱人不买房（大环境）；B：对手给我们客户利息优惠、釜底抽薪（对手）；C：我们额度低、放款慢（总部产品）；D：对手送米送油送体验金，我们啥都没有（总部促销）；E：老员工离职、新人不行（分行）；F：你们就是态度有问题（对人）。 怎么剥？先扔 F（对人不对事）→ 分层（AB 外部 / CD 总部 / EF 分行）→ 排大环境（同行行不行？有人行就不是大环境）→ 找反例（老员工也差 → 跟离职无关）→ 剩下 CD 去做测试。 <strong>这告诉你</strong>：找关键不是比谁嗓门大，是先分层、先扔掉对人不对事和大环境，再用反例证伪，剩下的做测试。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（剥银行那六条）</div><div class="step-body"><pre>F「态度问题」      → 对人不对事，先扔
+A「大环境」        → 同行有人行 → 不是大环境，扔（去学先进做法）
+B「对手釜底抽薪」  → 看是否针对我们；若普降则归到价格问题
+E「新人不行」      → 找反例：拉老员工业绩，老员工也差 → 跟离职无关，扔
+C/D「产品/促销」   → 剩下的争不清 → 做小测试（试点降价/送赠品看效果）</pre></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做（教培续报率暴跌）</div><div class="step-body"><p>某教培机构续报率暴跌，复盘会五种说法： ① 大环境不好，家长都不报班了 ② 隔壁机构降价抢人 ③ 我们课程太贵、老师水平参差 ④ 这届招生老师不行，新来的不会逼单 ⑤ 都怪你们执行力差、没狼性</p>
+<p><strong>问题</strong>：先打掉哪几个？用什么方法？最后落到哪里？</p>
+<details class="fold"><summary>👉 对答案</summary><div class="fold-in"><ul><li>先扔 <strong>⑤</strong>（对人不对事，"狼性"是立场之争）。</li><li><strong>①大环境</strong>：先问"是不是所有同类机构都跌"？有机构续报还行 → 不是大环境，扔。</li><li><strong>②对手降价</strong>：看是普降还是专挑我们客户；普降就归到 ③ 的价格问题。</li><li><strong>④新人不行</strong>：找反例——拉老招生老师的续报率，若老员工也跌 → 跟新人无关，扔。</li><li>剩下 <strong>③（课程贵/老师水平）→ 做测试</strong>：挑一个班降价或换好老师试点，看续报能不能回来，别坐而论道。</li></ul></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：在一堆原因里锁定关键的 4 步</div><div class="step-body"><div class="methodcard"><ol><li><strong>扔掉对人不对事</strong>：态度问题先刨出去，回到对事</li><li><strong>分层</strong>：外部（大环境/对手）vs 内部（总部产品/个人执行）</li><li><strong>排除</strong>：先大环境（有人行就排除）、再对手（是否针对你）</li><li><strong>证伪或测试</strong>：内部争议用找反例证伪；剩下的做小测试，别空谈</li></ol></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错＋自测</div><div class="step-body"><p><strong>三个常踩的坑</strong>：</p>
+<ul class="check"><li>有没有先把"对人不对事"的说法刨掉？</li><li>有没有给原因分层（外部/内部、总部/个人）？</li><li>是在找反例证伪，还是在费力自证清白？</li></ul>
+<h3 class="blk">自测一题（全新场景）</h3>
+<div class="quote"><p>你们电商店铺这月 GMV 掉了 20%，运营会上：有人说大盘流量贵了、有人说主图不行、有人说客服回复慢、有人说"是你们不上心"。 用"分层 → 排除 → 找反例 → 测试"说你怎么一层层剥到真因。</p></div>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><ol><li>先扔"<strong>不上心</strong>"（对人不对事）。</li><li><strong>分层</strong>：外部 = 大盘流量贵（平台级）；内部 = 主图（局部可改）/ 客服（执行）。</li><li><strong>排大环境</strong>：看同类目其他店是不是都掉，有店没掉 → 不是大盘。</li><li><strong>找反例/看数据</strong>：客服慢 → 拉"咨询转化率"有没有同步掉，没掉就跟客服关系不大；主图 → 看点击率（CTR）有没有掉，掉了才指向主图。</li><li><strong>剩下的做测试</strong>：换主图做小流量 AB，看 CTR/转化能不能回来。一层层剥，别一上来论证每条都为真。</li></ol></div></details></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><p>2.9 是全册的<strong>收尾方法论</strong>——前面教你各种拆法，这一节教你在一堆吵闹的原因里，靠分层 + 排除 + 找反例 + 测试锁定关键。它统摄整张人货场的网。</p></div></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-cap">
+<div class="sec-h"><h2>🎓 结课大实战：给"鹿见"茶饮做一次完整诊断</h2>
+<button class="done-btn" data-done="cap">标记学完</button></div>
+<div class="quote"><p>这一关把全册都用上：<strong>1.2 四问/人货厂 → 2.3 战略看方向 → 2.4 换维度打标签 → 2.5 圈标杆 → 1.3/1.6/1.7 渠道（场）→ 2.9 排除法</strong>。建议先合上答案，自己写一份诊断，再展开对照。</p></div>
+<h3 class="blk">背景</h3><p>连锁茶饮品牌「鹿见」，全国本季销售环比 <strong>−18%</strong>。老板拍桌子："给我一个完整诊断！"你手上有这些（都是真实工作里"糊"的样子）：</p>
+<p><strong>① 同行对比（战略层）</strong></p>
+<div class="tbl-scroll"><table><thead><tr><th></th><th>鹿见</th><th>龙头·蜜雪</th><th>同体量·喜茶</th></tr></thead><tbody><tr><td>收入增速</td><td>−18%</td><td>+5%</td><td>−3%</td></tr><tr><td>净利率</td><td>12%</td><td>18%</td><td>5%</td></tr><tr><td>加盟商原料库存周转</td><td>天数飙升</td><td>正常</td><td>—</td></tr></tbody></table></div>
+<p><strong>② 换维度（战术层）</strong>：按地区看，华东、华南都跌；换"经典款 vs 新品"看——招牌奶茶各地都稳，一堆季节限定<strong>新品全线扑街</strong>。</p>
+<p><strong>③ 渠道（场）</strong>：堂食、外卖、小程序三个渠道里，<strong>外卖占比最大、跌得也最多</strong>；小程序稳。</p>
+<p><strong>④ 标杆（战斗层）</strong>：300 家店里，"营业额 − 房租 − 人工"最高的<strong>店A</strong>——经典款占比高、不硬推新品、外卖好评率高。</p>
+<p><strong>⑤ 复盘会甩锅</strong>：</p>
+<ul><li>运营总监：大环境不行，奶茶都饱和了</li><li>产品部：新品研发没问题，是门店不会卖</li><li>加盟商代表：总部逼着压货、新品难喝、还涨价</li><li>某区经理：就是有些店长不上心</li></ul>
+<h3 class="blk">你的任务</h3><ol><li>复盘会五种说法，<strong>先扔哪条</strong>？（2.9）</li><li>这是<strong>大环境</strong>问题吗？（2.3）</li><li>真正的主因在<strong>人/货/场</strong>哪里？（1.2 换维度 + 2.4）</li><li>"加盟商原料库存周转飙升"说明什么隐患？（2.3）</li><li>标杆店A 有哪些<strong>可复制</strong>的点？（2.5）</li><li>给一个<strong>结构化诊断 + 测试建议</strong>。</li></ol>
+<details class="fold"><summary>👉 参考诊断（先自己写完再看）</summary><div class="fold-in"><p><strong>1. 先扔"店长不上心"</strong>——对人不对事，一针对人就变立场之争，没法分析。</p>
+<p><strong>2. 不是大环境</strong>——龙头蜜雪还 +5%，说明赛道没崩；而鹿见 −18% 比同体量喜茶（−3%）跌得还狠，是自己的问题。谁说"行业饱和"，让他解释蜜雪为什么还在涨。</p>
+<p><strong>3. 主因在"货"和"场"：</strong></p>
+<ul><li><strong>货</strong>：换维度看，经典款各地都稳、<strong>新品全线扑街</strong>——问题在新品（选品/定价/难喝），不在地区、不在某个人。（这正是 1.2 的"换维度归因"+ 2.4 的"给货打标签"。）</li><li><strong>场</strong>：<strong>外卖渠道占比最大、跌最多</strong>——要单独拆外卖漏斗（1.6/1.7 思路：是曝光少、还是进店不下单、还是配送差评/涨价劝退）。</li></ul>
+<p><strong>4. 库存隐患</strong>：加盟商原料库存周转<strong>飙升</strong> + 加盟商抱怨"被压货" = 总部在<strong>向渠道压货</strong>。注意这里收入是在<strong>跌</strong>（−18%），所以重点<strong>不是</strong>"纸面富贵冲收入"（那是收入冲高时的玩法，如 2.3 的三只松鼠），而是 <strong>1.8 讲的渠道压货链条</strong>：货积在加盟商仓里 → 资金被占、卖不动 → 接下来很可能打折甩货、串货、关店退出 → 把 −18% 拖得更深。也就是说，<strong>这 −18% 可能还没见底</strong>，压货的雷还没爆。（再叠加 2.3 的提醒：看销售一定连着看库存。）</p>
+<p><strong>5. 标杆店A 可复制点</strong>：① 经典款占比高、② 不硬推卖不动的新品、③ 外卖运营好（好评率高）。→ 这些正好对应主因，可以照抄。</p>
+<p><strong>6. 结构化诊断 + 测试建议：</strong></p>
+<ul><li><strong>方向（战略）</strong>：赛道没崩、净利率 12% 还行，方向不用大改；但要<strong>立刻停止向加盟商压货</strong>，否则加盟商甩货/退出会把 −18% 拖成雪崩。</li><li><strong>货</strong>：暂停"硬压一堆季节限定新品"，回到"经典款为主 + 少量精选新品做测试"；新品先小范围测口味/价格，跑通再铺。</li><li><strong>场</strong>：单独诊断外卖——拆漏斗看是曝光、转化还是配送/差评/涨价的问题，挑几家店做"外卖优化"测试。</li><li><strong>执行（战斗）</strong>：把店A 的"经典款陈列 + 外卖运营"做成学习材料，挑 10 家店试点照抄，看营业额能不能回来。</li><li><strong>一句话</strong>：不是大环境、不是店长不上心，是<strong>新品（货）拖累 + 外卖（场）下滑 + 总部压货埋雷</strong>；先停压货、收新品、救外卖，用标杆店A 做试点验证。</li></ul></div></details>
+<div class="quote"><p>🎉 <strong>训练册到此完结。</strong> 你已经走完：认知（1.1）→ 总纲（1.2）→ 六大渠道（1.3–1.8）→ 综合操作（1.9）→ 三个层次（2.2–2.5）→ 人货场组合（2.6–2.8）→ 找关键（2.9）→ 结课大实战。</p>
+<p>接下来最好的练习，就是<strong>拿你自己公司的销售数据，套这套动线真做一遍</strong>。卡住了，回详解版翻对应节。</p></div>
+</section>
+</div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var STORE_KEY = "xsfx-workbook-done";
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch(e){ done = {}; }
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.sec'));
+  var TOTAL = 19;
+
+  // 进度渲染
+  function renderProgress(){
+    var n = 0, k;
+    for (k in done){ if (done[k]) n++; }
+    document.getElementById('progress').textContent = '已学 ' + n + ' / ' + TOTAL;
+    navLinks.forEach(function(a){
+      var ck = a.querySelector('.ck[data-ck]');
+      if (!ck) return;
+      var href = a.getAttribute('href') || '';
+      var id = href.replace('#sec-', '');
+      ck.textContent = done[id] ? '✓' : '';
+    });
+  }
+
+  // 标记学完
+  document.querySelectorAll('.done-btn').forEach(function(btn){
+    var id = btn.getAttribute('data-done');
+    function sync(){
+      if (done[id]){ btn.classList.add('on'); btn.textContent = '✓ 已学完'; }
+      else { btn.classList.remove('on'); btn.textContent = '标记学完'; }
+    }
+    sync();
+    btn.addEventListener('click', function(){
+      done[id] = !done[id];
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(done)); } catch(e){}
+      sync(); renderProgress();
+    });
+  });
+  renderProgress();
+
+  // 当前节高亮
+  var byId = {};
+  navLinks.forEach(function(a){ byId[a.getAttribute('href')] = a; });
+  if ('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          var link = byId['#' + en.target.id];
+          if (link){
+            navLinks.forEach(function(x){ x.classList.remove('active'); });
+            link.classList.add('active');
+          }
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function(s){ obs.observe(s); });
+  }
+
+  // 窄屏目录
+  var toc = document.getElementById('toc');
+  var scrim = document.getElementById('scrim');
+  var burger = document.getElementById('burger');
+  function closeToc(){ toc.classList.remove('open'); scrim.classList.remove('open'); }
+  burger.addEventListener('click', function(){
+    toc.classList.toggle('open'); scrim.classList.toggle('open');
+  });
+  scrim.addEventListener('click', closeToc);
+  navLinks.forEach(function(a){ a.addEventListener('click', closeToc); });
+
+  // 打印前展开所有折叠
+  window.addEventListener('beforeprint', function(){
+    document.querySelectorAll('details.fold').forEach(function(d){ d.open = true; });
+  });
+})();
+</script>
+</body>
+</html>

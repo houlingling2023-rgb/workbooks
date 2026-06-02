@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《高手之路·结构化思考》学习训练册</title>
+<style>
+  :root{
+    --paper:#faf6ec; --paper-2:#f4eedf; --card:#fffdf7;
+    --ink:#322e28; --ink-soft:#6f675a; --ink-faint:#9a9384;
+    --accent:#1f7a6b; --accent-deep:#16584d; --accent-tint:#eaf2ef;
+    --warn:#c0392b; --line:#e6ddcb; --line-soft:#efe8d8;
+    --maxread:720px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;}
+
+  /* ===== 顶栏 ===== */
+  header.topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#f5efe0;
+    display:flex;align-items:center;gap:14px;padding:10px 18px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+  .topbar .burger{display:none;background:none;border:none;color:#f5efe0;font-size:22px;cursor:pointer;line-height:1;}
+  .topbar h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+  .topbar .spine{font-size:12.5px;color:#cfe3dd;border-left:1px solid #3c7c70;padding-left:14px;flex:1;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .topbar .progress{font-size:12.5px;background:#15504675;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+
+  /* ===== 布局 ===== */
+  .wrap{display:flex;align-items:flex-start;}
+  nav.toc{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);overflow-y:auto;
+    width:255px;flex:0 0 255px;background:var(--paper-2);border-right:1px solid var(--line);padding:16px 10px 60px;}
+  nav.toc .grp{font-size:12px;color:var(--ink-faint);font-weight:700;margin:16px 8px 6px;letter-spacing:.5px;}
+  nav.toc a{display:flex;align-items:flex-start;gap:7px;text-decoration:none;color:var(--ink-soft);
+    font-size:13.5px;padding:6px 9px;border-radius:7px;margin:1px 0;line-height:1.45;}
+  nav.toc a:hover{background:var(--accent-tint);color:var(--accent-deep);}
+  nav.toc a.active{background:var(--accent-tint);color:var(--accent-deep);font-weight:700;
+    box-shadow:inset 3px 0 0 var(--accent);}
+  nav.toc a .ck{flex:0 0 auto;width:15px;color:var(--accent);font-weight:700;}
+  nav.toc a.special{color:var(--accent-deep);font-weight:600;}
+
+  main{flex:1;min-width:0;padding:0 28px 120px;}
+  .reader{max-width:var(--maxread);margin:0 auto;}
+
+  /* ===== 章节通用 ===== */
+  section.sec{padding-top:30px;scroll-margin-top:60px;}
+  .sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);
+    padding-bottom:10px;margin:8px 0 6px;}
+  .sec-h h2{font-size:23px;margin:0;color:var(--accent-deep);font-weight:800;}
+  .badge-time{font-size:12px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);
+    padding:2px 10px;border-radius:20px;}
+  .badge-axis{font-size:12px;color:var(--accent-deep);background:var(--accent-tint);border:1px solid var(--line);
+    padding:2px 10px;border-radius:20px;}
+  .done-btn{margin-left:auto;font-size:12.5px;background:none;border:1px solid var(--line);color:var(--ink-soft);
+    padding:4px 12px;border-radius:20px;cursor:pointer;}
+  .done-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  /* 步骤块 */
+  .step{margin:22px 0;}
+  .step-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin:0 0 8px;}
+  .step-h .ic{font-size:18px;}
+  .step-body{padding-left:2px;}
+  .step-body>p:first-child{margin-top:0;}
+  p{margin:.55em 0;}
+  strong{color:var(--ink);}
+  .accent{color:var(--accent-deep);font-weight:700;}
+  .blk{font-size:15.5px;font-weight:800;color:var(--ink);margin:18px 0 6px;}
+
+  /* 引文式场景块 */
+  .quote{border-left:3px solid var(--line);background:var(--paper-2);border-radius:0 8px 8px 0;padding:10px 15px;margin:13px 0;}
+  .quote>p:first-child{margin-top:0;} .quote>p:last-child{margin-bottom:0;}
+
+  /* 框架代码块 */
+  pre{background:#f3ecdb;color:#3b362d;border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:10px;padding:14px 16px;overflow-x:auto;
+    font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13px;line-height:1.65;margin:12px 0;}
+
+  /* 锚点故事 callout —— 靠图标+细边，不靠大色块 */
+  .callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);
+    border-radius:8px;padding:12px 15px;margin:14px 0;font-size:15px;}
+  .callout .c-h{font-weight:800;color:var(--accent-deep);margin-bottom:4px;}
+
+  /* 方法卡 */
+  .methodcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0;}
+  .methodcard h4{margin:0 0 8px;color:var(--accent-deep);font-size:15px;}
+  .methodcard ol{margin:0;padding-left:22px;} .methodcard li{margin:5px 0;}
+
+  /* 易错 checklist */
+  ul.check{list-style:none;padding-left:2px;margin:10px 0;}
+  ul.check li{position:relative;padding-left:26px;margin:7px 0;}
+  ul.check li::before{content:"❌";position:absolute;left:0;font-size:14px;}
+  .warn-x{color:var(--warn);font-weight:700;}
+
+  /* 自查 checklist（方框） */
+  ul.selfck{list-style:none;padding-left:2px;margin:10px 0;}
+  ul.selfck li{position:relative;padding-left:26px;margin:7px 0;}
+  ul.selfck li::before{content:"☐";position:absolute;left:0;color:var(--ink-faint);font-size:16px;}
+
+  /* ===== 训练册轻互动：输入框 + 对照浮现 ===== */
+  .ta-label{font-size:13px;color:var(--ink-soft);margin:10px 0 5px;}
+  textarea.ta{width:100%;min-height:74px;background:var(--card);border:1px solid var(--line);border-radius:9px;
+    padding:10px 13px;font-family:inherit;font-size:15px;line-height:1.7;color:var(--ink);resize:vertical;}
+  textarea.ta:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint);}
+  .saved-tag{font-size:11.5px;color:var(--accent);margin-left:8px;opacity:0;transition:opacity .3s;}
+  .saved-tag.show{opacity:1;}
+  .recall{background:var(--accent-tint);border:1px dashed var(--accent);border-radius:9px;padding:11px 14px;margin:12px 0;font-size:14.5px;}
+  .recall .rh{font-weight:700;color:var(--accent-deep);font-size:13px;margin-bottom:4px;}
+  .recall .rc{white-space:pre-wrap;color:var(--ink);}
+  .recall.empty{border-style:dotted;}
+  .recall.empty .rc{color:var(--ink-faint);font-style:italic;}
+
+  /* 折叠答案 */
+  details.fold{border:1px dashed var(--accent);border-radius:9px;margin:12px 0;background:var(--card);}
+  details.fold>summary{cursor:pointer;list-style:none;padding:11px 15px;font-weight:700;color:var(--accent-deep);user-select:none;}
+  details.fold>summary::-webkit-details-marker{display:none;}
+  details.fold>summary::before{content:"▸ ";color:var(--accent);}
+  details.fold[open]>summary{border-bottom:1px solid var(--line-soft);}
+  details.fold[open]>summary::before{content:"▾ ";}
+  details.fold .fold-in{padding:8px 16px 14px;}
+
+  /* 全景图 */
+  .map{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0;}
+  .map .m-box{border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;background:var(--paper);}
+  .map .m-box.lead{background:var(--accent-deep);color:#f1ece0;border-color:var(--accent-deep);}
+  .map .m-box.lead b{color:#fff;}
+  .map .m-cap{font-weight:800;color:var(--ink);margin:0 0 7px;font-size:13.5px;}
+  .map .m-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0;}
+  .map a.chip,.map span.chip{display:inline-block;text-decoration:none;font-size:12.5px;color:var(--ink);
+    background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:3px 11px;}
+  .map a.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .map span.chip.off{color:var(--ink-faint);border-style:dashed;}
+  .map .m-arrow{text-align:center;color:var(--ink-faint);font-size:15px;margin:2px 0;}
+  .map .lyr{font-size:11px;color:var(--ink-faint);}
+
+  .lead-callout{background:var(--accent-deep);color:#eef4f1;border-radius:10px;padding:13px 17px;margin:14px 0;}
+  .lead-callout b{color:#fff;}
+  hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+  /* 表格 */
+  .tbl-scroll{overflow-x:auto;margin:12px 0;}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--card);}
+  th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;}
+  thead th{background:var(--paper-2);color:var(--ink);font-weight:700;}
+  tbody tr:nth-child(even){background:#fcf9f1;}
+  .note{color:var(--ink-soft);font-size:14px;}
+
+  /* 遮罩（窄屏） */
+  .scrim{display:none;position:fixed;inset:48px 0 0;background:rgba(0,0,0,.3);z-index:25;}
+  @media (max-width:820px){
+    nav.toc{position:fixed;top:48px;left:0;z-index:28;transform:translateX(-100%);transition:transform .2s;
+      box-shadow:2px 0 14px rgba(0,0,0,.15);}
+    nav.toc.open{transform:translateX(0);}
+    .scrim.open{display:block;}
+    .topbar .burger{display:block;} .topbar .spine{display:none;}
+    main{padding:0 16px 100px;}
+  }
+  @media print{
+    header.topbar,nav.toc,.done-btn,.scrim,.saved-tag{display:none!important;}
+    main{padding:0;} textarea.ta{border-color:#bbb;} details.fold{border-color:#bbb;}
+    details.fold[open] .fold-in,details.fold>summary{display:block;}
+    body{font-size:12pt;background:#fff;}
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="目录">☰</button>
+  <h1>《高手之路·结构化思考》学习训练册</h1>
+  <div class="spine">内核：先把问题拆对，再动手　·　认知 / 分析 / 博弈</div>
+  <div class="progress" id="progress">已学 0 / 11</div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav class="toc" id="toc">
+  <a class="special" href="#map"><span class="ck"></span>🗺 全景图</a>
+  <div class="grp">认知打底（该先想什么）</div>
+  <a href="#sec-1"><span class="ck" data-ck></span>① 结构化思考入门</a>
+  <a href="#sec-2"><span class="ck" data-ck></span>② 自然 VS 社会科学</a>
+  <a href="#sec-3"><span class="ck" data-ck></span>③ 思考流程·目标现状差距</a>
+  <div class="grp">分析硬功（把难题拆开）</div>
+  <a href="#sec-4"><span class="ck" data-ck></span>④ 数据解读·找主指标</a>
+  <a href="#sec-5"><span class="ck" data-ck></span>⑤ 难题拆解·二分法逻辑树</a>
+  <a href="#sec-6"><span class="ck" data-ck></span>⑥ 挑战不可能·收集案例</a>
+  <div class="grp">职场博弈（搞定事，更搞定人）</div>
+  <a href="#sec-7"><span class="ck" data-ck></span>⑦ 项目避坑·别当背锅的</a>
+  <a href="#sec-8"><span class="ck" data-ck></span>⑧ 结构化面试·五要素</a>
+  <a href="#sec-9"><span class="ck" data-ck></span>⑨ 项目管理·道天地将法</a>
+  <a href="#sec-10"><span class="ck" data-ck></span>⑩ 结构化述职·FAB</a>
+  <a href="#sec-11"><span class="ck" data-ck></span>⑪ 从事到人·看透利益</a>
+  <a class="special" href="#sec-cap"><span class="ck" data-ck></span>🎓 结课大实战</a>
+</nav>
+<main>
+<div class="reader">
+
+<section class="sec" id="map">
+  <div class="sec-h"><h2>🗺 全景图</h2></div>
+  <p class="note">一张图看懂整门课。点任意节点直接跳到那一单元。</p>
+  <div class="map">
+    <div class="m-box lead"><b>内核</b>：先把问题拆对，再动手　·　不信名字看目标 / 先分问题类型 / 先现状后方法 / 对事更对人</div>
+    <div class="m-arrow">↓ 三类问题，从"想对"到"搞定人"</div>
+    <div class="m-box">
+      <div class="m-cap">认知打底（该先想什么）</div>
+      <div class="m-row"><a class="chip" href="#sec-1">① 结构化思考入门 <span class="lyr">·心法</span></a>
+        <a class="chip" href="#sec-2">② 自然vs社会 <span class="lyr">·心法</span></a><a class="chip" href="#sec-3">③ 思考流程 <span class="lyr">·框架</span></a></div>
+    </div>
+    <div class="m-box">
+      <div class="m-cap">分析硬功（把难题拆开）</div>
+      <div class="m-row"><a class="chip" href="#sec-4">④ 数据解读 <span class="lyr">·框架</span></a><a class="chip" href="#sec-5">⑤ 二分法逻辑树 <span class="lyr">·框架</span></a>
+        <a class="chip" href="#sec-6">⑥ 挑战不可能 <span class="lyr">·心法</span></a></div>
+    </div>
+    <div class="m-box">
+      <div class="m-cap">职场博弈（搞定事，更搞定人）</div>
+      <div class="m-row"><a class="chip" href="#sec-7">⑦ 项目避坑 <span class="lyr">·心法</span></a><a class="chip" href="#sec-8">⑧ 结构化面试 <span class="lyr">·框架</span></a>
+        <a class="chip" href="#sec-9">⑨ 项目管理 <span class="lyr">·框架</span></a><a class="chip" href="#sec-10">⑩ 述职 FAB <span class="lyr">·话术</span></a><a class="chip" href="#sec-11">⑪ 从事到人 <span class="lyr">·心法</span></a></div>
+    </div>
+  </div>
+  <div class="lead-callout">
+    <b>怎么用这张图给自己定位：</b><br>
+    · 不知道"该先想什么" → 认知打底（①②③）<br>
+    · 拿到难题"拆不开" → 分析硬功（④⑤⑥）<br>
+    · 事能做、但"搞不定人" → 职场博弈（⑦⑧⑨⑩⑪）<br>
+    两条主线：横向看"对什么"（认知/分析/博弈），纵向看"练到多细"（心法 → 框架 → 话术）。
+  </div>
+</section>
+
+<hr class="soft">
+<section class="sec" id="howto">
+  <div class="sec-h"><h2>📖 怎么用</h2></div>
+  <p>这是配套《详解版》的「练习册」：详解版负责讲透、可查，本册负责<strong>会做、能上手</strong>。每单元先合上详解版、跟着 8 步动线走一遍；卡住了再回详解版翻对应节。</p>
+  <p>动线：🎯 先卡你一下 → 🔑 这单元只攻一个动作 → 🧠 高手怎么想 → ✍️ 跟着做一遍 → 🪜 换你做 → 🃏 随身方法卡 → ⚠️ 易错+自测 → 🧭 挂回全景图。</p>
+  <p><strong>关键：🎯 出现时先在框里写下你的第一反应再往下看</strong>——你写的内容会自动存在本地（换设备 / 关页面不丢），还会在「✍️ 跟着做」末尾浮现出来，让你亲眼对照差在哪。折叠的「👉 参考」<strong>先自己做完再点开</strong>；右上角「标记学完」记进度（也存本地）。</p>
+</section>
+
+<hr class="soft">
+<section class="sec" id="path">
+  <div class="sec-h"><h2>📅 学习路径</h2></div>
+  <div class="tbl-scroll"><table><thead><tr><th>路径</th><th>练哪些单元</th><th>建议节奏</th></tr></thead><tbody>
+  <tr><td><strong>最小可用</strong>（时间紧、先救急）</td><td>① 入门 → ⑤ 逻辑树 → ⑦ 项目避坑 → ⑪ 从事到人</td><td>4 天，每天 1 单元</td></tr>
+  <tr><td><strong>完整深读</strong>（系统掌握）</td><td>① → ⑪ 全部 + 🎓 结课实战</td><td>2 周，每天 1 单元</td></tr>
+  <tr><td><strong>按角色加餐</strong></td><td>新人：①②③⑧　|　数据分析岗：③④⑤⑥　|　带项目 / 管理：⑦⑨⑩⑪</td><td>按需，每天 1 单元</td></tr>
+  </tbody></table></div>
+</section>
+
+<hr class="soft">
+<section class="sec" id="sec-1">
+  <div class="sec-h"><h2>第 1 单元　结构化思考入门：接到模糊指令，先问什么</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">认知打底 · 心法层</span>
+    <button class="done-btn" data-done="1">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>周一早上，你是公司的行政专员。行政总监在电梯口塞给你一句："下周三集团那边几位高管要过来，你把三楼大会议室收拾一下，<strong>弄精致点，别丢人</strong>。"话音没落，电梯门就关上了。</p></div>
+    <p>这事你怎么接？<strong>先别往下看</strong>——在下面写下你此刻的第一反应：你打算做的第一件事是什么？要不要回总监一句话、回什么？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u1-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>接到一个模糊指令，第一下<strong>不是去做、也不是抠细节，而是先问"起因"——这事为什么做、给谁用、要达成什么</strong>。后面的 5W2H 都是它的延伸：起因抓对了，一半细节你自己就能推出来；起因没问，做得再漂亮也可能全错。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>接到模糊指令 → 千万别脱口"好的"就冲出去
+
+① 先连流程：起因 → 经过 → 结果
+     · 优先抓【起因】：为什么做？给谁？要达成什么？
+     · 抓住起因，往往能省掉后面一连串细节问题
+② 再补细节：5W2H —— 时间 / 地点 / 谁 / 做成啥样 / 多少 / 力度
+铁律：先 ① 后 ②。一上来就抠细节（用什么花、摆几把椅子）必跑偏。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>2015 年陈老师给某企业上系统、对接积分商城，市场部一个哥们要给用户兑话费，大笔一挥在采购单上写了五个字——"需采购话费 100 万元整"，就甩给了采购员。结果那天大家在隔壁开会，就听见采购员拿着单子冲下楼骂："你们市场部的工资这么高，就写个这给我，<strong>哪来的野人啊！</strong>"</p>
+      <p>为什么翻车？他<strong>起因清楚</strong>（给用户兑积分）、<strong>结果却含糊</strong>（怎么兑、充话费还是流量、怎么分运营商，一概没有）。<span class="accent">起因对了不代表能动手，结果不清一样炸。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>就用开头那个"收拾会议室"的场景，看高手怎么接总监这句话——</p>
+    <p><strong>第 1 步 · 先问起因，别急着擦桌子。</strong>你追上去、或发条消息："总监，这几位高管下周三过来，主要是什么安排？是参观路过、在会议室开个会、还是要接待签约？"——这一问，决定了会议室是两种完全不同的样子。</p>
+    <p><strong>第 2 步 · 起因一到手，半套细节自己就出来了。</strong>总监回："集团来跟一个大客户签战略合作，签约仪式放三楼。"你立刻能推出来：要签约桌、双方桌牌、背景横幅、签字笔加绒布、茶水、给随行人员留拍照位——都不用再一条条问。</p>
+    <p><strong>第 3 步 · 剩下的用 5W2H 补齐。</strong>几点开始、大概多少人、要不要投影放合作介绍、要不要茶歇、谁是现场对接人。</p>
+    <p><strong>第 4 步 · 把结果跟总监确认清楚。</strong>"那我按签约接待规格布置：签约桌 + 双方桌牌 + 横幅，周三上午 10 点前弄好，再备茶水和拍照位，您看行吗？"——结果一清晰，这事就稳了。</p>
+    <div class="recall empty" data-recall="u1-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"我去把会议室打扫干净、桌椅摆整齐"——那是直接跳进了执行细节。万一这是场签约仪式，你擦得再亮，没横幅、没桌牌、没签字笔，照样"丢人"。差距就在那一句：<strong>你有没有先问"为什么、给谁"。</strong></p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你是新媒体运营。周一中午，主编在群里 @你一句："上个月那篇阅读 10万+ 的爆款选题，你再给我搞一个类似的，这周内出稿。"然后就没下文了。</p></div>
+    <p>请写下你的三步：① 你会先问主编哪一个<strong>起因</strong>问题（不是问"配什么图"这种细节）？② 哪些 5W2H 细节你可以自己合理假设、不必每条都问？③ 你最后会把"结果"跟主编确认成什么样的一句话？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u1-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u1-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有先抓起因）</p>
+      <p>① 先问起因：<strong>"主编，咱们想复制上次那篇的'什么'？"</strong>——是顺着同一个选题方向再榨一篇，还是要复制它那种"反差标题 + 真实故事"的套路？这次是冲阅读量，还是想引流到私域 / 带货？（起因不同，选题天差地别。）</p>
+      <p>② 可自己假设的细节：发布沿用老号、篇幅和排版风格照上次、配图风格不变、字数 2000 上下——照着上一篇来即可，不必问。</p>
+      <p>③ 确认结果："那我按'还是上次那种真实故事 + 反差标题、主打涨粉'的方向，周四中午给您初稿，您先帮我定一下选题方向行吗？"——把模糊的"类似的"，落成了具体的方向 + 时间 + 交付物。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>拆解一个模糊指令的 5 步</h4><ol>
+      <li><strong>先问起因</strong>：这事为什么做、给谁、要达成什么——优先级最高。</li>
+      <li><strong>再钉结果</strong>：要交付的东西到底长什么样，别让结果含糊。</li>
+      <li><strong>连成流程</strong>：起因 → 经过 → 结果，整件事连起来想。</li>
+      <li><strong>5W2H 补细节</strong>：时间 / 地点 / 谁 / 做成啥样 / 多少 / 力度，能自己假设的就别都问。</li>
+      <li><strong>删繁就简</strong>：用最简方案，只守住"不留明显纰漏"这条底线。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>接到指令脱口"好的"就冲出去——<span class="warn-x">一个起因都没问</span>。</li>
+      <li>一上来纠结细节（用什么花、摆几把椅子），却没问这事<span class="warn-x">究竟为什么做</span>。</li>
+      <li>反过来用力过猛，搞一张几十项的需求表去烦人——<span class="warn-x">那不是结构化，是官僚主义</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，带隐情）</p>
+    <div class="quote"><p>你是 HR。老板路过你工位丢下一句："给销售团队安排一次团建，预算 3 万，下个月办，搞得热闹点。"你后来才隐约听说，最近销售团队连走了三个人、士气很低——但老板<strong>没明说</strong>这一层。</p></div>
+    <p>请写：① 你该先问哪个<strong>起因</strong>问题，才可能挖出老板真正想要的（提振士气、留住人）？② 如果你没问起因、直接订了个网红基地吃喝玩乐两天，可能会怎么翻车？③ 确认真起因后，方案会往哪个方向调？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u1-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u1-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 先问起因，但要问得让老板愿意接话：<strong>"老板，这次团建您最想让大家带走的是什么——是单纯放松一下，还是趁机把团队重新拧成一股绳？"</strong>顺势补一句："最近团队好像有点波动，这次是不是也想稳一稳大家？"——把没明说的隐情，轻轻递到台面上。</p>
+      <p>② 翻车点：纯玩乐的团建对"士气低、想离职"基本无效，甚至适得其反——大家玩归玩，回来该走还走；老板花了 3 万觉得没效果，最后怪到你头上"团建白搞了"。</p>
+      <p>③ 调整方向：加入能重建联结和认可的环节——老板当面讲讲团队的价值和下一步、表彰几个还在拼的人、设计需要协作才能赢的项目，而不只是吃饭加 KTV。预算同样 3 万，花法完全不同。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元是全册的<strong>入门地基</strong>，主导 <span class="accent">认知打底</span>（解决"该先想什么"），主要落在 <span class="accent">心法层</span>（先问起因、不被名字和细节带偏），兼带框架层（起因经过结果 + 5W2H）。后面所有"分析硬功"和"职场博弈"的单元，都站在这块地基上往下走。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-2">
+  <div class="sec-h"><h2>第 2 单元　区分问题：自然科学 VS 社会科学</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">认知打底 · 心法层</span>
+    <button class="done-btn" data-done="2">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你刚入职两个月，发现部门的考勤打卡机三天两头识别失败，好几个同事明明准时到了、却被记成迟到扣了钱，大家私下怨声载道。你想推动换一台。你跑去找行政主管，主管头也不抬："这机器是去年总监亲自拍板选的，好得很，是你们自己不会刷。"</p></div>
+    <p><strong>先别往下看</strong>——写下你此刻的第一反应：接下来你打算怎么推动这件事？你会跟主管说什么、做什么？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u2-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>遇到一个问题，先把它<strong>拆成两部分：自然科学问题（有标准答案的）和社会科学问题（看情况、没标准的）</strong>，然后<strong>分别用对方法</strong>——尤其别拿"科学道理"去硬碰"人的问题"。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>遇到问题，先分流：
+  自然科学（数理化、设备、技术…）→ 有标准答案
+     · 找对学科 / 专业人，用数据和标准说话、对比方案
+  社会科学（管理、人情、面子、利益…）→ 看情况、没标准
+     · 别找权威标准，多试、管用就行
+现实里两者常混在一起 → 拆开，各用各的方法
+铁律：不能拿自然原理去碾压社会问题（一碾就激化成敌我矛盾）</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师举过一个经典场景：你怀孕了，婆婆非逼你吃天价鱼翅，说不吃对孙子不好。这其实是两个问题缠在一起——<strong>自然科学的那半</strong>：鱼翅有没有营养？其实主要成分就是蛋白质，吃个鸡蛋白、蛋白粉一样补。<strong>社会科学的那半</strong>：你能不能当面跟婆婆说"你没读过大学，这就是智商税"？你一说，她心里只会翻译成"这媳妇看不起我"——瞬间变敌我矛盾。所以最后高手怎么破？做一碗粉丝假装是鱼翅，糊弄过去。<span class="accent">社会科学的最高标准就四个字：管用就行。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"换打卡机"的场景，看高手怎么破——</p>
+    <p><strong>第 1 步 · 先把问题拆成两类。</strong>① 打卡机识别率低 = <strong>自然科学问题</strong>（识别成功率可测、有技术标准）；② 机器是总监拍板买的、主管在护短 = <strong>社会科学问题</strong>（面子、当初的决策对不对）。</p>
+    <p><strong>第 2 步 · 自然科学这半，用证据说话。</strong>别空口喊"这机器不行"。连着一周把"识别失败次数、被冤枉迟到的人和金额"记下来，再对一下厂家标称识别率、同价位新机型参数——拿数据，不拿情绪。</p>
+    <p><strong>第 3 步 · 社会科学这半，绝不硬碰。</strong>千万别当众说"总监当初买错了""主管你不懂"——那是拿"我对"去碾压人。主管会跟你死磕到底：这事办成了他没好处，还坐实了当年拍板有问题。</p>
+    <p><strong>第 4 步 · "管用就行"地迂回。</strong>给所有人留台面："总监当年选型眼光是准的，只是用了一年多传感器老化了（递台阶）。我这儿有一周的故障统计，您看是不是走个保修升级、或申请换一台？"——主管不丢面子、总监不被打脸，机器还是换了。</p>
+    <div class="recall empty" data-recall="u2-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"我拿数据去证明这机器烂、直接找总监理论"——技术上你可能全对，但<strong>社会科学这关你输了</strong>，事大概率推不动，还把人得罪光。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你是产品经理。用户反馈 App 上个月新上的某功能很难用、相关页面流失率明显升高，数据也支持。可这个功能，是 <strong>CEO 上个月力推、还在全员大会上专门夸过</strong>的。你想把它砍掉或大改。</p></div>
+    <p>请写：① 这件事里哪部分是<strong>自然科学问题</strong>（有数据标准）、哪部分是<strong>社会科学问题</strong>（人的面子）？② 如果你直接拿流失数据冲到 CEO 面前说"这功能该砍"，大概率会怎样？③ 你会怎么"管用就行"地迂回——既改了功能，又不打 CEO 的脸？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u2-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u2-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有拆两类、有没有硬碰）</p>
+      <p>① 自然科学：功能好不好用、流失率高不高——有埋点数据、有可用性测试标准，可测；社会科学：这是 CEO 力推还公开夸过的，砍它 = 当众打他脸。</p>
+      <p>② 大概率：CEO 觉得"你在否定我的判断"，要么不让动、要么让你"再优化优化"把你架住；就算数据铁证，他面子上也下不来。</p>
+      <p>③ 迂回："CEO 这个功能方向是对的（保住大方向），我们做了灰度测试，发现用户卡在第二步的交互上（把问题缩小到细节、不否定整体）。我想保留功能、只改这一步，A/B 跑一版看数据，您看行吗？"——给方向留面子，把改动包装成"优化"而非"推翻"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>拿到问题先分流的 4 步</h4><ol>
+      <li><strong>问有没有标准答案</strong>：有 = 自然科学，没有 / 看情况 = 社会科学。</li>
+      <li><strong>自然科学找学科</strong>：找专业人，用数据和标准说话、对比方案。</li>
+      <li><strong>社会科学去试</strong>：别找权威标准，管用就行。</li>
+      <li><strong>混合就拆开</strong>：自然部分讲科学，社会部分（人 / 面子 / 利益）灵活迂回，别拿科学硬碰。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>在该认死理的地方耍小聪明——自然科学问题<span class="warn-x">绕过专业、凭感觉拍</span>。</li>
+      <li>在该灵活的地方钻牛角尖——社会科学问题<span class="warn-x">死找"权威标准 / 谁规定的"</span>。</li>
+      <li>拿"我有数据 / 我读过书"去碾压人的问题，<span class="warn-x">把事激化成敌我矛盾</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，带隐情）</p>
+    <div class="quote"><p>你妈非要把医生给你三岁孩子开的退烧药停掉、改用她信的"祖传草药偏方"，说西药伤身。你跟她讲科学，她不听，说你"读了几本书就不要老人了"。</p></div>
+    <p>请写：① 这里的<strong>自然科学问题</strong>是什么（草药 vs 退烧药，哪个安全有效——有没有医学标准可依）？② <strong>社会科学问题</strong>是什么（你能不能直接对你妈说"你那偏方是迷信、会害死孩子"）？③ 你会怎么既守住孩子的用药安全、又不跟你妈彻底撕破脸？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u2-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u2-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 自然科学：退烧药有明确成分、剂量、循证依据；草药偏方成分不明、剂量不可控——这是有医学标准的，孩子用药安全这条不能让步、不能"管用就行"。</p>
+      <p>② 社会科学：你妈出发点是疼孙子，你一句"迷信、害死孩子"，她听到的是"你说我蠢、我害我孙子"，立刻对立、反而更固执。</p>
+      <p>③ 破法：守住底线但给足台面——"妈，我知道您是心疼孩子（先接住情绪）。要不咱明天带孩子去找儿科医生，您把这偏方也带上一起问问大夫，听听专业的怎么说？"把"信不信你"换成"信医生"。守底线的事（吃什么药）寸步不让，给面子的事（怎么说）灵活到底。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">认知打底</span>，落在 <span class="accent">心法层</span>——遇事先分"自然 / 社会"两类问题，是后面所有"对人"单元（项目避坑、从事到人）的认知前提。它和第 1 单元一起，构成"动手前先想对"的底座。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-3">
+  <div class="sec-h"><h2>第 3 单元　思考流程：目标 → 现状 → 差距 → 方法</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">认知打底 · 框架层</span>
+    <button class="done-btn" data-done="3">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你工作三年，月薪 1 万 2，最近越来越焦虑，跟朋友吐槽："我想跳槽涨薪。"朋友追问："涨到多少？去哪个行业？靠什么涨上去？"你一下卡住了——脑子里只有一句"反正想多挣点、换个更好的工作"。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：如果是你，现在该先把什么想清楚，才算真的开始解决"涨薪"这件事？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u3-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>分析任何问题（连"怎么涨薪"这种人生问题也一样），先套<strong>"目标 → 现状 → 差距 → 方法"</strong>这一个框架，而且<strong>从目标开始</strong>——目标（标准）不说清，差距和方法全是糊的。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>分析的唯一模型（从目标倒着推）：
+   目标〔先定！标准说清：什么时间、达到什么程度〕
+    ↑  差距
+   现状〔我现在在哪、有多少〕
+    →  方法 一二三〔差距越大方法越极端；方法也得先知道有哪些〕
+关键：分析不是模型，是搞清现状——
+  多数人卡住，不是不会算，是没见识，不知道目标 / 现状 / 方法是什么。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师印象最深的一个学生在昆明：女朋友的爹妈是昆明大学的教授，他自己做外包、月入 15000，那是 2017 年，昆明房价才 7500 一平。陈老师劝他："你一个月能买两平米，安心把婚结了，小日子过得比谁都好。"怎么劝都不听，非要分手、跑去上海"看看世界长什么样"。结果在上海打了五年工，钱没挣到、女朋友也没了，现在又纠结要不要回昆明。<span class="accent">很多人不是不会分析，是根本不知道自己想要什么、也看不清自己的现状。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"想跳槽涨薪"的场景，看高手怎么把它拆明白——</p>
+    <p><strong>第 1 步 · 先定目标（标准）。</strong>"想涨薪"太糊。逼自己说清楚：我要在 <strong>1 年内、月薪从 1.2 万到 2 万、留在互联网行业、做数据分析岗</strong>。——这才是个能往下算的目标。</p>
+    <p><strong>第 2 步 · 看现状、算差距。</strong>现状：3 年经验、1.2 万、会 SQL + Excel、但没独立负责过项目。而 2 万的岗位普遍要"独立做过用户增长 / 会 Python / 带过小项目"。差距一清二楚：<strong>缺一个拿得出手的增长项目 + Python</strong>。</p>
+    <p><strong>第 3 步 · 差距决定方法。</strong>差距不大（不是要翻十倍），方法就不必极端：在现公司主动接个增长相关的活、攒案例，业余补 Python，半年后带着项目去面 2 万的岗。</p>
+    <p><strong>第 4 步 · 万一"方法"这格是空的（压根不知道怎么涨）。</strong>那不是不会分析，是没见识——去招聘网站扒 20 个 2 万的目标岗 JD，看它们到底要什么，现状和方法自然就显出来了。</p>
+    <div class="recall empty" data-recall="u3-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的还是"多挣点、换个好工作"，那是<strong>目标这一格根本没填</strong>——目标一糊，后面现状、差距、方法全跟着糊。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你表弟读大三，跟你说："哥，我毕业想进大厂做产品经理。"你一问才知道：他不清楚大厂产品岗到底要什么、不知道自己现在差在哪、也没做过任何像样的项目。</p></div>
+    <p>请写：① 你会帮他把"目标"具体成什么样（用 5W2H）？② 怎么帮他看清现状、算出差距？③ 他大概率卡在"目标 / 现状 / 方法"哪一格？你会让他先去做什么来"长见识"？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u3-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u3-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有从目标开始、有没有指出他卡在哪格）</p>
+      <p>① 目标具体化："毕业（明年 6 月）进一线大厂、做 C 端产品经理、起薪 20k+。"</p>
+      <p>② 现状 vs 差距：现状是大三、无实习、无项目、无作品集；大厂产品岗校招普遍要"≥1 段产品实习 + 能讲清一个完整的需求分析案例"。差距 = 一段实习 + 一个能拿出手的产品 case。</p>
+      <p>③ 他卡在<strong>方法 / 现状这两格</strong>——根本没见过大厂产品岗要什么。先让他去扒 10 份大厂产品校招 JD + 找一个在大厂做产品的学长聊一次，比他自己空想一年都有用。这就是"没见识 ≠ 不会分析"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>分析任何问题的 4 步</h4><ol>
+      <li><strong>先定目标</strong>：把"成功"的标准写清楚（什么时间、达到多少）。</li>
+      <li><strong>再看现状</strong>：我现在在哪、有多少。</li>
+      <li><strong>算差距</strong>：现状到目标差多少——差距决定方法的极端程度。</li>
+      <li><strong>选方法</strong>：方法也是描述性统计，不知道就去见识、去问、去扒 JD / 看标杆。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>没定目标就开始想方法——<span class="warn-x">标准不清，差距和方法全糊</span>。</li>
+      <li>指望一个测评 / 咒语算出人生答案（天天测 MBTI）——<span class="warn-x">对抗不了人性，没用</span>。</li>
+      <li>不知道现状和方法就硬分析——<span class="warn-x">没见识，分析的是空气</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，带隐情）</p>
+    <div class="quote"><p>你朋友开了家奶茶店，生意不温不火，跟你说："我想让店火起来、多赚钱。"</p></div>
+    <p>请写：① 你会帮他把"火起来"具体成什么<strong>可衡量</strong>的目标？② 现状要看哪些（位置 / 日客流 / 复购 / 成本结构）？差距怎么算？③ 他可能卡在哪一格？你会建议他先去"见识"什么？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u3-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u3-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 目标具体化："3 个月内，日均订单从现在的 80 单做到 150 单、月净利从 1 万到 3 万。"（光说"火起来"没法分析。）</p>
+      <p>② 现状要查：店的位置和客流、现在日均多少单、客单价、复购率、房租 + 人力 + 物料成本各占多少。差距 = 目标 150 单 − 现状 80 单 = 每天要多 70 单，再看这 70 单从哪来（新客 or 复购）。</p>
+      <p>③ 他大概率卡在<strong>方法和现状</strong>——不知道生意差在哪、也没见过火的店怎么做。建议他先做两件"长见识"的事：连续记一周自己店的客流和时段分布（看清现状），再去隔壁那家天天排队的店蹲半天，看人家产品、定价、出杯速度、引流方式哪里不一样。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">认知打底</span>，落在 <span class="accent">框架层</span>（目标 → 现状 → 差距 → 方法）。它是后面"分析硬功"三个单元的总框架——数据解读、逻辑树，本质都是在"看清现状"这一格里往下钻。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-4">
+  <div class="sec-h"><h2>第 4 单元　数据解读：在一堆指标里找主指标</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">分析硬功 · 框架层</span>
+    <button class="done-btn" data-done="4">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你刚接手一家在线教育公司的运营。老板甩给你一张表，字段是：<strong>日期、注册人数、试听课预约数、试听到课数、付费转化数、客单价、退费数</strong>。老板说："你看看哪儿有问题，给我个说法。"你盯着这一排指标，有点懵。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：面对这一堆指标，你第一步会怎么下手、先看哪个？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u4-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>拿到一堆陌生指标，先<strong>找"主指标"——离收入 / 成本最近的那个</strong>；其余所有指标，都是用来解释它的。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>读懂一堆陌生数据：先问"哪来的"，再"找主指标"
+  ① 定层级：财报 / 部门级 / 明细（财报最易看含义，有同业对比）
+  ② 找主指标：和收入 / 成本 / 费用最相关的那个
+  ③ 其余当解释：所有别的指标，都是解释主指标好坏的
+铁律：纠结单个数字的大小没意义，找到主指标，全盘就活了。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师拿一份"美国超市的财报"坑过好多人：一排收入、成本、毛利、净利润摆上来，大多数人对着发懵、不知从哪看。其实你只要先认出"这是财报"、再问一句"哪个行业"，知道是美国零售，去找沃尔玛、Costco、塔吉特的财报一对比——<span class="accent">一分钟，原形毕露。没思路的人对着数发呆，有思路的人一句话就看穿。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那张"在线教育"的表，看高手怎么读——</p>
+    <p><strong>第 1 步 · 先定层级。</strong>有注册、试听、转化、客单价、退费——不是财报、也不是最明细（没到每个学员 ID），这是一张<strong>部门级运营数据</strong>。</p>
+    <p><strong>第 2 步 · 找主指标。</strong>谁离收入最近？付费转化数 × 客单价 − 退费 ≈ 净收入。所以<strong>主指标是"付费转化"</strong>（它直接决定收入）。</p>
+    <p><strong>第 3 步 · 其余都是解释项，串成一条漏斗。</strong>注册 → 预约试听 → 试听到课 → 付费转化，是一条漏斗；客单价、退费是收入的加减项。主指标（付费）不好，就沿漏斗往回看：是注册少？试听到课率低？还是到课了不付费？</p>
+    <p><strong>第 4 步 · 锁定卡点。</strong>比如发现注册、预约都正常，但"试听到课率"只有 40%——问题就锁定在"约了试听却不来"这一环，再去查是提醒没做好、还是排课时间不合适。</p>
+    <div class="recall empty" data-recall="u4-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你一上来盯着"客单价"或"注册人数"纠结这个数大不大——那是没找主指标。<strong>先锁定"付费"这个主指标、把其余串成漏斗</strong>，出问题的环节自己就跳出来了。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你是一家健身房的店长，系统导出一张表，字段是：<strong>月份、办卡会员数、私教课购买数、到店打卡次数、续卡会员数、退卡数、会员投诉数</strong>。</p></div>
+    <p>请写：① 这是哪一层数据？② 主指标该选谁（离收入最近）？③ 其余字段，你会怎么定位成"解释项"、怎么串起来看？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u4-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u4-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有先锁主指标）</p>
+      <p>① 部门级运营数据（不是财报，也没到每个会员 ID 的最明细）。</p>
+      <p>② 离收入最近的有几块：办卡（新增收入）+ 私教课（增值收入）+ 续卡（留存收入），减去退卡。综合看主指标可锁<strong>净收入</strong>；若只能选一个最该盯的，是<strong>续卡</strong>——健身房利润大头在续费，新办卡获客成本高。</p>
+      <p>③ 解释项怎么串：到店打卡次数解释"会员活不活跃"（不来的人多半不续卡）；会员投诉数解释"为什么退卡 / 不续卡"；私教购买解释"增值收入"。链路：到店频次 → 续卡率 → 净收入，投诉是续卡下滑的预警信号。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>读懂一份陌生数据的 4 步</h4><ol>
+      <li><strong>问来源</strong>：哪来的、能干什么。</li>
+      <li><strong>定层级</strong>：财报 / 部门级 / 明细。</li>
+      <li><strong>找主指标</strong>：和收入 / 成本 / 费用最相关的那个。</li>
+      <li><strong>其余当解释</strong>：所有别的指标，都是解释主指标好坏的。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>上来就纠结某个数字大不大——<span class="warn-x">意义不大，要看含义和对比</span>。</li>
+      <li>看到一堆指标就懵、被带偏——<span class="warn-x">先找主指标</span>。</li>
+      <li>把所有指标平铺着一个个看——<span class="warn-x">不串成漏斗、不挂收入，看不出问题</span>。</li>
+    </ul>
+    <p class="blk">自测（全新数据表，带陷阱）</p>
+    <div class="quote"><p>你是 SaaS 产品的运营，拿到一张表：<strong>周、新增试用账号、激活账号、周活跃账号、付费转化账号、月费、流失账号</strong>。其中"周活跃账号"这个数字特别大、特别好看，老板看了很满意。</p></div>
+    <p>请写：① 主指标该是谁（<strong>别被"周活跃"带偏</strong>）？② 如果周活跃很高、但付费转化和流失都很差，说明什么？③ 你会沿什么链路找问题？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u4-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u4-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 主指标是<strong>付费转化（净收入）= 付费账号 × 月费 − 流失带走的收入</strong>。"周活跃"再大也不直接等于钱，它只是个<strong>解释项</strong>，不是主指标——这就是这道题的陷阱。</p>
+      <p>② 周活跃高但付费差、流失高，说明：产品有人用、但<strong>用的人不愿意为它掏钱</strong>，或免费版就够用、付费点没设计好；活跃是虚的繁荣。</p>
+      <p>③ 链路：新增试用 → 激活 → 活跃 → <strong>付费转化</strong> → 流失。活跃没问题，所以往后看"活跃却不付费"那一环（付费墙设在哪、值不值），以及"付费后又流失"那一环（用一阵发现不值）。盯主指标，别被好看的活跃数迷惑。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">分析硬功</span>，落在 <span class="accent">框架层</span>（找主指标）。它是"看清现状"的硬功夫之一——把一堆吓人的指标，收敛成"一个主指标 + 一条漏斗"，问题环节自然浮出来。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-5">
+  <div class="sec-h"><h2>第 5 单元　难题拆解：用二分法构建逻辑树</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">分析硬功 · 框架层</span>
+    <button class="done-btn" data-done="5">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你是一家连锁面包店的运营。老板发现最近一个月整体营业额跌了 15%，把你叫进办公室："给我查清楚——为什么跌、怎么办。"你手上有各门店、各品类、各时段的数据。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：你会从哪儿下手？先看什么、先怀疑什么？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u5-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>面对一个"为什么"难题，用<strong>二分法（非此即彼）把它层层拆成一棵逻辑树</strong>，再用证据一支一支排查——而不是一上来就列八条假设。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>分析 = 问题 → 假设 → 数据 → 论证（循环）
+  ① 先搞现状：哪个店 / 品类 / 时段跌得最狠（先找靶子）
+  ② 排序假设：排掉超权限 / 伤筋动骨的，从致命或易解决处下手
+  ③ 二分法建树：非此即彼、层层一拆二（最好的 MECE 法）
+  ④ 沿流程找证据：顺业务链路逐环节验，正反论证，证据多者胜
+铁律：先画靶子再射箭；二分法找思路最快，别硬憋"八条方略"。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师拆"为什么红牛比东鹏发展慢"：他没一上来列七条假设，而是先看现状（红牛从 230 亿降到 210 亿、东鹏从 40 亿涨到 158 亿），再把"降价、改做咖啡"这些伤筋动骨、超权限的先叉掉，锁定"<strong>经销商</strong>"这一个突破口，用二分法一拆——流失 / 未流失，未流失再分订货升 / 降……一棵逻辑树就出来了。<span class="accent">新手憋八条方略，高手一拆二拆到底。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"面包店跌 15%"的场景，看高手怎么拆——</p>
+    <p><strong>第 1 步 · 先搞现状，别瞎猜。</strong>跌 15% 是个总数，先拆：是所有门店都跌，还是几家拖累的？是所有品类都跌，还是某个品类崩了？先找"跌得最狠"的那块。假设查出来：80% 的跌幅来自 3 家社区店，且集中在"现烤面包"这个品类。</p>
+    <p><strong>第 2 步 · 排掉不该查的。</strong>"是不是大环境消费降级""要不要全面降价"——超权限、伤筋动骨，先叉掉，聚焦那 3 家店的现烤面包。</p>
+    <p><strong>第 3 步 · 二分法拆树。</strong>现烤面包跌 → 是"卖出去的少了"还是"卖出但退货 / 客诉多了"？→ 卖得少 → 是"进店客流少了"还是"进店了却不买现烤"？→ 客流正常 → 是"产品问题（不新鲜 / 不好吃）"还是"陈列 / 价格 / 时机问题"？</p>
+    <p><strong>第 4 步 · 沿流程找证据。</strong>顺着"进店 → 看到现烤 → 购买"找：调监控，客流正常；看现烤区，发现新来的店员把出炉时间从早 7 点拖到了 9 点——早高峰的上班族买不到热面包，扭头就走了。真因锁定。</p>
+    <div class="recall empty" data-recall="u5-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"把所有数据拉出来全分析一遍 / 列十个可能原因"——那是没有靶子的乱射。<strong>先找跌得最狠的一块、二分法一拆到底</strong>，比平铺八条假设快十倍。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你是一款手机游戏的运营，发现这周玩家的"次日留存"突然从 45% 掉到了 30%。</p></div>
+    <p>请写：① 你先看什么现状、先定位到哪一块（哪个渠道 / 哪个版本 / 哪类玩家跌得最狠）？② 你会用二分法怎么拆（至少拆两层）？③ 沿什么流程找证据来锁定真因？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u5-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u5-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有先定位、有没有一拆二）</p>
+      <p>① 先搞现状：按渠道分（是不是某个新投放渠道带来的玩家特别差）、按版本分（是不是上周更新的版本出了问题）、按新老玩家分。先找留存跌得最狠的那一块——假设定位到"上周新版本 + 新手玩家"。</p>
+      <p>② 二分法：新手留存跌 → 是"进不来"（下载 / 登录失败）还是"进来了留不住"？→ 进得来 → 是"新手引导卡住了"还是"玩法不好玩"？→ 卡住 → 是"某一关过不去"还是"闪退 / 卡顿"？</p>
+      <p>③ 沿"下载 → 登录 → 新手引导 → 第一次完整对局 → 次日回流"找证据：看各步骤的流失漏斗，定位到新版本某个新手关卡的通过率从 90% 暴跌到 50%——大概率是这关难度 / Bug 出了问题。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>拆解"为什么"难题的 5 步</h4><ol>
+      <li><strong>先搞现状</strong>：哪块跌得最狠（门店 / 品类 / 时段 / 渠道）。</li>
+      <li><strong>排序假设</strong>：排掉超权限 / 伤筋动骨的，从致命或易解决处下手。</li>
+      <li><strong>二分法建树</strong>：非此即彼，层层一拆二。</li>
+      <li><strong>沿流程找证据</strong>：顺着业务链路逐环节验。</li>
+      <li><strong>正反论证</strong>：证据多的一方胜出。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>不看现状就开始猜原因——<span class="warn-x">在野地里浪战</span>。</li>
+      <li>一上来列八条假设、不分轻重——<span class="warn-x">看着全，没法执行</span>。</li>
+      <li>硬憋"救国八大方略"——<span class="warn-x">构建思路阶段，二分法最快</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，带陷阱）</p>
+    <div class="quote"><p>你是电商客服主管，发现这个月"客户满意度评分"从 4.8 掉到了 4.2。老板一口咬定是客服态度变差了。</p></div>
+    <p>请写：① 你会先怎么定位（是全体客服都跌，还是某几个人 / 某个时段 / 某类问题）？② 用二分法拆，"满意度跌"先分成哪两支？③ 如果查出来其实是物流爆仓、发货慢，客户把火撒到了客服评分上——这说明了什么？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u5-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u5-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 先定位：按客服个人分（是不是几个人拉低的）、按时段分（是不是某段时间集中差评）、按问题类型分（是不是某一类工单评分特别低）。别一上来就认定"全体态度差"。</p>
+      <p>② 二分法第一刀，恰恰应该是：满意度跌 → 是"客服自己的问题（态度 / 响应慢 / 没解决）"还是"不是客服的问题（产品 / 物流 / 价格，客户迁怒到客服）"？——这一刀，就避免了冤枉客服。</p>
+      <p>③ 说明：<strong>别带着老板的预设结论去查</strong>。二分法的第一刀就把"是不是客服的锅"摆上台面，证据一拉（差评集中在"发货慢"这类工单、客服响应其实都正常），真因是物流、不是客服。如果你一开始就顺着老板"态度差"去查，只会冤枉人、还查不到真问题。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">分析硬功</span>，落在 <span class="accent">框架层</span>（逻辑树 / 二分法）。它是"为什么"类难题的拆解主武器，和第 4 单元（找主指标）一起，构成分析的两把硬功夫——一把收敛指标、一把拆开原因。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-6">
+  <div class="sec-h"><h2>第 6 单元　挑战不可能：用收集案例分解高难度任务</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">分析硬功 · 心法层</span>
+    <button class="done-btn" data-done="6">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你是一个普通县城的高中老师，月薪 5000。某天你突然下定决心："我要在 5 年内，做到副业月入过万、而且是能躺着收的被动收入。"可一动念，你就发现自己完全不知道从哪开始，越想越觉得：这根本不可能。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：面对这个看似不可能的目标，你的第一步会做什么？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u6-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>面对一个看似不可能的目标，别急着放弃、也别闷头硬扛，先<strong>去收集"别人是怎么做到的"案例</strong>——所有不可能任务，本质都是"你还不知道怎么做"。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>不可能任务的解法 = 收集案例（关键就是：知不知道怎么做）
+  收集到案例 → 整理成清单：方法 ｜ 流程 ｜ 必备条件 ｜ 预期结果
+  难度高 ≠ 不可能：列出几条路径，方案就成型了
+（在公司里）领导目标太高时，甩锅四件套：
+  ① 压给底下人  ② 问题扩大化大家扛  ③ 多论证拖时间  ④ 招个替死鬼顶上
+铁律：难题不是无解，是你没见过案例；成年人只能筛选，不能教育。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>有人问陈老师"十年从零搞到一千万"怎么可能，他不空谈，直接甩出四个真实案例：<strong>打工</strong>——211 硕士进阿里搜索原地留任，三年年薪百万；<strong>结婚</strong>——表妹一个小会计，嫁给出名车厂老总，上海两套房两辆车；<strong>投资</strong>——同事 2011 年两家凑首付买深圳南山的房，卖时回收 700 万；<strong>做生意</strong>——潮汕邻居家族烟酒茶一条龙，一个小区五套房。<span class="accent">难度高不代表不可能——关键是你手上有没有这些路径、以及每条路径各自的"必备条件"。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"县城老师想月入过万被动收入"的场景，看高手怎么破——</p>
+    <p><strong>第 1 步 · 把"不可能"转成"收集案例"。</strong>别坐着空想，去找"普通人做到副业过万"的真实路径：做学科自媒体？卖课？写网文？做电商？知识付费？先收集 4–5 个你查得到的真实案例。</p>
+    <p><strong>第 2 步 · 每个案例拆出"必备条件"。</strong>"教师做学科类自媒体"——必备：有学科专业度（✅ 你正好是老师）、能持续产出、平台政策没把教培卡死（要核实）。"写网文"——必备：能日更几千字、熬得过没收入的前半年。</p>
+    <p><strong>第 3 步 · 列成清单，对照自己。</strong>把 4–5 条路径列成表（方法 / 必备条件 / 预期收入），看哪条的"必备条件"你已经有了大半——做教育类内容，你的专业度就是现成的本金。</p>
+    <p><strong>第 4 步 · 选一条门槛最低的先试。</strong>不求一次成功，挑最匹配你现状的（比如教育类短视频），先做三个月看反馈，再决定加码还是换路。</p>
+    <div class="recall empty" data-recall="u6-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"想想算了，太难了 / 我也不知道能做啥"——那是停在了"不可能"三个字上。<strong>把它转成"收集案例 + 拆必备条件"</strong>，路径和门槛立刻就具体起来了。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你弟弟大学刚毕业、没什么积蓄，跟你说："哥，我想三年内开一家自己的咖啡店。"</p></div>
+    <p>请写：① 你会让他去收集哪些"普通人开咖啡店"的真实案例？② 每条案例，你会让他拆出哪些"必备条件"（本金 / 选址 / 手艺 / 客源）？③ 对照他现在一穷二白的现状，他大概率该先补哪个必备条件、先做什么？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u6-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u6-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有让他收集案例 + 拆必备条件）</p>
+      <p>① 收集：独立小店、社区店、加盟连锁、先摆摊 / 快闪试水的——各找一两个真实例子，看人家怎么起步的。</p>
+      <p>② 拆必备条件：独立店要本金（装修 + 押金几十万）+ 选址 + 出品手艺 + 稳定客源；加盟省了手艺和品牌、但加盟费高；摆摊 / 快闪几乎零本金，主要练手艺和验证客流。</p>
+      <p>③ 对照现状（没钱）：他最缺"本金"和"被验证的手艺 / 客源"。所以别一上来开店，先补门槛最低那条的必备条件——去一家好咖啡店打工半年（学手艺 + 攒钱 + 看真实经营），同时周末摆摊试产品、验证有没有人买。把"开店"这个不可能，拆成了"先打工攒手艺和本金"这个可做的第一步。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>拆解一个"不可能任务"的 5 步</h4><ol>
+      <li><strong>转化为收集案例</strong>：别人怎么做到的，先找几个真实案例。</li>
+      <li><strong>整理清单</strong>：方法 / 流程 / 必备条件 / 预期结果。</li>
+      <li><strong>列出 N 条路径</strong>：难 ≠ 不可能。</li>
+      <li><strong>对照现状选一条</strong>：挑"必备条件"你已有大半的那条先试。</li>
+      <li><strong>（公司里）应对疯目标</strong>：甩锅四件套，别一个人扛。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>听到"不可能"就放弃、洗洗睡——<span class="warn-x">它本质是收集案例</span>。</li>
+      <li>收集了案例却不拆"必备条件"——<span class="warn-x">你看不出哪条适合自己</span>。</li>
+      <li>（公司里）自己一个人扛领导的疯目标——<span class="warn-x">用甩锅四件套分担</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，公司场景）</p>
+    <div class="quote"><p>你是市场部主管，老板拍板"今年公众号粉丝从 5 万涨到 50 万"，远超你们历史增速，<strong>预算还不加</strong>。</p></div>
+    <p>请写：① 你会去收集哪些"账号一年涨十倍"的真实案例、看它们各自靠什么（爆款 / 投流 / 矩阵 / 大活动）？② 如果收集完发现这些路径要么要砸钱、要么靠运气，现实里这点预算做不到——你会怎么用"甩锅四件套"应对老板这个不加预算的疯目标？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u6-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u6-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 收集：靠一篇爆款带起来的、靠投流买量的、靠矩阵号互导的、靠一场大型活动 / 联名引爆的——每条看它的必备条件（爆款靠选题运气、投流靠预算、矩阵靠人力、活动靠资源）。一对照，你会发现它们几乎都要"钱或人或运气"。</p>
+      <p>② 甩锅四件套用法：① <strong>把目标压下去</strong>——拆给每个渠道 / 每个人分指标，让压力分散，不是你一个人背 50 万。② <strong>问题扩大化</strong>——拉上产品、销售一起开会："涨粉不只是市场部的事，得全公司一起导流"，把锅摊薄。③ <strong>多论证拖时间</strong>——"先做一个月增长测试、看哪个渠道 ROI 最高再放量"，用论证换缓冲，事缓则圆。④ <strong>要资源或留退路</strong>——明确告诉老板"不加预算，靠纯内容增长，合理目标是 5万→15万；要 50 万得配 X 万投流预算"，把"做不到"的责任提前还给资源方。核心：别默默一个人扛一个注定完不成的数。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">分析硬功</span>，落在 <span class="accent">心法层</span>（难 ≠ 不可能、收集案例）。它是分析硬功里偏"破局心法"的一块，也是通往"职场博弈"的桥——后半截的"甩锅四件套"，已经在教你怎么对人了。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-7">
+  <div class="sec-h"><h2>第 7 单元　项目避坑：接项目先确认角色，别当背锅的</h2>
+    <span class="badge-time">⏱ 约 35 分钟</span><span class="badge-axis">职场博弈 · 心法层</span>
+    <button class="done-btn" data-done="7">标记学完</button></div>
+  <p class="note">合并自详解版【第 1、2 节 项目避坑指南（上 / 下）】。</p>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>领导在群里 @你："公司要搞一个'数字化转型'项目，我看你能力强，这个就交给你牵头了，你当总负责人，好好干，年底我看成果。"同事们刷屏点赞恭喜你。你心里有点小激动。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：接到这个"总负责人"的任命，激动之余，你第一件该弄清楚的事是什么？你会回领导一句什么？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u7-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>接到一个项目（尤其被任命"牵头 / 总负责"），先冷静确认<strong>"我到底是什么角色、这项目能不能量化出价值"</strong>——别一激动，就当了那个背锅的。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>接到项目，立项前先问清四件事（项目八成死在开头）：
+  ① 为什么做：看目标、不信名字（"数字化转型"so what？）
+  ② 要什么数据：只要是系统，先问数据
+  ③ 我是什么角色：需求方 / 开发 / 项目经理
+        —— 不知道谁背锅，那个背锅的就是你
+  ④ 价值能不能量化：挂增收减支，拉一个业务方背书
+落地后：团结分蛋糕（尤其拉财务）、技术不达标就回到"业务能交差就行"
+铁律：听到大项目别激动——很可能是被拉来填坑的。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师跟华夏银行的人吃饭，对方说领导天天喊"你们要勇于突破、大胆创新"。陈老师问："这句话的重点是哪个词？"华夏银行的人一句话点破——<strong>"重点是'你们'。"</strong>意思是：他不会替你背锅，出了事都是"你们"的，所以"创新个屁"。<span class="accent">管你叫总负责人、总指挥、项目 CEO，都别真把自己当太上皇——名头越大，越可能是来背锅的。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"数字化转型总负责人"的场景，看高手怎么接——</p>
+    <p><strong>第 1 步 · 先别激动，看目标。</strong>"数字化转型"是个名字，不是目标。先问领导："这个项目年底您最想看到的、能衡量的结果是什么——是降本、提效，还是某个业务指标涨上去？"名字唬人，目标才是真的。</p>
+    <p><strong>第 2 步 · 确认我是什么角色。</strong>"总负责人"是个虚衔。项目里真正就三个角色：需求方（说要什么）、开发方（做东西）、项目经理（盯进度、催人）。你得问清楚：需求谁提、开发谁做、我是只盯进度，还是连需求带开发都得我一个人扛？——如果全得你扛、又没资源没权限，那你就是被拉来背锅的。</p>
+    <p><strong>第 3 步 · 别真把自己当太上皇。</strong>记住华夏银行那一课。要么把"项目经理 / 需求方"明确按到别人头上、你只担一块；要么跟领导白纸黑字把角色、资源、谁背锅定清楚。</p>
+    <p><strong>第 4 步 · 给项目挂个可量化的价值 + 拉业务方背书。</strong>别做"没价值的创新"，找一个业务部门一起定一个实在、能交差的指标——只要有一个业务跳出来说"挺有用"，一俊遮百丑。</p>
+    <div class="recall empty" data-recall="u7-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"太好了，我一定好好干、给领导一个惊喜"——那就是一激动当了背锅的。<strong>先把"目标、角色、价值"问清楚</strong>，才不会死在开头。</p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你是技术骨干。CTO 单独找你："咱们要做一个 AI 中台、赋能所有业务线，你来当总架构师，资源你随便调。"听起来很风光。</p></div>
+    <p>请写：① 这个任命里，你要先确认哪几件事（目标 / 角色 / 资源 / 价值）？② "随便调资源"这句话，你会怎么把它落成白纸黑字？（不落实可能会怎样？）③ 你怎么判断自己是被重用、还是被拉来填坑当背锅的？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u7-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u7-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有先确认角色和价值）</p>
+      <p>① 确认：① 目标——AI 中台到底要支撑哪几条业务线的什么具体场景（不是"赋能所有"这种空话）；② 角色——我是只管架构（开发方），还是连需求、进度、跨部门协调都得我扛？需求方是谁、谁拍板优先级；③ 资源——"随便调"具体是几个人、多少预算、能不能调别的部门；④ 价值——上线后用什么指标证明它有用。</p>
+      <p>② 落白纸黑字：让 CTO 在立项文档 / 启动会上，把人头、预算、可调动的部门和对接人写清楚、当众确认。不落实的话，"随便调"到执行时就变成"那个部门很忙、给不了人"，你拿着空头衔扛着所有 deadline。</p>
+      <p>③ 判断填坑信号：需求方缺位（没人对你的成果负责）、各业务线只想用不想配合、资源口头答应却落不了地、出了问题第一个被问的是你——满足越多，越像背锅。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>接到一个项目的避坑 5 步</h4><ol>
+      <li><strong>看目标不信名字</strong>：这名字背后到底要达成什么可衡量的结果。</li>
+      <li><strong>系统先问数据</strong>：要什么数据、产出什么数据、我司有什么数据。</li>
+      <li><strong>确认我的角色</strong>：需求方 / 开发 / 项目经理，别稀里糊涂全扛。</li>
+      <li><strong>白纸黑字定责任</strong>：角色、资源、谁背锅，写清楚、当众确认。</li>
+      <li><strong>挂价值 + 拉背书</strong>：一个可量化指标 + 一个业务方背书。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>听到"你牵头、大项目"就激动——<span class="warn-x">很可能是被拉来填坑的</span>。</li>
+      <li>把"总负责 / 总指挥"当太上皇——<span class="warn-x">管你叫啥，不确认角色，你就是背锅的</span>。</li>
+      <li>做没有可量化价值的"创新"——<span class="warn-x">结尾一定被问"做了到底有啥用"</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，带陷阱）</p>
+    <div class="quote"><p>你是运营专员。总监当着全部门的面宣布："这季度的'用户增长攻坚'交给小王（你）全权负责，要人给人、要钱给钱！"大家鼓掌。会后你去找总监落实，总监却说："具体资源嘛，你先列个方案我看看。"</p></div>
+    <p>请写：① 当众的"要人给人要钱给钱"和会后的"先列方案我看看"，这个反差说明了什么？② 你该先确认哪几件事，才不至于变成那个背锅的？③ 如果总监始终不肯把资源和权限落到白纸黑字，你会怎么保护自己？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u7-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u7-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 反差说明：当众那句是给你"画饼 + 戴高帽"（也把责任公开压给了你），会后的"先列方案"才是真实态度——资源还没影、全凭他事后审批。高调授权 + 低调给资源，是典型的"背锅人"配置。</p>
+      <p>② 先确认：目标（增长到什么量、考核口径）、角色（我是只做增长执行，还是连产品、渠道、预算审批都得我协调）、资源（具体几个人、多少预算、谁配合）、退路（达不成的判定标准）。</p>
+      <p>③ 保护自己：用"方案"这步反向锁定资源——在方案里白纸黑字写明"达成 X 目标，需要 A 预算 + B 人力 + C 部门配合"，请总监书面确认；他批了，资源就有据可依；他不批、只想要结果，你就有了"资源未到位"的免责记录，并据此把目标谈到一个资源匹配得上的合理值。别揣着空头衔单扛 deadline。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">职场博弈</span>，落在 <span class="accent">心法层</span>（项目死在开头、别当背锅的）。它是博弈类的第一课——把前面"先想对"的认知，搬到"接项目、分角色、定责任"的真实战场上。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-8">
+  <div class="sec-h"><h2>第 8 单元　结构化面试：把自己和岗位按五要素对着比</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">职场博弈 · 框架层</span>
+    <button class="done-btn" data-done="8">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你工作四年想跳槽，看中一家公司的岗位，海投了简历，结果石沉大海。你跑去问朋友："为什么没人理我？是不是我能力不行？"朋友说："你把那份 JD 发我看看。"——你这才发现，自己压根没仔细读过那份招聘要求。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：拿到一份心仪岗位的 JD，你该怎么判断自己有没有戏、该怎么准备？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u8-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>把自己和目标岗位<strong>按五要素（行业 / 薪资 / 技术 / 业务 / 学历）对着比一遍</strong>，看清匹配度和差距——找工作不是玄学，是描述性统计。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>科学求职 = 我（简历）→ 目标岗位 → 投递 → 笔试 / 面试 / 谈薪
+诊断一个岗位，看简历五要素：
+  ① 行业（同行跳同行最易；平台类经验可迁移）
+  ② 薪资（差一档，人家不理）
+  ③ 技术能力   ④ 业务能力   ⑤ 学历及硬件
+四个环节，卡点含义不同：
+  投出没人回 = 匹配 / 简历 / 能力（最复杂）   笔试不过 = 技术太烂
+  用人面不过 = 故事讲不好                     谈薪没下文 = 要贵了
+铁律：欠得越多机会越少；别像祥林嫂问"为什么不理我"，自己看一眼匹配度就懂。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师最头疼那种"祥林嫂式"求职者：天天追着问"老师为什么没人理我"，却从来不去看 JD。他说：你反过来想——如果你是同程金融、或哈啰单车金融部门做中台、有数仓经验的人，行业对口、专业对口，人家<strong>分分钟就把你捞走了</strong>，根本轮不到你问"为什么不理我"。<span class="accent">没人理你，不是玄学，是匹配度自己写在脸上。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"海投石沉大海"的场景，看高手怎么诊断——</p>
+    <p><strong>第 1 步 · 先把 JD 拆成五要素。</strong>拿出那份心仪 JD，逐条标出来：要哪个行业经验、给多少薪资、要什么技术、要什么业务能力、学历卡不卡。</p>
+    <p><strong>第 2 步 · 把自己对着比。</strong>一栏一栏打勾：行业（我是不是同行 / 有没有可迁移的平台经验）、薪资（我现在的价位够不够得着）、技术（要求的工具我会几个）、业务（要求的场景我做过没）、学历（卡不卡我）。</p>
+    <p><strong>第 3 步 · 算匹配度、看缺哪格。</strong>五格里你占了几格？缺的是行业还是业务？欠得越多越没戏。如果是"海投没人回"——大概率要么简历没把匹配点怼出来，要么匹配度本来就低。</p>
+    <p><strong>第 4 步 · 定位卡在哪个环节、对症补。</strong>没人回→先改简历，把匹配点放到最显眼处；技术缺口→跟着一个完整案例练一遍补上；行业差太远→先找个能迁移的跳板岗过渡。</p>
+    <div class="recall empty" data-recall="u8-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"我再多投几家试试 / 是不是我能力不行"——那是没诊断就瞎投、瞎焦虑。<strong>五要素一比，差在哪、补什么，清清楚楚。</strong></p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你做了三年传统制造业的会计，想转去互联网公司做"财务 BP"。看到一个 JD 写着：<strong>要求 3 年以上互联网 / 快消财务经验、熟悉业务建模、能用 SQL 取数、本科及以上。</strong></p></div>
+    <p>请写：① 用五要素把这个 JD 和你自己比一遍，你最可能缺哪几格？② 这种"没人回"，大概率卡在五要素的哪一格？③ 你会怎么补、或者先找什么跳板过渡？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u8-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u8-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有逐格比、有没有找到主要缺口）</p>
+      <p>① 逐格比：行业 ❌（传统制造 ≠ 互联网 / 快消）；薪资 ❓（看你现在价位）；技术 ❌（不会 SQL）；业务 ❌（没做过业务建模 / 财务 BP）；学历 ✅（本科达标）。主要缺口：<strong>行业 + 业务 + 技术</strong>。</p>
+      <p>② 卡点：缺得太多，卡在"没人回"——简历和 JD 三格不匹配，HR 一眼刷掉。</p>
+      <p>③ 补法 / 跳板：① 技术好补——SQL 自学 + 拿个项目练手；② 行业和业务最难补——别硬跳头部互联网，先找一家"传统制造转型 / 有互联网业务线"的公司做 BP 过渡，或先转去快消（行业跨度小一点），攒 1–2 年"业务财务"经验，再跳互联网。先够一格、再够下一格，比一步登天靠谱。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>科学找一份工作的 5 步</h4><ol>
+      <li><strong>列对照表</strong>：目标公司 / 岗位 / 要求 / 我的匹配度。</li>
+      <li><strong>拆五要素</strong>：行业 / 薪资 / 技术 / 业务 / 学历，逐条比。</li>
+      <li><strong>定位卡点</strong>：没人回？笔试？面试？谈薪？对症下药。</li>
+      <li><strong>技术岗练手</strong>：跟着一个完整案例练一遍。</li>
+      <li><strong>业务岗练嘴</strong>：多表达、多做题。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>眼睛只盯 JD 里的一个词（某个工具 / 某张证）——<span class="warn-x">人家几百字你只看一句</span>。</li>
+      <li>"同事能去我也能去"——<span class="warn-x">你跟他五要素根本不一样</span>。</li>
+      <li>像祥林嫂一样问"为什么不理我"——<span class="warn-x">自己看一眼匹配度就懂了</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，带陷阱）</p>
+    <div class="quote"><p>你表妹是普通二本、应届、没实习，非要海投头部大厂的"算法工程师"岗，投了 200 份全无回音，天天哭诉"大厂歧视双非"。</p></div>
+    <p>请写：① 用五要素帮她诊断，她到底卡在哪几格？② 这个"200 份没人回"，真的是"大厂歧视"，还是匹配度问题？③ 你会建议她把目标调成什么、先补哪一格？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u8-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u8-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 五要素：行业 / 岗位 ❌（算法岗门槛极高）；技术 ❌（应届无项目、无竞赛、无论文）；业务 ❌；学历 ❌（头部大厂算法岗普遍卡 985 / 硕士起）；薪资 ❓。几乎格格不达标。</p>
+      <p>② 不是"歧视"，是<strong>匹配度几乎为零</strong>——头部大厂算法岗的硬门槛（学历 + 项目 + 竞赛）她一条都没占，简历连初筛都过不了。把"匹配度问题"归因成"歧视双非"，正是祥林嫂式的不看 JD。</p>
+      <p>③ 调目标：别盯头部大厂算法岗。要么降维——投中小厂的数据分析 / 数据开发岗（门槛低、能积累）；要么先补硬条件——考个相关方向的研究生、或先做一段实习 + 一个拿得出手的项目，把"技术"和"学历"这两格补上去，再谈算法岗。先够得着、再往上够。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">职场博弈</span>，落在 <span class="accent">框架层</span>（五要素对照）。它把第 3 单元"目标 → 现状 → 差距"的框架，落到"找工作"这个最高频的人生场景上——找工作，本质也是一次结构化分析。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-9">
+  <div class="sec-h"><h2>第 9 单元　项目管理：道天地将法，先定人别自己干</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">职场博弈 · 框架层</span>
+    <button class="done-btn" data-done="9">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你刚被提拔为小组长，第一次带 4 个人做一个"客户满意度提升"的项目。你以前是组里最能打的，习惯什么都自己上手。项目要启动了，你打算：先把方案框架自己写出来、关键模块自己做、再分点边角活给大家。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：第一次带项目，你会怎么安排这个项目的启动？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u9-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>管项目要按<strong>"道天地将法"的顺序</strong>——先定目标、再盘资源、<strong>重点是先定谁负责（将）</strong>、最后才排执行；当了领导，就别再自己一个人从头干到尾。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>做项目，顺序要倒过来想（十个项目，八个死在目标）：
+  道   = 目标（必挂增收减支；收入比成本更打动老板）
+  天地 = 资源和机会（要申请什么、有什么可用）
+  将   = 先定谁负责〔最重要、加红加粗〕
+  法   = 执行计划（甘特图：谁做什么、前序、交付物）
+复盘倒着来：执行卡住 → 先看人 → 再看资源 → 最后才看目标
+  人干不出来：开研讨会给方法 → 引外援 → 换将（别自己替干）
+铁律：当领导是定人、配资源，不是自己从头干到尾；换将 = 把锅甩出去。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师反复提醒新晋管理者最容易栽的跟头：你是从基层升上来的、太能干，一当头满脑子都是"法"——怎么做、怎么执行，于是资源没要、人没定，又一头扎进去自己干。结果呢？"<strong>你这个领导当跟没当一样，还是自己从头干到尾，出了锅还是你背。</strong>"<span class="accent">换将是把锅甩出去，你不让人家干、自己干，锅最后还是落你头上。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"第一次带项目"的场景，看高手怎么启动——</p>
+    <p><strong>第 1 步 · 先定道（目标），别急着写方案。</strong>"客户满意度提升"得挂一个能衡量、跟业务挂钩的目标：比如"本季度 NPS 从 30 提到 45、复购率 +5%"。</p>
+    <p><strong>第 2 步 · 盘天地（资源）。</strong>要几个人、多少预算、能不能调动客服 / 产品的数据和配合——提前讲清楚、要到手，别开干了才发现没人配合。</p>
+    <p><strong>第 3 步 · 重点是定将（谁负责）。</strong>把项目拆成几块，每块<strong>明确按到一个人头上</strong>：谁管客户调研、谁管问题整改、谁盯进度。你是组长，角色是定人 + 盯进度，不是埋头做每一块的那个人。</p>
+    <p><strong>第 4 步 · 最后才排法（执行计划）。</strong>谁做什么、前后依赖、什么时候交付，列个甘特图。</p>
+    <div class="recall empty" data-recall="u9-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"我先把方案和关键模块自己做、再分点活给大家"——那正是新晋管理者最大的坑：满脑子"法"、自己从头干到尾。你累死，组员没成长，出了锅还是你背。<strong>当领导的第一件事是定人，不是自己上。</strong></p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你被任命牵头公司的"年会筹备"项目，配了 3 个跨部门的同事和一笔预算。你以前办过活动、什么都会，特别想亲力亲为。</p></div>
+    <p>请写：① 按道天地将法，你启动这个项目的前三步分别做什么？② "将"这一步，你会怎么把年会拆块、按到这 3 个人头上？③ 如果其中一个同事负责的环节（比如订场地）一直推不动，你会怎么从下往上复盘、用什么办法（而不是自己冲上去订场地）？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u9-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u9-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有先定人、复盘有没有从下往上）</p>
+      <p>① 前三步：① 道——定目标（年会要达成什么：表彰 + 凝聚 + 控制在 X 预算内，几月几号办）；② 天地——盘资源（预算多少、3 个人各能调动什么部门资源、场地 / 供应商有没有现成的）；③ 将——把年会拆块定人。</p>
+      <p>② 拆块定人：一人管场地 + 餐饮、一人管节目 + 流程、一人管物料 + 宣传，你自己管总进度 + 预算 + 对外协调。每块一个责任人、一个交付时间。</p>
+      <p>③ 从下往上复盘：先看<strong>人</strong>（不愿干 / 不会干 / 被别的工作占住了）→ 再看<strong>资源</strong>（预算没批、供应商联系不上）→ 最后才看目标。对症：不会干就帮他对接两个靠谱供应商（给方法）、资源不到位就帮他催预算（配资源）、实在扛不动就换个人接这块（换将）。就是别自己冲上去订场地——那样这次你救了急，下次还得你救，他永远学不会。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>道天地将法管项目的 5 步</h4><ol>
+      <li><strong>道 · 定目标</strong>：先定目标、反推一切，且挂增收减支。</li>
+      <li><strong>天地 · 盘资源</strong>：要申请什么、有什么可用，提前说清。</li>
+      <li><strong>将 · 定人</strong>：先定谁负责（最重要）。</li>
+      <li><strong>法 · 排计划</strong>：甘特图——谁做什么、前序、交付物。</li>
+      <li><strong>复盘倒着来</strong>：人 → 资源 → 目标，靠换人，不靠自己替干。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>一上来满脑子"法"（怎么执行）——<span class="warn-x">资源没要、人没定，一个人干啥都干不成</span>。</li>
+      <li>当了领导还自己从头干到尾——<span class="warn-x">累死自己、组员没成长、锅还你背</span>。</li>
+      <li>目标定成"提升满意度"这种空话——<span class="warn-x">没挂可衡量指标，没法交差</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，带陷阱）</p>
+    <div class="quote"><p>你带的项目里有个老员工，资历比你老、活儿干得慢，分给他的模块拖了两周还没动。你很想"算了我自己做了快"。</p></div>
+    <p>请写：① 按"从下往上复盘"，你该先确认什么（是人不愿干、还是资源不到、还是方法不会）？② 如果是他能力不行 / 不配合，你作为组长有哪些办法（而不是自己替他干）？③ 为什么"我自己做了快"是个坑？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u9-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u9-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 先看人：找他聊一次，分清是"不愿干"（有情绪 / 觉得不该他做）、"不会干"（能力够不上）、还是"被别的事占住了"（资源 / 时间冲突）——三种原因，三种解法。</p>
+      <p>② 办法：不会干→开个小会帮他理清思路、给个模板（给方法）；不愿干→把这块的价值和考核讲清楚、或换一块他愿意干的；占住了→帮他协调、或把这块挪给别人（换将）；都不行→直接换将，把这块按到能干的人头上。</p>
+      <p>③ "我自己做了快"为什么是坑：这次你救了急，但他这块你包了——下次他还是不会、还得你包；你这个组长越当越像个干活的，组员永远长不起来；而且项目一旦出问题，因为是你做的，锅还是你的。短期快，长期把自己拖死。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">职场博弈</span>，落在 <span class="accent">框架层</span>（道天地将法）。它和第 7 单元（接项目避坑）正好一头一尾——一个教你接项目时怎么不当背锅的，一个教你带项目时怎么不把自己累死。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-10">
+  <div class="sec-h"><h2>第 10 单元　结构化述职：用 FAB 先找对方在意的好处</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">职场博弈 · 话术层</span>
+    <button class="done-btn" data-done="10">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你是数据分析师，花了一个月做了一个"自动化报表系统"，把原来每天人工拉数 2 小时的活，变成了一键出数。下周要在部门季度汇报上，当着总监和各业务负责人讲这个项目。你打算这么讲：我用了什么技术、爬了哪些数据源、做了 ETL、搭了调度、开发了可视化看板……</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：要跟总监和业务负责人讲这个项目，你会怎么开场、重点讲什么？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u10-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>述职 / 汇报用 FAB——<strong>先找听众在意的那个 B（好处），别堆你做了什么（F）</strong>。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>述职 = FAB（重点是 B，不是 F）
+  F = 我做了什么（Feature）   ← 技术人最爱讲，但没人 care
+  A = 它有什么好处（Advantage）
+  B = 对"对方"的用处（Benefit）← 投其所好、送其所要
+顺序其实是反的：先找对方感兴趣的 B → 再用 F / A 证明能实现
+找 B 的方向：往公司 / 上层 / 其他部门的帮助上找，挂业务指标（收入 / 成本 / 效率）
+铁律：你做什么是一回事，对老板有用才是重点。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师点过一个要害：你对着总经理、财务讲"我做了大数仓宽表、ETL"，人家根本听不懂"什么叫宽表"。你要找的 B 是<strong>对方在意的</strong>——比如把一个库存看板项目，讲成"帮公司把积压在仓库里的钱快速变现、缓解资金压力"，再拉上产销、供应的领导一起开个庆功会互相吹捧，这事就漂亮地结了。<span class="accent">别人听不懂的 F，换成他在意的 B，你的功劳才立得住。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"自动化报表"的场景，看高手怎么讲——</p>
+    <p><strong>第 1 步 · 先别讲技术，找听众的 B。</strong>台下是总监和业务负责人，他们 care 的不是 ETL，是"这东西对我有什么用"。</p>
+    <p><strong>第 2 步 · 把 F 翻译成 B。</strong>"自动化报表"这个 F——对业务负责人的 B：以前要等到下午才能看到数据、决策慢半拍，现在一早就能看到、当天就能调投放 / 调库存；对总监的 B：省下一个分析师每天 2 小时的人力，还杜绝了手工出错。</p>
+    <p><strong>第 3 步 · 挂到业务指标上。</strong>别说"提升了效率"这种虚的，说："出数从 T+1 变成当天早上、每天为业务多争取了半天反应时间""一个月省下 40 小时人力，相当于省出大半个人。"</p>
+    <p><strong>第 4 步 · 拉个业务方背书。</strong>"上线后运营的王经理说，现在每天早上能直接对着数据开晨会了。"——让受益方替你说话，比你自夸有力十倍。</p>
+    <div class="recall empty" data-recall="u10-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"讲技术栈、数据源、ETL、调度"——那是只讲 F，台下业务负责人听不懂、也不关心。<strong>先找他们的 B（早看到、少等、少错），把技术翻译成对他们的好处。</strong></p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次你来。你是 HR，花两个月推行了一套新的"线上入职流程"，把新人办手续从"跑 5 个部门盖章、3 天才办完"，变成"线上一键提交、半天搞定"。下周要向 CEO 和各部门负责人汇报。</p></div>
+    <p>请写：① 对 <strong>CEO</strong>、对<strong>用人部门</strong>、对<strong>新员工</strong>，这套系统的 B 分别是什么？② 你会怎么把"线上化流程"这个 F，翻译成他们各自在意的好处？③ 你会拉谁来背书、让他说一句什么话？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u10-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u10-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有对不同人找不同 B）</p>
+      <p>① 三种 B：对 CEO——招人到上岗更快、HR 人力成本降、公司显得专业（影响雇主品牌）；对用人部门——新人当天就能到岗干活、不用等 3 天，业务不耽误；对新员工——入职体验好、不用满楼跑盖章，第一天就有好印象。</p>
+      <p>② F→B：把"线上一键提交"翻译成——"用人部门要的人，从'3 天后到岗'变成'当天下午就能开工'""HR 每月省下 X 小时重复的纸质流程""新人第一天的吐槽从'跑断腿'变成'半天搞定真高效'"。</p>
+      <p>③ 背书：拉一个上个月刚招人的业务负责人，让他说一句"以前等盖章等得我项目都开不了工，这次新人上午入职、下午就进组了"——用人方的一句真话，胜过 HR 自夸一百句。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>让述职出彩的 4 步（FAB）</h4><ol>
+      <li><strong>先找 B</strong>：对方（老板 / 业务 / 用人方）最在意什么好处。</li>
+      <li><strong>再配 F / A</strong>：你做的事怎么实现这个 B。</li>
+      <li><strong>挂业务指标</strong>：收入 / 成本 / 效率，量化价值。</li>
+      <li><strong>平时就筛</strong>：干活时就问这东西有没有价值。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>见人就讲"我写了代码、做了 ETL、搭了看板"——<span class="warn-x">关人家啥事</span>。</li>
+      <li>只讲 F、不讲 B——<span class="warn-x">没人 care</span>。</li>
+      <li>述职才想起 FAB——<span class="warn-x">干活的时候就该筛选价值</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，改写题）</p>
+    <p>下面是一段技术味十足的述职开头，请你用 FAB 把它改写成听众听得懂、会点头的话。</p>
+    <div class="quote"><p>原话："本季度我主导搭建了基于 Flink 的实时计算引擎，对接了 8 个数据源，开发了 12 个实时看板，QPS 提升到 5000，延迟降到 200ms。"</p></div>
+    <p>听众是<strong>销售总监和市场总监</strong>。请写：① 这段话对销售 / 市场总监的 B 到底是什么？② 把它改写成一段他们听得懂、会买账的话。</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u10-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u10-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① B：以前活动 / 投放的数据要等到第二天才出，错过了当天调整的窗口；现在能实时看到，大促和投放时能当场发现哪个渠道在爆、哪个在亏，立刻加预算 / 止损——直接关系到他们的转化和 ROI。</p>
+      <p>② 改写版："给两位总监汇报个好消息：以前咱们做大促和投放，数据都是第二天才看到，发现哪个渠道亏了、想止损也来不及了。这季度我们上线了实时数据系统，现在活动一开始，哪个渠道在爆、哪个在亏，你们手机上当场就能看到，能立刻加预算或者关掉——相当于把'第二天复盘'变成了'当场指挥'。上次 618，市场部就是靠它当晚砍掉了一个亏损渠道、把钱挪给了爆的那个。"（技术参数一个没提，全是对方在意的"当场指挥、少亏钱"。）</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">职场博弈</span>，落在 <span class="accent">话术层</span>（FAB）——它是全册唯一一个纯话术层的单元。把你埋头做的事，翻译成对方听得懂、又在意的那一句话，功劳才落得进别人心里。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-11">
+  <div class="sec-h"><h2>第 11 单元　从事到人：看透"傻事"背后的真原因</h2>
+    <span class="badge-time">⏱ 约 30 分钟</span><span class="badge-axis">职场博弈 · 心法层</span>
+    <button class="done-btn" data-done="11">标记学完</button></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body">
+    <div class="quote"><p>你爸退休后迷上了一个"养生大师"的课，非要把 15 万养老钱拿去买大师推荐的"量子能量床垫"，说睡了包治百病。你跟他讲科学、讲这是骗局，他不但不听，反而觉得你不孝、不信他、看不起他。</p></div>
+    <p><strong>先别往下看</strong>——写下你的第一反应：面对认死理要买的老爸，你接下来会怎么劝、怎么做？</p>
+    <div class="ta-label">✍️ 我的第一反应：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u11-hook" placeholder="写完再往下看，这段会在「跟着做」末尾帮你对照…"></textarea>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body">
+    <div class="quote"><p>当一个人做"傻事"时，先坚信他不傻，按<strong>"不知道 → 不理解 → 不信任 → 利益"这四步顺序</strong>找原因、对症化解——尤其别拿"我对、你蠢"去碾压他。</p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
+<pre>坚信：人不傻，做傻事必有原因（四选一）
+  ① 不知道 → 告诉他这事有问题
+  ② 不理解 → 换通俗方式 / 变个小魔术让他懂
+  ③ 不信任 → 看他信谁（权威 / 专家 / 身边人 / 迷信），用那个渠道说
+  ④ 利益（鬼迷心窍）→ 知道有问题还坚持，最难，要强制 + 拓信息源
+关键：论证环节是自然科学；信任环节是社会科学（坑蒙拐骗、管用就行）
+  别拿"我读过大学"去碾压，会让对方感到危险、激化矛盾
+铁律：高学历卡在"不知道"，低学历卡在"理解 / 信任"。</pre>
+    <div class="callout"><div class="c-h">🔖 锚点故事</div>
+      <p>陈老师讲过一个老奶奶，非要花 88 万买一个"宇宙磁场洗脚盆"。你说它就是个普通盆，她说："你不懂，这是宇宙反射板，太阳一照会发五彩光波！"高手不跟她硬刚科学——直接上淘宝花 8 块钱买一个一模一样的塑料板回来："您看，这个是不是也发五彩光？我 8 块钱买的。"<span class="accent">当场拆穿那个"魔法"，让她自己亲眼看见——比你讲一百遍"这是假的"都管用。</span></p></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body">
+    <p>用开头那个"老爸要买量子床垫"的场景，看高手怎么破——</p>
+    <p><strong>第 1 步 · 先坚信他不傻、找原因。</strong>老爸不是傻，是几样叠在一起：被忽悠了、<strong>不知道</strong>这是假的；<strong>不信任</strong>你（觉得你不懂养生）；背后还有情感诉求——怕老、怕病、想健康。</p>
+    <p><strong>第 2 步 · 千万别拿科学去碾压。</strong>别说"爸你被骗了、这是智商税、你怎么这么糊涂"——他耳朵里听到的是"你嫌我蠢、你不孝"，立刻对立，反而更要买给你看。</p>
+    <p><strong>第 3 步 · 用他信的渠道，而不是你信的。</strong>他信"养生大师"，你光讲科学没用。换一个<strong>他信的源</strong>：带他去找三甲医院他认的那位老中医（权威）、或请他信服的老战友帮着劝（身边人）、或翻出央视的打假报道给他看——让"他信的人"来说这东西不行。</p>
+    <p><strong>第 4 步 · 如果钱已经动了心（鬼迷心窍），上强制 + 拓信息源。</strong>先拖住钱："这么大笔钱得跟妈一起商量、缓几天。"再给他多个信息源：陪他多看几家、找个懂行的朋友一起评估——别让那个"大师"成为他唯一的信息来源（骗局最怕你身边有别的声音）。</p>
+    <div class="recall empty" data-recall="u11-hook"><div class="rh">👀 回头看你在 🎯 写的第一反应：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p>如果你写的是"我找一堆科普文章 / 拆穿原理给他看、跟他讲清楚这是假的"——技术上你全对，但你在拿科学碾压人，老爸只会更逆反。<strong>先找他信的渠道，让他信的人来说。</strong></p>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body">
+    <div class="quote"><p>换个场景，这次回到职场。你推动了一个新的协作工具，全公司都用起来了，唯独隔壁组的张姐坚决抵制，还到处说这工具难用、带着她组的人一起不用。你私下打听到：工具其实不难，张姐是觉得"这是你们组搞出来的，凭什么让我们配合你们"。</p></div>
+    <p>请写：① 张姐的"傻事"（抵制好用的工具），属于四个原因里的哪一个？② 如果你拿"工具明明很简单、数据证明它高效"去说服她，会怎样？③ 你会怎么对症化解？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u11-try" placeholder="先自己写，再点下面的参考…"></textarea>
+    <details class="fold"><summary>👉 对照参考（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u11-try"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考（不是标准答案，重点看你有没有看穿这是"利益/面子"而非"不懂"）</p>
+      <p>① 不是"不知道 / 不理解 / 不信任"——她心里门儿清。这是<strong>利益 / 面子问题</strong>：抵制的真正原因是"凭什么你们组主导、我们配合"，是地盘和被忽视感。</p>
+      <p>② 你拿"工具简单、数据高效"去碾压，等于当众证明"是你无理取闹"——她面子上更下不来，会抵制得更凶，因为现在不是工具之争，是面子之争。</p>
+      <p>③ 化解：把"利益/面子"还给她。私下找她："张姐，这工具推下去少了你们组肯定不完整，你们用得最重、最有发言权——能不能请你们组提几条改进意见，我们按你们的来调，也算你们一起共建的？"把"被要求配合"变成"被请来主导一部分"，给足面子和参与感；甚至让这工具挂上"X 组共建"的名。面子顺了，工具自然就用了。这一招，就是社会科学的"管用就行"。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡</div><div class="step-body">
+    <div class="methodcard"><h4>化解"人难伺候"的 4 步</h4><ol>
+      <li><strong>先告知</strong>：不知道，就告诉他这事有问题。</li>
+      <li><strong>再解释</strong>：不理解，就换通俗方式 / 变个小魔术让他懂。</li>
+      <li><strong>换信任源</strong>：不信你，就找他信的人 / 渠道来说。</li>
+      <li><strong>应对利益</strong>：鬼迷心窍 / 面子作祟，上强制手段 + 拓宽信息源 / 给足面子。</li>
+    </ol></div>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body">
+    <p class="blk">易错自查</p>
+    <ul class="check">
+      <li>上来就"你被骗了 / 你糊涂了"——<span class="warn-x">对方感到危险，激化成敌我矛盾</span>。</li>
+      <li>信任环节端着"我读过书 / 我有数据"去碾压——<span class="warn-x">人家信的来源跟你不一样</span>。</li>
+      <li>以为讲清科学道理就够——<span class="warn-x">论证是科学，信任是社会科学，管用才行</span>。</li>
+    </ul>
+    <p class="blk">自测（全新情境，应答题）</p>
+    <div class="quote"><p>你妈非要给你刚出生的宝宝绑"蜡烛包"（把婴儿裹得紧紧的），说老一辈都这么带、对腿好；可现代育儿明确说这样有害髋关节发育。你跟她讲科学，她不听，说你"读了几本书就不要老人了"。</p></div>
+    <p>请写：① 这属于四个原因里的哪个？② 你直接说"这是陋习、会害了孩子"会怎样？③ 你会用哪个"她信的渠道"、怎么不撕破脸地化解？</p>
+    <div class="ta-label">✍️ 我的答案：<span class="saved-tag" data-tag>已存本地</span></div>
+    <textarea class="ta" data-save="u11-quiz" placeholder="先自己写，再点下面的解析…"></textarea>
+    <details class="fold"><summary>👉 对照解析（先自己写，再点开：你的 vs 参考）</summary><div class="fold-in">
+      <div class="recall empty" data-recall="u11-quiz"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+      <p class="blk">参考解析</p>
+      <p>① 主要是<strong>不信任 + 情感</strong>：她信的是"老一辈的经验"，不信你这"几本书"；背后是"我带大了你、还不如你看的书"的委屈。</p>
+      <p>② 直接说"陋习、害孩子"：她听到的是"你否定我带孩子的一辈子、还说我害我孙子"——瞬间敌我矛盾，越说越要绑给你看。</p>
+      <p>③ 换她信的渠道：别用"我读的书"，用"她信的权威"。带她去做产检 / 儿保时，请医生当面讲："现在医生都说不能绑了，绑了对孩子腿不好。"——把"信不信我"换成"信医生 / 信医院"；再给足情感面子："妈，您带孩子的经验我们都靠着呢，就这一条现在医院改了说法，咱听大夫的。"守住底线（不绑），但话说得让她不丢脸。</p>
+    </div></details>
+  </div></div>
+
+  <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
+    <div class="callout"><p>本单元主导 <span class="accent">职场博弈</span>，落在 <span class="accent">心法层</span>（人不傻、四选一、别拿科学碾压人）。它是全册的<strong>收官心法</strong>——把"对事"的结构化，最终落到"对人"上：再硬的道理也碾不过人心；先看他卡在哪、用他信的方式，才算真正把问题解决。至此，从"先想对"（认知）→"拆得开"（分析）→"搞定人"（博弈），全册闭环。</p></div>
+  </div></div>
+</section>
+
+<section class="sec" id="sec-cap">
+  <div class="sec-h"><h2>🎓 结课大实战：空降数据负责人的头三个月</h2></div>
+  <div class="lead-callout">下面是一个连续的职场剧本——你刚跳槽进一家中型电商公司、当"数据负责人"，头三个月接连遇到 5 个坎。每一坎都"糊"得很真实（有情绪、有隐情、有陷阱）。请<b>按顺序</b>，每一关先自己写下"我会怎么做 / 怎么说"，再展开对照参考。这一局，把全册 11 个单元的功夫都用上了。</div>
+
+  <h3 class="blk">第 1 关 · 接项目（用到 单元 1 + 单元 7）</h3>
+  <div class="quote"><p>入职第一天，CEO 在欢迎会上当众宣布："我把'用数据驱动增长'这个战略级项目交给老 X（你）了！全权负责，资源随便调，给你三个月做出成绩！"全场鼓掌。会后你回到工位，发现没人跟你交接、也没人告诉你"增长"具体指什么。</p></div>
+  <p><strong>你写</strong>：① 你激动之余，第一件该弄清楚的是什么？② 你会找 CEO 补问哪几句？</p>
+  <div class="ta-label">✍️ 我的处理：<span class="saved-tag" data-tag>已存本地</span></div>
+  <textarea class="ta" data-save="cap-1" placeholder="先自己写，再点开参考…"></textarea>
+  <details class="fold"><summary>👉 对照参考</summary><div class="fold-in">
+    <div class="recall empty" data-recall="cap-1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p><strong>别一激动就当了背锅的</strong>（单元 7）。"用数据驱动增长"是个名字、不是目标（单元 1：看目标不信名字）。补问 CEO 三件事：① <strong>目标 so what</strong>——"三个月后您最想看到哪个数字变化？是 GMV、复购、还是新客成本？"② <strong>角色</strong>——"我是只做分析、给业务建议，还是连业务的增长动作都归我管？需求谁提、谁拍板？"③ <strong>资源落地</strong>——"'随便调'具体是几个人、多少预算？麻烦在启动会上明确一下，我好对接。"把当众的高帽，换成白纸黑字的目标 + 角色 + 资源，否则三个月后背锅的就是你。</p>
+  </div></details>
+
+  <h3 class="blk">第 2 关 · 找问题（用到 单元 4 + 单元 5）</h3>
+  <div class="quote"><p>你拉到数据：公司近三个月 GMV 一直在跌。运营甩给你一张表，字段一堆——UV、加购率、下单转化率、客单价、复购率、退款率、客服满意度。CEO 催："你快分析分析到底为啥跌！"</p></div>
+  <p><strong>你写</strong>：① 这堆指标里，你先锁定哪个主指标？② 你会用二分法怎么拆"为什么 GMV 跌"（至少两层）？</p>
+  <div class="ta-label">✍️ 我的处理：<span class="saved-tag" data-tag>已存本地</span></div>
+  <textarea class="ta" data-save="cap-2" placeholder="先自己写，再点开参考…"></textarea>
+  <details class="fold"><summary>👉 对照参考</summary><div class="fold-in">
+    <div class="recall empty" data-recall="cap-2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p><strong>先找主指标</strong>（单元 4）：GMV ≈ UV × 转化率 × 客单价，离收入最近的就是这三个的乘积，主指标锁 GMV，其余是它的拆解项和解释项。<strong>再用二分法拆</strong>（单元 5）：GMV 跌 → 是"人少了（UV 跌）"还是"人没少但买得少（转化 / 客单跌）"？→ 假设 UV 正常 → 是"转化率跌"还是"客单价跌"？→ 转化率跌 → 是"新客不下单"还是"老客不回购（复购率跌）"？一层层一拆二，配合退款率、客服满意度这些解释项，定位到最狠的那一支。</p>
+  </div></details>
+
+  <h3 class="blk">第 3 关 · 改不动的体系（用到 单元 2 + 单元 11）</h3>
+  <div class="quote"><p>你查出来了：GMV 跌的主因是上个月新上线的"会员积分体系"把老客户搞烦了（规则复杂、积分缩水），老客复购率断崖式下跌。可这个会员体系，是<strong>市场总监力推、CEO 亲自拍板</strong>的。你刚把数据发群里，市场总监就甩话："数据是你们瞎算的，我的会员体系没问题。"</p></div>
+  <p><strong>你写</strong>：① 这件事里哪部分是自然科学问题、哪部分是社会科学问题？② 你怎么既推动改体系、又不跟市场总监撕破脸、不打 CEO 的脸？</p>
+  <div class="ta-label">✍️ 我的处理：<span class="saved-tag" data-tag>已存本地</span></div>
+  <textarea class="ta" data-save="cap-3" placeholder="先自己写，再点开参考…"></textarea>
+  <details class="fold"><summary>👉 对照参考</summary><div class="fold-in">
+    <div class="recall empty" data-recall="cap-3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p><strong>先拆两类问题</strong>（单元 2）：自然科学——会员体系到底有没有拉低复购，有数据、可验证；社会科学——这是市场总监的"孩子"、CEO 拍的板，砍它 = 打两个人的脸。<strong>别拿数据去碾压人</strong>（单元 11）。迂回三步：① 给方向留面子——"会员体系这个方向绝对是对的（先肯定），我们只是发现某几条规则上线后老客有点不适应"；② 把"推翻"包装成"一起优化"——"我想跟市场部一起，挑两条规则做个 A/B 测试，用数据找最优解，也算市场部主导的迭代"；③ 拉市场总监站到同一边——让改进挂上"市场 + 数据共建"的名，他面子顺了，体系自然就改了。守住底线（必须改），话说得人人有台阶。</p>
+  </div></details>
+
+  <h3 class="blk">第 4 关 · 带人落地（用到 单元 9）</h3>
+  <div class="quote"><p>整改方案定了，活儿不少：要重做积分规则、回访流失老客、改前端文案、盯数据复盘。你手下有 3 个组员。你的老习惯是——重要的活自己上、省心。</p></div>
+  <p><strong>你写</strong>：① 你会按道天地将法怎么启动这次整改？② 怎么把活按到 3 个人头上，而不是自己全干？③ 如果负责"回访老客"的组员一周了还没动静，你怎么处理（而不是自己抄起电话回访）？</p>
+  <div class="ta-label">✍️ 我的处理：<span class="saved-tag" data-tag>已存本地</span></div>
+  <textarea class="ta" data-save="cap-4" placeholder="先自己写，再点开参考…"></textarea>
+  <details class="fold"><summary>👉 对照参考</summary><div class="fold-in">
+    <div class="recall empty" data-recall="cap-4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p><strong>道天地将法</strong>（单元 9）：道——定目标（"6 周内把老客复购从 X 拉回 Y"）；天地——盘资源（要不要客服配合回访、要不要预算发召回券）；<strong>将——先定人</strong>（积分规则给 A、老客回访给 B、文案给 C，你自己盯总进度和对外协调）；法——排时间表和交付物。<strong>别自己全干</strong>：你是负责人，角色是定人 + 盯进度，不是埋头干每一块。组员卡住时<strong>从下往上复盘</strong>：先看人（B 是不愿干、不会干、还是被别的事占住了）→ 再看资源（是不是没给他客服名单 / 召回券权限）→ 对症给方法 / 配资源 / 实在不行换人，就是别自己抄电话——那样这次你救了急，下次还得你救，B 永远学不会。</p>
+  </div></details>
+
+  <h3 class="blk">第 5 关 · 汇报成果（用到 单元 10）</h3>
+  <div class="quote"><p>三个月到了。结果不错：GMV 止跌回升、老客复购回来了。你要在季度大会上，当着 CEO、市场总监、运营总监汇报。你准备讲：我们重构了积分模型、跑了 12 组 A/B、清洗了用户标签、搭了复盘看板……</p></div>
+  <p><strong>你写</strong>：① 对 CEO、对市场总监、对运营总监，你各自该讲的 B 是什么？② 怎么不只讲"我做了什么"？③ 改过市场总监的体系，这场汇报你怎么给他留面子？</p>
+  <div class="ta-label">✍️ 我的处理：<span class="saved-tag" data-tag>已存本地</span></div>
+  <textarea class="ta" data-save="cap-5" placeholder="先自己写，再点开参考…"></textarea>
+  <details class="fold"><summary>👉 对照参考</summary><div class="fold-in">
+    <div class="recall empty" data-recall="cap-5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+    <p><strong>FAB，先找各自的 B</strong>（单元 10），别堆 A/B、标签清洗这些 F：</p>
+    <ul class="check" style="list-style:none;">
+      <li style="padding-left:2px;">对 <strong>CEO</strong> 的 B："三个月 GMV 从跌 X% 转成回升 Y%、老客复购拉回来了"——直接给他要的增长数字。</li>
+      <li style="padding-left:2px;">对 <strong>运营总监</strong> 的 B："现在每天有复盘看板，哪个活动拉新、哪个掉复购，当天就能看到、当天能调。"</li>
+      <li style="padding-left:2px;">对 <strong>市场总监</strong> 的 B + 给足面子（关键）：把功劳分给他——"这次能回升，<strong>核心是市场部的会员体系打底</strong>，我们只是一起把几条规则做了优化、用数据调到了最优；这是<strong>市场和数据一起干成的</strong>。"——改了他的体系，却让他成了"主功之一"，他不仅不记恨，下次还愿意配合你。</li>
+    </ul>
+    <p>这一关把全册收口：搞定了事（数据），更搞定了人（面子）。</p>
+  </div></details>
+
+  <div class="lead-callout">
+    <b>走完这五关，你就把全册串起来用了一遍</b>：接项目先确认角色（⑦）、先问起因（①）→ 找主指标（④）+ 二分法拆因（⑤）→ 拆自然 / 社会问题（②）+ 不拿科学碾压人（⑪）→ 道天地将法带人（⑨）→ FAB 汇报、给人留面子（⑩）。<br><br>
+    真实职场里，一件事往往同时是"分析题"和"人情题"——<b>先把问题拆对，再动手；对事要结构化，对人要给台阶。</b>这，就是这门课的全部。
+  </div>
+</section>
+
+</div>
+</main>
+</div>
+
+<script>
+(function(){
+  var LS = "gsjg_workbook_v1";
+  function load(){ try{ return JSON.parse(localStorage.getItem(LS)||"{}"); }catch(e){ return {}; } }
+  function save(d){ try{ localStorage.setItem(LS, JSON.stringify(d)); }catch(e){} }
+  var data = load();
+
+  // 恢复 + 绑定所有输入框
+  document.querySelectorAll("textarea.ta").forEach(function(ta){
+    var key = ta.getAttribute("data-save");
+    if(data[key]) ta.value = data[key];
+    var tag = ta.parentElement.querySelector("[data-tag]") || (ta.previousElementSibling && ta.previousElementSibling.querySelector("[data-tag]"));
+    var timer;
+    ta.addEventListener("input", function(){
+      data[key] = ta.value; save(data);
+      syncRecall(key, ta.value);
+      if(tag){ tag.classList.add("show"); clearTimeout(timer); timer=setTimeout(function(){ tag.classList.remove("show"); },1200); }
+    });
+  });
+
+  // 🎯 第一反应 → ✍️ 处对照浮现
+  function syncRecall(key, val){
+    document.querySelectorAll('[data-recall="'+key+'"]').forEach(function(box){
+      var rc = box.querySelector(".rc");
+      if(val && val.trim()){ rc.textContent = val; box.classList.remove("empty"); }
+      else{ rc.textContent = "（你还没在上面写，写了这里会自动显示）"; box.classList.add("empty"); }
+    });
+  }
+  document.querySelectorAll("textarea.ta").forEach(function(ta){ syncRecall(ta.getAttribute("data-save"), ta.value); });
+
+  // 标记学完 + 进度
+  var doneSet = data.__done || {};
+  function refreshProgress(){
+    var n = Object.keys(doneSet).filter(function(k){return doneSet[k];}).length;
+    document.getElementById("progress").textContent = "已学 " + n + " / 11";
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){
+      var m = (a.getAttribute("href")||"").match(/^#sec-(.+)$/);
+      var ck = a.querySelector(".ck[data-ck]");
+      if(m && ck) ck.textContent = doneSet[m[1]] ? "✓" : "";
+    });
+  }
+  document.querySelectorAll(".done-btn").forEach(function(btn){
+    var id = btn.getAttribute("data-done");
+    if(doneSet[id]){ btn.classList.add("on"); btn.textContent="✓ 已学完"; }
+    btn.addEventListener("click", function(){
+      doneSet[id] = !doneSet[id];
+      btn.classList.toggle("on", doneSet[id]);
+      btn.textContent = doneSet[id] ? "✓ 已学完" : "标记学完";
+      data.__done = doneSet; save(data); refreshProgress();
+    });
+  });
+  refreshProgress();
+
+  // 导航 active 高亮
+  var secs = [].slice.call(document.querySelectorAll("section.sec"));
+  var links = {};
+  document.querySelectorAll("nav.toc a[href]").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
+  function onScroll(){
+    var pos = window.scrollY + 90, cur = null;
+    secs.forEach(function(s){ if(s.offsetTop <= pos) cur = s.id; });
+    Object.keys(links).forEach(function(id){ links[id].classList.toggle("active", id===cur); });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  // 移动端抽屉
+  var toc=document.getElementById("toc"), scrim=document.getElementById("scrim");
+  document.getElementById("burger").addEventListener("click", function(){ toc.classList.toggle("open"); scrim.classList.toggle("open"); });
+  scrim.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); });
+  document.querySelectorAll("nav.toc a[href]").forEach(function(a){ a.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); }); });
+})();
+</script>
+</body>
+</html>
