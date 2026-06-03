@@ -127,9 +127,87 @@
     .topbar .spine{display:none;}
     main{padding:0 16px 100px;}
   }
+  /* ===== 阅读进度条 ===== */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:40;
+    background:linear-gradient(90deg,#e9c46a,#f4e1b0);transition:width .08s linear;}
+
+  /* ===== 返回顶部 ===== */
+  #totop{position:fixed;right:18px;bottom:22px;z-index:35;width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--line);background:var(--card);color:var(--accent-deep);font-size:20px;cursor:pointer;
+    box-shadow:0 3px 12px rgba(0,0,0,.14);opacity:0;pointer-events:none;transition:opacity .2s;}
+  #totop.show{opacity:1;pointer-events:auto;} #totop:hover{background:var(--accent-tint);}
+
+  /* ===== 模式色标 ===== */
+  .mode-tag{font-size:12px;font-weight:700;padding:2px 11px;border-radius:20px;border:1px solid;white-space:nowrap;}
+  .mode-express{color:#1f6f5f;background:#e8f3ef;border-color:#bfe0d6;}
+  .mode-listen{color:#2b6a8f;background:#e7f0f6;border-color:#c2dcec;}
+  .mode-game{color:#b15a2b;background:#f6ece3;border-color:#e7cdb6;}
+
+  /* ===== 图标图例 ===== */
+  .legend{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:18px 0;}
+  .legend h3{margin:0 0 10px;font-size:15px;color:var(--accent-deep);}
+  .legend .lg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 22px;}
+  .legend .lg-item{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.5;}
+  .legend .lg-ic{flex:0 0 22px;font-size:16px;text-align:center;}
+  .legend .lg-item b{color:var(--ink);}
+  @media(max-width:560px){.legend .lg-grid{grid-template-columns:1fr;}}
+
+  /* ===== 动手区（该你写的步骤） ===== */
+  .step--do{background:linear-gradient(180deg,#fffdf6,#fbf5e6);border:1px solid var(--line);
+    border-left:4px solid var(--accent);border-radius:12px;padding:6px 16px 14px;margin:22px 0;}
+  .step--do>.step-h{margin-top:12px;}
+  .do-flag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--accent);
+    border-radius:6px;padding:2px 9px;margin-left:9px;letter-spacing:.5px;vertical-align:middle;}
+
+  /* ===== 写作输入框 ===== */
+  .work{display:block;width:100%;min-height:80px;resize:vertical;margin:8px 0 2px;
+    background:#fffdf7;border:1px solid var(--line);border-radius:9px;padding:10px 12px;
+    font-family:inherit;font-size:14.5px;line-height:1.7;color:var(--ink);}
+  .work:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint);}
+  .work-label{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--accent-deep);margin-top:8px;}
+  .work-saved{font-size:11.5px;font-weight:600;color:var(--ink-faint);margin-left:auto;}
+  .fold-hint{font-size:12.5px;color:var(--ink-soft);margin:9px 0 3px;font-style:italic;}
+  .recall{background:var(--paper-2);border:1px dashed var(--accent);border-radius:8px;padding:9px 13px;margin:0 0 12px;font-size:14px;color:var(--ink);line-height:1.7;}
+  .recall-h{font-size:12px;font-weight:800;color:var(--accent-deep);margin-bottom:3px;}
+  .recall-empty{color:var(--warn);}
+
+  /* ===== 注释小标签（替代密集加粗的括号注释） ===== */
+  .anno{font-size:12.5px;color:var(--accent-deep);background:var(--accent-tint);
+    border-radius:5px;padding:1px 7px;margin:0 1px;font-weight:600;}
+
+  /* ===== 单元间导航 ===== */
+  .navlinks{display:flex;justify-content:space-between;gap:12px;margin:32px 0 4px;}
+  .navlinks a{flex:1;min-width:0;text-decoration:none;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;background:var(--card);color:var(--ink-soft);font-size:13.5px;line-height:1.4;}
+  .navlinks a:hover{border-color:var(--accent);color:var(--accent-deep);background:var(--accent-tint);}
+  .navlinks a.nl-next{text-align:right;}
+  .navlinks a .nl-k{display:block;font-size:11px;color:var(--ink-faint);font-weight:700;margin-bottom:2px;}
+  .navlinks a.nl-disabled{visibility:hidden;}
+
+  /* ===== 金字塔 HTML 图（替代易碎的 ASCII） ===== */
+  .pyramid{margin:14px 0;}
+  .pyramid .py-layer{margin:0 auto;text-align:center;color:#eef4f1;padding:8px 10px;font-size:13.5px;line-height:1.45;}
+  .pyramid .py-layer:nth-child(1){width:60%;background:var(--accent-deep);border-radius:9px 9px 0 0;}
+  .pyramid .py-layer:nth-child(2){width:74%;background:#1f7a6b;}
+  .pyramid .py-layer:nth-child(3){width:87%;background:#2f8b7b;}
+  .pyramid .py-layer:nth-child(4){width:100%;background:#3c9c8b;border-radius:0 0 9px 9px;}
+  .pyramid .py-layer b{color:#fff;}
+  .pyramid .py-dirs{display:flex;gap:10px;margin-top:12px;}
+  .pyramid .py-dir{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 13px;font-size:13px;background:var(--paper-2);}
+  .pyramid .py-dir .pd-h{font-weight:800;color:var(--accent-deep);margin-bottom:2px;}
+  @media(max-width:560px){.pyramid .py-layer{width:100%!important;}.pyramid .py-dirs{flex-direction:column;}}
+
+  /* ===== 可勾选清单 ===== */
+  ul.check li{cursor:pointer;user-select:none;transition:color .15s;}
+  ul.check li.done{color:var(--ink-faint);}
+  ul.check li.done::before{content:"☑";color:var(--accent);}
+
+  @media(max-width:560px){pre{font-size:12px;padding:12px 13px;}}
+
   @media print{
-    header.topbar,nav.toc,.scrim{display:none!important;}
+    header.topbar,nav.toc,.scrim,#progress,#totop,.navlinks{display:none!important;}
     main{padding:0;} details.fold{border-color:#bbb;} details.fold[open]{} body{font-size:12pt;background:#fff;}
+    .step--do{background:#fff;} .work{border:1px solid #bbb;min-height:70px;}
   }
 </style>
 </head>
@@ -190,6 +268,21 @@
   <tr><td><strong>按角色</strong></td><td>管理者 / 新人 / 对外岗</td><td>管理者重 9·11·12·6·4；新人重 1·3·7·14；对外岗重 5·8·13·2</td><td>先重点、再补全</td></tr>
   </tbody></table></div>
   <p class="sec-intro">用法：每个 🪜「换你做」和 ⚠️「自测」的参考答案都<strong>折叠</strong>着——先自己写/想，再点开对照。学过的例子不算练，所有练习都是全新场景。</p>
+
+  <div class="legend">
+    <h3>📖 每个单元都长这样（8 个图标 = 固定动线）</h3>
+    <div class="lg-grid">
+      <div class="lg-item"><span class="lg-ic">🎯</span><div><b>先卡你一下</b>　抛个真实场景，先逼你写下第一反应</div></div>
+      <div class="lg-item"><span class="lg-ic">🔑</span><div><b>只攻一个动作</b>　这单元唯一要练会的那一招</div></div>
+      <div class="lg-item"><span class="lg-ic">🧠</span><div><b>高手怎么想</b>　背后的心法 + 框架 + 锚点故事</div></div>
+      <div class="lg-item"><span class="lg-ic">✍️</span><div><b>跟着做一遍</b>　带着你把这个动作走一遍（示范）</div></div>
+      <div class="lg-item"><span class="lg-ic">🪜</span><div><b>换你做</b>　全新场景，你自己写（折叠着参考答案）</div></div>
+      <div class="lg-item"><span class="lg-ic">🃏</span><div><b>随身方法卡</b>　可以背走的几步口诀</div></div>
+      <div class="lg-item"><span class="lg-ic">⚠️</span><div><b>易错＋自测</b>　避坑清单 + 一道改写自测题</div></div>
+      <div class="lg-item"><span class="lg-ic">🧭</span><div><b>挂回全景图</b>　这单元在整门课里的坐标</div></div>
+    </div>
+    <p class="m-note" style="margin-top:11px"><b>🟡 淡黄色卡片</b> = 该你动手写的地方（🎯热身 / 🪜练习 / ⚠️自测）；每个都配了输入框，<b>写完再点开折叠的参考答案对照</b>。你写的内容会自动存在本机浏览器里，刷新、关页都不丢。</p>
+  </div>
 </section>
 <hr class="soft">
 
@@ -212,13 +305,16 @@
 
   <div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body">
     <p>表达和思考，是同一座金字塔上<strong>两个相反的方向</strong>：</p>
-    <pre>              ▲ 塔尖：我要和你实现什么（需求 / 要你拍板的事）
-            ╱      我要做什么（方案）        ╲
-          ╱        我怎么看（分析）            ╲
-        ╱       发生了什么（事实 / 问题）        ╲
-        ────────────────────────────────────────
-   想清楚时：从底往上爬（主语是"我"，自己关起门来爬）
-   说出来时：从顶往下滑（主语是"你"，先讲跟对方有关的）</pre>
+    <div class="pyramid">
+      <div class="py-layer"><b>▲ 塔尖</b>　我要和你实现什么（需求 / 要你拍板的事）</div>
+      <div class="py-layer">我要做什么（方案）</div>
+      <div class="py-layer">我怎么看（分析）</div>
+      <div class="py-layer">发生了什么（事实 / 问题）</div>
+      <div class="py-dirs">
+        <div class="py-dir"><div class="pd-h">想清楚时 · 从底往上爬 ↑</div>主语是"我"——自己关起门来，从塔底一层层爬到塔尖。</div>
+        <div class="py-dir"><div class="pd-h">说出来时 · 从顶往下滑 ↓</div>主语是"你"——开口先讲塔尖、先讲跟对方有关的。</div>
+      </div>
+    </div>
     <p>底层原则：所有人都以自我为中心听话——想抓住对方注意力，<strong>第一句就得落在"他在乎的点"上</strong>。</p>
     <div class="callout"><div class="c-h">🔖 锚点故事·电脑卡顿汇报</div>
     <p>一个学员要跟老板汇报"公司电脑卡顿"。他下意识从塔底往上爬：先讲"很多同事反映电脑卡顿、拉低效率"（事实）→"我查了，是配置低"（分析）→"我找供应商出了升级方案"（方案）→ 最后才挤出一句"需要你拍个预算"（需求）。讲到一半，老板大概率打断："等你想清楚再说。"</p>
@@ -230,7 +326,7 @@
     <p>还记得 🎯 里老板问你"客户投诉处理得怎么样了"吗？跟着走一遍：</p>
     <p><strong>① 先爬塔尖（想清我要和他实现什么）</strong>：他这一问，真正想要的是"心里有底 + 知道要不要他出手"。所以我的第一句，应该落在"结论 + 要不要你介入"上，而不是投诉的来龙去脉。</p>
     <p><strong>② 从顶往下滑，主语换成"你/这件事"</strong>：</p>
-    <div class="quote"><p>"已经控制住了，客户情绪稳下来了，<strong>这周内能结案，暂时不用您出面</strong>（<strong>结论 + 跟你有关的点先给</strong>）。简单说就是：起因是发货延迟，我已经道歉并补了方案，对方基本接受（<strong>再补一句分析/方案</strong>）；唯一不确定的是赔偿额度，到时候可能需要您拍一下板（<strong>留出真正要你拍的点</strong>）。"</p></div>
+    <div class="quote"><p>"已经控制住了，客户情绪稳下来了，<strong>这周内能结案，暂时不用您出面</strong><span class="anno">结论 + 跟你有关的点先给</span>。简单说就是：起因是发货延迟，我已经道歉并补了方案，对方基本接受<span class="anno">再补一句分析/方案</span>；唯一不确定的是赔偿额度，到时候可能需要您拍一下板<span class="anno">留出真正要你拍的点</span>。"</p></div>
     <p>对照一下你在 🎯 写的第一句：是不是从"事情是这样的，上周三客户打电话来说……"开始讲起？那就是在塔底起步、拉着老板往上爬。而上面这句——<strong>先给结论、先讲跟他有关的、把要他拍板的点拎出来</strong>，他 5 秒就知道该不该操心。这就是"往下滑"。</p>
   </div></div>
 
@@ -306,7 +402,7 @@
     <p>还记得 🎯 里老板让你考察的 A、B 两家供应商吗？跟着走一遍：</p>
     <p><strong>① 先定判断（合作思维：老板真正要的是"该签谁、能不能签"）</strong>：他不要一份对比流水账，他要的是"你的推荐 + 我能不能放心拍板"。</p>
     <p><strong>② 第一句给结论 + 建议</strong>：</p>
-    <div class="quote"><p>"两家我都跑完了，<strong>我推荐 A，建议这周就签</strong>（<strong>结论 + 建议先给</strong>）。理由就三条：A 报价比 B 高 8%，但账期长一倍、还接过我们同行的大单，综合更稳；B 便宜，但资质和交付我打了问号（<strong>判断依据，分点</strong>）。要支撑这个判断，我重点确认了 A 的三个客户口碑和它的产能，都没问题（<strong>只留支撑结论的关键事实</strong>）。"</p></div>
+    <div class="quote"><p>"两家我都跑完了，<strong>我推荐 A，建议这周就签</strong><span class="anno">结论 + 建议先给</span>。理由就三条：A 报价比 B 高 8%，但账期长一倍、还接过我们同行的大单，综合更稳；B 便宜，但资质和交付我打了问号<span class="anno">判断依据，分点</span>。要支撑这个判断，我重点确认了 A 的三个客户口碑和它的产能，都没问题<span class="anno">只留支撑结论的关键事实</span>。"</p></div>
     <p>对照一下你在 🎯 写的第一句：是不是"A 家报价是……账期是……，B 家报价是……"？那就是在做对比流水账——老板听完还得自己在脑子里替你下结论。而上面这句，<strong>先给了你的推荐和理由</strong>，他 10 秒就能决定信不信你、要不要签。这就是"不可替代"和"录音笔"的区别。</p>
   </div></div>
 
@@ -384,7 +480,7 @@
     <p>还记得 🎯 里老板让你"整理一份竞品资料"吗？跟着走一遍：</p>
     <p><strong>① 先问 3W（30 秒，别埋头就干）</strong>：要哪几家竞品（What）？你手上有没有现成对标口径（How）？什么时候要（When）？</p>
     <p><strong>② 关键是多问一句 Why</strong>：</p>
-    <div class="quote"><p>"老板，我马上整。<strong>不过想先跟您确认一下：这份资料您主要是想用来干嘛？</strong>（<strong>问 Why</strong>）是给投资人看融资材料，还是我们自己定价/做功能取舍要参考？"——他说："明天见客户，客户问起来我得能接得住。"</p></div>
+    <div class="quote"><p>"老板，我马上整。<strong>不过想先跟您确认一下：这份资料您主要是想用来干嘛？</strong><span class="anno">问 Why</span>是给投资人看融资材料，还是我们自己定价/做功能取舍要参考？"——他说："明天见客户，客户问起来我得能接得住。"</p></div>
     <p><strong>③ 抓住 Why，方案就变了</strong>：原来他要的不是"一份大而全的对比表"，是"明天当着客户能对答如流的几个关键差异点"。于是你只做"3 个客户最可能问、我们最有优势的对比"，半小时搞定，还正中下怀。</p>
     <p>对照一下你在 🎯 写的那句：是不是直接"好的，我下午给您"就埋头做了？那很可能做出一份大而全、却不是他要的表，白干半天。<strong>多问那一句 Why，省下的是你一下午的瞎忙。</strong></p>
   </div></div>
@@ -469,7 +565,7 @@
     <p><strong>① 换频道（先认出，再稳住）</strong>：心里默念一句"我现在被杏仁核绑架了，先别急着反驳"——给自己 3 秒，别让那股血冲出去。</p>
     <p><strong>② 问自己"我们共同的目标是什么"</strong>：我和老板都想要"这个方案能成、能交付"。他发火，说明"方案没达到他要的"，不是"他要灭了我"。</p>
     <p><strong>③ 对事回应、顺带问出真问题</strong>：</p>
-    <div class="quote"><p>"老板，我听出来这版离您的预期差挺远（<strong>接事，不辩护</strong>）。我也想把它做成（<strong>亮共同目标</strong>）。能不能帮我点一下——是方向不对，还是哪几块不到位？我今天就重做（<strong>把火转成具体的事</strong>）。"</p></div>
+    <div class="quote"><p>"老板，我听出来这版离您的预期差挺远<span class="anno">接事，不辩护</span>。我也想把它做成<span class="anno">亮共同目标</span>。能不能帮我点一下——是方向不对，还是哪几块不到位？我今天就重做<span class="anno">把火转成具体的事</span>。"</p></div>
     <p>对照一下你在 🎯 写的那句：是不是"这个方案我有我的考虑……"（举证据=战斗），或者闷头不吭声（逃跑）？而上面这句——<strong>没护脸、先接事，亮出共同目标，把"批评"接成"具体要改什么"</strong>，老板的火反而没处发，还会觉得你靠谱。</p>
   </div></div>
 
@@ -477,12 +573,12 @@
     <div class="quote"><p>你交的季度复盘报告，老板看完直接在工位上发火："这就是你熬了一周的东西？数据这么浅，让我怎么往上汇报？"周围同事都听见了，你脸一阵红。</p>
     <p>请写出你的回应——用"换频道 + 问共同目标 + 听事不护脸"，<strong>不许辩解、不许顶回去，也不许闷头不吭声</strong>。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"（先稳住，不辩解）老板，我听明白了，这版深度不够、撑不住您往上汇报（<strong>接事，不护脸</strong>）。我也想让它能拿得出手（<strong>亮共同目标</strong>）。您能点我一下吗——是哪几个数据要再往下挖，还是结论的角度不对？我今晚就补出来（<strong>把火转成具体要改的事</strong>）。"</p></div>
+      <div class="quote"><p>"（先稳住，不辩解）老板，我听明白了，这版深度不够、撑不住您往上汇报<span class="anno">接事，不护脸</span>。我也想让它能拿得出手<span class="anno">亮共同目标</span>。您能点我一下吗——是哪几个数据要再往下挖，还是结论的角度不对？我今晚就补出来<span class="anno">把火转成具体要改的事</span>。"</p></div>
       <p><strong>反射</strong>：当众被吼，最难的是别让那股血冲出去（"我熬了一周你还嫌"＝战斗，或当场僵住＝逃跑）。换频道之后你会发现：他骂的是"报告不够深"这件事，先接住事、亮出共同目标，火就没处烧了，旁边同事反而觉得你稳。</p>
     </div></details>
   </div></div>
 
-  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：挨批 / 被发火 3 步</div><div class="step-body">
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：挨批 / 被发火（3 动作 + 1 守则）</div><div class="step-body">
     <div class="methodcard"><ol>
       <li><strong>换频道</strong>：认出"我被杏仁核绑架了"，先稳 3 秒，别吵别逃</li>
       <li><strong>问共同目标</strong>："我和他都想要什么"——把对方从对手切回战友</li>
@@ -502,10 +598,14 @@
     <div class="quote"><p>客户当面甩给你一句重话："你们这服务也太差了，找你们就是个错误！"你下意识想回的差版本是：<strong>"我们已经按合同做了，问题不在我们这边。"</strong></p>
     <p>请用"换频道 + 问共同目标 + 听事不护脸"，把这句"防御反击"改写成一句"合作式回应"。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
-      <div class="quote"><p>"听得出来这次确实让您很不满意，真的抱歉（<strong>先接情绪，不辩护</strong>）。咱们的目标是一样的——把这事顺顺当当办成（<strong>亮共同目标</strong>）。能不能具体说说是哪个环节出了问题？我现在就跟进、给您一个说法（<strong>听事、转成具体动作</strong>）。"</p></div>
+      <div class="quote"><p>"听得出来这次确实让您很不满意，真的抱歉<span class="anno">先接情绪，不辩护</span>。咱们的目标是一样的——把这事顺顺当当办成<span class="anno">亮共同目标</span>。能不能具体说说是哪个环节出了问题？我现在就跟进、给您一个说法<span class="anno">听事、转成具体动作</span>。"</p></div>
       <p><strong>反射</strong>："问题不在我们这边"是典型的杏仁核反击——赢了道理、输了客户。换频道之后你会发现：他骂的是"那件没办好的事"，不是要你认人品的错。先接事，关系和事都救得回来。</p>
     </div></details>
   </div></div>
+
+  <div class="callout ok"><div class="c-h">📎 加餐·本单元还藏着两招（详解版第 8 节）</div>
+  <p><strong>二级反馈（让对方以后更愿意好好说话）</strong>：想让谁的脾气变好，就在他"脾气好、把话好好说清"的那一刻给正反馈——"塑造"要发生在对方做对时，而不是只在他做错时才反应。比如上级难得心平气和地把问题讲明白了，你补一句"您这么直接说，我一下就抓住重点了，特别感谢"——他下次更可能继续这么沟通。</p>
+  <p><strong>分清"严格管理"和 PUA</strong>：两者都让你不舒服，区别看三点——PUA 只对人不对事、否认你的真实感受、提要求却不给任何支持；严格管理对事、认可你的付出、会给方法和资源。挨批时拿这把尺量一量：别把正常的高要求当成 PUA，也别把真 PUA 忍成"我活该"。</p></div>
 
   <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
     <p>本单元主导【<strong>关系博弈</strong>】模式；主要落在【<strong>心法 → 框架</strong>】层——心法是【<strong>合作思维</strong>：老板是战友、不是对手】，框架是"换频道 · 问共同目标 · 听事不护脸"。它和"有效批评"正好是一体两面（一个接批评、一个发批评），也和"处理冲突""得体拒绝"同属"有摩擦时把事谈成"。</p>
@@ -551,7 +651,7 @@
     <p><strong>① 魔法想象挖深层需求</strong>：换新工具→不卡了→团队不用天天等加载→产出能提上来。深层需求是"<strong>团队产出/效率</strong>"，不是"工具新不新"。</p>
     <p><strong>② 找利益共同体</strong>：谁也想要团队产出更高？老板。他就是合作方。</p>
     <p><strong>③ 三段句式说出来</strong>：</p>
-    <div class="quote"><p>"老板，您今年最看重的是咱们组的交付提速吧（<strong>① 你想要什么</strong>）。我也想把交付效率打上去（<strong>② 共同目标</strong>）。现在卡点很实在：旧工具每天让每个人白等差不多 1 小时，<strong>换一套新的、一次性 X 万，估算两个月就能从省下的工时里赚回来</strong>（<strong>③ 我的需求怎么推动那个目标</strong>）。您看值不值得投？"</p></div>
+    <div class="quote"><p>"老板，您今年最看重的是咱们组的交付提速吧<span class="anno">① 你想要什么</span>。我也想把交付效率打上去<span class="anno">② 共同目标</span>。现在卡点很实在：旧工具每天让每个人白等差不多 1 小时，<strong>换一套新的、一次性 X 万，估算两个月就能从省下的工时里赚回来</strong><span class="anno">③ 我的需求怎么推动那个目标</span>。您看值不值得投？"</p></div>
     <p>对照一下 🎯 里那句"工具太老、大家抱怨、能不能买个新的"：那是把需求停在"我和同事的体感"上，老板只听到"你们嫌弃工具"。而上面这句——<strong>先点他在乎的（交付提速）、亮共同目标、再把'换工具'算成一笔能回本的投资</strong>，他批起来就有理由了。</p>
   </div></div>
 
@@ -559,7 +659,7 @@
     <div class="quote"><p>有个对你工作很有帮助的行业培训，要花 5000 块、占两天工作日。你想申请公司出钱、给假。别说成"我想去学习、能不能批"。</p>
     <p>请用"三段句式"写出你的申请（你想替老板/公司实现的是什么 → 共同目标 → 这个培训怎么帮到它）。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"老板，下季度咱们要啃下 X 这块新业务，对吧（<strong>① 你想要什么</strong>）？我也想成为能扛起这块的人（<strong>② 共同目标</strong>）。正好有个针对 X 的实战培训，两天、5000 块，<strong>学完我就能直接上手做 X 的方案，不用咱们再花钱找外部顾问</strong>（<strong>③ 需求怎么推动目标</strong>）。这两天的活我提前安排好不耽误。您看能不能支持？"</p></div>
+      <div class="quote"><p>"老板，下季度咱们要啃下 X 这块新业务，对吧<span class="anno">① 你想要什么</span>？我也想成为能扛起这块的人<span class="anno">② 共同目标</span>。正好有个针对 X 的实战培训，两天、5000 块，<strong>学完我就能直接上手做 X 的方案，不用咱们再花钱找外部顾问</strong><span class="anno">③ 需求怎么推动目标</span>。这两天的活我提前安排好不耽误。您看能不能支持？"</p></div>
       <p><strong>反射</strong>："我想去学习、能不能批"是把培训当成"我个人的福利"，老板要从成本角度掂量。换成"它帮我们拿下下季度的新业务、还省了外部顾问钱"，培训就从"花钱"变成了"投资"。</p>
     </div></details>
   </div></div>
@@ -584,7 +684,7 @@
     <div class="quote"><p>你想跟隔壁产品组要一个人，临时支援你两周。你准备说：<strong>"你们最近不忙吧？借个人给我用两周呗，我这边实在忙不过来。"</strong></p>
     <p>请用"三段句式"把它改写成对方愿意点头的版本。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
-      <div class="quote"><p>"你们这季度也指着 A 项目上线拿结果吧（<strong>① 对方想要什么</strong>）？我手上这个活，恰恰是 A 上线前必须打通的一环（<strong>② 共同目标：A 成了，大家都好看</strong>）。所以想跟你借小李两周，<strong>他来帮我把这一环搞定，等于直接给 A 扫清障碍</strong>（<strong>③ 我的需求怎么帮到对方的目标</strong>）；两周后准还，期间他的活我帮你盯。"</p></div>
+      <div class="quote"><p>"你们这季度也指着 A 项目上线拿结果吧<span class="anno">① 对方想要什么</span>？我手上这个活，恰恰是 A 上线前必须打通的一环<span class="anno">② 共同目标：A 成了，大家都好看</span>。所以想跟你借小李两周，<strong>他来帮我把这一环搞定，等于直接给 A 扫清障碍</strong><span class="anno">③ 我的需求怎么帮到对方的目标</span>；两周后准还，期间他的活我帮你盯。"</p></div>
       <p><strong>反射</strong>："你们不忙吧、借个人、我太忙了"——通篇是"我的难处"，对方凭什么为你的忙买单？翻译成"借人＝帮你们的 A 项目扫障碍"，他才有动力松手。</p>
     </div></details>
   </div></div>
@@ -631,10 +731,10 @@
     <p><strong>① 先判必要</strong>：定下季度营销方向，是不是非得拉一屋子人开？——核心就营销、运营、我三个人，要不要先一对一对齐、把方案打到七八成，再开会拍板？（很多会这一步就砍掉了）</p>
     <p><strong>② 要开，就把通知写清</strong>（别只有"几点+会议室"）：</p>
     <div class="quote"><p>"【下季度营销方向·决策会】明天 14:00–15:00 会议室 A。</p>
-    <p>目的：拍板下季度营销主打方向（<strong>主题</strong>）。</p>
-    <p>我会先用 10 分钟讲 2 个备选方案的数据和我的倾向（<strong>我的角色：提报+主持</strong>）；</p>
-    <p>请 @运营 准备上季度各渠道转化数据、@设计 准备两个方向各一张概念图（<strong>每个人的角色 + 要准备什么</strong>）；</p>
-    <p>这是决策会，来之前请各自想好倾向哪个、为什么（<strong>会议类型 + 预期</strong>）。"</p></div>
+    <p>目的：拍板下季度营销主打方向<span class="anno">主题</span>。</p>
+    <p>我会先用 10 分钟讲 2 个备选方案的数据和我的倾向<span class="anno">我的角色：提报+主持</span>；</p>
+    <p>请 @运营 准备上季度各渠道转化数据、@设计 准备两个方向各一张概念图<span class="anno">每个人的角色 + 要准备什么</span>；</p>
+    <p>这是决策会，来之前请各自想好倾向哪个、为什么<span class="anno">会议类型 + 预期</span>。"</p></div>
     <p>对照一下 🎯 里那句"明天 2 点开会、讨论下季度营销、会议室见"：没人知道自己来干嘛、要不要准备、是来拍板还是来听——结果必然是少数人发言、多数人玩手机。<strong>而上面这条，每个人上会前就知道自己的活，会自然就高效了。</strong></p>
   </div></div>
 
@@ -642,7 +742,7 @@
     <div class="quote"><p>你主持一个产品评审会，议题是"敲定 V2 版要砍哪些功能"。可开了 20 分钟，大家聊嗨了，从"砍功能"一路聊到"明年要不要做海外市场"，越扯越远。</p>
     <p>你作为主持人，<strong>写一句把会拉回正轨的话</strong>（要温和、但坚定，别让人下不来台）。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"海外市场这个点特别好，我先记下来，咱们另开一场专门聊（<strong>先肯定、给安放，不否定</strong>）。不过今天这一个小时，我们的目标是把'V2 砍哪些功能'定下来，时间有限，我们先拉回到功能清单上（<strong>温和而坚定地点明目标、拉回</strong>）。来，我们一个一个过——第一个，登录页的 X 功能，留还是砍？"</p></div>
+      <div class="quote"><p>"海外市场这个点特别好，我先记下来，咱们另开一场专门聊<span class="anno">先肯定、给安放，不否定</span>。不过今天这一个小时，我们的目标是把'V2 砍哪些功能'定下来，时间有限，我们先拉回到功能清单上<span class="anno">温和而坚定地点明目标、拉回</span>。来，我们一个一个过——第一个，登录页的 X 功能，留还是砍？"</p></div>
       <p><strong>反射</strong>：拉回跑题的关键不是"别聊了"，而是"<strong>先肯定那个话题、给它一个去处，再亮出本场目标把人领回来</strong>"。硬打断会让人难堪，会议主持人的活是"不偏题、专注解决任务"。</p>
     </div></details>
   </div></div>
@@ -667,12 +767,17 @@
     <p>请把它改写成一条"让人不溜号"的通知（补上它缺的东西）。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
       <div class="quote"><p>"【10 月复盘·信息同步会】周五 10:00–11:00 大会议室。</p>
-      <p>目的：各组同步本月关键结果与卡点，定 11 月重点（<strong>主题 + 产出</strong>）。</p>
-      <p>形式：每组轮流 5 分钟，按'做成了什么 / 没做成什么 / 下月要什么支持'三段讲（<strong>形式 + 结构，杜绝流水账</strong>）。</p>
-      <p>请各组长今天下班前把这三段填进共享文档，会上照着讲（<strong>角色 + 要准备什么</strong>）。"</p></div>
+      <p>目的：各组同步本月关键结果与卡点，定 11 月重点<span class="anno">主题 + 产出</span>。</p>
+      <p>形式：每组轮流 5 分钟，按'做成了什么 / 没做成什么 / 下月要什么支持'三段讲<span class="anno">形式 + 结构，杜绝流水账</span>。</p>
+      <p>请各组长今天下班前把这三段填进共享文档，会上照着讲<span class="anno">角色 + 要准备什么</span>。"</p></div>
       <p><strong>反射</strong>：原版缺了三样致命的东西——<strong>每个人的角色、要准备什么、按什么结构讲</strong>。补上这三样，"全员开会"才不会变成"组长念流水账、其他人刷手机"。</p>
     </div></details>
   </div></div>
+
+  <div class="callout ok"><div class="c-h">📎 加餐·本单元还藏着三招（详解版第 12 · 13 节）</div>
+  <p><strong>六顶思考帽（让一屋子人"同向思考"）</strong>：开会乱，常因为大家思维不同向——有人在挑毛病、有人在畅想、有人在算成本，互相打架。六顶帽就是让全场在同一时间只"戴同一顶帽子"想同一类问题（这一轮都只找优点、下一轮都只挑风险、再一轮只谈感受……），收束发散、效率立刻上来。</p>
+  <p><strong>判断要不要插手一场争执</strong>："表达情绪"（带着情绪把观点说清）可以放行；"情绪化的表达"（为赢而吵、造势压人、人身攻击）要干预。一句话：直指本质的，赞同；为造势而压制别人的，警惕。</p>
+  <p><strong>裸心会（专治"人"层面的积怨/误解）</strong>：当冲突已经不在事、而在"我就是看他不顺眼"时，开一场裸心会——① 会前 1v1 征得双方意愿；② 会中围圈、不隔桌，主持人请各方陈述误解点，并做"翻译"（把指责翻译成需求）；③ 会后 1v1 跟进。目的是把"只能一个人对"推回"我们都想要的共同目标"。</p></div>
 
   <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
     <p>本单元主导【<strong>表达输出</strong>】模式（兼带会中的"博弈控场"）；横跨【<strong>框架 → 话术</strong>】层——框架是"会前中后三位一体 + 会前五件事"，话术是开场定调和跑题拉回那几句；心法仍是【<strong>合作思维</strong>：开会是大家一起把事做成，你有义务让每个人的时间不被浪费】。</p>
@@ -717,7 +822,7 @@
     <p><strong>① 后果想象（30 秒内心戏，先攒勇气）</strong>：要是抹不开面子全接下来 → 今晚得先弄完他这份、我自己的方案又得往后拖，周末大概率搭进去，周一交出来的东西还可能两边都糙……代价太大，这个得拒，但要拒得让他还愿意找我。</p>
     <p><strong>② 选哪一招</strong>：他要的是"报表别开天窗"，我给不了的是"今晚替他做完整份"——典型的 <strong>① 只接一小部分</strong>：接住他最卡的那一点 + 给个替代。</p>
     <p><strong>③ 说出来的话（示范话术）</strong>：</p>
-    <div class="quote"><p>"你这份我帮你想想（<strong>先接住，不甩脸</strong>）。不过今晚我真顶不了——我自己周一要交的方案还在火上，整份替你赶我做不到（<strong>明确扔掉给不了的，并给原因</strong>）。你最卡的是哪一块？<strong>现在我花十分钟，跟你一起把卡住的那一步弄通</strong>，剩下的你照着往下填；要是明早还有拿不准的，我一上班先帮你看（<strong>接住一小部分 + 给确定的替代</strong>）。"</p></div>
+    <div class="quote"><p>"你这份我帮你想想<span class="anno">先接住，不甩脸</span>。不过今晚我真顶不了——我自己周一要交的方案还在火上，整份替你赶我做不到<span class="anno">明确扔掉给不了的，并给原因</span>。你最卡的是哪一块？<strong>现在我花十分钟，跟你一起把卡住的那一步弄通</strong>，剩下的你照着往下填；要是明早还有拿不准的，我一上班先帮你看<span class="anno">接住一小部分 + 给确定的替代</span>。"</p></div>
     <p>对照一下你在 🎯 写下的那句：是不是要么"行行行我来"（全盘接、自己崩），要么"我没空"（硬扔、把人推开）？而上面这句——<strong>接住了他真正的需求（报表别开天窗）、扔掉了你给不了的（今晚整份）、还给了替代（教卡点 + 明早再看）</strong>，全程没有一个生硬的"不"字。这就是"接一半扔一半"。</p>
   </div></div>
 
@@ -725,7 +830,7 @@
     <div class="quote"><p>你是设计，隔壁运营的小周这周<strong>第三次</strong>卡着点丢需求过来："这个 banner 今晚能出不？明早推送要用。"可你今晚有事，而且这种"临下班才提、还次次都急"已经不是头一回了。</p>
     <p>请写出你的回应：既<strong>接住</strong>能接的、又<strong>扔掉</strong>今晚做不了的，<strong>还顺手把"次次临时加塞"这个根儿问题往桌面上放一放</strong>。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"小周，banner 我可以做，没问题（<strong>接</strong>）。但今晚我确实有事，赶不出来，最早明天上午给你（<strong>扔 + 给确定的替代时间</strong>，不空着）。另外有个事想跟你说一下——这周这已经是第三次临下班来急活了，我特别怕这么赶出来的东西对不起你们的推送。我们要不要约个十分钟，<strong>你把推送排期提前同步给我</strong>？这样我能排进去，你也不用每次都救火。（<strong>把"反复临时加塞"的根儿问题，温和而坚定地放到桌面上</strong>）"</p></div>
+      <div class="quote"><p>"小周，banner 我可以做，没问题<span class="anno">接</span>。但今晚我确实有事，赶不出来，最早明天上午给你（<strong>扔 + 给确定的替代时间</strong>，不空着）。另外有个事想跟你说一下——这周这已经是第三次临下班来急活了，我特别怕这么赶出来的东西对不起你们的推送。我们要不要约个十分钟，<strong>你把推送排期提前同步给我</strong>？这样我能排进去，你也不用每次都救火。<span class="anno">把"反复临时加塞"的根儿问题，温和而坚定地放到桌面上</span>"</p></div>
       <p><strong>反射</strong>：得体拒绝 ≠ "这次又忍了"。它是"<strong>接住能接的 + 给确定的替代 + 把反复发生的根儿问题摆出来</strong>"——后面这一步，其实就是一次小小的"冲突前置"，省掉你下周的第四次救火。</p>
     </div></details>
   </div></div>
@@ -751,8 +856,8 @@
     <div class="quote"><p>你的下属小林周五下午找你："周末有个行业沙龙我想去学习，能不能帮我报名、算调休？"可那个沙龙跟他的岗位<strong>八竿子打不着</strong>，预算也紧。你差点脱口而出的"差版本"是：<strong>"这个跟你工作没关系，不批。"</strong></p>
     <p>请把这句"硬拒绝"改写成"接一半扔一半"的版本。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
-      <p>先拆需求：他真正想要的是"<strong>学习成长</strong>"（这是好的，<strong>接住</strong>）；而"去这个不相关的沙龙 + 报销"是你给不了的（<strong>扔</strong>）。改写：</p>
-      <div class="quote"><p>"我特别支持你想学习这件事（<strong>接住需求/动机</strong>）。不过这个沙龙跟你现在的岗位关联不大，公司预算也紧，这一个我先不批，给你交个底（<strong>明确扔 + 给原因</strong>）。但你这股劲儿别浪费——你最近在做的 X 方向，我手上正好有两个更对口的课程和行业群，回头我推给你（<strong>给替代</strong>）。等哪天有跟岗位强相关的活动，我们再走报销，我帮你争取（<strong>留口子 + 给条件</strong>）。"</p></div>
+      <p>先拆需求：他真正想要的是"<strong>学习成长</strong>"（这是好的，<strong>接住</strong>）；而"去这个不相关的沙龙 + 报销"是你给不了的<span class="anno">扔</span>。改写：</p>
+      <div class="quote"><p>"我特别支持你想学习这件事<span class="anno">接住需求/动机</span>。不过这个沙龙跟你现在的岗位关联不大，公司预算也紧，这一个我先不批，给你交个底<span class="anno">明确扔 + 给原因</span>。但你这股劲儿别浪费——你最近在做的 X 方向，我手上正好有两个更对口的课程和行业群，回头我推给你<span class="anno">给替代</span>。等哪天有跟岗位强相关的活动，我们再走报销，我帮你争取<span class="anno">留口子 + 给条件</span>。"</p></div>
       <p><strong>反射</strong>：你拒的是"<strong>这一个不相关的沙龙</strong>"，接住的是"<strong>他想成长</strong>"——别因为要拒绝具体那件事，把人家好的动机也一起否定了。</p>
     </div></details>
   </div></div>
@@ -800,7 +905,7 @@
     <p>还记得 🎯 里"本周必须上 vs 坚决不行"吗？跟着走三拍：</p>
     <p><strong>① 稳住</strong>：先别把"他在阻挠我"这句话喊出来。心里默念"处理这个本来就是我的活"，站定，深吸一口气。</p>
     <p><strong>② 先处理人</strong>：</p>
-    <div class="quote"><p>"等一下——我能感觉到咱俩都有点上头了（<strong>点破情绪</strong>）。我不希望让你觉得我在逼你拿质量冒险（<strong>我不希望</strong>），我特别清楚出了问题是你背锅。我希望的是，咱俩一起想个既不砸口碑、又能给客户交代的办法（<strong>我希望</strong>）。"</p></div>
+    <div class="quote"><p>"等一下——我能感觉到咱俩都有点上头了<span class="anno">点破情绪</span>。我不希望让你觉得我在逼你拿质量冒险<span class="anno">我不希望</span>，我特别清楚出了问题是你背锅。我希望的是，咱俩一起想个既不砸口碑、又能给客户交代的办法<span class="anno">我希望</span>。"</p></div>
     <p><strong>③ 再处理事（抬到利益、找 C）</strong>：</p>
     <div class="quote"><p>"咱们各退一步看真正要的：你要的是'别带着没测完的风险上线'，我要的是'这周得给客户一个交代'——其实不冲突。<strong>能不能这周先给客户开放一个'内测版/小范围灰度'，把核心功能给到、风险可控；全量上线放到测试跑完？</strong>"（A：本周全量上 / B：测完再上 / <strong>C：本周灰度 + 测完全量</strong>）</p></div>
     <p>对照一下你在 🎯 写的：是不是要么继续举证"市场已经答应客户了"（硬掰、强制），要么憋着"算了听他的吧"（投降）？而上面这三拍——<strong>先稳住、再接住他的情绪、最后从'上不上'抬到'各自怕什么/要什么'</strong>，一个灰度方案就把死结解开了。</p>
@@ -810,12 +915,12 @@
     <div class="quote"><p>季度预算就一笔，你和搭档吵起来：你坚持"砸投放、先把量做起来"，他坚持"投产品、口碑才是根本"。两人都觉得对方短视，会越开越僵。</p>
     <p>请用第三拍的思路写出你的破局话：先把双方从"投放 vs 产品"的立场，抬到各自真正的<strong>利益</strong>，再提一个 A+B=C 的第三方案。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"咱俩先别争钱花哪儿——说说各自到底图啥（<strong>抬到利益</strong>）。你要的是'别透支口碑、留住用户'，我要的是'这季度的增长数字能交代'，对吧？这俩其实是一件事的两头（<strong>点出利益不冲突</strong>）。<strong>要不这季度先拿一小笔做'小步投放 + 同步打磨那一两个最影响口碑的点'，用投放带来的真实反馈反推产品该改哪儿——一个月后看数据再决定加码哪边？</strong>（A 砸投放 / B 投产品 / <strong>C：小步投放 + 精准打磨，用数据再分配</strong>）"</p></div>
+      <div class="quote"><p>"咱俩先别争钱花哪儿——说说各自到底图啥<span class="anno">抬到利益</span>。你要的是'别透支口碑、留住用户'，我要的是'这季度的增长数字能交代'，对吧？这俩其实是一件事的两头<span class="anno">点出利益不冲突</span>。<strong>要不这季度先拿一小笔做'小步投放 + 同步打磨那一两个最影响口碑的点'，用投放带来的真实反馈反推产品该改哪儿——一个月后看数据再决定加码哪边？</strong>（A 砸投放 / B 投产品 / <strong>C：小步投放 + 精准打磨，用数据再分配</strong>）"</p></div>
       <p><strong>反射</strong>："投放 vs 产品"是行动层的死磕；"增长数字 vs 口碑留存"是利益层——一旦抬上去，你会发现俩人要的其实是同一件事的两面，C 方案自然就有了。</p>
     </div></details>
   </div></div>
 
-  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：处理冲突三拍</div><div class="step-body">
+  <div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：处理冲突三拍（+1 前提）</div><div class="step-body">
     <div class="methodcard"><ol>
       <li><strong>稳住</strong>：默念"这是我的工作"，站定，不跑不炸（杏仁核会骗你，理性叫得回来）</li>
       <li><strong>先处理人</strong>：用"我不希望…我希望…"接住情绪；自己上头就喊暂停</li>
@@ -836,7 +941,7 @@
     <p>请按"先处理人 + 把行动抬到利益 + 给 A+B=C"，写出你的破局思路和一句话。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
       <ul>
-        <li><strong>先处理人</strong>："我不希望搞得像我不顾你感受，我知道你周末就想好好休息（<strong>我不希望/接情绪</strong>）。"</li>
+        <li><strong>先处理人</strong>："我不希望搞得像我不顾你感受，我知道你周末就想好好休息<span class="anno">我不希望/接情绪</span>。"</li>
         <li><strong>抬到利益</strong>：你真正要的是"周末有个安静的休息环境"，我要的是"有个地方招待朋友"——不一定非得抢同一个客厅同一个晚上。</li>
         <li><strong>A+B=C</strong>："<strong>要不聚会挪到周六下午（你白天本来也常出门），晚上还你；或者我把场地换到附近那家咖啡馆，家里就不吵你了</strong>——你看哪个行？"</li>
       </ul>
@@ -883,7 +988,7 @@
     <p><strong>① 忍</strong>：把"你别绕了"那句话咽回去。心里那束光打在他头上——他绕，多半是有顾虑、没说出口的东西，不是在浪费你时间。</p>
     <p><strong>② 等</strong>：别在他卡壳时替他下结论，等他把那句"排期吧……"说完。</p>
     <p><strong>③ 问（先复述、再开放）</strong>：</p>
-    <div class="quote"><p>"你先别急（<strong>给空间</strong>）。我听下来，你是担心现在的排期有点风险，对吗？（<strong>复述式·确认</strong>）具体是哪一块让你不太确定——能展开说说吗？（<strong>开放式·请他多说</strong>）"</p></div>
+    <div class="quote"><p>"你先别急<span class="anno">给空间</span>。我听下来，你是担心现在的排期有点风险，对吗？<span class="anno">复述式·确认</span>具体是哪一块让你不太确定——能展开说说吗？<span class="anno">开放式·请他多说</span>"</p></div>
     <p>对照一下你在 🎯 想说的"按我说的来"：那是机关枪——你以为他在绕，其实他可能正想告诉你一个你没看到的坑。<strong>忍住、等他说完、问出来</strong>，你不光没漏掉风险，他还会觉得"原来你真的在听我"——下次他才敢早点跟你说真话。</p>
   </div></div>
 
@@ -919,10 +1024,14 @@
     <p>你差点脱口而出的差版本是：<strong>"那肯定是你没抓住老板的点，你应该先去问清楚他到底要什么。"</strong></p>
     <p>请把这句"急着给建议"改写成"忍·等·问"的倾听式回应。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
-      <div class="quote"><p>"改了好几版还被打回，那种挫败感我懂（<strong>接情绪、不评判</strong>）。我先听听——是每次老板的反馈都不一样，还是你心里其实也没太摸准他要什么？（<strong>复述/开放式提问，把卡点问出来</strong>）你先说说，咱们再一起看怎么弄。"</p></div>
+      <div class="quote"><p>"改了好几版还被打回，那种挫败感我懂<span class="anno">接情绪、不评判</span>。我先听听——是每次老板的反馈都不一样，还是你心里其实也没太摸准他要什么？<span class="anno">复述/开放式提问，把卡点问出来</span>你先说说，咱们再一起看怎么弄。"</p></div>
       <p><strong>反射</strong>："你应该先去问清楚"也许是对的建议，但在他还没被听见时甩出来，他只会觉得"你在教育我、嫌我蠢"。先忍住建议、把他卡的点问出来——很多时候问着问着，他自己就想通了。</p>
     </div></details>
   </div></div>
+
+  <div class="callout ok"><div class="c-h">📎 加餐·本单元还藏着两招（详解版第 21 节）</div>
+  <p><strong>非正式谈心会（把团队问题还给团队）</strong>：团队士气低、私下抱怨多时，别一个人硬扛。开一场非正式、无上下级的谈心会：围一圈，每人轮流讲一个最近的困惑，再指定另一个人给建议。低成本地提供情绪价值，也让团队自己消化问题。</p>
+  <p><strong>按你的"优势"选倾听方式</strong>：倾听没有标准姿势。引领型的人不是不会听，而是"先说后听"——先把自己的观点抛出来清空，再静下心听；亲和型的人天生会听、能让人掏心窝，是团队的润滑剂。用你的优势，别硬学别人。</p></div>
 
   <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
     <p>本单元主导【<strong>倾听输入</strong>】模式；主要落在【<strong>框架 → 话术</strong>】层——框架是"忍·等·问 + 听完要行动"，话术是复述式/开放式那几句问法；心法是【<strong>合作思维</strong>：倾听赢的不是这场对话，是一个愿意跟你合作的盟友】。它和"共情""接任务·问需求"同属"把话听进来"这一支。</p>
@@ -1046,7 +1155,7 @@
     <p>还记得 🎯 里那个搞砸了、低头不语的下属吗？跟着走一遍：</p>
     <p><strong>① 停一停、放一放</strong>：把"你怎么这么差"咽回去，把"赶紧让他改完"的目标先放一边——他现在这个状态，你逼他改也改不好。</p>
     <p><strong>② 拿起来、言语化（替他把感受说出来）</strong>：</p>
-    <div class="quote"><p>"先别急着说事（<strong>给空间</strong>）。我看你这几天状态挺沉的，<strong>是不是觉得最近不管怎么使劲，好像都差一口气、心里挺挫败的？</strong>（<strong>替他把感受说出来</strong>）"——多半他眼圈一红，话就出来了。</p></div>
+    <div class="quote"><p>"先别急着说事<span class="anno">给空间</span>。我看你这几天状态挺沉的，<strong>是不是觉得最近不管怎么使劲，好像都差一口气、心里挺挫败的？</strong><span class="anno">替他把感受说出来</span>"——多半他眼圈一红，话就出来了。</p></div>
     <p><strong>③ 再用三件套往下走</strong>：</p>
     <div class="quote"><p>"（描述问题）这件事确实没达到要求；（承认感受）但我知道你不是不上心，是卡住了；（问他怎么办）你觉得是哪一步最让你卡？我们一起看看。"</p></div>
     <p>对照一下你在 🎯 想说的"你到底怎么回事"：那是把他的情绪当成了"挡我事的麻烦"，他只会更缩、更不敢说真问题。<strong>先替他把感受说出来</strong>，他从"被审问"变成"被看见"，才肯告诉你真正卡在哪——事才推得动。</p>
@@ -1056,7 +1165,7 @@
     <div class="quote"><p>一个平时很拼的同事，今天负责的项目被客户当众否了，他回到工位一直阴着脸、闷不吭声。你想关心他，但又怕一开口就变成"别难过了，这没什么"那种没用的安慰。</p>
     <p>请写出你的共情回应——用"承认 + 替他说出感受"，<strong>不许给建议、不许说"这没什么"</strong>。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"这个项目你前前后后熬了那么久，今天被当众否，<strong>搁谁心里都堵得慌，特别是当着那么多人的面</strong>（<strong>替他说出感受，且具体</strong>）。你先缓缓，不用急着跟我说什么。等你想说了，我都在。"</p></div>
+      <div class="quote"><p>"这个项目你前前后后熬了那么久，今天被当众否，<strong>搁谁心里都堵得慌，特别是当着那么多人的面</strong><span class="anno">替他说出感受，且具体</span>。你先缓缓，不用急着跟我说什么。等你想说了，我都在。"</p></div>
       <p><strong>反射</strong>："别难过了，这没什么"是"我给你的你不想要的"——它否定了他的感受，等于说"你这点事至于吗"。而"搁谁都堵得慌"是接住、是替他说出来——他会觉得"至少你懂"。共情第一步永远是承认情绪，不是消灭情绪。</p>
     </div></details>
   </div></div>
@@ -1083,7 +1192,7 @@
     <div class="quote"><p>你朋友失恋了，跟你哭诉。你差点脱口而出：<strong>"这种人不值得，早分早好，你看开点，下一个更好。"</strong></p>
     <p>请把这句"急着讲道理"改写成"停一停 + 替他说出感受"的共情版本。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
-      <div class="quote"><p>"你别急着看开——你们在一起这么久，说断就断，<strong>现在心里肯定又难受又有点不敢相信吧</strong>（<strong>替他说出感受，不评判对方好坏</strong>）。想哭就哭，想骂就骂，我陪着你。等你缓过来，咱们再聊别的。"</p></div>
+      <div class="quote"><p>"你别急着看开——你们在一起这么久，说断就断，<strong>现在心里肯定又难受又有点不敢相信吧</strong><span class="anno">替他说出感受，不评判对方好坏</span>。想哭就哭，想骂就骂，我陪着你。等你缓过来，咱们再聊别的。"</p></div>
       <p><strong>反射</strong>："这种人不值得、下一个更好"是你在替他下结论、催他赶紧好起来——可他此刻要的不是道理，是"有人懂我现在多难受"。先承认情绪，道理是后面的事。</p>
     </div></details>
   </div></div>
@@ -1129,9 +1238,9 @@
     <p>还记得 🎯 里那份"没用心"的方案吗？跟着走一遍：</p>
     <p><strong>① 先脱敏 + 摆平姿态</strong>：把"什么玩意儿"咽回去——这是反馈、不是发泄，我和他要的是"方案能用"。</p>
     <p><strong>② 说观察、不说评论</strong>：</p>
-    <div class="quote"><p>"这版我看了，有几个具体的点（<strong>反馈，不贴标签</strong>）：竞品只列了 3 家、没写数据来源，结论那段也没有支撑（<strong>观察：客观事实，不是'你不用心'</strong>）。"</p></div>
+    <div class="quote"><p>"这版我看了，有几个具体的点<span class="anno">反馈，不贴标签</span>：竞品只列了 3 家、没写数据来源，结论那段也没有支撑<span class="anno">观察：客观事实，不是'你不用心'</span>。"</p></div>
     <p><strong>③ 给对的做法 / 用机会型问题引导</strong>：</p>
-    <div class="quote"><p>"我要的是能直接拿去跟客户讲的版本。<strong>你觉得，要让它能说服客户，还差哪几块、怎么补？</strong>（<strong>机会型问题：让他自己说出怎么改，而不是我替他骂一遍</strong>）"</p></div>
+    <div class="quote"><p>"我要的是能直接拿去跟客户讲的版本。<strong>你觉得，要让它能说服客户，还差哪几块、怎么补？</strong><span class="anno">机会型问题：让他自己说出怎么改，而不是我替他骂一遍</span>"</p></div>
     <p>对照一下 🎯 里那句"你这做的什么玩意儿"：那是评论 + 贴标签，他立刻进入防御（找借口/顶嘴/闷头不服），方案下一版照样糙。而上面这套——<strong>对事不对人、给了标准、还让他自己想怎么改</strong>，他没法防御，只能去改对。</p>
   </div></div>
 
@@ -1139,7 +1248,7 @@
     <div class="quote"><p>你的下属这个月已经第三次拖了 deadline。你想认真跟他说一次，但不想说成"你太拖拉了、一点时间观念都没有"（评论、贴标签）。</p>
     <p>请用"事实是反馈"写出你要说的话：① 说观察（具体事实），② 用机会型问题引导他自己说出怎么改。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"我想跟你聊个事（<strong>平等，不是兴师问罪</strong>）。这个月有三次交付都比约定晚了 1–2 天，分别是 X、Y、Z（<strong>观察：摆具体事实，不说"你拖拉"</strong>）。这几次都卡住了下游同事。<strong>你自己看，是哪个环节最容易让你延期？怎么调整能让你按时交？</strong>（<strong>机会型问题：让他自己找原因、给方案</strong>）我们一起想个办法。"</p></div>
+      <div class="quote"><p>"我想跟你聊个事<span class="anno">平等，不是兴师问罪</span>。这个月有三次交付都比约定晚了 1–2 天，分别是 X、Y、Z<span class="anno">观察：摆具体事实，不说"你拖拉"</span>。这几次都卡住了下游同事。<strong>你自己看，是哪个环节最容易让你延期？怎么调整能让你按时交？</strong><span class="anno">机会型问题：让他自己找原因、给方案</span>我们一起想个办法。"</p></div>
       <p><strong>反射</strong>："你太拖拉了"是评论，他会觉得被贴标签、忙着辩解；"三次晚了 1–2 天"是观察，无可辩驳。再用"怎么调整能按时"代替"你为什么总拖"，他就从"被骂"转成"解决问题"。</p>
     </div></details>
   </div></div>
@@ -1166,10 +1275,13 @@
     <div class="quote"><p>你要给一个同事反馈，你想说的差版本是：<strong>"你做事太毛躁了，老是出错，能不能细心点？"</strong></p>
     <p>请把它改写成"说观察 + 给对的做法/机会型问题"的有效反馈。</p></div>
     <details class="fold"><summary>👉 参考解析</summary><div class="fold-in">
-      <div class="quote"><p>"这周提交的两份报表，里面有 3 处数字对不上（<strong>观察：具体事实，不说"毛躁"</strong>）。这种错误如果到了客户那儿挺要命的。<strong>你觉得交之前加一道什么检查，能把这类错挡住？</strong>（<strong>机会型问题：引导他自己想防错机制</strong>）需要的话我们一起定个自查清单。"</p></div>
+      <div class="quote"><p>"这周提交的两份报表，里面有 3 处数字对不上<span class="anno">观察：具体事实，不说"毛躁"</span>。这种错误如果到了客户那儿挺要命的。<strong>你觉得交之前加一道什么检查，能把这类错挡住？</strong><span class="anno">机会型问题：引导他自己想防错机制</span>需要的话我们一起定个自查清单。"</p></div>
       <p><strong>反射</strong>："太毛躁、能不能细心点"是评论 + 空泛要求，他听完也不知道具体改什么。换成"3 处数字对不上"（观察）+"加一道什么检查"（让他自己想办法），既不伤人，又真能解决问题。</p>
     </div></details>
   </div></div>
+
+  <div class="callout ok"><div class="c-h">📎 加餐·本单元还藏着一招（详解版第 27 节）</div>
+  <p><strong>扬善于公堂，规过于密室（曾国藩）</strong>：表扬要当众（放大正向激励、让人有面子），批评要私下（保住对方的接受度）。曾国藩处理两员悍将哗变，就是先在大堂公开表彰他们的战功，再把人单独叫到密室、一条条指出问题——对方当场服气。反过来做（当众批评、私下表扬）几乎必翻车。</p></div>
 
   <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
     <p>本单元主导【<strong>关系博弈</strong>】模式；横跨【<strong>心法 → 框架 → 话术</strong>】——心法是【批评＝反馈，姿态平等（为批评脱敏）】，框架是"观察 vs 评论 + 三种反馈（事实/求助/关怀）"，话术是"你上周迟到 4 次""怎么才能…""你需要意识到你话语的影响力"。它和"应对批评"正好是一体两面——这一单元教你怎么把批评给出去。</p>
@@ -1210,7 +1322,7 @@
   <div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍（回到那句"客服压力很大"）</div><div class="step-body">
     <p>还记得 🎯 里那句打动不了老板的"客服压力很大"吗？跟着把它感官化：</p>
     <p><strong>① 语言成像（把"压力大/流失客户"变成画面）</strong>：</p>
-    <div class="quote"><p>"老板，昨天下午高峰期，<strong>3 个客服面前同时挂着 27 个未读、客户消息平均要等 8 分钟才有人回</strong>；我翻了下，光昨天就有 11 个人等不及，直接说'算了我退款'走了（<strong>把抽象的'压力大、流失'换成具体的画面和数字</strong>）。"</p></div>
+    <div class="quote"><p>"老板，昨天下午高峰期，<strong>3 个客服面前同时挂着 27 个未读、客户消息平均要等 8 分钟才有人回</strong>；我翻了下，光昨天就有 11 个人等不及，直接说'算了我退款'走了<span class="anno">把抽象的'压力大、流失'换成具体的画面和数字</span>。"</p></div>
     <p><strong>② 图像可视化（再加一层）</strong>：把"客户等待时长曲线""每天流失订单数"做成一张图，红线一路飙升——比你说十句"压力大"都管用。</p>
     <p><strong>③ 带到现场（最狠的一层）</strong>："您要不下午来客服工位坐 10 分钟？您亲眼看一眼那个消息一直跳、根本回不过来的状态。"</p>
     <p>对照一下 🎯 里那句"压力很大、流失很多客户"：那是抽象结论（拍子），老板脑子里没有画面，只会"嗯，我知道了，再说"。而上面这些——<strong>27 个未读、等 8 分钟、11 个人扭头退款、一张飙升的红线、甚至请他来现场坐 10 分钟</strong>，他"看见"了，才会真的动。</p>
@@ -1305,7 +1417,7 @@
     <div class="quote"><p>公司年会，老板举着杯突然点你："来，老员工，上台说两句！"你不能又是那句"我很激动、感谢公司、感谢大家"。</p>
     <p>请用"现场取材"（人 / 细节 / 情绪 / 收获）写一段 30 秒的即兴感言，<strong>至少包含一个具体的现场细节</strong>。</p></div>
     <details class="fold"><summary>👉 参考话术（参考，不是唯一答案）</summary><div class="fold-in">
-      <div class="quote"><p>"其实我刚在台下还跟小李说（<strong>人 + 现场</strong>），今年最难忘的是 3 月那次通宵改方案——改到凌晨四点，咱们几个趴在会议室桌上睡着了，是行政的张姐第二天一早拿热豆浆把我们叫醒的（<strong>细节</strong>）。那一刻我特别确定，我不是一个人在扛（<strong>情绪</strong>）。这一年我最大的收获，不是做成了多少项目，是知道了身边这帮人靠得住（<strong>收获</strong>）。敬大家！"</p></div>
+      <div class="quote"><p>"其实我刚在台下还跟小李说<span class="anno">人 + 现场</span>，今年最难忘的是 3 月那次通宵改方案——改到凌晨四点，咱们几个趴在会议室桌上睡着了，是行政的张姐第二天一早拿热豆浆把我们叫醒的<span class="anno">细节</span>。那一刻我特别确定，我不是一个人在扛<span class="anno">情绪</span>。这一年我最大的收获，不是做成了多少项目，是知道了身边这帮人靠得住<span class="anno">收获</span>。敬大家！"</p></div>
       <p><strong>反射</strong>："我很激动、感谢大家"是空话，谁都能说、谁也记不住。而"凌晨四点趴桌睡着、张姐拿豆浆叫醒"是只属于你们的现场细节——这才让人鼻子一酸。感言的精髓在"感"，从现场取材才有"感"。</p>
     </div></details>
   </div></div>
@@ -1341,6 +1453,12 @@
     </div></details>
   </div></div>
 
+  <div class="callout ok"><div class="c-h">📎 加餐·主动即兴：主动开口怎么破冰（详解版第 31 节）</div>
+  <p>前面练的是"被点名"的被动即兴；还有一种更难、也更值钱的——<strong>主动</strong>走上前，跟一个层级比你高、还不认识你的人开口。公式：<strong>表达尊重 + 提供价值</strong>（底色还是利他：人在"给予"时最有底气，在"索取"时最没底气）。</p>
+  <p><strong>表达尊重（给对方一个舒服的入口）</strong>：① 礼貌肯定，颗粒度要细——别说"我特别佩服您"，要说"您《XX》里关于 X 的那个观点，帮我解决了 Y 这个具体问题"；② 请教破冰——问一个很小、很具体的问题，门槛低，对方好回答。</p>
+  <p><strong>提供价值</strong>：① 实质价值——用你的长板去碰对方的长板（哪怕你是新人，也有他不了解的一线信息）；② 情绪价值——发自内心、颗粒度很细的赞美，再小白也给得起。</p>
+  <p><strong>🔖 锚点·一份穷小白的零食礼包</strong>：翠翠入行时是个"人微言轻"的穷小白。听说一位大总编辑丧父，她没想着攀关系，只想"让他好受一点"，送了份零食大礼包。十年后她创业出第一本书，那位总编辑亲自送来一大束花。<strong>利他，能打破"我人微言轻、不配开口"的执念——你能给的，永远比你以为的多。</strong></p></div>
+
   <div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body">
     <p>本单元主导【<strong>表达输出</strong>】模式；主要落在【<strong>框架 → 话术</strong>】层——框架是"PREP（发表观点）+ 现场取材（发表感言）"，话术是"是这样的，我认为……"和那些抓人/细节/情绪的句子；心法是【即兴不是拼天赋，是拼平时的积累】。它和"上台克服紧张""生动表达"一起，凑齐了"当众把话说好"这一支——<strong>全册到此，14 个单元齐了。</strong></p>
   </div></div>
@@ -1368,8 +1486,8 @@
   <p><strong>请写出：① 你不急着站队，先怎么"听"；② 怎么把这场"降不降价"的对立，往"第三方案"上引。</strong></p></div>
   <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
     <ul>
-      <li><strong>先倾听（忍·等·问）</strong>："你俩先别急着说服我（<strong>忍住自己评判</strong>）。小 A 你先说，你担心的到底是什么；小 B 你听完别打断，等下你说（<strong>让双方把话说完</strong>）。"——分别用"所以你真正担心的是……，对吗"复述确认。</li>
-      <li><strong>引向第三方案（处理冲突·把行动抬到利益）</strong>："你俩其实要的不冲突——小 A 要的是'别轻易降价、守住利润盘'，小 B 要的是'别丢了这个大客户'（<strong>抬到利益</strong>）。那有没有第三条路：<strong>不直接降价，但给他升级服务/加赠一个增值包，单价不动、感知到的价值上去</strong>？（A 降价 / B 不降 / <strong>C：不降价但加价值</strong>）"</li>
+      <li><strong>先倾听（忍·等·问）</strong>："你俩先别急着说服我<span class="anno">忍住自己评判</span>。小 A 你先说，你担心的到底是什么；小 B 你听完别打断，等下你说<span class="anno">让双方把话说完</span>。"——分别用"所以你真正担心的是……，对吗"复述确认。</li>
+      <li><strong>引向第三方案（处理冲突·把行动抬到利益）</strong>："你俩其实要的不冲突——小 A 要的是'别轻易降价、守住利润盘'，小 B 要的是'别丢了这个大客户'<span class="anno">抬到利益</span>。那有没有第三条路：<strong>不直接降价，但给他升级服务/加赠一个增值包，单价不动、感知到的价值上去</strong>？（A 降价 / B 不降 / <strong>C：不降价但加价值</strong>）"</li>
     </ul>
     <p><strong>点评</strong>：先用倾听（忍·等·问）把火压下来、让双方觉得被听见，再用处理冲突的"抬到利益、找 A+B=C"破局。新官上任最忌一来就拍板站队——那必得罪一个。</p>
   </div></details>
@@ -1378,7 +1496,7 @@
   <div class="quote"><p>周三，隔壁产品组的总监（级别比你高）笑呵呵地来："你组里小 A、小 B 经验足，借我两周去支援我那个上线项目呗，反正你刚接手、应该还没那么忙。"——可你正缺人、还顶着续费目标。</p>
   <p><strong>请写出你的回应：既不硬刚得罪人，又把这个会要了你命的"借人"挡回去。</strong></p></div>
   <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
-    <div class="quote"><p>"您看得起我们组的人，我特别高兴（<strong>先接住、不甩脸</strong>）。不过实话实说，我刚接手就背了 90% 续费的硬指标，A、B 正是顶在一线的主力，这两周抽走我真扛不住（<strong>明确扔掉给不了的 + 给原因</strong>）。<strong>要不这样：他俩抽不开身，但我可以让 C 每天匀出两小时支援你那个项目最急的环节；或者等我这边续费冲刺过了这两周，再给你借人</strong>（<strong>给替代方案 + 留口子</strong>）。您看行不行？"</p></div>
+    <div class="quote"><p>"您看得起我们组的人，我特别高兴<span class="anno">先接住、不甩脸</span>。不过实话实说，我刚接手就背了 90% 续费的硬指标，A、B 正是顶在一线的主力，这两周抽走我真扛不住<span class="anno">明确扔掉给不了的 + 给原因</span>。<strong>要不这样：他俩抽不开身，但我可以让 C 每天匀出两小时支援你那个项目最急的环节；或者等我这边续费冲刺过了这两周，再给你借人</strong><span class="anno">给替代方案 + 留口子</span>。您看行不行？"</p></div>
     <p><strong>点评</strong>：标准的"接一半扔一半"——接住"认可+愿意帮"，扔掉"借走主力两周"，给替代（匀部分工时/换时间）。对级别比你高的人，更要"温和而坚定"，而不是硬刚或硬吞。</p>
   </div></details>
 
@@ -1387,8 +1505,8 @@
   <p><strong>请写出：① 你怎么先"接住"他的状态（而不是劈头就批）；② 怎么把"方案很糙"这个批评，说成他接得住的反馈。</strong></p></div>
   <details class="fold"><summary>👉 参考处理</summary><div class="fold-in">
     <ul>
-      <li><strong>先共情（停一停放一放 + 言语化）</strong>："先别急着说工作（<strong>放下'赶紧批他'的冲动</strong>）。我看你这两天状态挺沉的，<strong>是不是遇到什么事了，还是觉得最近怎么使劲都不太对？</strong>（<strong>替他把感受说出来</strong>）"——很可能他这才说出真问题（家里的事/对方向的困惑）。</li>
-      <li><strong>再反馈（说观察不说评论 + 关怀式）</strong>："这份方案确实没到能给客户的程度——客户痛点那段空着、报价也没依据（<strong>观察：具体事实，不贴'敷衍'的标签</strong>）。我知道这不是你的真实水平（<strong>关怀：先肯定人</strong>）。你觉得是状态的事，还是哪块卡住了？需要我怎么搭把手？（<strong>机会型问题 + 给支持</strong>）"</li>
+      <li><strong>先共情（停一停放一放 + 言语化）</strong>："先别急着说工作<span class="anno">放下'赶紧批他'的冲动</span>。我看你这两天状态挺沉的，<strong>是不是遇到什么事了，还是觉得最近怎么使劲都不太对？</strong><span class="anno">替他把感受说出来</span>"——很可能他这才说出真问题（家里的事/对方向的困惑）。</li>
+      <li><strong>再反馈（说观察不说评论 + 关怀式）</strong>："这份方案确实没到能给客户的程度——客户痛点那段空着、报价也没依据<span class="anno">观察：具体事实，不贴'敷衍'的标签</span>。我知道这不是你的真实水平<span class="anno">关怀：先肯定人</span>。你觉得是状态的事，还是哪块卡住了？需要我怎么搭把手？<span class="anno">机会型问题 + 给支持</span>"</li>
     </ul>
     <p><strong>点评</strong>：对"有能力但状态下滑"的人，先共情（接住情绪）、再用关怀式反馈（关心人 + 说观察不贴标签），而不是上来一顿"你怎么回事"。先处理人，再处理事。</p>
   </div></details>
@@ -1415,7 +1533,8 @@
 </div>
 
 <script>
-  // 仅保留导航类轻交互：移动端目录开合 + 当前单元高亮（无打卡、无本地存储）
+(function(){
+  // ===== 移动端目录开合 + 当前单元高亮 =====
   var burger=document.getElementById('burger'), toc=document.getElementById('toc'), scrim=document.getElementById('scrim');
   function closeToc(){toc.classList.remove('open');scrim.classList.remove('open');}
   burger.addEventListener('click',function(){toc.classList.toggle('open');scrim.classList.toggle('open');});
@@ -1423,14 +1542,134 @@
   toc.addEventListener('click',function(e){if(e.target.closest('a'))closeToc();});
 
   var links=[].slice.call(toc.querySelectorAll('a[href^="#"]'));
-  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var tmap={}; links.forEach(function(a){tmap[a.getAttribute('href').slice(1)]=a;});
   var obs=new IntersectionObserver(function(es){
     es.forEach(function(en){ if(en.isIntersecting){
       links.forEach(function(a){a.classList.remove('active');});
-      var a=map[en.target.id]; if(a)a.classList.add('active');
+      var a=tmap[en.target.id]; if(a)a.classList.add('active');
     }});
   },{rootMargin:'-45% 0px -50% 0px'});
   document.querySelectorAll('section.sec').forEach(function(s){obs.observe(s);});
+
+  // ===== 阅读进度条 + 返回顶部 =====
+  var bar=document.createElement('div'); bar.id='progress'; document.body.appendChild(bar);
+  var totop=document.createElement('button'); totop.id='totop'; totop.innerHTML='↑';
+  totop.setAttribute('aria-label','返回顶部'); document.body.appendChild(totop);
+  totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  function onScroll(){
+    var h=document.documentElement, sc=h.scrollTop||document.body.scrollTop;
+    var mx=(h.scrollHeight-h.clientHeight)||1;
+    bar.style.width=(sc/mx*100)+'%';
+    totop.classList.toggle('show', sc>420);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  // ===== 模式色标（挂到各单元标题） =====
+  var MODE={express:[1,2,5,6,10,13,14],listen:[3,9,11],game:[4,7,8,12]};
+  var MINFO={express:['表达输出','mode-express'],listen:['倾听输入','mode-listen'],game:['关系博弈','mode-game']};
+  function modeOf(n){for(var k in MODE){if(MODE[k].indexOf(n)>=0)return k;}return null;}
+  document.querySelectorAll('section.sec').forEach(function(sec){
+    var m=/^sec-(\d+)$/.exec(sec.id); if(!m)return;
+    var info=MINFO[modeOf(+m[1])]; if(!info)return;
+    var h=sec.querySelector('.sec-h'); if(!h)return;
+    var tag=document.createElement('span'); tag.className='mode-tag '+info[1]; tag.textContent=info[0];
+    h.appendChild(tag);
+  });
+
+  // ===== 写作输入框（自动存 localStorage） =====
+  function keyFor(id){return 'cuicui-biaoda::'+id;}
+  function makeBox(id, placeholder){
+    var wrap=document.createElement('div');
+    var lab=document.createElement('div'); lab.className='work-label';
+    lab.innerHTML='✍️ 先自己写下来 <span class="work-saved"></span>';
+    var ta=document.createElement('textarea'); ta.className='work'; ta.id=id;
+    ta.placeholder=placeholder||'在这里写你的答案……（自动存本机，刷新不丢）';
+    var saved=lab.querySelector('.work-saved');
+    try{var v=localStorage.getItem(keyFor(id)); if(v){ta.value=v; saved.textContent='已保存';}}catch(e){}
+    var t;
+    ta.addEventListener('input',function(){
+      try{localStorage.setItem(keyFor(id),ta.value);}catch(e){}
+      saved.textContent='已保存'; clearTimeout(t);
+      t=setTimeout(function(){saved.textContent=ta.value?'已保存':'';},1500);
+    });
+    wrap.appendChild(lab); wrap.appendChild(ta); return wrap;
+  }
+
+  // 动手区高亮（🎯热身 / 🪜练习 / ⚠️自测）
+  var DO={'🎯':'热身','🪜':'练习','⚠️':'自测'};
+  document.querySelectorAll('.step').forEach(function(step){
+    var ic=step.querySelector('.step-h .ic'); if(!ic)return;
+    var flag=DO[ic.textContent.trim()]; if(!flag)return;
+    step.classList.add('step--do');
+    var fl=document.createElement('span'); fl.className='do-flag'; fl.textContent='✍️ '+flag;
+    step.querySelector('.step-h').appendChild(fl);
+  });
+
+  // 每个折叠答案前插入「输入框 + 别偷看」提示，展开时把你刚写的浮现到参考答案顶部（先写后照）
+  function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+  var idx={};
+  document.querySelectorAll('section.sec details.fold').forEach(function(fold){
+    var s=fold.closest('section.sec'), sid=s?s.id:'x';
+    idx[sid]=(idx[sid]||0)+1;
+    var box=makeBox(sid+'-w'+idx[sid]);
+    var ta=box.querySelector('textarea.work');
+    var hint=document.createElement('div'); hint.className='fold-hint';
+    hint.textContent='👇 写完上面，再点开下面对照（别偷看）';
+    fold.parentNode.insertBefore(box, fold);
+    fold.parentNode.insertBefore(hint, fold);
+    var fin=fold.querySelector('.fold-in');
+    if(fin&&ta){
+      var recall=document.createElement('div'); recall.className='recall';
+      fin.insertBefore(recall, fin.firstChild);
+      fold.addEventListener('toggle',function(){
+        if(!fold.open)return;
+        var v=(ta.value||'').trim();
+        recall.innerHTML = v
+          ? '<div class="recall-h">👆 你刚写的：</div>'+esc(v)
+          : '<div class="recall-h recall-empty">（上面你还没写——建议先合上、写完再来对照）</div>';
+      });
+    }
+  });
+  // 🎯 热身步骤没有折叠答案，单独补一个输入框
+  document.querySelectorAll('.step--do').forEach(function(step){
+    var ic=step.querySelector('.step-h .ic');
+    if(!ic||ic.textContent.trim()!=='🎯')return;
+    if(step.querySelector('textarea.work'))return;
+    var s=step.closest('section.sec'), sid=s?s.id:'x';
+    var body=step.querySelector('.step-body'); if(!body)return;
+    body.appendChild(makeBox(sid+'-warm','写下你脱口而出的第一句……（自动存本机）'));
+  });
+
+  // ===== 单元间「上一节 / 下一节」 =====
+  var order=[].slice.call(document.querySelectorAll('section.sec'));
+  function titleOf(sec){
+    var a=tmap[sec.id];
+    if(a) return a.textContent.replace(/^[\s\d]+/,'').trim();
+    var h=sec.querySelector('h2'); return h?h.textContent.trim():sec.id;
+  }
+  order.forEach(function(sec,i){
+    if(sec.id==='map')return;
+    var nav=document.createElement('div'); nav.className='navlinks';
+    var prev=order[i-1], next=order[i+1];
+    var pa=document.createElement('a');
+    if(prev){pa.href='#'+prev.id; pa.innerHTML='<span class="nl-k">← 上一节</span>'+titleOf(prev);}
+    else{pa.className='nl-disabled'; pa.href='#';}
+    var na=document.createElement('a'); na.className='nl-next';
+    if(next){na.href='#'+next.id; na.innerHTML='<span class="nl-k">下一节 →</span>'+titleOf(next);}
+    else{na.className='nl-next nl-disabled'; na.href='#';}
+    nav.appendChild(pa); nav.appendChild(na); sec.appendChild(nav);
+  });
+
+  // ===== 可勾选清单（存 localStorage） =====
+  document.querySelectorAll('ul.check li').forEach(function(li,i){
+    var s=li.closest('section.sec'), sid=s?s.id:'x', id='chk::'+sid+'::'+i;
+    try{if(localStorage.getItem(id)==='1')li.classList.add('done');}catch(e){}
+    li.addEventListener('click',function(){
+      li.classList.toggle('done');
+      try{localStorage.setItem(id, li.classList.contains('done')?'1':'0');}catch(e){}
+    });
+  });
+})();
 </script>
 </body>
 </html>
