@@ -1,0 +1,486 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe coding for 数据分析 · 交互训练册</title>
+<style>:root{
+  --paper:#faf6ec; --paper-2:#f4eedf; --card:#fffdf7;
+  --ink:#322e28; --ink-soft:#6f675a; --ink-faint:#9a9384;
+  --accent:#1f7a6b; --accent-deep:#16584d; --accent-tint:#eaf2ef;
+  --warn:#c0392b; --line:#e6ddcb; --line-soft:#efe8d8;
+  --maxread:720px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;}
+header.topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#f5efe0;
+  display:flex;align-items:center;gap:14px;padding:10px 18px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+.topbar .burger{display:none;background:none;border:none;color:#f5efe0;font-size:22px;cursor:pointer;line-height:1;}
+.topbar h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+.topbar .spine{font-size:12.5px;color:#cfe3dd;border-left:1px solid #3c7c70;padding-left:14px;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .progress{font-size:12.5px;background:#15504675;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.wrap{display:flex;align-items:flex-start;}
+nav.toc{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);overflow-y:auto;
+  width:255px;flex:0 0 255px;background:var(--paper-2);border-right:1px solid var(--line);padding:16px 10px 60px;}
+nav.toc .grp{font-size:12px;color:var(--ink-faint);font-weight:700;margin:16px 8px 6px;letter-spacing:.5px;}
+nav.toc a{display:flex;align-items:flex-start;gap:7px;text-decoration:none;color:var(--ink-soft);
+  font-size:13.5px;padding:6px 9px;border-radius:7px;margin:1px 0;line-height:1.45;}
+nav.toc a:hover{background:var(--accent-tint);color:var(--accent-deep);}
+nav.toc a.active{background:var(--accent-tint);color:var(--accent-deep);font-weight:700;box-shadow:inset 3px 0 0 var(--accent);}
+nav.toc a .ck{flex:0 0 auto;width:15px;color:var(--accent);font-weight:700;}
+nav.toc a.special{color:var(--accent-deep);font-weight:600;}
+main{flex:1;min-width:0;padding:0 28px 120px;}
+.reader{max-width:var(--maxread);margin:0 auto;}
+section.sec{padding-top:30px;scroll-margin-top:60px;}
+.sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:10px;margin:8px 0 6px;}
+.sec-h h2{font-size:23px;margin:0;color:var(--accent-deep);font-weight:800;}
+.badge-time{font-size:12px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.badge-axis{font-size:12px;color:var(--accent-deep);background:var(--accent-tint);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.done-btn{margin-left:auto;font-size:12.5px;background:none;border:1px solid var(--line);color:var(--ink-soft);padding:4px 12px;border-radius:20px;cursor:pointer;}
+.done-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.step{margin:22px 0;}
+.step-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin:0 0 8px;}
+.step-h .ic{font-size:18px;}
+.step-body{padding-left:2px;}
+.step-body>p:first-child{margin-top:0;}
+p{margin:.55em 0;}
+strong{color:var(--ink);}
+.accent{color:var(--accent-deep);font-weight:700;}
+.blk{font-size:15.5px;font-weight:800;color:var(--ink);margin:18px 0 6px;}
+.quote{border-left:3px solid var(--line);background:var(--paper-2);border-radius:0 8px 8px 0;padding:10px 15px;margin:13px 0;}
+.quote>p:first-child{margin-top:0;} .quote>p:last-child{margin-bottom:0;}
+pre{background:#f3ecdb;color:#3b362d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;overflow-x:auto;
+  font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13px;line-height:1.65;margin:12px 0;}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);border-radius:8px;padding:12px 15px;margin:14px 0;font-size:15px;}
+.callout .c-h{font-weight:800;color:var(--accent-deep);margin-bottom:4px;}
+.callout.ok{border-left-color:var(--accent);background:var(--accent-tint);}
+.methodcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0;}
+.methodcard h4{margin:0 0 8px;color:var(--accent-deep);font-size:15px;}
+.methodcard ol{margin:0;padding-left:22px;} .methodcard li{margin:5px 0;}
+ul.check{list-style:none;padding-left:2px;margin:10px 0;}
+ul.check li{position:relative;padding-left:26px;margin:7px 0;}
+ul.check li::before{content:"❌";position:absolute;left:0;font-size:14px;}
+.warn-x{color:var(--warn);font-weight:700;}
+ul.selfck{list-style:none;padding-left:2px;margin:10px 0;}
+ul.selfck li{position:relative;padding-left:26px;margin:7px 0;}
+ul.selfck li::before{content:"☐";position:absolute;left:0;color:var(--ink-faint);font-size:16px;}
+.ta-label{font-size:13px;color:var(--ink-soft);margin:10px 0 5px;}
+textarea.ta{width:100%;min-height:74px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 13px;font-family:inherit;font-size:15px;line-height:1.7;color:var(--ink);resize:vertical;}
+textarea.ta:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint);}
+.saved-tag{font-size:11.5px;color:var(--accent);margin-left:8px;opacity:0;transition:opacity .3s;}
+.saved-tag.show{opacity:1;}
+.recall{background:var(--accent-tint);border:1px dashed var(--accent);border-radius:9px;padding:11px 14px;margin:12px 0;font-size:14.5px;}
+.recall .rh{font-weight:700;color:var(--accent-deep);font-size:13px;margin-bottom:4px;}
+.recall .rc{white-space:pre-wrap;color:var(--ink);}
+.recall.empty{border-style:dotted;}
+.recall.empty .rc{color:var(--ink-faint);font-style:italic;}
+details.fold{border:1px dashed var(--accent);border-radius:9px;margin:12px 0;background:var(--card);}
+details.fold>summary{cursor:pointer;list-style:none;padding:11px 15px;font-weight:700;color:var(--accent-deep);user-select:none;}
+details.fold>summary::-webkit-details-marker{display:none;}
+details.fold>summary::before{content:"▸ ";color:var(--accent);}
+details.fold[open]>summary{border-bottom:1px solid var(--line-soft);}
+details.fold[open]>summary::before{content:"▾ ";}
+details.fold .fold-in{padding:8px 16px 14px;}
+.map{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0;}
+.map .m-box{border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;background:var(--paper);}
+.map .m-box.lead{background:var(--accent-deep);color:#f1ece0;border-color:var(--accent-deep);}
+.map .m-box.lead b{color:#fff;}
+.map .m-cap{font-weight:800;color:var(--ink);margin:0 0 7px;font-size:13.5px;}
+.map .m-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0;}
+.map a.chip,.map span.chip{display:inline-block;text-decoration:none;font-size:12.5px;color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:3px 11px;}
+.map a.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.map .m-arrow{text-align:center;color:var(--ink-faint);font-size:15px;margin:2px 0;}
+.map .lyr{font-size:11px;color:var(--ink-faint);}
+.map .m-axis{flex:0 0 auto;font-weight:800;color:var(--accent-deep);width:30px;}
+.map .m-note{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;}
+.lead-callout{background:var(--accent-deep);color:#eef4f1;border-radius:10px;padding:13px 17px;margin:14px 0;}
+.lead-callout b{color:#fff;}
+.intro-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:18px 0;}
+.intro-card h3{margin:.2em 0 .4em;color:var(--accent-deep);}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.tbl-scroll{overflow-x:auto;margin:12px 0;}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--card);}
+th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;}
+thead th{background:var(--paper-2);color:var(--ink);font-weight:700;}
+tbody tr:nth-child(even){background:#fcf9f1;}
+.note{color:var(--ink-soft);font-size:14px;}
+.scrim{display:none;position:fixed;inset:48px 0 0;background:rgba(0,0,0,.3);z-index:25;}
+/* —— 动手区：圈出"该读者写"的块（淡黄卡片+左带+角标） —— */
+.do-zone{background:linear-gradient(180deg,#fffdf6,#fbf5e6);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:6px 16px 14px;margin:20px 0;}
+.dz-flag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--accent);border-radius:6px;padding:2px 9px;letter-spacing:.5px;}
+/* —— 行内注释小标签（替代密集括号加粗） —— */
+.anno{font-size:12.5px;color:var(--accent-deep);background:var(--accent-tint);border-radius:5px;padding:1px 7px;margin:0 1px;font-weight:600;}
+/* —— 返回顶部 + 上一节/下一节（JS 自动生成，可选增强） —— */
+#totop{position:fixed;right:18px;bottom:22px;z-index:35;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--accent-deep);font-size:20px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.14);opacity:0;pointer-events:none;transition:opacity .2s;}
+#totop.show{opacity:1;pointer-events:auto;} #totop:hover{background:var(--accent-tint);}
+.navlinks{display:flex;justify-content:space-between;gap:12px;margin:30px 0 4px;}
+.navlinks a{flex:1;min-width:0;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--card);color:var(--ink-soft);font-size:13.5px;line-height:1.4;}
+.navlinks a:hover{border-color:var(--accent);color:var(--accent-deep);background:var(--accent-tint);}
+.navlinks a.nl-next{text-align:right;} .navlinks a .nl-k{display:block;font-size:11px;color:var(--ink-faint);font-weight:700;margin-bottom:2px;}
+.navlinks a.nl-disabled{visibility:hidden;}
+@media (max-width:560px){pre{font-size:12px;}}
+@media (max-width:820px){
+  nav.toc{position:fixed;top:48px;left:0;z-index:28;transform:translateX(-100%);transition:transform .2s;box-shadow:2px 0 14px rgba(0,0,0,.15);}
+  nav.toc.open{transform:translateX(0);}
+  .scrim.open{display:block;}
+  .topbar .burger{display:block;} .topbar .spine{display:none;}
+  main{padding:0 16px 100px;}
+}
+@media print{
+  header.topbar,nav.toc,.done-btn,.scrim,.saved-tag,#totop,.navlinks{display:none!important;}
+  main{padding:0;} textarea.ta{border-color:#bbb;} details.fold{border-color:#bbb;}
+  details.fold[open] .fold-in,details.fold>summary{display:block;}
+  body{font-size:12pt;background:#fff;}
+}
+</style>
+</head><body>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="目录">☰</button>
+  <h1>Vibe coding for 数据分析 · 训练册</h1>
+  <div class="spine">人定规则 + 业务判断，执行交给 AI</div>
+  <div class="progress" id="progress">已学 0 / 4</div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav class="toc" id="toc">
+  <a href="#sec-1" class="special"><span class="ck" data-ck></span>《Vibe coding for 数据分析》学习训练册（完整版）</a>
+  <a href="#sec-2"><span class="ck" data-ck></span>第 1.1 节　一个案例，看 AI 数据分析全流程</a>
+  <a href="#sec-3"><span class="ck" data-ck></span>第 1.2 节　一个案例，用 AI 做用户数据分析</a>
+  <a href="#sec-4"><span class="ck" data-ck></span>第 攻略-3 节　一个因果推断模型的案例（PSM）</a>
+  <a href="#sec-5"><span class="ck" data-ck></span>🎓 结课大实战：「喵小鲜」社区生鲜 App</a>
+</nav>
+<main><div class="reader">
+<section class="sec" id="sec-1"><div class="sec-h"><h2>《Vibe coding for 数据分析》学习训练册（完整版）</h2></div>
+<div class="quote"><p>这是"练习册"，不是"教材"。教材（讲透、可查）是同目录的《详解版讲义》；这里只干一件事——<strong>逼你动手，学完真的会做</strong>。<br>每节固定 8 步动线：🎯先卡你 → 🔑只攻一个动作 → 🧠高手怎么想(只留1个锚点) → ✍️跟着做一遍 → 🪜换你做(留空·答案折叠) → 🃏随身方法卡 → ⚠️易错+自测(折叠) → 🧭挂回全景图。<br>用法：先被 🎯 卡住、别看答案；✍️ 跟着算一遍；🪜 和 ⚠️ 一定要自己动手填了再点开折叠对答案。<strong>练习数据全是新的，所有数字都验算过。</strong><br>范围：覆盖 3 个视频节（1.1 / 1.2 / 攻略-3）；专栏内 8 篇案例图文见 <code>课件/案例图文/</code>。</p></div>
+<hr class="soft">
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🗺 全景图</p>
+<pre>            《Vibe coding for 数据分析》训练册 · 全景图
+  核心一句：用汉语让 AI 写 Python(执行)，但"要什么 / 对不对 / 行不行"由人定
+
+  数据处理能力栈(脊柱)  ── 越往右越深 ──▶
+  ┌────────┬────────┬──────────┬──────────┬─────────┐   ┌──────────┐
+  │清洗合并 │指标计算 │用户画像   │因果建模   │报告/看板 │ ─▶│工作流/Agent│(后续)
+  └────────┴────────┴────┬─────┴────┬─────┴─────────┘   └──────────┘
+   ▲                      │          │           ▲
+   └─[1.1 全流程]──横跨整条链路的开篇示范──────────┘
+                          │          │
+                  [1.2 用户分析]  [攻略-3 PSM]
+                   RFM+标签       不做ABtest估活动效果
+
+  两条主线(每节都在练其中之一/之二)：
+   主线A  AI 写 Python ── 把"执行"交出去：清洗 / 计算 / 建模 / 出图
+   主线B  人定规则+判断 ── 口径 / 指标 / 思路 / 选方法 / 判场景 / 拍"行不行"  ◀ 命门
+
+  纵向层次(粗→细)：
+   战略  选方法·判场景·判断产品行不行    1.1判永生花下不下架 · 攻略-3选不选PSM
+   战术  定口径·定指标·定标签·定思路     1.1主指标+漏斗 · 1.2 RFM+标签
+   战斗  口喷让 AI 执行                 合并 / 取数 / 建模的提示词</pre>
+<div class="quote"><p>怎么用这张图定位：横看你在"能力栈"哪一环（清洗？画像？建模？），纵看你在哪一层（战略/战术/战斗）。<strong>所有节最终都指向主线 B——AI 能力越强，人越要往"战略层判断"走。</strong></p></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">📅 学习路径表</p>
+<div class="tbl-scroll"><table><thead><tr><th>路径</th><th>学哪些</th><th>适合谁</th><th>建议节奏</th></tr></thead><tbody><tr><td><strong>最小可用</strong>（先上手）</td><td>1.1 全流程 → 1.2 用户分析</td><td>时间紧，想先把"报表全流程 + 用户分层"两个最常用场景跑通</td><td>每天 1 节，2 天</td></tr><tr><td><strong>完整深读</strong>（系统掌握）</td><td>1.1 → 1.2 → 攻略-3 → 🎓结课大实战</td><td>想把"执行交给 AI、判断留给自己"整套吃透</td><td>每天 1 节，1 周内含实战</td></tr><tr><td><strong>按角色加餐</strong></td><td>业务/运营：重 1.2 分层策略 + 攻略-3 的"场景判断"；分析/技术：重 1.1 提示词流程 + 攻略-3 建模四步</td><td>按岗位侧重</td><td>在完整路径上各自精读</td></tr></tbody></table></div>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-2"><div class="sec-h"><h2>第 1.1 节　一个案例，看 AI 数据分析全流程</h2><button class="done-btn" data-done="2">标记学完</button></div>
+<p>⏱ 预计 30–35 分钟 ｜ 类型：数据/案例节（要动手算到底）</p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🎯 先卡你一下</p>
+<p>你刚接手公司一个新品的搜索推广。运营甩来 30 个 Excel（每天一张，从生意参谋导出），只说一句："看看这新品行不行。"</p>
+<p>先别急着分析，给自己 1 分钟想两件事：</p>
+<ol><li>这 30 张表怎么变成"一张能算的表"？合并时你打算让 AI 干哪几步、按什么顺序？</li><li>"清洗口径、看哪些指标、怎么判断行不行"——这些你打算自己定，还是丢一句"豆包帮我分析"让 AI 替你拿主意？</li></ol>
+<p>想好了再往下。这一节就是要让你看清：<strong>第 2 个问题答错，整件事就废了。</strong></p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🔑 这节只攻一个动作</p>
+<div class="quote"><p><strong>把"要什么"想清楚——清洗口径、分析思路、业务判断都由你定，只把"执行（写 Python）"口喷给 AI。</strong></p></div>
+<p>其余（怎么写提示词、用什么工具）都是细节。记住一句：<strong>人定规则，AI 写 Python。</strong></p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🧠 高手怎么想</p>
+<p>全流程其实就 5 环，人和 AI 的分工卡死在"规则"上：</p>
+<pre>①清洗合并   ②指标计算   ③出报告    ④做PPT/看板    (⑤可接RPA/工作流)
+   │            │           │           │
+ 人定:口径    人定:主指标   人定:结论    人定:看板套路
+ AI写:Python  AI写:Python  AI写:Python  AI写:HTML
+        └─────────── 人最后兜底：这产品到底行不行 ───────────┘</pre>
+<p><strong>锚点故事——永生花的"两周两单"</strong>（这一节记住这一个就够）：</p>
+<p>案例里那个永生花产品，看板拉出来：卖了整整两周（5 月底到 6 月 13 号），最高的那个热词<strong>一个点击都没有</strong>，反而是极小的长尾词有点击、有转化，两周加起来<strong>总共才卖 2 单</strong>。AI 给的建议却是"还具备流量基础、部分产品竞争力强"。陈老师当场一句"不屁"——两周两单还有啥流量基础？这产品就是需求不清晰、定位不准，该下架或重新包装成"送礼"再上。</p>
+<div class="quote"><p>这就是核心动作的化身：AI 把表、把报告全做了，但"这产品行不行"只有人能拍板。数据分析师不叫"数据代码师"，差别就在这一下。</p></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">✍️ 跟着做一遍</p>
+<p>【全新案例】一家在线书店推一本《英语四级真题》，搜索推广跑了一周，合并后按关键词汇总成这张宽表：</p>
+<div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>曝光</th><th>点击</th><th>访客</th><th>支付订单</th></tr></thead><tbody><tr><td>四级真题</td><td>8000</td><td>80</td><td>60</td><td>1</td></tr><tr><td>四级真题卷</td><td>1200</td><td>96</td><td>70</td><td>5</td></tr><tr><td>英语四级 历年</td><td>600</td><td>60</td><td>45</td><td>6</td></tr><tr><td><strong>合计</strong></td><td><strong>9800</strong></td><td><strong>236</strong></td><td><strong>175</strong></td><td><strong>12</strong></td></tr></tbody></table></div>
+<p><strong>第 1 步·定主指标</strong>：主指标找收入/成本/费用 → 这里就是"支付订单/支付金额"。</p>
+<p><strong>第 2 步·看转化漏斗（先看一头一尾）</strong>：曝光 → 点击 → 访客 → 支付。</p>
+<ul><li>整体曝光点击率 = 236 / 9800 = <strong>2.41%</strong></li><li>整体访客转化率 = 12 / 175 = <strong>6.86%</strong></li></ul>
+<p><strong>第 3 步·分关键词维度</strong>（逐词算曝光点击率、访客转化率）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>曝光点击率</th><th>访客转化率</th><th>读出什么</th></tr></thead><tbody><tr><td>四级真题</td><td>80/8000 = <strong>1.0%</strong></td><td>1/60 = <strong>1.67%</strong></td><td>泛词/热词，曝光最大但又不点又不买</td></tr><tr><td>四级真题卷</td><td>96/1200 = <strong>8.0%</strong></td><td>5/70 = <strong>7.14%</strong></td><td>精准长尾，点得多、转化好</td></tr><tr><td>英语四级 历年</td><td>60/600 = <strong>10.0%</strong></td><td>6/45 = <strong>13.3%</strong></td><td>最精准，转化最高</td></tr></tbody></table></div>
+<p><strong>第 4 步·下业务结论</strong>：曝光最大的"四级真题"是个泛词——8000 曝光只换 1 单，纯烧曝光；真正成交靠两个长尾词。动作不是"加大推广"，而是<strong>把预算从泛词挪到长尾词，选品/标题也往"真题卷、历年"这类精准需求靠</strong>。</p>
+<p>看到没？跟永生花一个套路：<strong>热词带量不带成交，长尾才是真需求。</strong></p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🪜 换你做</p>
+<p>【留空，自己算】一家家居店推"北欧风落地灯"，一周关键词数据如下。请算出每个词的曝光点击率、访客转化率（=支付订单/访客），并回答：哪个词该加投、哪个该停？这个产品到底有没有需求？</p>
+<div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>曝光</th><th>点击</th><th>访客</th><th>支付订单</th></tr></thead><tbody><tr><td>落地灯</td><td>12000</td><td>60</td><td>50</td><td>0</td></tr><tr><td>北欧风落地灯</td><td>900</td><td>72</td><td>55</td><td>4</td></tr><tr><td>卧室落地灯 客厅</td><td>500</td><td>50</td><td>40</td><td>5</td></tr></tbody></table></div>
+<div class="do-zone"><span class="dz-flag">✍️ 动手</span>
+<div class="ta-label">先写你的答案，再点开对照：<span class="saved-tag" data-tag>已存本地</span></div>
+<textarea class="ta" data-save="q1" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开看参考答案</summary><div class="fold-in">
+<div class="recall empty" data-recall="q1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>曝光点击率</th><th>访客转化率</th><th>判断</th></tr></thead><tbody><tr><td>落地灯</td><td>60/12000 = <strong>0.5%</strong></td><td>0/50 = <strong>0%</strong></td><td>泛词，12000 曝光 0 成交，纯烧钱 → <strong>停投/降权</strong></td></tr><tr><td>北欧风落地灯</td><td>72/900 = <strong>8.0%</strong></td><td>4/55 = <strong>7.27%</strong></td><td>精准，转化好 → <strong>加投</strong></td></tr><tr><td>卧室落地灯 客厅</td><td>50/500 = <strong>10.0%</strong></td><td>5/40 = <strong>12.5%</strong></td><td>最精准 → <strong>加投</strong></td></tr></tbody></table></div>
+<p>合计：曝光 13400、点击 182、访客 145、支付 9 单。</p>
+<p><strong>结论</strong>：产品本身有需求（两个长尾词能稳定成交），问题出在"落地灯"这个泛词上——12000 曝光 0 单，把钱烧在了不精准的流量上。该停掉泛词、把预算压到精准长尾词，而不是"整体加大推广"。</p>
+</div></details></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🃏 随身方法卡：用 vibe coding 跑通一份数据报表的 6 步</p>
+<ol><li><strong>想清楚要什么</strong>：先过一遍清洗规则（合并谁、加什么列、删哪几行），把顺序讲死。</li><li><strong>口喷合并</strong>：提日期 → A 列前加日期列 → 第 6 行起填 → 删 1–4 行 → 合并成 CSV，让 AI 保留 .py 复用。</li><li><strong>检查首版</strong>：抽查关键日期那几行对不对，确认无误再继续。</li><li><strong>定分析思路</strong>：主指标（收入/成本）→ 转化漏斗看一头一尾 → 分维度。</li><li><strong>出双格式 + 点评</strong>：word 给领导、MD 给 AI；让 AI 点评但不许改数据。</li><li><strong>做 PPT/看板</strong>：MD 丢豆包出 PPT；HTML 看板套"指标卡 → 时间走势 → 过程指标 → 明细表"。</li></ol>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">⚠️ 易错 + 自测</p>
+<p><strong>3 条易错自查</strong></p>
+<ul class="selfck"><li>提示词把"加列/删行"的顺序讲死了吗？（位置删了会变，先加列再删行）</li><li>给业务的结论是我自己判断的，还是照抄了 AI 的乐观措辞？❌</li><li>我是先抓主指标+漏斗，还是一上来就钻"平均搜索排名"这种细节？❌</li></ul>
+<p><strong>自测一题</strong>（全新糊数据，先找问题再下结论）</p>
+<p>一个生鲜 App 推"有机草莓"，运营给了一周关键词汇总，但数据有点脏：</p>
+<div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>曝光</th><th>点击</th><th>访客</th><th>支付订单</th></tr></thead><tbody><tr><td>有机草莓</td><td>5000</td><td>25</td><td>30</td><td>0</td></tr><tr><td>草莓 礼盒</td><td>800</td><td>64</td><td>48</td><td>6</td></tr><tr><td>草莓 顺丰</td><td>（缺失）</td><td>40</td><td>32</td><td>4</td></tr></tbody></table></div>
+<p>问：①这张表里有哪两处数据明显有问题？②在可用的数据下，你建议加投哪个词、"有机草莓"怎么处理？</p>
+<div class="do-zone"><span class="dz-flag">✍️ 动手</span>
+<div class="ta-label">先写你的答案，再点开对照：<span class="saved-tag" data-tag>已存本地</span></div>
+<textarea class="ta" data-save="q2" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开看解析</summary><div class="fold-in">
+<div class="recall empty" data-recall="q2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>① 两处问题：</strong></p>
+<ul><li>"有机草莓"行：<strong>访客 30 &gt; 点击 25</strong> 不合逻辑——访客是点击进来的，必然 ≤ 点击。这是脏数据，要回去核对或剔除。</li><li>"草莓 顺丰"行：<strong>曝光缺失</strong>——没有曝光就算不了曝光点击率，需要补数后才能评估它的引流效率。</li></ul>
+<p><strong>② 可用判断：</strong></p>
+<ul><li>"草莓 礼盒"：点击率 64/800 = <strong>8%</strong>，转化 6/48 = <strong>12.5%</strong>，好 → 加投。</li><li>"草莓 顺丰"：转化 4/32 = <strong>12.5%</strong> 也好（但曝光缺失，先别评点击效率）→ 谨慎加投、先补曝光数据。</li><li>"有机草莓"：5000 曝光 0 成交，典型泛词烧曝光 → 停投/降权。</li></ul>
+<p><strong>要点</strong>：脏数据要先识别、别直接喂给 AI 算——不然 AI 也不知道"访客&gt;点击"是错的，照样算出一堆指标。这正是"人兜底"的地方。</p>
+</div></details></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🧭 挂回全景图</p>
+<p>本节是整门课的<strong>全流程开篇</strong>，主导轴落在「数据处理全链路」（清洗→计算→报告→看板）。层次上它一路贯穿<strong>战斗层</strong>（口喷让 AI 合并、出表）到<strong>战略层</strong>（判断这产品到底行不行），但真正的落点是那句——<strong>执行可以全交给 AI，业务判断必须握在人手里。</strong></p>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-3"><div class="sec-h"><h2>第 1.2 节　一个案例，用 AI 做用户数据分析</h2><button class="done-btn" data-done="3">标记学完</button></div>
+<p>⏱ 预计 30–35 分钟 ｜ 类型：数据/案例节（要动手算到底）</p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🎯 先卡你一下</p>
+<p>老板把会员消费明细表甩给你——几千行，每行一个订单（会员、消费时间、商品、实付、用了什么券），然后说："看看咱会员质量到底咋样，要不要继续发券。"</p>
+<p>给自己 1 分钟：</p>
+<ol><li>这张"一行一个订单"的明细表，你打算<strong>按什么单位汇总</strong>才能看"会员质量"？</li><li>你会先打哪几个标签，把"该召回的、在薅羊毛的、值得养的"分出来？还是直接丢给 AI 一句"帮我分析"？</li></ol>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🔑 这节只攻一个动作</p>
+<div class="quote"><p><strong>明细表要汇总（按用户）→ 打 RFM + 业务标签 → 人先提假设，再喂 AI；别让 AI 裸跑。</strong></p></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🧠 高手怎么想</p>
+<pre>交易明细 ──按用户汇总──▶ RFM(R距今/F订单数/M实付) + 优惠比例
+        ──打标签──▶ 召回 · 薅羊毛 · 消费分层 · 活跃分层
+        ──人提假设(谁拉升/谁管控/谁慎投)──▶ 喂AI出分层策略</pre>
+<p><strong>锚点故事——AI 让你"加大奖励力度"</strong>（这一节记这一个）：</p>
+<p>案例里把标签打完，发现<strong>薅羊毛客占了接近一半</strong>。这时如果你不提假设、直接把数据丢给 AI，它给的建议是"推 VIP 专属优惠、加大奖励力度"——薅羊毛都过半了你还加奖励，公司不挣钱不发工资了？陈老师一句"纯扯淡"。同一份数据，人先提出"管控优惠、过滤狠薅的人"这个假设再让 AI 落地，建议立刻变靠谱。</p>
+<div class="quote"><p>这就是核心动作：<strong>AI 不知道你的业务假设，它只会算指标、同比环比；价值在你先想清"该怎么分、问题是什么"。</strong></p></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">✍️ 跟着做一遍</p>
+<p>【全新案例】一家咖啡店会员，按用户汇总后（统计区间近 3 个月，R 为最后消费距今天数）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>会员</th><th>R 距今(天)</th><th>F 订单数</th><th>M 总实付</th><th>总原价</th></tr></thead><tbody><tr><td>A</td><td>5</td><td>6</td><td>320</td><td>360</td></tr><tr><td>B</td><td>45</td><td>1</td><td>28</td><td>50</td></tr><tr><td>C</td><td>12</td><td>5</td><td>260</td><td>400</td></tr><tr><td>D</td><td>60</td><td>2</td><td>75</td><td>90</td></tr><tr><td>E</td><td>3</td><td>1</td><td>33</td><td>60</td></tr></tbody></table></div>
+<p><strong>判定口径</strong>（与业务可商定）：召回 R&gt;30 天；消费分层 M&gt;200 高 / &lt;100 一般 / 其余中等；活跃 F&gt;4 高频 / F2–3 一般 / F1 无复购；薅羊毛 优惠比例（实付÷原价）&lt;80%。</p>
+<p><strong>第 1 步·算优惠比例</strong>：</p>
+<p>A=320/360=<strong>88.9%</strong>，B=28/50=<strong>56%</strong>，C=260/400=<strong>65%</strong>，D=75/90=<strong>83.3%</strong>，E=33/60=<strong>55%</strong>。</p>
+<p><strong>第 2 步·逐人打标签</strong>：</p>
+<div class="tbl-scroll"><table><thead><tr><th>会员</th><th>召回</th><th>消费分层</th><th>活跃分层</th><th>薅羊毛(&lt;80%)</th><th>一句话</th></tr></thead><tbody><tr><td>A</td><td>无需</td><td>高(320)</td><td>高频(6)</td><td>否(88.9%)</td><td>头部高价值，维护/会员卡</td></tr><tr><td>B</td><td>待召回(45)</td><td>一般(28)</td><td>无复购(1)</td><td><strong>是(56%)</strong></td><td>无复购+薅+久未来，发券效果差，慎投</td></tr><tr><td>C</td><td>无需</td><td>高(260)</td><td>高频(5)</td><td><strong>是(65%)</strong></td><td>高价值但重度用券，维护+管控优惠</td></tr><tr><td>D</td><td>待召回(60)</td><td>一般(75)</td><td>一般(2)</td><td>否(83.3%)</td><td>待召回的一般用户</td></tr><tr><td>E</td><td>无需</td><td>一般(33)</td><td>无复购(1)</td><td><strong>是(55%)</strong></td><td>新近但无复购+薅，拉复购+控优惠</td></tr></tbody></table></div>
+<p><strong>第 3 步·下结论</strong>：薅羊毛 3/5 = <strong>60%</strong>（过半！连高消费的 C 都在 65% 重度用券）——业绩很依赖投券；真正头部只有 A、C 两人。</p>
+<p><strong>策略</strong>：维护 A、C（C 要管控优惠），一般用户（B/D/E）慎发券、先拉复购，整体<strong>收紧优惠力度</strong>——而不是 AI 那句"加大奖励"。</p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🪜 换你做</p>
+<p>【留空，自己算】一家书店会员，近 3 个月汇总如下。请算优惠比例、逐人打四类标签，并回答：谁最该召回？薅羊毛占比多少？有没有哪一行卡在规则缝隙里？</p>
+<div class="tbl-scroll"><table><thead><tr><th>会员</th><th>R 距今(天)</th><th>F 订单数</th><th>M 总实付</th><th>总原价</th></tr></thead><tbody><tr><td>甲</td><td>8</td><td>5</td><td>240</td><td>300</td></tr><tr><td>乙</td><td>50</td><td>1</td><td>18</td><td>40</td></tr><tr><td>丙</td><td>20</td><td>4</td><td>150</td><td>160</td></tr><tr><td>丁</td><td>65</td><td>2</td><td>600</td><td>620</td></tr></tbody></table></div>
+<div class="do-zone"><span class="dz-flag">✍️ 动手</span>
+<div class="ta-label">先写你的答案，再点开对照：<span class="saved-tag" data-tag>已存本地</span></div>
+<textarea class="ta" data-save="q3" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开看参考答案</summary><div class="fold-in">
+<div class="recall empty" data-recall="q3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p>优惠比例：甲=240/300=<strong>80.0%</strong>，乙=18/40=<strong>45%</strong>，丙=150/160=<strong>93.75%</strong>，丁=600/620=<strong>96.77%</strong>。</p>
+<div class="tbl-scroll"><table><thead><tr><th>会员</th><th>召回</th><th>消费分层</th><th>活跃分层</th><th>薅羊毛(&lt;80%)</th><th>一句话</th></tr></thead><tbody><tr><td>甲</td><td>无需</td><td>高(240)</td><td>高频(5)</td><td>否（<strong>正好 80%，不&lt;80</strong>）</td><td>头部高价值，维护</td></tr><tr><td>乙</td><td>待召回(50)</td><td>一般(18)</td><td>无复购(1)</td><td>是(45%)</td><td>无复购+薅+久未来，慎投</td></tr><tr><td>丙</td><td>无需</td><td>中等(150)</td><td><strong>F=4 卡缝隙</strong></td><td>否(93.75%)</td><td>见下方陷阱</td></tr><tr><td>丁</td><td><strong>待召回(65)</strong></td><td>高(600)</td><td>一般(2)</td><td>否(96.77%)</td><td><strong>高价值却流失，最该重点召回</strong></td></tr></tbody></table></div>
+<ul><li><strong>谁最该召回</strong>：丁——M 600 是高消费，却 65 天没来，高价值流失，比一般用户的召回优先级高得多。</li><li><strong>薅羊毛占比</strong>：只有乙，1/4 = <strong>25%</strong>。</li><li><strong>规则缝隙（陷阱）</strong>：丙的 F=4，而口径是"F&gt;4 高频 / F2–3 一般"——<strong>4 既不&gt;4 也不在 2–3</strong>，落在缝隙里！这说明讲师的分层口径有个洞，遇到边界值要回去和业务确认（比如改成"F≥4 高频"或"F=4 归一般"）。另外甲的优惠比例正好 80%，"&lt;80%"判定下<strong>不算</strong>薅羊毛——边界值要敏感。</li></ul>
+</div></details></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🃏 随身方法卡：把一张交易明细做成用户画像的 5 步</p>
+<ol><li><strong>合并宽表</strong>：能做宽表就做宽表，讲清谁 join 谁、拿哪些字段。</li><li><strong>按用户汇总</strong>：算出 RFM（R 距今 / F 订单数 / M 实付）。</li><li><strong>加衍生指标</strong>：按业务补能回答问题的指标（如优惠比例、参与优惠订单比例）。</li><li><strong>打业务标签</strong>：召回 / 薅羊毛 / 消费分层 / 活跃分层，口径与业务商定。</li><li><strong>人提假设再喂 AI</strong>：先给分类和问题假设，再让 AI 出分层策略——别让它裸跑。</li></ol>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">⚠️ 易错 + 自测</p>
+<p><strong>3 条易错自查</strong></p>
+<ul class="selfck"><li>我把明细汇总到"用户"这个单位了吗？（不是看单笔订单）</li><li>标签口径的<strong>边界值</strong>（F=4、优惠正好 80%）我处理清楚了吗？❌</li><li>我给 AI 喂了业务假设，还是让它裸跑出"加大奖励"这种结论？❌</li></ul>
+<p><strong>自测一题</strong>（全新糊数据，先找问题再下结论）</p>
+<p>一家宠物用品店会员，近 3 个月汇总，但数据有点脏：</p>
+<div class="tbl-scroll"><table><thead><tr><th>会员</th><th>R 距今(天)</th><th>F 订单数</th><th>M 总实付</th><th>总原价</th></tr></thead><tbody><tr><td>旺财</td><td>10</td><td>8</td><td>520</td><td>500</td></tr><tr><td>来福</td><td>70</td><td>3</td><td>180</td><td>300</td></tr><tr><td>咪咪</td><td>5</td><td>1</td><td>25</td><td>（缺失）</td></tr></tbody></table></div>
+<p>问：①哪两处数据有问题？②可用数据下，谁该重点召回、谁在薅羊毛？</p>
+<div class="do-zone"><span class="dz-flag">✍️ 动手</span>
+<div class="ta-label">先写你的答案，再点开对照：<span class="saved-tag" data-tag>已存本地</span></div>
+<textarea class="ta" data-save="q4" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开看解析</summary><div class="fold-in">
+<div class="recall empty" data-recall="q4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>① 两处问题：</strong></p>
+<ul><li>旺财：<strong>总实付 520 &gt; 总原价 500</strong> 不合逻辑——用券后实付只会 ≤ 原价。脏数据，要核对（也许原价漏算了某件商品）。</li><li>咪咪：<strong>总原价缺失</strong>，算不了优惠比例，需补数。</li></ul>
+<p><strong>② 可用判断：</strong></p>
+<ul><li>来福：优惠比例 180/300 = <strong>60% &lt; 80% → 薅羊毛</strong>，且 R70&gt;30 <strong>待召回</strong>，M180 中等——该召回但要警惕（已重度用券，召回别再砸大额券）。</li><li>咪咪：R5 新近、F1 无复购——是新客没回购，重点是<strong>拉第二单</strong>，不是发券。</li><li>旺财：R10、F8 高频、M 高，看着像头部，但<strong>实付&gt;原价的脏数据不修正就别下结论</strong>，先回去核对。</li></ul>
+<p><strong>要点</strong>：脏数据先识别再算——直接喂 AI，它不会告诉你"实付不该超原价"，照样算一堆指标给你。</p>
+</div></details></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🧭 挂回全景图</p>
+<p>本节落在数据处理全链路的<strong>"用户画像/建模"环</strong>（明细 → 汇总 → RFM+标签）。层次上以<strong>战术层</strong>（定标签口径、设计衍生指标）为主、接<strong>战略层</strong>（人提假设定分层策略），落点那句——<strong>人提假设引导 AI，胜过让 AI 裸跑同比环比。</strong></p>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-4"><div class="sec-h"><h2>第 攻略-3 节　一个因果推断模型的案例（PSM）</h2><button class="done-btn" data-done="4">标记学完</button></div>
+<p>⏱ 预计 28–30 分钟 ｜ 类型：方法论/建模节（重在选对方法、判断场景；建模交给 AI）</p>
+<div class="quote"><p>范围：原视频名挂"PSM+DID"，实操只到 PSM，DID 仅原讲预告，本节同样只练 PSM。</p></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🎯 先卡你一下</p>
+<p>你们上月发了张"双 11 优惠券"，没做 AB 测试。现在老板问："这券到底拉动了多少客单价？"你手里有两批人：用了券的、没用券的。</p>
+<p>给自己 1 分钟：你打算<strong>直接拿"用券的人均消费 − 没用券的人均消费"当活动效果</strong>吗？</p>
+<p>如果你点头了——这一节就是来拦住你的。</p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🔑 这节只攻一个动作</p>
+<div class="quote"><p><strong>不做 AB 测试估活动效果时，别拿全量直接比；用 PSM 从"没参与的人"里配出"和参与者相似"的对照组再比。</strong> 你管的是"选对方法 + 判断场景"，建模口喷给 AI。</p></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🧠 高手怎么想</p>
+<pre>不做ABtest估效果：  X=是否参加活动   Y=效果(消费)   协变量=活动前特征
+PSM 四步：
+ ①逻辑回归预测"是否参加"(此步Y=是否参加,不是消费) → 倾向性得分
+ ②KNN按得分配对(可加卡尺0.05) → 相似对照组
+ ③T检验/SMD查平衡(两组越像越好,SMD&lt;0.25越小越好)
+ ④对比两组Y → 处置效应(活动净效果)</pre>
+<p><strong>锚点——可算主算例：全量比 vs 配对比，差一倍</strong>（这一节记这一个对照）：</p>
+<p>原案例里，直接拿全量比：参与 600 人均 1200、未参与 1400 人均 600，差 <strong>600</strong>，看着活动猛得很。但参与者 <strong>70% 本就是高消费金卡用户</strong>！用 PSM 从 1400 里配 600 个"活动前就相似"的人再比，效果只剩 <strong>300 多</strong>。</p>
+<div class="quote"><p>一句话：<strong>整体用户质量越强，活动就越显得有效——那是假象。</strong> 配对，才是把"用户本来就好"和"活动真带来的"分开。</p></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">✍️ 跟着做一遍</p>
+<p>【全新案例】一个健身 App 发了"7 天打卡返现"，没做 AB 测试，想看它对<strong>月消费</strong>的影响。跟着走一遍四步：</p>
+<p><strong>① 定 X / Y / 协变量</strong>：X = 是否参加打卡返现；Y = 当月消费；协变量 = 活动前的"历史月均消费、过去 30 天打卡天数、会员等级"。</p>
+<p><strong>② 别急着全量比</strong>——先看全量比会怎样：</p>
+<ul><li>参与组 400 人，月均 <strong>900 元</strong>；未参与组 1600 人，月均 <strong>500 元</strong> → 全量差 <strong>400 元</strong>。</li><li>但参与者多是本来就爱打卡的活跃老用户，这 400 里混了"人本来就好"。</li></ul>
+<p><strong>③ 用 PSM 配对再比</strong>：逻辑回归（Y=是否参加，把活动前特征丢进去）出倾向性得分 → 从 1600 里 KNN 配 400 个相似的 → T 检验/SMD 查平衡。配对组月均约 <strong>720 元</strong>。</p>
+<p><strong>④ 算处置效应</strong>：900 − 720 = <strong>180 元</strong>。</p>
+<p>→ 活动真实净效果约 <strong>180 元/人</strong>，远没有全量比的 400 元那么唬人。报给老板的是 180，不是 400。</p>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🪜 换你做</p>
+<p>【判断题——方法论节不硬算，练"选对方法"】下面三个场景，各选一个：<strong>A. 适合 PSM ／ B. 不适合（找不到可比对照）／ C. 别用 PSM，直接 AB 测试更干净</strong>。并说一句理由。</p>
+<ol><li>滴滴想看"给某市 1000 名司机发补贴"对接单量的影响——全市有几万司机，且补贴政策不好做 AB（司机之间会串话、闹投诉）。</li><li>双 11 全平台大促，参与用户 60 亿人次，想看大促对 GMV 的净效应。</li><li>App 要上一个新功能，想看它对次周留存的影响，技术上完全可以随机放量：一半用户开、一半关。</li></ol>
+<div class="do-zone"><span class="dz-flag">✍️ 动手</span>
+<div class="ta-label">先写你的答案，再点开对照：<span class="saved-tag" data-tag>已存本地</span></div>
+<textarea class="ta" data-save="q5" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开看参考答案</summary><div class="fold-in">
+<div class="recall empty" data-recall="q5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<ol><li><strong>A 适合 PSM</strong>：小部分参与（1000/几万）、有庞大未参与池可配相似个体、又不能做 AB（会串话投诉）——正是 PSM 的主场。</li><li><strong>B 不适合</strong>：几乎全员参与，根本找不到"没参与且可比"的对照组，配不出来。大促有大促的分析法（如同比、增量拆解），别硬套 PSM。</li><li><strong>C 直接 AB 测试</strong>：能随机分流就别绕弯——随机化天然消除选择偏差，比事后配对更干净、更可信。PSM 是"没法做实验"时的次优解。</li></ol>
+<p>口诀：<strong>能 AB 就 AB；不能 AB、又是一小撮自选人群 → PSM；几乎全员参与 → 两个都不行。</strong></p>
+</div></details></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🃏 随身方法卡：用 AI 跑一次 PSM 的 5 步</p>
+<ol><li><strong>想清 X→Y</strong>：明确干预（活动）和效果（如消费），列出活动前可用协变量。</li><li><strong>问 AI 拿步骤</strong>：先报指标，再报"谁对谁影响"，要它给四步方案。</li><li><strong>逻辑回归出得分</strong>：这步 Y 是"是否参加"（剔除效果变量），其余做 X，输出倾向性得分。</li><li><strong>配对 + 查平衡</strong>：KNN 按得分配对（必要时加卡尺 0.05），T 检验/SMD 查两组够不够像。</li><li><strong>对比出效应</strong>：算两组 Y 均值差；现实数据匹配七七八八即可，别死磕完美。</li></ol>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">⚠️ 易错 + 自测</p>
+<p><strong>3 条易错自查</strong></p>
+<ul class="selfck"><li>我是不是拿全量（参与 vs 未参与）直接比，把效果说虚高了？❌</li><li>逻辑回归那步的 Y，我写的是"是否参加"还是误写成了"消费金额"？❌</li><li>我是不是以为"T 检验显著就 OK"？（恰恰相反：平衡要的是<strong>不</strong>显著、SMD 小）❌</li></ul>
+<p><strong>自测一题</strong>（全新场景，判断 + 说理）</p>
+<p>某银行发了"理财金卡升级"活动，约 8% 的客户升了级，想看升级对 AUM（管理资产）的影响，没做实验。请回答：</p>
+<p>①该用 PSM 吗？为什么？</p>
+<p>②如果用，逻辑回归这一步的 Y 应该是什么？</p>
+<p>③配对后发现"年龄""持仓年限"的 SMD 还是偏高，说明什么？怎么办？</p>
+<div class="do-zone"><span class="dz-flag">✍️ 动手</span>
+<div class="ta-label">先写你的答案，再点开对照：<span class="saved-tag" data-tag>已存本地</span></div>
+<textarea class="ta" data-save="q6" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开看解析</summary><div class="fold-in">
+<div class="recall empty" data-recall="q6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p>①<strong>适合</strong>：8% 小比例、客户自选升级（不是随机）、没做实验、且有庞大未升级客户池可配对——典型 PSM 场景。</p>
+<p>②Y = <strong>"是否升级金卡"</strong>（预测这个动作的概率），不是 AUM。AUM 是最后才对比的效果变量，逻辑回归里要剔除。</p>
+<p>③SMD 偏高 = 两组在"年龄/持仓年限"上<strong>没配平、还有系统性差异</strong>，直接比效果会有偏。办法：加卡尺收紧匹配、或补更多协变量重配；若现实数据就这样，匹配到"七七八八"可接受，但要在结论里注明这两个维度未完全平衡。</p>
+</div></details></div>
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">🧭 挂回全景图</p>
+<p>本节落在数据处理全链路最深的<strong>"建模/因果推断"环</strong>。层次上以<strong>战略层</strong>为主（选对方法、判断 PSM 适不适用这个场景）、辅以战斗层（口喷让 AI 建模）。落点那句——<strong>AI 取代的是 Python、不是人；人的价值在选方法、定场景。</strong></p>
+</section>
+<hr class="soft">
+<section class="sec" id="sec-5"><div class="sec-h"><h2>🎓 结课大实战：「喵小鲜」社区生鲜 App</h2><button class="done-btn" data-done="5">标记学完</button></div>
+<p>⏱ 预计 40–50 分钟 ｜ 把三节方法串起来：全流程出数 → 用户分层 → 活动因果评估 → 识破 AI</p>
+<hr class="soft">
+<p><strong>背景</strong>：你是「喵小鲜」（社区生鲜 App）新来的数据分析师。运营丢给你三份"糊"的资料，外加一版 AI 跑出来的结论，让你"看看草莓品类和会员运营到底咋样，上月那张券有没有用"。</p>
+<p>### 资料 A · "草莓"品类近一周搜索推广（合并后按关键词）</p>
+<div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>曝光</th><th>点击</th><th>访客</th><th>支付订单</th></tr></thead><tbody><tr><td>草莓</td><td>15000</td><td>75</td><td>60</td><td>1</td></tr><tr><td>奶油草莓 礼盒</td><td>1000</td><td>80</td><td>64</td><td>8</td></tr><tr><td>草莓 同城配送</td><td>600</td><td>54</td><td>45</td><td>6</td></tr></tbody></table></div>
+<p>### 资料 B · 会员汇总（近 3 个月；R=最后消费距今天数）</p>
+<div class="tbl-scroll"><table><thead><tr><th>会员</th><th>R 距今</th><th>F 订单</th><th>M 实付</th><th>总原价</th></tr></thead><tbody><tr><td>u1</td><td>6</td><td>7</td><td>380</td><td>420</td></tr><tr><td>u2</td><td>55</td><td>1</td><td>22</td><td>45</td></tr><tr><td>u3</td><td>15</td><td>5</td><td>300</td><td>500</td></tr><tr><td>u4</td><td>70</td><td>2</td><td>520</td><td>540</td></tr></tbody></table></div>
+<p>### 资料 C · 上月"满 49 减 15"券</p>
+<p>全平台月活约 5 万人；约 1000 人领券并下单。领券用户月均消费 <strong>240 元</strong>，未领券用户月均 <strong>130 元</strong>。没做 AB 测试。</p>
+<p>### 资料 D · 运营附带的"AI 结论"</p>
+<div class="quote"><p>"草莓品类流量基础好，建议<strong>加大'草莓'泛词投放</strong>；会员里优惠敏感人群多，建议<strong>给薅羊毛用户加大满减</strong>、提升活跃。"</p></div>
+<hr class="soft">
+<p class="blk" style="font-size:16.5px;color:var(--accent-deep);margin-top:24px;">任务（依次完成，先自己做再看参考）</p>
+<ol><li><strong>【全流程·1.1】</strong> 这周数据来自 7 张每日导出表——说出你让 AI 合并它们的口喷顺序；再用资料 A 算各关键词的曝光点击率、访客转化率，判断"草莓"品类该怎么投。</li><li><strong>【用户分析·1.2】</strong> 用资料 B 算优惠比例、给四类标签（召回/消费分层/活跃/薅羊毛，口径同正文），指出谁最该召回、薅羊毛占比，给一条分层策略。</li><li><strong>【因果推断·攻略-3】</strong> 用资料 C：能用 PSM 吗？X / Y / 协变量各是什么？为什么<strong>不能</strong>直接说"这张券带来了 110 元"？</li><li><strong>【识破 AI·综合】</strong> 资料 D 那版 AI 结论错在哪？给出你的最终诊断（3 句话以内）。</li></ol>
+<div class="do-zone"><span class="dz-flag">✍️ 动手</span>
+<div class="ta-label">先写你的答案，再点开对照：<span class="saved-tag" data-tag>已存本地</span></div>
+<textarea class="ta" data-save="q7" placeholder="先自己写，再点下面对照…"></textarea>
+<details class="fold"><summary>👉 点开看参考诊断</summary><div class="fold-in">
+<div class="recall empty" data-recall="q7"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div>
+<p><strong>任务 1 · 全流程</strong></p>
+<ul><li>口喷顺序：从每个文件末尾提日期 → A 列前加"日期"列 → 第 6 行起填日期 → 删 1–4 行表头 → 合并成 CSV（先加列再删行，顺序讲死），保留 .py 复用。</li><li>算数：</li></ul>
+<div class="tbl-scroll"><table><thead><tr><th>关键词</th><th>曝光点击率</th><th>访客转化率</th></tr></thead><tbody><tr><td>草莓</td><td>75/15000=<strong>0.5%</strong></td><td>1/60=<strong>1.67%</strong></td></tr><tr><td>奶油草莓 礼盒</td><td>80/1000=<strong>8.0%</strong></td><td>8/64=<strong>12.5%</strong></td></tr><tr><td>草莓 同城配送</td><td>54/600=<strong>9.0%</strong></td><td>6/45=<strong>13.3%</strong></td></tr></tbody></table></div>
+<ul><li>判断：泛词"草莓"15000 曝光只换 1 单，纯烧曝光；成交全靠两个精准长尾词。<strong>该停/降权"草莓"泛词，把预算压到"礼盒""同城配送"这类长尾词</strong>，选品标题也往精准需求靠。</li></ul>
+<p><strong>任务 2 · 用户分析</strong></p>
+<ul><li>优惠比例：u1=380/420=<strong>90.5%</strong>，u2=22/45=<strong>48.9%</strong>，u3=300/500=<strong>60%</strong>，u4=520/540=<strong>96.3%</strong>。</li></ul>
+<div class="tbl-scroll"><table><thead><tr><th>会员</th><th>召回</th><th>消费分层</th><th>活跃</th><th>薅羊毛(&lt;80%)</th><th>一句话</th></tr></thead><tbody><tr><td>u1</td><td>无需</td><td>高(380)</td><td>高频(7)</td><td>否</td><td>头部，维护/会员卡</td></tr><tr><td>u2</td><td>待召回(55)</td><td>一般(22)</td><td>无复购(1)</td><td>是(48.9%)</td><td>无复购+薅+久未来，慎投</td></tr><tr><td>u3</td><td>无需</td><td>高(300)</td><td>高频(5)</td><td>是(60%)</td><td>高价值但重度用券，维护+管控优惠</td></tr><tr><td>u4</td><td><strong>待召回(70)</strong></td><td>高(520)</td><td>一般(2)</td><td>否</td><td><strong>高价值流失，最该重点召回</strong></td></tr></tbody></table></div>
+<ul><li>最该召回：<strong>u4</strong>（高消费却 70 天没来）。薅羊毛占比：u2、u3 共 <strong>2/4 = 50%</strong>。</li><li>策略：维护 u1/u3（u3 管控优惠），重点召回 u4，u2 这类无复购薅羊毛用户慎发券；整体<strong>收紧优惠力度</strong>。</li></ul>
+<p><strong>任务 3 · 因果推断</strong></p>
+<ul><li><strong>能用 PSM</strong>：约 1000/5 万是小比例、用户自选领券（非随机）、没做 AB、且有庞大未领券池可配相似个体——典型 PSM 场景。</li><li>X = 是否领券；Y = 月消费；协变量 = 领券前的历史月均消费、活跃度、会员等级等。</li><li>为什么不能用 110：领券的人多半本就是爱买的高消费用户，全量差 240−130=110 里混了"人本来就好"。要从未领券者里配出"领券前就相似"的对照组再比，真实净效果会明显低于 110。</li></ul>
+<p><strong>任务 4 · 识破 AI</strong></p>
+<p>两处都错：①"加大草莓泛词投放"——泛词"草莓"15000 曝光才 1 单，加投是继续烧钱，该停而非加；②"给薅羊毛用户加大满减"——薅羊毛已占一半，再加满减是自己掏钱补贴本就在薅的人，利润更薄。</p>
+<p><strong>最终诊断（3 句）</strong>：草莓品类有真需求，但要靠精准长尾词承接，立即停泛词、加投长尾；会员里薅羊毛过半、业绩依赖投券，应收紧优惠、重点召回高价值流失的 u4、慎给无复购用户发券；那张"满 49 减 15"的真实效果要用 PSM 配对评估，别拿 110 元的虚高数字汇报。</p>
+</div></details></div>
+<hr class="soft">
+<div class="quote"><p>做完这份实战，你应该体会到全册那条主线：<strong>清洗、计算、建模、出图都能交给 AI；但"投哪个词、召回谁、能不能用这方法、AI 说得对不对"——这些判断，才是你不被替代的地方。</strong></p></div>
+</section>
+</div></main></div>
+<script>(function(){
+  var LS = "vibecoding_workbook_v1";   /* ← 改① 每份文件换唯一名，防不同页面串档 */
+  function load(){ try{ return JSON.parse(localStorage.getItem(LS)||"{}"); }catch(e){ return {}; } }
+  function save(d){ try{ localStorage.setItem(LS, JSON.stringify(d)); }catch(e){} }
+  var data = load();
+  document.querySelectorAll("textarea.ta").forEach(function(ta){
+    var key = ta.getAttribute("data-save");
+    if(data[key]) ta.value = data[key];
+    var tag = ta.parentElement.querySelector("[data-tag]") || (ta.previousElementSibling && ta.previousElementSibling.querySelector("[data-tag]"));
+    var timer;
+    ta.addEventListener("input", function(){
+      data[key] = ta.value; save(data); syncRecall(key, ta.value);
+      if(tag){ tag.classList.add("show"); clearTimeout(timer); timer=setTimeout(function(){ tag.classList.remove("show"); },1200); }
+    });
+  });
+  function syncRecall(key, val){
+    document.querySelectorAll('[data-recall="'+key+'"]').forEach(function(box){
+      var rc = box.querySelector(".rc");
+      if(val && val.trim()){ rc.textContent = val; box.classList.remove("empty"); }
+      else{ rc.textContent = "（你还没在上面写，写了这里会自动显示）"; box.classList.add("empty"); }
+    });
+  }
+  document.querySelectorAll("textarea.ta").forEach(function(ta){ syncRecall(ta.getAttribute("data-save"), ta.value); });
+  var doneSet = data.__done || {};
+  function refreshProgress(){
+    var n = Object.keys(doneSet).filter(function(k){return doneSet[k];}).length;
+    var p = document.getElementById("progress");
+    if(p) p.textContent = "已学 " + n + " / 4";   /* ← 改② 把 N 换成章节总数；不要进度就删本段 */
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){
+      var m = (a.getAttribute("href")||"").match(/^#sec-(.+)$/);
+      var ck = a.querySelector(".ck[data-ck]");
+      if(m && ck) ck.textContent = doneSet[m[1]] ? "✓" : "";
+    });
+  }
+  document.querySelectorAll(".done-btn").forEach(function(btn){
+    var id = btn.getAttribute("data-done");
+    if(doneSet[id]){ btn.classList.add("on"); btn.textContent="✓ 已学完"; }
+    btn.addEventListener("click", function(){
+      doneSet[id] = !doneSet[id];
+      btn.classList.toggle("on", doneSet[id]);
+      btn.textContent = doneSet[id] ? "✓ 已学完" : "标记学完";
+      data.__done = doneSet; save(data); refreshProgress();
+    });
+  });
+  refreshProgress();
+  var secs = [].slice.call(document.querySelectorAll("section.sec"));
+  var links = {};
+  document.querySelectorAll("nav.toc a[href]").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
+  function onScroll(){
+    var pos = window.scrollY + 90, cur = null;
+    secs.forEach(function(s){ if(s.offsetTop <= pos) cur = s.id; });
+    Object.keys(links).forEach(function(id){ links[id].classList.toggle("active", id===cur); });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  var toc=document.getElementById("toc"), scrim=document.getElementById("scrim");
+  if(toc&&scrim){
+    document.getElementById("burger").addEventListener("click", function(){ toc.classList.toggle("open"); scrim.classList.toggle("open"); });
+    scrim.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); });
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){ a.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); }); });
+  }
+
+  /* —— 可选增强：返回顶部 + 每章「上一节/下一节」（不要可整段删，不影响其它功能） —— */
+  var totop=document.createElement("button"); totop.id="totop"; totop.innerHTML="↑"; totop.setAttribute("aria-label","返回顶部");
+  document.body.appendChild(totop);
+  totop.addEventListener("click", function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+  window.addEventListener("scroll", function(){ totop.classList.toggle("show", window.scrollY>420); }, {passive:true});
+  function navTitle(s){ var a=links[s.id]; if(a) return a.textContent.replace(/^[\s✓]+/,"").trim(); var h=s.querySelector("h2"); return h?h.textContent.trim():s.id; }
+  secs.forEach(function(s,i){
+    var nav=document.createElement("div"); nav.className="navlinks";
+    var prev=secs[i-1], next=secs[i+1], pa=document.createElement("a"), na=document.createElement("a"); na.className="nl-next";
+    if(prev){ pa.href="#"+prev.id; pa.innerHTML='<span class="nl-k">← 上一节</span>'+navTitle(prev); } else { pa.className="nl-disabled"; pa.href="#"; }
+    if(next){ na.href="#"+next.id; na.innerHTML='<span class="nl-k">下一节 →</span>'+navTitle(next); } else { na.className="nl-next nl-disabled"; na.href="#"; }
+    nav.appendChild(pa); nav.appendChild(na); s.appendChild(nav);
+  });
+})();
+</script>
+</body></html>
