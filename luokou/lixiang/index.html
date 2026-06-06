@@ -624,4 +624,42 @@ document.getElementById('menu').onclick=function(){tg(!toc.classList.contains('o
 mask.onclick=function(){tg(false)};
 toc.addEventListener('click',function(e){if(e.target.tagName==='A')tg(false)});
 </script>
+<script>
+/* 续读记忆 v1 —— 记住每篇读到哪，下次进来可一键续读（按页面路径分别存于本机 localStorage） */
+(function(){
+  var KEY='read:'+location.pathname, saved=null;
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+  var st=document.createElement('style');
+  st.textContent='.resume{position:fixed;left:50%;bottom:74px;transform:translateX(-50%) translateY(18px);z-index:25;'
+    +'max-width:calc(100vw - 28px);display:flex;align-items:center;gap:10px;background:var(--card);'
+    +'border:1px solid var(--line);border-radius:12px;padding:9px 11px;box-shadow:0 8px 30px rgba(0,0,0,.24);'
+    +'opacity:0;pointer-events:none;transition:opacity .28s,transform .28s;font-size:.86rem;color:var(--ink)}'
+    +'.resume.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}'
+    +'.resume b{color:var(--accent);font-weight:700}'
+    +'.resume .go{border:none;background:var(--accent);color:#fff;border-radius:8px;padding:7px 12px;'
+    +'font-size:.84rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}'
+    +'.resume .go:active{transform:scale(.95)}'
+    +'.resume .x{border:none;background:transparent;color:var(--sub);font-size:1.15rem;line-height:1;cursor:pointer;padding:2px 5px}';
+  document.head.appendChild(st);
+  var t=0;
+  function save(){
+    var h=document.body.scrollHeight-innerHeight, y=scrollY, pct=h>0?Math.round(y/h*100):0;
+    if(pct<2||pct>97){try{localStorage.removeItem(KEY)}catch(e){}return;}
+    try{localStorage.setItem(KEY,JSON.stringify({y:y,pct:pct,ts:Date.now()}))}catch(e){}
+  }
+  addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=0;save()},400)},{passive:true});
+  addEventListener('pagehide',save);
+  addEventListener('visibilitychange',function(){if(document.hidden)save()});
+  if(saved&&saved.y>200&&saved.pct>2&&saved.pct<97){
+    var bn=document.createElement('div'); bn.className='resume';
+    bn.innerHTML='<span>上次读到 <b>'+saved.pct+'%</b>，继续？</span>'
+      +'<button class="go" type="button">继续阅读</button><button class="x" type="button" aria-label="关闭">×</button>';
+    document.body.appendChild(bn);
+    var hideT=setTimeout(function(){bn.classList.remove('show')},7000);
+    setTimeout(function(){bn.classList.add('show')},450);
+    bn.querySelector('.go').onclick=function(){clearTimeout(hideT);scrollTo({top:saved.y,behavior:'smooth'});bn.classList.remove('show')};
+    bn.querySelector('.x').onclick=function(){clearTimeout(hideT);bn.classList.remove('show')};
+  }
+})();
+</script>
 </body></html>
