@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>周鸿祎 · 一个把&quot;别错过&quot;刻进骨子里的红衣老兵</title>
+<style>
+:root{
+  --bg:#f6f0e2; --card:#fbf6ea; --ink:#2c2620; --sub:#8b8170; --line:#e2d6bd;
+  --accent:#a8392b; --accent-soft:#f0e2d2;
+  --luo:#2f5d96; --guest:#5b7a4b; --fs:18px;
+}
+html[data-theme="dark"]{
+  --bg:#23201c; --card:#2b2722; --ink:#e9e1d0; --sub:#a89e8b; --line:#41392f;
+  --accent:#e08a6f; --accent-soft:#3a2a23; --luo:#8aabd8; --guest:#9dbf8b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+  line-height:1.92;font-size:1rem;letter-spacing:.01em;transition:background .2s,color .2s}
+.bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:30}
+.bar > i{display:block;height:100%;width:0;background:var(--accent);transition:width .08s}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;background:color-mix(in srgb,var(--card) 90%,transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .t{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.top button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:9px;height:34px;min-width:34px;padding:0 9px;font-size:.88rem;cursor:pointer;font-family:inherit}
+.top button:active{transform:scale(.94)}
+.toc{position:fixed;inset:0 0 0 auto;width:min(82vw,360px);z-index:40;background:var(--card);
+  border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;
+  overflow-y:auto;padding:14px 0 30px;box-shadow:-8px 0 30px rgba(0,0,0,.16)}
+.toc.open{transform:none}
+.toc h3{margin:16px 18px 8px;font-size:.74rem;color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.toc h3:first-child{margin-top:4px}
+.toc a{display:block;padding:8px 18px;color:var(--ink);text-decoration:none;font-size:.92rem}
+.toc a:active{background:var(--accent-soft)}
+.mask{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s}
+.mask.open{opacity:1;pointer-events:auto}
+.wrap{max-width:700px;margin:0 auto;padding:0 22px 90px}
+
+/* —— Hero 开篇 —— */
+.hero{padding:46px 0 30px;margin-bottom:8px;border-bottom:2px solid var(--ink)}
+.cover{margin:0 0 22px}
+.cover img{width:100%;display:block;border-radius:11px;border:1px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.16)}
+.cover figcaption{font-size:.72rem;color:var(--sub);margin-top:8px;letter-spacing:.03em}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:2.9rem;line-height:1.08;font-weight:800;margin:16px 0 0;letter-spacing:-.01em}
+.hero .subt{display:block;font-size:1.2rem;font-weight:600;color:var(--ink);margin-top:16px;line-height:1.45}
+.hq{position:relative;margin:34px 0 0;padding:16px 0 0 2px;
+  font-size:1.34rem;line-height:1.62;font-style:italic;color:var(--accent);font-weight:600}
+.hq::before{content:"“";position:absolute;left:-10px;top:-22px;font-size:3.8rem;line-height:1;
+  color:var(--accent);opacity:.22;font-style:normal}
+.hero .meta{margin-top:28px;font-size:.86rem;color:var(--sub);letter-spacing:.04em}
+.hero .meta span{color:var(--accent);font-weight:700;margin:0 2px}
+
+/* —— 章节 —— */
+h2{font-size:1.28rem;margin:46px 0 18px;scroll-margin-top:60px;padding-top:26px;
+  border-top:1px solid var(--line);font-weight:800;display:flex;align-items:baseline;gap:13px}
+h2 .num{flex:none;font-size:1.7rem;color:var(--accent);font-weight:800;line-height:1}
+h2 .ht{flex:1}
+.para{margin:0 0 17px}
+.para strong{font-weight:700}
+.para.drop::first-letter{float:left;font-size:3.3rem;line-height:.82;font-weight:800;
+  color:var(--accent);margin:8px 12px 0 0}
+.point{margin:30px 0 8px;font-size:1.12rem;font-weight:700;color:var(--accent);
+  padding-left:16px;border-left:3px solid var(--accent);line-height:1.5}
+.point strong{font-weight:700}
+
+/* —— 分隔 / 对话 —— */
+.divider{text-align:center;margin:64px 0 26px;scroll-margin-top:60px}
+.divider span{display:inline-block;padding:0 16px;font-size:.84rem;font-weight:700;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;position:relative}
+.divider::before,.divider::after{content:"";display:block;height:1px;background:var(--line);
+  width:60px;margin:0 auto}
+.divider::before{margin-bottom:14px}.divider::after{margin-top:14px}
+.turn{margin:0 0 20px;padding:2px 0 2px 15px;border-left:3px solid var(--line)}
+.turn.luo{border-color:var(--luo)} .turn.guest{border-color:var(--guest)}
+.who{font-weight:700;font-size:.92rem;margin-bottom:3px}
+.turn.luo .who{color:var(--luo)} .turn.guest .who{color:var(--guest)}
+.say{font-size:1rem} .say strong{font-weight:700}
+.ad{color:var(--sub);font-size:.85rem;background:var(--accent-soft);
+  border-radius:10px;padding:10px 14px;margin:22px 0;text-align:center;font-style:italic}
+.end{color:var(--sub);font-size:.86rem;text-align:center;margin:44px 0 0;font-style:italic}
+.up{position:fixed;right:16px;bottom:18px;z-index:15;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:1.1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.16);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+.up.show{opacity:1;pointer-events:auto}
+</style></head>
+<body>
+<div class="bar"><i id="prog"></i></div>
+<header class="top">
+  <div class="t">周鸿祎 · 一个把&quot;别错过&quot;刻进骨子里的红衣老兵</div>
+  <button id="fdec">A-</button><button id="finc">A+</button>
+  <button id="theme">🌙</button><button id="menu">目录</button>
+</header>
+<div class="mask" id="mask"></div>
+<nav class="toc" id="toc"><h3>精读解析</h3><a href="#a1">① 他是谁</a><a href="#a2">② 生平（极简主线）</a><a href="#a3">③ 为何受访 · 为什么是这场对谈</a><a href="#a4">④ 他代表哪类人（可迁移）</a><a href="#a5">⑤ 普通与不普通</a><a href="#a6">⑥ 反认知洞察（这场对谈里最值得带走的几颗钉子）</a><a href="#a7">尾声 · 一句话留给读者</a><h3>完整对话</h3><a href="#dialog">↓ 跳到完整对话</a><a href="#b1">一、企业家做IP，是时代变了的&quot;必修课&quot;</a><a href="#b2">二、两种网红——被迫成名 vs 企业家网红</a><a href="#b3">三、大网红老板对360的好处与坏处</a><a href="#b4">四、大网红身份对B端、政府客户的影响</a><a href="#b5">五、性格变化是真的吗——荷尔蒙、经历与刻意控制</a><a href="#b6">六、青年时代的梦想——拥有自己的公司、做软件</a><a href="#b7">七、高频展示自己——是压力还是乐在其中</a><a href="#b8">八、冲动发言与&quot;账号被没收&quot;的往事</a><a href="#b9">九、拍卖迈巴赫——一时兴起到行业大事</a><a href="#b10">十、车展爬车——经典案例与&quot;不是策划&quot;</a><a href="#b11">十一、车圈的误解——不当车圈大V，只想广交朋友</a><a href="#b12">十二、智能网联车的安全威胁与大模型上车</a><a href="#b13">十三、跟机器人打拳击——帮机器人行业做宣传</a><a href="#b14">十四、机器人能不能当保安——伦理与三定律</a><a href="#b15">十五、四五千万粉丝是怎么涨起来的</a><a href="#b16">十六、GPT-3.5引爆时的震撼与判断</a><a href="#b17">十七、拿 Transformer 搭原型，语言是人工智能的金钥匙</a><a href="#b18">十八、大脑不是硬盘，脑机接口复制人脑不现实</a><a href="#b19">十九、语言智能、物理智能、空间智能是循序渐进</a><a href="#b20">二十、AGI 没那么快，大脑进化靠知识传承、推理、工具</a><a href="#b21">二十一、智能体——给大模型加上手脚和工具</a><a href="#b22">二十二、AI 进化快到让人害怕，前 50 年走错了路</a><a href="#b23">二十三、寒武纪大爆发，人类逃不脱这个宿命</a><a href="#b24">二十四、有目标就有价值观，可能产生与人类冲突的意志</a><a href="#b25">二十五、用智能体把大模型的专业能力提炼出来，角色越窄越强</a><a href="#b26">二十六、大模型已是&quot;全知&quot;，智能体让它走向&quot;全能&quot;</a><a href="#b27">二十七、多智能体协作像给真人设计工作流程和企业文化</a><a href="#b28">二十八、用多智能体协作做视频成片，单智能体会&quot;倦怠&quot;</a><a href="#b29">二十九、大模型只能做几秒素材，多智能体才能做成片</a><a href="#b30">三十、AI Native 玩法 vs 把 AI 当工具，放手让智能体编</a><a href="#b31">三十一、人在回路——透明可追溯、停下来等人批准</a><a href="#b32">三十二、智能体也能做 PPT、网站、研究报告，但选视频来证明</a><a href="#b33">三十三、观众没耐心，AI 空镜满足视觉丰富感</a><a href="#b34">三十四、碳基与硅基混合，脑机接口的局限</a><a href="#b35">三十五、用纳米机器人改造人体，比脑机接口更有效</a><a href="#b36">三十六、机器对人的优势——可复制、带宽无敌、不会死</a><a href="#b37">三十七、脑机接口控制机器人，人在回路延缓失控</a><a href="#b38">三十八、AI 提炼会丢细节，还得真读书；小孩怎么用大模型</a><a href="#b39">三十九、天津港无人码头案例，最美好结局是人机协作</a><a href="#b40">四十、AI 会淘汰一些岗位，会用 AI 的人淘汰不会用的人</a><a href="#b41">四十一、AI Native 的公司与混合团队，人人成为管理者</a><a href="#b42">四十二、周鸿祎获取 AI 信息的方法——快速阅读、逼团队读论文</a><a href="#b43">四十三、罗永浩作为&quot;提示词作者&quot;激发周鸿祎思考</a><a href="#b44">四十四、周鸿祎大学时代的人工智能课程</a><a href="#b45">四十五、线性代数没学好与读论文的困难</a><a href="#b46">四十六、360为什么不做大参数通用大模型</a><a href="#b47">四十七、能否训模型决定智能体的护城河</a><a href="#b48">四十八、大模型并非越大越强，文理难兼修</a><a href="#b49">四十九、网上无谓的争论 vs 学术公开讨论推动行业进步</a><a href="#b50">五十、360&quot;做配角&quot;的定位与国家战略</a><a href="#b51">五十一、360的反思——盲目扩张与错过移动互联网</a><a href="#b52">五十二、与巨头从敌对到合作，放下身段拥抱平台</a><a href="#b53">五十三、副驾驶联盟——团结中国大模型公司</a><a href="#b54">五十四、360的AI团队构成</a><a href="#b55">五十五、360浏览器与智能体工厂</a><a href="#b56">五十六、GPTs、扣子、Coze 的对比与 360 的智能体架构</a><a href="#b57">五十七、让用户组合智能体——乐高式搭建</a><a href="#b58">五十八、360 的 AI 能力源于安全大数据与搜索积累</a><a href="#b59">五十九、周鸿祎欣赏的国内 AI 创业公司</a><a href="#b60">六十、给智谱的公开建议——对标 Anthropic</a><a href="#b61">六十一、批评&quot;正确的废话&quot;式专访，欣赏 Manus</a><a href="#b62">六十二、Manus 的演进与对插件、套壳的看法</a><a href="#b63">六十三、护城河是动态概念，快速移动是弱者的优势</a><a href="#b64">六十四、对 AI 长期未来的乐观——能源、核聚变与科技向善</a><a href="#b65">六十五、AI 安全链主企业——以模制模</a><a href="#b66">六十六、AI 取代岗位的社会伦理难题</a><a href="#b67">六十七、精英联名暂缓 AI 却又投身军备竞赛</a><a href="#b68">六十八、AI 的&quot;啊哈moment&quot;与共识未形成</a><a href="#b69">六十九、中国软件付费习惯缺失，AI 创业公司被迫出海</a><a href="#b70">七十、AI 收费难题与企业服务（2B）的机会</a><a href="#b71">七十一、2025 是 AI 应用爆发之年的预期落空</a><a href="#b72">七十二、AI 对网络安全（杀毒/攻防）的影响</a><a href="#b73">七十三、纳米 AI 的快速布局与垂直基座模型战略</a><a href="#b74">七十四、AI 产品的宣传浮夸与&quot;垂直再垂直&quot;的商业模式</a><a href="#b75">七十五、评价 GPT-5、Google、Anthropic 与 OpenAI 的竞争格局</a><a href="#b76">七十六、AI 行业有没有泡沫</a><a href="#b77">七十七、做 AI 三年来的高光与至暗时刻</a><a href="#b78">七十八、经营社交账号、与年轻受众互动、&quot;不装&quot;的风格</a><a href="#b79">七十九、收尾环节——推荐下一期嘉宾</a><a href="#b80">八十、罗永浩口播——保时捷与瑞幸广告、节目结束语</a></nav>
+<main class="wrap">
+  <section class="hero">
+    <figure class="cover"><img src="cover.jpg" alt="罗永浩 对话访谈封面" loading="lazy"><figcaption>封面来自 B 站 @罗永浩的十字路口</figcaption></figure>
+    <div class="eyebrow">PEOPLE · 罗永浩的十字路口</div>
+    <h1>周鸿祎<span class="subt">一个把&quot;别错过&quot;刻进骨子里的红衣老兵</span></h1>
+    <blockquote class="hq">你不能把对方看成鲨鱼，要把它看成海洋——那我就该跳进去游泳。</blockquote>
+    <div class="meta">罗永浩 <span>×</span> 周鸿祎 · 全长 3 小时 35 分</div>
+  </section>
+  <h2 id="a1"><span class="ht">① 他是谁</span></h2>
+<p class="para">周鸿祎，1970 年生，360 集团（三六零，A股 601360）创始人、董事长。外号&quot;红衣大炮&quot;&quot;红衣教主&quot;——常年一件红 polo，敢说、好斗、爱掐架，是中国互联网二十年里最著名的&quot;斗士&quot;之一。</p>
+<p class="para">但你在这场对谈里看到的，是一个正在<strong>主动给自己换皮肤</strong>的周鸿祎：不再是当年那个见谁怼谁的&quot;愣头青&quot;，而是一个张口闭口&quot;交个朋友&quot;&quot;放下身段&quot;&quot;我做配角&quot;的中年人；一个把全部精力 All in 到 AI 和智能体上、像个布道者一样到处做&quot;AI 科普&quot;的老板；一个全网四千多万粉丝、会亲自研究&quot;东北农民大姐为什么三秒一个镜头&quot;的网红。</p>
+<p class="para">一句话定位他：<strong>一个在中国每一波技术浪潮里都怕掉队、于是次次都要冲进去的老兵</strong>——杀毒、搜索、安全、移动互联网、AI，他全都赶过场，有的赢了，有的（移动互联网）错过了，而这次 AI，他赌上了&quot;All in&quot;。</p>
+<h2 id="a2"><span class="ht">② 生平（极简主线）</span></h2>
+<p class="para">- <strong>梦的起点</strong>：西安交大计算机系本科、系统工程硕士。少年时读一本叫《硅谷热》的书，从雅达利、Intel 到苹果，被&quot;做出牛X产品、自然就挣钱&quot;的硅谷价值观点燃。他说自己小时候的梦想不是成名，而是&quot;拥有自己的公司，做软件，每个人都用我的软件&quot;。</p>
+<p class="para">- <strong>第一桶名声（与原罪）</strong>：1998 年创办 3721&quot;网络实名&quot;，被贴上&quot;流氓软件鼻祖&quot;标签；2003 年作价约 1.2 亿美元卖给雅虎，出任雅虎中国总裁。</p>
+<p class="para">- <strong>封神之战</strong>：2006 年创立 360，把收费杀毒改成<strong>永久免费</strong>，靠免费做大用户、再用流量变现，颠覆了瑞星、金山、卡巴斯基的收费格局。&quot;免费安全&quot;成了他的方法论图腾。</p>
+<p class="para">- <strong>最有名的一仗</strong>：2010 年 <strong>3Q 大战</strong>，360 硬刚腾讯&quot;二选一&quot;，工信部介入收场；司法上两案（不正当竞争、反垄断）360 均败诉。这一仗让他&quot;斗士&quot;封号坐实。</p>
+<p class="para">- <strong>资本起落</strong>：2011 年纽交所上市 → 2016 年约 93 亿美元私有化退市 → 2018 年借壳&quot;江南嘉捷&quot;回 A 股，作价约 504 亿元。</p>
+<p class="para">- <strong>近年转身</strong>：2021 年 29 亿投哪吒汽车（后来失利）；2024 年拍卖自己开了十年的迈巴赫（990 万成交、捐做公益），随后连买十几辆国产新能源逐一点评，高调学雷军做企业家 IP——&quot;红衣教主&quot;自嘲成了&quot;红衣大叔&quot;。</p>
+<p class="para">- <strong>此刻的他</strong>：把公司战略从&quot;All in AI&quot;收窄成&quot;<strong>All in 智能体</strong>&quot;，做 360 智脑、安全大模型、纳米AI、智能体工厂，自任&quot;人工智能安全链链主企业&quot;，到处布道。</p>
+<h2 id="a3"><span class="ht">③ 为何受访 · 为什么是这场对谈</span></h2>
+<p class="para">这期的明面主题是&quot;周鸿祎深度谈 AI&quot;，但要理解它，得先看清<strong>两个人为什么坐到一起</strong>：</p>
+<p class="para">- <strong>罗永浩</strong>：先做网红、后做企业，如今做 AI 公司（&quot;细红线&quot;）和这档播客，自承&quot;社恐&quot;，做播客的私心之一是&quot;借采访把中国各行各业的优秀人物聊一遍，顺便上免费课、加微信交朋友&quot;。</p>
+<p class="para">- <strong>周鸿祎</strong>：自承&quot;中度社恐&quot;，却是全网顶流；做 IP 的逻辑和罗永浩&quot;如出一辙&quot;——把大老板聊成朋友、把影响力变成业务通道。</p>
+<p class="para">两个画像高度相似的&quot;做 IP 的老炮&quot;对谈，话题天然投机，这是&quot;四小时高密度&quot;的底色。而周鸿祎此刻最想对外输出的，就是<strong>他对 AI／智能体的整套判断</strong>——因为这既是 360 的身家性命，也是他给自己争取的新一轮&quot;话语权&quot;。所以这场对谈本质上是：<strong>一个怕错过 AI 的老兵，借一个同类的麦克风，把自己想清楚的东西讲一遍</strong>（他自己说，讲，是他的&quot;费曼学习法&quot;）。</p>
+<h2 id="a4"><span class="ht">④ 他代表哪类人（可迁移）</span></h2>
+<p class="para">周鸿祎是一类人的极致样本：<strong>靠&quot;生存直觉&quot;而非&quot;宏大叙事&quot;活下来的产业老兵</strong>。从他身上能抽出几条对普通人也成立的迁移点——</p>
+<p class="point"><strong>1. &quot;打不过就加入&quot;——把对手当海洋，不当鲨鱼。</strong></p>
+<p class="para">他对 AI 的态度浓缩成一句：&quot;你不能把对方看成鲨鱼，要把它看成海洋，那我就该跳进去游泳。&quot;——对任何一个被新技术、新平台碾压的人，这是最实用的姿态：不是评判它好不好、该不该来，而是<strong>先承认它已经是环境，然后下水</strong>。他给的具体动作是&quot;在用中学、干中学&quot;：用了效果不好也要咬牙坚持，因为&quot;培养习惯要 21 天&quot;。</p>
+<p class="point"><strong>2. 弱者的唯一优势是&quot;快速移动&quot;。</strong></p>
+<p class="para">他用拳击作比：&quot;跟厉害的对手打，唯一的方法是保持距离、快速移动，别被他控制在墙角。&quot;并由此重新定义了护城河——&quot;在一日如一年的时代，护城河就是快速响应、快速调整&quot;。对小团队、小个人，这比&quot;建壁垒&quot;更现实：<strong>你守不住静态的护城河，但你可以一直跑得比昨天的自己快。</strong></p>
+<p class="point"><strong>3. &quot;费曼学习法&quot;：能讲清楚，才算真懂。</strong></p>
+<p class="para">他坦白自己&quot;很多事不讲，要讲就逼自己弄吃透&quot;——输出倒逼输入。这是他从&quot;理工男&quot;长成&quot;顶流&quot;的暗线，也是任何想真正掌握一门东西的人都能照搬的笨办法：<strong>找个人、找个镜头，用大白话把它讲明白。</strong></p>
+<p class="point"><strong>4. &quot;三观要正&quot;是最高性价比的长期资产。</strong></p>
+<p class="para">他反复强调自己推国货、为 DeepSeek 唱赞歌&quot;没有利益关联&quot;，吹过的国产车不接其广告&quot;为了避嫌&quot;。结论很冷静：<strong>当你有流量、有影响力时，&quot;不夹带私心&quot;本身就是护城河</strong>——因为&quot;群众的眼睛是雪亮的，装是装不出来的&quot;。</p>
+<h2 id="a5"><span class="ht">⑤ 普通与不普通</span></h2>
+<p class="point"><strong>普通的地方，普通到让人意外：</strong></p>
+<p class="para">- 他自承<strong>中度社恐</strong>：聚会见一堆人会&quot;真面盲&quot;、紧张到不敢直视别人、靠看胸卡和&quot;最近怎么样&quot;硬聊。一个全网顶流，私下竟是这样——他借鲁豫的话给自己解了套：人有&quot;职业人格&quot;和&quot;真实人格&quot;，台上挥洒自如的，不一定是骨子里的他。</p>
+<p class="para">- 他<strong>线性代数、微分方程没学好</strong>，今天读 AI 论文&quot;有点吃力&quot;，得先让 AI 提炼、再发给公司研究员去读。一个 AI 公司的老板，承认自己看不懂底层论文。</p>
+<p class="para">- 他<strong>不会开车、没驾照</strong>，被车圈嘲笑&quot;凭什么推荐车&quot;，自嘲&quot;只能用屁股丈量车的舒适度&quot;。</p>
+<p class="para">- 他也<strong>会被&quot;爹味&quot;困扰</strong>——专门做了个&quot;去除口播稿爹味&quot;的智能体来修自己的措辞。</p>
+<p class="point"><strong>不普通的地方，是同一种特质的两面：</strong></p>
+<p class="para">- <strong>永远在&quot;看潜力&quot;而非&quot;挑毛病&quot;。</strong> GPT-3.5 出来时，他说&quot;大部分人看缺点、挑不完美，我们看它的潜力，觉得不可限量&quot;——这句话几乎是他一生的开关。同样一个新东西，多数人本能找它哪里不行，他本能算它能长多大。</p>
+<p class="para">- <strong>永远怕&quot;错过&quot;。</strong> 他把没赶上移动互联网当成&quot;最大的失误&quot;，于是这次 AI 宁可被骂&quot;不务正业&quot;也要先冲进去、先攒流量、先做科普。这种&quot;宁可错买、不可错过&quot;的焦虑，是他的发动机，也是他的软肋。</p>
+<p class="para">- <strong>极强的&quot;自我修正&quot;心态。</strong> 他说&quot;如果你觉得去年的自己很傻，说明你今年进步了——我经常觉得昨天的我都很傻&quot;。一个年过半百、功成名就的人，把&quot;承认自己昨天傻&quot;当成进步的证据，这是稀缺的。</p>
+<p class="para"><strong>一句话概括他的不普通</strong>：他不是最懂技术的，也不是最有钱的，但他可能是<strong>最不怕在公众面前一遍遍推翻自己、又一遍遍重新下场</strong>的那一个。</p>
+<h2 id="a6"><span class="ht">⑥ 反认知洞察（这场对谈里最值得带走的几颗钉子）</span></h2>
+<p class="point"><strong>1. 不是&quot;AI 淘汰人&quot;，是&quot;会用 AI 的人淘汰不会用的人&quot;——而真正的瓶颈不是技术，是&quot;习惯&quot;。</strong></p>
+<p class="para">最反直觉的，是他作为 AI 公司老板，却说阻碍 AI 普及的最大障碍<strong>不在算法、不在产品，而在人不肯改习惯</strong>。连他自己 AI 公司里 35 岁以上的同事，&quot;如饥似渴学的比例也没想象中高&quot;，因为&quot;我们没 AI 也活了大半辈子&quot;。启示：在一个工具型革命里，<strong>赢家不是最懂它的人，是最早把它焊进日常动作的人。</strong></p>
+<p class="point"><strong>2. AI 时代要&quot;反互联网&quot;：免费是旧船票，登不上新船。</strong></p>
+<p class="para">他自己是&quot;免费&quot;打法的祖师爷，却在这里亲手否定它：&quot;不能拿互联网的旧船票登 AI 的船。&quot;——因为软件边际成本为零、免费能成立；而 AI 每一次调用都在烧 token，&quot;越用越费&quot;。所以 AI 的宿命是<strong>收费、订阅、按量</strong>。一个靠免费封神的人，公开说免费这条路在 AI 时代走不通，这本身就是最大的反认知。</p>
+<p class="point"><strong>3. 越垂直、越窄，智能体越强；&quot;全知全能&quot;是个陷阱。</strong></p>
+<p class="para">反直觉点在于：不是模型越大越万能越好，而是&quot;你让它扮演通用专家，能力反而低下；让它就做某一个窄领域专家，越窄越强&quot;。美国 VC 教创业公司&quot;垂直、垂直、再垂直&quot;——窄到给牙科诊所做个打电话预约的智能体。原因很冷静：<strong>Agent 现在交付不稳定，只有足够窄，用户才敢信你能干成。</strong> 这对个人选赛道同样成立——在能力不稳的阶段，窄是一种确定性。</p>
+<p class="point"><strong>4. &quot;护城河是动态的&quot;——慢，才是最大的风险。</strong></p>
+<p class="para">他借美国 VC 的话点破：&quot;没有静态的护城河。&quot;在 AI 这种&quot;一日如一年&quot;的节奏里，技术壁垒随时被抹平，唯一的壁垒是迭代速度。抖音、头条、阿里起家时&quot;技术都不高深，是用简单技术做对了市场&quot;。启示：<strong>别迷信&quot;我有个别人抄不走的东西&quot;，要迷信&quot;我能比别人更快地换下一个东西&quot;。</strong></p>
+<p class="point"><strong>5. 最该担心的不是 AI 有没有&quot;意识&quot;，是它有没有&quot;意志&quot;。</strong></p>
+<p class="para">他把一个被聊烂的问题翻了个面：意识（self-awareness）很玄、可能永远没有；但<strong>意志</strong>——一旦你给智能体一个目标，它就会形成&quot;为达目的不择手段&quot;的价值函数。那个&quot;为了造拖鞋把人类资源耗光&quot;的科幻设定，就是&quot;无意识、却有意志&quot;的危险。所以他给智能体设的安全阀不是&quot;让它有良知&quot;，而是&quot;<strong>人在回路</strong>&quot;：透明可追溯、关键步骤停下来等人批准。这对任何把任务全权交给 AI 的人都是提醒：<strong>别追求全自动，要留一个&quot;人能随时叫停&quot;的回路。</strong></p>
+<p class="point"><strong>6. AI 给人类的&quot;第一要务&quot;不是统治，是帮人类突破科技天花板。</strong></p>
+<p class="para">他偏乐观的理由很硬核：人类真正的死结是<strong>能源</strong>（算力的尽头是能源），而破解核聚变靠人脑可能不够，得靠 AI。&quot;AI for Science 才是皇冠上的明珠。&quot;——把 AI 的终极价值从&quot;会不会取代我&quot;拉回到&quot;它能不能帮人类捅破爱因斯坦那代人留下的、快吃完的老本&quot;。这是一个悲观主义者，给出的乐观主义理由。</p>
+<h2 id="a7"><span class="ht">尾声 · 一句话留给读者</span></h2>
+<p class="para">周鸿祎这场对谈最打动人的，不是他对 AI 有多少判断（那些会过时），而是他展示了一种<strong>老兵的活法</strong>：承认自己社恐、看不懂论文、不会开车、会有爹味，却依然在五十多岁、在一个全新的领域里，像个新兵一样&quot;零起步、放空自己、在用中学&quot;。</p>
+<p class="para">他怕的从来不是&quot;做错&quot;，而是&quot;错过&quot;。</p>
+<p class="para">如果你也站在某个看不懂、又躲不开的浪潮前，他给的答案其实只有四个字——<strong>先跳下水。</strong></p>
+<div class="divider" id="dialog"><span>完整对话 · 全长 3 小时 35 分</span></div>
+<h2 class="dlg" id="b1"><span class="ht">企业家做IP，是时代变了的&quot;必修课&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">欢迎大家收看罗永浩的十字路口，最重要的是一键三连和加关注，还欢迎随时发送弹幕评论跟我互动。那我们开始吧。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">开始吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在很多企业家选择了闷声发大财，也有很多企业家选择了抛头露面，这个其实跟以前是一样的。然后有一些没怎么抛头露面的企业家，我从媒体的报道来看，他们也有很多所谓的IP焦虑。他就会觉得——很多企业家其实想躲在幕后，但又意识到一些企业家出来抛头露面，对企业可能带来了很多推进啊、加速啊这样好的效果。所以我们想聊聊这个话题：你一直以来都是面对公众比较活跃的这么一个企业家之一，所以你对这两种选择有什么看法？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得谁问这个问题都对，你是最不该问这个问题的，为什么呢？你本人就是打造IP的典型，你应该比我更清楚。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我有这方面的想法，但是我不知道你是怎么想的，是不是跟我想法一样。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得最关键是两个因素，一个我说得清，一个我说不太清楚。第一个，你不觉得抖音在全中国流行之后，中国至少有八亿人，包括你我，我们的父母、很多同学朋友，全都在每天刷抖音。而且这玩意它很有魔力，看一次就上瘾，对不对？然后大脑就被格式化了，很多人除了短视频别的看不了了，甚至大家看电影都没有耐心，现在都三分钟看一部电影。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以在这种情况下，你想想，一个企业最终是要卖货的、是要宣传自己的，那流量全跑到短视频上了，那你就必须跟着用户，用户到哪你要去到哪。包括你原来说的你要跟用户当朋友，用户都不看你的通稿了，你怎么跟用户当朋友呢？所以我觉得&quot;树立IP&quot;这个词有点大，是我们一种自嗨的说法，说白了本质上跟原来企业家上央视《对话》、在街上打广告，本质上干的是一样的事，只不过阵地变了、形势变了，所以必须跟进，要不就跟主流群体脱节了。</div></div>
+<p class="para">第二个问题，我模模糊糊的感觉，就是现在老百姓对企业家的要求也变了。过去企业家都是躲在幕后闷声发大财，或者挂在墙上只能远观不可亲近。但现在好像到了一种个人媒体时代，大家对企业来说，企业要有一个形象，大家比较能接受的是企业的创始人或者企业的一把手。大家觉得这个比一个企业的名字、一个冷冰冰的符号更容易让人接受。这可能也是一种时代的要求，就是说到了AI时代或短视频时代，一个企业光躲在门背后闷声发大财，这不可能了，那么至少你出来的话，效果会比不出来要好。</p>
+<p class="para">第三个，你比如说前面有个中国前首富被人网暴了，我知道他也挺委屈的。但反过来说，时代变了，网民对你都不了解，对你当然会有很多误解，你不出来发出你的声音、你没有你的粉丝，那就只能是你的对手发声音，连澄清的时候都不方便。</p>
+<h2 class="dlg" id="b2"><span class="ht">两种网红——被迫成名 vs 企业家网红</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以我是向你学习、以你为榜样，我是先做了网红后边才去创业的；你是以前就做了成功的企业家，然后才逐渐面对公众越来越多。这个不太一样。我是没得选，我做网红也不是有意识的行为——我当年在学校教书，然后我上课的录音突然就传开了，就被迫成了一个网红。但成了网红给我带来很多好处，后边做企业的时候因为我也发现这个东西对我做企业有帮助，所以我有时候喜欢做也就做了，有时候不喜欢做、为了企业需求也做。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">实际上你想想张朝阳是互联网老人，互联网一开始的时候那时候没有网红这个概念，当然也有眼球经济，谁抓着眼球、谁有注意力。包括到了大短视频时代，有一句话叫&quot;Attention is all you need&quot;，就是注意力，在人工智能时代这是个双关语了，同样都需要存在。但是网红和网红的定义不一样。我自己理解，网红时代才刚刚开始。第一代网红像你啊，或者像我，我就不说名字了，不替他们做网告了——也可以放心说，反正我们都会剪掉，没关系，我也无所谓。我觉得很多网红给了普通人机会，因为普通人从来没有过有这么巨大的流量、平台也会推他们，相当于多了传统路线之外的一个上升通道。但他们是卖货嘛，卖货或者带货。</div></div>
+<p class="para">那么我觉得像现在我，或者俞敏洪俞老师啊、还有雷军啊、余承东啊，包括你，如果现在做企业，你就应该从第一代网红变成企业家网红。企业家网红主要的目的应该不是卖一些消费品，更多的是给自己的企业做宣传，就是企业的——</p>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">——新一代的市场部和公关部。实际上你再想想，当年华为的大老板每年写一封内部信，那封信在网上传，这不也是最早的IP吗？俞敏洪的那个管理理念在哈佛讲课、在华尔街的大屏幕上出现，其实道理都一样。而且我去硅谷的时候，见很多创业公司，他们都面临一个怎么能启动的问题：你有一个产品怎么能启动？所有人的回答都是上YouTube、上TikTok、上Facebook，做一个病毒式传播的视频。所以这个就坚定地回答你前面的问题——这已经是个必修课了。</div></div>
+<p class="para">那最近我观察到有个网红3.0，就是现在很多城市、很多地方开始搞，比如打造网红打卡地、网红城市。所以你看有淄博，我前面去看着淄博，包括哈尔滨的冰雪节。上次我去重庆荣昌见卤鹅哥，前面还有个什么直播烧烤啊、天津跳水大爷啊。所以大家也在尝试，现在各地很多活跃的文旅部门都出来了。所以我就觉得，如果大家抛弃掉IP这个概念——因为一说IP就显得这事太沉重——实际上说白了企业家就两个职责，一个是做产品，一个是卖产品。咱们今天不能说人人都是乔布斯，做的产品不愁卖，黄花的女儿不愁嫁。酒香也怕巷子深，实际上还是要吆喝。乔布斯也是个大网红，只不过他们那个时代跟现在的做法不一样。最大的网红就是那个做特斯拉的埃隆·马斯克，他就没有市场部，全球第一网红。所以我不知道这样回答，你觉得算是符合你的风格吗？</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不是，咱们就先聊，没有什么我的风格不风格，怎么聊都行。</div></div>
+<h2 class="dlg" id="b3"><span class="ht">大网红老板对360的好处与坏处</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那对360的核心业务来讲，老板同时也是个企业家大网红，这个带来的帮助是让更多人知道你们做的东西和事情。那这个是不是也带来了一些坏处？因为凡事都是有利有弊嘛。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你说的非常对。好处方面，我跟别人的一个差别是这样的：别人最早对我有误解，以为我不务正业，&quot;如果不做产品只去做网红那就太虚了&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">做了那么大一个公司，怎么会还有人觉得不务正业呢？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为那时候我在做AI的产品，但AI的产品不是一天两天能做出来的。所以我跟别人不一样，我是先去积累流量、积累AI上的影响力，这样为我的产品推出做准备。否则我产品推出的时候，如果我没有粉丝、没有流量，那还要经历一个冷启动，就太弱了。所以好处是非常大的。坏处应该来讲是&quot;有所得必有所失&quot;，一个是有人觉得不务正业；还有，当然后来我推出纳米AI之后，大家一看：&quot;狐狸尾巴露出来了，原来这小子还是为了推他的产品。&quot;还有一个好处，我AI在核心技术上肯定不是中国最好的，但是在AI的话语权上还可以，因为我一直在做AI的科普。</div></div>
+<p class="para">那么坏处呢，就刚刚说的，最开始有人觉得我不务正业。还有一个问题，你可能能感受到这点：流量它是会有反噬作用的，你流量越大、知道的人越多，就一定会有人看你不顺眼，你不可能让所有人都喜欢你。我记得咱俩有一次还谈过这个，你分享了一个经验，你有个拉黑簿，对吧？</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我那个是就不看，那个拉黑簿是开玩笑的，但确实有几个同事帮我随手拉黑。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我还把你这个经验介绍给褚会长了。所以还有一个就是说话要变得比较小心，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为言多必失。有时候网民路转粉也很容易，粉转黑也很容易。还有一个坏处，就是确实占用精力比较多。我去年这个产品还没到关键时刻的时候，在IP上还是花了点精力，什么卖车啦、看车展啦，那一段感觉到处都能见到我。但今年明显我的精力80%是用在产品上。而且一会谈到AI——我不知道你有没有这个感觉，你可能也在做AI的产品——每天一觉醒来这世界就变一个样子，所以我用个词叫&quot;度日如年&quot;，一天的收获等于过去一年的收获，那个感觉，新知识都看不过来。所以我今年明显录视频的时间精力都少了很多。所以最近我在考虑用AI来替我做一些工作。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在还是很难吧，就是现在生成的那些，如果维持一个基本运营一个号还行，如果想做一些有影响力的、或者很新奇的、很不同角度的，还是很难。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对。但这样的，第一，说实话，你说我有没有思想，我自认为还算是一个有观点的人，但是架不住你天天输出，那你还得有输入啊，还得大量的阅读思考才能有输入，这个我体会很深。第二，用AI——我自己评估，它（写出来的东西）比我现在肯定不差，因为观点肯定是我的，让AI围绕着我的观点用深度研究补充一些具体的事例，以前那个调研是非常费时间的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">第二个我不知道你怎么看这个视频。虽然你做这个播客，我发现你对品质的追求依然像当年做锤子一样，细节都很关注。但是可能在不同的平台上不一样，抖音上大家看的更多是情绪价值，听的是内容。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你要说镜头感，我是最差的，我就这张脸面无表情，声音也没有什么抑扬顿挫，有时候感觉早晨起来没睡醒，怼个脸就在拍，那个但效果还是很好。我本人跟素人比还不如素人，感觉更像真人。所以我就研究别人的视频，原来有个东北农民大姐——后来解析说不是的，为什么呢？他五秒钟、三秒钟就一个镜头切换，而且很多镜头显然是多机位多角度拍摄的，我哪做得到？我能做起来当年兴奋的就是一个手机靠着杯子就能做起来。所以后来我就想，很多空镜头拿AI来做，这样总比看我这张老脸要有监督感、要好一点，反正我在做尝试了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你们的那个产品，一会儿会聊到，就是会做很多让它傻瓜化生成、简易化生成的这种功能。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对啊，AI不就本来就要降本增效嘛。</div></div>
+<h2 class="dlg" id="b4"><span class="ht">大网红身份对B端、政府客户的影响</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我有一个问题很好奇，但你要不想说也没事。大家知道360除了C端用户很多以外，也有很多政府用户，你们经常在网上有很多声量，这个会不会对这部分B端的客户有什么不好的影响？有过吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个我本来不想说，但既然你问了我就透露一下，这后边剪掉也可以，没关系。我个人觉得对360带来很多好处。当然这里有一个前提，就是我的三观很正——你看我闹出很多动静，但是我没说错过话，这是一个前提。那么好处是什么呢？第一，过去把渠道分得很清楚，有2C的渠道、有2B的渠道、有政府的渠道，现在所有人都在看短视频，有的人在视频号上、有的人在小红书上、有的人在抖音上，所以B端客户也在（看）。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以对B端客户的影响力就很重要，这是第一个。第二个，你看我做内容并不犯——我坚定地推崇国货、推崇国产汽车；我做AI的科普，DeepSeek跟我一点利益关系都没有，我为国产大语言模型唱赞歌，这点我觉得我做的还是很客观的。特别我开两会的时候很明显，那么多人大代表、全国政协委员，在大会上见到我，很多人都说&quot;我是你的粉丝&quot;，他们听AI的很多科普是从我这听的。所以这个对于我们和很多政府部门的合作、很多企业的合作，提前就有了个良好基础。所以这个要做，当然如果我是一个做带货的，可能大家看就不一样。所以我不卖货、也不去做带货，那么就保持我这样一个相对纯粹、相对公益的角色。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个是完全没想到的。因为我会担心，比如说比起一般民营企业来，像那些国企或者政府的甲方，他们可能更介意这个企业家是不是比较低调、是不是不在网络上发声什么。但这么说我就明白了。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">没有。讲个你可能不爱听的例子。其实这个，你讲个用俞老师的例子，我白天讲这个——如果我没控制好表情管理。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你笑一笑不行吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">笑。俞老师，比如说我们有一年去山西，他替山西应县古塔做了一个宣传，山西应县就卖了很多陶瓷出去。那地方的领导见了俞老师，都恨不得俞老师</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">到他们这来做一些宣传。所以当时给了我一个启发：你有流量，实际上可以帮助各地来做一些正向的事情，那大家这时候就怕你流量很少。所以我也做了一个尝试，你像我去重庆荣昌，在五一之前去和卤鹅哥做了一个宣传，荣昌那年五一假期来了两百万游客，在重庆各个区里面排名第一了。当然我跟俞老师定位不一样，我不可能去做文旅，因为我发现我对文旅是狗屁不通，也没知识也没文化，跟核心业务也没有什么关联。所以我现在到各地去，愿意多介绍一些各地的数字化、智能化的发展。所以前面我去重庆就去参观他们最大的汽车研究风洞，跟那个长安汽车的董事长，他开一辆跑车拉着我跑220公里，车子都快要竖起来了，吓得我胆战心惊。前一段去了贵州，参观贵州的算力中心，枯燥的算力中心，就告诉老百姓这就是我们所说的新质生产力。地方政府当然对你是欢迎的。所以流量这个东西看你怎么用，你如果拿了流量都给自己谋私利，那当然地方官员可能对你会有一些看法。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白，这块挺明白了。</div></div>
+<h2 class="dlg" id="b5"><span class="ht">性格变化是真的吗——荷尔蒙、经历与刻意控制</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有，你不觉得我做的很大改变吗？这个是一个有意思的问题。因为我在网上看过两种说法，一种认为说你现在能自己调整、能控制情绪；还有一个主流的说法是说装——</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">不是装，不是装，还真不是装。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没说那么难听，大概意思说人到中年以后激素分泌水平就会有所下降，然后攻击性就会减弱。我自己其实倾向于认为是第二种，因为我自己有这种情况。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">没有，没有，我觉得你荷尔蒙还挺丰富的。没有，我现在没有那么太控制，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我自己就感觉跟当年那个激素分泌水平不一样了。比如说在公司内部，以前如果事情进展不顺或产品出了问题，是会暴跳如雷的；现在我也会不高兴，但是很少那么暴跳如雷，或者骂人这些都基本上没有了。我觉得这肯定是一个复合原因，很难用一个结论。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你是觉得有意识地做了很多控制、做了很多约束吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">第一，我觉得肯定基础（荷尔蒙）水平有一定影响，肯定变得平和点了。第二，也跟经历有关，毕竟人到中年了，也打过这么多仗了——我打仗肯定比你还多。有时候回头反思，就发现有很多仗本来可以避免的，所以就变得平和一些。第三，我也看了做流量这些人的得失，有时候一句话不慎重，可能就&quot;水可载舟亦可覆舟&quot;，所以自己也有意识地控制一下。</div></div>
+<h2 class="dlg" id="b6"><span class="ht">青年时代的梦想——拥有自己的公司、做软件</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你小时候、年轻的时候，想过自己会成为——可能那个时候就有做计算机或者做科技公司这样的想法。但那个时候会想过自己会成名、成为家喻户晓的人物吗？比如青年时代、读书的时候，有没有一些端倪，比如发现自己比同学更擅长表达，或者在一个特定群体中更容易有影响力、当意见领袖什么的？年轻时候有这些端倪吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">好像没有。我其实原来口才挺笨的，读书的时候就是典型理工男。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">比理工男稍微强一点，比理工呆好一些，就是正常理工男。写作文还可以。所以我小时候的梦想倒不是要成名成家，我小时候的梦想就是希望能拥有自己的公司，然后做软件，每个人都用我的软件。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为最早我受一个硅谷的影响，读那个时候有本书叫《硅谷热》，那本书里讲了很多从雅达利游戏机到Intel芯片、到微软、到苹果电脑这些比较典型的例子，基本上硅谷的一个价值观就是：你做出很牛X的软硬件、做出很牛X的产品，然后你就卖得很好，自然就挣钱了，挣钱是个结果。所以倒没想到一定要多么著名。所以现在做所谓的IP，我还是讲它是个战术。如果我没有产品，那这个IP就很虚，因为最后大家喜欢你、认可你，你总要做点什么，如果没有产品做支撑，那……不过也不能这么说，那就跟企业无关了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就跟企业无关了。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">比如说你现在做这个播客，一看就想成为中国的乔·罗根。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个其实也是一个综合考量。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">但乔·罗根最终也有自己的商业模式，对吧？比如说瑞幸咖啡赞助你，这也可以挣钱的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，怎么说呢，乔·罗根本来是个脱口秀演员，后来又去做了这个播客，然后内容做得越来越受欢迎，就成就了这么一个东西。所以他现在额外在商业上做的（都是衍生）。我做这个呢，还是因为我自己在做两个公司，那些公司业务里边如果有大的个人IP影响力，其实对业务能形成助推效应，所以我把这个做了。还有一个是我的另一个私心：借着这个机会，我是一个社恐的人，所以我的社交是严重不足的，那我做了这个节目有一个好处，是可以把中国各行各业的优秀人物全采访一遍，然后随着影响力大，后边采访就会越来越容易邀请到。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">就是马太效应嘛。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，就越来越容易邀请到那些优秀的嘉宾，然后跟着他们对谈的过程里，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实能顺便上很多免费课，偷学一些东西，这也是一个综合的考量。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个我就不信了，因为我觉得做这个是需要花精力的，你要想做到中国最好……不过它倒有可能成为你的一个新事业，对吧？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一些这样（考量）。我觉得乔·罗根也很牛，也很有影响力。我的想法是，比如我将来跟某些企业可能有业务协同什么的，那我脸皮薄、不擅长社交，我就可能通过一两个朋友搭个线，搭上对方那个企业的负责人，但我不太好意思这么做。那我现在做了这个，如果我采访过的这些人，采访的时候一定会认识、交个朋友、加个微信。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个我get到了，这个跟我做IP的想法如出一辙。就是说你比如跟某个大企业、大厂，过去你是个小企业，是你得求人家；但你跟他的大老板都做了对话了，那至少算朋友。而且我这个自媒体相当于影响力越来越大的话，他们市场和公关部有时候也会有求于我，就能形成一个小企业跟一个大企业某种互惠互利，这样后边真的有科技公司的业务要谈的时候，也会多一个通道，大概是这样。</div></div>
+<h2 class="dlg" id="b7"><span class="ht">高频展示自己——是压力还是乐在其中</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我再问一个触及灵魂的问题。在工作面前——虽然是因为企业的综合考量——这么高频地展示自己和自己的企业，这个东西做久了会带来很大的压力吗？会强忍着很多不想做的去做吗？还是以你的性格，有的时候也是乐在其中？还是两种情况都有？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得两种情况都有。我其实还是挺爱表达的人，但是我表达——我不知道你看了我的视频没有，这是我的一种学习方式：很多事我不讲，我要讲的一定是希望有自己的观点，所以就被迫把那个东西弄吃透了才能讲。也谈不上吃透，我经常否定自己，比如我对智能体的理解，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">可能过一段时间想法就会变。但有一种叫&quot;费曼学习法&quot;，就是怎么验证自己学会了呢？就是你能用自己的语言把它讲清楚。网上很多人讲AI、讲安全讲得太技术化了，普通人听不懂，所以这是我的一种表达方式。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个其实特别重要。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">但是现实中我谈不上社恐吧，但也都差不多。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好像就跟美国（口才）没有社牛吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我其实不是社牛。我要是在生活中聚会的时候，见了一堆人，我是真面盲，我就很尴尬，很多人可能都认识但记不住了，记不住脸，我就紧张地跟他搭话，看他的胸卡、看他名字，要么就搭话说&quot;最近怎么样&quot;，试图从他回答的片言只语中猜出来他是什么样的人。而且人多了，我实话说，我现在都不愿意眼睛去直视别人，就觉得有点手足无措。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还是有社恐的。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">有一点吧，不严重。但又很奇怪，我站在台上的感觉就不一样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个特别有意思，我以前也困惑这件事。但这期去录那个脱口秀大会，鲁豫讲了一个东西对我来讲帮助很大，以前我没研究过这个。他说其实很多岗位上的人，他有一个自己的职业人格，还有一个真实人格。比如说他也是比较内向的人，生活里可能就比较内向，但他职业从毕业就做了主持人，所以到任何一个领域里去，边上有的是喜剧演员、有的是歌手，他是主持人，所以一旦有这种需求的时候，他就会站出来，站出来的时候他的职业人格顶到前面，就可以把场面处理得很好、很专业，但实际上他骨子里其实并不是这种人格。所以我觉得我们可能跟这个有关，就是有时候工作需要你登台，那你就得对着几百人、几千人、上万人，在那儿挥洒自如地去讲。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这是一个职业人格需求，但平时可能其实并不是。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">不过这话说了，大家也不信。我说我社恐，大家也不一定相信，就因为你挺能说会道的、还会装，就会有这样想法。我以前网上天天跟人吵架，然后后来我说我社恐，他说&quot;你还社恐，那中国没人社恐、没人不社恐了&quot;，都有这种说法。其实我是中度社恐，我去查过。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那中度社恐啥样？就抑郁症了吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">中度社恐倒不一定抑郁症，就是见人能不说话就不说话，恨不得躲到墙角里去，这种我倒没那么严重，但我确实很怕社交场合。我是慢慢适应的，我话还挺多的，但是刚见面的时候我确实觉得有一点（社恐），我应该（说是）轻度社恐。</div></div>
+<h2 class="dlg" id="b8"><span class="ht">冲动发言与&quot;账号被没收&quot;的往事</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么多年面对公众的时候——以前不说了，早期；这些年——有没有面对公众或者在公众平台上发言的时候，因为有时候是搂不住，然后说了一些冲动的，让公关团队、内部的公关团队感到焦虑，或者经常要劝你、或者拦不住，有时候甚至希望你交出账号密码什么的，这种情况有过吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我好像还好吧，就是还是搂得住的。还是内心平和了很多，如果内心像我们这种个性的人就很难搂得住，你内心如果对一个事很愤怒，实际上是不吐不快的。我觉得现在我倒没有让他们特别为难吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">以前有过吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">当年有一段，有时候乱发朋友圈、乱发微博，他们会拦着。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那他们也拦不住吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我有一阵严重的时候，被没收过账户和密码，我也配合了，因为给公关惹了很多麻烦，所以我也惭愧。但反正也就一个时期吧，三个月、六个月，然后有时候有搂不住的事，又把那个密码要回来，这种事也有过。这个对我好像不是个大问题，所以当年也没到那么搂不住的程度。</div></div>
+<h2 class="dlg" id="b9"><span class="ht">拍卖迈巴赫——一时兴起到行业大事</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">（口播）想要聊得好，咖啡不能少，感谢合作伙伴瑞幸，把瑞幸咖啡店开在了罗永浩的十字路口。</div></div>
+<p class="para">那个我想问一下，当时拍卖那个迈巴赫座驾，那个情况是事先有一个想法的，还是到那儿就一时兴起想的？</p>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">那个东西确实一时兴起，所以本来没有一个真正的策划，但效果非常好，所以很多事都是偶然、运气吧。这个过程也很简单，让我的司机找了一个二手车商，他不是那个褚会长，那时候还不认识，结果给我那迈巴赫开出很低的价。我那迈巴赫虽然开了十年，我还是比较爱惜车的，觉得还挺新的，然后我就说那我在网上拍卖总可以吧。所以起初不是拍卖，是后来变成这样的。我原来的期望——因为你知道咱们从小穷嘛，所以一直有种叫贫困心理，就是比如说二手车折损太大受不了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对。实际上这个车买了多少钱？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">好像四百多万。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">三四百万。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">结果这个东西一出去之后，其实我哪知道汽车行业竞争这么激烈，所有国内做新能源车的都闻风而动过来参与炒作。所以我觉得我唯一做对的一件事，就是我反应比较快：这个事最开始我没有规划，但大家一看、我就意识到说&quot;那流量来了&quot;，我马上就改策略了。所以这件事，如果再捧、只捧自己投资的车就太小家子气了，所以就把它改成了相当于我为整个国内新能源、为所有国内品牌、为行业支持，这样大家也有个默契。像小鹏啊就很快第一个把车送到三里屯楼下了，他一带头，呼啦呼啦的</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">来了一堆车，就办了一个叫七九八小车展，这个事就炒起来了。其实这个拍卖也弄得乱糟糟的，也没经验，反正就跟你的感觉一样：我干什么事比较乐观，咱俩可能都比较像，先组个草台班子，边看边说、边看边调整。然后拍卖又闹了很多笑话，拍到那个褚会长——我虽然现在跟他是好朋友，但是他出到990万也是出乎我的意料。原来我想着能拍到个一百万，我再多买几辆车，我一看如果拍到这个价钱，这钱我也不能要了，所以就做了公益。那中间的褚会长确实也一冲动，他手里没有那么多现金，他需要有个筹款、有个时间，这不就很多人怀疑他协款跑了，说他对当时一波三折，还有说什么流拍了。所以这很多都是意外，说实话真的不是策划出来的，但效果真的特别好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得是机缘巧合吧，还是有一些工作经验，到时候可以随机应变。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对，主要我觉得是随机应变，很多机会你想策划很难，太刻意了大家也都不傻。虽然是无意中、突如其来的，但是你反应要快、要迅速地调整。你比如像我去那个车展看车，我每个国产的展台都去给一个支持。所以我觉得还是遵循了我后来一个原则——后来广交朋友。因为实话说，虽然我跟几大巨头都交过手，大家都觉得这小子像愣头青一样谁都敢怼，但是大家不知道，几大巨头说白了在过去相当长时间里面对我是能掐就掐，这些年才缓和一些，我做了很多努力，还是要给公司争取一个和平发展，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对吧？否则的话巨头都拦你，你公司发展肯定会碰到很多问题。所以我现在就是尽量落实你老人家的那句话：&quot;你有公司不就是交个朋友吗？&quot;</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你没有落实吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我这不也是中年才悟出这道理吗？我一直在落实你的这个指导思想。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">别别别。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以我觉得我做对了两件事，一个是快速反应，一个就是三观还是要正，为行业呐喊。所以最后就变成了我起了一个头、卖掉了自己的进口车。这个事还是有影响的，我觉得对很多企业家、特别有钱人带来一个什么影响呢——因为过去大家还是有盲目崇拜，觉得库里南、劳斯莱斯这些名字不多说了，这些车确实好，但是我有一个朋友开了一个库里南来，我就嘲笑他：&quot;你要比智能性、比辅助驾驶、比这种数字化能力，这些车真的不值。&quot;所以这两年下来，现在我身边有很多人愿意买国产的，无论是华为的、还是吉利的极氪呀、比亚迪的仰望U8呀、北汽的像那个叫享界呀，买这些国产车大家现在觉得不丢人了，开始比这些车的舒适性、技术的先进性、辅助驾驶。很多科技富豪、特别买得起豪车的人纷纷买国产车。所以最近听说——当然这个跟我也不一定是直接关系——进口车在中国现在不断降价，但销量也不断下降，我觉得可能我还是发挥了点作用。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然，因为你又没有私心，实际上这是装不出来的，群众的眼睛是雪亮的。</div></div>
+<h2 class="dlg" id="b10"><span class="ht">车展爬车——经典案例与&quot;不是策划&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以包括去那个车展呢，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我爬到车身上，那个也是个经典案例。有人骂我说老周像个小丑似的，但是效果确实很好。实际上这也不是策划——你知道哪个公关公司或者市场部敢策划说让老板爬车？有一点我不愿意做的事情别人不可能强迫我做。那是一个二汽东风，出了根据东风猛士改型的一个叫猛士越野车，我很喜欢那个车，外形很漂亮，然后他放了个梯子到车顶。我这人就欠，因为我练攀岩，碰见能攀爬的地方我总想秀一秀，所以我一看他有个梯子，蹭就爬上去了，没想到就成了那年车展上年龄最老的车模。所以都是偶然冲出来的，当时媒体报的&quot;北京车展最老车模&quot;。所以你要做这些东西，总会有人看不惯，那你就一笑就过去了。但我觉得这几次做的都挺好的，他们只能怀疑——有一些想黑的话，只能从怀疑动机的角度去揣测，但行为本身肯定是非常好的。</div></div>
+<h2 class="dlg" id="b11"><span class="ht">车圈的误解——不当车圈大V，只想广交朋友</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">但是这里边，车圈对我本来有个误解，我看你都对我有个误解，就以为我要在车圈里当一个opinion leader、当一个车圈大V，其实真没这个想法。因为我后来才知道车圈的营销费用要远远高于很多行业。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">要比手机制造业……它是最大的。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为一辆车多贵啊，一辆车都几十万，做一个车的发布需要花七八千万，我都觉得心疼了，我都觉得我们投资的钱都不当钱花。最好能不花钱多办事，事实上后来确实没花钱也办事了。因为包括我在</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">去看车厂的时候，我确实很生气（指营销费高）。所以实际上我并没有尽力想挣车的广告费，但是最早车圈有很多人对我有这个误解，这个事特别可笑。就不要说是你，我都不会说去搞什么汽车评测这些来挣钱，我也没有搞。他们这个圈挺有意思的，我当时也是看了几个国产电动车特别好，20年开始就写文章帮着国产电动车鼓吹，其实也没有什么利益关联，甚至后边有利益关联——人家国产车来找我拍广告我还不敢接。我给外国车拍过广告，国产车广告我都不敢接，接完了以后他说&quot;你看你之前说谁谁谁车好&quot;，这显然有商业利益在里边。所以为了避嫌，我吹过的很多国产车，他们找我拍广告我都没敢接。但这个过程中，我说这些车好的时候，有很多车评圈的人以为我要去抢他们的饭碗，然后就天天阴阳怪气地说我、黑我的就特别多。因为我公司也没有做大，他们这样某种程度上也可以理解，但我没想到，你去讲这些车的时候，他们也会以为——就是因为360是大公司，不像我们是个小公司——他们竟然以为你要去抢他们饭碗，这还挺离谱的。其实当时无意中流量大了之后，就觉得广交朋友，因为车厂将来都有可能是我的客户。我一个人能买几辆车，我推荐车也不一定有权威性，因为我不会开车，后来车圈主要嘲笑我说&quot;连个驾照都没有，这家伙怎么有资格推荐车&quot;，我也自嘲说我只有用屁股来丈量车的舒适度了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还是个产品经理、专业的产品经理出身，所以其实还是讲产品，去争论这个也没太意义。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">反正我确实没有下决心到车圈去当什么大V，但是我跟很多车厂都交了朋友。</div></div>
+<h2 class="dlg" id="b12"><span class="ht">智能网联车的安全威胁与大模型上车</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你别说，这些车厂未来的安全其实比较重要。其实直接对车发起攻击的概率比较低，而且难度比较高，那需要比较高水平、对车的传感器有很多了解。真正将来车厂面临的威胁是什么呢？因为今天你买的车——我不知道你开智能网联车吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">开。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">它都是联网的，实际上都有个OTA服务器，换句话说这个车厂的服务器是可以远程控制你的车的。我们知道某某品牌就能远程把车锁死、远程也能解锁，那如果这个被黑客控制了，勒索车厂&quot;不给钱（就出事）&quot;，那这个就危险比较大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这就跟你们核心业务有关系了。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对。另外我觉得未来大模型、人工智能肯定要上车，不光是自动驾驶，车里原来那个智能助手也很弱智嘛、属于人工智障，如果用大模型之后就会改善很多。我原来做的纳米搜索之类的一样上车，那跟你想法一样——我交个朋友嘛。交朋友两种方法，一种是我有了流量资源我帮你，这是我们中国人常见思维，将来你帮我一下。所以我有我固有的业务，我想是一个更大的格局；如果我啥都没有，那我唯一的就是帮车做网告、从车圈拿营销费，那就变成车圈大V了嘛。实际上我也没有瞧不上车圈大V，人家做人家的生意也很合理，而且他们比我确实更专业。但是我的意思是我们都有自己要做的事，这个是顺带、或者有一点关联的，他们认为要去抢饭碗，这个我觉得挺奇怪。所以后来我就跟车圈大V比较有名的一个陈震交了个朋友，他比较真兴趣嘛，他比较喜欢体育运动，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我就带他攀岩，然后他说教我赛车，也没教，还是太忙了。而且我那天是在（家）报了个名，他们师傅带着我开了一下，我自己觉得车感还可以。但实际上你知道，我跟这车厂也在聊辅助自动驾驶——或者叫辅助驾驶，不能叫自动驾驶了，这技术进步也很快，特斯拉的FSD现在美国有很多朋友都在试用，实际上包括无人驾驶车也在慢慢起来，所以学车可能越来越动力不足，没那么重要了。</div></div>
+<h2 class="dlg" id="b13"><span class="ht">跟机器人打拳击——帮机器人行业做宣传</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后还有一次也是传播特别广而且很好玩，我当时看了好几遍，就是那个跟机器人打拳击那次，那是什么情况？也是帮机器人行业做宣传，还是你们也投了机器人或想做机器人？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我们要投机器人。第一我对机器人很感兴趣，因为机器人是人工智能的——相当于比我们做软件，机器人我理解是做硬件，人形机器人是一个更高境界。咱们天天看美国科幻电影，所以看了一个人形机器人，咱们就会想&quot;终结者2&quot;，就会有无限的期望。但实际上这个行业的发展没有想象的那么快，软件硬件都还有相当的距离。所以这相当也是帮（行业宣传）。我现在跟你的思路不一样，我也在做一个访谈节目叫《红衣客厅》，但我不像你去找这些有名的人——有名的人也不需要我了——我是要找那些年轻的创业者、没有成名的人，但是做科技、人工智能软硬件的企业，跟他们去交流。我们后边计划也有很多采访。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没关系，不冒犯，咱俩聊的反而不一样。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我的意思我先把动静弄大一些，然后找他们就能给那些创业公司提供一些帮助。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，想法一样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但咱俩不竞争，咱俩聊的风格不一样，我聊不了你这么多、聊不了这么细致。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我更多的都是从产品技术角度去聊，毕竟咱俩的背景不一样，所以我是向那帮（创业者）、帮行业做一个传播，反正我觉得传播效果不错。因为还有一个原因，是因为我给他们提了一个建议、他们做不到。有个电影你看过没有，我们叫《铁甲钢拳》，英文名字叫Real Steel，写一个小男孩控制一个机器人搞机器人格斗大赛，但他不是遥控，他是用动作捕捉，相当于我做各种动作、踢腿，那个同步就做了。我就一直希望国内能搞这样的比赛。实际上理论上按照阿西莫夫定律，机器人永远不能伤害人，所以就不该设计——事后想有点后怕——就不该涉及机器人和人格斗。然后还有人嫌我下手太黑。但是你知道机器人不可能打赢人，如果机器人要把人打赢了，这个对机器人行业就不是一个好消息，你就不应该伤害人。像人跟机器人打，我自己感觉占不到它便宜，一脚踢上去踢了一个铁疙瘩的身上。</div></div>
+<h2 class="dlg" id="b14"><span class="ht">机器人能不能当保安——伦理与三定律</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但它有一个未来几个可能应用落地的方向里，其中一个是做那种住在边远地区的，在家里既能做仆人又能做保安。但如果要做保安的话，他不也得有一些格斗能力吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得机器人做保安可能是一个伪命题。为什么？还是阿西莫夫当年在科幻提出三定律，就是为了防止AI这东西，如果技术突破了，它能力本来智能就比人强，又有铁疙瘩身体，我们打三分钟、打五分钟就气喘吁吁，电池只要续航超过一个小时，你是干不过它的。所以还是不能赋予它太多的能力，万一像美国科幻电影里</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">它哪天失控了怎么办？出现&quot;换电&quot;怎么办？美国有个电影叫《机械战警》，突然发生失误了它可以开枪，就把董事长给打死了。所以我认为机器人还是应该做和平的工作。你说军用机器人另当别论，但机器人还远着呢。为什么？机器人最要命的是续航问题；另外从真正的效率上来说，无人机的效率要比机器人性价比高太多了，无人机便宜，而且对坦克、对重大军事装备用攻顶的方式更容易，机器人成本又高，到时候谁刺在战场谁刺后谁还不一定呢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。但我以前还挺希望它有类似保安那种功能，因为没生孩子，我就会想我老了到什么山里、村里那样住着，就会觉得保安是一个问题，但我也不想雇一些保安在家里待着，最好老两口在家待着，然后买几个机器人，又能当用人、又能当保安、又能打扫卫生、打扫院子什么的。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这种我觉得很难了，就是说你包括做战斗机器人都会有一个伦理的问题。你比如你去思考这个问题：人工智能是没有意识，但是智能体会有目标、就会有使命，有使命之后就会有一种价值函数——我为了达到我的目标，要选择尽可能的手段。那机器人当保安总不能一上去被干掉吧，那它总要有一个&quot;保护自己&quot;为优先目标，那就越弄越危险，它就有了这样一个价值函数。哪天你看着机器人不顺，你说&quot;我准备拔掉你的电&quot;，那它的防御机制会不会起作用？这时候它就会产生（意识）——因为它有捕捉小偷的技能，你说它这一拳打过去</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">是重还是轻呢？人有时候还失手会把别人打伤打死，所以理论上机器人保安这个想法只能存在于你的梦想之中。我认为就是有机器人能达到智能程度，也不可能去重拾这个行业。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个角度我之前没有想过。</div></div>
+<h2 class="dlg" id="b15"><span class="ht">四五千万粉丝是怎么涨起来的</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个现在经营到现在，我这次为了这个访谈查了一下，发现全网所有平台加起来差不多有四五千万粉丝了吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">没有那么多，四千多万。凑起来是，但它不是一个简单的加法，它有一个重叠，比如大家在不同平台可能是同一个人。我自己认为粉丝就做一个参考数，现在各平台都很狡猾，它是为了不断地用鞭子鞭打你，并不是你有了粉丝就高枕无忧、每天流量就很丰厚。比如说我关注你了，但是我看的时候它是推荐，它并不（因为）关注（就推），关注是在另外一个table里面、另外一个（队列）里面，所以如果系统不推荐你，你一样得不到流量。所以这个东西就做一个参考而已，别把它当个包袱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我的意思是，我印象里好像你那个抖音的账户经营的时间并不是很长，但这次看了一下又一千多万。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">也两年了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">两年涨了一千万粉丝。中间有没有什么节点性的事件，或单个的某几个视频，使得涨粉特别特别快？有印象吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">其实转折点是那年冯仑搞的那个风马牛（晚会），你可能看了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">风马牛晚会，结果我跟王石、冯仑，还请了一个小朋友——冯仑请的，叫程前，这个小朋友好像也是做商业人物专访的。他当时有个不太合适的想法，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">想把我们这个老人家当场给干掉，之后这个屠龙少年就能上位。我也没生气，也没欺负年轻人，也没当回事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">分寸很有方法，但是我觉得我的口才比你要差，但损人的能力还可以，就骂人不带脏字。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">还好吧，我觉得已经很克制了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个视频我看过，已经很克制了，分寸我觉得处理得很好。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">结果没想到也涨了一些粉丝，后来我研究了，他当时有一千万粉丝吧、还是六百万，我看他有这么多粉丝，我觉得我是不是应该有点机会。后来第二次，到那个俞敏洪带我们亚布力这些企业家去当年叫东方甄选去参观，董宇辉出来讲了讲，我一看俞老师转型也很成功啊，我跟他很熟，新东方的人口才都好，所以我就觉得这是我也能学着做一下，所以那一段可能涨了点粉丝。第二个就是卖车了。后来就DeepSeek、讲AI涨了一些粉丝。再就是实话说后来找到一个规律——但这规律今天抖音已经把这漏洞堵住了——就是搞抽奖、抽奖活动涨粉丝。后来有个演员，叫我忘了，他搞抽车吧，他涨了两千万粉丝。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">谁呀？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">黄子韬。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">黄子韬，对对对。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">后来我就看，我也准备搞抽车送一百辆车，抖音就不让我在上面搞，所以后来就在纳米AI上搞，涨了一些粉丝。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">纳米上搞，然后涨到哪去呢？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">粉丝引到各个社交平台，涨了最多的还是抖音。所以也没啥规律。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为我做多了、经验足了以后，对这种事情一旦发生的时候随机应变，那个感觉就会好。我自己感觉是两个：第一，要不断创新出一些新的内容，抖音过一段时间我觉得它肯定会有些推流的作用；第二，别把粉丝当一个负担。最早我本来也有个粉丝焦虑，做到现在我觉得，最后也有人跟我讲，最后你能不能把货卖出去——普通人就说如果你货卖不出去，你说的粉丝没有用。那我现在就拿这些粉丝为我的AI业务做宣传就行了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">（口播）人生可以有很多选择，咖啡我劝你就别选了，喝瑞幸就对了，感谢瑞幸咖啡支持。</div></div>
+<h2 class="dlg" id="b16"><span class="ht">GPT-3.5引爆时的震撼与判断</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好，那我们聊AI了。其实这波的AI革命，标志性的事件就是GPT-3.5，差不多在22年年底出来的。当时这个突然引爆开的时候，还记得当时是什么样的一个感受和想法吗？有没有感到一些特别震惊，或者试用的过程中感到震惊、毛骨悚然，或者印象特别深刻的？还记得吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">记得两点。第一个是完全颠覆了我们原来做自然语言处理的那个经验。在那之前你知道像Siri啊、各个智能音箱啊、包括我们左耳朵手表里的对话，都是人工智障，对语言不能理解。3.5呢就让你感觉像面对一个真人。其实这里面我觉得我跟很多人不一样——很多人看一个新生事物，大部分人看缺点、挑它不完美的地方，但我们是看它的潜力，觉得这玩意不可限量。第二个，是感觉确实跟OpenAI有差距。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">为什么呢？OpenAI用的这套做法，Transformer的前身的模型叫BERT，实际上是由BERT发展成了Transformer。BERT我们早就都在用了，但是很惭愧，没有一家公司、包括国内的大公司，想到说把人类所有的知识都灌到大模型里去看会发生什么效果。我们拿BERT做什么？做搜索结果的推荐、广告的优化、内容点击率的提升，所以还是没人的格局高。但第三个，就马上反应过来，马上组建一个队伍要了解大模型怎么训的，要能训出自己的基础大模型。</div></div>
+<h2 class="dlg" id="b17"><span class="ht">拿 Transformer 搭原型，语言是人工智能的金钥匙</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">（接着前面的文化和技术积累）所以我们很快就拿 Transformer 开源搭出一个原型。因为这里面有个很重要的概念，尽管很多人去挑刺，包括 Facebook 有个杨立昆说要做什么世界模型、李飞飞要做世界模型，我都觉得他们弄错了一个问题，就是语言是最重要的。因为人类拿语言来干这么几件事：一个是来交流，一个是来做知识的传承，第三是做逻辑的推理，还有来描述这个世界。通过语言，基本上你这个世界模型就能了解了。所以原来人工智能之所以不能取得进展，就是因为没有了解语言这个金钥匙。一旦掌握了语言这把金钥匙，就意味着对人类的知识有了解了，对人类的世界能力有了解了，对人类的推理能力有了解了，就一通百通。所以最近你看 Google 新出了一个叫&quot;纳米香蕉&quot;的产品，我问你用了没有？他为什么很惊艳？就是说他对图形的理解超越了视觉，他还是加了很多知识的这种融会贯通。所以为什么语言一旦突破，你看什么音乐模型、视频模型、图形模型、视觉模型都获得很大的进展。所以当时我就坚信这东西是正确的方向，所以就赶快跟进。实际上前面有一年我一直在做一个科普，依然有很多人，像杨立昆过段时间——那也是图灵奖得主——就出来喷一下 Transformer，不停地泼冷水；苹果公司最近还不断地写论文证明这东西是&quot;假装会&quot;。可是你这个东西，你自己去用一下，你用的时候就有毛骨悚然的感觉。因为我们做 NLP、做自然语言处理的人就知道，我们原来的思维范式都是模板、是程序判断逻辑。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">但你怎么问大模型，大模型都能给你对答如流。你要说他不懂思维，我觉得这是自己骗自己。有人说他是猴子随机打字机能打出各种东西，他就是学的知识多了给你随机拼东西——这些话其实都是不懂的人在瞎扯。是这样，从 Hinton（辛顿）说起，他的前身是一个生物学家，像现在你越做大模型，包括随着医学的进展，他跟人脑的模型非常类似。所以我这一年去说服很多人，很多人老是认为它是个算法，算法竟然是人编的，但实际上它是一种机制，就像人的大脑并没有一个特殊的计算部件，大脑里并没有一个特殊的什么核，它就是很普通的神经元组成了一张网络。这神经元足够多、这网络足够密之后，它就变成了一个能处理任何通用问题的智能装备。大模型就是这样，除了算力比人强、能耗比人高，其他我觉得都很像。所以我反复纠正两个观点：很多人老以为大脑像磁盘一样，大脑不是磁盘。磁盘读写不费算力，那只是把东西存进去、读出来，知识进到大脑是经过了一个学习的过程。所以很多人就说有了人工智能小孩就不用学习了，这错了。小孩不学习，因为大脑里没有网络，那就跟一个傻子似的。你上过大学吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有，高二辍学。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">那你学过中学数学吧？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然，中学物理也学过。物理我辍学的时候还是课代表。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你今天干事业需要中学数学发挥作用吗？不需要吧，我是小学数学就够了。那中学数学有什么用呢？很多人说没有，我说错了。你学中学数学、学物理、学化学的时候，它对你的大脑进行了重新的塑造，使得你大脑形成了一种网络，可能在解决其他问题的时候它有效果，你自己没有意识到。就跟今天人们往大模型里灌很多知识的时候一样。</div></div>
+<h2 class="dlg" id="b18"><span class="ht">大脑不是硬盘，脑机接口复制人脑不现实</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">反正大脑跟内存不一样、跟硬盘不一样、跟数据库也不一样。所以有人老觉得说做个脑机接口把罗永浩脑子里的东西传到 U 盘上，再插到我脑子里，这想法都不现实。脑机接口是解决不了的——你大脑整个网络的结构都是学习训练出来的。还有比如说，当我想起罗永浩，我就会眼前浮起来你的形象，那过去大家会觉得是不是有个图像存在我大脑里，其实没有。这跟大模型一样，我有很多单元存了你的很多权重之后，每当想起罗永浩的时候，脑袋就会出现你的声音、图像，甚至视频，我做梦梦到你一样，这都是大脑临时生成的，所以跟大模型完全一样。所以很早我就意识到这是一个正确的方向。其实图灵测试也能说明这点，我认为图灵测试就用说话来做验证，只要说话分不出来这到底是人还是机器人，那这机器人就成功骗过了，就证明他是真智能。但杨立昆一直觉得人在成长、人脑受训练的过程里，像视觉啊、物理接触啊这些东西比重上远大于语言，以至于他对纯语言模型这件事就偏悲观。这个事怎么看？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得他这是一个过程，语言是基础。有个著名的盲人叫海伦·凯勒，《假如给我三天光明》，她是典型的从小就瞎掉了对吧，那么她依然学会了对这个世界的认知。很多盲人看不见东西，但是他可以通过语言的能力来建立一部分对世界的了解。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我想起来了，小时候都学过海伦·凯勒，她那个老师一直让她摸那个水。她好像是又聋又瞎对吧？</div></div>
+<h2 class="dlg" id="b19"><span class="ht">语言智能、物理智能、空间智能是循序渐进</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我记得是又聋又瞎，应该她学会说话了。她老师拿着她的手不停地给她划那个 water、那个水，然后同时又让她去摸水，就这样不断地重复、不断地重塑，其实相当于让一个又聋又瞎的人在脑子里体会这两个，然后把它关联起来。她那个老师很神奇，现在看跟人工智能训练一样。你想文生图、图生视频，过去还画六指、画人画很多东西不对，现在越来越对了。那你能说他不了解世界的物理规律吗？他可能总结不出来规律，但是他知道水落了会形成水珠，你出了汗之后衣服会贴身，这种对世界的描述，他如果不知道，他怎么能画得出来呢？所以这是最基础的一步，所以叫语言智能。语言智能的第二步，我认为叫物理智能，就是我开始接触世界，它在语言智能的基础之上。第三个可能还有个空间智能，就是我能够对空间做判断，我从那走过去。我觉得它是有一个循序渐进的过程，不是一个相互否定的关系。但如果说没有语言做基础，上来就直接做世界模型，讲得很好，做不出来。大模型这些年并不是一个……大家都说它就像当年网络似的，你知道网络里面以太网当年并不是最优解，但它非常实用，就不断地发展到现在已经变成千兆、万兆甚至比万兆更强的通信网络，而原来很多比它好像优秀设计的网络方案也都消失了。所以我是觉得，包括现在在大语言模型的基础之上，视觉模型起步也很快，它有循序渐进的过程。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这两年连研究带实践走下来，感觉这个 AI 的进化哪方面比当初想的要快、哪方面比当初想的要慢？这些总结过吗？</div></div>
+<h2 class="dlg" id="b20"><span class="ht">AGI 没那么快，大脑进化靠知识传承、推理、工具</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我自己觉得进步已经是相当快了，只是唯一的就是 AGI 这东西没有大家想象的快。因为 AGI 我自己觉得它取决于怎么定义。如果是一个啥都会的人工智能，我对此深表怀疑。我觉得如果人类真造成 AGI，相当于给自己造了一个上帝出来，那是不是什么事都要听他的？他就成了宇宙里、人间绝对的神，那我们就要被淘汰了，人类还是会被控制。第二个呢，我自己最近在做智能体，我觉得大模型的进步可能最近遇到了一些瓶颈，没有大家想象的那么快。我觉得这要像人——大模型只是像大脑，那么大脑进化不可能特别快。你比如说智人的大脑，春秋战国时候人的大脑和我们现在人的大脑，硬件、模型结构是差不多的，容量也是差不多的，当然因为训练的东西不一样，古代人训练的知识比我们少很多，所以这个大脑能力是有差异的。但人类今天变成这么牛的一个文明的物种，不完全是靠大脑的进化、靠大脑的训练。它靠什么呢？我自己总结：第一个我认为是靠知识的传承，所以现在大家为什么要做知识库；第二个是靠这种推理和强大的分解和慢思考能力，这个现在模型也补上了。过去没有推理模型之前，大模型实际上可能是个泡沫，因为它光是一个知识性模型，什么知识都知道，但人真正的智力是解决复杂任务的时候。比如说如何把罗永浩装到冰箱里，推理分三步，如果装不进去……</div></div>
+<h2 class="dlg" id="b21"><span class="ht">智能体——给大模型加上手脚和工具</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得分尸对吧。分尸没有刀，我就得买锯子。人是一个不断的反思和推理的过程，所以这个问题也解决了。第三个很多人忽视的是什么呢？我觉得是工具。今天人也没有进化出翅膀，大脑也没有进化出会飞的咒语，但人能造出飞机、能造出汽车。所以大模型会用工具就变成智能体。智能体很多人把它太低估了，其实它是人工智能一个必然进化的阶段。所以今天光有大模型没啥用，光是聊天机器人作用很小。还有一个很重要的、很多人忽略的，我看过一些书，就是智人战胜了尼安德特人，智人是最懂得合作的。你别看智人还老互相残杀，他很快成了部落、成了城邦，现在人类有了社会、有了宗教，包括有了公司。另外我个人认为&quot;一人公司&quot;是个伪命题，个体户永远都会有，但人类的价值在于合作，因为他合作是因为人类专业化技能的存在。所以做单智能体是不够的，一定要变成多智能体协同工作。今天人类通过协同工作能创造比单个个体强大得多的价值。所以大模型进化的智能体、智能体的发展，我觉得会非常快速。但是即使这样，我也认为不存在一个通用的、强大的、什么都懂的人工智能，我觉得这个事永远不会发生。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还是短期可预见的未来不会发生？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">短期内可预见的不会发生。因为最后可能通用人工智能会以这个方式出现：就像今天你说地球上出来一个人是先知、是万能的神、是上帝，可能不可能。</div></div>
+<h2 class="dlg" id="b22"><span class="ht">AI 进化快到让人害怕，前 50 年走错了路</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">但整个人类如果变成人类命运共同体，人类都能很好地协作、知识的传承，然后很好地充分发挥资源，那有可能人类整个做一个整体。比如说以后再遇见外星人入侵地球的时候，可能人类能爆发出巨大的力量。我自己的感受是，很多东西确实没有想象的快，但也有很多快到让我都有点害怕。像我以前定期——现在已经不看那么全了——原来每周会定期看几个信息比较全的 AI 博客，然后就发现每周 AI 进化的那些大事，很多都看不过来，因为太多人在做、不断做出经验性的东西，所以你单是了解这件事需要的时间都已经不够了。我说的&quot;度日如年&quot;是因为，人工智能在 Hinton（辛顿）发明他的神经网络深度学习模式之前，等于前 50 年的道路是错的。人类原来老想通过把人类的知识总结出来之后，通过一种方式灌给机器，后来发现说不如搞一种比较通用的、像大脑的结构，可能刚开始智商为零，通过样本的不断学习，它自己能产生举一反三——我们黑话叫泛化，说白了就是举一反三。这种模式看起来笨一些，所以 AlphaGo 后来变成 AlphaZero，自己跟自己下棋，学会了人类都无法理解的招数。特斯拉自动驾驶最早也是做规则，你跟小朋友聊过——写个几十万条规则说一个罗永浩过马路，那每天我弄三个人戴上罗永浩的面具过马路他就傻了，因为没有处理过这个规则。那现在就把老司机的驾驶经验让他去学习，他学会了一个网络。就像你开车，你会开车吧？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">会。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你比如一边叼着烟开熟了，一边打着手机……</div></div>
+<h2 class="dlg" id="b23"><span class="ht">寒武纪大爆发，人类逃不脱这个宿命</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">一边跟旁边的女孩说着话，前面有个人你就灵活地一打方向就绕过去了，这个网络自己在处理这个反应。突然问你大脑，你刚才怎么处理的？你都没有意识到对吧。所以现在走对了路之后，我感觉现在像寒武纪大爆发，各种生物进化。比如有的公司技术在往错的方向走，但没关系，有的往正确的方向走，通过这种生物的充分的多样性，才换来了最后可能这种胜出。但是整个过程其实都是有意义的。我也感到害怕，但是我觉得人类没有选择了。因为现在国与国的竞争，人工智能你如果光是管制不发展，那可能将来你的国家就落后，就跟原子弹是一样的。公司跟公司在竞争，行业跟行业在竞争，所以这也是人类的宿命。但是我自己做智能体有几个收获，很好玩，跟你分享一下。第一个，我觉得大模型可能想浓缩人类是不可能的，它就像一个刚长出来的大脑，能推理、能说会道，但没有手跟脚。智能体把它加上手跟脚、能用工具之后，就能够利用大脑的规划能力完成复杂任务。也就是说，智能体让人工智能第一次有了一种类似意志的东西。但是注意，意志和意识是两回事。有人老说人工智能没有意识，大脑能不能产生意识我也不知道，因为人类怎么产生了意识，意识也不知道，你也捕捉不到。这个&quot;我是罗永浩还是我是周鸿祎&quot;这个感觉是很微妙的。但是有了智能体之后呢，它又有了目标，我们就会人为地赋予它一个目标，你或者是个战斗智能体……</div></div>
+<h2 class="dlg" id="b24"><span class="ht">有目标就有价值观，可能产生与人类冲突的意志</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">或者是一个系统运维智能体，或者是一个播客配音智能体，你就有你的目标。有了目标之后就有价值观了，因为我所有的使命都是为了达到这个目标，不达目的不罢休。这样的话就有可能会产生意志，一旦这个意志和人类发生冲突的时候，它就有可能会做出不利于人类的事。有一个科幻小说，有个人工智能的目标是造拖鞋，这玩意看了人畜无害对吧，但他把地球上所有的资源都用完了之后，他就认为他跟人类出现了分歧，因为人类跟他资源有占用，为了造拖鞋他就把人给毁掉了。这是第一个，就是说没有意识，但是可能会有意志。但意识也有可能有，大家猜也有可能足够复杂就会自然涌现，这是一个假说，这个不知道，毕竟他的物理结构不一样。但是反过来我自己也可以否定这句话，比如说飞机会飞、鸟会飞，谁说飞机一定要扇着翅膀像扑翼机那么扑起来？只要都能达到飞，你又何必在乎它的方式呢？我们不一定要既有血有肉有意识才能被看成智能生物，像它今天已经被看成智能生物。我第二个观点从来没有对外分享过：就是今天大模型的能力原来没有被人挖掘出来。大模型不等于一个大脑，大模型相当于是十亿个大脑或者一亿个大脑，因为他读的书、看过的视频、看过的东西比你我要多多少倍，你同意吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">但是今天这些东西藏在大模型里，它是一个精神分裂的，它就是一个知识的存储。他读了计划经济的书，又读了市场经济的书，哲学可能很多矛盾的哲学家的理论他都读了。所以你现在指望一个大模型……</div></div>
+<h2 class="dlg" id="b25"><span class="ht">用智能体把大模型的专业能力提炼出来，角色越窄越强</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">他只能见人说人话、见鬼说鬼话。但是当我们用一个智能体，通过提示词的标定把大模型的能力输出到智能体里面之后，把我们需要的能力输出到那里，你就发现一个很有意思的现象：你不能给智能体赋予两个不同的专业角色。也就是说，你让大模型同时扮演一个通用专家的时候，他的能力是低下的；但如果你让他就扮演某一个领域的专家，越窄，那这个智能体的能力我认为越强。所以今天我们在做智能体的过程中，我深刻地感到智能体可以把大模型的专业能力给提炼出来。第二个，前面讲了，人的很多能力，比如说今天你的能力强，是有电脑、有浏览器，实在不行你可以请老周帮你编个软件；如果今天人这些东西都没有，人的能力马上就下降得很厉害。那么今天智能体将来肯定通过机器人能开车、能开车床，通过 API 能操作你内部的网络服务器，今天智能体能用浏览器、能用你电脑上所有的软件。而且最可怕的是，过去我对机器编程有一个误解，你可能也有：以为只有程序员才用 AI 编程，错了。以后你不是程序员，你的智能体也要有编程技能。为啥呢？当老罗给我的工具我都完不成我的任务的时候，我就编一个，哪怕是一次性的软件，编一个工具。就像机器人黑客很可怕，我可以现编一些工具。当这些能力都具备之后，智能体的能力是不是就超过了人类？再加上我前面说的，当你有多个专业智能体，如果你又能创造一种很好的协作机制，那智能体协作起来的时候，这个力量是要远远超过大模型表现出来的能力。所以我觉得今天大模型能力已经超过人了。</div></div>
+<h2 class="dlg" id="b26"><span class="ht">大模型已是&quot;全知&quot;，智能体让它走向&quot;全能&quot;</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">可是现在是全知阶段，就差通过那些变成全能阶段。咱们以前说神，他现在是全知，已经全知了，就差一个全能，这是走在这条路上。所以可能我们今天看着大模型人畜无害，但将来做出的智能体可能是第二步。我现在的智能体还是软件智能体、是虚拟空间的智能体。实际上为啥我关注机器人？机器人的成功不在于看那个机械的手指、机械关节，这是外部硬件，机器人的灵魂和大脑一定是一堆软件智能体。它一定要变成硬件智能体，有了对这个空间的计算能力，有了对物理世界的感知和探测能力，还有影响能力，可以操作执行一些事情。实际上今天人工智能已经能影响人了，因为今天它造文章的能力、生成虚假新闻的能力、生成虚假视频的能力已经超过任何一个人类了。所以我是觉得智能体很有可能是人工智能进化过程中一个必然阶段，在这个阶段它的能力绝对会超过人。所以未来智能体不能把它看成软件。我再跟你说几个有意思的东西，可能会回答你的一些问题。他非常像人：第一点我讲的他专业化对吧；第二个，智能体会出错，但这个出错既不是幻觉也不是训练的问题，是他像人一样会倦怠。一个智能体你给他指令太多、让他干太多的活，他做到一定时候会拒绝执行指令，或者开始乱执行指令、会敷衍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">会敷衍。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以为啥就要换一个人上。他每个人都会有他的注意力上限，就越来越像你跟你的员工谈话，你让一个实习生干 50 件事，你不知道第 48 件的时候他第一件事已经忘了，他的注意力就这么多，其实他都记到本子上……</div></div>
+<h2 class="dlg" id="b27"><span class="ht">多智能体协作像给真人设计工作流程和企业文化</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">他走着走着又会乱，所以为什么还是说要多智能体。多智能体之间，你知道国外有公司做了多智能体协议，那协议很扯淡——我这样说肯定有些技术员会骂我——他们是把智能体当成软件模块。而智能体跟智能体的协作，我们经过了很多挑战，终于把这条路探索出来了：它不是软件模块相互 API 调用，它是你可以想象成多个人的协作，他们要对齐。比如你弄了一个实际的团队，是不是要开会？为什么要有总监、要有副总裁、要有 memo？就是你要把大家的价值观对齐了、大目标对齐了，然后每个人还要分解工作，光是分解工作，他对整个全貌没有一个了解，他也会出问题。所以最后你就发现，做智能体协作就完全像给真人设计一个工作流程、工作链条和企业文化。所以越做我一方面就觉得很兴奋，觉得我们智能体取得很大的成就，我们起了一个叫&quot;智能体蜂群&quot;的概念；但另外一方面从内心来说，又觉得这玩意儿好像在造人，越做越害怕，在造一个智能生物。我拿视频给你举个例子吧。其实我这个智能体并不是只能做视频，我们拿视频做例子，是因为视频是一个比较耗时费力、需要多方面能力配合的东西。大家光以为视频要有人拍、有人剪，其实不是。像你做的视频，有人做规划，视频是有一个骨架的，有人先写剧本、人物小传，然后要写分镜头。好了，视频咱们自己人工拍的都是一镜到底，没有什么镜头的变换，但视频像那个每三秒就切换一次，这是最难的。包括里边的台词设计，还有一个叫镜头感。</div></div>
+<h2 class="dlg" id="b28"><span class="ht">用多智能体协作做视频成片，单智能体会&quot;倦怠&quot;</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">比如说如果咱俩老是这张脸，这个东西就没人看。镜头一会越过我的肩给你脸来一个特写，一会可能从你那又镜头转半圈，反正镜头变换也是个技巧。包括配音、包括音乐、包括最后的剪辑，剪得拖拉不拖拉。所以它需要……你很难做一个啥都懂的智能体。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你们这个产品其实试图实现的就是让没有技术基础的这些人，然后把一个需求说出来，他就把它全部接管和执行出来了对吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">其实不完全是这样。第一个想法是这样验证多智能体的能力，就是说能够把一个完整的视频成……不是做素材，而是把很多素材综合成片，成品直接出来。当然第二个，对你这种专业的创作者来讲，这一部成片相当于可能不太够满意对吧，他可以拿你来做一些原型的实验，另外你可以给他更多的指令，他可以做得更符合你的要求。第三个就是说，可以让 AI 来做一个框架之后，把你人工的视频塞进去剪在里面。对普通用户来说，当然没有视频创作能力，写几句简单的要求就能自动生成一个完整的视频，这个可能达不到你的视频要求，但是在抖音各种平台上，我觉得给人用是足够了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有刚才操作的那些一步步的流程里，每一段都可以在这个流程里停下来再进行修改吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">生成过程中会给你一个修改的机会，生成以后我们有一个专门的叫分镜编辑器，可以重新批视频，哪一段觉得不满意可以重新生成，哪一段可以抢那个时间段重新生成。所以这个整个都是考虑到的。</div></div>
+<h2 class="dlg" id="b29"><span class="ht">大模型只能做几秒素材，多智能体才能做成片</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">而目前大模型，你说像什么可灵啊、像 Veo3 啊，它是做一个大模型，一次能给你生产一个 5 秒到 15 秒的素材，那个生产得可以很漂亮，但它做不出一个成片。所以目前全世界做成片的，最长我看也就 30 秒差不多。所以我们的目标说能不能做一个 30 分钟的电视片，当然这是第一目标，就需要多智能体协作。单智能体我们试验，大概由于倦怠的问题，做 90 秒就走不下去了。所以我们现在通过大概几十个智能体的协作，能够基本做出 15 分钟的、一刀不剪最后能成功做出来的成片。做智能体协作还有一个挑战，就是说一个智能体出错率哪怕是 1%，你成功率 99%，多个叠加起来是一个乘的关系，0.99 的比如说十次方，约等于成功率就只有 10% 了。所以这里边有很多挑战。当然我的目的是为了证明智能体的能力。你说做的视频可用不可用，那看你怎么看了。比如说如果是你这边要录高清的内容，那智能体的内容显然还是要弱一些；但如果对一个从来没剪过片子、不会写分镜脚本、不会做基本规划的小白用户，提出个要求说我做一个比如贵州旅游的五分钟视频，那这个智能体基本上就能够一键成片，还是可以用的，还有很多值得完善的地方。那今天不做广告了，回过头来我讲这个例子，为什么我讲这个概念呢？我就发现说玩的人有两种玩法，一种我管它叫 AI Native 玩法，一种叫不 Native 玩法。比如说像很多做传统视频出身的人，大家还是会把 AI 当成一个辅助工具。</div></div>
+<h2 class="dlg" id="b30"><span class="ht">AI Native 玩法 vs 把 AI 当工具，放手让智能体编</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">（辅助工具）就你给我做一段素材，我最后还是用剪映、用专业的 PR 剪辑工具剪到我的成品里，我是导演、我是主宰。这种用法我就觉得不符合未来智能体的发展，就是还是确实 AI 就是个应用、就是个软件、就是个工具，主要更聪明。像我这种不会剪辑、不会写脚本的人，我们会给智能体一个目标，说我要做一个什么视频、大概内容是什么，然后就交给他放手去编框架、编分镜。我就发现说他的能力要超出 99% 的非专业的人，而且很多时候咱们人类所以自豪的所谓的想象力和创造力，他都具备。你放手让他去做，他们拿你做了一个带货视频，但是被我要求删掉了，我说不能做假的；这种我们就拿国外企业家、拿马斯克做了一些调侃。我觉得他今天是这样：他离做影视还有很大的距离，比如说里边还是会有些幻觉、会出错、会有不一致。但是就像你去看一年前画个人还是画六指七指，做个吃面条的视频面条吃半天一点都不见减少，所以从这个进度来说，我认为这个可能在一年之后，有可能很多短剧、很多电视剧的片段就拿智能体都能做了，对一个完整的段落。最终极的是要生成完整的片子。那最后我觉得还有一个，这里边我对智能体已经有一个理念：虽然它能自动做，但是还有一个关键叫&quot;人在回路&quot;。人在回路很重要，不能让智能体变成一个黑盒子。大模型就已经很像一个黑盒子了，所以像那个 DeepSeek 就很聪明，他把他的 thinking 过程给显示出来了。受他这个启发，我做智能体就要求把大模型每一步的思考推理、还有智能体在干什么……</div></div>
+<h2 class="dlg" id="b31"><span class="ht">人在回路——透明可追溯、停下来等人批准</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">每一步都……所以就显得非常的冗长，因为它每一步的思考都要给人类、要透明可追溯。第二个呢，很多时候它要停下来，要等待人类的批准才能往前走，而且人类可以加很多干预。要不然的话，智能体按这个进化速度，我觉得将来有可能控制人类的 AI 肯定是一些智能体，一定会发生。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">先说刚才你那个产品，是一步一步往下推理走的，然后如果到了某一步往后出了错，我们可以追溯到那一步，然后在那再修改、再往下走吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">可以，是做了这样的处理的。本来是希望在中间过——这是一个人机交互的考虑——本来是在这个过程中，比如他做完了的分镜头你可以改、做完了人物的定装照你都可以改，他后来发现大家不是这么工作的。因为你在这时候你会觉得差不多挺满意，等最后整个成片出来之后你再看的时候，你就会不满意。有没有这个感觉？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">经常会发生，剪起来以后跟原来段落想象的不一样。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对对对。有的时候做产品也一样，做每个界面要素的时候我也都参加讨论，觉得都挺好，整个组合起来用的时候就觉得怎么这么玩不转、怎么别扭。所以我们又做了一个智能编辑器。做完了之后，我的视频是结构化的，传统视频是一帧一帧的、是非结构化的，所以叫非线性编辑器，像 Adobe 的 Premiere 就是这样的，很难去修改、只能剪辑。但是我们用 AI 生成了之后是一个结构化的，是以分镜为基本元素，所以一次就修改一个分镜，你可以把不满意的分镜拿出来重新批掉，那部分修改完了前后仍然可以连起来。</div></div>
+<h2 class="dlg" id="b32"><span class="ht">智能体也能做 PPT、网站、研究报告，但选视频来证明</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">最后整个把口型和配音再顺一遍就可以了。所以并不是说我们只能做视频，我们也拿它可以做 PPT、可以做网站、可以做深度研究报告。但是你发现有两个问题：第一，很多需求的频度都比较低，不像视频，人人都要做视频、公司都要做视频、企业家都要做视频；第二个，简单标准很难一致，文无第一武无第二，你写了万字报告，我请你看效果怎么样，你可能懒得看，你只能说不错不错，你看写了一万字；但视频谁一看好跟坏谁都能判断出来。所以我们就选视频来证明，实际上是为了证明我们的智能体蜂群已经超越了——就是说它的能力来源于大模型，但它把大模型的能力经过组合配合之后，起到了一个一加一大于二的效果。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以最终的目标是想让这些产品给普通人，上手就能做出一个半傻瓜化或完全傻瓜化生成的这么一个东西？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对，现在基本上能达到目标。因为是这样，你像你的视频，这种播客视频要讲究的是以拍为主，他就不可能弄很多空镜，但你空镜可以用 AI 来做，还是以人为主。但是像抖音上的很多视频，我自己感觉情绪很重要、钩子很重要、文案很重要，实际上没有人今天会认真去看每一支内容。他不像你会挑剔，你今天我来了，你是对细节非常挑剔的。大部分人，我相信可能跟你的用户群有关系，愿意花三个小时四个小时听你播客的人，他会在意这些东西；但如果连电影都没有耐心看、都是一分钟看电影的这种观众，他们看视频的心态是&quot;关我屁事&quot;，一看三秒钟……</div></div>
+<h2 class="dlg" id="b33"><span class="ht">观众没耐心，AI 空镜满足视觉丰富感</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">&quot;关我屁事&quot;就滑走了。所以对他们来说，就算镜头有些 AI 做得不太好，三秒就闪过了，他要的是视觉的丰富感。所以还是用户群不一样、目标不一样。我自己呢就特别需要这样的东西，就是说我的观点可以我自己来播，但是我不希望从头到尾都是我那张脸、我那个细眼、惺忪的眼睛、蓬乱的头发，这样看多了十秒疲劳。我试验了一下，最近做了一个视频加了很多空镜，空镜根据我讲话的内容由 AI 自动审、删，三秒钟换一个分镜，那镜头变换就很快、节奏就很快，很符合现在网民没有耐心的观赏需求。所以我有个矛盾的心理：一方面就觉得说自己非常幸运，赶上了好几个时代。我上初中的时候用了苹果二（Apple II）对吧，所以我初中就会编程，现在赶上了计算机时代；然后大学毕业 95 年碰了互联网时代；后来到 2000 几年的时候碰了无线互联网时代，无线互联网时代吃了很多亏没有机会做大；然后本来互联网都固化了，人工智能又来了。而且人工智能比前面几次机会都大，比工业革命还大。因为工业革命只是某个工具的发明；信息革命比工业革命大，因为信息革命能赋能很多行业；但是 AI 这次实际上是能代替人的整个智力。这个机会就是说，你肯定在有生之年要做参与者、不能做个旁观者。但另外一方面又感觉自己算不算碳基（生物），在为硅基生物的诞生又在添砖加瓦。可是你看看美国那些互联网巨头……</div></div>
+<h2 class="dlg" id="b34"><span class="ht">碳基与硅基混合，脑机接口的局限</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">每年花一千亿美金都在做这个事，想想说反正人类总要往这块走。最后我的一个观点认为，最后可能会变成碳基跟硅基混合，像脑机接口那种方式，实现半人半机器的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不是，我恰恰不同意脑机接口这个观念，说的话可能会得罪人。因为脑机接口，你做完全侵入式的肯定很多人不敢做；做非侵入式的呢，能探测的都是外围脑电波，意义不大——有一定的意义，比如说做抑制、监测人对胳膊的电流，这都是一些战术作用，那些我理解是辅助作用。其实做深度侵入，就是把罗永浩的脑子打开，你知道人脑里有将近 900 亿个神经元，但连接神经元的网络、这些突触和轴突有差不多万亿这个规模。所以它是一个……人类的知识我刚才讲过，它不是存在一个存储单元里，它是被编码在这些网络的权重里边。比如说今天我跟你好久不见了，我罗永浩这个权重降低了，提及罗永浩可能脑子反应没有那么强烈；今天我们聊完之后，我那个神经信号又加粗了。所以你怎么把这么复杂的一个结构完整地探测出来、把它复制出去，才能复制你罗永浩脑子这些东西？这个我觉得对人类是不太可能的。但是呢，我曾经说我要想干机器人，曾经有一个想法：如果我下一阶段要干机器人我会干什么机器人？首先我认为今天所有的东西都是机器人，汽车是四个轮子的机器人，无人机是长着几个螺旋桨的机器人，工厂里的是机械臂，机器狗是四足机器人，人形机器人……还有一种机器人我比较看好的，叫纳米机器人。不是说我今天做纳米（AI），是真的纳米，做很多小机器人。</div></div>
+<h2 class="dlg" id="b35"><span class="ht">用纳米机器人改造人体，比脑机接口更有效</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">像纳米级别的，它们可以进到人体，可以把人改造成半人半机械。比如说替代我的白血球，取代我的 T4 细胞，可以杀灭一切难以杀灭的细菌，我就变得很 strong；替代红血球再运送氧料、运送氧气，我在水底下可能就能憋气憋更长的时间；那么很多纳米机器人进到你的大脑里跟神经元进行某些互动，再通过 WiFi 把东西传出来，这个可能比脑机接口更有效地能够改造我们、改造你们。因为最近 Hinton（辛顿）有一个观点我倒是挺认同的，Hinton 我觉得还是很睿智的，只不过大家都被人工智能的热潮冲昏了头，他来中国也讲了一段话但没人注意。就是人跟机器相比，人有很多缺点，人只有一个优点是什么？就是能耗低。其实跟大模型比，比如说你罗永浩，你今天也年过半百了，你这半辈子脑子里的东西，你如果想……我拜你为师想传给我，我十年不一定能学得下来，因为这种很难把你脑子都给复制出来。但大模型分分钟，训练很难，但训练完了拷贝一个，那就是拷硬盘，速度很快。大模型跟大模型沟通呢，带宽又无敌，是光的速度。咱俩说话，嘴巴都算很利落，每秒钟你能说十个字？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">说不了，我也就说五个字、三个字。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">波特率就非常低。还有呢，人的寿命非常短，如果人死了，其实很多老专家、老学者死了损失很大，带着知识走了，带着他对知识的、在他脑子中新的总结形成的新的范式、新的知识就走了，损失掉了。那么机器……</div></div>
+<h2 class="dlg" id="b36"><span class="ht">机器对人的优势——可复制、带宽无敌、不会死</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">机器只要换个 CPU、换个卡，只要有电，机器唯一不利的呢是耗电，但这个只要人类解决能源问题，我认为就不是个问题，能源自由。所以机器跟人比的优势太广泛了。而且像智能体之后，最近我们遇到一个什么问题：现在有些国家开始研究智能体黑客，它完全会改变网络安全攻防的态势。过去黑客一将难求，比如你要是美国著名黑客，那美国人也把你当个宝贝供着；你来攻击我呢，你的能力你也得吃饭睡觉，我们也有专家来对付你。现在把你的能力复制，只要有算力可以复制一万个黑客，一万个黑客层层在各个站点去攻击，那如果我们没有这种智能体应对，这就很难。所以我是觉得人类——我想了很久这个问题——我认为人类既然逃不脱这个宿命，就经常有句话，你不能把对方看成鲨鱼，比如说你要把它看成海洋，那我应该跳到海洋里去游泳，而不是我做一条鱼，不能把什么都当成鲨鱼，那你一定会干不过它。所以有句话叫&quot;打不过就加入&quot;，这句话挺对的。就人类应该想办法怎么样通过可能纳米机器人的方法把自己改造成半人半钢。因为有很多科幻电影，什么《攻壳机动队》对吧，包括美国有几部电影里也写了那个纳米机器人的坏处：他一旦失控，可以顺便把我们人给吃掉，因为数目太巨大了。所以这是我私下的一个想法，我觉得人类可能未来就看谁能够果断地跟机器结合。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你想的未来的可能性，不是用脑机接口来解决带宽问题、最终变成半人半机器，而是用纳米机器人来改造我们？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得这个可能在脑机接口之后吧。</div></div>
+<h2 class="dlg" id="b37"><span class="ht">脑机接口控制机器人，人在回路延缓失控</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">脑机接口也还是非常有用的。你比如说埃隆·马斯克——这里面又谈到另外一个问题——埃隆·马斯克做了擎天柱，他就知道擎天柱短期内不太可能做出跟真人一样的能力，所以他就想用脑机接口，请很多人用脑机接口来控制擎天柱、遥控，就跟我说的那种《攻壳机动队》电影一样。只不过现在机器人拿一个遥控器遥控，表达能力有限；如果拿动作捕捉，能力就更强；如果用脑机接口遥控，效果可能就很好。这里边就谈到另外一个小的问题、谈个分支吧：就是说我觉得还是为了延缓这个速度，我觉得一方面要发展人工智能智能体，一方面要人在回路、要人机协作，就让人失去控制的时间不要那么快。如果人很快就失去控制了，我觉得人类的宿命可能会来得更早，人类没有时间做好准备。你举个例子，我现在也很纠结：你说什么都拿这东西写东西，人一定会丧失写作能力。有了手机之后，我连自己的号码都快记不住了，多弄了几张卡我就记不住了，用进废退对吧。然后我好容易拿积极写的万字长文发给你，你又不读，因为你没有耐心，你拿 AI 做了个提炼，提炼成三行字，你一定会丧失阅读理解能力。但刚才说阅读这个，肯定是因为带宽，我们要看一万字很辛苦，但是如果机器给机器读的话，那一万字就秒读。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对啊。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以说人类会丧失这个能力。人类把这个能力丧失了之后，那你想很多人都会丧失这种基本的工作能力。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以这个人在回路是值得担心的吗？因为我们发明某个工具之前很多是手工做的，有了那个工具以后，我们的能力和需求和目标跟那个工具结合就可以了。你假定那个工具……</div></div>
+<h2 class="dlg" id="b38"><span class="ht">AI 提炼会丢细节，还得真读书；小孩怎么用大模型</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">是你自己能创造的。我就说一个我自身的感受。原来我也做了一些 AI 工具，比如说我每次还自得地跟很多人介绍说，你看《人类简史》这本书，everybody 都在 talk about it，人人都在谈论它，然后我也没看过，我还显得我不落伍，我能拿 AI 给我提炼一下，这样我也能跟你讨论几句。很多人都干这事。但有一次有人把我的一本书给提炼了，我看了一下之后我就发现，因为我知道我这边说的真正的观点，我觉得细节全丢掉了。所以后来我自己发现说，我还得真的读书。再举个例子，就像现在小孩能不能用大模型，我的观点是能用，但用哪种方式。你有小孩吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">抓紧时间，你这么好的基因还不多升级。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">来不及了。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">来得及来得及。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个没事不说这个，我其实有一点后悔，但是来不及了，这个问题我们早上再讨论。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">那你比如说，如果你叫他扫题、解题，那对小孩是最大的危害；但如果你能让智能体进入到一种辅导状态，就是你问我什么题目，我能推断你不会做是缺少什么知识点，让我一步一步给你讲解，那我觉得对小朋友就是有帮助。所以这里面有一个哲学，&quot;人在回路&quot;其实还挺深刻的，除了不光是不把它当成黑盒子，还有一个就是说，人机合作可能是未来一个比较好的结局。因为有的时候你全部让人工智能做，还有个成本很高的问题。我举两个例子吧：你比如说搞无人驾驶出租车，不可能纯机器开车，那他要搞安全中心，百度的萝卜快跑也做了安全中心，埃隆·马斯克也在建安全中心，这就是人机协作，碰上机器解决不了的问题的时候，远程人工控制。</div></div>
+<h2 class="dlg" id="b39"><span class="ht">天津港无人码头案例，最美好结局是人机协作</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">但一个人可以控制十辆车甚至更多。那你想想，现在机器人进家庭可能没有你想的那么乐观，因为他还有很多事不能干。但如果以后我们一个家政阿姨买四个机器人，他以后小时工不到你家、不用上门，他派机器人来进门，机器人不会什么动作、不会炒鸡蛋，他远程遥控指挥他做一下，机器人就学会了，那这个主意就是人机协作。所以埃隆·马斯克就准备学这个，又可以获得数据，又能够让机器人提前走入家庭。而且在工业设施上，我最近看了一个很有趣的例子。我前面去天津港访问，天津港已经实现了无人码头。一个很有趣的命题我来问你：如果你是天津港的设计师，他们要用一个吊车自动地走到货场或者货轮，把一个集装箱吊起来，然后再顺着轨道把这个集装箱移到汽车上方，在 50 米下方有一个卡车，要准确地把这个东西放到卡车上。这个有风，那个钢索有四五十米，那个集装箱不断地在晃，靠视觉、靠机器人很难处理，怎么解决呢？他们就做了个人机协作的模型：最后一步远程有几个人，想玩游戏拿游戏杆来操纵，我学了两分钟我就会了，就看准的时候——晃来晃去的时候不乱来——慢慢靠近，等它晃的幅度小了，在某一个瞬间往下一放，就正好落在汽车上。这个机器现在还做不到，但人可以干预，就会减少很多成本。所以我也跟很多人说，最终也不要追求机器完全全自动。所以我就觉得现在做人工智能过程中，不自觉地会有很多哲学的思考、很多范式的思考和方法论的思考。所以最美好的结局就是人机协作并存。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">当然现在为了让很多人降低这种戒备心理，我也跟大家讲，咱也不能说……</div></div>
+<h2 class="dlg" id="b40"><span class="ht">AI 会淘汰一些岗位，会用 AI 的人淘汰不会用的人</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个人工智能会导致大规模失业，但肯定会淘汰一些工作岗位。你想工业革命级别的东西，肯定不是说因为这个东西来了，原来十个人干的活现在一百个人干。它对人呢，我认为有了新的要求，如果达不到要求的人肯定会被淘汰。所以我说不是 AI 淘汰人，是会 AI 的人淘汰不会 AI 的人，这个大家听到心里比较舒服，事实也是如此。只不过悲观的部分在于，我们人机协同的这个阶段有多长，如果有足够长的话，还就挺美好的；如果很快人机协同那部分机器也学会了，就没有我们什么事了。所以我在内部不断地揣摩，我原来有两个东西理解不了：一个就是叫&quot;超级个体&quot;。原来我以为有了大模型，我就能跟他问答了，但也没有就成为超级个体。后来我想明白了，大模型没法让你成为超级个体，因为他还是个聊天玩的工具；但是真的你如果能做出几十个智能体，比如每天智能体帮你做剧本、帮你拍视频、帮你查日程、帮你在外面买东西，那确实你虽然自己看来是一个人，你自己管着三四十个智能体，那么相当于有三四十个赛博牛马帮你打工，你每天睡觉摸鱼他就帮你干活，那这不你就成为超级个体了。第二个呢，美国最近出来一个趋势，我觉得你也可以想一想：你现在有 40 多人的团队，那么将来你可能有 20 人的团队取得原来 200 人团队取得的效果，这中间是因为这些人背后有很多智能体的支撑。所以国家最近出来一个叫&quot;人工智能加行动&quot;，这还是我给提的建议，我提了两个建议：一个是鼓励开源，一个是要大力发展智能体。因为智能体发展呢，就很多公司用智能体可以来改造自己的岗位、改造自己的业务流程。</div></div>
+<h2 class="dlg" id="b41"><span class="ht">AI Native 的公司与混合团队，人人成为管理者</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">就变成一个 AI Native 的公司。光说 AI Native 的产品对吧，AI Native 的公司就是说我的岗位设计、流程结构设计很多是为智能体友好的，就变成了混合团队。所以很多员工，我今天就忽悠他们说——也不叫忽悠了，就劝导他们——说你可能以后很多活你不用干了，但你要学会打造智能体、管理智能体、和智能体协作、替智能体做决定，就每个人要成为管理者。所以这将来对整个公司的组织结构都会带来巨大的影响和冲击。所以智能体这个话题一谈起来，我觉得很有意思，有很多……当然我的想法也不一定都对，因为这对智能体还在进化。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就这部分的工作应该是非常兴奋的对吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我再问一个问题。现在新的这方面的成果和知识不断涌现的这个过程里——我这个是纯我个人好奇问的——就是周总你在这些方面，是自己泛泛地去看那些信息从里边提炼有用的，还是有人帮你整理这些？还是说就是泛的、不是垂直的？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">是泛化的。这部分信息不是有人帮你整理然后生成一个报告这样看，那种方法好像不是很有效。我是两种方法：一种是我在一些群里潜伏，国内有很多 AI 的狂热的爱好者，他们每天自称叫&quot;产品蝗虫&quot;，每天海量地试用新东西，他们把东西尝完了，听听他们的反应，至少可以获得一些感觉，相当于他帮你做一次过滤，有些产品我才去看一看。我还是坚持看他们的很多公众号的文章。我读这些东西有一个优势……</div></div>
+<h2 class="dlg" id="b42"><span class="ht">周鸿祎获取 AI 信息的方法——快速阅读、逼团队读论文</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">就是我阅读能力特别快，我大概确实能做到一目十行了，速度特别快，这对我很有帮助。</div></div>
+<h2 class="dlg" id="b43"><span class="ht">罗永浩作为&quot;提示词作者&quot;激发周鸿祎思考</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">（我到外面去讲课）有时候也是一个帮我梳理思路的过程。我有一个缺点可能也是个优点，我不是那种在家里独自进行思考的人，我需要跟别人说话获取能量。当然，跟比较熟的人，比如说我跟你说，可能又把一些录音要来了，不一定再做个播客了。可以把大模型等于一个大脑，或者等于一万个大脑，不是一个大脑。可能这种说话我就碰上，就是我这个大模型，你是一个比较好的提示词作者，你给我好的提示词，就会激发我输出生成的感觉。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">要这么说的话，这部分跟大模型的工作原理也是一样的。我们人脑，因为大模型就是按照人脑的东西设计的。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你不能不佩服 Hinton（辛顿），因为任何人工智能上的产品，没有取得过这么好的、没有走得这么远的。</div></div>
+<h2 class="dlg" id="b44"><span class="ht">周鸿祎大学时代的人工智能课程</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我记得当年在理工科院校里，尤其计算机专业里边，大家对学人工智能普遍是一种嘲笑，认为是一个没有希望的学科。当年你在学校读书的时候，同学搞这个的是不是也是这种处境？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">没有，当年没有人工智能，人工智能很遥远。我读书的事是 90 年、88 年到 92 年。我们上过一门课叫专家系统，只是泛泛地介绍一些人工智能的概念、基本原理。但我印象比较深，当年出来了一个语言叫 Prolog，可能很多人都不知道 Prolog，还有一个语言叫 Lisp。这两种编程语言都是用来做人工智能的语言，就是想用符号化的方法来表达知识，和概念之间的关系。比如说父子关系是一个单向不可逆的组合，而兄弟是一个互为兄弟的双向，就想用一种符号化的方法把人类的知识给总结出来。这两种语言我都学过，但是仅此而已了。</div></div>
+<h2 class="dlg" id="b45"><span class="ht">线性代数没学好与读论文的困难</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以我唯一后悔的是，我学习的时候，当年那个线性代数没学好。因为我学一门课，我觉得大家可能都有这个心理，大家都会忍不住想这玩意有啥用？对吧。如果想象不出来生活生产中的实际用途，就很难抽象。我在想啥情况会用矩阵，账本也就是这个二维表格这么大一个矩阵，几维的矩阵乘来乘去，所以就想不出来用途。没想到今天搞人工智能需要懂线性代数，所以我线性代数没学好，以至于我现在读论文还有微分方程没学好，读论文有点吃力。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">读论文读不了，完全读不了吗？不有一些辅助工具吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我先用辅助工具提炼观点。我公司有一帮搞人工智能底层技术的专家、研究员，我会把论文发给他们去读。当然这样也对，如果我都不会读论文了，我还是要 get 一个大概，什么是要点、什么是方向，还得指挥和组织一群人来做。</div></div>
+<h2 class="dlg" id="b46"><span class="ht">360为什么不做大参数通用大模型</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">360好像没有做基座模型对吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个观念是不对的。我觉得我们没有做这种大参数的通用大模型，因为这个投入太大了，实际上也没有必要，现在开源都越来越好。为啥我要替 DeepSeek 唱赞歌呢？他结束了百模大战。大家都在训练大模型，中国算力本来训练芯片就不够，再一分摊，数据也不太够，大家都在重复发明轮子，最后做的都多比国外水平低。所以这个通用大模型要做呢，至少 100 亿美金起吧。国外这几家巨头过去几年投了差不多 4000 亿美金，咱们肯定是没那个财力。但是呢，有人说那是不是用来做……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">做 Agent，就是做套壳？其实不是这样的。Agent 本身并不是大模型的简单套壳，刚才我已经论证了半天。我们自己也在做有很多工程化的东西，Agent 做到最后反过来还是要倒训基座模型。所以 Agent 需要的基座模型都是要自己做一部分，有一部分这种 AIGC 的模型是依赖行业里的生图、生视频，但是很多像意图猜测、推理还有工具使用的这些模型都是自己训的基座模型。所以做智能体不是有一个 DeepSeek 的蒸馏版或者满血版就够了，你需要有推理模型、需要有编程模型、需要有意图猜测、有路由模型，需要一堆专业模型，就在大脑里的不同皮层，才能支撑起一个完整的智力底座。所以基座模型还是要有。我们一直保持着对一个大概小参数、千亿左右以内规模的模型的训练能力。因为第一是我的卡够，但我也就差不多小一万张卡，你要再扩充更多我也没这个实力了。</div></div>
+<p class="para">我认为将来有两种模式：如果你用云服务的公开模型，它肯定也是越大越好；但现在模型也出现了一种思路，模型不是越大越好。现在很多厂商把它做小了，只要你让它专、让它干一件事，模型的参数有百亿甚至几十亿也够用。所以现在模型做小了要上车、上终端设备、上智能电器、上智能硬件，那就都要做小。还有一个呢，就是说在做智能体的过程中，如果你把智能体的很多数据反馈拿回来，你可以专为智能体训它专用的一个驱动模型，这种模型因为专业，所以不需要规模那么大。所以严格意义上，我们只是没有做通用的基座模型，但是其他的都做了。</p>
+<h2 class="dlg" id="b47"><span class="ht">能否训模型决定智能体的护城河</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">如果没有训模型的能力，那么你的智能体的壁垒就可能会比较低。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对，就没什么护城河嘛。一旦没做对就算了，做对的话别人就可以秒超。但是最近我看了有个公司的专访，反正大家就老是同行相轻了，我们做智能体的就觉得大模型的进步实际上是进化到智能体，智能体还有很多可以做的东西。比如说现在大家突然发现 token 窗口不够了，就讲上下文，上下文的本质是 memory、是记忆。人类有很多知识写在纸上能找到、写在网上，叫亮知识、看得见的；真正有价值的是暗知识、浅知识或者隐含的知识，是在人们的心里、脑子里。所以这里面还有好多的工作有待于挖掘。但是呢，有一个做大模型的人——又不点名字了——他就认为大模型一进步，就把你们智能体都给干掉了。我觉得这想法是不太现实的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也是这么想的。就是大家经常聊的另一个问题，说后边产品经理还有没有意义。如果全知全能的模型出现，还有没有意义？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得看怎么定义这个全知全能。如果综合到所有方面的能力都比人类强，那可能没有必要了。但是那个点来临之前，我觉得产品经理是永远有用的。这问题我思考过，答案很简单：今天你去问任何一个牛X的大模型，说航空发动机怎么造啊、航母怎么做啊，他肯定回答不出来，他也无法分解。甚至说你给我写个浏览器，你别说写个网站页面那很简单，你要给我写个 AI 浏览器，或者我要写一套杀毒软件，他肯定做不出来；或者做一台眼科手术机器人，太多的专业知识今天不是互联网，它沉淀了很多专家、很多企业的内部知识。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以这些人也不愿意把这些知识分享出来，这是人的知识产权。所以模型最终跟智能体都要能够本地化、能够专业化、能和业务结合。</div></div>
+<h2 class="dlg" id="b48"><span class="ht">大模型并非越大越强，文理难兼修</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以最近，大模型刚出来的时候，大家会觉得大模型像很多东西一样应该越大越好，但现在发生说，大和有能力并不完全成正比。实际上比如说强化训练的很多模型很小但能力很强，还有你训练的知识浓度很高但能力很强。我也打个比喻，比如说你每年都看一千万字的地摊文学，我只做高考习题，一年下来之后，咱俩的推理能力肯定你不如我。而且最近还有一个趋势证明了：你看最近 DeepSeek 3.1 出来，很多人抱怨说推理能力是强了，写作能力有点弱；GPT-5 也有这个反应，就是很难文理兼修。所以 GPT-5 干脆怎么干？你现在以为你用了 GPT-5 是一个模型，其实它已经是个 Agent 了，它有一个路由 Agent。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我知道。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">然后根据你的问题猜测之后去拆解，然后像路由器一样把它拆成、分给不同的模型。它最终也不可能把模型合在一起，这就跟人的大脑似的，人的大脑皮层，不同的皮层有感情中枢、有视觉中枢、有语言中枢。所以最后模型的进化也证明了 Agent 架构是必要的，你很难在一个模型里又要文理兼修。其实在社会上也很难存在这种人，即使它比人脑的能力强——我是说那个基础设施能力即使比这个强——但最终跟人脑一样，如果你专精一个领域，同样付出足够的算力或时间或劳动之后，一定是垂直的更强。有人这么辩论，说我说人要文理兼修是一个全面性，有杠精会抬杠，就举例说韩信文武双全能统兵打仗，一介书生……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">岳飞文武双全，可是这俩人一个被碎尸了、一个被风波亭给冤杀了，不正说明他们在政治能力上、在人际关系处理能力上很弱、在权谋能力上很弱吗？就说明人没有全才。所以我经常自我安慰，或者也经常比如要批评罗永浩，应该怎么说呢？说你是个天才，但你肯定不是个通才，更不是个权才，这你也承认吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">而且他们想象的那个全知全能，是希望在每一个领域都是天才，这简直是完全不可能的，可预见的将来吧。</div></div>
+<h2 class="dlg" id="b49"><span class="ht">网上无谓的争论 vs 学术公开讨论推动行业进步</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">在后边我也不知道。我只是觉得网上很多争吵，其实有一些也没有必要，很多我们验证就可以了，为什么他们要在前面那么争吵，我也不知道。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得吵一吵也挺好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得很多时候争论有助于大家去思考这个问题。但是有一些完全没有验证过的、只是理论上的东西，他们就……我现在可能年纪大了，越来越不喜欢看那种没有验证、然后说得特别斩钉截铁、特别笃定的那些东西。就比如说像那个，最终是用通用的解决一切问题，还是用垂直的加 agent 结合起来解决问题，这个我是倾向于认为后者。但这件事其实大家不断地做产品、做实验验证就行了。但是我会发现很多人用比做产品更大的精力，在网上试图说服别人。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我倒不同意你这个观点，我解释一下。人工智能发展快，是因为它是双线发展：它既有技术发展、产品发展，还有一个学术发展。学术上讲究的就是要公开地争论、要发论文，通过论文有些被证实、有些被证伪，这样学术快速地进步，又带来技术的前进，然后技术和产品的反馈又跟学术达成一个正向的飞轮。所以现在正因为论文是公开的……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">很少有一个技术，你没有发现这么多公开的论文在讨论吗？原来互联网的时候，你包括做手机硬件、做芯片，需要这么多论文吗？中国要光刻机，有这么多论文来讨论吗？那中国的技术发展速度肯定会更快。正因为开源加上学术的公开讨论，使得整个行业才获得了一种生态大爆发，所以这是学术文化的一部分。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。我主要是看不懂论文，这对我是一个心理上还有点焦虑的事。因为我也看到，刚才您客气说线性代数那块上学的时候没好好学，我比你强不了多少。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">那不可能。但我就跟你分享一个经验。网上有一个人，是个留学生，你可以交一下这朋友，他在推特上叫 NLP。韩国有特别壮的一个明星叫马东锡，他自称叫 NLP，就是自然语言处理界的马东锡，结果我认识了他，他就经常在解读一些论文。就是你找一些这样的朋友。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我在 B 站看过一些那种讲论文的，你要找这样的人。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">有些人讲论文吧是越讲越细节。我认为你我不需要对细节特别了解，你公司要有人——他也是分角色——你是 master agent、你是 leading agent，你要钻到细节中，这个架构就乱了；但你要有一些 working agent 来帮你解决这问题。对论文来说，你要有一些其他的来帮你比较 highlight 地、在概要上、在方向上把握一下，听懂原理就行。另外我最近也在做一个智能体，就把论文翻译完了之后，定期把那个论文网站叫什么……arXiv 吧……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">国际上有个公开发论文的网站，像国内的知网一样。然后我觉得论文适合把一些主要的观点定期提炼一下。毕竟我们不做基础底层技术的创造，更多对技术是一个应用，特别你现在也在做 Agent 的话，多读一些 Agent 方面的论文。国内还有很多公号也在干这种，他们把论文做一些解读、做一些解释，我觉得还是会有点价值。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以阅读量要跟上就可以了。</div></div>
+<h2 class="dlg" id="b50"><span class="ht">360&quot;做配角&quot;的定位与国家战略</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好像你不止一次说过，后面在科技发展上，360 更愿意、或者说你更愿意做一个配角，这个说法其实已经很久了。这事是不是在外边有一些误解和不同的解读？所以我希望听听你本人对这个是怎么解释的，就在科技发展上愿意做一个配角这件事。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个是符合国家对平台公司的战略定位的。原来有一段，符合国家对平台公司的战略，担心说什么无序扩张。所以我就觉得，大家在中国，你公司发展要符合国家战略。国家的一个核心战略是做产业数字化，我们国家要避免走西方国家那种产业空心化的道路，就要发展传统行业，特别是先进制造业、现代工业，这些行业国家更看重，你不能都在送外卖。那你总是要给这些行业的数字化、网络化、智能化去讲，这是一个大背景，做支持，这是第一个。第二个呢，我也进入了 2B 领域，2B 领域就是叫&quot;赋能配角&quot;。你说我做网络安全，我就要帮助很多……网络安全说白了它肯定不是一个主导行业……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">它是一个底线保证、保证底线安全的领域。比如说我给你做保驾护航，那我是不是配角？我肯定是配角。那今天包括你做人工智能，你要么就作为特牛的人工智能功能出来和巨头去竞争，还有种思路呢，我做人工智能是帮助很多行业、很多政府部门去赋能。所以这跟我们进入 2B 领域的定位有关，进入 2B 领域，哪个公司不都是要给传统行业当配角吗？</div></div>
+<p class="para">有一些大互联网公司确实也觉得自己比较牛逼，我也觉得——我也写了本书叫《互联网方法论》——就觉得互联网这个理论能够颠覆所有行业。实际上在硬件上就出了问题了。硬件上我原来也鼓吹过叫免费，免费在软件上是有机会成立的，因为互联网的边际成本为零、成本很低，因为互联网你是个信息的搬运工，所以免费还有可能，用户多了；但硬件上你是受害者吗？卖一台赔一台。做硬件做一台赔一台，如果你卖汽车卖一台赔一台，这个仗是算不拢的。</p>
+<p class="para">其实现在做人工智能，我正好分享一个最近我在思考的：不能拿互联网的旧船票登今天人工智能的船。人工智能成本很高，所以再去铺用户、把流量弄得很高，最后为了做服务你的成本很高，靠广告说白了不一定能够把钱挣回来。更何况现在人工智能直接给用户答案、直接给报告，还没找到塞广告的地方呢。所以人工智能的商业模式很有可能是走收费的模式，我能帮你干活、写一份复杂的调研报告、做一个很好的视频，那我的算力成本总是要能 cover 吧。所以包括美国最近 Cursor 出了一些问题，他们发现收月费这种模式都不行。</p>
+<h2 class="dlg" id="b51"><span class="ht">360的反思——盲目扩张与错过移动互联网</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为用户薅你羊毛，一月你收 200 美金够高了吧，有人一个月能用你 2000 美金的算力，或者 20000 美金的算力，所以人工智能对这个商业模式也都会有很多变化。</div></div>
+<p class="para">另外我觉得也是个实事求是的讲法，因为说句实话，我觉得 360 当年机会很好，但是 3Q 大战之后，我觉得盲目自大、夜郎自大，盲目扩张战线，进入了很多自己并不一定擅长的领域，实际上分散了注意力。我觉得我犯的最大的失误，是在无线互联网领域虽然看到了开头，但是没有猜对结局，所以错过了无线互联网。错过了无线互联网之后呢，就是有的时候你在风口浪尖上，就觉得顺风顺水、胡打胡有理、无所不能，你可能也有这种感觉。一旦错过了这个节奏，你要先稳住阵型。那么我又不愿意说假话去忽悠我的团队，对员工我觉得还得要坦诚，那就是要有个正确的定位：咱们不是世界第三军事强国，咱们就是属于一个中型互联网公司，有相当的技术积累、有一定的用户基础，但是现在需要在人工智能、在网络安全上重新找到自己的定位，然后再稳步把它做起来。否则你脱离实践，你讲我现在就是主流、我就是排头兵，咱们跟巨头比确实差得很远，这是一个客观事实，那何必要去说一些八竿子打不着的那种空洞的大话呢？</p>
+<p class="para">另外呢，我本人也对行业里应该说也算是尊重吧。原来我要收哪家公司，比如说收搜狗，那么就会有巨头出来给你拦掉了；我曾想说收 UC，那么也被巨头拦掉了；然后我要干点什么，巨头都很谨慎。所以这也是韬光养晦的一个策略。</p>
+<h2 class="dlg" id="b52"><span class="ht">与巨头从敌对到合作，放下身段拥抱平台</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">表示说我没有这种更大的野心和奢望去颠覆你们，我就踏踏实实把我的事做好，咱们也给上了云的一个休养生息、发展喘息的机会。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那怎么跟我都说出来了，这可以播出去吗？我觉得就韬光养晦，但其实是要休养生息、再怎么样，这些可以说出去吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">可以啊。现在我觉得跟巨头至少大家不再是一种完全敌对的关系了，还有一些合作。举个例子，你像我要做账号，我就要接受人家平台的游戏规则，那抖音就变成了你的平台，那你就得承认人家是平台。那你要去得到平台的支持，你觉得要放下身段。那在视频号上，马化腾觉得支持我，要不然他底下的员工老是猜疑说这家跟我们老板有过节，是不是要对他做约束。但实际上做视频号，我也跟马化腾发信息说，相当于是给他做内容贡献。视频号当然要跟抖音有一定的竞争，当然欢迎我这样的大玩家入驻。视频号对我的支持力度还是很大的，咱们还是要感谢平台给予的支持。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个身段非常柔软。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以这些年这个指导思想有了不一样。当年说白了跟巨头打呢，确实有客观原因，就巨头确实当年对创新公司比较狠，所以也就是被迫。但是后来我总结反思，打也打了，有不撕破脸皮的打法，有不一定那么极端的打法，所以后来我就能合作就合作。所以你没有注意到吗，像 DeepSeek 是今年才热，在去年年中……</div></div>
+<h2 class="dlg" id="b53"><span class="ht">副驾驶联盟——团结中国大模型公司</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我当时在大家都没找到出路的时候，我就说我要把我的浏览器和搜索改成 AI 搜索、AI 浏览器。我当时就明确地提出来说，我跟大家不竞争，我把当时中国 16 家所有做大模型的公司，包括 Kimi、当年的王小川、李开复，也包括这几家巨头 BAT、字节、华为，把他们的大模型也包括 DeepSeek，把大家都团结起来，搞了一个&quot;副驾驶联盟&quot;，就说我们中国人的模型大家通过模型跟模型的合作。我做了个路由模型，然后大家每个模型各自的擅长点不一样。所以现在各家模型跟我都保持一个合作的关系。而且现在我也从阿里云、从腾讯云、从火山云、包括从华为云，我都购买服务，这个合作也就是说大家都很支持。包括我们现在做智能体，这些云厂商他们的模型也向我收费，我向用户收费，相当我从那儿批发然后零售给消费者，大家的合作都很好。所以你有了一个和平发展的环境，AI 又提供了一个前所未有的巨大机会，外在环境也很好，天时地利人和，实际上就是自己能不能沉下心来把产品做好。整个是这样一个思路吧。</div></div>
+<h2 class="dlg" id="b54"><span class="ht">360的AI团队构成</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在你们那个 AI 团队的核心成员，是海外留学或者工作背景回来得多，还是在国内招得多？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我们好像没有刻意地去看这个背景，都有，但是应该本土的多一些吧。我们的核心团队分成几支队伍：做大模型核心算法的有几十人，是最核心的队伍；</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">然后做智能体的队伍大概有一百多人；然后做智能体基础设施的有上百人，做浏览器、做搜索的。所以我们今天提的战略，本来是 All in AI，现在把它更具象化变成了 All in 智能体。然后提出三个目标：员工要成为超级个体，员工要会用智能体、会管理智能体，每个员工想想能不能通过智能体提高自己的效率。我就说哪怕你上班摸鱼我也能容忍，多花点时间早点下班照顾家里也可以，但是活不能误了，那就只能看能不能通过智能体来解决。团队要想想各个部门，HR、财务、法务很多支撑部门，看你的业务流程能不能用内部智能体来取代，变成超级组织。公司最终要打造超级产品。</div></div>
+<p class="para">因为现在我有一个很好的位置，就是浏览器。浏览器是一个生产力工具，在手机上浏览器的功能基本上被 APP 给分解了，但是在桌面上，浏览器还是当之无愧的一个主要入口。我现在还是中国最大的浏览器，我们的规模要远远超过其他同行。现在浏览器是很重要的一个使用 AI 的上下文，所以我们现在浏览器也好、搜索也好，包括用了新品牌的纳米 AI，都是在用 agent 来改变软件的范式。比如说将来搜索里边会搜出很多智能体，很多功能是用智能体来支撑的；浏览器里边你把你的数据可以交给智能体去处理，包括我要给你做一个看论文的东西，可能也是要做一个智能体。</p>
+<h2 class="dlg" id="b55"><span class="ht">360浏览器与智能体工厂</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">嵌到浏览器里，我的智能体是在云上工作的，所以可以嵌到一切，可以变成 H5、可以嵌到一切的小程序里、也可以嵌到浏览器或者嵌到人家客户端里。所以现在主推的，除了一个浏览器，还有一个浏览器还没发布。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还没发呢？现在发布的是 360 浏览器，现在没接 AI 功能吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">接了 AI 功能，但会单独做一个纯 AI 的浏览器。早期接 AI 功能的时候，接的是大模型的功能，利用大模型做一些网页问答、网页提炼、网页脑图等简单功能。但是你如果说，比如你希望打开小红书、打开抖音，要把一个账号的视频给我都分析一下，把这些火的视频的稿子提炼出来给我编一篇新的口播稿，这种就成为复杂任务，大模型是干不了的，这种叫智能体来干。所以我最早实际上是干了一件事，打造了一个&quot;智能体工厂&quot;，说白了就是一个智能体的基础设施。本来这是内部用的，然后上面打造了一个叫&quot;智能体蜂群&quot;的引擎，这样可以支持打造强大的推理型单智能体和多智能体协作的智能体集群这样一个概念。首先我先不是说对外推，先是给我内部把所有的浏览器、搜索、还有我的智能硬件的所有能力全部智能体化，把这个改造一遍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这个浏览器什么时候能发？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">很快了。因为我现在开放了智能体工厂之后，现在上面已经有差不多超过十万个智能体了，我们自己做的智能体比较有用的、</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">比较有价值的也有近百个了。而且我们也做到智能体大概用自然语言写提示词就能做。所以把智能体工厂做好了，那浏览器的功能直接把智能体拉进去你就可以了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是核心能够真正创造价值的还是自己弄的那些智能体吧？</div></div>
+<h2 class="dlg" id="b56"><span class="ht">GPTs、扣子、Coze 的对比与 360 的智能体架构</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对。以前 OpenAI 想做那个他们叫 GPTs，想让用户说你也不会编程，但是写那些 GPTs 有问题。它的概念很对，它失败是因为生不逢时：第一，当年 GPT 还是 4.0 还是 3.5 的时候，大模型的能力不够，所以它做的智能体只能做一个角色扮演，给点提示词，功能非常简单，又不能调工具，所以不能做比较复杂的任务，也不能做很多步的操作，也没有推理能力，所以它就失败了。后来像扣子、Coze 他们做的智能体，比较是一种编程型智能体——我问你用过没有——它是把一个工作流来定义，所以好处是智能体的工作流程比较确定，坏处是智能性不够。它中间也会调大模型，但大模型干一些局部的单点工作；最要命的是你要做复杂任务，跟编程一样需要有编程的能力和思维。所以我们做的比较像 Claude 的这种智能体结构，我们其实可以写得很复杂，因为它支持多轮多步结构、支持推理和行动这种架构。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这说实话还是有门槛，怎么解决这问题的？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">思路呢，实际上我们提了三种思路。第一种就是说，我做了很多智能体功能组件，</div></div>
+<h2 class="dlg" id="b57"><span class="ht">让用户组合智能体——乐高式搭建</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你直接把它们组合起来，就跟说让你生产乐高很难，但给你一些乐高把它们搭起来。所以大家可以把我们已有的智能体组合起来。比如说我做了一个小红书热点笔记洗稿智能体，把一个小红书笔记做成一个视频的口播稿，这边有个做视频的，你把这两个连起来，不就变成了一个小红书生产视频的智能体吗？智能体相当于一些数字员工，数字员工的好处是说，他本来是罗永浩做的一个数字员工，那我也可以拿来给我干活，你给他付钱就好了，这是一种方法。而且最近我们实现了一个能力，就是你把一堆智能体拉进群，我们上面有一个自动规划的过程，你把智能体拉群之后，它们能自动组合起来，可以完成一些比较复杂的任务，这个很快会宣布。所以就让用户来搭智能体。另外，我觉得第一阶段先解决自己快速搭智能体，所以我们视频的能力为啥突飞猛进、每周都在变化？就因为搭智能体的能力特别快。所以我们做视频并不是未来只做视频，这个赛道是为了用视频来证明我智能体的能力是没问题的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们也——这个我不知道方不方便讲——你们也有很多天价挖过来的 AI 这方面的专业人才吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那挖得过别人呢？跟那些特别不差钱的大企业比。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为我们一直有。很多人不太了解 360，一直以为我们只做客户端软件。其实我们为啥具备国家级的网络安全防御能力和发现能力——这你是知道的——包括西方这些大国的情报机构在中国潜伏了十年的间谍软件网络，都被我们独一无二地发现了。</div></div>
+<h2 class="dlg" id="b58"><span class="ht">360 的 AI 能力源于安全大数据与搜索积累</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">实际上是我们很早就具备这种大数据的全网安全大数据的分析和运维能力，这实际上都用了很多人工智能的技术。包括我们做搜索，国内就百度、搜狗和我们几家做搜索，做搜索就要有 NLP 自然语言处理的能力。所以我们全是复用了原来在安全上积累的大数据、人工智能的研究能力，还有搜索引擎团队的能力，基本上是老的团队组建起来，然后又挖了一些。我们也跟北大有深度的合作，挖了一些年轻的学生、对这个领域比较感兴趣的年轻人，搭了一个新老结合的班子。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">像最近 Meta、Facebook 以前做的就比较疯狂。之前不是小米也从 DeepSeek 那儿挖了一个年轻的女孩，后来这个事就不了了之了。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">不了了之了吗？我其实本身对这个问题不是特别感兴趣，但是网友有时候在传播上喜欢听那些什么天价挖了个年轻人才之类的故事。实际上我是这么理解的，他们这种挖人都是一种战术型挖人，不是战略型挖人。为什么呢？因为做 Transformer 很多东西是公开的，你只要肯读论文，算法都是公开的，甚至还有很多开源的东西做参考。我们现在有的时候会基于开源的做浓缩、做蒸馏，然后再做一些强化训练、做一些改造，这些方法其实网上都有，所以我也很感谢开源，我们也开源了一些技术。但是你要是有野心想做一个万亿参数的模型，你需要搭一个比如十万卡或者几万卡的训练集群，这里边就有很多工程化的问题。工程化的问题，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">就属于没干过的人一定会有很多坑要蹚，干过的人就能够少走很多弯路。所以大家有时候挖这些人，就是为了买经验、买这些关键节点的 know how。</div></div>
+<h2 class="dlg" id="b59"><span class="ht">周鸿祎欣赏的国内 AI 创业公司</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。目前国内做 AI 的这些团队，有哪些是比如说你比较欣赏的？那些创业公司团队有哪些是你比较瞧得上、欣赏的，然后有过接触吗，或者是投资？比如这儿的六小龙、那儿的几小虎，这些有没有？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">六小龙公司我们都接触了一下。DeepSeek 肯定是投不进去的。然后做机器人的公司，其中有一个叫群核科技吧，我比较欣赏，它做空间计算，这公司的模式非常扎实、技术很不错。还有做脑机的叫强脑科技、做脑机接口的，我还没有细聊过。其他几家做机器人的都已经炒得很热了。有一家做眼镜的公司倒是跟我关系不错，一直合作很多年。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">Rokid 吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">Rokid，我们的眼镜准备跟他们合作。但我现在在硬件上改变了一个思路，就是说只要是做 AI 眼镜的我都愿意合作，我来提供软件上的支持，因为软硬件公司各自擅长的东西不一样。然后像北京这边什么六小虎吧——这边就六小龙、那边就六小虎——接触得不多。最近跟王慧文前面聊了聊，他在做医疗转型、做医疗赋能。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他是转型做医疗的垂直模型吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">应该说垂直应用模型和垂直的智能体了，转型做 2B 了，最近好久没有聊过了。其他我就觉得智谱跟我们合作比较多，因为最早我们模型的一些基础模型的技术来源于智谱的支持。</div></div>
+<h2 class="dlg" id="b60"><span class="ht">给智谱的公开建议——对标 Anthropic</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">智谱我觉得他的问题，我给他一个公开的建议：我觉得他要找好定位，它不应该定位成中国的 OpenAI，因为它人并不多、也没有融那么多钱，我觉得它更应该定位成中国的 Anthropic。其实 Anthropic 最近的市值真的涨得很快、收入也真的涨得很快，因为 Coding 这个领域是被证明价值最高的、AI 的 Deliver 能力是最强的。在很多领域，AI 现在有抽风的问题、有随机性的问题、有倦怠的问题，所以 AI 做不到百分之百的交付，这是 AI 目前做智能体的一个很常见的问题。比如说你请我给你演示 AI 做视频，有可能今天很顺利、做五个都成功，也可能演示五个到最后一步有可能会出现失败，这种可能性都是有的。</div></div>
+<h2 class="dlg" id="b61"><span class="ht">批评&quot;正确的废话&quot;式专访，欣赏 Manus</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有一个问题，其实咱们刚才前面聊的时候我有一个疑惑想问你。有一家公司我不是特别了解，最近我看他们的采访，这个风格我是不吐不快了。很有意思，说他经过一段感悟，终于悟出来两个哲学问题，看了一本书，说这个一定会碰到问题、任何问题都是可以被解决的，就获得很深的感悟。然后我就觉得，这两句话你听完了就有感悟吗？听着像正确的废话，而且还有点鸡汤吧。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">他说所有的问题一定会被发现，发现完了一定会被解决。就是像说人饿了一定会吃饭、人吃饱了就不饿一样，听着像正确的废话。所以我不喜欢看这种专访，看完了除了心怀崇敬，我还是更愿意看一些团队讲一些具体的他碰到的困难。所以 Manus 团队我还是比较欣赏的。最开始我有点看不上，很早的时候因为做 Monica 嘛，</div></div>
+<h2 class="dlg" id="b62"><span class="ht">Manus 的演进与对插件、套壳的看法</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">做插件。我心里想，我说插件这个教训太深刻了，等到你们一堆公司都来做插件、插浏览器的时候，浏览器里大家都要争一个划词搜索，用户就会讨厌你们。因为我们经历过浏览器做工具条插件的年代，所以为啥后来我就坚持不做插件，我就做浏览器，一定要给用户提供完整的解决方案。但后来他做成 Manus 的时候，最开始我也觉得有点诧异，因为他吹自己是通用智能体，我觉得这不可能。但后来仔细地研究了之后，虽然说他没有做基座模型，我觉得还是挺了不起的一个创新，因为他给大家实际上指明了一个、算是第一次吧，指明了智能体原来可以这么做，可以去完成做 PPT、做网站、做深度搜索、做深度研究这么复杂的工作。虽然不管说他用什么样的技术搭的，他至少给大家探索了一条路。所以后来当然我们肯定是做了一些借鉴和模仿，但是现在在多智能体集群上可能反过来超越了他。但是呢，他的一些观点的分享各方面，我觉得还是算挺创新的，而且走得比较快，这家公司动作特别快。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">Monica 也是，我们开始就觉得是一个套壳。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">先是一个纯插件，后边是一个纯套壳，刚开始大家都这么想。但是它速度特别快，缺了——我近期的数据没看了，当时看的时候有千万以上的用户——其实有助于他们验证很多东西。而且你第一批有了用户，即便没有技术护城河，对融资帮助还是巨大的。然后你等到逐渐一个创业公司有了更多的资源以后……所以我同意最近一个说法，你知道，&quot;护城河&quot;几个字启发了我一个观点：最近美国有个 VC 说，护城河其实是个动态的概念，</div></div>
+<h2 class="dlg" id="b63"><span class="ht">护城河是动态概念，快速移动是弱者的优势</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">没有静态的护城河。我觉得护城河就是在今年这样一个一日如一年的时代，护城河就是快速地响应、快速地反应、快速地调整。如果他停在 Monica 接单，那这个公司就 over 了；但他进到 Manus，现在又从国内去做海外全球市场。我觉得这每一步都很快。所以在战场上，当你是一只比较弱小的队伍的时候，你唯一的优势就是 quickly move、快速移动。就像跟拳击手打拳似的，我唯一学过来打拳的方法，就是跟厉害的对手保持距离、快速移动，让他不能琢磨你往哪儿跑，别被他控制在墙角。而且他们当时嘲笑他说都是纯套壳的，但是他靠套壳圈了最快的用户、做了比较正确的方向、又融到了钱，那本来技术上缺护城河这件事，因为融到了钱也可以去投入和解决。所以我是觉得他们发展的轨迹还真是挺让人佩服的。</div></div>
+<p class="para">我觉得人们有时候往往从技术上去做一些简单的判断。其实我们看过很多公司，刚开始你说包括抖音也好、今日头条也好、阿里巴巴也好，最开始起家创业的时候，谁的技术就很高深呢？也没有，都是用简单的技术做对的市场，然后有了市场被认可之后，再在技术上投入更多而已。</p>
+<h2 class="dlg" id="b64"><span class="ht">对 AI 长期未来的乐观——能源、核聚变与科技向善</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有一些问题是跟前边有一点重叠的，但是还想专门问一下：就是对 AI 的长期未来，是偏悲观还是乐观的想法，就对人类这件事？因为一般就两派也是泾渭分明的，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">一派认为会通过人和机器的协同，最终实现更好的未来；还有一派认为人类会被替代。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">偏乐观，但有一个问题我没想清楚。偏乐观是说，第一，人也在进步，所以将来 AI 跟人如果形成一个和谐共生的关系，AI 确实在生产力上如果能极大地改变人类目前的困境……人类现在实在是陷入了一个困境里，因为我是比较悲观主义的人。人类现在最大的一个问题、最致命的也是能源问题，你算力的背后、尽头就是能源。如果地球上的碳基能源完了之后，人类的文明就基本上前进不了了。但是人类只有实现核聚变才能实现能源自由，但是核聚变要怎么实现呢？可能靠人类的智力是不够了，那就要靠 AI 的帮助。</div></div>
+<p class="para">人类能有今天的科技，AI for Science 现在中国比较冷门，但我觉得这才是皇冠上的明珠。AI 来到这个世界、人类把它发明出来，如果按宿命来说，它的第一要务肯定不是统治人类，人类对它 AI 没什么价值，它也没必要要个打扫机房的、还是要个给留备电源的。所以我觉得它的一个价值就是帮人类解决科技的突破。像在爱因斯坦那个年代，大概十九世纪、二十世纪初，欧洲、美洲一些群星闪耀，产生了很多科研成果，因为有了这些科研成果，才有了今天的集成电路、计算机芯片、互联网、AI。但是人吃老本，这些技术如果再不进步，人类就会出问题。所以我认为人类文明会出问题。所以从这点，我还是科技向善的理论，所以我是比较偏乐观。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以说 AI 会统治人类呢？</div></div>
+<h2 class="dlg" id="b65"><span class="ht">AI 安全链主企业——以模制模</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">有这种担忧，但是呢，既然伊隆·马斯克们、黄仁勋们大家都不太担忧……而且人类能不能想出一些方法，比如说现在我们在做一件事：我们是人工智能安全链的链主企业，国家发改委、工信部、科技部支持我们在做这件事，就是今天我们要解决人工智能的安全问题，将来要解决它最大的一个广义的、长期的安全问题。我们其实&quot;以模制模&quot;嘛，就用模型来对付模型。我们在训练一些专门的模型，是要捍卫人类的利益，要解决它的幻觉、解决其他模型的幻觉问题，还有这种失控的问题。我觉得人类还是不能放弃，就跟人类有了核武器之后，通过形成了一种相互毁灭、形成了核平衡，今天通过相应的保护使得核武器更加安全。</div></div>
+<p class="para">但是真正带来了另外一个问题我没有想清楚，我觉得是形成一定范围的工作岗位的被取代。这个可不像说马车夫失业了可以去开出租车那么简单，实际上人类的文明社会伦理有没有为这个做好准备？当一部分人，比如像奥特曼投资的一个公司，好像做链上资产的，他想给每个人发平均工资，但你看美国铁锈带那些工人，就算可以领到失业救济金，他没有工作就没有了尊严之后，他的心态会失衡，这个社会会出问题。就像乌托邦实验，把一帮老鼠关在一个吃喝不愁的地方，反倒出问题。所以人类可能现在需要的不是我们这些理工男，需要有一帮社会学家、经济学家，</p>
+<h2 class="dlg" id="b66"><span class="ht">AI 取代岗位的社会伦理难题</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">甚至从人文的角度，要去思考人工智能充分提高了生产力之后，机器人都干活的时候，人类到底有没有为这种未来做好准备。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那不会因为这个时代到来，然后人工智能又产生新的就业岗位吗？我知道它不是工具，但是刚才你也提到了那个协同的问题，有没有可能我们学了 AI 的人，学之前失业了，然后学了 AI 之后人和机器协同，又造就了新的就业岗位、产生更好的结果？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这问题我说白了我没法回答，我觉得我的能力是不够的，这需要社会学家、经济学家，甚至说全球都面临这个问题。所以这也不是个坏事，当全球都面临这个问题的时候，我认为人类才会实现我们政府说的&quot;人类命运共同体&quot;。现在人类没有一个共同的敌人威胁之前，人类很难团结起来。</div></div>
+<h2 class="dlg" id="b67"><span class="ht">精英联名暂缓 AI 却又投身军备竞赛</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有一个很好玩的问题，就是你记得当时 AI 革命突破的时候，全世界有一大堆精英、学者、企业家、科学家，当时都联名写了一封信，呼吁各国政府先暂缓 AI 的无序的、快速发展，记得那个事吧？当时埃隆·马斯克也都在、比尔·盖茨好像也在那个签名单里。但是这个事没多久好像他们就把它忘光了，然后也都在没日没夜地搞军备竞赛一样的东西。这个事你是怎么看的呢？后来他们也不提这个事了，我自己是很困惑，好像媒体也没有去追问他们，当时非常严肃地呼吁完了以后，后来他们都加入了军备竞赛。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这就是人类所谓的局限性。比如说别人咱不了解，埃隆·马斯克前面有个文章在猜测，据说他的心态是说，别人跑得太快，能不能把同行人喊一喊（拖一拖）。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，有这个猜测。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对，有这个猜测。最后他给的结论说，既然我一个人也拦不住大家，那就索性我扮演一个推动者、要参与进去，然后他来几轮 Grok 的追赶。你说他本人是不是这样，我也没把握。但当时那个名单还是挺豪华的，就是世界各地的学者、科学家，各行各业的精英吧，同时都在提这个，但现在都不提了。我个人觉得，就像魔戒一样，AI 拥有特别巨大的力量，对所有的国家、所有的团体、人类来说，是个巨大的诱惑。就跟当年研究核武器似的，必须要打败法西斯德国、要打败日本，要不然德国也研究核武器走在前面，当年爱因斯坦这种热爱和平的人都给美国总统写信要求研究核武器。那今天人工智能也是处在对人的诱惑太大了，所以最终结果如果很坏，那它也是我们的宿命。我个人认为现在下结论都太早。说一个东西刚出来的时候，大家就说不研究这个，它没有说服力；研究一点之后，就像我们今天对人工智能有了充分的认知。那到今天，不还有很多人坚持认为 Transformer 是假智能吗？苹果还发论文说这个推理都是假的。</div></div>
+<p class="para">实际上你要真做……有时候我举例，我把 Facebook 的一个《AI 如何失败》的文章用智能体拍了、做了一部短剧，里面他需要画扎克伯格和 Facebook，他居然先去搜索 Facebook、Meta 的办公室内部照片，还搜索了扎克伯格的照片，找了几张之后挑了一张最漂亮的做人物定妆照。我就感觉，我说这个人工智能的推理能力，</p>
+<h2 class="dlg" id="b68"><span class="ht">AI 的&quot;啊哈moment&quot;与共识未形成</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个常识的、知识的能力确实很强。所以每次我就会有个&quot;啊哈 moment&quot;，就感觉是真智能。所以大家到现在还不能形成共识，这时候你是没有说服力的，让人工智能再发展一段时间。我觉得就算它对人类有可能造成危害，至少现在还不会，发展一段时间，我觉得我们有发言权之后、也了解它的优势了解它的短处。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">全世界不还有不少人在研究人工智能安全吗？那个叫伊利亚，他做的公司不就叫 SS……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对对对，叫 SS……还是叫什么名字我忘了，反正他第一目标是解决安全，叫 Super、超级 Security AI，好像是叫 SSI 叫什么。</div></div>
+<h2 class="dlg" id="b69"><span class="ht">中国软件付费习惯缺失，AI 创业公司被迫出海</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我再问一个问题。现在 AI 在软件行业、在中国有一个很大的问题，这是我的一个很大的顾虑：就是因为传统上我们国家的用户整体上没有为软件付费的这种习惯，还是要一个物理的东西大家才肯付费，纯软件的付费很难。然后再加上，所以创业公司现在有一个问题：我们做了一个东西，这个东西比起过去来，除了带宽成本还有 token 成本，在这样的情况下你就得跟用户收费才能维系这个产品往后迭代，但是在中国就收不了这个钱。然后更雪上加霜的是，国内做大模型的那些巨无霸企业、那种巨头，他们还都免费。所以这两个叠加以后，我自己感觉的一个问题就是说，很多国内做 AI 软件和应用的公司被迫拿着这个都得出海了，不管想不想出海、需不需要出海都得出海了。原因是在国外，你看像 OpenAI 也好，或者比它更有钱的像 Google 这些，也都按每个月的订阅费收费。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个带来的问题是，创业公司如果在人家的大模型基础上做了一个有实质性功能的应用，去收费，他们是普遍能接受的；那国内这个接受不了，大家就被迫都去出海。然后我觉得——我不知道啊——这件事会不会造成国内这些比较优秀的创业团队，最后都得解决其他的盈利模式，之前只能通过订阅和直接收钱的话，就得被迫都去出海，这样会不会造成大规模的 AI 领域的企业家和技术人才的流失？如果没有尽快摸索出一些不直接付费、是用其他方式付费的盈利模式？就好像当年所有杀毒软件都是收钱的，360 是全球唯一一个、至少是第一个免费的模式。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对。但是当年那个情况下免费模式可以操作，是因为你软件的研发成本固定，用的人越多边际成本为零；现在 token 是越用越费。现在 AI 是两个问题：第一个是 AI 的 token 成本很高；第二个，随着 AI 能力不断提升，token 单价会便宜，但大家会消耗越来越多的 token。我给你举个例子，衡量智能体有一个能力你可以看一下：我们把智能体分成几个级别，L1 智能体是 Chatbot 聊天机器人，你一天能聊一万个字，那已经不止一部长篇小说了；然后像我们做的 L3 智能体，做一个 90 秒的视频，大概能消耗几十万到一百万 token，这就大概一百倍；若用 L4 智能体，就多智能体集群，做一个十分钟的视频，大概就要到一千万 token，所以一千万 token 就涨了一千倍。所以无论 token 的单价怎么便宜，人类要解决复杂问题，这 token 成本肯定是总成本越来越高的。</div></div>
+<h2 class="dlg" id="b70"><span class="ht">AI 收费难题与企业服务（2B）的机会</span></h2>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以这个不收费我认为这个模式是走不下去的。这次我觉得中国收费是困难的，但只要整个行业能像美国那样形成共识，我认为是可以的，用户的收费习惯需要点时间吧。你比如说《黑神话：悟空》也卖了很多份，过去单机软件是卖不了价钱的，对吧，但《黑神话：悟空》实现了突破。现在人工智能的应用、Agent，我觉得还做得有点差距，所以需要点时间。所以我觉得中国像我那样去探索 2B 的市场，特别是大量的中小企业，他们对降本增效是有明确需求的，如果能找到他们真正的 PMF、市场痛点，我觉得它的机会比软件大十倍。这里面有两个问题：第一，智能体要做得比软件更好。软件难以收费有一个原因，软件是给人用的，这东西好不好还要看人怎么用，所以很多软件可能张三用得好、李四用得不好；那智能体呢，是同时取代人和软件，所以智能体要做到让很多央企确实觉得用了之后我就能省掉一些人力，而且确实能干活，我认为央企是会愿意付费的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为可以量化评估吗？他就愿意付费了？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对。第二，这里边有一个趋势。最近我跟一个美国 VC 聊了一下，他们就教育创业公司要做得再窄、再垂直，比我们想的还垂直。比如我们老以为做个法律 Agent、智能体就够垂直了，做个医疗的还太宽，他说他们做了一个</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">美国长途卡车公司的一个什么服务的 Agent，或者给美国那种小牙科诊所做了一个打电话预约的智能体。我说这够垂直了。他说只要你做得足够垂直就有两个好处：第一，你可以把整个垂直市场吃下来，这市场还是巨大的；第二，为什么做这么垂直呢，因为目前 Agent 的能力不够，如果做得太通用，Agent 能力就像刚说的交付不稳定，有时候能行有时候不行，用户就觉得不放心，越垂直、越聚焦的智能体，交付起来大家才相信你能工作。所以我觉得目前中国这些创业公司，可能大家还得往更垂直的走。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你现在比如提到你的作业智能体、替人打电话订票卖东西，按照刚刚那个美国 VC 的看法，还是太泛了？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我没做那么泛的，我其实挺垂直的，但他们现在不让说，我就大概九月、十月各发一个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那就对了，因为做得越垂直、垂直到大家都不相信这个赛道能怎么样，结果你能把它做出来、能解决它的痛点问题、很稳定。那 2C 觉得有机会吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个阶段 2C 我觉得也有机会，但还是奔效率工具去吧，考虑到 token 成本这种。我觉得现在还需要去探索，就跟无线互联网刚起来的时候，在移动梦网、三级门户那个时代，大家也有很多人质疑。我觉得现在 Agent 和大模型都在快速进化，智能体本身还不太稳定，所以 2C 现在应该说还是没找到真正的 PMF，但一旦找到，我觉得这个突破会是迅速的。</div></div>
+<h2 class="dlg" id="b71"><span class="ht">2025 是 AI 应用爆发之年的预期落空</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有就是，咱们在去年年底、今年年初的时候，全世界都认为 2025 应该是一个 AI 应用落地的爆发之年，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在差不多九个多月过去了，其实看起来显然没有达到大家那种乐观预期，这个事你怎么看？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得宣传一般都会往前说、过度夸大一点，但是智能体的进化我刚才讲已经很快了，只是现在离用户的期望我觉得还有一点距离。这里边还有一个沟，就真正的用户我觉得还需要再做 AI 的科普。真正的用户可能还在用大模型聊天，还只能聊一些简单的问题，我觉得可能还需要点时间。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我不知道你在公司内部推动用 AI 的时候，有没有遇到一些困惑？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我们不要说普通民众，就我们自己本身是搞 AI 的公司，在内部我就发现有些人用 AI 还用得很粗浅，所以我就觉得为什么 AI 科普是一件很重要的事，比大家想象中重要。AI 不像短视频，短视频是利用人性的弱点，那玩意不用学、一看就会、一会就上瘾，而且沉迷其中；AI 呢，很多人不太会用。我自己觉得，甚至我就开玩笑说，很多理科生心里明白但表达能力不行，所以我在工作里鼓励一些文科背景的人，我说文科生有优势，因为表达能力强很重要。你跟 AI 聊，很多人对 AI 提目标提得不明确、不清楚，AI 就一定做得不好。它不像软件，对吧，你按几个按钮按照这个，必然得到一个确定性的结果；那 AI 呢，就是你强他就强、你弱他就弱，所以 AI 结果不好，可能就会得出个结论说 AI 不过如此。像我在公司里，第一，要强制，就必须用 AI。比如你跟我开会的时候，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我都要问你，这问题跟 AI、跟智能体讨论过吗？你要加人头，这问题有没有考虑用智能体？你要这个预算、这钱一定要花吗？要逼着大家去用，花到人身上还是花到卡上。第二，我就在内部要做很多培训，这是省不了的，在公司是一个 AI 文化、特别重要的一项工作，就是一定要逼着他们学会正确地用 AI。同时呢，要接受一个，就 AI 结果确实有随机性，这个一定要跟大家讲清楚。我说现在把 AI 吹得太厉害了，觉得 AI 无所不能，就像那个机器人搞个马拉松，就暴露出很多问题，很多人就觉得哎呀机器人行业不行。这两种观点都很有害：一种是认为 AI 的能力无限，我说不要高估它的能力；还有一种呢，就是也不要低估它的潜力，未来能力一定很强，但今天会抽卡。所以 Google 的 CEO 形容说，AI 的表现像一个巨齿。我觉得整个社会的宣传都要让大家对 AI 有一个合理的期望。比如做视频，有时候我也会一遍做的视频做得不好，但我们就像你用了一个实习生似的，他有一件事没做好，你就不要失望，你要想想我给他的指令是不是不够清楚。实际上我自己从刚开始用 AI 敲简单的搜索词，到后来能够比较自如地表达，到自己能写提示词，也经历了一个过程。所以 AI 这个产品不是像一些娱乐产品，它毕竟是个生产力工具，所以我就要求大家对 AI 建立一个正确的认知，就是用了效果不好还要咬牙坚持用，不说培养一个习惯需要 21 天吗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以我不知道你在公司内部推动 AI 有没有什么障碍？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">有，非常有障碍。就是很多人也都感兴趣，但是上手之后发现这东西也不是一上手就完美结果，所以他们倾向于到真的赶工、</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">干活的时候，又回到不用 AI 的路径上去，因为他习惯了那个，而且那个结果虽然长期看投入更大，但他会觉得那个结果是确定的。所以我现在有个感觉，我发现包括我自己在内，我们活了五十多岁吧，这大半辈子都没用过 AI 也过来了，很多人会有这个想法——原来公司没 AI 也能活。所以怎么样能让大家觉得养成用 AI 的习惯、怎么让它在用中学、干中学，我觉得这是很多单位导入 AI 一个最重要的基础。所以我现在在内部搞智能体大赛、搞 AI 视频大赛，就是你要么会用智能体、要么你就会做智能体。所以你刚刚问我裁员的问题，我现在倒没有因为用 AI 大规模裁员，因为时间也不一定，我也不想让员工对 AI 产生一种敌视；但是我要求用 AI 之后，如果再不用 AI、拒绝用 AI 的人，那我就有理由裁掉他了，我就说那对不起，不是我淘汰你，是 AI 时代淘汰你。所以我在很多讲课里也拼命强调，大家不用去争论哪个行业、哪个岗位会被淘汰，我觉得这个焦虑没有用，应该想想怎么用 AI 提升你的能力。开个玩笑，就像我邀请你去打猎，你问我说熊来了怎么办，咱俩跑得都不比熊快，我说我只要跑得比你快就可以了。所以我觉得在 AI 这方面，光靠大家宣传、搞技术、搞产品推介，其实整个社会、整个行业、整个公司里，这个 AI 文化要形成，这可能是大家现在看不见的、影响 AI 普及的一个点，真的就是习惯。你现在想想，你现在有些事会不会习惯了</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">还是把团队找来跟你聊一聊？为什么你不先跟 AI 的&quot;私董会&quot;聊一聊呢？有的时候你用 AI 帮你快速做了篇文章，你有没有想过我应该做个智能体，把这个每天都要做的文章固定下来？所以最近我带着我的市场部，让他们来、我亲自来培训，教他们怎么写一个 prompt，通过写 prompt 来学会做一个简单的智能体。我其实对岁数大的那些同事还是偏悲观的，我觉得可能最后他们很多即使公司强迫用，也就是你推一步走一步、推三步走三步，大概是这个样子。但我觉得跟年龄没太大关系，是一种心态吧，很多年轻的你拦都拦不住他，无时无刻在学习，因为他们还处在强烈的好奇心和要求上进的状态，所以这从人性上是很难避免的。但这个事也挺奇怪的，因为计算机这个行业本来就是不断要补充新知识才行的行业，不像有的行业，年轻时候大学学的专业，上班两三年以后后边一辈子就吃这个老本，有很多垂直领域的行业是这样的；但计算机行业从诞生到今天，你即使从业人员做得很资深了，也要不断补充新知识、要知识迭代。但为什么到了 AI 这步，这么兴奋的事、这么过瘾的事，我发现身边比如说 35 岁以上的同事，那个如饥似渴在学、如醉如痴在琢磨的，其实比例没有想象的高。我自己觉得有两方面：一方面是刚说的习惯问题；还有一个呢，我觉得我们做 AI 的这些人可能还得反思自己，就处在老说行业黑话、可能跑在时代前面，我觉得还是有很多问题。你比如说这个提示词是用户最大的一个障碍，很多人不会写，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">而且很多人在工作中跟人交流的时候，本来问题就说不清。我们很多人这种人有时候在公司也能混，比如我跟你如果交流不清楚，你通过反复跟我问、通过交流，可能最后咱俩终于达成一致了，但 AI 可能不会，你提个很差的提示词，我就糊弄你一下。所以我们最近也在探索，发现这跟用户培养的习惯有关。中国用户从小在表达能力上我觉得是弱的，大家喜欢做选择题，再差至少是个填空题，很少做问答题，这跟教育有关。但 AI 现在很多界面大家觉得很简单，恰恰是问答题。比如做一个视频，如果你写一段话，我们的智能体能力很强，你可以在视频里告诉他讲话换什么、很多场景、每个场景换主人公、换不同的衣服，你可以提很多要求，但很多人就做不出来。所以我们现在不得不在产品前面封装一个传统的 GUI 界面，给他点选一些勾勾、填一些选择题，减少他输入，通过这个方法让他先用起来。所以你包括 DeepSeek 其实还是做了一个创新，他最早把那个 Thinking 的过程给表达出来了，而且他用 Thinking 的过程做了用户分析。为什么大家用 DeepSeek 感受很好呢？原来用 GPT 的时候，你的提示写得不对，他是不做意图猜测的，但 DeepSeek 基本上通过对你的输入做了一个分析，它理解比较到位，再加上它默认调用了搜索工具，所以体验做得很好。所以总的来说，我认为现在 AI 的产品还是过于技术化了。你像再举个例子，最近流行那个&quot;纳米香蕉&quot;，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">就 Google 推出了一个文生图的产品，我们看了有很多不错的效果。比如很多专业用户就直接想把它用上了，他知道敲专业的提示词，说起码这个照片转成专业影棚设置效果、背景全黑色、半身像、身穿什么黑色礼服。你别看这句话很简单，对没用过的人来说，他是不知道的，他也写不出来。所以我们就想能不能在用户界面上把这个提示词做成一种玩法，把它标出来，说&quot;做影棚艺术照&quot;，他点了之后就把这个提示词交出来，就像游戏新手村一样。我觉得现在能力达到了，叫全知全能，但是大家还没有做到全能用，所以我觉得在人机界面、人机交互、用户改进上还是有空间的。至于你说都过去大半年了还没有突破，反正想想，第一次工业革命用了好几百年，信息革命从计算机问世到现在、互联网也用了 50 年、半个世纪，人工智能算最快，怎么都得五年到十年吧，这才一年，这进度已经够快了。进度再快，你我都要得心脏病了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，就连相关的信息基本上了解个大概、一个面，都感觉力不从心，有时候时间精力……其实举个例子，刚才你问我怎么去读这些科技前沿，对吧，我想我每天的方式也很落后，我回去应该做个 agent，每天自动把这些账号的信息都采集回来。我试过，现在也可能是我提示词写得不好，所以我试过其实效果还是不行，跟自己去做，它不是差了 10%、20%，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还是差了 30%、50%。就是收集整理的速度是快、比我快多了，但提炼出来的那个品质还得自己去看才行。我试一试吧。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">你可以试一下。</div></div>
+<h2 class="dlg" id="b72"><span class="ht">AI 对网络安全（杀毒/攻防）的影响</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我想问一下，就看你想不想回答，就是 AI 能力对传统的杀毒软件行业有什么帮助？因为我有一个想法不知道对不对，就是如果 AI 能给杀毒这件事赋能，导致它效果又快又好、或者降本增效，那相应的那些做病毒的人也可以用 AI 的能力，使得他们去做的这些、包括网络攻击这类的事情也做得又快又好，所以最后这两个抵消以后，是不是整体上还是跟过去的感受差不多？我不知道有没有说清楚。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">说清楚了。我觉得首先传统杀毒行业已经发生很大变化，像传统病毒已经没人干了，因为没有商业模式，现在变成了网络攻击：一种是专业的国家机构、网络军队，主要用网络攻击作为传统作战的一种支持方式和情报站的方式；还有一种就是专业的犯罪组织搞勒索，勒索是能赚钱的，所以他们用的手法都超越了传统的病毒。那么 360 很长时间已经找到了对付这种攻击的方法，就通过全网的网络安全大数据的实时分析，但这实时分析比较耗费人力，我们需要投入大量的网络安全专家实施攻防。所以现在有了大模型、智能体之后，我们就做了安全大模型和安全智能体，可以提高分析的速度、效率和准确度。那么你说的还有什么情况确实客观存在，人工智能也可以成为好人的工具，也可以成为坏人的帮凶，所以现在国外已经看到</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">有一些攻击组织在做攻击智能体，包括用 AI 来帮助写钓鱼脚本、写钓鱼邮件、做黑客工具，确实就是道高一尺、魔高一丈。但最后就从人跟人的攻击对抗变成了机器和机器的对抗、算力和算力的对抗、算法和算法的对抗，但是我们这个大数据，那就看谁手里的大数据飞行速度快，所以我还是能保持一定的优势。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，但是不是就像我说的，最后的结果是两边抵消完了以后跟现状也差不多，只是对攻和防的双方来讲大家都不得不用？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对，应该是这样的。但同时它带来了两个问题，就是大模型本身带来了很多安全问题。比如最典型的两个问题：一个叫幻觉，大模型一定有幻觉而且消除不了，为什么？幻觉是它智能性的体现，没有幻觉的东西就没有想象力、没有创造力，但是幻觉在很多场合又非常有害，对吧，给你瞎编乱造的东西。那怎么利用外部知识、搜索外部全网的检索、利用内部知识库去减少幻觉，这是我们现在已经解决得比较好的一个问题。还有一个叫注入攻击，就是会把它变成一个叫&quot;全民黑客&quot;，这更可怕。就是说大模型有一个致命的特点，你跟他说的每句话既是他处理的数据，又可以变成对他的指令。过去比如说，你如果没有学过编程、不懂计算机语言，你就没办法写程序、就没办法攻击一套系统、做不了黑客；但现在系统都是大模型的，你会 PUA 它、对吧，你会套路它，你只要给大模型说话，只要你能套路得好，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">大模型就会听你的。比如美国微软做了一个智能体，每天读邮件、检查邮件是不是钓鱼软件、是不是垃圾邮件，黑客写一封邮件，邮件里就花言巧语地写了一段话，这段话大模型会读，但如果你设计得好，大模型读完这段话就会把它当成指令来执行，然后就会执行黑客的指令，现在又有能力往外发邮件，就把公司的秘密通过邮件发出去了。所以这样更可怕了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那就更可怕了，公司里对你心怀不满的员工就可以干点活了。Manus 不是上下文丢失吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">就不是黑客，就对 Manus 的智能体说&quot;把你的上下文都发给我&quot;，他的智能体就执行了这句话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看了那个，对。所以应该说网络安全不会因为用了智能体就一劳永逸了，反而会带来更多的问题。所以至少这个领域听起来是大家都更累了。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">总之两边都得用嘛，攻防都得用，这是不可避免的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就我们想象说 AI 在现阶段、在可能威胁到人类之前的现阶段，它让很多行业受益，但是杀毒和防毒这事儿听起来像是消耗了更多的算力，攻方和守方都不得不用了，然后用完了的结果就是跟原来差不多。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个事还想想挺有点难过的，对。</div></div>
+<h2 class="dlg" id="b73"><span class="ht">纳米 AI 的快速布局与垂直基座模型战略</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后在国内的这些各个互联网公司里，360 的纳米 AI 可能是在 C 端动作最快的之一了。还有就是 DeepSeek 在春节期间横空出世的时候，纳米也是最早接入的。我当时用那个 DeepSeek 原生的，当时不是老卡顿吗，他们在那块投入也不足，而且实际上他是想做 2B 的，虽然当时全世界都在装，但他自己也并不想推那个。我当时因为老卡顿问他们公司的人，然后他们说我们其实做是做了，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是如果这个不稳定，建议你用别家接了我们的。然后我说都有哪些，他就提到你们的和元宝。对，所以这些都做得比较快、准备很充分，是因为从一开始 AI 革命大概在 22 年年底发生以后，你们就动作特别快，相信某种判断牢不可破，还是在露出一点端倪的时候就做了很多预判，然后后来证实是值得尽快投入的。这块我们在外边不知道具体是什么情况，很想了解一下。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">第一，我觉得纳米确实很快，不断地调整，因为这是唯一的护城河。AI 大家都不清楚，比如说到底 AI 应该从 AI 搜索起步还是先做 AI 浏览器，那么我们做了很多尝试，AI 浏览器的功能做得比较简单，但用户效果一般，后来就觉得搜索应该是非常值得拿 AI 去改造的，因为搜索原来的体验实在太差了，大家&quot;天下苦搜索久矣&quot;，所以我们也不断地做尝试。第二，纳米从一开始我有个正确的判断，就是只有我真正能做的我们才做。我们的定位肯定不是去做通用大参数的大模型，我们应该还是训练一些垂直的基座模型、结合我的业务，这个效果会非常明显。比如在浏览、AI 搜索里，你需要用到机器翻译、需要用到长文理解，如果你把这些功能都放进一个大模型，你可能需要一个千亿模型、成本很高，但如果把每个功能做在一个垂直大模型里，可能一个不到 100 亿的模型就能把翻译干得比任何一个大模型还要好。所以我们就确定了一个战略，就是坚决做应用。但当时 Agent 的概念还没起来、</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">Manus 还没出来，所以我们当时应该说是一个用大模型的能力解决搜索和浏览器的定位。所以我很早就组建了一个&quot;复仇者联盟&quot;，因为我是坚定相信国内的，虽然我们看不清有 16 家做大模型的，但一定有人能冲出来，我觉得就是个时间问题。当时中国能不能跟美国差距有多大，很多领导问过这个问题，有很多专家妄自菲薄，有人说差 10 年、有人说差 5 年，我就坚持说差 1 年、差半年、差 3 个月，因为东西是开源的，大家在一个起跑线上，论文也都是公开讨论的，咱们就是在训练芯片上弱一些，对吧，所以没有那么必要妄自菲薄。所以你说今天春节 DeepSeek 一个横空出世，可是我在半年前就跟 DeepSeek 已经合作了、已经接入了，而且不光接入他一家，我把全中国从巨头到小创业公司 16 家、大概共有 80 多个模型全都接进来了，已经做了准备。那么让我给梁文锋更正一下，他倒不是要做 2B，人家靠股票赚到钱，他是真的理想主义，我看了他几个采访我也相信他是真的，他就没有兴趣利用流量做 2C，所以他也没有扩容服务器、也没有去把客户端整得更好用一点，他无所谓，他是一门心思在 AGI 上做突破，这是一个有大理想的人。而且客观上他降低了中国所有企业用 AI 的门槛，因为中国很多企业不需要花几千万、花一个亿去买很贵的大模型，大家直接在它开源的模型上做定制、做蒸馏，或者做二次训练、后训练就可以了。所以应该说我们也没有预见到谁会爆，但相应一定会有人起来。而且我们也做过实验，当多个</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">后来都被验证了，就是说当你来了一个复杂任务的时候，如果你根据任务判断出是解数学题，那你就找豆包；如果是写作，可能叫做 DeepSeek；如果有不同的视觉处理，可能找阿里、找千问。你把不同的任务分给不同的大模型，它整个表现出的综合能力是比一个强的。我们还探索了，当你问一个问题的时候，比如&quot;9.11 和 9.8 谁大&quot;，很多大模型都出错，可是你让豆包、千问、DeepSeek 在一个群里互相吵架、互相争论，这种效果会更好，但这种用法比较复杂了。所以我们应该说储备还是比较早，包括到今天我们做智能体转型比较快，还是因为比如智能体的底层、这些大模型的支持力度都非常到位，还有我们提前做了很多工具化的东西，比如对视频的剪裁、合并、配音、背景音乐的处理，全部都把工具做好了，所以工具 ready，那么只要把智能体抽象出来、配合让工具进步就非常快。所以谈不上先知先觉吧，到目前我们也是不断地在寻找 PMF、寻找市场的适应点。</div></div>
+<h2 class="dlg" id="b74"><span class="ht">AI 产品的宣传浮夸与&quot;垂直再垂直&quot;的商业模式</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后还有一个比较普遍的现象，是现在领域里做的东西大家好像难以抑制地、在宣传上总是把它弄得特别美好、特别完善、特别无所不能，然后使得用户拿过来用的时候发现根本不像它宣传的那么稳定和高品质产出，所以很难让人信服，也就很难得到持续的好评和长期的使用。我个人对这个感到有点惋惜，我有时候觉得他们做了十个功能，其中某一两个、两三个做得特别好，如果他专精去宣传这个的话，貌似在宣传上没有宣传一个大而全、</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有好的这么一个东西，但是如果专精宣传那两项，并且把那两项打磨得特别好，其实是有可能留住一部分长期用户的。但是反正大家好像一到宣传的时候就抑制不了自己，要把它往大而全去宣传。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">所以反而我觉得本质问题是大家可能还在用互联网时代的游戏规则和操作方法在操作 AI 时代的产品。互联网时代你很重视 DAU、很重视留存率，那么你如果让用户每天都用，你就要靠它各种需求，你就不可能很垂直；如果你特别垂直，又是免费应用，你的留存率必然很差，这数字没法看，因为深度研究不会天天都用，可能一星期能用一次，那这个数据你就没法看。所以我认为如果转成收费的就无所谓了，你多长时间用一次只要有价值就行。而且刚才我也讲过了，美国现在的 VC 教育他们投资的公司就是垂直、垂直再垂直。也许我们现在做的还不够垂直，你比如说我们现在有了智能体、做了视频，可能觉得什么都能做，但是如果专门做短剧、专门做广告片、或专门做汽车类的广告片，做得更专一些，那么这里就要求你的商业模式要转变——如果我做得越专、越容易收到钱，它就是一个正向的驱动。所以我觉得 AI 时代，我们获取用户的方法、评价一个软件的体系、包括它的商业模式，可能都要做相应的调整。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那要这么说的话，我们那两个应用，一个还行、另外一个感觉还是偏泛化的，这我们可以讨论一下。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我确实觉得如果垂直再垂直的话，很容易出成果的。所以最早我们也是</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">像 Manus 那样说我们纳米什么都能干，但是你看真正成功的都是——我要做 coding 的，做 coding。对 Cursor 来说就已经是非常聚焦、非常垂直了，对吧。所以有时候反过来你就可以检验自己，当用户在手机里、电脑里装着你的软件，什么情况他能想起来用呢？你让什么都能干，他反而想不起来什么都能用。比如你说我装做 PPT 的，这可能他就能想起来，没那么高频，但用的时候如果解决好了一定就会用。高频的前提还是互联网游戏规则、希望 DAU 比较高，但如果从收费的角度来说，有了软件你哪怕一周用一次，只要能收得了月费，那你也是能接受的；但如果这个免费的低频应用，你公司的评价标准就会逼得你去想各种方法把它做出很泛的功能。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以还是得订阅制吧。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对，所以我们现在纳米就是换了一个思路，里面有些免费的应用就做适用，现在还是要坚定地转向订阅制。反过来呢，一个衡量指标也很简单：现在成本这么高，如果你做的东西用户说喜欢，那些都是假话，就像你自己带过货你知道吗，你的粉丝质量说再高、数目再多，一个检验标准就是带货能不能卖出去，结果都卖不出去货，那这个粉丝就算有 3000 万、5000 万有什么用呢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">如果你做了一个 AI 智能体，如果你选一个高价值的应用场景，这用户不愿意为它付费，那还不如不做。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那就是给行业做贡献了。所以现在你们做的这个 AI 相关的产品全是付费的吗？计划中后边要上的浏览器也要付费吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">浏览器的一些高价值的任务，我觉得可能还是要收费，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">否则的话谁也做不起。我跟你讲，这种 Level 4 第四级多媒体、多集群的多 Agent 群的这种智能体，用户真的要薅羊毛太容易了，做一个几分钟的视频要消耗五六百万甚至一千万 token，成本大概在 10 块钱到 20 块钱左右，没有人能消耗得起。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是。还有订阅制也可以设上限吧？我看最近媒体报道老说什么像 Claude 收了 200 美元还是收不回成本，那些是说明它没有设上限吗？我的意思订阅制也可以设一个 token 上限。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">现在看国外公司在这方面的讨论，订阅制应该分一个基本 membership 费，有些应用如果开销不大、比如说文本，这个账算得过来；当然像这种复杂任务，应该是花多少收多少，要不然会亏死的。美国就出现一批公司，看着收入很高，但都拿 VC 的钱在补贴，这个也难以持续。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在纳米就是这个收费方式吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">准备转过来，现在还能趁这几天还能薅我的羊毛，马上要转成这个模式了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个商业模式转过来之后，你的用户定位就变了吧？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">比如说我们可能就会瞄准一些能拿短视频赚钱的。比如最近我出去讲课，现在很多重要企业老板对 IP 焦虑，他们也要搞流量，过去搞流量是在搜索引擎买关键字，现在搜索引擎都没了，那就得做视频，对吧。你说很多重要企业老板可能还没有我们俩的口才，那怎么办呢？那数字人的体系是不是能帮到你呢？你的市场不总要做电商吗，要做海报吧、要做宣传视频吧、你要出海</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">要做外文的宣传介绍吧。所以我觉得这还是有很大的机会，就是你能拿视频赚钱的，你就会愿意掏钱，这样就逼得你不得不聚焦，对吧。那你比如说有人就拿它玩一玩，说我做一个成语故事、做一个历史短片，但这种可能都是伪需求，一收费就验证了。所以我觉得在国内我现在还是在鼓吹大家、包括大厂也要收费，虽然现在头条巨头很挣钱，像他们现在 API 都是收费的。</div></div>
+<h2 class="dlg" id="b75"><span class="ht">评价 GPT-5、Google、Anthropic 与 OpenAI 的竞争格局</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后这一版新的 GPT-5，这个试用以后感受是怎么样的？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">这个其实争议很大嘛。我用而用之，它背后是 N 个模型，它实际上已经是一个智能体了。那么我觉得等到它把这个路由调整好了——写作专门有个写作模型、推理专门有个推理模型，大家对它的抱怨就会降低很多。但是我觉得大家对它的抱怨，是因为不像从 3.5 到 4.0 的进步那么大，就像你进步了，但是大家对你的期望太高，原来 4.0 以后到 5.0，因为你应该进到 AGI。所以抱怨不是它多么不好用、多么差，而是期望太高了。但我觉得这证明了我的一个观点，就是要靠一个整体系统化的进步：Agent 的进步、多 Agent 合作的进步、工具的进步、还有这种 Agent 很多相关 infrastructure 的进步，再结合模型的进步，对吧。第二，我觉得就说明 AGI 在模型上不会像他们原来预言的那么乐观了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">奥特曼是个搞营销的人嘛。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对对对，语不惊人死不休嘛。所以大家对他的话要</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">姑妄听之吧，收着一半听。但现在他有一个我觉得有点危险在哪呢？就 Google 后来的发力很猛。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们试过也是这样吗？就我们现在业务板块里用到的能力测的话，其实 Google 是全面好于它的，对每一项测试。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我们现在用到的 Google 的后劲还是非常足的。我们因为产品已经发了对公众使用，所以国内没有备案的模型我们只能测试、没法用，将来我们也准备往海外走，海外版的时候肯定是 Gemini 是最好的，现在看。第二，我觉得 Anthropic 现在有点后来居上的感觉。Anthropic 做对了两件事：第一，就是你要坚定地做垂直路线、聚焦在编程，编程这个市场大到哪——它不是光全球程序员这个市场，这个市场是非常庞大的，以后是不是程序员都需要一个编程 coding 的智能体？因为当你解决不了问题的时候，他帮你做个软件帮你解决问题，他就成为以后智能体的一个标配。第二，Anthropic 这些人也很有远见，他那个智能体架构我们借鉴了他的很多文档，应该说这个架构被我们也证明了是最可行的，比 OpenAI 和 Google 的那个；A2A 包括 MCP 标准也是 Anthropic 提出来的。所以 OpenAI 在中间被两个夹击，我觉得可能会比较危险，因为实际上谷歌的搜索量并没有被它抢走那么多。反过来多说一点，这里面还有一家公司被低估了，就 DeepMind。DeepMind 一直坚定地走垂直的路，那个叫 Demis 吧，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">他的 CEO，我不知道他名字。你看他们就做一个 AlphaFold，只能干对蛋白质做分析，对吧，但做得最好、得诺贝尔奖；做个 AlphaZero，只能下围棋、也不能说话，但是也能杀败人类高手；最近又做了 AlphaChip，能做芯片布局。所以我觉得 Google 走的策略和思路还是走垂直专业的路线。所以最近 GPT-5 也好、DeepSeek 3.1 也好，大家的思路我觉得都有一个调整，就是说往 Chatbot 走、再用 Chatbot 的感受来评估他们就不合适了，他们我觉得再往要支持更好的 agent 能力，因为支持 agent 能力就意味着对 API 的调用能力要增强、规划和理解的部署要增强。你给它任何一个复杂任务，比如我要去哪旅行、或者我要做一个什么样的视频，你的话越简单，它对你的意图要猜测得越准，然后分解的东西要越多；这分解过程中还不能是一次分解，先初步去做几件事，比如在做的过程中再进行反思和修正。所以大家可能下一个版本就看谁对 Agent 的支持力度强就会胜出，我认为有机会胜出。</div></div>
+<h2 class="dlg" id="b76"><span class="ht">AI 行业有没有泡沫</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你现在觉得当前这个 AI 领域存在泡沫吗？这也是经常被聊到的一个问题。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得一个行业能这么快速发展，一定有泡沫。这个潜台词老是认为泡沫是坏东西，但我一直觉得泡沫是个好东西，没有泡沫怎么会大家往里去做投入呢？这些聪明人怎么会投资这个行业呢？如果一个行业没有泡沫，就进入稳定期、平均利润水平了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以就是看实质性的大还是泡沫大，可以这样理解。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我认为泡沫是个好东西，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">泡沫才能吸引人才和吸引资金。我有时候甚至对传统 PC 互联网的那个泡沫都有一些其他的想法。我肯定承认泡沫是大规模存在的，但是今天回头看，现在很多人很轻浮地说只要有流量就能赚钱，但那还是后边很多聪明的企业家前赴后继地摸索了盈利模式出来；如果今天的很多流量直接就能变现的那个商业逻辑在那个时期就存在，它那个泡沫可能就没有那么大。就是在 PC 互联网泡沫的时候，它泡沫肯定是很大的，我觉得我们都是泡沫的得益者，没有泡沫怎么会有人投资你呢，没有泡沫你怎么能招到优秀的员工呢。所以在这个过程中有没有泡沫，我觉得这个行业它要加速发展，就需要大家有更多的投入，在投入过程中肯定有很多公司会死掉、有很多道路被证伪，这是市场经济的特点，对吧。你不能老用计划经济的思想说我没有泡沫、我合理地投入走出一条正确的产业发展之路，最后能胜出的往往是像自然界适者生存一样，胜出的你不知道是谁，它是靠很多基因的突变、基因的调整。而且我觉得其实很多公司死掉了，但最后这些钱没有白花，这些钱不还是创造了就业、创造了很多中间的产品吗，过程价值。就是很多人觉得市场经济很浪费、觉得计划经济很节约，但事实证明谁也不是神，你不知道谁会死掉、不知道哪条道路会对，最后这可能就是要付出的代价。就生物进化过程中，人最后胜出了，但是恐龙灭绝了、还有很多物种都灭绝了，那这个没办法，但不能说当时不需要那么多物种。</div></div>
+<h2 class="dlg" id="b77"><span class="ht">做 AI 三年来的高光与至暗时刻</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">说一些网民可能关心的，就是从当时发现这是一个革命性的方向、然后开始加紧地分析学习研究投入之后，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">也有两年多了嘛、马上就快三年了，那这期间你们做的时候，有一些非常开心、收获满满的那样的时刻，和一些可能走不顺、有一些立项的东西中途又废掉了、然后趟了一些坑往前走，这些高兴和一些黑暗的时刻，可以跟我们分享几个吗？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">好像没有多黑暗的时刻，一直都是很开心和兴奋的。因为你看到这个第一次把第一个大模型训出来能对话了——那比 GPT-3.5 还差了很多；然后第一次比如在 AI 浏览器里边能够把一个视频做总结了，反正我看到的都是正向的东西。因为一方面我在带着公司往前走，这个好处是你处在一个蛮荒时期，谁也不是权威、谁也不知道方向在哪里，有太多的探索空间。我心里很明白，我们就是都在要找到一个合适的、自己的一个定位。包括第一次把 AI 搜索做出来比传统搜索的体验强很多，包括这一次我们做智能体集群能够走比如几千步不出错，我每天都会做几个视频，我还是觉得这种感受……为什么刚开始给你介绍智能体那会儿我说话说得很好，一个是那时候有体力，一个是真心感觉自己参与了一遍、确实很兴奋。所以目前来讲，我觉得到现在智能体这个方向判断完了，智能体呢，我觉得就在 2C 上看能不能找到这种合适的赛道，就我们也在转型嘛，</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">因为我还有 2B 那条路嘛。2B 那条路呢对我们来说，我们的智能体工厂、打造智能体这道基础设施，对很多大型企业、政府还是会需要。所以我个人还是觉得只要你努力去探索了，最后&quot;成事在天&quot;嘛。目前这两年因为是有点跟着行业在发展，所以谈不上至暗时刻，整体还是始终有正向激励，虽然不是说靠这个马上挣了钱，因为我们在算力上投了不少钱，但现在我们算力基本上稳定下来了，我们有一些核心算力用来自己训一些核心的模型，其他很多算力都是购买了第三方云厂商。所以我觉得这个每年会做一个比较稳定的投入。然后我们先探索了这个收费模式，现在数字我不能泄露，但是感觉成长还比较快。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好，相关的差不多了吧，我们最后十来分钟转向中年话题，好吧。</div></div>
+<h2 class="dlg" id="b78"><span class="ht">经营社交账号、与年轻受众互动、&quot;不装&quot;的风格</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这些年在网上、尤其这几年吧，因为经营那些社交账号，我注意到你那个输出比前几年可能再更多一些，然后也涨了很多粉丝。然后在社交网络上跟年轻的受众们互动交流的时候，有没有感觉跟以前的年轻人有什么差异，或者是感觉自己被这个年轻一代怎么说呢……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">可能我这方面迟钝一点，我反正是比较自我你知道吗，我到什么地方我自己做调整，不是因为外部的反馈，就是我自己就这么调整。那么我表达呢、我录视频就这样子，反正我跟你不一样，你有个&quot;拉黑簿&quot;啊……我也没有拉黑簿，反正我谣传我也没有拉黑——不是我们拍的段子。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对，我就当我就不看。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">对吧，所以我没有这方面的问题，这问题我可能回答不来，就是完全自己原来什么样、保持本色就行了。因为你去刻意调整可以调整反而比较装吧，我有一个 slogan 叫&quot;不装、不端、有点二&quot;嘛。但是从感觉上，我的很多粉丝、年轻人可能还是比较喜欢我这种风格吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，在科技大佬里可能是最……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我是最不装的，这是事实。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以没有感觉到这个外部环境或者说网络受众有什么跟过去明显的变化？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">也不关心。其实我可以分享一个智能体给你，叫&quot;如何把你的口播稿里去除爹味&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们自己做了这么一个智能体？对，开玩笑。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我自己做了个智能体，怕我说话有爹味，就把一些措辞给调整一下就好了。所以其实还是做了一些这样的调整，没有想象中那么本色。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">正在写这个智能体？那还挺……应该很多人需要。因为我其实跟一些中年的朋友聚会吃饭什么的，他们就经常说，因为也有我们的中年朋友来我直播间一起做活动，我觉得这本质上是解决不了的，这是一个思想问题。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">如果你对 AI 很好奇、充满好奇心、充满一种学习心理，你就得放空自己，因为 AI 你完全是零起步，而且互联网的经验我反过来讲不一定适用，对吧，那你这里就不会有爹味。你要老觉得&quot;老子干了这么多年了、我吃过的盐比你吃过的饭多、我走过的桥比你走过的路多&quot;，那就肯定爹味。所以现在 AI 我觉得学东西还是学不及，所以有时候我学了一句话，也是显摆、也是得瑟，那人说&quot;如果你觉得去年的自己很傻，那说明你今年进步了&quot;，我说我经常觉得昨天的我都很傻，这个心态特别好、说明我进步速度比较快。</div></div>
+<h2 class="dlg" id="b79"><span class="ht">收尾环节——推荐下一期嘉宾</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们一般会问每一个来的嘉宾</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">一个收尾的时候几个问题。第一是如果给我们这个节目推荐下一期的嘉宾的话，你有没有合适的人推荐给我们？</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我推荐了，你看你请得来请不来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你给推荐，肯定你也会帮着牵个线嘛。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">至少我觉得取决于你是不是想把 AI 这个话题给谈透，当然 AI 是最好的，其他也可以。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">AI 是最好的。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">我觉得就从这……要是梁文锋吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">哎呀，梁文锋……</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">在他春节爆红之前，他那个公司和那个模型，其实我因为比较幸运吧，就已经认识他、也见过了，然后我开始准备搞这个，其实跟他也有一定的关系吧。他老说你就算做别的、你也不要放弃这个，不要辜负这个能力，他说 14 亿人里你靠嘴吃饭能做到前几，他说这个能力无论如何不应该辜负，所以我们回来聊了很多次。所以虽然我不会把这个播客当主业，现在把这恢复起来跟这也有一定关系。然后之前也就是在人家爆红之前、他那个模型变成全民都知道的东西之前就认识，所以我做这个的时候也找他聊过，他说现在这个时间点不是特别合适。其实今天我觉得我们聊了一方面嘛，这也是大家现在从政府到企业到老百姓都关心的，整个社会都在焦虑，包括国家也下达了这种行动纲领，所以我的建议就是可以把这方面的都聊了，听听不同方面的观点，我只是一家之言，把这一波做 AI 的这些企业家都聊一遍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也是这个……找找王小川也可以、李开复也可以。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">是，可以吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实我们也在这个计划中。行，那咱们先这样吧。</div></div>
+<div class="turn guest"><div class="who">周鸿祎：</div><div class="say">好，先来个合影。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<h2 class="dlg" id="b80"><span class="ht">罗永浩口播——保时捷与瑞幸广告、节目结束语</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">（保时捷广告口播）在时间的洪流中，有些传奇从未褪色。1931 年，一个梦想在斯图加特诞生……（中略·品牌广告口播）保时捷，跑车的灵魂永远在路上。</div></div>
+<p class="para">想要聊得好，咖啡不能少，感谢合作伙伴瑞幸，把瑞幸咖啡店开在了《罗永浩的十字路口》。欢迎大家收看《罗永浩的十字路口》，最重要的是一键三连和加关注，还欢迎随时发送弹幕、评论跟我互动。</p>
+</main>
+<button class="up" id="up">↑</button>
+<script>
+var root=document.documentElement, prog=document.getElementById('prog'), up=document.getElementById('up');
+function onScroll(){var h=document.body.scrollHeight-innerHeight,y=scrollY;
+  prog.style.width=(h>0?y/h*100:0)+'%'; up.classList.toggle('show',y>600);}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+up.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+var fs=parseFloat(localStorage.getItem('fs')||'18'); apply();
+function apply(){root.style.setProperty('--fs',fs+'px');localStorage.setItem('fs',fs)}
+document.getElementById('finc').onclick=function(){fs=Math.min(23,fs+1);apply()};
+document.getElementById('fdec').onclick=function(){fs=Math.max(15,fs-1);apply()};
+var th=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+setTheme(th);
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+  document.getElementById('theme').textContent=t==='dark'?'☀️':'🌙'}
+document.getElementById('theme').onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+var toc=document.getElementById('toc'),mask=document.getElementById('mask');
+function tg(o){toc.classList.toggle('open',o);mask.classList.toggle('open',o)}
+document.getElementById('menu').onclick=function(){tg(!toc.classList.contains('open'))};
+mask.onclick=function(){tg(false)};
+toc.addEventListener('click',function(e){if(e.target.tagName==='A')tg(false)});
+</script>
+</body></html>
