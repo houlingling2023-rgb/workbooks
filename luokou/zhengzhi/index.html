@@ -2,103 +2,130 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>郑执：一个总在赶末班车的手艺人</title>
+<title>郑执 · 一个总在赶末班车的手艺人</title>
 <style>
 :root{
-  --bg:#f4ecd8; --card:#faf3e1; --ink:#3a352b; --sub:#8c8270; --line:#e3d7bd;
-  --luo:#2f5d96; --luo-bg:#e9eef3; --guest:#5b7a4b; --guest-bg:#edf1e6;
-  --fs:18px;
+  --bg:#f6f0e2; --card:#fbf6ea; --ink:#2c2620; --sub:#8b8170; --line:#e2d6bd;
+  --accent:#a8392b; --accent-soft:#f0e2d2;
+  --luo:#2f5d96; --guest:#5b7a4b; --fs:18px;
 }
 html[data-theme="dark"]{
-  --bg:#262220; --card:#2e2a25; --ink:#e8e0cf; --sub:#a99f8b; --line:#433d33;
-  --luo:#8aabd8; --luo-bg:#23303f; --guest:#9dbf8b; --guest-bg:#232f1f;
+  --bg:#23201c; --card:#2b2722; --ink:#e9e1d0; --sub:#a89e8b; --line:#41392f;
+  --accent:#e08a6f; --accent-soft:#3a2a23; --luo:#8aabd8; --guest:#9dbf8b;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{font-size:var(--fs)}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
-  line-height:1.9;font-size:1rem;letter-spacing:.01em;transition:background .2s,color .2s}
+  line-height:1.92;font-size:1rem;letter-spacing:.01em;transition:background .2s,color .2s}
 .bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:30}
-.bar > i{display:block;height:100%;width:0;background:var(--luo);transition:width .08s}
+.bar > i{display:block;height:100%;width:0;background:var(--accent);transition:width .08s}
 .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;
   padding:10px 14px;background:color-mix(in srgb,var(--card) 90%,transparent);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .t{font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.top .t{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
 .top button{border:1px solid var(--line);background:var(--card);color:var(--ink);
   border-radius:9px;height:34px;min-width:34px;padding:0 9px;font-size:.88rem;cursor:pointer;font-family:inherit}
 .top button:active{transform:scale(.94)}
 .toc{position:fixed;inset:0 0 0 auto;width:min(82vw,360px);z-index:40;background:var(--card);
   border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;
-  overflow-y:auto;padding:14px 0 30px;box-shadow:-8px 0 30px rgba(0,0,0,.14)}
+  overflow-y:auto;padding:14px 0 30px;box-shadow:-8px 0 30px rgba(0,0,0,.16)}
 .toc.open{transform:none}
-.toc h3{margin:16px 18px 8px;font-size:.78rem;color:var(--luo);font-weight:700;letter-spacing:.04em}
+.toc h3{margin:16px 18px 8px;font-size:.74rem;color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .toc h3:first-child{margin-top:4px}
 .toc a{display:block;padding:8px 18px;color:var(--ink);text-decoration:none;font-size:.92rem}
-.toc a:active{background:var(--luo-bg)}
-.mask{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:.25s}
+.toc a:active{background:var(--accent-soft)}
+.mask{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s}
 .mask.open{opacity:1;pointer-events:auto}
-.wrap{max-width:720px;margin:0 auto;padding:20px 20px 90px}
-h1{font-size:1.55rem;line-height:1.45;margin:.3em 0 .9em;font-weight:700}
-h2{font-size:1.18rem;margin:38px 0 16px;scroll-margin-top:60px;
-  border-top:1px solid var(--line);padding-top:22px;font-weight:700}
-h2:first-of-type{border-top:0;padding-top:4px}
-.para{margin:0 0 16px}
+.wrap{max-width:700px;margin:0 auto;padding:0 22px 90px}
+
+/* —— Hero 开篇 —— */
+.hero{padding:46px 0 30px;margin-bottom:8px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:2.9rem;line-height:1.08;font-weight:800;margin:16px 0 0;letter-spacing:-.01em}
+.hero .subt{display:block;font-size:1.2rem;font-weight:600;color:var(--ink);margin-top:16px;line-height:1.45}
+.hq{position:relative;margin:34px 0 0;padding:16px 0 0 2px;
+  font-size:1.34rem;line-height:1.62;font-style:italic;color:var(--accent);font-weight:600}
+.hq::before{content:"“";position:absolute;left:-10px;top:-22px;font-size:3.8rem;line-height:1;
+  color:var(--accent);opacity:.22;font-style:normal}
+.hero .meta{margin-top:28px;font-size:.86rem;color:var(--sub);letter-spacing:.04em}
+.hero .meta span{color:var(--accent);font-weight:700;margin:0 2px}
+
+/* —— 章节 —— */
+h2{font-size:1.28rem;margin:46px 0 18px;scroll-margin-top:60px;padding-top:26px;
+  border-top:1px solid var(--line);font-weight:800;display:flex;align-items:baseline;gap:13px}
+h2 .num{flex:none;font-size:1.7rem;color:var(--accent);font-weight:800;line-height:1}
+h2 .ht{flex:1}
+.para{margin:0 0 17px}
 .para strong{font-weight:700}
-.point{margin:26px 0 6px;font-size:1.03rem;color:var(--luo)}
+.para.drop::first-letter{float:left;font-size:3.3rem;line-height:.82;font-weight:800;
+  color:var(--accent);margin:8px 12px 0 0}
+.point{margin:30px 0 8px;font-size:1.12rem;font-weight:700;color:var(--accent);
+  padding-left:16px;border-left:3px solid var(--accent);line-height:1.5}
 .point strong{font-weight:700}
-.divider{display:flex;align-items:center;gap:14px;margin:60px 0 14px;scroll-margin-top:60px;
-  color:var(--sub);font-size:.9rem;font-weight:600}
-.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* —— 分隔 / 对话 —— */
+.divider{text-align:center;margin:64px 0 26px;scroll-margin-top:60px}
+.divider span{display:inline-block;padding:0 16px;font-size:.84rem;font-weight:700;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;position:relative}
+.divider::before,.divider::after{content:"";display:block;height:1px;background:var(--line);
+  width:60px;margin:0 auto}
+.divider::before{margin-bottom:14px}.divider::after{margin-top:14px}
 .turn{margin:0 0 20px;padding:2px 0 2px 15px;border-left:3px solid var(--line)}
 .turn.luo{border-color:var(--luo)} .turn.guest{border-color:var(--guest)}
 .who{font-weight:700;font-size:.92rem;margin-bottom:3px}
 .turn.luo .who{color:var(--luo)} .turn.guest .who{color:var(--guest)}
 .say{font-size:1rem} .say strong{font-weight:700}
-.ad{color:var(--sub);font-size:.86rem;background:color-mix(in srgb,var(--ink) 5%,transparent);
-  border:1px dashed var(--line);border-radius:10px;padding:10px 14px;margin:20px 0}
-.end{color:var(--sub);font-size:.86rem;text-align:center;margin:40px 0 0}
+.ad{color:var(--sub);font-size:.85rem;background:var(--accent-soft);
+  border-radius:10px;padding:10px 14px;margin:22px 0;text-align:center;font-style:italic}
+.end{color:var(--sub);font-size:.86rem;text-align:center;margin:44px 0 0;font-style:italic}
 .up{position:fixed;right:16px;bottom:18px;z-index:15;width:42px;height:42px;border-radius:50%;
-  border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:1.1rem;
-  box-shadow:0 4px 16px rgba(0,0,0,.14);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+  border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:1.1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.16);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
 .up.show{opacity:1;pointer-events:auto}
 </style></head>
 <body>
 <div class="bar"><i id="prog"></i></div>
 <header class="top">
-  <div class="t">郑执：一个总在赶末班车的手艺人</div>
+  <div class="t">郑执 · 一个总在赶末班车的手艺人</div>
   <button id="fdec">A-</button><button id="finc">A+</button>
   <button id="theme">🌙</button><button id="menu">目录</button>
 </header>
 <div class="mask" id="mask"></div>
 <nav class="toc" id="toc"><h3>精读解析</h3><a href="#a1">一、他是谁</a><a href="#a2">二、他的生平：一条「野路子」</a><a href="#a3">三、他为什么被采访</a><a href="#a4">四、他代表哪一类人</a><a href="#a5">五、他的普通与不普通</a><a href="#a6">六、访谈里的「金矿」：几个反认知的洞察</a><h3>完整对话</h3><a href="#dialog">↓ 跳到完整对话</a><a href="#b1">一、开场介绍</a><a href="#b2">二、开场寒暄</a><a href="#b3">三、《森中有林》：不剧透地讲讲故事</a><a href="#b4">四、片名《森中有林》的由来</a><a href="#b5">五、第一次做导演，为何如此成熟</a><a href="#b6">六、从小说家到编剧再到导演</a><a href="#b7">七、为什么连短片都没拍，制片方却放心交大制作</a><a href="#b8">八、第一次做导演，最操心的工作</a><a href="#b9">九、全明星阵容是怎么选角的</a><a href="#b10">十、跟明星合作、导演的心理素质</a><a href="#b11">十一、辣白菜与西塔：一个朝鲜族观众的&quot;崩溃&quot;</a><a href="#b12">十二、类型片与文艺片的平衡、AI 与创作平权</a><a href="#b13">十三、海南受伤停摆：黎母山的萤火虫</a><a href="#b14">十四、剪辑的取舍与&quot;导演剪辑版&quot;</a><a href="#b15">十五、《刺猬》：编剧代表作</a><a href="#b16">十六、那场&quot;一席&quot;演讲：暴露了创作母题</a><a href="#b17">十七、编剧跟组、从&quot;当玩&quot;到看重《刺猬》</a><a href="#b18">十八、小说与电影&quot;黄金时代&quot;的感慨、两个&quot;末班车&quot;</a><a href="#b19">十九、喜欢的导演：李沧东、侯孝贤、杨德昌</a><a href="#b20">二十、导演上映期&quot;最脆弱的时刻&quot;</a><a href="#b21">二十一、早期写作：青春文学、鸡汤、甚至情色小说</a><a href="#b22">二十二、香港皇冠出版社做编辑：给蔡澜做&quot;豆腐块&quot;专栏</a><a href="#b23">二十三、台湾读研、高利贷还债的往事</a><a href="#b24">二十四、三十岁的&quot;中年危机&quot;、从未享受过青春</a><a href="#b25">二十五、东北文学为什么大量用方言</a><a href="#b26">二十六、童年：歌手母亲、姥姥带大、气功热</a><a href="#b27">二十七、气功热、迷信与&quot;敬畏不可控力&quot;</a><a href="#b28">二十八、文学启蒙：爱伦·坡与蒲松龄</a><a href="#b29">二十九、19 岁的第一本长篇与赴港求学</a><a href="#b30">三十、第一本书的投稿：从室友父亲到作家出版社</a><a href="#b31">三十一、父亲去世休学写书、鸡汤、《我在时间尽头等你》</a><a href="#b32">三十二、匿名作家计划：意外得奖</a><a href="#b33">三十三、&quot;穷鬼乐园&quot;啤酒屋的今昔</a><a href="#b34">三十四、《生吞》：救了他的一本书</a><a href="#b35">三十五、写作的&quot;第一读者&quot;与打磨心态</a><a href="#b36">三十六、&quot;东北文艺复兴三杰&quot;</a><a href="#b37">三十七、被并列后的压力：六年没出书</a><a href="#b38">三十八、未来计划与收尾</a></nav>
 <main class="wrap">
-  <h1>郑执：一个总在赶末班车的手艺人</h1>
-  <h2 id="a1">一、他是谁</h2>
+  <section class="hero">
+    <div class="eyebrow">PEOPLE · 罗永浩的十字路口</div>
+    <h1>郑执<span class="subt">一个总在赶末班车的手艺人</span></h1>
+    <blockquote class="hq">我老追末班车，但起码，我还赶上了</blockquote>
+    <div class="meta">罗永浩 <span>×</span> 郑执 · 全长 2 小时 40 分</div>
+  </section>
+  <h2 id="a1"><span class="num">一</span><span class="ht">他是谁</span></h2>
 <p class="para">郑执，1987 年生，沈阳人，作家、编剧、导演。</p>
 <p class="para">一句话定位：<strong>他是当下中文世界里少数「两栖」都成了的创作者——以小说拿过严肃文学奖，以编剧拿过上海电影节金爵奖，如今又交出一部不像新人手笔的导演处女作。</strong> 文学圈把他和双雪涛、班宇并称「东北文艺复兴三杰」；电影圈刚因他自编自导的《森中有林》上映，重新打量他。</p>
 <p class="para">但比起这些头衔，有个更贴的标签，是他自己反复提的三个字——<strong>赶末班车的人</strong>。</p>
-<h2 id="a2">二、他的生平：一条「野路子」</h2>
+<h2 id="a2"><span class="num">二</span><span class="ht">他的生平：一条「野路子」</span></h2>
 <p class="para">郑执的履历，几乎是「非科班、非天选」的标本。</p>
 <p class="para">他出生在沈阳一个平民家庭，父亲开过面馆、后来倒闭赔了钱，母亲是个没走上专业路的业余歌手，他从小由姥姥带到十七八岁。高三那年家里已经拿不出他出国读书的钱，去香港的第一年学费定金，是找干妈借的。</p>
 <p class="para"><strong>写作是他唯一从小就确信的天分。</strong> 19 岁高考前两个月，他不复习了，在课本底下偷写第一本小说——起因不过是失了场恋。这本书后来靠一股生猛劲儿投稿成功、出版，可惜赶上的是青春文学浪潮的尾巴，「末班车没追着，吸着尾气上去的」。</p>
 <p class="para">接下来是漫长的「被毒打」。父亲去世那年他休学回家陪母亲，每天念《金刚经》、买菜做饭，晚上写点东西；前三本书越卖越差，到第三本《我只在乎你》，写了两年，版税只拿到九千多块。为了挣钱，他写过鸡汤（两本，没卖好），写过情色小说，在香港的出版社做过编辑（给蔡澜攒过专栏集，做过莫言《红高粱》香港版的责编），去台湾读过戏剧研究生（没读完）。那几年他还背着一笔高利贷，利滚利、被电话催债，「那口气跟早年看港产黑帮片差不多」，最后靠一本小说的版权才还清。</p>
 <p class="para">真正的转折是一本叫《生吞》的小说。当时他对自己的销量已经「跌到谷底、对这条路有些怀疑」，索性放下「自我表达」，就想写一个「能把人留住」的故事——结果卖了 20 万册，救了他。紧接着 2018 年，他用三天两夜赶出的一个短篇，在张悦然办的「匿名作家计划」里击败一众成名作家（包括阎连科）拿了首奖，那篇就是后来被顾长卫拍成电影《刺猬》（葛优、王俊凯主演）的《仙症》——他凭这个剧本拿了金爵奖最佳编剧。</p>
 <p class="para">到《森中有林》，他第一次自己当导演。</p>
-<h2 id="a3">三、他为什么被采访</h2>
+<h2 id="a3"><span class="num">三</span><span class="ht">他为什么被采访</span></h2>
 <p class="para"><strong>直接的由头，是新片要上映。</strong> 这是一期标准的宣发期对谈，他自己也直言「咱们这访谈的由来，是因为电影要上了」。</p>
 <p class="para">但罗永浩看重的不止是新片。在他眼里，郑执是个稀缺样本：<strong>小说和电影，两个正在走下坡路的行业，他偏偏在两边都临门赶上、还都做出了东西。</strong> 罗永浩自己三四十岁后就几乎不读虚构文学了，是被内容负责人推荐，先读了双雪涛、又读了郑执，才有了这次对谈。说到底，采访他不是为了听电影八卦，而是想搞清楚：<strong>一个没踩中任何风口的人，凭什么能在两个退潮的领域同时站住。</strong></p>
-<h2 id="a4">四、他代表哪一类人</h2>
+<h2 id="a4"><span class="num">四</span><span class="ht">他代表哪一类人</span></h2>
 <p class="para">每个时代都有「天选之子」：踩中风口、被浪潮托着往上走。郑执是反面——他<strong>每次入场，都赶在浪潮退去的时候</strong>。</p>
 <p class="para">所以他代表的是这样一类人：<strong>没背景、没踩中任何风口，只能靠一门手艺，在一个又一个「黄金时代」落幕之后，硬挣一份体面的人。</strong></p>
 <p class="para">而这类人，恰恰是今天的大多数。我们这代人里，真吃到时代红利、站上风口的是少数；更多人是在行业增速放缓、机会收窄之后才入场，手里只有自己那点本事。郑执值得你花时间的地方就在这儿——他把「一个没有红利的人，怎么活下去、还活得不卑微」这件事，完完整整演了一遍。</p>
-<h2 id="a5">五、他的普通与不普通</h2>
+<h2 id="a5"><span class="num">五</span><span class="ht">他的普通与不普通</span></h2>
 <p class="para"><strong>先说普通。</strong> 郑执身上几乎没有「成功者」的光环感。他出身平民，自称心理素质「极差」，会慌、会焦虑；为写不出书半夜哭过，拍个宣传视频被问到「有没有为哪个人物动情」，当场就哭了；他从小就觉得「有什么东西在背后追着我」，没享受过青春，30 岁就来了第一次中年危机。他也从不装清高——写鸡汤、写情色、接编剧，他大方承认「就是想挣钱」。这些都太像我们普通人了。</p>
 <p class="para"><strong>再说不普通。</strong> 他的特别，不在天赋异禀，而在三样东西：</p>
 <p class="para">一是<strong>野路子的生存力</strong>。19 岁敢背着稿子闯进出版社、对着编辑「狂捧」自己一个钟头，把脸皮和口才也当成手艺的一部分。</p>
 <p class="para">二是<strong>对自己的诚实和清醒</strong>。他不装「什么都想得开」——「我绝对不是大大咧咧的人，只是嘴上而已」；他把前些年的窘迫当段子讲，可心里清楚那是真不容易。</p>
 <p class="para">三是<strong>把每段「不光彩」的经历重新估值的能力</strong>。鸡汤、情色、野路子出身，别人可能想藏，他却说「我很珍惜自己野路子出来的路径，这是我最宝贵的东西」——因为正是在那些「上不了台面」的写作里，他学会了「怎么把人吊住」。</p>
 <p class="para"><strong>关键在于：他的不普通，恰恰长在他的普通之上。</strong> 正因为没资源、被市场反复毒打过，他才被逼出了一套清醒的务实——既不被理想主义绑架，也没被犬儒淹没。</p>
-<h2 id="a6">六、访谈里的「金矿」：几个反认知的洞察</h2>
+<h2 id="a6"><span class="num">六</span><span class="ht">访谈里的「金矿」：几个反认知的洞察</span></h2>
 <p class="para">这是最该带走的部分。下面几条，都是「过来人才懂、和直觉相反」的东西。</p>
 <p class="point"><strong>1. 顺，不一定是好事。</strong></p>
 <p class="para">郑执第一次投稿、第一本书就出版，一次没被退过稿。可他对这份顺利的态度是警惕：「开头太顺，后边是要反噬的。」——过早的成功最大的风险，是让你误判自己、停掉本该更扎实的打磨；等市场来收账，欠的债一分不少。他后来「两年挣九千块」的低谷，某种意义上就是在还 19 岁那次「太顺」的债。<strong>别把运气当本事，得看它是奖励了你的实力，还是掩盖了你的不足。</strong></p>
@@ -114,10 +141,10 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <p class="para">这是访谈里一条对未来的洞察：当 AI 把拍电影的成本指数级降下来，一个「有才华但没资源的年轻人」和一个「功成名就的大导演」，会第一次站到同一条起跑线上——拼的只剩想法。罗永浩管这叫「工具霸权的下放」。<strong>不止电影：任何一个曾经「得有资源才能入场」的领域，都值得用这个框架重新想一遍，机会可能正在重新发牌。</strong></p>
 <p class="para"><strong>最后，回到那个标签——「赶末班车」。</strong> 听完会发现，它只说对了一半。一个总在末班车上的人，意味着他从没吃过时代的红利，每一步都得靠手艺硬挣。可也正因如此，当浪潮退去、别人被搁浅在沙滩上，他手里那点真本事，反而成了还能游下去的唯一凭仗。用郑执自己的话说：「我老追末班车，但起码，我还赶上了。」</p>
 <p class="end">（解析完 · 原访谈全长 2 小时 40 分，逐字稿与分角色对话稿见同一文件夹）</p>
-<div class="divider" id="dialog">完整对话 · 全长 2 小时 40 分</div>
-<h2 id="b1">一、开场介绍</h2>
+<div class="divider" id="dialog"><span>完整对话 · 全长 2 小时 40 分</span></div>
+<h2 class="dlg" id="b1"><span class="ht">开场介绍</span></h2>
 <div class="turn luo"><div class="who">罗永浩（开场白）：</div><div class="say">欢迎大家收看罗永浩的十字路口，最重要的是一键三连和加关注，还欢迎随时发送弹幕、评论跟我互动。今天我们请到的嘉宾是&quot;东北文艺复兴三杰&quot;之一的青年作家郑执。他是新东北作家群的代表人物，曾凭借小说《仙症》在首届匿名作家计划中击败了一系列著名作家、获得首奖；同时作为编剧，他凭借影片《刺猬》获得了 2024 年金爵奖最佳编剧。现在正值他自编自导的首部长篇作品《森中有林》将在本月全国上映——这是一部发生在东北的犯罪题材电影，于和伟、高圆圆、乔杉、宋小宝、韩庚等全明星阵容，非常好看，我有幸提前看过了，强烈推荐。接下来就是我和这位能写会拍的青年作家、导演郑执的访谈，我们一起聊聊这部电影，以及他的创作和人生。</div></div>
-<h2 id="b2">二、开场寒暄</h2>
+<h2 class="dlg" id="b2"><span class="ht">开场寒暄</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你就怎么舒服怎么来。人家到我这儿的时候，两脚放桌子上都没事，其实不用那么严肃，随便坐。不过要是往后仰太多，就把椅子拽过去。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">那早说，我今天应该把那双鞋穿来。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">什么鞋？</div></div>
@@ -125,7 +152,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">在北京工作室吗？可以让他们拿过来。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">没没没，开玩笑，开始吧。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">好。</div></div>
-<h2 id="b3">三、《森中有林》：不剧透地讲讲故事</h2>
+<h2 class="dlg" id="b3"><span class="ht">《森中有林》：不剧透地讲讲故事</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">《森中有林》是你第一次执导的电影作品，对吧？也是改编自你同名小说。能不能先给我们的听众，在不剧透的情况下介绍一下这个故事？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">这个我没经验啊。我们做电影上市前的这种谈话，有时候我会觉得——你这是连电影带原著都看了。我没经验。当然咱们不是现场直播，可以剪后期，但我也不知道怎么在不剧透的情况下，把这个电影还充分聊一下。你应该是有经验的吧？或者你们提前做过训练，面对不同媒体有不同话术？我们在这儿该怎么说？</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">就凭感觉说吧。</div></div>
@@ -133,7 +160,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">等于啥都没说。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">再讲就剧透了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吧。</div></div>
-<h2 id="b4">四、片名《森中有林》的由来</h2>
+<h2 class="dlg" id="b4"><span class="ht">片名《森中有林》的由来</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我一直很好奇。我对电影上市前宣传的那些东西看得不多，以前我看自己感兴趣的电影，上市前的宣传一般不主动去找，都是从社交网络里不小心刷到的——那些其实是扩散破圈的，一般偏八卦。即使是严肃的作品也这样。我还在学习：电影如果连宣传都算上，是一个非常复杂的系统工程。那《森中有林》这个名字，具体指什么？看完了我也不知道为什么叫这么个名字，虽然里边有种树那些事。这名字是怎么来的、怎么个想法？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我一开始单纯就是被中文造字的美吸引了。觉得这种会意字，把几个木头放在一起，特别像家庭跟人的关系，是一个意象——你把每个单独的木头当做一个人来看，就会有这种感觉。其实就是这么个想法。然后你套进去之后，有些意味解释不太清楚：这里边还有东西，就像命运里还有命运、家里边还有人，那些主观的、感性的、可以多重解读的东西。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。反正你们搞文学创作的，也不太在乎书名、标题起得会不会影响销量什么的。</div></div>
@@ -157,7 +184,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你不一定赌得到。那（对名字）没有信心吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我一点信心都没有。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我还行。</div></div>
-<h2 id="b5">五、第一次做导演，为何如此成熟</h2>
+<h2 class="dlg" id="b5"><span class="ht">第一次做导演，为何如此成熟</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是第一次做导演对吧？但我和（同事）草哥在上海看放映的时候，我们还很吃惊，因为完全不像新人导演做的东西，感觉非常成熟，风格上。你以前没偷偷拍过一些东西吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">没有，就一直在剧组。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">等于是做编剧的时候，深入剧组的那种编剧。你跟过很多剧组对吧？那也算经验。</div></div>
@@ -169,7 +196,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我以为你们圈里都知道。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">也可能没那么普遍吧。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">反正我看的时候，感觉就不像新人导演，很成熟，可能跟你跟过很多剧组有关系。</div></div>
-<h2 id="b6">六、从小说家到编剧再到导演</h2>
+<h2 class="dlg" id="b6"><span class="ht">从小说家到编剧再到导演</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">能不能跟我们分享一下，你是怎么从一个小说家，一步步成为导演的？因为虽然小说家成名了，但你这制作成本也不低，至少看演员阵容肯定成本不低。这是怎么走到导演这步来的？还有，一般做编剧的，很多作品被改编成影视，那个过程里很难保证编剧跟导演想法一样，所以写原创剧本或小说原著的人，创作理念不可能跟导演完全一样，憋到某个程度想冲上去做导演，从人性上也很好理解。你能不能讲讲整个过程？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我觉得您刚才说的心态，我占一半。我写小说很早就出道了，19 岁写了第一本小说，后来觉得能吃这碗饭，写了几年；写了几年之后越写越穷，那时候就面临进入社会、养活不了自己。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">一开始是不是出版商想把你包装成那种青春偶像文学？那时候还流行少年作家。</div></div>
@@ -182,7 +209,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">也不叫心理（创伤）。我觉得还是自我意志变强了。虽然有些剧本大多数我都当个活干，但到一定程度，你还是觉得：我嫌跟人沟通累，这个事挺累的，你始终要反复给别人讲你是怎么想的。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们以前了解的常见情况有两种。第一种是：小说作家对影视改编是欢迎的，反正多份收入、多一些影响力，但他对影视本身不感兴趣，这种就不容易心里不舒服，授权给你、你们随便拍我也不看，这种很舒服，可以多年愉快合作。还有一种是职业编剧，他不是小说家转行的，从第一天就知道画面权是在导演手里的，所以也能相对心平气和。但你这种小说家，原来有自己的表达，又喜欢影视、又参与了半天，最后又发现是导演说了算，就很容易（不舒服）。所以我们理解你走到这一步，本身是合情合理，也是好事——对你个人身心健康都是好事。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对对对，其实是。</div></div>
-<h2 id="b7">七、为什么连短片都没拍，制片方却放心交大制作</h2>
+<h2 class="dlg" id="b7"><span class="ht">为什么连短片都没拍，制片方却放心交大制作</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">那为什么连短片都没拍过呢？制片方也这么放心吗？因为你第一步就是个大制作。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">它是这样的。整个过程其实是——写到《森中有林》的时候，我当时在业内就所谓&quot;放话&quot;，我说这是我写的最后一个剧本了，我再也不写剧本，我要回头（写小说）。因为我前几年写小说成绩还行，逐渐能养活自己了，还不错。所以写剧本那段经历前些年给我造成的——也不叫写作创伤，就是&quot;皮了&quot;，特皮。你觉得我一两年、两三年写一个剧本，这两三年我能写本不错的小说了，一样能挣钱，而且更愉快，还能完成自己在文学上那点追求。但我这人是答应人一个活就一定交活的人，无论隔了几年。所以《森中有林》是我最后一个&quot;库存&quot;。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是版权卖给别人了，也答应了几页剧本，但还没拍。</div></div>
@@ -200,7 +227,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得这个决策做得非常好，因为我们看电影的时候，就感觉第一次拍的真的非常好。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">谢谢。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我有那种社恐（？），但这个不是（客套），真的感觉特别好。完全不像新人导演的东西。还有就是，很多小说家最后也去参与拍电影，这种例子很常见，但能把小说语言和电影语言都掌控好的人其实并不多；也有一些电影导演后来写过小说，两种语言都能掌控好的，其实并不常见。所以我觉得特别好。</div></div>
-<h2 id="b8">八、第一次做导演，最操心的工作</h2>
+<h2 class="dlg" id="b8"><span class="ht">第一次做导演，最操心的工作</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">第一次做导演，我相信很多听众会感兴趣。一般大家在公共平台上看到一个导演出来讲作品，多数情况下，如果作品足够好，通常已经是有经验的导演了（当然也有新人导演出来聊的例子）。我自己也挺感兴趣，因为我年轻时在电影学院上过一年进修班。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我知道，听过这个故事。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">后来觉得自己天分不行就放弃了。第一次做导演，有哪些比你想的复杂得多、操心得多的工作？比如选角、班子的搭建——因为你没有固定班底，干了好几年的导演都有非常固定、长期合作的班底——这整个过程里的困难，或者好玩的，跟我们简单分享一下。</div></div>
@@ -265,7 +292,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">这样的话，其实对有想法的人——主要就是编剧和导演——就拼想法了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">要不然的话，你看很多艺术才华有限的人在电影圈混得很好，是因为他擅长别的东西，作品永远是及格，但他能一部接一部拍；而那些真正牛的呢，可能一个电影就给他搞得跟资方甚至决裂什么的，艺术家这种事挺常见。</div></div>
 <div class="ad">【广告】 想要聊得好，咖啡不能少。感谢合作伙伴瑞幸，把瑞幸咖啡店开在了罗永浩的十字路口。</div>
-<h2 id="b9">九、全明星阵容是怎么选角的</h2>
+<h2 class="dlg" id="b9"><span class="ht">全明星阵容是怎么选角的</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">那演员这块呢？因为你作为一个新人导演，第一部电影阵容很豪华了——于和伟老师、高圆圆老师，然后张天爱、韩庚、乔杉、宋小宝、孙悦，都是明星，明星就一堆。我甚至觉得这里边好像镜头多一点的就没有完全的新人，除非特别配角，几乎没有，基本是全明星阵容。你是怎么选角的？他们都是你本来的第一人选吗？这个过程给我们说说，其实观众更喜欢听明星相关的。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">选角是个玄学。以前我做编剧，因为改编自己的小说，所以导演和资方还是会问你的意见，说&quot;郑老师你有没有什么想法，你觉得脑子里最贴合的脸&quot;。经历过，但自己选的时候，你才明白这个玄学的点在哪。有的可以具体说，比如于和伟，于老师是我从脑子里冒出他的脸之后，就再没想过别人。我等他等了一年多，各种原因，他本身也忙，一开始剧本都没时间看，后来看完之后有一点问题，但我俩要见面碰、聊，都得隔个两三个月。我俩磕了三次剧本，我记得是三次，每次聊十二个小时那种聊。这是于老师的一个方式。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">高圆圆呢，是我一开始脑子就掉进一个逻辑陷阱——我不知道为什么，我就觉得既然是我自己选，我这次就追求一个：我一定要全班底东北籍。</div></div>
@@ -302,7 +329,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">但他俩年轻的时候分别完全感觉不到像，现在到中年不知道什么原因。有几个镜头，我跟草哥看的时候我就乐，我说你看这个镜头，我还倒回去暂停，我说你看像谁，他在那看半天说眼熟，我说这不跟郑钧一模一样吗。你们剪后期时没有这感觉吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">没有。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">没事，我觉得这是好事，因为他们俩像谁也不会觉得（难看），都是帅哥美女、顶级美貌，而且会多一个话题，我觉得是个很好玩的事。有几个镜头像得我都感觉（恍惚），你可以回去再看一下，好像是那个地板擦血（？）的时候，那个仰角的。</div></div>
-<h2 id="b10">十、跟明星合作、导演的心理素质</h2>
+<h2 class="dlg" id="b10"><span class="ht">跟明星合作、导演的心理素质</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">拍摄过程中，跟这些明星有什么好玩的事吗？还有两个喜剧明星参加，在片场会不会……</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">会，大家气氛很好。但你要说下来，我整体心态——这次其实我把拍戏当玩。我要是拍的过程中这么说，资方估计就疯了，但我安慰自己是这么个心态。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还挺难的。你本来心理素质很好吗？因为新人导演第一次，又是投入比较大的、全明星阵容。像我这种心理素质不好的……</div></div>
@@ -330,7 +357,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我觉得能做到这个的导演应该不是特别多，有肯定有。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我觉得跟个性有关。实际上我也不是完全为了别人：如果我在一个工作环境当中有那种剑拔弩张的气氛，或者不舒服的，首先第一个不舒服的是我自己。所以我是围绕我自己为中心营造那么一个气氛。然后我觉得，对一切都能坐下来聊，无论是创作上的还是创作以外的都能坐下来聊。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个还挺难得的。因为也可能是坏事传得广，反正我这辈子听说过的剧组的事，即使最后作品非常成功、但拍摄不愉快的故事，远多于拍摄愉快、而且最后作品也很好（的故事）。这非常好。</div></div>
-<h2 id="b11">十一、辣白菜与西塔：一个朝鲜族观众的&quot;崩溃&quot;</h2>
+<h2 class="dlg" id="b11"><span class="ht">辣白菜与西塔：一个朝鲜族观众的&quot;崩溃&quot;</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">刚才有一点我忘了——这里有一个剧情我看着很懵：高圆圆是一个北京女人，因为各种以前的经历辗转到东北生活，为什么还给她安排了一个做辣白菜的角色呢？我作为一个朝鲜族看得特别崩溃。崩溃的点不是觉得不好，是奇怪：为什么一个北京女人、又不是朝鲜族女人，跑到东北生活，结果还做辣白菜、还卖过辣白菜，很专业。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">这个好问题。这个聊起来你得问一点具体的，我就想起来了——你一上来问&quot;有什么有趣的事&quot;，让我满脑子搜，想不起来。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且你想，我是个朝鲜族，所以我就想：这导演在东北长大，肯定吃过很多朝鲜族做的辣白菜，但怎么会让一个北京女人、又是个汉族女人……</div></div>
@@ -346,7 +373,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">（有意思。）</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">创作就这样，融合了很多东西，结果那些就都顺了。比如她抹辣白菜的时候，那个氛围是比较阴郁的，辣白菜里面是有隐喻的——她一开（冰箱）门有两只手（？），那些就都顺了。包括我们造型指导给她设计的从年轻到老的衣服主色以红色为主，也跟那个血案有一个阴影的对应。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">全对了，有意思。</div></div>
-<h2 id="b12">十二、类型片与文艺片的平衡、AI 与创作平权</h2>
+<h2 class="dlg" id="b12"><span class="ht">类型片与文艺片的平衡、AI 与创作平权</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们看完以后，感觉这个片子既有很成熟的类型片的感觉，也有很严肃的文艺片的感觉。你拍的时候是有意识地把握这个度吗，还是自然凭感觉就是这个结果？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">从改剧本的过程中就有这个意识。说起来这是个老生常谈的问题，就是平衡嘛。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，平衡。有一些有作者意识的导演也好、新导演也好、写作者转型当导演的也好，你毕竟还面临着一个商业诉求和票房压力。</div></div>
@@ -376,7 +403,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">反正我得在上海看一遍。因为我跟草哥看的时候，我们俩有个感受——我们俩算是资深影迷，乐片量（观影量）比较大——就有一些场景，那种压迫感的东西，无论是戏剧冲突还是画面呈现，就感觉这段不应该在小屏幕上看，经常有这种感觉。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">还包括一些声音设计和音乐，那个如果低频没了，感觉就不对了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">但说回刚才，一方面我会觉得电影艺术还是得去电影院看，要不然很多东西就损失掉了；首先它得是艺术，有些电影我觉得确实没啥区别。</div></div>
-<h2 id="b13">十三、海南受伤停摆：黎母山的萤火虫</h2>
+<h2 class="dlg" id="b13"><span class="ht">海南受伤停摆：黎母山的萤火虫</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后从这电影的筹备到拍摄到后期剪辑，刚才你说整个拍摄过程很愉快，那你前期编剧筹备、后期剪辑这些时期，也都很顺利吗？还是有一些很痛苦的事？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">没有。就刚才说的最大的拍摄意外。当时那个意外发生的时候，那一刻人都凉了，整个剧组。你脑子里没有想（别的），（先想）人没事吧，赶紧大家跑过去看，好，人没事，但是我们需要面临这个状况。然后接下来，安静下来之后，于（和伟）愿意回来了。大家——我总是按最差做一系列准备的那种，我说那就是这次运气差点，估计不太可能（继续了），就做好这批戏就别拍了、拍不了了这么个准备。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">都做这么绝望的准备。</div></div>
@@ -391,7 +418,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">当时我自己掏手机也把这段拍下来了。我杀青那一天，在朋友圈发了这个视频。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。回头转给我看看呗。</div></div>
 <div class="ad">【广告】 人生可以有很多选择，咖啡我劝你就别选了，喝瑞幸就对了，感谢瑞幸咖啡支持。聊天需要等待，等待渐入佳境，等待灵光一闪；喝酒就别等了，歪马送酒，想喝就有。</div>
-<h2 id="b14">十四、剪辑的取舍与&quot;导演剪辑版&quot;</h2>
+<h2 class="dlg" id="b14"><span class="ht">剪辑的取舍与&quot;导演剪辑版&quot;</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后剪辑后期的时候，那两个半小时剪到两个小时的时候，没有很痛苦吗？可能就挺难决策的。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对，是难决策的那种，但它就是创作的一部分，每个人都面临这种。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">虽然我对那些我喜欢的电影，特别喜欢看导演剪辑版，但导演剪辑版也分两种：有一些是大刀阔斧砍了——是因为商业上的平衡没办法——但后期他把那些大量的又剪回来，这种有一些我印象里是很过瘾的；但也有那种，这个电影真的就剪了两个小时二十分钟，然后制片方认为必须保两个小时，他就很痛苦地又剪了 20 分钟，然后很生气，最后发行光碟的时候把那 20 分钟的完整版也发出来了。这种我也看过很多。那种大刀阔斧砍掉、找回来值得看的很多；但像两小时 20 分钟变成两小时的，我这辈子的印象里，好像都是两小时的更好。前两年有一个美剧叫《制片厂》，你看过吗？</div></div>
@@ -402,7 +429,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">有一些（是）个性、各种原因，确实各种原因。我也有制片人朋友，跟他们做对谈的时候，上来就一句&quot;我们资方有原罪&quot;，跟艺术家谈，先说&quot;我们有原罪&quot;。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这是情商很高的资方。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对对对。但其实你能理解：哪些资方到底是出于什么原因——他真的是认为戏这么剪更好看，再跟你聊这个东西；还是出于一些创作以外的东西——是能分辨的。只是说最后大家干起来没法调解的，就是审美上：如果大家审美不同，那这事真没法聊。如果都是出于&quot;我审美上认为这个更好看&quot;，那审美没法达成共识。</div></div>
-<h2 id="b15">十五、《刺猬》：编剧代表作</h2>
+<h2 class="dlg" id="b15"><span class="ht">《刺猬》：编剧代表作</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你那个《仙症》是 24 年改编的电影？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">24 年上映的，但拍比那早，22 年拍的，顾长卫导的。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么早了吗？</div></div>
@@ -419,7 +446,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">没有，也很愉快。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你就是情商高啊。我不是说你情商高导致你撒谎或者社交辞令——</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">够用。</div></div>
-<h2 id="b16">十六、那场&quot;一席&quot;演讲：暴露了创作母题</h2>
+<h2 class="dlg" id="b16"><span class="ht">那场&quot;一席&quot;演讲：暴露了创作母题</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我特别喜欢你那一席的演讲，特别特别好。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">那是很多年前的演讲了，31 岁……19 年，32 岁。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你那种演讲就做过那么一次吗？</div></div>
@@ -455,7 +482,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">就跟作品没关系了，然后搞得导演、编剧、其他主创人员其实都挺尴尬，但你又不能说那个流量明星和他的粉丝有什么错，什么错都没有，就是一个尴尬。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我也不能说。我觉得大家都有经验，这种演员其实都懂，这种场面也经常碰到。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我的意思是，如果现场有关注作品本身的人，去了以后到后段环节就会觉得&quot;这是在干啥&quot;，会有这种（感受）。这都是无奈的事。</div></div>
-<h2 id="b17">十七、编剧跟组、从&quot;当玩&quot;到看重《刺猬》</h2>
+<h2 class="dlg" id="b17"><span class="ht">编剧跟组、从&quot;当玩&quot;到看重《刺猬》</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你之前跟过（几个）剧组的时候是什么情况？我以前不懂这些——编剧一般跟剧组是常态吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">不一定。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">不一定。</div></div>
@@ -471,7 +498,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这事我很奇怪。草薇（草哥）你当时知道吗？我知道。因为葛优现在很少演戏了，如果 24 年演了一个戏，我应该是知道的，所以这事还挺奇怪的。但我想补一下那个课。当时是怎么——顾长卫导演？那好理解了。现在一般应该请不动葛优老师了，他也是半退休状态，挑戏。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">他挑戏，人到一定级别确实挑戏。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且可能人家在创作上的成就感、满足感，前半生都已经很充分了，除非有什么特殊原因打动。这很能理解。我还特别想访谈一次葛优老师，但估计他也不会出来。</div></div>
-<h2 id="b18">十八、小说与电影&quot;黄金时代&quot;的感慨、两个&quot;末班车&quot;</h2>
+<h2 class="dlg" id="b18"><span class="ht">小说与电影&quot;黄金时代&quot;的感慨、两个&quot;末班车&quot;</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你之前——刚才聊过这个话题了——前面做编剧的时候并没有非要做一个导演，这个刚好一切都对了，然后也就半推半就做了，结果现在看还是很愉快的一件事情。如果票房也好，就圆满了。我觉得它有充足的理由票房好。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">谢谢，借你吉言。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得它一个好票房的元素是完备的——故事、表演、大众接受度的那些剧情处理，还有刚才说的平衡问题，这些都有。我怎么说呢，这就涉及到另一个话题，现在大家经常聊的，当然可能又是我们中年人经常聊的一个话题：就是我有时候看到小说的黄金时代过去之后、出现的优秀的年轻作家的时候，我就有一点——虽然这事跟我没关系——我就有点难过，你理解我意思吗？你看咱们说&quot;东北文艺复兴三杰&quot;你们几位，如果你们跟余华老师……上世纪八九十年代有个叫先锋文学（创作高峰）。</div></div>
@@ -506,7 +533,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">这些事我会思考。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是会对你造成困扰吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我会经常想这些问题。然后就我刚才跟你说过的，一方面有这种感慨，另一方面又绷着一根弦，老提醒自己&quot;你这是多余的顾虑，他们将来有他们特别快乐的事情，根本不需要担心&quot;。我在这两个中间纠结，可能就是中年心理的一个具体表现。</div></div>
-<h2 id="b19">十九、喜欢的导演：李沧东、侯孝贤、杨德昌</h2>
+<h2 class="dlg" id="b19"><span class="ht">喜欢的导演：李沧东、侯孝贤、杨德昌</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你自己在学电影、喜欢看电影的过程里，对你影响比较大的、你特别喜欢的导演有哪些？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">李沧东、侯孝贤。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">李沧东是韩国那个吗？我听很多人提起来，我还没看过他电影。</div></div>
@@ -553,14 +580,14 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">明白。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">行，我回去补一下李沧东的课。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">而且他出道这么多年只有六部作品，很少，然后部部都是经典。如果只看两部的话，我就推荐他早期的《薄荷糖》，那个是指引了我剧本创作的一个很灵魂的作品。然后再就是他最新的作品、几年前的《燃烧》。</div></div>
-<h2 id="b20">二十、导演上映期&quot;最脆弱的时刻&quot;</h2>
+<h2 class="dlg" id="b20"><span class="ht">导演上映期&quot;最脆弱的时刻&quot;</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">很多导演跟我说一个好玩的事：他们觉得自己是一个内心很强大、也很稳的人，但他说拍过几个电影，每次电影上映的时候是他人生最脆弱的时刻——你知道什么意思吧？他自己对创作是很自信的，但这跟写小说不一样：写小说发完了以后其实没有那么大的压力，但电影因为惊动了这么多人、用了这么多资源、花了这么多钱，过程中可能还找了一些档期不合适的、用人情硬拽过来的，所以他的投入跟小说一个人的创作是没有可比性的。那等到这个片子上的时候，一定要票房好。并不是说我就认钱，但是这个电影上了如果票房不好，等于你作者从艺术价值上有自己的判断，但它毕竟又是个商品——既是艺术作品又是商品——这商品出去以后得不到市场认可的时候，对导演来讲是很难的一件事。所以有一些导演就说，他们作品上映的那个时候是人生最脆弱的时刻，然后听不得一点负面意见，即使明明白白知道那个负面意见是对的也听不进去，他就觉得&quot;等这个从院线播完下来，咱们再聊这个&quot;。你觉得你这个电影即将上、又是你人生第一个执导的作品，你有没有类似的心理问题？现在还是特别淡定？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">不敢说特别淡定，但还好，我心理压力没那么大。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你本来就心理素质比较好的，刚才咱也聊过。对，你用什么人、拍什么样的电影、花了多少钱，未来面对这个票房。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对，我唯一的心态就是我特别不想给别人造成压力，我是这么个人，所以我希望让资方能赚回成本、票房好一点。然后当然从创作者个体的角度，我肯定希望夸我的多一点、希望得到一些正向评价，但还好，因为我写小说被骂的年头很多，所以这方面心理素质还行。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？你是说你早期写青春文学那会儿？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">很早，30 岁以前。</div></div>
-<h2 id="b21">二十一、早期写作：青春文学、鸡汤、甚至情色小说</h2>
+<h2 class="dlg" id="b21"><span class="ht">早期写作：青春文学、鸡汤、甚至情色小说</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你早期就是那种纯青春文学吗？我的感觉，你是从那个叫什么——《仙症》之后的嘛——在那之前就是……</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我《仙症》之前有两个阶段，我自己分为偏青春小说的阶段，和鸡汤——鸡汤我也写过。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">还写过鸡汤？是故意的吗？</div></div>
@@ -572,7 +599,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">还是有分量的严肃文学奖的得主，同时又写过擦边的，你可能是（独）一号了吧。因为有很多作家，自己创作偏严肃、文学性很强，同时也写过一些流行的，这个比较常见；但写过擦边、又得过严肃文学奖的，你可能是独一号了。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">不是。我印象中，我以前看一些大师早年——可能一两百年前的大师——好像为了养活自己，写小豆腐块（专栏），我一时想不起名字了，但你早年看那些作家履历，是很多人干过这事的。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个话题挺有意思，而且还是从人性上能共鸣、共情的东西，挺有意思的。</div></div>
-<h2 id="b22">二十二、香港皇冠出版社做编辑：给蔡澜做&quot;豆腐块&quot;专栏</h2>
+<h2 class="dlg" id="b22"><span class="ht">香港皇冠出版社做编辑：给蔡澜做&quot;豆腐块&quot;专栏</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我听说你在那个香港出版社的时候，还帮一些香港著名的专栏作家做编辑、帮他们改语病。有个叫……</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">（蔡澜）我知道，他就是写豆腐块专栏的，属于专栏作家，一周三更可能一篇，一千多字两千字。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">他这人挺有意思，他的文字你是看过——他是受过非常（严格训练的）。</div></div>
@@ -603,7 +630,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以勾起这种回忆了。这个还挺有意思的，你刚才说的时候我觉得画面感很强，而且搞得还挺惊险，还跑回去。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对对，真的是。当时整个那个心情……那是我在香港过的最后一年，也是最不好的一年，然后第二年紧接着没多久就辞职走了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，好像我在你其他的访谈里看，你那时候待在（香港）并不开心，越到最后越不开心。</div></div>
-<h2 id="b23">二十三、台湾读研、高利贷还债的往事</h2>
+<h2 class="dlg" id="b23"><span class="ht">台湾读研、高利贷还债的往事</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有你还去台湾读过研究生，后来又放弃了，那段是怎么回事？就是离开香港之后。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对，离开香港之后，读的戏剧，（去之前先）把债还完了。因为在香港走不了，是因为欠着债也没还。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，说说你那个高利贷那个事，那个为什么……你不后怕吗？那个时候其实那个要没处理好，可能要祸害你很多年。</div></div>
@@ -630,7 +657,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">当然知道我家住哪，你借钱的时候身份证都压那了、都签了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。那台湾那个研究生中途放弃是因为啥，是学业跟想的不一样、没意思是吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">不是，（是要）赶紧挣钱，都二十七了，那时候二十七八了。</div></div>
-<h2 id="b24">二十四、三十岁的&quot;中年危机&quot;、从未享受过青春</h2>
+<h2 class="dlg" id="b24"><span class="ht">三十岁的&quot;中年危机&quot;、从未享受过青春</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你三十岁前有过那种（中年危机）吗？我是有的，我是三十岁就来了第一次中年心理危机。而且以前像我七十年代生（人），我年轻的时候平均年龄也不到今天的八十多岁，六七十岁很多人就去世了，所以大家好像那个年代把三十岁就当成是中年。所以我印象很深，是我二十八九岁的时候就很慌，就觉得马上就三十了、一事无成。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我非常理解那心态，我甚至比那更早。我从很小的时候就总觉得有什么东西在追着、赶着我在后边，我也不知道是啥。这么说起来挺伤感的，我感觉我像没享受过青春，我从来没有享受过青春的心态。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。你那个演讲里，自己写那&quot;青春&quot;，想（对）爸爸（说），还跟他写的纯胡编、假装很快乐。</div></div>
@@ -639,7 +666,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">（那是）18 年，那是 30 出头，也过 30 了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">但也算是比较早了，30 岁成名也可以了，当然不是那种少年（成名）的。你（也能）安慰自己——比如我也安慰自己说我老追末班车，那起码我还赶上了。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">有一些（安慰），我是能安慰自己。但就是你刚才说那心态我特懂，因为很少有跟人聊过这个心态。</div></div>
-<h2 id="b25">二十五、东北文学为什么大量用方言</h2>
+<h2 class="dlg" id="b25"><span class="ht">东北文学为什么大量用方言</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">说到你那个小说——不是说电影，我说小说的时候——我有一个疑问：你们这波，叫什么&quot;东北文艺复兴&quot;这批作家，应该平均是比我小十几岁这波，你们都有一个特点是我一直很疑惑的：就是你们在文字里那么大量地用家乡的土话，这是什么样的一个考虑？就完全不考虑南方读者的感受吗？我先把问题解释清楚。比如你看我们年轻的时候都看过王朔，王朔那个语言其实特别是落到口语上、对白上的，那个东西你就觉得是他文学作品里有机的组成部分，是不能缺的，有一些北京话也有一些是土话，但那些东西是它整个小说的有机构成部分。所以这种对白上的方言话，我是能理解的，因为它有时候带来一些特色、生动性。但我困惑的是，你们这波写东北文学的，即使是描述性的文字也都用大量的东北土话，这个如果改成普通话，会有什么文学价值或艺术上的损失吗？我觉得不会啊。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">好问题，我没有……你以前想过或聊过这个话题吗？我没有考虑过这个层面。但是就我个人回答这问题，我觉得很简单：它就是风格化的抓手。在那个阶段，是风格化的某种抓手。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，特别是刚出道的时候。</div></div>
@@ -658,7 +685,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对对对，是个度的问题。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且咱们大陆的输入法，有些字根本就打不出来，字库里没有。明白。我只觉得这个问题好玩，问一下，没别的意思。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">它其实很简单的一个答案，就是急于寻找风格的阶段。</div></div>
-<h2 id="b26">二十六、童年：歌手母亲、姥姥带大、气功热</h2>
+<h2 class="dlg" id="b26"><span class="ht">童年：歌手母亲、姥姥带大、气功热</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你小的时候——因为你演讲里讲过你家庭的那个状况——你小时候性格是什么样的？那个时候打小很小就对文艺这些东西感兴趣吗，还是后边因为机缘巧合才走到这（一波）？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">从小知道 DNA 里文艺细胞不错，因为我母亲是个歌手——业余歌手，没有走上专业赛道。小时候我就是淘，又淘又懂事：惹事的惹事，然后懂事的懂事，然后我总能逃避惩罚，就是惹完了还能避开挨打。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个是一个很大的本事。我小时候也淘气，但是哪个打（都没少挨）。我听你那些（故事）我都听过，有点硬核，就是嘴贱各种挨揍。然后你是跟姥姥长大的？</div></div>
@@ -675,7 +702,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">没有，那其实是我的父辈经历。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">都不用父辈，比你大个十岁就经历了。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对，他们可能在那个阶段（经历）。</div></div>
-<h2 id="b27">二十七、气功热、迷信与&quot;敬畏不可控力&quot;</h2>
+<h2 class="dlg" id="b27"><span class="ht">气功热、迷信与&quot;敬畏不可控力&quot;</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">（你们这代）受到过这种东西的影响（吗）？因为那时候市面上全是（气功）。我现在回想都不可思议，因为那时候那些气功（流行）横行的时候，很多受过严谨的理工科训练的大学教授（都信），我现在讲就不可思议，一直弄不明白当时是怎么了，但回想那段还是很有意思。包括你小说里不也有那些怪力乱神的东西吗？所以我就怀疑你们小时候也经历过大规模都信，其实是没有的对吧？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对，我觉得不是大规模的。后来我跟我的朋友们聊天，会知道好像是我个人经历在这方面（接触）比较（多），还是因为家里老人的关系——家里七大姑八大姨多、老人多，从小它就是你正常生活逻辑的一部分、一个背景。所谓的迷信，其实是他们家庭生活逻辑的一部分。我经历多了，什么算命、改名，从小我算过多少回命。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你改过好几次名？</div></div>
@@ -694,7 +721,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">但是对这种东西还是不可妄论吧，因为我见过——我很小的时候见过。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">见过啥？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">该怎么形容呢，就是生命体以外的东西，在我很幼小的时候。所以可能它根植在我记忆当中，我对这种东西、我是相信有另一个维度的世界或者什么的存在，我相信。</div></div>
-<h2 id="b28">二十八、文学启蒙：爱伦·坡与蒲松龄</h2>
+<h2 class="dlg" id="b28"><span class="ht">文学启蒙：爱伦·坡与蒲松龄</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你在写作的时候，早期对你影响、或者整个写作生涯里对你影响比较大的、或你特别格外喜欢的作家都有哪些？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">这个说过无数次，就是爱伦·坡。然后如果是中文作家，对我从小影响的就是蒲松龄。小时候这两本书——我识字、能自己看书以后，这是我最早接触的文学作品。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后有某个共同处，因为小时候就都当鬼故事看。</div></div>
@@ -707,7 +734,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">是，我觉得最本质的、说白了，就是你还不明白&quot;文学&quot;两个字是什么东西的时候，扎根在脑子里的那个概念——就是讲一个让人放不下的故事，这就是我最早对文学的理解。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">然后后来你才明白，讲故事还能用这种句式、还能用那种结构、还能讲出花来、还能隐喻、还能有那么深刻的哲学意味，那都是后来明白的事了，是后来在原来知识基础上叠加的东西。最初就是一个故事抓人，而且这个是永远的、永不过时的。</div></div>
-<h2 id="b29">二十九、19 岁的第一本长篇与赴港求学</h2>
+<h2 class="dlg" id="b29"><span class="ht">19 岁的第一本长篇与赴港求学</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你的第一本长篇，就是叫《浮》吧？那个是你说的那个青春文学时期吗？当时是一个什么样的情况？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">19 岁。高考前开始动的笔，大一那个学期写完了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">高考期间啊？</div></div>
@@ -733,7 +760,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">那时候你写那种青春文学小说的时候，也是把那些畅销的青春文学作家当成一个潜在的（对标）？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">没有没有。说实话就乱写，一半当日记，写着写着有意识——这玩意挺长，好像这玩意是不是就是小说，这写出来是不是就是小说，这么个概念。一开始写就是因为失恋了，高二高三失恋了，然后觉得那个情愫我也不知道该往哪寄托，学也学不进去。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你是愣头的（往外投）吗？就长篇小说直接给出版社还是杂志社？</div></div>
-<h2 id="b30">三十、第一本书的投稿：从室友父亲到作家出版社</h2>
+<h2 class="dlg" id="b30"><span class="ht">第一本书的投稿：从室友父亲到作家出版社</span></h2>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我不是，等于是高考前动的笔，那个暑假写了，那个暑假的氛围很尴尬。家里一方面知道我要去香港了，还被地方媒体报道——那时候去香港也算凤毛麟角，&quot;去香港多厉害&quot;，还来报道你；可是另一方面关起门来，家里还要考虑这个钱哪来，然后我跟我爸之间那种对峙，又是我非要去、他就必须承担这个责任，就家里那么一个氛围。我就猫在屋里写一写。然后总算去了香港，过了两个月开学了。我们第一年叫 Foundation，不是 year one——香港的大学本科生本地是三年，我们大陆上四年，是给你安排一个 Foundation 一年熟悉环境用，也没啥正经课上。我就没事老跑 19 楼，我们宿舍 19 楼有个自习室，我就带个笔记本电脑去打字。那时候所有刚到香港的大陆学生每天都是出去玩、见世界、玩、约，就我一个憋屋里。还有一个哥们，他现在是我的好朋友，一个北京男孩，他也每天憋在自习室里打 CS。我俩大概那么互看了一个月之久，然后终于有一天他莫名其妙就凑过来，说&quot;哥们我问你，你天天啪啪啪打啥呢？&quot;我说我在写小说。他说写多少了，我说写一半多了吧。他说能不能给我看看，然后他就看，是我的第一个（小说）《浮》。然后他觉得很好笑、很好玩，他说&quot;那你快写完了吧&quot;，我说是。他说&quot;你写完了，暑假放假跟我回北京，我爸虽然不是干出版社的，但跟这个行业有关&quot;——他父亲那个时候是做版权保护中心的，是那么一个机构，但懂出版。他说&quot;你爸（指他爸）愿意，我把你稿子给我爸看看行不行？&quot;我说好。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">然后那个暑假我就来到北京，我记得在清河小营。后来我才知道——他隔了好几年才跟我说实话——他接近我，是因为发现我有一个女性朋友他喜欢，他接近我最后是为了认识那个女孩，但最后我们都成为了好朋友。然后我到了北京就住在他家，他爸非常学究式的那种人物，戴眼镜，一晚上把稿子打印出来，一天一宿读完看完了，然后给了我几句非常老干部式的评语：&quot;郑执写得不错，这本小说就你的年纪而言，我整体给你打 85 分，叔叔给予你的鼓励。第二，我只是个建议，你就去投稿吧，去投稿千万不要灰心，你去看看那些余华、苏童、莫言他们被退稿的经历，一定不要气馁。第三，叔叔给你建议，怎么投呢——你先从最好的去。&quot;我说最好的是哪？&quot;当然是作家出版社&quot;，就那时候严肃的、有排名的，在团结湖文联那楼里。&quot;你先从作家出版社（投），但是叔叔告诉你，大概率一定会被退回来。&quot;然后他给我列了个单子：第二个你往哪投，第三、退到某些社科类的小出版社，可能你哪个踩中、走个狗屎运出了本书，那你就算是作家了。我说那我就明白了，你就把作家社地址告我，明天我就去。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">完了我就背个小书包，我那哥们陪我去，我俩就是（直接）敲门。我到现在记得当年作家社那个副主编，那位老师的名字叫张水舟，是叔叔辈、父辈的人。我就把打印出来的稿子撂到人家（桌上），我那哥们像我保镖似的跟后边一坐，俩学生。我就跟人狂捧（自荐），我说我怎么怎么样，甚至我那个时候还会说——那是 19 岁纯小鲜肉——我说&quot;你看，我知道你们现在推这些年轻作家也很在意形象，我觉得我形象也不差&quot;，就 hard sell 自己，东北人的那种。我说&quot;我形象也不差，说也不丢人，你们要是推形象，我口才也还行，如果需要我场面上、咱也场面上（行）。总之你看这稿子挺厚的，张老师我就求你看一下这稿子。&quot;然后那个老师——哎哟您要不提今天不聊，我都快忘记这个名字了——那老师就听我喷了半个点、一个小时吧，很有耐心听我聊，聊完之后、我一顿喷喷完了，张老师说：&quot;郑执你看，我也不瞒你说&quot;——他那桌上一摞全是稿子——&quot;你看这一摞是某某省作协副主席刚寄来，上面说……我不能保证很快，根本看不过来，但是我保证，如果我看不完的话，我交给我手底下（的人）一定看。给你一个答复行吗？&quot;我说行，走了。当时我认为这就是一种搪塞、安慰，就走了。我就等着——等退稿信或退稿邮件回来，完了我就按那个名单去找第二家。</div></div>
@@ -754,7 +781,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">吸着尾气。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">吸着尾气上去，有意思。这个也是如果（早）找个五年左右——</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">不用五年，三年。当时找个三年，因为有一段，基本上只要是青春文学、写得不是特别差，其实就是 85 前那一代——那些名字你都知道，就是韩寒、郭敬明、张悦然，他们就在，就是新概念第一波出来的 85 前，比我长几岁这一波。那个时候全是少年作家，全是二十岁前出书，全是青春题材，各有各风格都卖得很好，每个人都有动静。然后我这个书出完了以后，这个卖了一万册左右，后边就没什么动静了。</div></div>
-<h2 id="b31">三十一、父亲去世休学写书、鸡汤、《我在时间尽头等你》</h2>
+<h2 class="dlg" id="b31"><span class="ht">父亲去世休学写书、鸡汤、《我在时间尽头等你》</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">第二个（长篇）是什么时候写的？我觉得这里边有个特好玩（的对比）——因为你后边拿了文学奖、又写了一些非常好的，然后早期那些，有一点像什么呢：有的作家前后还是（一致的），不管有一些小波动，但不是脱胎换骨。你有一些读者粉丝是看了后期的以后去看早期，觉得特别（落差大），说这是一个人（写的）吗？非常割裂的。这还挺有意思的。然后你第二个是怎么回事，也是长篇？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我前三本都是长篇。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">我没看过你早期那些。</div></div>
@@ -793,7 +820,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我真不这么想。我觉得我的体质，可能就是一切冷静下来之后——说白了就是潮水退去之后，我穿这个小裤衩，&quot;你看这人还穿裤衩&quot;，我可能就是这种体质。你真要是给我推到那种浪潮当中去，我觉得我可能会失控。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">怎么个失控？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">可能会容易脑袋热，在创作上不理智地看待自己、看待创作本身，我觉得我有点那样。</div></div>
-<h2 id="b32">三十二、匿名作家计划：意外得奖</h2>
+<h2 class="dlg" id="b32"><span class="ht">匿名作家计划：意外得奖</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">那次的文学奖是怎么回事？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">那个文学奖就是 18 年，张悦然跟周嘉宁，他们俩办的——他们不是有个杂志吗，叫《鲤》，就是这种自己办的文学杂志，其实很少了，他们一直坚持办这个杂志，特别好。然后后来他们搞了这么一个活动，叫&quot;匿名作家计划&quot;。我当时不（知道），就只是说周嘉宁给我发微信说&quot;郑执约个稿，写个短篇小说，我们上杂志，两万字以内&quot;，就这么个要求。当时没明确，我没明白那是个比赛，反正就以为是个正常约稿。然后提前半年约，隔了半年了，周嘉宁问我说&quot;写了吗&quot;，我说还没写，他说&quot;还有三天截止&quot;。我说啥截止？我以为是你下场（发表），我说这期不登就下期。他说&quot;这是个比赛，郑执，我们得尊重规则&quot;。我说你没给我说清楚。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">（后来明白）应该是这样，反正一开始没以为是比赛。我记得他推我的时候还剩不到七天，然后最后我用两天两宿写的那篇小说，严格控制在两万字以内，我记得一万九千多点，连改带（写）两天两宿，然后就甩给嘉宁那边了。</div></div>
@@ -831,7 +858,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我不会为这种感到羞耻。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">像我们年轻的时候觉得，作为男性不公开表达自己脆弱或感性的那一面，这件事我到今天看也没有什么对错。比如我如果有一个孩子，我不会教育他一定要这样，但如果他这样我也没觉得有什么问题。我看你们现在——包括在北方长大的、甚至北方小地方长大的那些小伙子们，也不以流露那些感性或脆弱的为耻，我其实是为他们高兴的，我觉得这是好事，因为我们以前有一些多余的负（担）。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">因为我也是，比如这几年有意识（地改变）。你从小在那么一个传统价值观的普通家庭、平民子弟的家庭内长大，所受的教育是不可能（先进的）——除非你是天才，你脑子里怎么会有那么先进的性别意识、某种观念，你一定是通过&quot;我有意识说我想学习、我想进步、这东西是我应该要学习的&quot;，慢慢学习的过程，也是几年。</div></div>
-<h2 id="b33">三十三、&quot;穷鬼乐园&quot;啤酒屋的今昔</h2>
+<h2 class="dlg" id="b33"><span class="ht">&quot;穷鬼乐园&quot;啤酒屋的今昔</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">说到你那个一席演讲里提到的那个&quot;穷鬼乐园&quot;那个啤酒屋，那个现在还在吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">在啊，这生意老好了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？被你带（火）了。</div></div>
@@ -867,7 +894,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你不是说他们是 24 小时、永不歇业的店吗？那你们去拍的时候是包下来？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">包下来，然后我们一撤人家就正常营业。然后来喝酒的、愿意当群演的可以进来。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这个电影上了以后那可能更有意思了。明白。那老板娘也是要熬出来了对吧。</div></div>
-<h2 id="b34">三十四、《生吞》：救了他的一本书</h2>
+<h2 class="dlg" id="b34"><span class="ht">《生吞》：救了他的一本书</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你有没有到某一个点，突然意识到&quot;我好像不干编剧、靠小说也没问题了&quot;？这个大概是什么时候、到哪年？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">《仙症》以后吧，可能 19、20 年左右，就那个演讲前后。后边小说也就卖得可以、还行。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">有特别畅销的吗？</div></div>
@@ -885,13 +912,13 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，读着书长大的人总是有（这种心理）。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">关键是因为那时候网络小说已经很繁盛了，然后你心里会觉得&quot;你看（人家）起点（中文网）&quot;，我不是放在网络（成长的）。那个别扭劲扭捏了一两年才扭捏过来。然后《生吞》就是当时一个想法：我就是想锻炼一下我还有没有这个能力，我这次就是吸引人，别想什么自我表达、你觉得自己多牛，说白了回到了当初喜欢爱伦·坡的那种心态——我就想写一个能吸引人的故事、把人留住、让人觉得好看，能不能有这个本事，当时就想做到这一件事。所以这本书畅销了、挣了钱了，解决了我的生计问题，然后打开了一个局面。所以这本小说对我个人而言很重要，救了我。那是得文学奖之前，之后才有的《仙症》、才有的《森中有林》、才有的现在的新书，就是才能更自由地说：我不用考虑明年有没有饭吃，我今天可以踏实写。那个阶段就是说，我这礼拜写不出来东西、下礼拜收不到稿费，再下礼拜可能就困难了。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。</div></div>
-<h2 id="b35">三十五、写作的&quot;第一读者&quot;与打磨心态</h2>
+<h2 class="dlg" id="b35"><span class="ht">写作的&quot;第一读者&quot;与打磨心态</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你提到你当年写青春文学的时候，刚好自习室里有一个古怪的同学，你们俩很莫名其妙在那一个多月，所以他成了你第一个读者。那你现在一般写小说的时候，正式发表前你会给谁看、或征求一下谁的意见吗？除了责任编辑这样的。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">不一定。有时候是编辑、我经纪人，或有时候我太太，或者有时候对我很特别的人，或者不给别人看，各种情况都有，取决于那个题材、取决于我想不想（给看）。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你会某些写作很重视某一个朋友的意见吗？还是多数时候都是完全自己想的、很有信心？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">会。比如这次——我觉得我最新这本书，是我最尊重编辑和我翻译的意见的一次，因为他们确实会从更宏观的角度给我提意见，我真的觉得有道理、我听进去了。我觉得我这次创作新书、写小说新书的心态变成了一种打磨工艺品的心态，更稳了。就是哪怕别人提出只是一个抛光的（建议）、可能不影响什么大（局），但是抛了光会变得更亮、更吸引人，那个角度我都会琢磨，有用的我都吸纳。我会发现一半以上都挺有（道理）。有一度就是说别人说什么有道理我就不想听，有那么一度，完全一直写作的话容易有这个（毛病）。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。</div></div>
-<h2 id="b36">三十六、&quot;东北文艺复兴三杰&quot;</h2>
+<h2 class="dlg" id="b36"><span class="ht">&quot;东北文艺复兴三杰&quot;</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们被称为&quot;东北文艺复兴三杰&quot;是什么时候开始的、哪年的事？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">《生吞》那前后，《生吞》《仙症》那两年，18、19（年）可能是吧，是获奖前后就有这个说法，我记不清了。甚至这个话可能从某个酒桌上——我记得某个朋友，甚至他们还有人为这个&quot;谁先说的这个词&quot;产生过争论。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你怎么看这个说法？</div></div>
@@ -910,7 +937,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn guest"><div class="who">郑执：</div><div class="say">然后后来有一度，我会觉得有一点点那种洁癖、羞耻，说&quot;你看翻原来写过那个（鸡汤、擦边）&quot;。但后来当我扭正那个心态的时候，我现在是非常正视这个事：我很珍惜自己野路子出来的这个路径、经历，这是我最宝贵的东西。比如我写过那种擦边的，我在那里也学到东西——我知道怎么写东西是能吊住人的。在严肃文学里你也能看到，有一些很好看的故事，它只是用更高超的技巧吊住你，比如爱伦·坡，他就是吊你——就写一个人把妻子埋墙里了，这事二十几页就写这么一个事，他是怎么能勾着你。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">没错。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">所以我很珍惜自己野路子（出身），就有一度曾经可能有机会跟那所谓主流多接触一些，我有点刻意回避的心态，我觉得要保住自己这个特殊性。</div></div>
-<h2 id="b37">三十七、被并列后的压力：六年没出书</h2>
+<h2 class="dlg" id="b37"><span class="ht">被并列后的压力：六年没出书</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们被并列为&quot;文学三杰&quot;之后，有没有下意识的那种心理，比如会关注一下对方的书是不是又拿了奖、或者又卖得很好？下意识会关注这些吗？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">他们不知道，我会关注。因为你不关注你也会知道，因为大家会拿着比较着说。产量——可能不会逐（本）看，但比如他们，包括我们这两个、同龄的这些写得不错的作家，我知道的写得很好，人家两年一本、或者三年又一本了。你像我这一本跟上一本隔了六年。在这六年当中，我经历了挺痛苦的一个心理（历程），到中间那一段的时候会觉得有点压力，半夜把自己急哭过。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">（真的？）</div></div>
@@ -926,7 +953,7 @@ h2:first-of-type{border-top:0;padding-top:4px}
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个其实是好的压力。</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">对对对，好的压力，不是坏事。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你明明在一个体力跟精神状态最好的年纪——就是写小说、搞创作最好的一个年纪，刚开始，就会有这种时间压力。</div></div>
-<h2 id="b38">三十八、未来计划与收尾</h2>
+<h2 class="dlg" id="b38"><span class="ht">未来计划与收尾</span></h2>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">你现在大概后边的计划怎么样？有紧接着要写的题材、或要拍的电影吗？还是这个电影上完了以后休息一阵再说？</div></div>
 <div class="turn guest"><div class="who">郑执：</div><div class="say">我新书等于是最后一稿修改完是今年初，所以这个小说从写到改也小三年。写作上会休息休息。</div></div>
 <div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个（新书）是中篇还是长篇？</div></div>
