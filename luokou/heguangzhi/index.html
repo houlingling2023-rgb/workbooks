@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>何广智 · 一个把窘迫炼成天赋的清醒人</title>
+<style>
+:root{
+  --bg:#f6f0e2; --card:#fbf6ea; --ink:#2c2620; --sub:#8b8170; --line:#e2d6bd;
+  --accent:#a8392b; --accent-soft:#f0e2d2;
+  --luo:#2f5d96; --guest:#5b7a4b; --fs:18px;
+}
+html[data-theme="dark"]{
+  --bg:#23201c; --card:#2b2722; --ink:#e9e1d0; --sub:#a89e8b; --line:#41392f;
+  --accent:#e08a6f; --accent-soft:#3a2a23; --luo:#8aabd8; --guest:#9dbf8b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+  line-height:1.92;font-size:1rem;letter-spacing:.01em;transition:background .2s,color .2s}
+.bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:30}
+.bar > i{display:block;height:100%;width:0;background:var(--accent);transition:width .08s}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;background:color-mix(in srgb,var(--card) 90%,transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .t{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.top button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:9px;height:34px;min-width:34px;padding:0 9px;font-size:.88rem;cursor:pointer;font-family:inherit}
+.top button:active{transform:scale(.94)}
+.toc{position:fixed;inset:0 0 0 auto;width:min(82vw,360px);z-index:40;background:var(--card);
+  border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;
+  overflow-y:auto;padding:14px 0 30px;box-shadow:-8px 0 30px rgba(0,0,0,.16)}
+.toc.open{transform:none}
+.toc h3{margin:16px 18px 8px;font-size:.74rem;color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.toc h3:first-child{margin-top:4px}
+.toc a{display:block;padding:8px 18px;color:var(--ink);text-decoration:none;font-size:.92rem}
+.toc a:active{background:var(--accent-soft)}
+.mask{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s}
+.mask.open{opacity:1;pointer-events:auto}
+.wrap{max-width:700px;margin:0 auto;padding:0 22px 90px}
+
+/* —— Hero 开篇 —— */
+.hero{padding:46px 0 30px;margin-bottom:8px;border-bottom:2px solid var(--ink)}
+.cover{margin:0 0 22px}
+.cover img{width:100%;display:block;border-radius:11px;border:1px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.16)}
+.cover figcaption{font-size:.72rem;color:var(--sub);margin-top:8px;letter-spacing:.03em}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:2.9rem;line-height:1.08;font-weight:800;margin:16px 0 0;letter-spacing:-.01em}
+.hero .subt{display:block;font-size:1.2rem;font-weight:600;color:var(--ink);margin-top:16px;line-height:1.45}
+.hq{position:relative;margin:34px 0 0;padding:16px 0 0 2px;
+  font-size:1.34rem;line-height:1.62;font-style:italic;color:var(--accent);font-weight:600}
+.hq::before{content:"“";position:absolute;left:-10px;top:-22px;font-size:3.8rem;line-height:1;
+  color:var(--accent);opacity:.22;font-style:normal}
+.hero .meta{margin-top:28px;font-size:.86rem;color:var(--sub);letter-spacing:.04em}
+.hero .meta span{color:var(--accent);font-weight:700;margin:0 2px}
+
+/* —— 章节 —— */
+h2{font-size:1.28rem;margin:46px 0 18px;scroll-margin-top:60px;padding-top:26px;
+  border-top:1px solid var(--line);font-weight:800;display:flex;align-items:baseline;gap:13px}
+h2 .num{flex:none;font-size:1.7rem;color:var(--accent);font-weight:800;line-height:1}
+h2 .ht{flex:1}
+.para{margin:0 0 17px}
+.para strong{font-weight:700}
+.para.drop::first-letter{float:left;font-size:3.3rem;line-height:.82;font-weight:800;
+  color:var(--accent);margin:8px 12px 0 0}
+.point{margin:30px 0 8px;font-size:1.12rem;font-weight:700;color:var(--accent);
+  padding-left:16px;border-left:3px solid var(--accent);line-height:1.5}
+.point strong{font-weight:700}
+
+/* —— 分隔 / 对话 —— */
+.divider{text-align:center;margin:64px 0 26px;scroll-margin-top:60px}
+.divider span{display:inline-block;padding:0 16px;font-size:.84rem;font-weight:700;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;position:relative}
+.divider::before,.divider::after{content:"";display:block;height:1px;background:var(--line);
+  width:60px;margin:0 auto}
+.divider::before{margin-bottom:14px}.divider::after{margin-top:14px}
+.turn{margin:0 0 20px;padding:2px 0 2px 15px;border-left:3px solid var(--line)}
+.turn.luo{border-color:var(--luo)} .turn.guest{border-color:var(--guest)}
+.who{font-weight:700;font-size:.92rem;margin-bottom:3px}
+.turn.luo .who{color:var(--luo)} .turn.guest .who{color:var(--guest)}
+.say{font-size:1rem} .say strong{font-weight:700}
+.ad{color:var(--sub);font-size:.85rem;background:var(--accent-soft);
+  border-radius:10px;padding:10px 14px;margin:22px 0;text-align:center;font-style:italic}
+.end{color:var(--sub);font-size:.86rem;text-align:center;margin:44px 0 0;font-style:italic}
+.up{position:fixed;right:16px;bottom:18px;z-index:15;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:1.1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.16);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+.up.show{opacity:1;pointer-events:auto}
+</style></head>
+<body>
+<div class="bar"><i id="prog"></i></div>
+<header class="top">
+  <div class="t">何广智 · 一个把窘迫炼成天赋的清醒人</div>
+  <button id="fdec">A-</button><button id="finc">A+</button>
+  <button id="theme">🌙</button><button id="menu">目录</button>
+</header>
+<div class="mask" id="mask"></div>
+<nav class="toc" id="toc"><h3>精读解析</h3><a href="#a1">一、他是谁</a><a href="#a2">二、他的生平：罕见的「一路上坡路」</a><a href="#a3">三、他为什么被采访</a><a href="#a4">四、他代表哪一类人</a><a href="#a5">五、他的普通与不普通</a><a href="#a6">六、访谈里的「金矿」:几个反认知的洞察</a><h3>完整对话</h3><a href="#dialog">↓ 跳到完整对话</a><a href="#b1">新王登基与塑料奖杯</a><a href="#b2">后期请把烟花加得越夸张越好</a><a href="#b3">这一季的&quot;志在必得&quot;其实是装的</a><a href="#b4">半决赛最惊险，总决赛留着两个绝妙想法</a><a href="#b5">去年太志在必得，反而事与愿违</a><a href="#b6">五年决赛，第一年就让&quot;小周&quot;危险</a><a href="#b7">夺冠那一刻，大脑一片空白想着获奖感言</a><a href="#b8">不会庆祝：对比王勉的&quot;球王动作&quot;</a><a href="#b9">庆功宴：空虚、合照与&quot;谢谢你&quot;</a><a href="#b10">大王的&quot;晚年&quot;：发炎只能吃流食</a><a href="#b11">这篇稿憋了三年：年终述职+长安的荔枝</a><a href="#b12">五年连续杀进决赛，硬碰硬夺冠</a><a href="#b13">冠军本子磨了三年</a><a href="#b14">看《长安的荔枝》路演意外得素材</a><a href="#b15">功利的善良：利他行为的动机困境</a><a href="#b16">不好意思用&quot;心路历程&quot;</a><a href="#b17">奖杯供起来还是扔厕所</a><a href="#b18">漫才兄弟的奖杯放谁家</a><a href="#b19">第一个作品：讲&quot;土/不酷&quot;这条赛道</a><a href="#b20">人生段子：三十年的生活为了这一篇</a><a href="#b21">童年没看过《大风车》</a><a href="#b22">不好意思晒歌单与装×的鄙视链</a><a href="#b23">想做一个有作品感的专场</a><a href="#b24">这一季最喜欢自己哪篇</a><a href="#b25">几乎全是新稿，创作大多单干</a><a href="#b26">脱平人在被时代抛弃</a><a href="#b27">打明牌，但规则又变了</a><a href="#b28">决赛主动让领笑员少 cue</a><a href="#b29">舒衡：偏门的天才</a><a href="#b30">低能量天才的&quot;存玩&quot;</a><a href="#b31">张骏：差一口气的洒脱帅哥</a><a href="#b32">假如冠军不是你</a><a href="#b33">小丽：最不内耗的人</a><a href="#b34">和小四爷同屏：看哭了</a><a href="#b35">对&quot;穷门&quot;年轻人的体恤</a><a href="#b36">拍灯的纠结</a><a href="#b37">为什么一直回避讲童年</a><a href="#b38">宋江的郓城，水浒好汉城</a><a href="#b39">城乡结合部最容易自卑</a><a href="#b40">&quot;知不到&quot;还是&quot;不知道&quot;</a><a href="#b41">包工头家里没见过钱</a><a href="#b42">妈妈的规矩与&quot;下饭神剧&quot;</a><a href="#b43">一张无辜的脸：从小擅长撒谎</a><a href="#b44">当好人比当坏人简单</a><a href="#b45">校服与布鞋里的自卑</a><a href="#b46">什么时候知道自己好笑</a><a href="#b47">嘴贱伤了好朋友</a><a href="#b48">纯性格上的胆小怕事</a><a href="#b49">当着女生面卖弄逗笑</a><a href="#b50">见一个爱一个，始终不敢表白</a><a href="#b51">愿不愿拿大王换暗恋的人</a><a href="#b52">电话销售像解数学题</a><a href="#b53">心软听不了客户诉苦</a><a href="#b54">13个月的蓝领：装老头乐增程器</a><a href="#b55">流水线上的喜剧种子</a><a href="#b56">带一万块坐14小时绿皮来上海</a><a href="#b57">北京没节目，上海是利益中心</a><a href="#b58">大家不知道的那一面：很有智慧</a><a href="#b59">一个人都不认识，闯进上海</a><a href="#b60">追梦的路上得有一个地道</a><a href="#b61">济南没有真观众，每一秒都很珍贵</a><a href="#b62">两块三毛三的门票心理学</a><a href="#b63">第一天到上海：摸两面墙的隔断房</a><a href="#b64">19块炒面与漫无目的的外滩</a><a href="#b65">观光车的吆喝：五年后多了&quot;看脱口秀&quot;</a><a href="#b66">第一次看开放麦：差距有点大</a><a href="#b67">隔一周才上台：第一场不冷不热</a><a href="#b68">固定住下：1100一月，一万块撑半年</a><a href="#b69">对行业莫名的自信</a><a href="#b70">一年半才靠脱口秀赚到钱</a><a href="#b71">像早期搞摇滚都往北京跑</a><a href="#b72">两年跑上千场，像电影男主角</a><a href="#b73">冷场带来的强烈自我怀疑</a><a href="#b74">和舒衡同批，都怀疑自己</a><a href="#b75">脱二播完，行业一夜成型</a><a href="#b76">偷偷学石老板，前辈给上课</a><a href="#b77">穷但快乐，没立场劝别人坚持</a><a href="#b78">天赋点不一样</a><a href="#b79">地铁段子成&quot;穷门教科书&quot;</a><a href="#b80">成名后被卷进名利场</a><a href="#b81">拒答&quot;嫉妒徐志胜&quot;的失礼提问</a><a href="#b82">上了表演课，确认自己不会演戏</a><a href="#b83">能量低，最舒适是板着脸不说话</a><a href="#b84">第一次去李诞家喝酒：上桌了</a><a href="#b85">酒桌上塑造的世界观：完成比完美更重要</a><a href="#b86">成哥那句话：你是写段子的人，写就完了</a><a href="#b87">不沉迷社交网络，但会搜自己</a><a href="#b88">现场互动、家里人的态度</a><a href="#b89">不爱读书却思想自洽：我没有困境</a><a href="#b90">几乎不看国外演员：国内外差距不大，甚至国内更牛</a><a href="#b91">穷门赛道是自然长出来的</a><a href="#b92">「戴刺的玫瑰」藏的观点</a><a href="#b93">不穷了，能力却撑不起更宽的话题</a><a href="#b94">真正摆脱穷门的，是那篇职场段子</a><a href="#b95">报复性消费：球鞋、高配电子、人均一千的餐厅</a><a href="#b96">大哥们带着喝酒结账：谁红谁买单</a><a href="#b97">为什么不买车：开车去开放麦「味儿就变了」</a><a href="#b98">劝你买国产电车，别买路虎</a><a href="#b99">大王的一天：台球、踢球、喝酒、出梗</a><a href="#b100">长远目标：先做一个有作品感的专场，再谈恋爱</a><a href="#b101">如果回到2018，一万块来上海</a><a href="#b102">结语：来直播间的第一个大王</a></nav>
+<main class="wrap">
+  <section class="hero">
+    <figure class="cover"><img src="cover.jpg" alt="罗永浩 对话访谈封面" loading="lazy"><figcaption>封面来自 B 站 @罗永浩的十字路口</figcaption></figure>
+    <div class="eyebrow">PEOPLE · 罗永浩的十字路口</div>
+    <h1>何广智<span class="subt">一个把窘迫炼成天赋的清醒人</span></h1>
+    <blockquote class="hq">我这一路走来，全是上坡路。</blockquote>
+    <div class="meta">罗永浩 <span>×</span> 何广智 · 全长 3 小时 20 分</div>
+  </section>
+  <h2 id="a1"><span class="num">一</span><span class="ht">他是谁</span></h2>
+<p class="para">何广智，1996 年生，山东菏泽郓城人，脱口秀演员。</p>
+<p class="para">一句话定位：<strong>他是当下中文脱口秀里把「穷门／接地气」这条最容易被做 low 的路，做到了天花板的人——并在 2025 年硬碰硬拿下「脱口秀大王」（《脱口秀和Ta的朋友们》第二季总冠军）。</strong> 成名作是「理发」「地铁」「戴刺的玫瑰」，他那套讲底层窘迫的段子，被同行私下当成「穷门教科书」。</p>
+<p class="para">但比起「大王」这个头衔，有个更贴的反差：<strong>他长着一张全场最憨厚老实的脸，脑子却是全场最清醒、最会算账的那一个。</strong> 这次访谈最值得看的，正是这层反差是怎么长出来的。</p>
+<h2 id="a2"><span class="num">二</span><span class="ht">他的生平：罕见的「一路上坡路」</span></h2>
+<p class="para">别人的励志是「被毒打」，何广智的版本恰恰相反——他自己反复强调：<strong>「我这一路走来，全是上坡路。」</strong></p>
+<p class="para">他在山东郓城的城乡结合部长大——他后来想明白，这是<strong>最容易自卑的地带</strong>：纯村里没事（再走十里还是村，没有对比），可他骑五分钟自行车就到市里，于是从衣食住行到口音用词，处处感到落差（村里说「知不到」，城里说「不知道」，连这都是鄙视链）。父亲是包工头，但「家里没见过钱」，没有零花钱是他童年最深的窘迫。妈妈管得严（吃饭不许看电视，以至于他长大看到「下饭神剧」四个字都惊呆了）。他从小胆小、敏感、晚熟、嘴皮子却很溜——能把全家和全班逗笑。</p>
+<p class="para">成年后的路也朴素：大专辍学 → 电话销售（卖车险，干了一年半，因为「心软、听不了客户诉苦」而离开）→ 新能源「老头乐」流水线点焊工（13 个月，图个不动脑）。<strong>2018 年，22 岁，他带着一万块、坐 14 小时绿皮火车闯上海</strong>，一个人都没商量（「燕雀安知鸿鹄之志」）。住进伸手能摸到两面墙的隔断房，磕了下头就说「以后有钱把整楼买下来」；漫无目的溜达到外滩江边，热泪盈眶——「这个地方配得上我的梦想」。</p>
+<p class="para">接下来两年,他跑了上千场,骑共享单车赶场,把自己代入电影男主角。2020 年《脱口秀大会》第三季「理发」出圈。<strong>穷,但每天都心向上、精神富足</strong>——这也是为什么他后来说「我没立场劝别人坚持」。再后来是被卷进名利场(综艺、串戏,发现自己「只会演自己」),以及今年那篇憋了三年的《年终述职 + 长安的荔枝》,硬碰硬夺冠。</p>
+<h2 id="a3"><span class="num">三</span><span class="ht">他为什么被采访</span></h2>
+<p class="para"><strong>直接的由头,是他刚拿了「脱口秀大王」</strong>,还是罗永浩直播间请到的「第一个大王」。</p>
+<p class="para">但罗永浩看重的不止是这个冠军。在他眼里,何广智是个<strong>稀缺样本</strong>:一个学历不高、自陈「不爱读书」、几乎不看国外演员(英语跟不上)的人,凭直觉和悟性,愣是把「穷门」这种最容易被做俗的题材做成了天花板;还在自己能力一度撑不起更宽话题、被台上当场戳穿「装穷」的阵痛期里硬撑了过来。说到底,采访他是想搞清楚一件事:<strong>一个「方法和路径完全不主流」的人,凭什么能走到金字塔尖。</strong></p>
+<h2 id="a4"><span class="num">四</span><span class="ht">他代表哪一类人</span></h2>
+<p class="para">郑执代表「赶末班车的人」,何广智正相反——<strong>他赶上了风口</strong>(脱口秀行业恰好起飞)。所以他代表的是另一类人:</p>
+<p class="para"><strong>没背景、没学历、清醒地知道自己「只有这一条路可走」,于是把全部筹码压上,并且足够幸运地押对了的普通人。</strong> 他来上海前算得很明白:「我又不是名牌学校毕业的,做脱口秀没什么可失去的,人生已经没有下降空间了,不如搏一搏。」</p>
+<p class="para">更精确地说,他代表那种<strong>「看起来最憨、最接地气,骨子里却极度清醒、极会算账」的人</strong>。我们身边其实很多这样的人:你以为他老实憨厚,其实他对自己的处境、对每一步的得失,算得比谁都清楚。何广智把这种人活成了样板。</p>
+<h2 id="a5"><span class="num">五</span><span class="ht">他的普通与不普通</span></h2>
+<p class="para"><strong>先说普通。</strong> 他身上几乎没有「成功者」的光环感:胆小怕事、社恐、晚熟、敏感脆弱(一次冷场就能自我怀疑、把过往半年的幻想全摧毁);不爱读书、英语不好、五音不全;晕针、怕恐怖片、不敢去密室逃脱;上了表演课才「死心」承认自己不会演戏;在综艺、名利场里浑身不自在,最舒服的状态是「坐在角落里不说话、板着脸」。这些都太像我们普通人了。</p>
+<p class="para"><strong>再说不普通。</strong> 他的特别,不在天赋异禀,而在三样东西:</p>
+<p class="para">一是<strong>精算师般的清醒</strong>。为什么选上海不选北京?——「你应该在利益中心写最干净的段子,而不是跑到远离利益的地方写脏活。」为什么成名了还不买车?——「我一开车去开放麦,味儿就变了,我就没法代表大众了。」他对自己的「人设资产」有近乎冷酷的清醒。</p>
+<p class="para">二是<strong>不靠输入的悟性</strong>。不读书、不看国外演员,却思想自洽。他的解释惊人地直接:「所有的书是为了解决问题,而我没有困境,我大脑能在三秒内处理完。」罗永浩用「我自成佛不读经」来呼应他。</p>
+<p class="para">三是<strong>把「不好意思面对的事」重新估值成资产的能力</strong>。住地铁终点站、没钱吃饭、土、不酷——别人想藏,他全写成段子,全成了冠军素材。</p>
+<p class="para"><strong>关键在于:他的不普通,恰恰长在他的普通之上。</strong> 正因为又自卑又敏感又窘迫,他才有「穷门」可写;正因为胆小求稳,他才在凶险的网络时代几乎不闯祸。他没有战胜自己的普通,而是把普通本身,变成了手艺。</p>
+<h2 id="a6"><span class="num">六</span><span class="ht">访谈里的「金矿」:几个反认知的洞察</span></h2>
+<p class="para">这是最该带走的部分。下面几条,都是「过来人才懂、和直觉相反」的东西。</p>
+<p class="point"><strong>1. 善良可以是「功利」的,而且不必为此羞愧。</strong></p>
+<p class="para">他坦白,自己做好事时会盘算「能换回东西」,并为此反复自我拷问。但他的结论很硬:<strong>好人好做。</strong>「我是洞悉了规律才选择当好人——当坏人太难了,得八面玲珑、一丝马脚都不能露;好人你浑身是毛病,有一丝闪光就够吃一辈子。」把善良看成一种<strong>高性价比的生存策略</strong>,反直觉,却比「我天生善良」诚实得多。</p>
+<p class="point"><strong>2. 在你的「利益中心」写最干净的东西,而不是躲到边缘去苦修。</strong></p>
+<p class="para">他选上海不选北京的逻辑:<strong>离机会最近的地方,保持初心、写最干净的段子;而不是远离诱惑、跑到偏僻处写脏活。</strong> 很多人把「清高」和「远离」绑在一起,他反过来——你该去的是利益中心,然后在那里守住自己。这个框架,换到任何一个「该靠近还是该躲开」的选择上,都值得想一遍。</p>
+<p class="point"><strong>3. 完成比完美更重要;而且,你是「做事的人」,不是「评价的人」。</strong></p>
+<p class="para">这是他从李诞酒桌上带走的两课。<strong>「一件事是做成的,不是筹备成的——你一直等完美,就永远不会出发。」</strong> 配上前辈那句:「你是写段子的人,写就完了,好的坏的评价交给别人。」一下把创作者从评价的漩涡里拽了出来。罗永浩自己做播客也犯过「准备到完美才端出来」的执念,边干边学才破的。</p>
+<p class="point"><strong>4. 不读书也能自洽:知识是解决问题的工具,没有困境就不必去书里找答案。</strong></p>
+<p class="para">这条最反认知、也最容易被误读(它不是反智)。它点破的是:<strong>很多人读书,其实是在「借别人的脑子」代替自己想;而真正的悟性,是自己能把事想通。</strong>「人类智慧的结晶也是人写的,我自己就能想到。」——你不必照单全收,但值得借它反问一句:你读的那些,是真的在解决你的问题,还是在替你逃避思考?</p>
+<p class="point"><strong>5. 「不油滑」本身,可以被经营成一种能力。</strong></p>
+<p class="para">他的自我剖析极诚实:<strong>「油滑是一种能力,我不具备,那我干脆给自己立一个『不油滑』的人设——这样所有需要油滑去做的事,我就都不用操心了。」</strong> 把自己的短板,主动经营成一种「真诚」的长板。这不是鸡贼,是一种清醒的扬长避短。</p>
+<p class="point"><strong>6. 你改不掉的过去,正是别人没有的手艺。</strong></p>
+<p class="para">「穷门」这条赛道能讲一辈子——他说,就算哪天成了亿万富翁,讲「我曾经土、曾经穷」,大众依然爱看;<strong>因为你只能改变未来,改变不了过去,而那个改不掉的过去,是别人没有的素材。</strong> 这条和郑执「野路子是资产」遥相呼应:<strong>你为之羞愧的来路,换个估值方式,可能正是你最值钱的东西。</strong></p>
+<p class="para"><strong>最后,回到那张「憨厚的脸」。</strong> 听完会发现,何广智最迷人的地方,是这张脸和脸背后那本「清醒的账」之间的巨大反差。他不靠苦情、不靠读书、不靠对风口的先知先觉,就靠「把自己活明白」这一件事,走到了金字塔尖。</p>
+<p class="para">问他「如果回到 2018 年带一万块来上海,会怎么重新规划」,他答得干脆:<strong>「一成不变。有运气的成分在,不敢再变了——再变,可能就不行了。」</strong> 一个看起来最憨、最普通的小镇青年,其实是全场对自己认知最诚实的人。</p>
+<p class="end">(解析完 · 原访谈全长 3 小时 20 分,逐字稿、分角色对话稿与校订记录见同一文件夹)</p>
+<div class="divider" id="dialog"><span>完整对话 · 全长 3 小时 20 分</span></div>
+<h2 class="dlg" id="b1"><span class="ht">新王登基与塑料奖杯</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">广智，咱们开始了。2025年脱口秀大王——欢迎大家收看《罗永浩的十字路口》。最重要的是一键三连和加关注，还欢迎随时发送弹幕评论跟我互动。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这就是传说中的大力神杯，那个大笑神杯。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，就是它。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">可以摸一下吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">轻点摸罗老师，因为质量特别次。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">啊？塑料的。哇，没有想到哈。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这个事只有历届的大王才知道是塑料的，没有人往外说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">哦，笑果。老板知道、你们历届大王知道，亚军开始就都不知道了。但还是很酷。感谢，让我摸了一下哈。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不，对大王，小何也可以。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">小何也可以？您可以了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不敢不敢，我把这个大王奖没收起来，叫我小何就可以了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好，那咱们开始吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还挺正式的，第一回录这么正式的播客。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">咱们这期播客录完了以后，播出去的时候，第二季的《脱口秀和Ta的朋友们》决赛也已经播出了，所以咱们这里边可以什么都随便说，没关系。就是我要以大王的身份来跟你对话。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为这期播出的时候，是会在决赛播出后播，所以没事，放心说。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那我就以大王的姿态，我就摆出来了。对，嘴脸什么的都匹配的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">行行行。首先恭喜。</div></div>
+<h2 class="dlg" id="b2"><span class="ht">后期请把烟花加得越夸张越好</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为我们这个直播间不太好打扫，录音棚不太好打扫，所以新王登基的时候，我们也没有准备这个真的烟花。希望你们后边后期给加一些那种特效的烟花，加得越夸张越好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还可以了，还不说还不说。我还有一个想法是，我觉得广智这个给加烟花的时候，最好有一个那样的效果。广智你先把这个麦克风推开，推到这边。对，你这样，你就凭空做一个微微仰视，然后脸上很陶醉，很自得意满。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但不要那个嘴脸太难看，就是那种&quot;多年的梦想终于实现了&quot;那种，而不是那种得意洋洋，讨厌那个劲。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">罗老师这个我现在非常会，练了很多次了。我现在就是那个平常自然放松的状态，就是清风得意。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">嘴脸不要太过分。你这样，你这样眼睛不要闭上，就这样缓缓的、缓缓的，这样转动两下。这个呢，我们后期给切很多烟花，在你面前爆开那种。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对，就这个意思。来再试一下啊。郭导你觉得对吗，这个角度，我仰视角度，来缓缓的转一下，三二一。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我确认一个事，这个咱们确定后期会配烟花？如果不配的话，我会很傻先。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">肯定会配烟花。我们会配一个很傻的，再配一个烟花的，还有背景音乐。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">牛。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们对艺术太严谨了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对，太严谨了。</div></div>
+<h2 class="dlg" id="b3"><span class="ht">这一季的&quot;志在必得&quot;其实是装的</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">感觉你这一季整体上的气势，从第一场开始就有点志在必得的意思。这个跟你往届的那些比赛比的话，有什么心态上的变化吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实是有的。好多人跟我说，说这一季从第一轮开始，就感觉我志在必得，有一个气势在。但其实我自己的感觉是，我第一轮其实是装的。因为我这一季挺心虚的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为啥呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我其实最志在必得、最有信心的是上一季。很简单，因为上一季我是储备了有两年的储备，我手里比完，我还有两套段子没讲完，就是完全放心。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有余量的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有余量的。今年呢，其实我只有两篇稿子存货，所以其实非常心虚，但又不想让别人看出来我心虚。我前两期就一直在硬撑，不能让别人看出来破绽，我就觉得假装志在必得。然后装着装着吧，大家就都信了，然后我也信了。我也没有段子，但是就在那硬志在必得。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是进入了一个自我催眠，和把大家带进你的幻觉的这种氛围。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。然后不知不觉，不知道怎么就撑下来了。</div></div>
+<h2 class="dlg" id="b4"><span class="ht">半决赛最惊险，总决赛留着两个绝妙想法</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是打到第几轮的时候——你们要一直打到最后的冠军，第二轮的话一共是七个作品吧——那你打到第几轮……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是……哎，我这舌头怎么了？我有点至，发现我有点大舌头。罗老师，你被我传染了。不是，就跟大王说话，还是可能有些惶恐，假装很放松，其实还是紧张。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不用紧张，何老师，你做自己。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">谢谢，谢谢何老师。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个打到整个比赛第几轮的时候，你感觉好像要稳了，有这种感觉是第几轮？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我最惊险的是半决赛。我当时跟身边的朋友也说，我说只要能让我过了半决赛，就是夺冠就有希望了。因为半决赛的那两篇稿子，是我自己本来——也不算是储备吧——就我有两个非常、我自认为非常绝妙的想法，两个idea在那放着，我一直没碰。我就决定总决赛再去动笔写它，但是我知道它是好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还没写出来。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">写了半篇嘛，两个半篇。但是我知道它是好的，我就一直没动。但是如果我在半决赛的时候，我如果提前动了总决赛的这两个想法，那我总决赛就没有东西打了，就没有特别硬的东西了。因为我觉得短时间内，很难找到这么跟总决赛的气质相配的东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在你拿完了冠军，说尽绝妙绝妙的也没事。你前面也是自己催眠，也是说绝妙。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我有一个感觉，我半决赛那个是新写的，比较艰难。我之前老有个想法是，我说这要是夺了冠之后，我以后说这些作品的时候，我都得用上&quot;作品&quot;两个字；但是要是没赢，我就只能说&quot;其实当时也就是那稿子，也就那样&quot;，我只能这么说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但实际上你在家里创作的时候，在键盘上敲着敲着，有时候就突然就站起来，手舞足蹈，就是&quot;小孩真有你的，我看你行&quot;，经常有这样说？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">经常有。我经常写着写着，要在那个客厅里绕一圈，就是&quot;这想法也太厉害了&quot;。</div></div>
+<h2 class="dlg" id="b5"><span class="ht">去年太志在必得，反而事与愿违</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你去年本子那么充足，然后也志在必得，肯定有过这样的时刻，最后没拿，回去怎么抽自己大嘴巴呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得去年还是有些、很多事情事与愿违。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是因为跟你的心态、姿态有很大的关系。因为去年太志在必得了，你太凌驾于比赛之上了，这种情况反而会出问题，自信到那个程度。但是你演得真好，就去年你整个赛段也没有那种丑恶的嘴脸，看着还行。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我经常就是在台下狂的，我说&quot;今天就给他们笑一个大的，让这些人看看什么叫幽默&quot;，上台之前是这种状态。然后我上了台，基本上面对镜头的时候，我还是会说&quot;今天也没发挥好，我觉得在我心里每一个人都是冠军，这个舞台对我来讲还是非常的难，大家都非常厉害&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">瞬间就切成那个嘴脸了。</div></div>
+<h2 class="dlg" id="b6"><span class="ht">五年决赛，第一年就让&quot;小周&quot;危险</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这是你历史上第几次杀进决赛？连续五年对吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我第一年只进了半决赛，然后从第二年脱四、脱五，然后脱友第一季、脱友第二季，我是四年进总决赛，全都有决赛。但我每年其实进总决赛都离冠军挺近的。就是我第一年竞选总决赛的时候，那时候大家觉得最有希望的是周奇墨，然后看完我第二轮的稿子之后，大家说好像周奇墨有危险。也不能说有危险，广智就有点希望，大家是那么说的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你在家里想的是周奇墨危险。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我在家想的是&quot;哎呀奇墨&quot;，尤其写出一段绝妙的之后，说&quot;奇墨完了&quot;。我当时替奇墨捏一把汗，我说&quot;哎呀小周呀，你遇到我算你倒霉吧小周，你这个天花板碰到我就完了，要漏雨了天花板今天&quot;。</div></div>
+<h2 class="dlg" id="b7"><span class="ht">夺冠那一刻，大脑一片空白想着获奖感言</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个宣布咱们这一季就是总决赛最后一轮、宣布结果的一瞬间，你当时是什么感觉？是一切都在掌握之中，还是&quot;真的吗&quot;，还是当时是什么想法？然后你第一时间就想的是什么，眼光投向了哪里？这个给我们回顾一下。注意不要撒谎，这个是有录像留存的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我这块绝对不会撒谎。我那会夺冠的那一会，反而我整个大脑一片空白，我整个人是抽离出去的。因为我其实是在那个演完第一轮结束的时候，我就觉得好像冠军要拿到了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为你最后一个本子是最硬的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">几乎是吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是。所以其实到那你应该心里就有数了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为我第二轮的稿子，我知道在我第一轮拿到最高票之后，我只要把我第二轮的稿子完成，我就是冠军。所以我情绪最浓烈的时刻，就是第一轮——决赛的第一轮，讲完或者是出票的时候，那两下，是我情绪最浓烈的时候。我就是特别想要得到冠军那个情绪，在那两下就释放完了。反而真正那一刻来临的时候……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就等于说你其实已经提前知道结果了，那一刻真的到来的时候没有那么激动。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那会我在想，获奖感言该怎么说会比较体面一些，就那会有点抽离出去了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">获奖感言去之前在家里准备了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没准备，说实话真没准备。因为没有精力。因为那帮哥们兄弟的，每天都在改稿，他们甚至临上台的前半个小时，还在调整自己的语序啊、表演。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你也是吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我也是。所以就没有机会准备获奖感言，就光改稿子了。我那会儿大脑一片空白，我在想怎么说获奖感言会比较体面。</div></div>
+<h2 class="dlg" id="b8"><span class="ht">不会庆祝：对比王勉的&quot;球王动作&quot;</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我还有隐隐的一种担心，因为我从小就特别不擅长应对这种盛大的、夸奖的场面。就是我特别擅长坐在角落里。首先就是我不擅长庆祝，我不知道用什么样的姿势把那个奖杯拿起来。因为我第一年看王勉夺冠的时候，他是这样，就是享受全场的鲜花掌声，像那些球王的动作。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我当时给我吓坏了，我说我这辈子不能夺冠，因为这个动作我就做不来。然后其次就是那个动作……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最后你还是做了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">最后还是做了。但是我就是通过这些年努力练习克服了。然后我也不知道，就是说你扭扭捏捏的，这样好像也不太合适，这样我又不太擅长。我当时就在非常紧张，我在想、大脑在快速地做这个抉择，我是应该这样呢，还是这样呢，还是怎么着呢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是作为一个真正的大王，怎么在公众面前表现王者之风。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，很紧张。我就觉得如果你表现得扭扭捏捏的，是不是又配不上这种奖杯、配不上这个场面，又怕过于浮夸。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你想太多了。因为你做那个动作的时候我看了，你肯定没有像王勉他们做的那么流畅自然丝滑。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不自然吗？我以为很自然。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不是很自然。但你不知道，你打动人的就是这个。就你做那个动作的时候，看起来有一种稍稍有一点木讷、稍稍有点笨拙的那种，那种东西特别打动人。所以你不用刻意要把那个练得贼帅，就那个东西特别打动人。说实话，像他们那种很丝滑、很帅的坐一圈，我还嫌油腻呢，你那个特别好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">非常衷心的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">得了，老师夸奖了，得了大王。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你就是坐得不丝滑，大家也能找到角度夸。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就这个道理。还是得赢，这个世界就是这样的。你那天晚上无论做错了什么——</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实没有啊。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但如果真的做错了什么，也一定会有一个理由大儒为你辩经。所以完全不用担心。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">行，那就放心。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">赢是最重要的。</div></div>
+<h2 class="dlg" id="b9"><span class="ht">庆功宴：空虚、合照与&quot;谢谢你&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你们去庆功宴，有什么好玩的或意外的或者邪门的事，跟我们分享一下吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实到了庆功宴的时候已经很晚了，已经凌晨四点半了吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们还补录了一些东西是吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，补才……到结束的时候，鸟鸟就跟我说，他觉得终于很辛苦、很劳累的阶段性工作完成了，但同时心里又特别空虚，就希望它没结束。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这种感受每个人都有，就是前面绷得太紧了，然后突然第二天告诉你啥事都没有了，就这种落差特别的空虚。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后到了庆功宴之后，大家情绪也已经很疲惫了，情绪也消磨得差不多，但还是很兴奋。就是我之前如果有人找我合照，我觉得我拿酒瓶的不太方便，我就会&quot;咱先别合了，怎么着怎么着的&quot;。那天我会觉得所有人的合照我都必须得答应，无论我此刻是什么状态了，因为不然会不会让别人说他飘了。那时候已经在想这个事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个庆功宴最让我动容的一个事是——你变成大王以后，&quot;感动&quot;都叫&quot;动容&quot;了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">开始这样说词了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我回家读了不少书，把所有的词汇都修改了一下，都不接地气了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就不能接地气。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">要不然太吓人了。最后临走的时候，高寒找到我——我不知道高寒愿不愿意让我把这段说出去，但我一定会说出去的——他找到我，他抱了我一下，他说&quot;智哥，谢谢你&quot;。他说的不是&quot;恭喜你&quot;，他说的是&quot;谢谢你&quot;。我大概能感觉到他是啥意思。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也大概能感觉到啥意思，但不一定我们会在这里说，对不对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实有一小波朋友，张骏也跟我说过一模一样的，他说的不是&quot;恭喜&quot;，他说的是&quot;谢谢你&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<h2 class="dlg" id="b10"><span class="ht">大王的&quot;晚年&quot;：发炎只能吃流食</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后最难受的是，致辞发言……我本来幻想的场景是，夺了冠之后狠狠的庆功宴，大碗吃肉、大块喝酒，大碗吃肉、大块喝酒。然后结果牙至发炎了，然后肉也没吃上，酒也没喝成。然后录完的第二天是最严重的时候，嘴都张不开，我在家吃了一天的流食。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">大家以为你要怎么着了，吃上偷偷的蛋糕了。怎么听着像大王的晚年呢？才第二天。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，第二天就开始吃上流食了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">像晚年一样。哪都没去？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有，累坏了，没出门。第二天去录小会了，还有一些后续的工作要处理，什么片花之类的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">什么补拍、什么高光时刻，这那的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还在忙。然后第二天晚上，是我真的觉得这个事、就真的确认自己赢了。前面一直是不太能接受这个事。</div></div>
+<h2 class="dlg" id="b11"><span class="ht">这篇稿憋了三年：年终述职+长安的荔枝</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那两天我跟很多人聊过这个赛事的结果，就大概意思说，这一季无论是广智还是这个节目，都功德圆满。当然还有一些嘴损的说，如果你中间不惹那些骂战就更好了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但这个不重要，重要的是节目本身。无论是你还是节目本身，真的就是功德圆满了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为我这一篇稿，就是总决赛第二轮的那个《年终述职》，我去年其实就有这篇稿，那是我给去年的第二轮准备的，但是没有那么完整。它去年只有&quot;年终述职&quot;，没有&quot;长安的荔枝&quot;那一部分。然后大家就说，其实我去年把这一篇如果进了第二轮的话，也肯定打不过漫才兄弟，就是去年也只能是最多可能跟呼兰掰掰手腕。就是大家觉得，其实这么看，好像一切都是最好的安排。就是因为去年没有进第二轮，然后这个稿子没有讲，然后留到了今年，又补上了一段&quot;长安的荔枝&quot;，让它更加完整之后呢，然后今年顺理成章了，夺了冠决。就是都是最好的安排吧。</div></div>
+<h2 class="dlg" id="b12"><span class="ht">五年连续杀进决赛，硬碰硬夺冠</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">今年漫才兄弟最后一轮也是无敌的好，你还是硬碰硬地赢了。他并没有说——比如我们都知道漫才兄弟的实力——但他并没有在最后一轮垮了、然后你表现好，其实你们俩是纯硬碰硬。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，他那个太强了，特别强，就那样你还是赢了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他那个其实从表演上是有重大突破的，但你还是赢了，所以我就特别高兴。为什么说功德圆满？它有很多个角度，其中一个就是漫才那最后一把也是惊艳的、也是突破的、也是实力无敌的，但你还是硬碰硬赢的，这个是最精彩的。就跟咱们以前看世界杯，你不愿意看决赛的时候，突然有一个很牛、另一个很拉胯被屠杀，大家说这也不像决赛——就没有这个。这是从节目的角度说功德圆满，就这个意思。最后一轮好几个都是硬碰硬的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。我当时的感觉就是，这个节目以往的历史上，很多那种优秀选手打到冠军的最后一轮——就是决赛的最后一轮的时候，其实都有点疲塌了嘛，还有一些就是把最狠的本子都已经用出去了。所以我记忆里还经常有，冠军赛的时候其实没有那么好看，大概率只有那么一两个人好看。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，因为不可能全员都有储备。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，今年是好几个好看，这是第一个。然后还有一个，我没有那么很认真地去回顾比较过，但我的感觉就是，你拿冠军的那个本子是这一季最强的一个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">可以说是要什么有什么吧——比如充足的笑点，然后有深刻的、现实的讽刺，然后还有一些很淡的、很收敛、很克制的那种伤感，然后还有最后那个小升华。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对，不落痕迹的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是淡淡地上了一个特别触动人的价值。咱们以前老说最厉害的选手，一场作品里虽然只有短短七八分钟，就是要什么有什么那种。我感觉你这个本子就是要什么有什么的那种。你当时是怎么想到这一篇的？</div></div>
+<h2 class="dlg" id="b13"><span class="ht">冠军本子磨了三年</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实我那稿子——我第二轮的稿子准备了，如果细数的话可能算是三年，大概这么久。最初的初稿是我脱五的时候第二轮，掏出来一张纸，这个形式在脱五就有，当时叫一封情书。因为我脱五讲了很多我没谈过恋爱的段子，但这个事情被很多网友用一个什么文化的词诟病吧，他们就说我怎么老讲谈恋爱，你怎么什么主题赛也讲谈恋爱，大家就老说这个事。然后到了总决赛第二轮的时候，那时候总导演红导，他就建议我，他说既然如此的话，你第二轮不如就写一封情书，写一个给脱口秀的情书，你怎么追求脱口秀的，叫《一封情书》。这是红导的点子。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，红导这个太厉害了，当时效果也很好，特别惊艳。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后我就把它写下来了。写下来之后，我脱五没有进第二轮，就一直留着这个形式。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有谁是在现场掏出一个纸来念的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有一些是告别、淘汰的时候说的，这个舞台上出现过这种形式，是掏一个纸出来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但我还是觉得红导那个建议挺好的，有一封情书。然后我没进第二轮，到了脱友第一季——脱六嘛——那就算了，我又没进第二轮。那个时候我已经把它改成《年终述职》了，我觉得我已经不讲谈恋爱的段子了，你再讲一封情书有点怪。然后有一回蛋卷跟我聊天，他说他押今年你是冠军，他说因为我算了，就是从群众威望、工作经验、业务能力方方面面你都适合。他说完这段话之后，我那时候刚好有一个年终述职的段子，我就把它改成了《述职报告》，又没进第二轮。然后到了第三年，就是今年，我把它补上了《长安的荔枝》。</div></div>
+<h2 class="dlg" id="b14"><span class="ht">看《长安的荔枝》路演意外得素材</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《长安的荔枝》那个是怎么想到的，这有个故事，那个特别好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那个《长安的荔枝》的段子，本来那段时间是新写的嘛，我已经完全不知道写啥了。然后就在我焦头烂额的时候，我一个公司的前同事——他之前跟我，我们那个部门关系比较不错吧——他现在跳槽去了《长安的荔枝》那个电影剧组，大概是这个感觉。然后他们跑路演的时候，有一站在上海，他就想邀请我去看一看，然后在最后的时候说两句话夸一夸嘛。我其实特别害怕这种场合，因为我也觉得我不懂电影，我能说个啥，我很紧张，然后我想要么拒绝了吧。但我转念又想，人家一个小朋友从你公司跳槽去了另外一个公司，如果在前公司一个朋友都没有的话，会不会显得——会给他现在的工作造成一定的影响。连个大王都请不过来，为人处事也不行，怎么前公司一个同事都叫不来。我就带入他的视角，我觉得有点……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这方面特别善良。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">很多人跟我说过，有点脆弱。我就觉得我想帮他一把，我应该去站个台，就是告诉大家这朋友在前公司处得不错，人是有朋友的。然后我硬着头皮去了，去就看他，发现电影真不错，然后有几个地方特别触动，然后跟比赛也特别像，能写，我就赶紧把它码下来去开放麦试。试完之后效果特别好，特别好。那天回去的路上，我就告诉自己，何广智，你的善良又救了你一次。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，因为你那个升华是特别自然、不动声色的一个，特别舒服的。咱们其实都很怕那种硬上价值或硬伤感的，你那个太舒服了。所以真的是因为做了好事，意外得了这么一个素材。</div></div>
+<h2 class="dlg" id="b15"><span class="ht">功利的善良：利他行为的动机困境</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但我后来想，老师，我现在有点——就包括我做这个事的时候，是因为我以前的善良得到了足够的回报。然后我发现，我在去看那个电影的时候，其实我就已经盘算好可能会有意外收获了。就是我发现，有很多时候，我的善良是非常功利的，我就感觉能换东西回来，反正我那时候后来结果真换来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">草威你记得吗，他这个想法跟我一模一样，而且我没在我俩之外的第三个公众人物身上看到过这个。你记不记得？</div></div>
+<div class="turn guest"><div class="who">草威：</div><div class="say">我记得。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我以前采访的时候——不对，是我《我的奋斗》里写的应该是——我就说我愿意做好事、愿意帮助别人，但同时我自省和自己想得很多，所以有时候又会觉得我做的这些好事其实都会功利上换来一个好的结果。所以我一方面是真的愿意做这些事，做了以后我还忍不住老自己在那动摇去想：我这到底是为了单纯的善良和乐于助人做的，还是会想这个过程中你也知道功利地会带来一个好结果。很少有人会去自己想这么多。原来真的有人跟我一样想法，这点咱俩一模一样，我那个书里就有这个。</div></div>
+<p class="para">将朋友提醒：广智和我的这种想法其实很普遍，甚至有一个专门的术语叫&quot;利他行为的动机困境&quot;，大家有兴趣的话可以自己问一下 DeepSeek。</p>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我当年很多朋友就说你这个想得太多了，没有必要，我也觉得没有必要，但是我就忍不住去想这个事。所以我一般做什么事的时候，公认是做得好、做得牛的事，我也会自己老反复去想这个事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以这点还挺有意思的，以后咱们俩可以多聊一下这个，咱们聊善良这一块。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是是是。</div></div>
+<h2 class="dlg" id="b16"><span class="ht">不好意思用&quot;心路历程&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你这个大王也拿了，有两周了？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">差不多，录完两周了吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这期间你整个心态有没有什么感受？当天我已经知道了对吧，你很激动，然后一片空白，然后第二天有恍惚感。这后边还有什么心理上的变化吗？比如有没有感觉什么空虚啊，或者有一点遗憾啊，就这些好玩的心理上的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我没好意思用他们采访最爱用的那个土词，叫什么&quot;心路历程&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">心路历程。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但后来就发现，这个虽然是陈词滥调，它其实字面上是很准的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我就发现很多词汇其实替换不掉，就太准了，用得太多就显得土，但是替换不了。包括我们做市场营销、做广告的时候，有一些那种套路你觉得特土，但等到你真做那类产品的时候，发现有一些是替代不了的，它准确，所以它才会老用。有的时候你为了求新而求新，其实是不对的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">罗老师，我插一下问个问题。你刚刚讲一些很土的、用得比较多的词汇你就不太愿意用了，所以罗老师你对这方面对自己有要求，因为觉得自己也算个文字工作者吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那如果说你比如在微信聊天的过程中，你会习惯于发表情包吗？还是觉得表情包如果能用文字替代，我就不发表情包？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不，我喜欢用表情包。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">喜欢用表情包。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，因为有一些尴尬的事，你用表情包会比文字好很多。对，其实我用文字也是真诚的，但它会显得有一点别扭，这时候用表情包就可以很好地化解这个东西。但是我现在的尴尬是，他们说现在年轻一代不爱用表情包了，然后我跟人家发的时候多几个表情包，人家说&quot;啊，这个就是老登的一个习惯&quot;。是有这种说法吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不是，罗老师，我听过另外一种说法是，有一些文字工作者会对自己有格外高的要求：如果说你一个写字的，你还发表情包，那证明你的文字能力也不行啊，这种情绪、这种感受你用文字表述不出来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我被这个绑架过，后来我发现——去他的。因为你很多时候尴尬的情况下只能用表情包。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">当然当然，文字是代替不了的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且我不相信这是文字工作者说的，他大概是文字工作者的粉丝，把他的偶像往死活里逼。我被这个绑架过，曾经我有一段时间用这个要求自己，后来发现不行，因为显得特别没有礼貌。人家拉个群都发个表情包干杯，我码一段字，显得我很傻。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对，是这样的，这个是完全没有必要的。</div></div>
+<h2 class="dlg" id="b17"><span class="ht">奖杯供起来还是扔厕所</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你一下就把话题给扯跑了。那我问你一个严肃的：你最后这个奖杯，是会像那些正常的、得了最高荣誉的人，放在书房里一个醒目的角落，或者很正式地放在某一处，还是干脆就扔了？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">扔了应该不至于，那太装了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一种装的是扔到厕所里，然后还让人知道。因为你们家厕所没人知道，得让人知道。我记得以前有球星是怎么干的。你是准备怎么处理这个奖杯？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我肯定把它供起来。因为我觉得这是通过努力换来的，这一路走来也很辛苦、也很光彩，我觉得没有什么见不得人，我要把它供起来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然当然。说明广智是那种很正常的大王，不是精神病大王，用这个能判断出来。应该没有人会把它扔厕所吧。</div></div>
+<h2 class="dlg" id="b18"><span class="ht">漫才兄弟的奖杯放谁家</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">说到这个我跑个题，那个漫才兄弟的奖杯，是放在徐浩伦家？这个我也很想知道。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没问过是吧。我们下次请漫才兄弟的时候一定要问一下，到底放谁家，还是轮流放——一个礼拜放 A 家，一个礼拜放 B 家。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">以我对他俩的了解，很有可能放在了笑马工作室。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有可能是那样，那可能是伟大爷耍了阴威，然后伟大爷求他们留在了那儿，但是肯定假惺惺地说，为了避免你们俩打起来，这个事我看公司替你保管吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，当老板呢，这一套一套的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你帮着就来，这我也会。</div></div>
+<h2 class="dlg" id="b19"><span class="ht">第一个作品：讲&quot;土/不酷&quot;这条赛道</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">咱们还是聊一聊你决赛的两个作品。第一个，你那个自嘲，我现场也说了，感觉你又挖掘到了一个长期价值很看好的赛道，就是你开始讲自己土嘛，我觉得这个特别聪明。以前咱们聊过，一个脱口秀演员从穷到富裕一些，这个时候他的难办之处是不能再讲穷段子了，但是一个有钱人土，其实是公众乐于见到他出洋相的。所以大家都知道你有了些钱以后，你开始使劲讲土，这个可以讲好几年。那个是创作过程中突然想到的，还是你有意识地觉得这是一个长期发展的赛道？你怎么看这个东西？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">罗老师这个问题问得非常好，我特别想回答。我其实并没有有意地往那个赛道走，但我觉得如果有一个人，他的意识能超前到说要走这个赛道，那他太厉害了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是写着写着就撞到这个方向了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为罗老师应该能听出来，那个段相对来讲会有些碎之类的感受，就是他从衣食住行每个方面都聊了一下嘛。其实最开始的时候，我只是——我最开始的情绪是，我发现我不好意思把我的歌单露出去，只有这一个情绪。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个是真事吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这个是真事，这是真事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你喜欢那些土的歌？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得你艺术上的品味不会差的，但音乐的话，可能刚好是你自己感觉不好意思的一个点。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我感觉我音乐品味应该没有那么好，应该一般。因为我天生——他们说我那个叫五音不全，我的耳朵听不到一些声音，所以我听歌跟别人听到的不一样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以是假结论吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，假结论。然后我其实就是先写&quot;我不好意思把歌单露出去&quot;，后来又想到了打车的时候师傅的歌单我都特别爱听，然后慢慢才发现这好像是一个赛道。所以最开始的切入点并不是倒着写的、本末倒置地先去写土。但我是觉得，如果有一个人的意识先写土的话，那很厉害。我反正就是只是写了我的处境。最后包括当年我写穷也是，其实我们那个时代是不分赛道的，最开始我只是写了我的处境，想到哪写到哪——住在中间站、不好意思打车，然后大家说他是这个贫穷赛道的。大家后知后觉才发现，好像分了赛道之后会让这个人的人设更加饱满立体。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实艺术创作都是这样的，开始是艺术家的不自觉行为，等到了一个阶段以后，研究的人、理论家就跟进了，跟进以后讲说这些人为什么会取得持续的成功、这个人为什么实力很强但一直波动，然后最后总结发现跟什么人设定位、长期强化某一个有关——这都是后总结出来的。所以像你还是比较天才的，没有想那么多，就一步一步撞到这了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我不知道这算不算天才，误打误撞。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">肯定是天才，你看他奖杯。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不反驳我不反驳。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这反驳不了，没法反驳。</div></div>
+<h2 class="dlg" id="b20"><span class="ht">人生段子：三十年的生活为了这一篇</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我那个土的段子，四月份我就写出来了，它在我的石墨文档里面，标题叫&quot;不酷的人&quot;，叫《不酷》。我把这个段子称为&quot;不酷&quot;。因为这是我在上海生活的七八年以来特别真实的一个情绪，它是我的一个处境。我当时写出来之后就偷偷笑了一下，我说这个要留到决赛走。我把这种类型的段子称为人生段子，就是可能我生活这三十年就是为了这个段子。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就你肯定是因为小时候生活在农村，原生家庭没有那么富裕，然后你的眼界没有那么宽，你接触的东西没有那么丰富，才导致你到了大城市的生活会比较窘迫，这所有的一切都是有因果关系的。你之所以有这个处境，是因为你前三十年的生活是那样。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">所以我把这种段子称为人生段子。它有点像比如小帕、小四爷他们第一轮的那种稿子，就是三十年的人生就为了这一篇稿子。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后我就偷偷笑了一下，我说这个情绪又真，又是个人生段子，一定能打，我就把它留下来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且可以创作很多年，这个赛道。就算你成了亿万富翁，这个也完全没有任何问题，就是暴发户嘛。大家不喜欢看到一个人挣了钱出来还说我不但有钱、我还帅、我还酷、我还行、我什么都行。但是如果你想象一下，你真的就算成了亿万富翁，你出来讲这些、讲我怎么土，大家还是觉得这些人非常可爱、非常有意思。你只能改变你的未来，你的过去是改变不了的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，而这是真实发生的。</div></div>
+<h2 class="dlg" id="b21"><span class="ht">童年没看过《大风车》</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我在上海经常会有一种尴尬，是我发现我的童年跟他们都不太一样。因为我小时候家里买电视买得晚，就很多那些什么童年的音乐、童年的动画，经常他们就是我们在一块喝着喝着酒，有一个 BGM 响起来，他们就&quot;啊，我鸡皮疙瘩起来了&quot;，我这边只能假装跟着感动，我说这个歌回到过去了——你知道，很尴尬。因为我的泪点跟嗨点跟他们都不一样。他们经常会在酒吧里听着听着歌突然全体站起来，&quot;就是啊，那个歌&quot;，我就懵了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你家小时候没有电视吗？但你这个年龄不应该啊。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">买得晚。我家首先是彩电就买得晚，而且买完之后你要收到更多的频道，得装那个叫什么有线，消费上比较……落后一步吧。也不是说家里多穷，就是我妈的教育理念就是这样的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是，是有这样的家庭。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后我就没有看过那个中央少儿频道、那个《大风车》，我就没怎么看过。有一回也是录节目，请来了董浩叔叔，他不就主持那个《大风车》吗，然后其他人都哭了，就说&quot;啊&quot;，我不知道他们在哭啥。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我当时——但是我知道大概是怎么回事，我当时也差不多快哭了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我当时脑子里没有&quot;董浩&quot;，全是问号，我说这个人是哪个频道的、是哪个节目的。我大概知道是少儿频道，但是我没有看过。他们那个主题曲，什么&quot;大风车吱呀吱哟哟地转&quot;，我就没听过。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你情绪到了也只能配合哭了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">只能配合哭，挺尬的。玩那个童年猜歌游戏、童年的动画片主题曲，我一个都没猜对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这是节目里的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">一个也没猜中，是一个商务。但它设置的是猜中的流程，别人是真全听过，你是真没听过，他们还大合唱。但是好在我还有一个人设是五音不全，我可以从音乐这方面的缺失演示，没有听过。</div></div>
+<h2 class="dlg" id="b22"><span class="ht">不好意思晒歌单与装×的鄙视链</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你的歌单能给我看一下吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">可以。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看一下有多羞耻。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我还行。但我感觉罗老师，我的歌单在您看来应该不觉得……我不知道您的品味。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是你跟出租车师傅在一起的时候，他的那些歌真是你爱听的对吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有一部分是。因为有些师傅会放那个有一些雅俗共赏、所有人都听的短视频神曲，什么刀郎啊谁，我挺爱听的。我直接找我收藏嘛——不是收藏。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但罗老师你别做小动作了，直接给我。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我的收藏也有一部分是用来给别人看的，用来装的，还有一个是演示用的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">演示用的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有一个演示用的全是英文歌，我全听不懂。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这很正常，大家都是听音乐吗？都老歌还行吧，什么《伤心太平洋》什么的。对，很正常，不是那种吓人的恶俗的那种。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">挺好的，有陈粒的、有周华健的、有赵雷的，然后有五条人的，不丢人。他为什么觉得丢人？我猜这个就是他说的给外边人看的。你是不是弄了两个音乐 APP，一个是给外边看的，一个是自己听的？这样就避免了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我还有一些是纯纯的，纯纯就在短视频上听，但是不会在这上面出现。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不对，你看我发现问题了，我到他的歌单——刚才是收藏，收藏都是给人看的，到歌单里就有一些土歌了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但这些土歌我不能念出来，得罪人。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不剪是吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不剪我就说了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">什么……就这些。也有不少好的，还有许嵩呢，《某不易》，这都好的，没那么夸张。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">它肯定是喜剧效果。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没那么夸张。是不是音乐上你有一些装×的朋友？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，可能是有这个原因。他们就喜欢拿着你说&quot;广智你还听这个&quot;，类似有这种。他们倒不会嘲讽我那个歌单，但是他们一播放他们的歌单，我基本上都没听过，插不上嘴。我有一帮朋友，他们听什么国外的、日本的、欧美的，那些我就没听过了，感觉插不上话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，插不上话。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为我聊这个确实聊不了。他们就喜欢聊，包括我说的那个看美剧、英剧，那也是我真实的感受。他们就会聊电影，我就聊点什么、聊一些小众的国内的，他们一聊意大利的、美国的——美剧我看的确实少。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你看什么多？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">国产的。我其实有一阵疯狂看电影，我就是把那个豆瓣评分排名前 100 的——但我看那些也是国外的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但这个事你永远追不上他们，他们一定要讲一个小众的、谁也没听说过的，然后显示自己涉猎广。比如在高中、大学那会儿，大家会觉得说你看点那种经典的、大众审美上的、豆瓣评分高的，就是装，什么《楚门的世界》呀、《放牛班的春天》呀、《教父》呀那些。但是到后来，所有人都看这些东西之后呢，这些就不装了。特别明白，其实装×这件事它有那个像鄙视链一层一层的，大家就要越来越装才能不能原地踏步，跟艺术追求一样，就装×要越来越往上垒。比如你们都看大书片的时候，我看全球什么 Top100。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">等到身边所有人都看 Top100 的时候，必须看小众的、冷门的、没人知道的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，拿了一个什么世界电影奖、也是冷门的奖，然后对方一听说我没看过，他就很得意。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他的音乐也这样。我们一路走过来，身边文艺青年朋友特别多，都是这么来的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我老追不上他们。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不用追，别搭理他们。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我到现在才开始看那种 Top 100，但 Top 100 他们早就看完了。他们肯定是在追求那种……他们经常就聊聊天，&quot;我给你推荐一部&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，这表情我见过一百多次。&quot;我发你一部电影，我给你推荐一部那个意大利的，那个谁拍的，获得什么奖，哎呀，那个你会看那个吧，跟你现在的这种感受，你或许能找到答案。&quot;</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">你或许能找到答案，就是也不知道在聊啥。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你或许能找到答案，你就这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，叫什么……有的时候说看哪一类电影，还是什么寻找自己。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，寻找自己。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我都……没有，追不上，一直追不上。</div></div>
+<h2 class="dlg" id="b23"><span class="ht">想做一个有作品感的专场</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我再补一句，我感觉把这个《年终述职》给揉到这个作品里边呢，更像是对你做脱口秀这七年的一个总结。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我在脱口秀上还有一个事是我没有完成的，是我想做一个有作品感的专场。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有完整感的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这也是我们特别期待的。其实演专场能够赚很多钱，是从梁海源那个《坐在角落的人》开始的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不能说赚到很多钱，就有比较可观的收益。梁海源把这条路给蹚出来了，就是说专场可以赚钱，然后才有人敢走这条路。而且梁海源那次我还是特别震惊的，因为他真的不太适合打比赛，所以在比赛里表现总是一般般。后来当时李诞跟我说，他说你一定要去看他的专场，他跟这个舞台上简直是两个人，而且作品的完整感、整体输出都特别牛。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实童漠男又把这个专场这个事做到了一个巅峰嘛，推到了一个比较高的位置。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那会第三年我是属于被推着走的，就觉得不干……就干这个吧，也不知道干啥，当工作干了。</div></div>
+<h2 class="dlg" id="b24"><span class="ht">这一季最喜欢自己哪篇</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这一季你自己最喜欢的作品是哪一个？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">挺难选的，因为太优秀了，一堆好得不得了的，让人怎么选啊。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为难一下自己吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我都挺喜欢的。我要用排除法的话，首先排除第一篇，就是那个崴脚的。我好像跟罗老师说过这个事，当时我说这是最差的一篇稿——不是说大话，后来证实一点也没说大话。那篇稿子对我来讲，它是一个有点长活的东西，是用纯技术、真技术堆起来的。崴脚那个事，我本来是想写一个很大的情绪，当时也是着魔了，觉得我要通过这个事告诉大家一个什么人生的道理，结果写了很多都不好笑，最后留下来的全是一些不痛不痒的梗。所以那个稿子我讲起来也别扭，它是一些纯粹的梗，那里边的表达也不是我想说的话。我那篇稿当时想说什么话来着……最后都没把它写得好笑。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">第二篇刚写出来的时候，其实业内对它的评价也很高。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我自己也很喜欢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但第二场没炸，对吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">第二场炸了，跳得挺高的，就是体检那个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个写得特牛，太牛了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但后来讲着讲着也没有那么喜欢了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？我对它印象特别深，体检那个，还有什么血压高，然后“你照不照吧”。你讲那些的时候有特别古怪的喜感，特别好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实那几个梗是特别难写的，我喜欢那篇稿子，从技术上难度非常大。我写了几个，它不是那种套路化的，是很不一样的，那几个梗很难出，我磨了很久才把它磨出来。包括那几个——前面的“连个结节都没有，你的愤怒呢，哥们你的愤怒呢”，很巧妙，那个东西很难写，我很喜欢那个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后到了第三篇小猫的时候，我本来着重想讲偏心那个话题。刚写出来时特别激动，因为我发现偏心这个话题，这个舞台上好像没有出现过。但是我发现很难写得很深入，因为只能以猫喻人——你真的写人的话，写得太直白了，大家会难受。我最开始跟朋友聊那个段子的时候，他说你又有点过、聊难受了。我就想问一下大家，你在家庭里面，你是那个被偏心的，还是不被偏心的？我跟很多朋友聊，就会有点难受。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是你们这一代不都是独苗吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我不是，我有个姐姐。我本来想写那个段子，是我过年回家的时候，发现身边有些朋友、亲戚，他们有两个孩子，我能明显感觉到他们家肯定是会偏心其中一个的。而且我觉得，如果你在过年走亲戚的时候，让亲戚都能察觉到你在偏心，那你日常关起门、自己在家的时候，肯定更加偏心、更过分。我对这个东西是有点触动的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是被偏心的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实不是，我还真不是，我们家挺平等的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你刚才说有一个姐姐？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我姐姐大我四岁。我们家挺平等的，没有明显的偏心。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你姐姐也这么看吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我姐姐也这么看。我敢拍着桌子说，我们家是非常平等的。然后我就想写偏心，但是感觉没有处理得特别好，因为很难真的把人拉出来写，只能写猫，可写猫又没那么对应得上。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不一定，我觉得这个角度特别好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">可能还是时间不够，就十四五天，没处理得特别好。</div></div>
+<h2 class="dlg" id="b25"><span class="ht">几乎全是新稿，创作大多单干</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这次全是新稿子吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">前两篇是老的，从第三篇、第四篇、第五篇是纯新的。然后总决赛的两轮，是有两个半篇、两个想法，又拿过来写的，一共七篇。那个想法在脑子里很久了，但写成本子也是新的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">想了很久的一个角度。那太厉害了，七个里边有五个都是新写的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">几乎是这样。你要说我最喜欢的，其实我最喜欢总决赛的第一篇，那个不酷那个。因为把那个说出来之后，我就感觉出了一口气，给自己这些年积攒的那些——就是你曾经被无数次冷落，其实也没那么严重，但是积累完了就有点不舒服。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">尤其你们也算文艺圈的，肯定是这种装、插饭特别多。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我就觉得出了一口气。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">特别理解。然后你这些年的创作里边，像比赛啊、节目安排，肯定会有一些总编剧跟你一起帮着出主意什么的。除去这些，你绝大多数时候都是个人创作，是吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">基本上是。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不是说有几个创作搭子，经常聊出来的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这样的时候也有，但不多，很少这种情况。我们这个职业基本上就大家自己单干。比如我开放麦碰到几个熟的，我说你帮我听一听，我们互相听一听、互相出主意。比赛期间的话因为时间太短，就可能会几个聚在一块写。我是跟小马、放放，我们哥仨老一块聊，就是那个编剧，两个编剧现场去的，我们老一块聊。其实早些年的时候，成哥的判断非常准——成禄。我们写了稿子就会给他看一眼，基本上他说在舞台上会好，你上去之后就会好；他要是摇摇头，你就感觉第二天去了果然就不行。</div></div>
+<h2 class="dlg" id="b26"><span class="ht">脱平人在被时代抛弃</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我有点感觉这两年换了一批新的观众。我们每期节目播完，都会有一些——现在有所谓的“脱平人”吧，他会点评整个节目。我前几年看脱平人点评的时候，发现他好像能跟我们演员共情，大家基本上审美是一致的。这两年我再看脱平人的点评，我有一种感觉，从他们的文字中能感受到，他们好像慢慢在被这个时代抛弃了，就他们是老一辈观众。新的观众在想啥，他们其实不知道，然后他们又不直面观众。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我不就很典型吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不，罗老师你是每年还去现场看录制，还去线下看演出。因为你在现场能够感受到观众的情绪起伏，你其实是直面观众的。而屏幕前的那波朋友，他们不直面观众，有时候真的不知道现场的观众为什么在这个点嗨了，他可能表示不理解。我就有一种感觉，这些人也被时代在抛弃，没有办法，在渐渐地被抛弃。</div></div>
+<h2 class="dlg" id="b27"><span class="ht">打明牌，但规则又变了</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">说到这个，我还有一个想说的事，就是我这两年对创作上有个感觉。这两年讲脱口秀的语境、大家的创作方法，跟前几年是有变化的。讲的时间久了之后，有一种感觉是，观众把我们摸透了，我们也把观众摸透了，有一种双方在互相打明牌的感觉。但是打的套路又变了，规则好像又变了。比如说，我们现在可以明确地告诉你，我在第六个段子加一个 callback，现场观众一定会嗨——观众我吃透了，观众也把我们吃透了，他知道第六个段子应该会有一个 callback，我也猜到了。就是双方在打明牌，但这个出牌的规则好像又变了。以前是四比三大，现在好像玩法不是这么出的了。反正我也不知道规则是啥，反正就变了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我的感觉是，还是有很多演员——我也看了这么多年，加上以前年轻时候也看过很多国外的，所以经常会感觉到，有一些即使表现很好的纯技巧派，你知道到哪个点他有什么，只是说他练得太娴熟了，所以即使讲的还是套路中的，你也觉得好玩、也能鼓掌，但确实就没有什么意外、不惊艳了。但是还是有一些优秀选手，能真的给你来一个完全猜不到的，这种还是有的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">尤其这一季，我觉得这一季新人厉害的特别多。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">能做到这些的往往都是新人，就是经验少一点的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还是新人，大家对他的套路不熟嘛。我感觉如果明年新人再来，可能会稍稍……有可能。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，你说这个有可能，他始终有新的角度和新的方法，这个其实也很难。</div></div>
+<h2 class="dlg" id="b28"><span class="ht">决赛主动让领笑员少 cue</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你知道，我在录制节目快到决赛的时候，在网络上惹了一些骂战吧。为了不给节目方添麻烦，所以我们最后一期录制前商量过，说决赛的时候——我主动提的，让邵刚少 cue 我几句，省得又被带偏节奏什么的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当时是有这个商量。结果这家伙最后 cue 我少到什么程度——</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就你那个决赛最猛的那场表演完了，都没跟我互动。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我当时也有冲动想主动说，但是有点心虚，因为给节目已经惹了一些不必要的麻烦，所以我犹豫了一下就没说。但我当时特别特别想说的，就是那个话，我后来跟你私下也讲过：我觉得梅西拿没拿球王，他也是梅西，他不需要用世界杯证明什么，但毕竟拿了世界杯，才让我们感觉彻底的功德圆满。所以套到你们那个决赛上，我就觉得广智拿没拿这个冠军，他也是脱口秀的无冕之王，但最终拿了这件事，是彻底的功德圆满。结果录制后——我当时还觉得我这话要说了很有分量、挺动人的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，很动人。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">结果呢，没想到结束以后聊起来，我一大堆朋友跟我这个想法一模一样，一点心意都没有。然后最好玩的是，到了后边你讲获奖感言的时候，你自己也提到了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我自己 cue 他，那个我就觉得有点……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你说说吧，你为什么当时那么猖狂，连梅西都想起来了？我们想起来不奇怪，我们是广智的粉丝，但你自己这么自恋，把这个跟梅西比较起来？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有，罗老师，这个有点误会我了，我的感受——我肯定没有把自己的地位跟梅西在足球界的地位相提并论，我没有那个意思。我当时说的是啥，怎么就让人解读成这样了，我真没有这个意思。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我当时……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也怪张老师，当时怎么不让您说呢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，都怪张老师。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我说就圆满了，就圆满了。其实我，或者我们任何一个嘉宾说都圆满了，我没有那个意思。我当时说的是——我还真没那个意思。我当时想的，我认真解释一下。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">来不及了，来不及了，没想到被误会了。其实没误会，这就是想纯刁难你。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。我是说，其实我看到梅西夺冠之后，我高兴了两年。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们当时在场就是这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我就老觉得，我欠那些喜欢我的人一个结局。因为我以前觉得，其实大家好像没那么爱你，大家各自就干手里的活了，日子就趋于平淡了，或者怎么着了。然后我发现，原来你的偶像夺冠之后你能高兴两年，我就觉得不行，我还是得给他们把这个句号画上，就是那个感觉。我们当时——草威你记得吧，那个世界杯那天晚上，我们都哭了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也哭了，对，就那个感觉，太圆满了。那天晚上看你的也是这个感觉，真是不容易。我可能是因为听出来你那个作品里透露出的是一个告别——你那个总结，那个所谓的年终述职，我感觉是对你这段比赛、这个节目的一个告别。所以听到那的时候，虽然很好笑、也在爆笑，但是也很难讲，有一点揪心的东西。最后一看拿了这个冠军，就觉得这不就全对了吗，就是应该好好去做一个作品了，就是那个专场。所以我觉得真的特别圆满。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实我还是挺爱比赛的。我觉得包括我这帮哥们兄弟，你看每年都来节目，而且呼兰每年都那么认真地打，李诞每年也来，大家其实特别爱比赛。但是我会觉得，我们在这个舞台上，接下来如果再继续去比的话，它不会有一个好的收获了，然后就再说吧。而且带出来这么多新人，我觉得挺好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我说实话，如果我有权建议的话，我特别希望明年你们这几个老选手、几个前辈大王什么的，去占两个席位，就是嘉宾席，真的没必要非要请什么所谓的卡位。我觉得你们去做两个，然后找性格相对值一点的，也别都是过年话，找性格——至诚就算了，至诚全是过年话，情商太高，找一个情商居中的。太值了也不行，这个好难找。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">情商居中的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，找一个居中的。真的，我觉得那个台子上应该做几个你们的，就是最牛的那些老人，你选两个去做。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实这个事，我们后来分析——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们内部聊过吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">内部没聊过，但是我自己的意见、我自己的感受是，它不能实施。是因为我们全是哥们兄弟，很难有人站在那个地方、面对镜头说实话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">很难有人张得开嘴说那个话，我觉得很难。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是你要是说把我们的脸蒙上，玩那种蒙面点评，那也不可能啊，不酷了吧。就是说你们这个行业，连说个真话也不敢嘛，天天说 real，特别不 real。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对。因为我们就属于第二天又见面了，你要给人说了啥，第二天低头不见抬头见的，公司又碰着了，尤其是有感情的，真的说不出口。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，有感情的、在职的也说不出口，这个难度我没想过。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">很难，真的很难。你要让呼兰点评这帮小兄弟们，他咋说？负面的肯定说不出嘴。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他说不出嘴，然后又全是好话，那不就又是过年话了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对啊，那不就等于没说吗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。所以这点李诞老师真是很神奇，他能插科打诨，从来不让一句话掉地上，同时又很真诚，这些天才——李诞老师太厉害了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，没见过第二个这样的人。李诞老师其实偶尔会把一些真话藏起来，藏在玩笑里面说出来；有时候表情控制不好，也会流露出一些真实的想法，然后后期给剪掉了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">所以我们其实有时候一对眼神就知道什么意思。但他能处理得这么好，情绪价值给足的同时，又一点也不油滑，真是。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以这个领笑员的席位，还是你们来做。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">别，今年就我表现最差，我明年不去了，哪都不去了，两边都不去了。我明年要准备一个我的专场。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个到时候再说，后边再说。卢老师就跟我们抢市场了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不是不是，是想帮脱口秀做一点更有价值的东西，心里话。</div></div>
+<h2 class="dlg" id="b29"><span class="ht">舒衡：偏门的天才</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我想说，这一季其他选手的作品里，你最喜欢或者印象最深刻的，有哪几个？就除去你自己的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我印象最深的是舒衡最好的那一篇，就是讲那个&quot;我的道德比较狭窄&quot;的，舒衡的倒数第二场。那个是我在观战间看的，我基本上是站起来叫好的那种。他那个有点太厉害了，厉害到我了。是一种好像……我想写一个那种感觉的东西，结果让他给写了的那种感觉。他那个又有点抽象，又讲道理，但是又足够好笑，就是不落俗套。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">舒衡也是不好找一个类似选手的那种天才。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对，他东西很偏，他不能被归类。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">国外好像有一些这样的，但是国内他是独一号的，就这个风格——特别丧，然后特别低能量，然后特别挨，但是有一些特别锐利的东西，是包在这个下边的，角度也特别刁钻，很少见。舒衡非常好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">舒衡他非常好。他给我的感受是，他的一些观点也好、思维也好，是非常非的，但是他最后的落点能够落到跟大众一样，他能把大家拉回来，没有因为他有很不一样的东西就让公众接受不了，他把这个平衡得特别好。舒衡有点是那种感觉——你看着他文艺青年的打扮，明示范嘛，然后你打开他的歌单，发现跟我的歌单是一样的。舒衡会让我有这种安全感。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他的歌单这么羞耻吗？他的歌单跟我的歌单肯定不一样。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我的意思是，舒衡会让我有这种安全感。就是他表面上给人感觉特别锋利、让人难以靠近，但是他的东西一说出来之后，你发现他其实是在表达大众的感受——&quot;我理解你，你是一个普通人&quot;，就是这个感觉，特别厉害。因为有很多人装着装着就装走了，就彻底真的飞了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">完全明白你意思。舒衡这个非常厉害。他那个什么……还有&quot;回家&quot;，什么北极的海龟，鼻子上还插着吸管呢，就那种东西。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">他那篇我特别喜欢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我完全同意你的判断。但是他作为专场演员就完全没问题，可这个大众的娱乐中意，他来还是有一点点……怎么说呢，当然以他的功力，他要想刻意迎合一下也很轻松，也能做到，但他保持自己想表达的那个本社的时候——对去看他专场的人一定没问题，但是如果是一个大众化平台上的中益，还是稍稍有点偏高级了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这个还是有的。但我完全认同，他想回到地面就能回到地面，就看他想不想。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你看他最后一场，那个文本无敌的高级。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，是的。但是他想表达完这个他就走人，所以他没有往里边加很多笑料或者怎样，他就想把自己感到不舒服的那个东西讲出来，是真的非常 real 的。但他也没有用激烈的、或让人难堪的方式去表达他自己很强烈的一个东西，还是保持了最大克制，所以我觉得真的特别好。</div></div>
+<h2 class="dlg" id="b30"><span class="ht">低能量天才的&quot;存玩&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是这家伙你也知道，他能量很低，什么事都不积极。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是躺在那，想起来一个就做了，想不起来就算了，然后他连续躺个一个礼拜啥也不干，也没有任何张骏说的那种&quot;我们中国人不能存玩&quot;。我觉得舒衡是有可能能存玩的，只是说他那个存玩还不是那种没出息的，他对自己处在一个低能量的状态完全没有任何不舒服，所以他可以一直这样。所以我从舒衡粉丝的角度，我还是挺痛恨他这个的，我特希望他能以那个能力奉献更多更牛的作品，但是他特别无所谓。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我猜测，舒衡背地里应该是挺努力的那种。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我感觉啊，我感觉是这样，不然他不可能创作出来那么多东西。他这么多年一共写了多少？两个专场？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有，他大大小小算起来，三四个专场是有的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有三四个专场了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有，只是前面几个没有那么出名。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还挺勤奋的。他才 29 吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，29 吧，我俩一边大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你俩一边大，那肯定你比他勤奋太多了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">他没有我勤奋，因为他没有节目推着他走，可能就稍微懒惰一点，全凭自觉也不行。</div></div>
+<h2 class="dlg" id="b31"><span class="ht">张骏：差一口气的洒脱帅哥</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">张骏也挺好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">张骏太好了，张骏有两场是冠军级别的演出，所以我特别特别为他高兴。因为我在台上说了多大死话，还得罪了很多张骏的粉丝。我是真的觉得，张骏从第一天上台，我就觉得这个小伙子特别出名，有想法有思想，但是就是不知道为什么差一口气。这一季他有两场还是三场，让我特别特别高兴，由衷为他高兴。但是第一个讲&quot;卷松弛&quot;的那个，其实现场打分就很低，我也没拍灯，然后我还表示了遗憾，结果他粉丝把我骂惨了。就意思说，&quot;你知道我们家张骏有多努力吗&quot;什么的——张骏后采里有讲他很勤奋，那个给我骂得狗血喷头的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但问题在哪？你说张骏台上是不是永远吊儿郎当、特别不屑一顾，很洒脱的那种帅哥范？他实际上是很努力的，那能怪我吗？你只能怪你那个人设搞得太成功了，把我都骗过去了。是不是这个道理？我们其实每个人都在台上伪装——你看我在那装谦虚，他在那装松弛，其实背地里我特别狂，他特别努力。你们这帮家伙太阴险了，给罗老师害惨了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对，我都信了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是我特别高兴，就是后边他那个有两个超级牛的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还有一个采钢师的，其实那话题很危险。所以等中途我们聊起网络名义的时候，他还担心那个出来以后，会不会被一部分人去网暴或怎么着，我也担心过这个。所以到了真播出那天，我们俩晚上还对了一下，我一问，果然他说他全网都搜了一遍，他说还行可控。他那个作品真是善意满满的，智力正常的人都能听出那个有多好。所以张骏这一季是我最大的惊喜之一，因为他这么多年一直没有达到这种水平。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">张骏跟舒衡，其实有几篇稿子是会让我觉得有点恐惧，就是会让我觉得说这个一定不在我的射程范围内了。有些朋友虽然他也很好，但是我只是觉得说这一场我打不过他，可我拿我最好的东西出来，还是在我的覆盖范围内。他俩有几个东西是我觉得敬畏，超过我那个火力覆盖范围、超过我射程了。</div></div>
+<h2 class="dlg" id="b32"><span class="ht">假如冠军不是你</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那我们再说一个，就是如果这一届冠军不是你，你最希望谁得这个冠军？这个应该不会得罪太多朋友。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">纯从作品角度说，不涉及其他因素，那我觉得小四爷跟小琪二选一，拿这个冠军我觉得是值得的。从纯作品角度讲的话，因为他俩几乎没有垮过。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，四爷除了总决赛那场差一点之外，其他每一场都特别好，奇怪是在总决赛他那个下来了一点，他前面是真稳。小琪还有过一次波动，但大部分时候都是好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且又是新人，其实非常不容易。我觉得四爷就属于那种第一次打比赛没有经验，太老实了，就把好段子全放前面了，也没想着留一手。还有一些是不可琢磨的，你永远判断不了：为什么一个在线下演过——不是开放麦，就正式的品牌演出和专长演出里演过的——到了那儿你信心满满，但不知道为什么就没达到预期，这种事永远会发生。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">所以我其实看到决赛的时候，最难过的是小琪、小丽和小诗言这三个人。其实到决赛轮的时候都有点掉了，但实际上他们实力我们都知道。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实这些不确定的因素就是比赛的一部分。</div></div>
+<h2 class="dlg" id="b33"><span class="ht">小丽：最不内耗的人</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">说到女冠军，我觉得最应该拿的是小丽。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那边是嘻哈，这边是小丽。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，小丽太强了。小丽姐基本上每一篇都挺能打，然后还有一些特别先锋的观点，所以成了很多女性特别羡慕、希望成为他这样的人。其实他的那些观点有拯救到我，因为我以前就有那种……他是我这辈子见过最不内耗的人，而且配得感极高。然后你发现，他的道理都是说得通的。我以前会有那种配得羞耻、自信羞耻，我觉得人不能那么自信，然后看到——就是因为小丽姐这种人站出来之后，你发现人就应该这样：我自信点怎么了，我就应该得到点东西怎么了，没有什么好羞耻的。关键就是他像他自己说的那样，真是冰雪聪明，他不是那种出于愚蠢的自信。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对。你看我们亚洲的教育，就是父母和老师总是打压你，对吧，&quot;不要飘、不要翘尾巴&quot;，都是这样的。然后欧美的教育呢，又是使劲鼓励，明明这孩子比 99% 的同学还傻，也是说&quot;你好棒、你好优秀&quot;。所以我说实话，我觉得我们亚洲父母这种老打击孩子的教育方式其实很不好；但是跟欧美那边出差呀、过去工作见多了，真的有傻得不行、然后自信爆棚的，那也很要命，那更夸张、更吓人。小丽呢，她就是特别的自信和特别的自洽，同时她一点都不傻。这真是一个从来没见过的人，我觉得我可能在书本上都没见过他这样的人，超级自洽。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实说白了，我觉得这个事放在脱口秀的舞台上还是很简单的：你只要是段子炸了，然后观众给你投票，你就是配得上所有的一切。你不能说你段子也没有，你就硬要、硬在那说&quot;我就配得上冠军&quot;，那也不行。还是段子好至关重要。</div></div>
+<h2 class="dlg" id="b34"><span class="ht">和小四爷同屏：看哭了</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有我这一季看你和所有的后彩前彩里，最感动的就是你和小四爷对谈那段，那个拍得太好了。是皮皮拍的是吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，皮皮拍的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个实在拍得太好了。尤其是那个两个屏幕，用黑白把你们俩在不同阶段的表演对应到那个点上，同时呈现，那段看的，是我在这个节目里看到最感人的一幕。因为你知道，我觉得前彩后彩现在越拍越好了。早期我看你们这个节目的时候，我是特别烦的，我说哪这么多屁话，我都快倒，就只看那个讲脱口秀的；那时候还没有纯享版，但现在有了纯享版，我反倒愿意整个看完了，因为真的有一些拍得特别用心。包括去小四爷家乡那段，我也看得鼻子酸；然后你和他一起同屏出来的那段，感动得不行了。我是一般很难感动到眼眶会湿、甚至流泪那种，我那个阈值还是很高的，但是我在家看那段时候，眼眶还是湿了，虽然没流出来，但还是眼眶湿了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">好多人都说那个眼眶湿了，拍得太好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你其实回头找一个那种状态很好的时候看一下，还是特别值得留下来那么一个东西。我猜你多年后看，也会非常感谢皮皮把那段拍下来。但可惜，他也是……我估计明年就不太好讲那个&quot;穷门&quot;的故事了。</div></div>
+<h2 class="dlg" id="b35"><span class="ht">对&quot;穷门&quot;年轻人的体恤</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但是穷门应该明年还会有人来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那当然，这个赛道上前赴后继的。我有时候会想说，你们这里边有很多优秀的年轻人，他可能没有这个舞台也能做成别的；但也有一些人，没有这个舞台，这个世界是不是有那么多足够大的机会给到他，其实是难说的。说这个话的意思并不是贬低他们，绝对没这个意思，是说你来到这个人间，能做好一件事、做得贼牛，这已经很可贵了。但是有的人就是天生——比如说也有运气成分，也有他个人努力成分——他能做两三件事都做得特别好；但也有的人就能做好一件事，做到一个国家级、世界级的水平，这也很伟大。所以我有时候看，心里会对你们这个圈子里的年轻人……比如说像张骏，我就觉得他不做脱口秀，可能还有十条赛道等着他，因为他整体就是聪明优秀，然后长得又帅，他是那种。但也有的呢，在脱口秀舞台上已经特别牛了，但是你去想象说，这个世界是不是有很多机会能给他取得很高……我就是这种，你有这感觉吗？我想说的其实并不是你。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我有几个是感觉，他们没有脱口秀可能生存都挺困难的，我会有这种感觉。所以我有时候觉得，这个舞台对我来讲，这么多年一直陪着走下来，我就感情越来越深。</div></div>
+<h2 class="dlg" id="b36"><span class="ht">拍灯的纠结</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">所以我为什么特别在意那个所谓拍灯那个事，就是——外界不知道，他们觉得&quot;小伙子今年你就凭着情绪拍了，明年他再来不也一样吗&quot;，我不这么看。就是我知道你们这个圈子的小伙子没成事之前是有多穷。如果你是个企业白领兼职做脱口秀，那其实你没有多难，过得也不差，只是说一遍一遍，最后红了，发现这个收益更大，他就那边辞职来做专职脱口秀，这种是有的。但还有一些真的就是——就穷门这个赛道的——真的就是他成事之前是真苦不是装苦，这是他唯一一个收入来源，甚至是他人生就这一条路可以走。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">所以我甚至你知道吗，决赛场的时候，我跟那个导演商量，我说虽然我们只有一灯——他从半决赛开始，我们不就只有一灯吗——我只有一灯，我也要非常认真地拍。我说前面都被骂了一集了，我还怕最后一集他们骂。我甚至想跟他说，我最后一场默认我全都不拍，只给极个别的几个、我认为就不能让他们输的那几个拍，因为我怕最后出现就差一票的现象。这个很少发生，但有可能会发生。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这要是发生会很遗憾。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我回去也可能睡不着觉，所以我就要这样。结果他们就慌了，他说我们也怕你挨骂、也怕节目挨骂，他说你要这么做肯定得挨骂。对，我就怕，但最后没出现差一票的事。我到那边录也是，说了一大堆过年话，全拍了——我是那边半决赛去的。但是其实我这样并不舒服，所以这也是我想后边不再录的一部分原因。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实是它需要那个位置上的那个人，你就不能全拍，全拍那不跟全媒拍一样吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那也不一定。有的时候这个节目组如果大家手都很严，肯定看着是当的，就是那种叫什么&quot;灭嗨&quot;，大家高兴不起来，然后全瞎拍，那肯定严重影响节目性，就像青岛那年。反正我是觉得，有一些分工这个时候还得——就不能违心，你按自己性格来，我自己性格是会很在意这个东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实我们聊过一个事，是领笑员这个位置很难干，是很难干的。因为如果是全都拍的话，现场的氛围过于嗨，会导致一个情况是：现场录制的观众会看得很爽，但是屏幕前面的观众会不知道你们在嗨什么，而且你们几个是来干嘛的，就会有这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，就是现场观众过嗨了之后，屏幕前面的人就带入不进去，说这个没有必要笑那么大声嘛，然后他就会看得很割裂，他会觉得&quot;啊，很假，我是那个独特的、跟大部分人想法都不一样的那个人吗&quot;，他会怀疑自己，就看不进去了。但是其实想做到跟屏幕前的人同频很难。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是今年说实话，他们三个都特别好，我的作用显不出来了。原来这个角色也有一半是讨厌的、一半是起作用的；今年他们三个太靠谱了，就我这儿没啥用，光剩讨厌。这个也不是设计出来的，是自然走到这儿了。</div></div>
+<h2 class="dlg" id="b37"><span class="ht">为什么一直回避讲童年</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">聊聊你的那个童年和长大的环境呗。我印象里你很少对外讲这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">好像是很少对外讲。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们这个是一个篇幅长达好几个小时的，在罗老师这说了，尤其是你这都拿完大王了，一定要回溯一下，就是说他怎么从一个来到世界的一个小孩，然后一步步走到今天。所以一定要回溯一下。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">行，那就落一落这个。其实我之前好像有意回避这个事，是因为可能童年窘迫的事比较多吧。然后我最开始的时候有点自卑，不爱往外聊；等到我不自卑了、想要去聊这些事的时候，大家又会说，你现在日子过好了，这个忆苦思甜，这种行为油腻——就是你又说你小时候怎么怎么贫穷，这种行为变成油腻了。所以我又一直没有找到一个合适的机会说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这怎么会油腻呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有。就是你取得一些成功之后，你再说你过往多么的心酸……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我猜不是你们这种表达油腻，是有一种媒体的八股文的风格，容易把这事给写油腻了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">写油腻。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们不会，我们就是保留咱们俩真实的聊天，所以不用担心。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我这个人也很容易被别人绑架，他们说有，我就说那就不说了，我就很容易被绑架。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那就在这儿唠一唠这个。</div></div>
+<h2 class="dlg" id="b38"><span class="ht">宋江的郓城，水浒好汉城</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你小时候是哪里人？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">山东菏泽郓城，一个县城里面，县城农村。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">郓城。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，就是那个宋江那个郓城。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就那个郓城，&quot;君&quot;字加一个耳刀。那还是历史文化名城。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，山东嘛。之前的时候只是有一个历史文化名城这么一个名号，然后县城里面啥也没有。现在好了，搞了一个什么旅游景区，叫什么水浒好汉城。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">文旅项目。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">搞了个文旅项目，像那么回事了。就之前你愣说是历史文化名城，你啥也看不出来；现在像那么回事了。每年回家，我爸特别好玩，之前还会劝我，回家就留在老家嘛，留在郓城，留在家乡发展。用山东话——&quot;你看，这脑啊，这啊，这水啊，这楼……&quot;</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这一次家乡牛了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我爸就经常拉着我转一圈，给我炫耀，让我留在老家。</div></div>
+<h2 class="dlg" id="b39"><span class="ht">城乡结合部最容易自卑</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我小时候在山东农村长大，我们家是一个叫城乡结合部、属于其实城乡结合部的地方。我后来反而发现，这种小孩是最容易自卑的。就如果你在乡镇里边反而没事，大家都是农村嘛，纯村里就没事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，你在纯村里边没有事，因为你再往前走十里还是村，再往前走二十里还是村，没有差异就不会自卑。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我后来发现我为什么这么自卑，就是城乡结合部那个地方是最容易自卑的，因为我小学就是在村里上的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就以我们贫穷的北方来讲，苏北其实挺好的了，但是他就会不断地感受到——过去啊，咱不说现在，省得又说地图炮——就是过去他会感受到来自上海的那种压力，它有对比嘛。但真的苏北跟那些不毛子弟比，其实也是挺繁华。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对啊，你在那边比的话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这个角度很好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">后来我是想了很多，为什么我比那些城里的小孩、比那些纯村里的小孩，都看上去更加自卑、更加谨慎呢？这个我后来明白了，问题在这。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">处在敏感地带。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，那个是最敏感的地带。我小学在村里上的，就十里八乡有那么一个学校大家都去，但骑五分钟自行车又到了市里了，差不多。然后我小学坏就坏在——小学学习还挺好，然后考上了县里最好的初中。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们现在都这么凡尔赛了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">坏就坏在小学时候学的还挺好——我接下来就要说自卑的事了——坏就坏的学习还挺好，然后我就考上了县里最好的初中。然后我的同学就都是那些城里的，一个班上大概有一两个农村、村里的，那时候自卑的情绪就会比较重，因为从衣食住行方方面面，你感觉都比不过别人。</div></div>
+<h2 class="dlg" id="b40"><span class="ht">&quot;知不到&quot;还是&quot;不知道&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">口音呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">口音有差异。我发现其实虽然说我在城乡结合部，大家都不说普通话，但是有些用词是不一样的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我是感受过这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我们是说土话，他们虽然不是普通话，但那个用词相对文雅一些。所以我就想说，无论往下怎么细分，甚至到了老少边穷地区，它还是有鄙视链存在的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，能听出来。而且那个东西是你在听别人讲那句话之前，你意识不到的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就有一个——我们山东，我们村里边管这个&quot;不知道&quot;，我们叫&quot;知不到&quot;。然后我去了城里上学，发现他们都说&quot;不知道&quot;，我又意识到好像这个不太对，然后我也说&quot;不知道&quot;。小孩还比较残酷，有可能你说了一些土一点的措辞，在他们看来土一点的，他就会有古怪的表情，甚至赤裸裸的嘲笑。你没经历过这个？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我倒没有经历过这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那你同学还不是足够残酷。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我是从我们那儿一个叫和龙县的地方搬到延吉市，到了那儿以后，就是大家现在听都是那种很土的老的东北话，但是他还是有鄙视链的，所以我到那也是，就类似你这样的情况，说错了一个词，然后他们就那样相视一笑，有时候表情很微妙，我已经严重受伤了。还有的时候就赤裸裸地讽刺我，那个其实反倒相对好化解；最伤人的就是他们互相对视一笑，然后演示一下表情，想把那种嘲笑我的那个给演示掉，那个是最伤人的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我那时候属于是我那帮同学还特别善良，没有明里暗里地嘲讽我，但是我自己能感觉到不一样。我自己遇到这个事的时候，反正听着，原来以前我都是这么说的，我心里会有落差，但是没有人嘲讽过我。</div></div>
+<h2 class="dlg" id="b41"><span class="ht">包工头家里没见过钱</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你父母是做什么的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我爸是包工头。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你家里不挺有钱的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">并不是。我小时候家里根本就没有见过钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有见过钱？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">包工头也有生意好和不好。甚至你包工头生意不好的时候，你比普通家庭都比不过，因为没有稳定收入。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，就是可能你家里边连学费都交不上那种情况，也能发生。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也发生过，也能发生。因为他就是类似于做生意那种，家里没有见过钱。所以我小时候是没有零花钱的。后来能理解我妈她为什么不给零花钱，因为家里确实没钱，没有办法再承担这一笔开支。我跟我姐——我姐也没怎么有零花钱——所以默认这笔开支是不存在的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">反正给你们吃饱了，也饿不死。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，就默认小孩不需要零花钱。但其实小孩是需要零花钱、特别需要的，因为大家都有的话，你没有你就怪，你就是那个奇怪的那个人。然后我也不好意思跟我妈要。而且小朋友也会互相请客什么的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，你没有的话就会很尴尬，因为别人买了零食你要吃吧，下次就得你买了，你不能老吃人家的。哎呀，这对小孩真是。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。但是我脸皮比较薄，我就不会硬跟我妈撒泼打滚地要零花钱，因为我就觉得说，如果我要钱我妈不给，那个很窘迫，然后这种事情我就不会让它发生第二次了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你很早就有这个意识？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你是比较敏感的那种？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，纯脸皮薄、纯敏感。就是我要跟命运抗争，你不是想要一遍一遍地用这种羞辱我吗，我不会再让这个场景发生了，我就不要那个钱，拿我没有办法吧。我姐比我好点，我姐性格活泼很多，我姐就是会硬跟我妈要，然后我妈扭不过她就会给；但我也不要，我就还是不要。</div></div>
+<h2 class="dlg" id="b42"><span class="ht">妈妈的规矩与&quot;下饭神剧&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你父母对你们姐弟俩的教育方式，是特别传统、特别保守的，还是比较开明的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得算是比较传统。其实有很多时候我还挺感谢我父母的教育方式的。我们家从小是那种相对有规矩的，但是规矩也不是大家想象的那种特别严苛。比如说我们家吃饭的时候是不能看电视的，我从小就是这样。有电视就比较晚，结果吃饭的时候就不能看，所以我就错过了很多电视剧——小孩看的很多就是吃晚饭的时候播的。我妈会觉得说，你一边吃饭一边看电视太放肆了，你要么就吃饭，你要么看电视，这俩事不能同时干。所以以至于后来我看到&quot;下饭神剧&quot;四个字的时候，我都惊呆了，觉得城里人活得这么放荡吗？我说你们一点规矩都没有，你们就是没有父母是吗？我惊呆了，我说这四个字能拿出来说吗？就那一下有点把我整个世界打开的感觉，就是撕开了一个口子，说原来外面的世界是这么放肆的，吃饭的时候能看电视剧，甚至我们能故意专门拍一种剧就叫&quot;下饭神剧&quot;。你说吓不吓人？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还是管得真的很严。我也听管教过，我小时候印象里好像也有什么吃饭的时候不要说话或少说话，或者吃饭就好好吃、看电视就好好看，也有类似的；但是我印象里我父母不是很严格，会时不时唠叨个一两句，但不是很严格。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我们家严格执行。就是你甚至吃饭不太能离桌子，端着去电视跟前吃，不太允许发生这个事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">主要是你爸性格这样，还是你妈性格这样，还是他俩都这样？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">好像我爸妈都这样，我爸妈的性格都是这种性格。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你小时候并不是很叛逆对吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我是没觉得这个有什么不妥的地方，觉得有道理。我就是因为从特别小这个思想就直入到我脑子里，我就觉得这是应该的。我到现在也觉得说，这个一边吃饭一边看电视，我现在做这个行为，我心里都有点不踏实，会觉得完了，礼崩乐坏了，完了，这世界完了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">真的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">真的，我真的有这种感觉。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那他们对你要求严格的，还有什么？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我想想。我妈还不让我把那个校服外套系在腰上，觉得那个是没正形。我妈不让那样，所以我现在土跟我妈当时较劲有一定的关系。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你想想，你要是吃饭的时候不看电视，又不那个，你确实土土的，你确实没办法。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我妈还有什么特别的规矩……还有就是我妈对正形这个事管我们管得还是挺严的。我们家倒不是坐有坐相、站有站相，就是你那种不正经的行为不太被允许。还有就是不允许把衣服套到膝盖上这样，反正衣服该怎么穿就怎么穿，那都不被允许。还有啥我想想……不给我零花钱。别的好像也没了，别的还是基本正常，但是不给我零花钱，那个对我的伤害挺大的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那当然。因为你跟一般关系很好的小伙伴，本来关系很好，一到大家一起去吃东西你就会……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我就找一个借口离开。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">要么就是你不知道怎么化解这个事。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是是。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且你找借口离开吧，你下回还得再找一个不同的借口。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，而且次数多了，你无论借口找得多精巧，他们也感觉到哪不对了。但是好在那个时候我还是有一定的编剧能力的，每次借口都找得非常完美。</div></div>
+<h2 class="dlg" id="b43"><span class="ht">一张无辜的脸：从小擅长撒谎</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">反正我是小时候不轻易撒谎，但是我每次撒谎，我自己感觉都撒得挺成功、挺真的。因为我从小是那种说话特别容易让人相信的人，就是可能那个伪装从小就开始了。我是小时候那种老实孩子，十里八乡都知道这小孩老实，基本上他们出去玩，只要是说有我在，家长都特别放心。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且你那个形象、眼神什么都特别诚恳，所以就天然地有这个优势。你要是个坏蛋的话会演示得非常好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">可能完全是我伪装出来的。比如说我们大家一块干很多坏事，坏事是我干的，大家也会说不可能是他。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是他那也是跟你学的，你是有这个效果的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我后来段子里写那个小猫那个杯子，就是那个是我真实的一个感受，只不过我当时是那个小猫——就小猫把杯子推下去，我是&quot;完了，跟大猫学坏了&quot;。我小时候是那个，我干了坏事之后，家长辈们都会说他肯定是无辜的，我自责了很久。长了一张特别无辜的脸，所以这些方面很占便宜，从小就特别擅长撒谎。反而是我长大了不太擅长撒谎，很容易露出马脚，我也不知道为啥，小时候老擅长撒谎。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你的一些朋友也说过，就是说广智人特别直，所以你们肯定也是娱乐圈的嘛，然后说这个名利场上，他这样直的性格，担心会受到更多的伤害。有一些你的哥们是这么跟我说的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我也有这种感觉。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你就还太诚实了、太老实了，到现在也是。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这个倒不用担心，我觉得我也没有那么老实，挺坏的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你不用油滑，但是有的时候还是要学会保护自己，少说一些东西。</div></div>
+<h2 class="dlg" id="b44"><span class="ht">当好人比当坏人简单</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但罗老师，我有时候会觉得说，我是在用这种不油滑在保护自己。就是可能所谓你给自己立一个不油滑的人设，然后那些所有的事你就都不用操心去做了。其实我是觉得，油滑是一种能力，然后我不具备这个能力，那我就干脆给自己立一个不油滑的人设。就包括我前面聊的那个善良——善良我老觉得，是我带着功利的心去做这个善良的事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个我跟你说过，我想过很多次，但你不用纠结这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我倒不是说纠结。我的意思是我其实后来发现，当好人反而很简单，当坏人很难。我不是说我天生是个好人，我是选择当好人，是因为我洞察了这个世界的规律，是洞悉了规律——就是好人好做，正向几率更多。因为我已经洞悉这个世界的规律了：你只要做好事，就一定会有好报。这个规律至少在我这个三十年的人生中没有被打破过，过程中可能有误解，但再往后、往长远了看，就肯定会有收获的。</div></div>
+<p class="para">我反而觉得当坏人很累很难。当坏人你至少得具备很多方面的业务能力啊、清晰的头脑，你要擅长撒谎、擅长伪装，骨子里还得是个坏，要不然很难，你也得有能力。其实坏人的要求非常高。我觉得这个世界反而对坏人来讲不公平，因为坏人太难当了、太难做了。坏人方方面面都要把自己武装起来，你不能露出一丝的马脚；然后好人反而你可以全是马脚，你有一丝闪光的地方，就够你吃一辈子的。好人好做。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个世界对坏人来讲，有点同情坏人，你们挺难的，挺难的这些坏人们。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">很难。他们露出一丝马脚就会被我击溃。其实绝大多数坏人都没有能力做坏人，所以就挺惨的，除了极个别那种金字塔尖的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但绝大多数确实是你说的这种，坏人得八面玲珑，一丝马脚不能露。</div></div>
+<h2 class="dlg" id="b45"><span class="ht">校服与布鞋里的自卑</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还有自卑的，就是我上学那段，其实属于比较俗套的剧情——你穿的不如别人嘛。到初中、中学的时候，因为那会儿……你们不是都穿校服吗？其实有一段时间不是，我们那个学校最开始的时候，也是看校领导的管理方式。有的领导可能就说，这段时间必须严格执行穿校服；但有一段时间，大家又不需要穿校服了。我就特别讨厌那些不需要穿校服的时候，那会儿就容易自卑。因为他们不需要穿校服，我也得穿校服。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是不强制要求的时候，大家都穿得千奇百怪，你可能还得穿校服。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，因为我妈觉得这个校服花钱给你买了，你就得穿。校服也是衣服嘛，我妈就会觉得，那也是衣服。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以那个时候，你的着装这件事给你造成过很多自卑。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，有很多自卑。而我妈是那种还挺有生活情调的人。有一会儿我妈从学校操场回来跟我说，她说：&quot;我真羡慕那些在操场上打篮球的小男孩，你要有这么活泼就好了。&quot;我说：&quot;妈，我穿布鞋去打篮球，很容易崴脚。&quot;我这个意思就是暗示该买双鞋了。但我妈说：&quot;那就算了。&quot;不是，我妈的关键是——布鞋也能打。其实我有时候想过，如果让我带着现在所有的观念回到过去，我会觉得穿布鞋打篮球是一件挺酷的事。但那都是经历过以后的想法，那个时候不会的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那对孩子太难了，14 岁的你很难迈出那一步。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是是，完全是。</div></div>
+<h2 class="dlg" id="b46"><span class="ht">什么时候知道自己好笑</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是什么时候发现自己比较好笑的，就比别的孩子好玩？比如说说话呀，或者搞怪呀，或者是什么？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">初中。其实很早就有这个意思了，但我正经知道自己好笑，应该是初中。其实我小学的时候就有一段——可能每个小孩都有这种经历——就是我跟一个发小，我俩每次上学路上都会结伴而行。那个时候我俩有个固定的、我俩自己的游戏，就是在路上斗嘴、砍大山，把班里同学的人物原型带进去，我们自己编些故事、出些梗。这个持续了大概四五年，从二年级到六年级，我俩每次上学都聊这些事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他的水平跟你大致相当。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">相当，对，如果不相当就聊不了，必须得相当。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那后来他去做脱口秀了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你很早就知道这个。你父母对这个有感受吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">比如说你看啊，我小时候在家里，我哥就是笨嘴笨舌，他人很老实，但笨嘴笨舌；我就是嘴皮子很溜。所以我哥就老打我，因为他跟我斗嘴斗不过，就动手打我。但我跟他差了五岁，我也打不过他，所以就被他打。不过我很早在家里对这个就有感知，经常能把全家人斗得哈哈大笑，到学校把同学斗得哈哈大笑，所以很早就从这个东西得到很强的反馈。虽然我后边也不愿意把说话当主业，但是就可以做到这个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你也是很早就感觉到，初中的时候就能把周围的同学逗笑了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">要到初中才有这个，对，初中才有。</div></div>
+<h2 class="dlg" id="b47"><span class="ht">嘴贱伤了好朋友</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那有没有因为嘴贱，被班里那种王大膘元的给揍一顿那种？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有被揍过，但是肯定因为嘴欠产生过一些矛盾。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">差点也打之类的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，因为当时不理解是为啥。后来才知道，原来幽默都是有冒犯的，你当时不知道。而且那时候是不能冒犯的，因为校园暴力是很普遍的一个问题。我就是因为那个事……我倒是没有因为那个挨揍，但是你会发现，其实反而是跟比较好的朋友说了一些话，我其实就是想幽默一下，反而发现伤害到他了，他生气了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有的人性格开不得玩笑。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。然后因为我也比较敏感，就导致有很长一段时间我都不敢开玩笑，都会把这话在脑子里过一遍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但没有因为嘴尖挨过打，那就说明还是没有我和高寒这种嘴尖。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我当时是不敢嘴尖别人，我都只敢嘴尖我身边的人，跟朋友。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">跟朋友，可能玩得好的朋友。我是因为嘴尖额外挨了不少打。</div></div>
+<h2 class="dlg" id="b48"><span class="ht">纯性格上的胆小怕事</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你性格上是胆小怕事吗，小时候？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">特别胆小怕事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个是跟自卑感相关的，还是你小时候发育不够、不够壮实还是怎样？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">跟这些好像都没有关系，我就是纯性格比较懦弱，不敢跟别人起冲突，也没有什么冒险精神，就是典型的求稳定那种。我小的时候——我觉得可能跟我家庭的教育理念也有一定关系。我小时候感冒了，我奶奶带我去打针，就是那个针拔下来之后，怕它出血，得拿棉签摁一会儿。我奶奶每次摁我这个棉签都是半个小时起步，谨慎到怕它再往外冒血。我就说：&quot;奶奶，是不是没事了？&quot;我奶奶还要摁。我奶奶得给我摁到肿了、淤血了——摁得太厉害了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个行为影响到你现在了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我到现在去打针，摁那个棉签，我都是医院里面摁的时间最久的。有一次在医院里跟一个老爷爷，我俩就杠上了，他一直不走摁着，我也一直不走摁着，因为我每次都是最后一个把棉签拿下来的。我觉得如果还有人没把棉签拿下来，就证明还不够安全。后来他被他老伴叫走了——那个老爷爷应该是性格跟我一样——他老伴把他骂了一顿，拿下来就走了。然后我就最后赢了，最后拿下来的，也挺好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在网络环境这么复杂，你这谨小慎微的性格也不容易闯祸。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，现在看是一件好事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就比如说我作为关心你的人，我觉得这可能是一件好事，现在网络环境太恶劣了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得是两方面都有，一方面是我家的教育也是谨小慎微，另一方面我自己的性格可能就是那种基因流传下来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你觉得先天后天都有。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">都有。我害怕的东西很多，怕黑夜，怕恐怖片啥的，胆子本来就小，也不敢冒险，从小就这种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实很多男的也都这样，他不好意思承认而已。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，比如说我一直到二十几岁都不愿意承认我怕看恐怖片，其实我是怕的。那种密室逃脱也不敢去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">去过吗？我年轻的时候没有密室逃脱，等于有密室逃脱的时候我都四十多岁了，不好意思去了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，不好意思去了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我还挺好奇的，我看过一些综艺里边，那个大老师也有玩密室逃脱，我看过，觉得挺好玩，我要年轻肯定会去。那个不至于那么害怕吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我真害怕的是那种恐怖片——有一些是单纯血腥的，还有一种是你看完了以后，连续一两个月都会想起来、后脑勺发凉的，像什么《咒怨》啊、什么贞子啊，我不敢看那些，那些真的就是……但是我们那会儿二十多，好像男的也没有承认自己不敢看恐怖片的，就会怕被说什么所谓娘炮啊这种事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你这性格，其实怎么说呢，就正常普通，你坦然这样其实也挺好的，能少受很多伤害，尤其是在娱乐圈，这还挺有保护作用的。</div></div>
+<h2 class="dlg" id="b49"><span class="ht">当着女生面卖弄逗笑</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你小时候那个感觉自己好玩、幽默这些东西，包括上课跟老师接话茬，这种有吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">肯定接。我发现虽然说老师不会打人，但是接话茬的时候，该接还是得接，快乐超过了那个害怕。因为很多时候接话茬是你那一瞬间的反应，你自己也不知道，你控制不住，根本就……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你感觉小时候，有没有跟女同学在——比如你喜欢的女同学在的时候，你跟边上的男同学聊天，有意无意地卖弄一些，或者特别好笑一些，然后那女生在边上哈哈乐，你就很满足，有过这个吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">肯定有，小男孩几乎全有过，每个人都有过。就是跑到人家女生桌旁边，两个男生在那聊一些有的没的，假装是我们俩在聊，其实是聊给那女的这边听。那女生嘎嘎乐，你就获得很大满足感。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但嘎嘎乐是比较完美的结局。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">大部分时候是人家也没听懂你聊的是啥，挺无聊的，这俩人就走了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那就是很失败。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">很失败。两种情况都有，也有失败的时候。</div></div>
+<h2 class="dlg" id="b50"><span class="ht">见一个爱一个，始终不敢表白</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你小时候，你初恋是什么时候？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我……其实那段子里讲的是真的，我在上节目之前都没有谈过恋爱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你小时候暗恋的时候有什么记忆吗？就很刻骨铭心的暗恋什么的。几岁的时候大概？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我就发现一个好玩的事——我以前作为被采访对象，人家来问我一些八卦的时候，我就觉得这什么媒体这么无聊；等到我去采访别人的时候，就得问这些问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不是八卦的念头，我不是为了更好的播放率啊那些，就是那个八卦的念头在胸中翻腾，根本抑制不了，问就行了，你随便问。来，说说你小时候刻骨铭心的暗恋，应该不止一次吧，你的性格天天暗恋嘛。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实我那个时候，最开始暗恋肯定是我上初中那会儿。你农村的小孩到城里去了，城里姑娘真好看，太好看了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，是你没有见过的好看。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那时候不管长得好、导刺得也好……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是学习也好、言谈举止也好，听起来完美。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，就是在那个时候，在你的审美里面就是完美的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">甚至说，你在往后的生命里再也没有遇到过那么完美的女孩，因为对那个时候的你来讲，冲击是非常大的。你不知道为什么会有人，学习还好、长得也好看、三观也正。那暗恋过很久吗？同一个暗恋过很久？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为我当时初中，那个学校还挺大的，我们那一年级有……是一千多人还是两千多人，一个年级有一千多人。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么大，那不是五个县里最大的初中吗？明白。所以说你在校园里面经常就是看一个爱一个，没有针对某一个、长时间那种痛苦的爱恋。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有过，初中的时候没有。那时候比较懵懂，就很难陷进去，经常就是见一个爱一个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">高中有？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">高中有，高中就陷进去了。但我那会儿就是挺自卑的，我也不敢跟人家爱恋，到最后也没表白。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他完全没察觉？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">应该察觉了，但是我就没有表白。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他肯定有察觉。但是这个期间，他也没找别的男朋友？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们那会儿高中会干涉吗？学校算早恋吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实不会干涉，不怎么管了，初中可能还会管。我那会儿属于那种——也不表白，又比较老实，就也不知道怎么做这个事，也不可能说把人家约出来，我是不敢做这个动作的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但同学谈恋爱的应该已经挺多的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">挺多的，我在这块比较晚熟。我只是有那种喜欢，但是怎么处理这个事，我就不知道怎么做。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你要说，哥们可能也算有点浪漫吧，在精神层面，但是实操上怎么做，根本就不敢、不知道。你也不知道说把人约出来，还是说写个纸条，还是托个人，怎么着？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">完全不知道。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你也没跟你那些比较风流倜傥一点的哥们去请教什么的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我刚刚就说这个，我不好意思问，就是该怎么做这种事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是不是那时候还挺幼稚，都假装我啥都会？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">挺幼稚的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">跟男性朋友会这样装，对吧，就不好意思提这个事，一副我也能搞得定的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，脸皮也薄。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你暗恋这个有多久？整整高中期间吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有，就是换着人暗恋，一直在暗恋，但是换了女主，换了好几个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，女主换了不同的女主，没有一个长时间好几年的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有，那倒没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">长达一年的有吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">一年的肯定是有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我在测试你是不是具有渣男体质。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">一年的是有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我感觉高中时期是你价值观开始塑造的时候，那时候很多东西会对你产生影响，你可能每年都有变化。我反而觉得是你价值观趋于稳定的时候，你会逮着一个人喜欢很多年。那我这么问你，你到今天二三十岁了，回想自己青少年时期，有那种还能想起来的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">都在脑子里，每个都在。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有特别的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有特别的，但是每个都在，特别的也好几个。对，我是这种人。罗老师，你这个问题问得特别好，我就是每一个都很特别，都在脑子里。</div></div>
+<h2 class="dlg" id="b51"><span class="ht">愿不愿拿大王换暗恋的人</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们本来还准备了一个特别熟的问题，看来都不用问了，应该是草威准备的吧。说，如果你能换回你青年时代没有得到的、那个刻骨铭心暗恋的那个人，愿不愿意拿这个脱口秀大王去换？就是你得不到脱口秀大王，但能跟那个年轻时候刻骨铭心暗恋的女孩在一块。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">你有答案了？陈宏陆老师，我不敢说，我有答案了。但是……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">草威有这个预设立场，是认为你有一个魂牵梦萦、都忘不了的。现在听起来有一堆，那一个奖杯也不够用啊。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不。一个奖杯——那个人只有一个了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个人只有一个。就还是有那么一个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，肯定换呀。奖杯这些虚名我没有那么在意，奖杯可以再拿。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这是你真诚的回答，还是为了用这个来巩固将来可能要渣男的那个人设？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我真诚的回答，我肯定会换。其实还是有一个的，只是刚才没想说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你拿奖杯换就机灵起来了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为我是觉得每一个都对我特别重要，然后有一个人尤其重要，其实还是有那么一个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好。然后你小的时候因为好玩，明显地被一些女同学夸过吗？就比如说我小的时候，跟一个男同学——就跟你说的一样——当着女生面卖弄，不管是卖弄幽默，还是卖弄博学，还是卖弄什么，有的时候偶尔就会有一个班里的女同学，用那样异样的眼神看着你说：&quot;哎呀罗小浩，你知道的可真多。&quot;就类似那种，是获得巨大满足的那种，有肯定有过吧？没有正反馈就不干这个事了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">肯定有正反馈，经常有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不是特别多吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但是每年都会有女生说&quot;真幽默&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是你没有因为足够好玩，以至于被倒追？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我说这个话，我不知道人家是怎么想，但我感觉他是对你有好感，主动跟你没话找话的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，但是我就没有……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">他不是你喜欢的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他不是我喜欢的。就喜欢我的我没有喜欢他，然后我喜欢的就不喜欢我，大概就这么错过了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那也不一定，你喜欢的可能也喜欢你。你不是不敢表白吗？这个还是至关重要的。尤其脸皮厚一点，你多表白几个，就不知道哪个就撞上了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我感觉我应该是错过了一些，就是因为当时我过于幼稚。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">你感觉对方也是有好感的，但你不敢说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有那么一个我感觉是有，我也喜欢，然后但是只是就错过了，始终没敢说。但这种事过去就过去了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，但是你今天也都快 30 了，你会不会再犯一样的错？比如说你今天如果碰到一个你喜欢的，就会克服这个心理障碍吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我到时至今日，还是没有那么会在实操的层面，但是我肯定会表达。而且我会觉得，如果我现在又遇到一个特别心动的，我的表达还是会非常谨慎。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是你越喜欢，你表达就会越谨慎、越害怕。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">越害怕失去，又害怕搞砸了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你就知道搞……因为现在的我都 30 了，我知道你在遇到那个心动其实是挺难挺难的一件事了，就是你由于过于害怕搞砸，所以会非常谨慎。但是你现在在上海年轻人的这种社交场合里，碰到一个女孩不认识你的概率也比较低了吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还是挺高的。但是遇到认识我的概率也挺高。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我相信就算有一些不认识你的，他至少中间的朋友会告诉他这个是谁谁谁。那这个其实会对你找女朋友形成障碍还是帮助？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实都有吧，好坏都有。因为我就不能确定他是不是喜欢我这个人，所以我反而会比较……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这个还真挺内耗的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我反而喜欢那些完全不认识我是谁的人，甚至这个人就不爱看脱口秀，我就喜欢这种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我朋友很多你这样的，但就感觉这样会活得更累。反正八卦的我们也不能讲太多，基本上都要剪掉不聊了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">虽然我八卦的欲望在胸中翻腾，不聊了。这很多都能播，我觉得都能播。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你觉得可以？可以播。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就把你们同事拦着我。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没事没事，不能播的我都不会说了。</div></div>
+<h2 class="dlg" id="b52"><span class="ht">电话销售像解数学题</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你的头几份工作都干过什么？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">第一个工作干过电话销售。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电话销售，卖什么？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">卖车险。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这么内向的性格……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我也是后来才知道，他们在招聘的时候根本就不管你内向还是外向。因为他们有一套非常完整、规范的话术，我以前像机器人一样念就行。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我们都以为销售需要你性格多么外放。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我也是干了这个工作之后发现，跟那些东西一点关系都没有。它有点像解数学题一样——对方说啥，你说啥，都是匹配好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，因为人性早就被他们研究透了，你照着那个就能卖得出去。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实是做那个课的人厉害，他把人性研究透了。而且销售这么些年发展下来，他们的话术也在不断地迭代，到最后到我们手里的那个东西全是精华，照着执行就行。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那业绩差异还是有的吧？你是好的还是差的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有的。我是中间的，不好不差。而且业绩差异，我甚至认为跟内向外向没有关系，因为我们那时候打电话根本见不着人，就跟你的语速呀、音色呀、运气呀有关系，跟别的好像关系没那么大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">勤不勤快有关系吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，跟勤不勤快有关系。其实你照着那个执行就可以了，给你发挥的空间并没有那么大。就比如说很简单，你要嫌这个东西贵，我说啥？我就说品质好就可以了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他有套路。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">他有套路。他要说我去别的家买、别的家比你便宜，然后你就会用什么话术去回他。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那有没有可能，这只是因为是电话销售？如果是面对面的销售，性格内向还是会明显吃亏。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">如果面对面的话，我觉得性格内向肯定会吃亏。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你有一个优点是，你长了一张很真诚、很让人信任的脸，所以也不好说，这个够不够弥补那个内向的毛病。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，所以说我没有做过这个事，我也不知道。我有可能能把它做得还不错，也有可能。</div></div>
+<h2 class="dlg" id="b53"><span class="ht">心软听不了客户诉苦</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电话销售做了多久？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">一年半。卖车险卖了那么久，后来我不愿意卖了。我那其实是挺大的一个保险公司，大的保险公司品质服务好，但是它的价格会高，然后很多投保车险的人就会选择小的保险公司，价格便宜嘛。你跟他说你的品质好，他就会觉得说，哎呀我确实没有那么多钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">嗯。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我这个人有点心软，我听不了那种话，听多了成了心理负担，我就会站在他那一边，我就觉得对呀，我为啥要花更多的钱在更大的保险公司买一样的险种呢？因为有些客户你跟他聊久了，他会跟你诉苦，说我这个钱孩子上学等着用呢，我确实没有那么多钱，你能不能便宜一点之类的，我很容易被他说服。因为很多人确实情况是如此。我听到了这种话之后，我觉得我不能再干这个工作了，太消耗了。我很难昧着良心跟人家推荐更贵的东西，然后我决定去流水线。</div></div>
+<h2 class="dlg" id="b54"><span class="ht">13个月的蓝领：装老头乐增程器</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">工厂流水线吗？这咱俩又都干过。你在车间干过一年？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">13个月的蓝领，在流水线上。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是做啥，装啥呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是一个金属制品厂流水线上的工人。我做过点焊，包装工干了七八个月，点焊干了五六个月，大概是这样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你那是什么工厂？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我是一个新能源汽车组装，但它也没有那么……就老头乐组装。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是装老头乐？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，就那个四个轮子的电车，但是那种特别小的，叫老头乐。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电动的邦邦。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我们那边叫老头乐，就是四个轮子电动车。我那个岗位是装那个叫增程器，它是一个发电机，就是用汽油给那个电池充电。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">增程。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我是装那个东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在电动车不也有增程式的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，老陈了，只不过你那是个小的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个干了多久？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也是一年。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你还是从写字楼做白领去干的蓝领，这不走过去？你心理上没有任何问题？还是那个挣钱多？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得那也不算白领，反正工作环境会差一些。就是一群小哥之间不停地打电话，因为我那公司挺大的，服务还挺好的，工作环境至少是舒适的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">用小丽的话说，你干那个打电话的活的时候，也没觉得自己是个都市丽人，对吧？感觉是个办公室蓝领，然后去车间当蓝领，也没有什么那种落差。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有落差，我没有觉得自己是什么都市白领那种，倒是没有。我是那个心理压力太大了，然后我决定干一点不需要动脑子的活，我觉得那就去流水线了。去流水线干了一年之后，倒是没有觉得有多苦。</div></div>
+<h2 class="dlg" id="b55"><span class="ht">流水线上的喜剧种子</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我那时候就觉得自己好像……那个时候我心里面是有一个喜剧的种子的。哪怕在那个流水线的时候，我就觉得我好像这一辈子不应该这样，我应该要干点事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你大专的时候就有这个想法了吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">应该有，从小就有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那为啥不敢走出这步呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有积蓄嘛，我得先打两年工赚点钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你得到大城市来做这个事，因为在家乡也做不了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，而且我也没有办法跟父母亲手要钱说，不工作了我就要去追求我的喜剧梦想。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白，小时候连花钱都不给。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">你给我多少钱？所以我就等于自己先工作两年攒点钱。</div></div>
+<h2 class="dlg" id="b56"><span class="ht">带一万块坐14小时绿皮来上海</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你带着一万元巨款来到上海滩的时候，其实都是自己挣和存的钱。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，自己挣的钱。我那时候存了三万块钱，后来那两万块钱怎么花的忘了，花挺快的。我辞职的时候是有三万块钱，先消耗掉了两万，然后才来的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你来那年是几岁？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">23那年好像，18年。我现在29。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">二十二三的，坐火车过来的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，坐了14个小时的绿皮火车。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这个决心下的时候，是跟家里、朋友，或者是谁……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">一个人都没商量，就自己下了这个决心。因为我觉得这个事你也找不到人商量，商量也会劝你不要做。我那时候就觉得，燕雀安知鸿鹄之志，跟他们没有共同语言，聊不了。我跟老家的那帮朋友，包括到现在为止，跟他们聊天他们也理解不了。我现在跟他们说，我说我没有那么想赚钱了，我想做点我想做的事，他们的反应是：你不赚钱你想干啥？到现在为止，他们的价值观依然是，你不赚钱你想干啥。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且贵省是最讲究稳定的省。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你这种听起来就特别不靠谱、甚至大逆不道的想法，聊了你也能预期什么结果，所以就自己想来想去，下了决心就来了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。那时候倒是跟有一个人商量过，算不算商量嘛，就是我会跟他探讨过这个事。其实因为我那时候最开始在济南是有脱口秀俱乐部的，只是非常的原始，没有观众，只是有人在做这个事、在组织这个事。然后我讲了三场开放麦，我觉得这没有观众肯定练不了，然后我就问那个俱乐部的负责人，我说我想去北京或上海，去更大的城市，然后问他的意见，去哪个好。他跟我的意见是，他说北京那时候氛围比较好，但是上海这边呢，是他的制作公司在上海。那时候脱口秀大会第一季已经播了，节目的制作公司在上海，然后北京是脱口秀大会氛围比较好，你自己选择吧。</div></div>
+<h2 class="dlg" id="b57"><span class="ht">北京没节目，上海是利益中心</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">脱口秀第一季已经播了，那个时候，18年的时候，那个拍得很简陋那次。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，但那个时候也给我极大的震动。因为我在网上刷片段，刷到什么庞博、Rock、韦伯琛，还有那个王勉跟Rock那个《北京北京》，我当时就指那段活着呢，我当时觉得这个太酷了。那个给我的震动到现在都……到现在就是那种感觉，我记忆里还有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那一般你想做这个的话，真的是……其实中国脱口秀整个市场也很小。那时候没有人能靠这个赚钱，哪怕是天花板周奇墨，一个月能靠这个挣个两千块钱，差不多。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">还不如上班呢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，肯定没有上班这么多。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但我那时候我觉得，我又不是什么名牌学校毕业的，我做脱口秀并没有什么浪费的，我没有什么失去的，没有那个下降的空间了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以想得不行就再回去。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对啊，我想得很明白。我觉得我还是有一些生存的智慧在的，就是你已经没有下降的空间了，你不如就搏一搏呢。我觉得这个生存的智慧是有的。包括我选择北京还是上海，纠结了很久，最后选择了上海，我觉得这个也是我的智慧一直在帮我。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我为什么选择上海……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为我觉得你要想出来、出人头地赚钱，你肯定得上节目。那上节目去哪了？肯定你要想让别人看到你的能力、让你上节目，你必须得去上海。尽管他们说北京那边创作氛围比较好，但北京没有节目。你只需要让自己在离那个意义最近的地方，然后保持自己的初心，写最干净的段子就行了。你没有必要跑到一个最偏远的地方，远离那个利益的地方，写脏活，这不是你弄反了吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。你应该在利益中心写最干净的段子，而不是在远离利益的地方写脏活。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得这个得想明白。</div></div>
+<h2 class="dlg" id="b58"><span class="ht">大家不知道的那一面：很有智慧</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这点也是我想说的。其实你对公众流露出来的，那里边包含你的很多同行跟我说过的，就他们一直认为你是个脑子很清楚的、然后规划什么、想什么都是很清醒的一个人。但是你的表演常年都是一个很好玩的、一个穷门吊嗓，讲那些好玩的，所以其实大家不容易知道你有这一面。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实我很有智慧，特别有智慧，我也这个感觉。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是这个其实你在过去的作品里体现得并不是很多。再加上这一季开始比较明显，很多那些年轻选手，所以在后边就是，一个是节目过程中可能交流也比较多、请教你问题也比较多，然后我眼睁睁地听着，原来很多叫呼兰哥，现在也很多人叫广智哥了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">它是一个自然流露，因为年龄上来了，现在小孩确实比我年龄小，我29了，他们23、24，叫个哥不过分。年龄也上来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">年龄涨上来，表现没有那么突出的，也不一定有那么多人喊哥，这也是一个很现实的问题。</div></div>
+<h2 class="dlg" id="b59"><span class="ht">一个人都不认识，闯进上海</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你当时是想着，反正也没什么退路、也没有什么可失去的，就带着一万块钱来了。然后来的时候，是直接去的笑果吗？还是在一些开放麦里先厮混了一阵，在笑果的开放麦？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我是来之前就打听到了那个笑果的开放麦，然后我就决定先去看一场。因为我知道那个报名的流程，济南也是这样，它都是模仿的上海：你看一场开放麦，到最后的时候主持人会拉一个群，他会说想上台的可以找我，他每次都说这句话。我就去看了一场，然后再去找一个主持人报名上台，然后把你拉到群里，你交稿子，大概一个流程我都熟。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">来上海那时候还是挺紧张的，第一回去一线城市，人生当中一个认识的人都没有。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">感觉挺震撼。对，来上海第一天就被上海的繁华给震惊到了，当时特别的兴奋，他的繁华程度远超我的想象。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个时候啥小子见过啥呀，就疯了。电影电视里看和真看……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">跟真看还是完全不一样。因为那个时候的电影电视就离你很遥远，然后你有一天发现，原来电影里的镜头是真实地出现在你面前了，你很震惊。我当时觉得跟电影里演的一样，这个地方配得上我的梦想，配得上我的梦想。</div></div>
+<h2 class="dlg" id="b60"><span class="ht">追梦的路上得有一个地道</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">因为我第一回是在火车站附近找了个青年旅社，然后我步行去那个开放麦的地方，穿过一个地道。我说这跟我电影里看的追求梦想是一样的，得有一个地道。如果你追求梦想的路上没有地道，那白跑一趟。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是地道好像是跟卖唱的更那个什么一些，你见过在地道里讲脱口秀的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有。但是我不知道为啥，可能是电影给我们造成的错觉，就是那个卖唱、那个就是追求梦想。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">它是一个非常视觉化的东西。我当时看到那个，甚至那个地道里边还有流浪汉，我说绝了，元素都集齐了，我当时觉得什么都不缺了。流浪汉、地道，这电影里的元素都有了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是来的时候其实也是特别自信吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">90的自信，加上10%的怀疑，也怀疑自己适不适合做这个，但就觉得放手一搏吧。</div></div>
+<h2 class="dlg" id="b61"><span class="ht">济南没有真观众，每一秒都很珍贵</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你在济南那些开放麦的时候，你刚才说完全没有观众，那它的观众怎么说呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">它不纯粹。比如说我们几个演员要上台，每个人负责带一个朋友过来，就属于亲友团，然后你给亲友团演，他们笑不到点上，他们只笑内部梗。那个时候我就感觉内部梗好使——其实是因为只有在你提到你朋友的时候，大家才会笑。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那笑的就不是梗了。你自己也知道你就干这个的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，然后就觉得要见真实的观众。那个时候除了上海，北京也没有成规模的，其实就只有北京、上海有。所以济南虽然有，那老板也就是一个拓荒者的角色，还没有形成固定的观众群。大家都各自有本职工作，一个月可能有一场开放麦，都不是一天一场——一个月一场，还没有观众。我当时觉得，我不能把青春浪费在一个组织上了。打定主意要做这个事的话，我的每一秒都很珍贵，我就决定要去，就这么横，我不能再耗了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你在地道里，觉得一切氛围都烘托到那了，老子必须干成脱口秀明星了——然后就直接去笑果那个开放麦了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">你不能第一天就上台，没有资格，先去看。</div></div>
+<h2 class="dlg" id="b62"><span class="ht">两块三毛三的门票心理学</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个是报名免费看对吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">两块三毛三，那个时候是。现在不要钱了，那个时候反倒要钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">勉强维持一个场地消耗。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也不是，就是怕有的观众不来。我们研究过大众的心理：你收他两块三毛三之后，原本不来的人可能都会来。因为他不来就觉得这两块三毛三亏了；如果不要钱，他就觉得可去可不去。然后收个两块三毛三——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，这个很合理。</div></div>
+<h2 class="dlg" id="b63"><span class="ht">第一天到上海：摸两面墙的隔断房</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你每次都是花两块三毛三去看。第一次花了两块三毛三去看，然后呢？你把整个过程给讲一下，因为这段好像也是我们聊起来大家最想听的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我就是先是那天到上海，下午两点半好像是，找了个青年旅社。一开始找不到地方，第一回来上海根本不知道，那个青年旅社已经不合规你知道吧，就在一栋楼里边。而且那个小区还挺好的，他虽然是个群租房打了隔断，但是楼下保安还挺横的那种。找不到地方，然后打电话让他下来接我，这那的一顿折腾，好不容易把东西放下来。放下来之后呢，进了那个房间——没有见过这么小的房间，你只在电影里看过那种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是大家都说北京上海寸土寸金。那个房间有多小？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有窗户。大概的宽度，是我伸开双臂刚好就能摸到两面墙，就这么宽。然后放了一个上下铺，还俩人。大概这么宽，巨窄一个窗户。看到那个，就是没想到会住得那么次。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你想到过可能生存条件会比较差。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但是也完全没有想到会那么次。更兴奋了，电影里的元素又集齐了一个。这时候还没有&quot;打卡&quot;这个名词，但感觉就是一个个。当时看到那个之后，越看越兴奋，就觉得这所有的一切都集齐了。就那一天，对我的整个人生来讲都是非常重要。很多画面到现在在我脑海里还存在，就是太震撼了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是一方面上海如此之繁华，把你震撼到了；然后你回到你的青年旅社，又如此之小、如此之狭窄。能这么窄是吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">他窄到那个床到那个墙，就只有我两条腿的距离，我想翻个身都很难。然后我住下铺，把东西放下之后在那坐着，看看手机，报名成功，准备去讲开放麦。然后坐起来的时候，一下头碰到了那个上铺，磕了一下。当时脑子里——我觉得应该每个刚来上海的人都说过这句话——捂着脑袋就说了一句：等以后有钱了，我要把整栋楼都买下来。应该每个人都说过这句话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们都那么狠。我还以为当时一个阶段性的目标，是等老子有了钱，把上铺消灭掉。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">直接就想得特别远。他是一句狠话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我知道，他是在情急之下说的一句话。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是我要把整栋楼都买下来。然后拿着手机就出门去开放麦了。</div></div>
+<h2 class="dlg" id="b64"><span class="ht">19块炒面与漫无目的的外滩</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那个时候已经学会精打细算了，想找上海最便宜的饭馆。一个是饿了，最便宜的饭馆是一个沙县小吃，吃了个炒面，什么19块钱，心疼坏了，生活成本也太高了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那可不嘛，跟老家比起来。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">19块钱当时觉得太贵了，但是没办法，第一顿，其实也找不到更便宜的。我走路去的开放麦，有一段距离，两三公里，说远不远说近不近，但是走起来其实还挺麻烦的。走着走着走着，就走到了那个外滩，滚滚红尘。那一块我没有导航要去那个地方，而是开放麦就在那附近的一个商场里。我走着走着去到了开放麦的场地，是四点半，他们说七点半，早到了三小时，肯定太早了。然后我就溜达着往前走，溜达溜达就到了外滩，漫无目的地就到了上海最繁华的地方。就是那一系列的建筑，给我的震撼，难以用语言描述呀。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且你如果是奔着外滩去的，震撼可能没有那么大；是因为你意外溜达溜达到了外滩，所以震撼效果更好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，到了江边，太激动了，太兴奋了，眼泪差点夺眶而出。就觉得我来这个地方了，这个地方配得上我的梦想。</div></div>
+<h2 class="dlg" id="b65"><span class="ht">观光车的吆喝：五年后多了&quot;看脱口秀&quot;</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我记得外滩走过去的时候，有一个观光车。我在上海街头遇到过很多那种很有宿命感的画面。当时遇到那个观光车的时候，那时候是18年，那个观光车他还会下来吆喝卖票，说去那个什么新天地、东方明珠，巴拉巴拉一堆景点，快上车。然后五年之后，我带我父母来上海玩，又路过那个观光车，那个人还是下来吆喝，他吆喝的是：有去什么新天地、东方明珠、看脱口秀的上车——脱口秀是其中的一个景点。就那一瞬间，我感觉挺电影的，挺宿命感拉满，挺起鸡皮疙瘩的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，然后脱口秀就变成了观光车的一个景点，走进主流视野。五年过去是这样的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后那天我就去江边待了一会儿，溜达溜达，反正就是从四点半待着到七点多，去看开放麦。</div></div>
+<h2 class="dlg" id="b66"><span class="ht">第一次看开放麦：差距有点大</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当天演的是谁？是知名的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">第一个是赵武诚。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我知道。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">赵武诚那时候演得还挺好的，还有段子。然后其他的人就都不太记得了。当天还有那个海涵，就是现在小四爷的老板，他那时候还是一个演员，是笑果（厂牌）的运营，同时也是一个演员。他那个时候上台讲了，有赵武诚，还有Storm，Storm那天也讲了，还有一些人我就不太记得了。坐在下边一边乐一边……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">想把他取而代之。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有想把他取而代之。因为那时候上海这边发展还是比济南好，有好多人段子说得还挺硬的，就觉得哇不行，差距有点大，还是有点心灰意冷，觉得人有点厉害。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是你的自信心那一刻是受到打击的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是上海这个城市还是太厉害了，因为它应该是各行各业最顶级的人才都在那，然后你就发现，有点厉害。然后就开始报名。</div></div>
+<h2 class="dlg" id="b67"><span class="ht">隔一周才上台：第一场不冷不热</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">报名也并不能第二天就接着上台，先隔了一周。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这一周你天天去看吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有。把我拉到了一个开放麦群里面，说让我交稿子，然后说下周几有一个开放麦可以去试一下。我就写了一周的段子去讲了。第一场一般，没有那么好，也没有那么冷，就正常。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你本来底子还是好的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。那天现场效果没有那么好，但是有一些同行的哥们，他们后来跟我回忆说，我那天听你——他说能听出来你是会写的。就虽然效果没有那么好，但是你的一些逻辑就能听出来，这哥们会写。然后我就……没有那么好，对我来讲就是一个打击，我觉得我应该是一下就炸场才行。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你在这方面本来就是很自信的，对吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">挺有自信的，我很自信，我非常自信。</div></div>
+<h2 class="dlg" id="b68"><span class="ht">固定住下：1100一月，一万块撑半年</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后我就回去，在那个青年旅社里边——我就上铺。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就没有下铺了呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">第二天我换了。我开始是下铺，因为他那个房间是流动的，我开始的时候是下铺，然后后来那个床铺明天卖出去了，我就被挪到了另一个房间的上铺。然后我就说，我固定在这住一个月，一个月1100块钱，交了房租。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那已经是你全部积蓄的十分之一了，还多一点。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。然后我按那个开销算了一下，大概能撑半年。我吃的话，找到自己做饭的地方了，然后大概就是馒头，点咸菜什么的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你光住就要一千一。但你一万块钱，当时算了一下，是省吃俭用的话能撑半年。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。我就半年以后的事半年之后再说吧，我就没想半年以后的事。然后就开始写段子嘛，我觉得我得好好地写了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这期间没有为了支持自己继续做脱口秀，再去打什么别的工？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就半年内就能靠脱口秀吃饭了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<h2 class="dlg" id="b69"><span class="ht">对行业莫名的自信</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你其实这个自信还是很充分的，并不是盲目自信。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。我那个时候的自信不仅是对我自己，对行业我也充满自信。很多人跟我说&quot;你去找个工作吧&quot;，首先这个行业、这行挣钱就很难。但我不知道为啥，那一年我就有莫名其妙的一种自信，我就觉得这个行业马上就好了。那个时候《脱口秀大会》第二季其实还没有录、还没有播，但我就莫名地相信这个行业。所以很多时候我就觉得，是不是命运在指引你？是不是上帝就是存在？我那个时候就莫名地……后来确实如我所料，就好了起来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有什么严谨的分析啊？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">啥也没有，纯感觉。然后我写了一周的段子，觉得还不错，我自己还挺满意，然后去讲——第二场就开始炸场了，就被人注意到了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">第二场就很热烈了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">基本上就很热烈了。第二场我写了一些为了效果……我写了一些下三路的脏梗，我到现在还记得那个梗，后来不讲了，因为后来他们说有点太脏了。但我自己觉得还行，不算特别脏。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你说的脏是指擦边还是？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">屎尿屁的、屎尿屁的。</div></div>
+<h2 class="dlg" id="b70"><span class="ht">一年半才靠脱口秀赚到钱</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你其实还是很顺利的，对吧？相对于很多演员算是顺利的。你去的时候就六个月的钱，结果不到六个月你就能靠这个吃饱肚子了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也没有，我是一年半才靠这个赚到钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那中间没有过钱断档的时候吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">中间有一阵是……我在这待了几个月、大概半年的时候，后来有一回我跟我妈、跟家里说这个事了，我妈就断断续续地给我一些钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还是家里支撑过一阵。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，给我转个一千块钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是他们知道你是来做脱口秀的吗？还是你假装来上海打工的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">开始我是说我来上海打工，后来慢慢地跟他们说是做脱口秀了。然后再后来，笑果看到我之后，会觉得这是上海这一边讲得比较好的，把我弄到北京去，跟北京那边演员学习交流三个月。然后他们出路费跟房租，我说这好——因为房租是大头，他们只要给你出了房租，别的就都无所谓了。他们在北京给我租的房子还挺大的，我基本上可以做饭，就花不了太多钱了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个时候有个什么训练营是吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">笑果训练营嘛，很多人都去过，我也去待了三个月，在那边认识了很多北京的朋友，包括志胜就是那个时候认识的。笑果做的这个事，对行业帮助还挺大的。那一段时间没有线上节目，两边演员大家也不怎么交流，不像现在——大家去哪个城市演出，你从上海过去、我从北京过去，大家在一块演，就能互相看到彼此的段子。那会儿行业里面没有商演，大家都是在自己各自封闭的环境下创作，没有交流，根本看不到。然后弄过去之后，大家就互相都看一看。</div></div>
+<h2 class="dlg" id="b71"><span class="ht">像早期搞摇滚都往北京跑</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有点像是中国最早搞摇滚音乐、原创音乐的那帮人。就我们那个年代、那个时候，全国各地都往北京跑，但总人数还是特别少。所以有的时候在马路上一看，就觉得&quot;他是搞音乐的，还没出名，还在地下室里成长&quot;；然后看着另一个人剃个朋克头，或者留个长发，就觉得&quot;这哥们别是搞音乐的吧&quot;。但那个时候整个群体还是特别小。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，那会儿大家交流不起，因为没有人出得起路费，所以只能在各自的城市里摸索。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是只有北京和上海还是有一点……虽然人数不多，还是有一点扎堆的意思了。其他城市有，但是没有形成、没有拧成一股力量，就是有哪一个人两个人这种。我特别特别希望咱们这个录完了、结尾的时候，有那个时期的一些影像资料。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">行，会找找，肯定会有。</div></div>
+<h2 class="dlg" id="b72"><span class="ht">两年跑上千场，像电影男主角</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一个，我看媒体报道的，就是说早期你那会儿特别特别勤奋，两年都跑了上千场演出，是吗？因为两年上千场的话，一年五百多场，平均一天要多于一场。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我没有做过统计，但是我那时候应该是最努力的一批演员，因为我没有工作，他们都有工作。有的人有工作，加班晚了就来不了开放麦了。我那时候开始的时候，一周都遇上开放麦，后来能力就好了一点，他们把我拉到了那个大群里面。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">基本上有时候在上海你能赶场吗？就是一天演个两到三场，骑个什么共享单车之类的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，骑个共享单车。那时候觉得自己也老帅了，骑个共享单车然后来回赶场。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为啥觉得老帅了？想到骑在路上，想着那边还有观众等我，是那种吗？你又把自己带入到电影里的男主角了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是，有时候下点小雨就更好了，就配上了，就感觉是在追逐梦想的路上，再往一个正确方向去。那时候每天醒来就觉得自己在朝着好的方向走，每天都充满力量。虽然吃不起饭，但是每天都充满力量。</div></div>
+<h2 class="dlg" id="b73"><span class="ht">冷场带来的强烈自我怀疑</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你整个过程还算顺利，但没有过很大的打击或挫折吗？这两年。因为我知道的是，你20年上完《脱口秀大会》第三季吧，那个之后肯定就都好起来了，但那个之前没有过很大的挫折吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我没有大挫折，但是小挫折也有过。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">类似什么样的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">无非就是冷场。这场讲完之后观众一点笑声都没有，那一刻会怀疑自己。但那个时候不知道——很多国外很成熟的演员他们也冷场，冷场是很正常的事，那个时候不知道，就很难过。然后后来再讲好一场之后，你就发现好像没事。就那个时候不知道这个段子好一场坏一场，是好还是坏，就会陷入到怀疑当中。没有一个人站出来告诉我们说&quot;好一场坏一场是正常的&quot;，没有人说这个话。而且冷场以后下来，你会很脆弱，非常脆弱，那个脆弱会觉得把你过往这半年所有美好的幻想全摧毁了——你觉得你是电影里的那个主角，然后这一场冷场之后，你就感觉那个电影演完之后没录上，就是那种挫败感，一切都是泡沫，会有那种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你当时演那么多开放麦，冷场和效果还不错、或者你自己能接受的，这种比例大概是多少呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">应该很低吧，冷场很低，冷场非常低。但没有一次……每次发生一次，你就会遭受特别大的自我怀疑。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">会怀疑、挫败感。那有一些也是过于敏感导致的。</div></div>
+<h2 class="dlg" id="b74"><span class="ht">和舒衡同批，都怀疑自己</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们当时一起那一波的演员里边，其实也有一些特别敏感的吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我们一起那一波演员里边，其实我跟舒衡是一起的。那个时候、到现在出来的人，就是反正走到大家视野里面的人，就是我跟舒衡，那时候我们是一批的，还有很多哥们兄弟。但舒衡应该也是很敏感的人。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以那时候舒衡也会怀疑自己。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实都会怀疑自己。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有没有一个晚上你们哥俩同时讲砸的？那个时候结束以后，到后边谁也不想理谁，有那种？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那会儿大家都讲砸了，反而不会谁也不理谁。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。所以你当时的生活就很简单、很纯粹，每天一睁眼，写段子、开放麦，就是这么点事。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这个状态持续了一年半。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">一年半以后可以靠一些线下演出挣钱了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，一年半以后，笑果就给了我一些机会，那个演出那时候是四百块钱一场拼盘。然后大概到了两年以后……</div></div>
+<h2 class="dlg" id="b75"><span class="ht">脱二播完，行业一夜成型</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">两年以后也就是20年左右，《脱口秀大会》第二季播完之后，有一个好处是线下的市场一下就活跃起来。其实《脱口秀大会》第二季对行业整个格局改变很大。在第一季、第二季播之前，这就不是一个行业，因为只有一些爱好者在组织。第二季播完之后，是有大批的观众愿意花钱买票去线下看剧场，那时候演员就能挣到钱了。然后那一段时间涌现出了一大批厂牌，就是现在的四孝、就是培养小四爷的厂牌，就是那个时候出现的。然后我呢，因为前两年的积累，在线下口碑也不错，我就成为了上海各个线下厂牌里的台柱子。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">竞相邀请。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。那个时候我应该是全国商演最多的演员之一。那个时候一场三百块钱、两百块钱、四百块钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你去录第三季之前，在线下已经是明星了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">可以这么说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是你得在线下先是明星，才有资格去录那个脱三，要不然也进不到他们选演员的视野里。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以它不是像以前那个唱歌选秀，集体报名然后去海选，不是这样的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有。所以我一直觉得，第三季那个节目观众的观感跟真实的情况是有偏差的。大家以为我们报名就能去、你是一个名不见经传的小人物，其实那时候哥们儿已经是炸场王了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以其实你上来……我的感觉就是，对我是百分之百的新人，但感觉技巧啊、经验啊，那些什么火候啊就特别到位嘛，包括创作。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那时候算不上特别到位吧，但是基本上不是那种纯新人，线下那些东西都是剧场里打磨过几百遍的那种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">说实话那一季你肯定是最瞩目的演员之一。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">第三季。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">像那个「理发」就那次对吧？「带刺的玫瑰」是第二年。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是第二年。</div></div>
+<h2 class="dlg" id="b76"><span class="ht">偷偷学石老板，前辈给上课</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你刚进这个行业的时候，有没有过对走在你前面的那些人——不管是叫兄长也好、前辈也好——有一些你特别羡慕、想成为那样的演员？在国内。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">太有了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你当时最喜欢谁？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">倒不是说我最喜欢谁。那时候网上能搜到的就是那些脱口秀的视频，除了《脱口秀大会》第一季之外，就是单立人，零零散散地传过一些，有一些石老板的、有一些周奇墨的，这些都能搜到。那时候其实石老板对我影响还挺大的，那时候就偷偷地学石老板。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那基本大家都在学他们。学他本人的表演吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不是，就是纯学他的创作方法。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">创作方法。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就你看着视频，他写一个啥，然后你照着他那个结构再写一个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你们那时候没有看过一些理论书籍？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">看过我看过。笑果当时是组织给新人上一些培训课，那个时候是一位赵老师给我上的那个课，他那个课上得特别好，我在那里学到了很多东西，他那套理论挺扎实的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是在学习班学的，不是……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，学习班有一套非常简洁的教材，我学的就是那个。然后学习那些东西，再看一些前辈的视频跟着学，然后在开放麦上听到前辈怎么讲的，再跟着后边学，就这么一步一步过来的。</div></div>
+<h2 class="dlg" id="b77"><span class="ht">穷但快乐，没立场劝别人坚持</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但那时候虽然还没挣到钱，整个过程还挺快乐吧？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">非常快乐。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吧。除了偶尔冷场之外。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">非常快乐。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且在你冷场之后，还有一个好处是，你看别人也冷场之后，你就越高兴了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">越高兴了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以经济上拮据这件事反倒没那么苦，反正能吃饱、有地睡觉就行了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，那个时候对生活的要求就是能吃饱、能有地睡觉就行。那时候也没吃过好东西，就什么便宜的都吃，填饱肚子就行。每天都心向上，每天太高兴了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你讲了那么多穷门段子，实际上你没有那些……比如说要在这个行业里干好几年才慢慢取得一点成绩的人，跟他们比你是一点不苦的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实没有，我为数不多苦过的日子大概就两年不到，然后还全被我写成段子了，也都值了。而且那段时间虽然物质上苦，但是精神上很富足。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我还以为你也经历过比如说长达一年以上的、很彷徨很费劲、然后总是讲不炸、然后很不自信、就是苦苦在摸索的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有这个。所以我也是后来才发现，我没有立场去劝别人&quot;你要坚持&quot;，因为我这一路走来全是上坡路。我之所以能坚持下来，是因为每天都很快乐。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那都不要坚持。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">每天都很享受。所以我后来就劝一些哥们兄弟，&quot;你为什么不坚持了&quot;，我发现张不开这个嘴——是因为他没有接受到那么多的鲜花掌声正反馈，你很难劝他说&quot;你再坚持坚持&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你这还是天分比多数人要好很多的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">后来你发现其实也谈不上天分。就后来你发现，每个进入这个行业的人都很有天分，只是这个时代的审美恰好是我这一款，我觉得这是我的运气。我跟舒衡是同一批的嘛，这些事其实别人都不太知道。舒衡刚上台的时候，现场效果挺凉的、挺尬的，但是后来你发现他是个天才，他就是东西有点超前，那个时候的观众有点欣赏不了这种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">舒衡是挣扎了很久才被逐渐接受。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">舒衡是挣扎了一些时间嘛，也没有很长吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有很长。我怀疑舒衡那些反倒是心理上的问题不好克服。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就跟我似的。我其实当年想去新东方求职，准备得还是很充分的，但是我心理素质特别差，即使准备好了上去，还是会晃、会冒汗、手脚不知道往哪放。所以我前期主要克服的是这个，不是克服我讲的内容——不管是讲课还是讲段子，不是克服这些，是克服心理问题。</div></div>
+<h2 class="dlg" id="b78"><span class="ht">天赋点不一样</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">舒衡是一个严重的爱人，所以他有可能用的精力更多、时间更多。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">每个人天赋点点的都不一样。有的人可能需要花十年的时间，去让自己在舞台上看上去松弛；有的人上台第一天就能在舞台上睡觉那种，就松弛到你感觉这是他家的客厅。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白，这就没有办法。那个谁、张骏不就第一次上来就一副特别放松。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">小北也是。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">小北我都想象不了小北紧张是什么样，我都没见过。你们见过吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有见过，他上台第一天就很松弛。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">都是杀牛吗？像小北肯定是杀牛吗。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我可能练十年也达不到那个状态。大家点的天赋点不一样。</div></div>
+<h2 class="dlg" id="b79"><span class="ht">地铁段子成&quot;穷门教科书&quot;</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以我们本来讨论的时候想问你，你整个早期的演出里，有没有哪一个关键的、成为你事业转折点的那么一场演出或一个段子？现在听起来你就是一路都是上坡路。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">几乎是吧。我其实在每个节点都拿出来了应有的作品。就比如说，大家在这个行业需要一个演员有一个代表作，那会儿我们没有节目嘛，大家就会私下传，谁谁谁有一个什么段子，从而都知道了。我就在这个时候大概写了「地铁」那套段子，大家都说&quot;他那个地铁怎么怎么着&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就地铁继承人嘛。就是你有一套段子能在外边传。穷门教科书。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">差不多，穷门教程。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个跟我们以前理解的完全不一样，但真挺好的。因为我不愿意听太多那种&quot;为了追求梦想整个过程特别苦&quot;那些东西。我不是没有同情心，我是就怕停，那些故事我听得太多了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你这个还是走得比较顺的，而且整个过程很快乐，这个特别重要。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">主要是物质上……当时每天的智慧都用在跟物质生活、跟省之间了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是。而且是在这么可怕的上海。说点说，以前我在杂志上看过，说美国智商最高的三个人，这三个人现实生活里都过得很差。他们智商是高得离谱的，你怎么测都是天才。其中有一个人在曼哈顿生活，他维持生计是靠给高智商组织写智商测试题为生，这些很奇怪的工作。然后他接受记者采访的时候说，他三分之二的精力用来解决&quot;如何以这么微薄的收入在曼哈顿能活下去&quot;，用三分之一的精力给那些高智商组织写智商测试题。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">看升级。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那会儿大概是这样，就是每天研究怎么活下去要花很多精力，怎么用最低的成本能维持住。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后剩下就全脱口秀。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那其实虽然穷，还真是想想都挺快乐的。</div></div>
+<h2 class="dlg" id="b80"><span class="ht">成名后被卷进名利场</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你后来成了脱口秀明星以后，就从第三季往后，生活就发生了哪些你印象比较深刻的大的变化？除了在马路上老被认出来以外，其实就是你的工作发生了巨变。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我有大概一到两年的时间几乎没有时间去跑开放麦、没有时间去剧场，那一年全扑在别的工作上，就是那种所谓名利场上面。但其实我也没有那么擅长录综艺啊什么的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。还有啥？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">录点综艺、拍拍广告。其实我们脱三脱四刚播完的时候，我们有点太新鲜了，很多工作都会找我们，可能也有些采访，甚至还去串一些电视剧电影啥的。反正就是你每天的日程都排得很满，全在干一些跟脱口秀不相关的事，那时候挺新鲜的，觉得挺好玩的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那当然，年轻人赶上这个，肯定是有一阵特别那个。后来发现还是想干脱口秀。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我不太想干的，因为我不太会干那些事。首先比如说你让我去电视剧里串个角色，我就不会演，我只会演我自己，演别人我就演不了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个跟演喜剧是两码事。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">非常难受。然后在那干干嘎嘎的，觉得自己挺多余的，那都是一些老前辈老戏骨。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你就觉得，是不是那些之前你段子里吐槽的、那些也不会演戏的小鲜肉，这不就自己吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那段时间有点拧巴了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你对演戏本身没有那么大热情。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有。我开始应该是有热情的，只是后来发现我不擅长这个事。甚至后来我发现，我就不太擅长在名利场里边。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不像你的好朋友徐志胜，徐志胜先生。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，志胜是天生的喜剧明星，他在方方面面都太如鱼得水了。然后我就没有那么擅长，我就觉得不擅长就不擅长，我就还是干脱口秀吧。</div></div>
+<h2 class="dlg" id="b81"><span class="ht">拒答&quot;嫉妒徐志胜&quot;的失礼提问</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也有过一些声音，就是给我俩进行一些比较，说&quot;你看见他那样你眼不眼红&quot;之类的、&quot;你嫉妒不嫉妒&quot;之类的。但其实没有大家想象的那么……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么不要脸的问题，我们作为一个播客是问不出来的。我不想点他的名字了，我特别讨厌这种记者或媒体——如果你要采访一个人，那个人愿意接受采访，前提咱们不是法治节目啊、采访罪犯，你怎么好意思问这么失礼的问题呢？它其实会让对方情绪失控，然后再说出来一些……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，就纯是坏。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以我们不会问这种问题。就是你当时也尝试过很多，然后最后发现还是最喜欢脱口秀。这个状态有多久？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不能说最喜欢嘛，发现还是最擅长干脱口秀。别的如果擅长的话，可能也喜欢了。</div></div>
+<h2 class="dlg" id="b82"><span class="ht">上了表演课，确认自己不会演戏</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你对哪些是本来有兴趣，后来发现自己不一定搞得了的？电影，或者是怎样的，有吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得我最开始的时候，对于演戏这个事我肯定是充满向往。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你为什么没像刘旸那样去报个班认真学习呢？刘旸以前演的也不行啊，但是他那个表演班学完了，感觉还是特别管用的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我没报。是那个公司有一段时间跟我们安排过一些表演课，但不是为了让我们出去接综艺、接戏，而是纯粹看能不能大家上上这些表演课，对自己脱口秀舞台上的表演有帮助。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然当然，因为那些表演型的选手也是特别厉害的嘛。你们多了一个很强的表演能力，肯定对作品有帮助。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我就是上了那个课之后，从而确认我不适合演戏。因为我在课上跟不上别人。如果不上那个课，我还对自己有一些幻想，可能上了课之后就非常厉害了；然后上了课之后，发现你确认了——这个人就是不会演戏。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以在表演上，你发现自己是低于平均水平的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">死心了，因为我的羞耻心太强了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是不是有专门的那个解放天性的课吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我在跟它对抗。其实说白了，那个动作我都做不了，那我就没法演戏。你让我演一个夺冠的状态，我就演不了这个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。所以你通过一些实验，发现自己这块不灵，去报了班发现不行，算了拉倒了。还做过别的尝试吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也看过一些所谓的表演课程，比如他们有些对口条的训练，因为我觉得这个对我有帮助，试着练过一段时间，但其实帮助不大。</div></div>
+<h2 class="dlg" id="b83"><span class="ht">能量低，最舒适是板着脸不说话</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我很想知道，你其实也有点社恐，对不对？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你在社交场合肯定不是热情的、到处主动跟人打招呼的那种。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">肯定。所以我在综艺上也没有那么舒适。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就吃亏吗？比如一些真人秀的录制上，其实不是你的综合素质不行，是性格吃亏。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">综合素质也没有那么好，都有、都有。比如说真人秀你得秀起来，你得跟人有接触、有说话，然后我日常生活中最舒适的状态是坐在那里不说话，你知道吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。就是真人秀拍一个人不说话，他很难出效果。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我就喜欢不说话。包括我演戏的时候也是。其实我生命中是一个能量比较低的人，我经常会板着脸，我最舒适的状态就是板着脸。我所有看上去有笑容的，那都不是我自然的状态，是我强行给自己打了一针强心剂，是我撑着一口气演出来的。所以我就特别想，希望有没有角色是那种——他就是一个面瘫、就是一个臭脸的那么一个人，你这个角色你找我，我保证演得非常好。就你让我演一个臭脸，我能臭一天。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但这种角色也不少。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我没……那可能是因为我的这个老实人设，大家就觉得这种臭脸的角色不太愿意找我。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有可能，就矛盾了、冲突了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是如果哪个戏里边需要一个臭脸、哪个综艺里边需要人不说话，你找我就好了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你庆幸吧，你还没到岁数，你等岁数大了一些，然后在那耷拉着一个脸，什么蔫味老灯就全来了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">哦，也是。</div></div>
+<h2 class="dlg" id="b84"><span class="ht">第一次去李诞家喝酒：上桌了</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你走红、走进公众视野以后，有没有你喜欢或者佩服的脱口秀行业的前辈主动跟你交往？或者整个娱乐圈，有没有什么大明星过来说&quot;广智，我其实也是你的粉丝&quot;什么的？这种肯定有吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有过。首先就是行业里的那些前辈，大家都会。然后也开始有资格去李诞家喝酒了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">录完第三季以后。你爱喝酒吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我之前不爱，但是爱跟他喝酒。那时候觉得跟他喝酒是一件非常荣耀的事情。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那当然，在这个圈子里肯定是百分之百。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我第一回去他家喝酒，那时候还在终点站呢，是坐地铁去的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有什么好玩的事，给我说说第一次去的感觉。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我第一回去他家喝酒，当时朋友们都在。反正就是你之前心中的那些前辈、公司的那些人，什么成哥呀，还有你今天喜欢的演员、线上的演员，都在。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">传说中的酒局，终于混进去了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">传说中的酒局，应该属于上桌了。然后他们身上还是那种——又文艺青年、但又不油腻的那种。就在那儿疯狂地出梗、开玩笑，大家就感觉在进行一些幽默比拼。你从来没见过这个世界上有如此高密度的、有梗的聊天，有梗的聊天就疯了。你觉得，哇，这个世界上为什么会有这样一群人？我甚至觉得它已经完全超越我正常生活的维度了。就是——人能那么快乐吗？不能；这个世界上有那么快乐的地方吗？不能吧。大家出梗的密度有点太高了。在那个地方，能说的、不能说的大家都说，反正梗特别密。而且你笑的时候都来不及笑完，下一个梗又出现了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，我经历过那个场面。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，那是我第一次去。然后你就觉得，如果自己不出个梗，就有点不配坐在这个桌上、对不住大家了。然后当你出到一两个梗的时候，你觉得可以安心地喝酒了，今天的 KPI 应该是完成了，现在的时间就交给哥哥们。就觉得能出一两个梗，KPI 是完成了，没白来。</div></div>
+<h2 class="dlg" id="b85"><span class="ht">酒桌上塑造的世界观：完成比完美更重要</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">而且那个时候他们在酒桌上聊的一些对生活的态度、观点，其实对我冲击挺大的。我甚至觉得，我真正的世界观、现代的世界观塑造成这样，就是从那个酒桌开始的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？我怎么觉得他们那有点偏虚无呢，整个调性。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那可能是您站在更高的维度。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不是。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得单纯从正常角度，因为对我来讲帮助还挺大的，那些大的聊天。因为我其实是一个没有立场的人，我经常会觉得这个人说这些也对、他们说那个也对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那前提是价值观没有什么太大问题。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你还是比较政治的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后那个酒桌上会告诉我说，没有立场是对的，你正常人就是会摇摆。我反正从那个酒桌上汲取了很多正向的能量。当然大家也不是说夸我，而是他们聊天过程中我能够吸取一些。我一下举不出来例子，我简单说两个。比如说&quot;完成比完美更重要&quot;，那就是李诞他们在酒桌上这么聊出来的。我以前会觉得，你做一件事情就应该把它做得完美，有工匠精神、锲而不舍。然后那个酒桌上的价值观就是——屁，这个事你先干了、先把这个活做完了，你现在没做好，下一步就能做好；你现在不开始做、一直要去完美，你就永远不会出发，永远做不了这个事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是一件事是做成完美的，不是筹备成完美的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，不一定要所有东西都筹备好再去做，你就应该先做，然后在路上再去寻找。我说原来是这样。类似的观点，我在那个酒桌上吸取了很多，这个其实对创作或者做任何事的帮助都很大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我也是过去有那个执念，就我希望什么事我都准备到完美才端出来。这次包括播客也是，我前期又是这么个想法，后来我身边那些朋友同事都急了，就说你没干过，你就边干边学，你不可能学会了再干。所以我第一期录的时候就很多——包括现在也是，我离一个成熟的、很踏实的、自己觉得一切都处理得很正确很准确的播客主持人，还差着十万八千里，但反正就硬着头皮上。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">挺成功的吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是，正评价比较多，播放量也比较理想。但整个过程里，其实犯的一些在做过的人看来很低级、很浅显的错误也有一大堆，昨天晚上我们也在开复盘会。但觉得这事就是必须边干边升级边打磨，允许自己犯错。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对，对自己宽容一点。你没做的情况下把它准备到完美，是永远不会发生的这件事。</div></div>
+<h2 class="dlg" id="b86"><span class="ht">成哥那句话：你是写段子的人，写就完了</span></h2>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后那个桌上，成哥跟我说过一句话，对我现在的创作还起到一定的影响。那时候就是——节目播了之后，你肯定会收到很多评价嘛，好的也有、差的也有，然后你就会很在意。然后成哥作为过来的人，就会告诉你说：你不要在意评价，而且你也不要去评价。我们是写段子的人，是做这个事的人，我们就写就完了，评价的事交给别人。他这一下就把我直接从那种评价的漩涡里拨愣出来了。就是原来我是做这个事的人、我是写段子的人，我只需要一直去写就行了。然后我从那之后，基本上就没有那么在意过评价。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，这个是比较管用的。其实首先肯定是有创作才有评论嘛，所以无论从哪个维度看，创作肯定是远重要于评论的。但是——</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但是这个罗老师没安好心，您那么像营销员的意思，就是说——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">别闹别闹。但是我会觉得，一个比较容易引导自己走出这个纠缠的东西，就是成哥说的那个理论，其实在艺术界也很常见：创作者肯定从哪个维度都比评论者来得重要和高级。所以如果你跟他们整天在那纠结，就会消耗自己还影响创作。但最简单的一个方式，就是说&quot;你们是二线的，我们是一线的，你是依附我生存的&quot;，这个角度是很容易把自己从这里边拖出来的。这个先不说对错吧，首先它是一个比较低成本、高效地解决这个心理纠结的方式。反正大概意思就是说，你就写就完了，好的坏的评价交给别人。刚才这段话如果听起来难听，那就是我说的，不代表何广智先生的立场，所以评论界不要激动。反正就写就行，大概是这么个意思。</div></div>
+<h2 class="dlg" id="b87"><span class="ht">不沉迷社交网络，但会搜自己</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后还有就是，你不太沉迷玩社交网络，对不对？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有沉迷过。怎么算沉迷呢？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就像我这种大傻子，在上面天天看天天泡，然后发现正常推过来的、或者流里出来的没有了，我还是搜一下自己。很多新人会这样，我这个作为网红出道有 20 年了，现在还闲着没事，发现别人骂我我就对骂，就这种臭毛病。其实咱们国家 14 亿人口，像我这样的精神病也不是很多。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">罗老师您都玩了 20 多年了，真要玩……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">倒不是说沉迷或泡在那上头，但我如果闲着没事去做这件事，还挺快乐的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我也搜。我现在每次演出完都会搜那个 review，我就大号搜嘛。我就搜&quot;广智&quot;，然后另外一个&quot;志&quot;，谐音都搜一遍。然后如果是好的我就看一会儿，如果发现是偏差的我就不看了。我现在学了一个方法——就卸载。如果这段时间感觉不太好，我就把 App 卸载了。</div></div>
+<h2 class="dlg" id="b88"><span class="ht">现场互动、家里人的态度</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一个问题，从脱口秀的角度，你在线下演出的时候，擅长跟现场的观众互动、像开场前那种现挂，这些你擅长吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">谈不上特别擅长，但也没有问题，完全没有问题。因为我以前在线下演出的时候，我们主持是给 200 块钱的，所以我有一阵是上海主持最多的人。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个其实对脱口秀演员也是必修课。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对。就是现在这个身份地位不太好去主持了，就没主持过了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">主要是怕你去主持，那个演出的人会惶恐，你要是开场的话，那个人后边就没法演了，只能退票了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我现在就只能压轴，没去主持过了。我以前是在现场老主持，那时候我主持得还可以、还挺好的，我跟观众互动什么的都没有问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这些年你家里——就是你成了明星以后，家里对你取得的成就，有没有表现得很高兴？还是像有一些保守的长辈继续唠叨，希望你去做那些所谓正常的事业？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那肯定没有，他们肯定非常高兴。如果现在再劝我去做一些相对稳定正常的工作，那他们就有点不正常了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那不好说，有一些老一辈确实不好说。当然你父母可能没那么老。当时我爸妈——我当时觉得那个手机事业做得貌似要成了，公司也一千多人，我们中间有几款手机是盈利的嘛，公司也都开始赚钱了。这个时候我妈来北京看我，我特意等公司全下班、跟她吃完晚饭，领着去看，一栋楼都是我们，领着转了一圈。我妈果然显得很高兴，然后我也很高兴、很得意。结果最后回到酒店，临睡前，我妈突然叹了口气，说&quot;哎呀，要考了大学有多好&quot;。就还在埋怨我没考大学。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">你父母是完全没有，对吧？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但我觉得罗老师，可能你妈妈那个意思是，不考大学都这个成就了，如果考了大学那得——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">绝对不是，绝对不是。他是对有一些东西有那种没有理由的执念。比如说我一直不买房，他就觉得&quot;哎呀，你这家还没安定呢&quot;。其实我就不愿意买房子，我一直住租的房子，我很开心呢。有一些老一辈的那种执念，没有逻辑可讲，他就觉得必须有，至于为什么不重要。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我妈现在也是这样。我妈肯定希望我能有个房、有个安定的地方，买个房子最好，赶紧娶个媳妇生孩子，这些是免不了的。但你告诉他这个房子多少钱，他说&quot;其实租房那个观念也挺好的&quot;。就是我妈还会自己跟自己打架，他觉得安定好，但你要告诉他房价是多少，那还是租房吧——他也能被迫接受租房。而且以我这个学历、以我们那个家庭，我爸妈都觉得已经很知足了，完全是他们没想象过的成绩、完全超过他们的预期，他们就觉得挺好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">拿了冠军以后他们说啥了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">反而没说啥。孩子能不能挣钱、自己过得好，这个东西远比什么所谓冠军 title 重要。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">而且我前些年其实给他们的冲击也足够大了，反而是到了这个节点上，他们并不知道冠军对我来讲意味着什么。其实我妈也知道，我拿了冠军之后可能会比之前多赚一点点钱，但我的生活不会跟之前有质的变化了。但对于我来讲——我只是还是太在意这个虚名了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">也不好说是虚名吧，它就是一个阶段性的、来自观众来自行业的认可。这些事有的人完全不在乎，有的人在乎，但我也不觉得是单纯跟名利相关。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，我本人是特别在意这个的。我爸妈反而还好，没有特别在意这个冠军，就跟往常一样，觉得很厉害很开心，他们当然是开心了，但是没有那么在意这个事。</div></div>
+<h2 class="dlg" id="b89"><span class="ht">不爱读书却思想自洽：我没有困境</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我听你身边的哥们说，你其实不怎么爱读书，对不对？你爱读书吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不爱读书，肯定是不爱读书。对，罗老师你是在问我之前，先打听了我一圈身边的哥们。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对啊，我问了不少啊。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">贵圈都是坏小子，他们说了很多拆台的话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，但是我还是非常克制地用在咱们俩的对话里。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我其实也不讨厌读书吧，虽然没有那么爱读书，讨厌不至于，谁会讨厌读书。但我其实读过一些书的，只是没有那么爱读书。我是在那个流水线的时候，包括干电话销售的时候，那期间反而读了很多书。当然我也不知道那属于什么类型。我其实说这个呢，你可能听着以后——我看你刚才复杂的表情，好像对这个还有一点尴尬。我不想宣扬不读书这个事，其实是因为我也多少读过一点。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我真正想表达的是：你的很多哥们告诉我你其实不怎么读书，但我其实想拐弯抹角夸你，这个既是夸，目的当然不是彩虹屁，目的是严肃讨论一个事。我们自己身边很多喜欢你的朋友也会聊起来说，听说广智不怎么看书，但是这个好像也没有影响你作品的表达深度、深刻性、思想性这些东西。所以你自己想过这些吗？因为有一些小时候没怎么读书、学历也不高的脱口秀演员，他就是图好玩，他不会、甚至也不在意有没有上架子、思想性、作品的深刻性，这些都没考虑过。你的哥们老拆台说你不怎么看书，但我觉得完全没有影响你作品里的表达深度和思想性。所以这个问题你有没有有意识地想过，还是根本就没想过？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这个问题有意识地想过，也不算有意识地想过吧。近些年来他们总夸我，给我夸的，我说我是不是实际上真有点东西，我看看。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然有东西，我觉得你是特别有东西。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我是后来总结这个事，我发现我应该就是——纯有思想。我给我自己的总结就是，我自己自带一个思想体系。而且我觉得那些人类智慧的结晶，其实那些东西也是人写的嘛，它就是人类智慧的结晶。你像我看一些他们所谓从书里读来的、很超前的、很惊艳他们的观点——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你自己就这么想过。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我自己就这么想的。我觉得，你所有的思想家、理论这个理论那个思想，谁提出了什么，你最终的目的是为了解决问题吗？我觉得所有的思想，它是一个解决问题的工具。然后我发现我没有困境，所有的困境我大脑能够在三秒内处理完。我只是觉得，你看所有的书是为了解决问题，然后我没有问题，所有的事我自己能想通，我不用去书里找答案。</div></div>
+<h2 class="dlg" id="b90"><span class="ht">几乎不看国外演员：国内外差距不大，甚至国内更牛</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我下一个问题想问的是，你从开始喜欢这个脱口秀、一直学习、一直走到今天成为一个老炮、成为今年的年度大王，整个过程里，你在不同阶段最喜欢的喜剧演员都有谁？国内国外的都算，我挺好奇这个。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实有一个非常惭愧、尴尬的答案：我国外的演员不咋看。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你不怎么看。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我几乎不看。因为我英语也不好，当然有中文字幕，但是我有点跟不上，我就几乎没咋看国外的演员。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这个事其实就更厉害了。真的，我不是开玩笑，就跟他不怎么看书、很多思想都能想通，是高度类似的一件事。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">但其实虽然我不看国外的演员，比如说大家也会探讨一些技巧，在探讨的过程中他们也会说，国外有个演员谁谁谁讲了一个什么段子。我就从他们口中听过，等于说我听过他们的复述、听过一个中文翻译。当然我不知道他们复述的跟那个本尊演的有几成差距，肯定是有差距的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然翻译一定会损失很多，因为这是精巧的语言艺术。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我听过他们的口述，就仅此而已。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但这东西是从美国来的。你从很多国内的高手身上学了、吸收了养分，加上自己的修炼，一路到今天，就没想看看最初这个发源地来的东西是什么样？打个不恰当的比喻，就像佛教最后说什么，我们这个好像传着传着传偏了，所以我们想去取个真经回来——没有这种想法都没有过吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得它那个东西只是符合——比如你看美国、英国那些欧美的，它只符合那个土壤，那个东西拿到这里来也不成立。我们在这块土地上讲的这个东西，你跟那些人比没有价值，因为大家的标准也不一样、尺度甚至也不一样，没有参考价值。你说他们厉害，那是因为他们能讲的东西比我们多吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实广智真的特别有意思。今天我要不聊这些我也不知道。你知道即使是读书人，也有一个理论叫——&quot;我自成佛不读经&quot;，就是讲有慧根的人，他并不是一定要从书本、从经典里获取什么东西。你真的天生就是吃这碗饭的，这叫什么……</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也没有，没有没有，我真的——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我没想到，你有今天这个成绩，而且你特别喜欢、痴迷这个，搞了这么多年，然后美国的那些你基本都没看过。所以真的就是你天生吃这碗饭。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我开始觉得看不懂。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是你的直觉和悟性是特别好的，所以不是说一定要依赖基于经典的那些一步步的演进才能到一个水平，其实是不靠这个的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我是后来发现，其实国内外，我感觉差距应该不大了。我现在甚至从很多角度认为国内更牛。因为我们一个主流的、所谓冒犯的题材里，80% 不能讲的情况下还能讲成这个样，这个在我年轻的时候认知里是不可能的。在这么多约束条件下，中国喜剧演员能创作这么多、这么牛的作品出来。所以我觉得从这个角度真的——就是呼兰有一次（上一届吧）讲得特别好，他说这个如果打奥林匹克，你给大众看的，你不能说脏话、不能讲那种种族冒犯的，你不能讲什么……他把这些全去掉以后，他说我们打国际比赛，中国运动员已经准备好好几年了，一直这么干的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">所以我真的觉得，我是有这个感觉的。有的时候还有一些人会比较盲目崇洋，觉得最牛的都在美国。其实美国肯定有很多牛的，但我是觉得差距真的不大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这个观点我也是挺认的。无论你多么惊世骇俗的观点，其实你起手起步的那一下，是能从书里的创作理论找到你第一步的，你是从这里走上去的。现代艺术有一个理论是说，所有的套路都被发明完了，所以到了现代艺术这个阶段——早期还有不断的发明创新、新的语言、新的东西出来，但现在基本上就是复制粘贴和排列组合。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，所有的套路都能拆解。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是是是。后边甚至大家仍然通过不同的排列组合，能得到令人惊喜、惊艳的这些东西。所以你这是一个很有意思的过程：你整个学习训练和发展的过程，不是说你不勤奋，而是说你的方法和路径不是一个我们理解的、整个学习的主流方式。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个可以聊到这了，这个比较严肃了，但这个我确实很喜欢这个话题。</div></div>
+<h2 class="dlg" id="b91"><span class="ht">穷门赛道是自然长出来的</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">穷门这个创作赛道，我很喜欢&quot;穷门&quot;这个词——这是大国手段里的。以前网上大家老说&quot;穷鬼赛道&quot;，这个我有时候说的时候有点害怕，知道背景、知道网上这么说的人还好，要不然还以为你在嘲笑穷人呢。大国手今年创造了&quot;穷门&quot;这个词，特别好。你是在创作过程中有意往这个方向规划的，还是也是自然形成的？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">完全没有，完全是自然形成的。那个时候还没有&quot;穷门&quot;这个概念，我就是从生活经验里找故事，就自然形成了这个。只是那个时候，上了那个课之后，课上有一些理论，说你怎么样才能好笑——你面对你最真实的自己、你面对你最尴尬的自己，就会好笑。我发现我经常羞于跟别人提及我住在终点站那个事，觉得不太好意思。就是你可以穷，但是穷到终点站，有点太穷了吧，哥们儿，有点不好意思提这个事。然后我就把它写成段子，写完之后效果特别好。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">尝到甜头之后，那我再找一点我这个不好意思面对的事呗，然后找到了什么——没有钱吃饭呀、什么野生动物呀、什么没有钱扫共享单车呀。把这些东西全写完之后去节目上讲完，人家说你这是穷门赛道，就这么安上了。但不是被规划出来的，只是那个教科书的方法是：你找一些自己不好意思面对的事，人生的尴尬什么的，好笑一点。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你中前期自己满意的作品，也有不是穷门赛道的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实剪头发也不算穷，它是一个丑，也是生活的尴尬，但它不是穷。&quot;戴刺的玫瑰&quot;那个是一个舔狗。</div></div>
+<h2 class="dlg" id="b92"><span class="ht">「戴刺的玫瑰」藏的观点</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">&quot;戴刺的玫瑰&quot;那个段我还挺喜欢的，那个也是传播最广的之一吧，应该比&quot;理发&quot;那个传播还广。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实它的创作方法我比较喜欢，它相对于我去年的创作，在方法上有一个进步——它是一个有点带观点的段子。只是因为那个梗太大了，之后大家把观点给忘了。我那个写的是：其实它藏了一个观点，是越美的东西，对这个世界来讲就越残忍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是，这个我记得。但确实传播的时候，大家已经忘了为什么了，就记得&quot;戴刺的玫瑰&quot;。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，忘了为什么推到这来的了。我自己觉得那个是我在创作方法上领先行业的一点。就是每一个时期，都会有一个人交替领先，然后大家去学他。我觉得那个时期的我领先了一点点。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有意思。当然后来我们就大规模地挤对你了。</div></div>
+<h2 class="dlg" id="b93"><span class="ht">不穷了，能力却撑不起更宽的话题</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">在这之前，比如说经济状况好转以后，你是不是自己有意识地觉得，穷门赛道讲起来会有点别扭——上台讲的时候，心里有一点觉得是不是还适合？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有过吧，有过。其实就是脱口秀大会第五季的时候，那时候已经不穷了，但是那个时候的能力又不足以支撑更宽广的话题。就是话题很多，但我能驾驭的只有&quot;穷&quot;这一个。就导致转型还没有成功。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，你那就是阵痛期嘛，就是你的创作能力不足以支撑那个比赛的强度。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是。然后写了很多装穷的段子，我自己也尴尬，观众听着也尴尬，直到在台上被戳穿。但是没有办法，那个时候的我就是不行。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但比赛又在那摆着呢，你又淘汰不了，一期一期的只能比。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后很难受。那个时候有人问我，那天问我说：广智你怎么能比赛这五年，你是怎么撑下来的，能撑五年？我说很简单——你水一年，其实脱五的时候，你就是不好笑一年，然后中间行业再休息一年，你会发现五年其实很好撑。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">又琢磨出来一些东西。对啊，你不好笑一年，然后再歇一年，那你后面两年就肯定就好笑了嘛。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那五年里边就水了两年，好笑三年，这不就过来了吗，日子就这么过来了。因为你第一年是有储备的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但这部分你还是有点谦虚吧。我觉得你其实水的时候也没有多水，就比如说你整个赛季打了五六场，可能水了两三场，然后那两三场还是特别扎实过硬的，就是有那么一两场高光。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后大部分时候那时候还是不太行，还行没那么多。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这又突然谦虚起来。你看这一季你这么多新写的也是特别强，你现在能力上来了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是那时候能力也没有，段子也没有，储备也没有，能力也没有，就在那里硬撑。</div></div>
+<h2 class="dlg" id="b94"><span class="ht">真正摆脱穷门的，是那篇职场段子</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你现在还记得你试图去讲别的、然后实现了自己满意的突破的第一个是哪个吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实上一季你那个说跟一帮小兄弟们喝酒、然后谈到那个面子问题的，那个我还挺喜欢的，但是好像观众不太接。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为其实我觉得那个时候观众一下不太能接受你这个身份的转变——就比如说你前面都是口口嗖嗖、穷门赛道，突然你成大哥了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对，大家有点难以接受，就中间没有一个过渡。其实是，因为那个是我专场里的段子。我专场铺到那的时候是自然的，我前面会讲很多事，铺到那是自然的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你前面会讲什么？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">讲坐头等舱那些段，观众能自然地接受，是过渡过去的。那天就有点一下接受不了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那天其实我听的是挺高兴的，后来发现观众不太吃那个。我当时另一个想法是说，是不是现场观众女孩多，所以你那个讲那种男人之间的哥们情谊、面子那种？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">都有，跟那个也有一定关系。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个在现场效果好吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就专场的时候是好的。包括业内的哥们兄弟也都挺喜欢那个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">大家觉得至少他很新，是一个大家不怎么常见的话题，是一个新玩意儿。而且里边有很多触梗的方式，也是我很喜欢的，是一种很新的触梗方式。比如说什么？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">&quot;正好广智也在&quot;，就是正好谁谁也在，后边跟着一定是大人物。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">&quot;正好村长也在&quot;，对对对，那个挺微妙的。没有说什么&quot;正好二狗也在&quot;的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就那些我还挺喜欢的，我觉得它很新，那个人也很新。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是你自己感到，比如说离开穷门赛道、去讲一些新的尝试的时候，第一个让你自己很满意的是那篇吗，还是哪个？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">其实真正摆脱那个，是我今年讲的，不是在节目上讲的，是在一个类似商务的场合——也不是商务吧，就是东方卫视做了一个节目。也不是平板演出，就是也叫我们这些演员去嘛，我们好几个也都当商务干。我写了一篇职场的段子，可能很多朋友没看过，就是我用一副扑克牌比喻职场。那个写了三天，但传播还挺好的。从那一下我就觉得，好像我写职场也能写。我这个职场跟穷完全没有关系。然后到后来，今年又写了崴脚的、加体检的，就这三篇基本上——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，这一季是完全证明了，你可以百分之百脱离穷门赛道，完全没有问题。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，从第一篇，其实应该是那个职场，让你觉得离开这个你也有信心了。</div></div>
+<h2 class="dlg" id="b95"><span class="ht">报复性消费：球鞋、高配电子、人均一千的餐厅</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一个好玩的，就是你开始觉得自己手头已经宽裕些了。我特想知道——因为我不知道你身上发生过没发生过——绝大多数人会有那个从手头拮据，到有一天发现我这可消费、可支配的这部分钱还比较充裕的时候，在这个初期有没有恶狠狠地消费过几笔，报复性消费、非实用主义的消费？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我也不知道啥是非实用的，因为很多东西可能对我来讲没有不实用，但是可能你们听上去……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">比如说奢侈品就很典型。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有可能奢侈品，也有可能比如说，我特别喜欢球鞋。我其实穿的特别朴素，但是不知道为什么就喜欢鞋本身，就是色彩搭配、工艺那些，我研究很多。那个制造业的东西、做出来的一个物理的东西，我很喜欢，所以我特别喜欢鞋，就买了好多鞋，也有贵的有便宜的，但一定不是说都是奢侈品。然后在家里堆满了。这种对我来讲就是一个很奇怪的爱好，而不是必须的，因为买鞋本来是要穿的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以这里可以说是奢侈品的，也可以说是反正就不是合理的、必须的、理性的消费的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我想想，我不知道这个算不算，就先念叨说吧。我当时把那个电子产品全换了一遍，全换了那个高配的、高型号的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">高配的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">笔记本电脑、平板、耳机，对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，咱们以前老说买手机、买笔记本电脑，什么乞丐版还是皇帝版，类似这种。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我狠狠地买了个高配的，然后发现也不怎么用。就是你以为用高配的写段子那么更快，发现就没打开过几眼，还是用手机写。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是是。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我当时除了这些东西之外……我想想，我开始吃好了，吃饭的时候又讲究起来了。比如去一些贵的餐厅，但那个时候我理解的贵的餐厅，可能就是我能想象的极限，就是人均一千的火锅、人均一千的餐厅，我觉得疯了、到头了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">人均一千确实就已经挺疯的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">然后大概就吃过那么一两回，感觉也没有怎么着，就觉得挺心疼的。还是因为那个时候思维还没有转变过来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是你请别人吃。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，对。然后就觉得，哎呀，算了算了算了，还是跟哥几个吃便宜一点。</div></div>
+<h2 class="dlg" id="b96"><span class="ht">大哥们带着喝酒结账：谁红谁买单</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你们前面挣了钱的那些大哥，没领你们去吃贵的吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那些大哥们倒是领我们玩过，就现在喝酒方面了。我们不大一块吃饭，他们主要就是——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你爱喝酒吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我之前不爱，现在开始爱喝酒了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你稍节制一点。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">他们喝得太凶了，我跟他们不怎么喝了，喝得没那么凶。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">纯恶习。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">他们喝得太凶了。然后我们这个行业有一个规则，就比如说哥们一块出去吃饭，基本上谁最红谁结账。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个应该的，应该的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我跟他们的时候，他们就会带我去一些比较高的消费。那个时候哥哥们带我去的时候都是他们结账，就导致我根本不知道这顿饭吃了多少钱、这个酒花了多少钱。然后他们也不是那种特别油腻的大哥，也不好意思告诉你说这个多少钱，他们也不是显摆这些的人。但我就很想知道这个酒到底多少钱，我想知道我喝了多少钱。然后他们也不好意思说，到现在我也就不知道哥哥们带我消费的那东西有多贵。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们这帮人都特别鸡贼。就如果有两个人咖位相当的情况下，大家都让对方结账。因为这样又省钱——</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">又省钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">又做人情——</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">又做人情。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">又抬高了对方。&quot;你来你来，你挣的多，前两天那个广告我看见了，那个什么什么冰箱，没少挣吧，咱们今天吃他一笔。&quot;&quot;我怎么能跟您比，我怎么能跟您比呢。&quot;我们就是哄着抬着，就让他给结账了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">你以为难到了他们，他们这帮人家不会被难到的，对吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，一个个都是鬼奸鬼奸。我们都抬对方，&quot;你前两天的广告我看见了，现在墙还挂着呢，你结账，你有钱&quot;，都是这种。</div></div>
+<h2 class="dlg" id="b97"><span class="ht">为什么不买车：开车去开放麦「味儿就变了」</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你现在没买车对吧，还是打车？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">打车，没买车。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你有驾照吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有驾照。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你为什么学完了不买车呢？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">觉得烦，开车。我对自己开车的技术没那么自信。再加上我老觉得，如果你开车去开放麦的话，这味儿就变了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">味儿就变了。那你平时开车，去开放麦的时候骑个自行车呗。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">那我心理上过意不去。我是觉得家里挺着一辆车，我在讲、我假装骑自行车，我就没有办法代表大众了。因为我觉得大部分人在上海生活是没有车的嘛。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你都离开穷门赛道了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我是离开穷门赛道了，但我怕你抖得太远。我有时候会出于创作上的考虑，我觉得说我至少在某些心态上还是不太愿意脱离大家。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是你们脱口秀演员都没车吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">几乎都没车，挣了钱的也不怎么买车，据我所知。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">上海倒是确实买车也不是那么必须的，因为太方便了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">也堵。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你不是都搬到近郊去了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，其实现在有个车是最方便的，但是还是没买，打算买一个来着。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你的粉丝天天害怕你发生了事，人设就崩了吗这一下。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">不能买路虎。我想我这个车买的话，就买一个便宜的。</div></div>
+<h2 class="dlg" id="b98"><span class="ht">劝你买国产电车，别买路虎</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你开过路虎吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没开过。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也不怕得罪谁，路虎不是什么好车。工业设计很好，确实漂亮，就是这么多年它的工业设计水平一直都没掉过。剩下就是真的——你要买车的话，有一个特别好的，就买国产车，因为现在国产电车做得太好了。就是国产的那些电车，就主流的那几个大品牌，一个比一个好，而且也都不贵。然后还是国产车，对你这个人形象也好，但是你实际的收获也是最好的。因为那些……说实话，有人说我极端，我真的由衷地觉得，现在那些世界名牌的很多车，其实本质就是洋破烂。你就比较一下你就知道了，你一定要到时候真的买车的时候，去试驾一下，就基本上是洋破烂。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">好像大家都说怕我开路虎，但我还真就唯独没坐过路虎这个车。因为没有人拿路虎跑那个网约车。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">路虎。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">有人会用别的车跑网约车，我都打到过。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你的粉丝最担心你开路虎，所以你也就不用打理路虎了。大家放心，不买路虎，然后你买一个国产电车，三四十万就好得不得了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得十来万就行。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你也不用太朴素了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">如果是我，前两天就试驾了那十来万的车，还挺厉害的。就现在国产的新能源十来万的车就很厉害。</div></div>
+<h2 class="dlg" id="b99"><span class="ht">大王的一天：台球、踢球、喝酒、出梗</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那脱口秀大王何广智先生日常生活的一天是什么样？就是没有什么演出或者商务的时候，日常的一天、通常的一天。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我是一阵一阵会变化的。反正基本上起来，如果不创作的话，就是提前约好哥几个，要么去打台球、踢足球，然后晚上就是吃饭、喝点酒。酒桌上就开始吹吹牛、聊点八卦，然后骂一骂一些公司的领导，然后再接受一下大家的吹捧，吹捧一下别人，就是有来有回，人吹捧你，再还回去。大概以前的生活就是这样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以除了创作，日常就是这样的生活。那你其实还是愿意跟朋友出来社交的，不是那么宅、不叫就不出来的那种人。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我以前是，但现在我在家待不住了，现在我必须得跟朋友聊天。因为我发现这个事，你老别在家里，对创作没有帮助，你必须得接触人、得这些事实地发生，才能有灵感创作。其实对创作更好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，你开始的时候是抱着对创作的目的去的。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">抱着创作目的去的，但是后来发现跟朋友们玩还是挺开心的。还有一阵我们还迷上了健身，我所有的爱好都是一阵一阵的，都是三分钟热度。健身那段时间大家都去，一屋子细狗在那个地方举那个……我们哥几个这身体你也知道，身体素质你也知道，基本上我们就是一个空杆来回举。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就一屋子细狗。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">就是拿那个最小的杠铃片，举最空的杆，然后跑步机最慢的速度。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最后谁练出来了吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没有，受伤了五六个，后来就不欢而散了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没找教练吗？瞎练吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">没找。因为我们哥几个很难找教练，我们就觉得有人来指导，我们就没有那么自在了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实没人教很容易受伤。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">包括我们当中有一些比较自信的哥们，觉得自己以前像Rock呀、Harry他们，觉得自己……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">Rock不是专业的吗？他开过健身馆。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对啊，他会带我们练嘛。但是他带我们练，主要是我们技术太薄弱了，又不正经，打打闹闹的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">主要是为了出梗。你要是举着的时候再出个梗，就很容易受伤。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">很容易受伤。一切都是为了出梗，毫无跟创作相关的目的去做一件事。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">毫无跟创作相关的目的去做一件事，那就只有一个，那就是他遇到真爱了吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">可能是，谈恋爱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">谈恋爱了吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">是是是，这个是唯一比创作更重要的，唯一能凌驾在创作之上的。</div></div>
+<h2 class="dlg" id="b100"><span class="ht">长远目标：先做一个有作品感的专场，再谈恋爱</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好，最后几个总结性的问题。你未来一段时期、或者更长远的事业和人生的目标，现在明确吗？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">非常之明确。我接下来想做一个在脱口秀圈我还没有完成的事——做一个有作品感的专场，非常厉害的专场。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个我们特别期待。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">这是接下来要做的事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那再往后你没想？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得后面是后面再说，就是把这个事做完再说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最好是这个过程中又能找到真爱，那最好。如果你没有也无所谓。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我觉得对我来讲，专场这个事先做了吧。因为现阶段，比完赛那口气还没有松下来，因为我专场这个事还没有做完。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你现在创作还在一个状态是吧。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">对，因为专场还没做嘛。等我也做了一个很牛的专场，大家都认，那个时候我可能就动力没那么强了，无欲无求了，可能就是想去谈恋爱了吧。有可能。主要是那口气现在还憋着呢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是是。</div></div>
+<h2 class="dlg" id="b101"><span class="ht">如果回到2018，一万块来上海</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">如果重新回到2018年，你拿着一万块钱来上海的那个时间点，你会怎么规划接下来这七年的事业和人生？跟今天没有区别吗，还是会有一些大的调整？</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">肯定没有区别。因为证明这么做是对的，我就不会再——我不敢再冒险去有别的方法了。因为我觉得走到今天来很幸运，有很大的幸运的成分在。我但凡重新再规划一下那一万块钱的使用方法，说不定就没有今天了。我觉得就是一成不变，有运气的成分在，不能再变了，再变就可能就不行了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你觉得你会一辈子一直做脱口秀吗？就有没有对它那么喜欢。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我应该会一辈子都做脱口秀。因为我也尝试了别的事，不是不擅长嘛，然后也不会做，就会做脱口秀。而且这个事我觉得我干上去很有成就感，而且始终是有人愿意看，大家觉得看这个挺爽的，那我就觉得一直就可以做这个。</div></div>
+<h2 class="dlg" id="b102"><span class="ht">结语：来直播间的第一个大王</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好，好，非常感谢。而且特别荣幸，因为你是来到我们直播间的第一个大王，不管是哪个领域。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">我是感谢罗老师能有这么个机会。其实今天说了很多心里话，有一些话在别的场合也可能不太好说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有些话一定得播出去，大家听一听。好，太好了。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">谢谢罗老师。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">后边我们还有一些好玩的专题策划，比如说找一批山东脱口秀演员聊聊山东话题，然后找一批东北脱口秀演员聊聊东北话题，到时候你要有空的话，还来支持我们。</div></div>
+<div class="turn guest"><div class="who">何广智：</div><div class="say">好，非常感谢。</div></div>
+</main>
+<button class="up" id="up">↑</button>
+<script>
+var root=document.documentElement, prog=document.getElementById('prog'), up=document.getElementById('up');
+function onScroll(){var h=document.body.scrollHeight-innerHeight,y=scrollY;
+  prog.style.width=(h>0?y/h*100:0)+'%'; up.classList.toggle('show',y>600);}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+up.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+var fs=parseFloat(localStorage.getItem('fs')||'18'); apply();
+function apply(){root.style.setProperty('--fs',fs+'px');localStorage.setItem('fs',fs)}
+document.getElementById('finc').onclick=function(){fs=Math.min(23,fs+1);apply()};
+document.getElementById('fdec').onclick=function(){fs=Math.max(15,fs-1);apply()};
+var th=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+setTheme(th);
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+  document.getElementById('theme').textContent=t==='dark'?'☀️':'🌙'}
+document.getElementById('theme').onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+var toc=document.getElementById('toc'),mask=document.getElementById('mask');
+function tg(o){toc.classList.toggle('open',o);mask.classList.toggle('open',o)}
+document.getElementById('menu').onclick=function(){tg(!toc.classList.contains('open'))};
+mask.onclick=function(){tg(false)};
+toc.addEventListener('click',function(e){if(e.target.tagName==='A')tg(false)});
+</script>
+</body></html>
