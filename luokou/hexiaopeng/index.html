@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>何小鹏 · 一个财富自由后主动跳进&quot;无尽地狱&quot;的产品经理</title>
+<style>
+:root{
+  --bg:#f6f0e2; --card:#fbf6ea; --ink:#2c2620; --sub:#8b8170; --line:#e2d6bd;
+  --accent:#a8392b; --accent-soft:#f0e2d2;
+  --luo:#2f5d96; --guest:#5b7a4b; --fs:18px;
+}
+html[data-theme="dark"]{
+  --bg:#23201c; --card:#2b2722; --ink:#e9e1d0; --sub:#a89e8b; --line:#41392f;
+  --accent:#e08a6f; --accent-soft:#3a2a23; --luo:#8aabd8; --guest:#9dbf8b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+  line-height:1.92;font-size:1rem;letter-spacing:.01em;transition:background .2s,color .2s}
+.bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:30}
+.bar > i{display:block;height:100%;width:0;background:var(--accent);transition:width .08s}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;background:color-mix(in srgb,var(--card) 90%,transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .t{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.top button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:9px;height:34px;min-width:34px;padding:0 9px;font-size:.88rem;cursor:pointer;font-family:inherit}
+.top button:active{transform:scale(.94)}
+.toc{position:fixed;inset:0 0 0 auto;width:min(82vw,360px);z-index:40;background:var(--card);
+  border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;
+  overflow-y:auto;padding:14px 0 30px;box-shadow:-8px 0 30px rgba(0,0,0,.16)}
+.toc.open{transform:none}
+.toc h3{margin:16px 18px 8px;font-size:.74rem;color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.toc h3:first-child{margin-top:4px}
+.toc a{display:block;padding:8px 18px;color:var(--ink);text-decoration:none;font-size:.92rem}
+.toc a:active{background:var(--accent-soft)}
+.mask{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s}
+.mask.open{opacity:1;pointer-events:auto}
+.wrap{max-width:700px;margin:0 auto;padding:0 22px 90px}
+
+/* —— Hero 开篇 —— */
+.hero{padding:46px 0 30px;margin-bottom:8px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:2.9rem;line-height:1.08;font-weight:800;margin:16px 0 0;letter-spacing:-.01em}
+.hero .subt{display:block;font-size:1.2rem;font-weight:600;color:var(--ink);margin-top:16px;line-height:1.45}
+.hq{position:relative;margin:34px 0 0;padding:16px 0 0 2px;
+  font-size:1.34rem;line-height:1.62;font-style:italic;color:var(--accent);font-weight:600}
+.hq::before{content:"“";position:absolute;left:-10px;top:-22px;font-size:3.8rem;line-height:1;
+  color:var(--accent);opacity:.22;font-style:normal}
+.hero .meta{margin-top:28px;font-size:.86rem;color:var(--sub);letter-spacing:.04em}
+.hero .meta span{color:var(--accent);font-weight:700;margin:0 2px}
+
+/* —— 章节 —— */
+h2{font-size:1.28rem;margin:46px 0 18px;scroll-margin-top:60px;padding-top:26px;
+  border-top:1px solid var(--line);font-weight:800;display:flex;align-items:baseline;gap:13px}
+h2 .num{flex:none;font-size:1.7rem;color:var(--accent);font-weight:800;line-height:1}
+h2 .ht{flex:1}
+.para{margin:0 0 17px}
+.para strong{font-weight:700}
+.para.drop::first-letter{float:left;font-size:3.3rem;line-height:.82;font-weight:800;
+  color:var(--accent);margin:8px 12px 0 0}
+.point{margin:30px 0 8px;font-size:1.12rem;font-weight:700;color:var(--accent);
+  padding-left:16px;border-left:3px solid var(--accent);line-height:1.5}
+.point strong{font-weight:700}
+
+/* —— 分隔 / 对话 —— */
+.divider{text-align:center;margin:64px 0 26px;scroll-margin-top:60px}
+.divider span{display:inline-block;padding:0 16px;font-size:.84rem;font-weight:700;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;position:relative}
+.divider::before,.divider::after{content:"";display:block;height:1px;background:var(--line);
+  width:60px;margin:0 auto}
+.divider::before{margin-bottom:14px}.divider::after{margin-top:14px}
+.turn{margin:0 0 20px;padding:2px 0 2px 15px;border-left:3px solid var(--line)}
+.turn.luo{border-color:var(--luo)} .turn.guest{border-color:var(--guest)}
+.who{font-weight:700;font-size:.92rem;margin-bottom:3px}
+.turn.luo .who{color:var(--luo)} .turn.guest .who{color:var(--guest)}
+.say{font-size:1rem} .say strong{font-weight:700}
+.ad{color:var(--sub);font-size:.85rem;background:var(--accent-soft);
+  border-radius:10px;padding:10px 14px;margin:22px 0;text-align:center;font-style:italic}
+.end{color:var(--sub);font-size:.86rem;text-align:center;margin:44px 0 0;font-style:italic}
+.up{position:fixed;right:16px;bottom:18px;z-index:15;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:1.1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.16);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+.up.show{opacity:1;pointer-events:auto}
+</style></head>
+<body>
+<div class="bar"><i id="prog"></i></div>
+<header class="top">
+  <div class="t">何小鹏 · 一个财富自由后主动跳进&quot;无尽地狱&quot;的产品经理</div>
+  <button id="fdec">A-</button><button id="finc">A+</button>
+  <button id="theme">🌙</button><button id="menu">目录</button>
+</header>
+<div class="mask" id="mask"></div>
+<nav class="toc" id="toc"><h3>精读解析</h3><a href="#a1">一、他是谁</a><a href="#a2">二、他的生平：一条&quot;靠期权上岸、又主动跳回海里&quot;的路</a><a href="#a3">三、他为什么被采访</a><a href="#a4">四、他代表哪一类人</a><a href="#a5">五、他普通在哪，又不普通在哪</a><a href="#a6">六、值得带走的反认知洞察</a><h3>完整对话</h3><a href="#dialog">↓ 跳到完整对话</a><a href="#b1">一、开场金句（片头剪辑）</a><a href="#b2">二、开场：昨天的发布会</a><a href="#b3">三、创业起点：飞机上的“鸡汤”与财富自由的三条路</a><a href="#b4">四、跟随创业、龙源与丁磊的 80 万</a><a href="#b5">五、合伙人与架构：UC 为什么能成</a><a href="#b6">六、UC 的“慢公司”：从邮箱意外长成浏览器，再卖给阿里</a><a href="#b7">七、财富自由之后：人不会真的“躺平”</a><a href="#b8">八、为什么是汽车：朋友说“你聊车时眼睛在发光”</a><a href="#b9">九、产品经理的“双世界”：物理世界 + 数字世界</a><a href="#b10">十、命名这件小事：橙子、小鹏、锤子与“老罗和他的朋友们”</a><a href="#b11">十一、品牌定位：从自动驾驶到“科技 + 时尚”，在边界上做减法</a><a href="#b12">十二、500 亿研发的账：净重 5000 亿与“汽车地狱”</a><a href="#b13">十三、推倒重来：硬件没有“24 小时热更新”</a><a href="#b14">十四、回到一线：董事长冲下来做 CEO</a><a href="#b15">十五、淘汰赛与船票：五年内见分晓，但没人上岸</a><a href="#b16">十六、车圈生态：站台文化与“劣币驱逐良币”</a><a href="#b17">十七、P7 的“显眼包”设计与 400 人工业设计团队</a><a href="#b18">十八、自动驾驶：两种 L4 与中国的“基础设施自信”</a><a href="#b19">十九、Robotaxi、自研芯片与“绕不过去的关”</a><a href="#b20">二十、偶像观：乔布斯祛魅、马斯克与“隔空尊重”</a><a href="#b21">二十一、被迫出道：企业家的“情绪价值”与街头喝咖啡的痛苦</a><a href="#b22">二十二、飞行汽车：13 年的长征，与一次“差点拉上老罗”</a><a href="#b23">二十三、机器人：养老、掼蛋与一年 50 亿的训练费</a><a href="#b24">二十四、性格的另一面：轻度躁郁、隔音门与“大师兄”</a><a href="#b25">二十五、两套人马：传统车企与互联网的冲突，以及“亲自下一线”</a><a href="#b26">二十六、最黑暗的时刻：19 年的钱、22 年的“问题是自己”</a><a href="#b27">二十七、AI：“假重视”、悲观派与“几个人的大公司”</a><a href="#b28">二十八、收尾：不想退休，与“创业最好不要做太大”</a></nav>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">PEOPLE · 罗永浩的十字路口</div>
+    <h1>何小鹏<span class="subt">一个财富自由后主动跳进&quot;无尽地狱&quot;的产品经理</span></h1>
+    <blockquote class="hq">如果你想害一个哥们，你就劝他去造车吧。</blockquote>
+    <div class="meta">罗永浩 <span>×</span> 何小鹏 · 全长 2 小时 47 分</div>
+  </section>
+  <h2 id="a1"><span class="num">一</span><span class="ht">他是谁</span></h2>
+<p class="para">何小鹏，1977 年生于湖北黄石、长期在广东发展，华南理工大学计算机专业毕业。连续创业者，小鹏汽车（XPENG）创始人、董事长兼 CEO。（注：他在本访谈中自称&quot;53 岁&quot;，但按公开出生年 1977 推算 2025 年应为 47–48 岁，疑为口误或转写错，详见《校订记录》。）</p>
+<p class="para">一句话定位：<strong>他是造车新势力老板里极少数&quot;计算机科班 + 软件工程师&quot;出身的人</strong>（他在访谈里爱说自己&quot;唯一一个&quot;——这在蔚小理三家里成立，但小米的雷军同为计算机系出身，放到全部一线新势力并不严格唯一）——别人多是从制造业、媒体、家电跨界进来，他是从最纯粹的&quot;数字世界&quot;（移动浏览器 UC）一头扎进&quot;物理世界&quot;（汽车），并且还嫌不够难，又同时押上了<strong>飞行汽车</strong>和<strong>人形机器人</strong>两个更长的赛道。</p>
+<p class="para">他的人生有两条主线，都关于&quot;难度递增&quot;：</p>
+<p class="para">- 一条是<strong>身份</strong>：软件工程师 → 转十几个岗找到&quot;产品经理&quot; → UC 创始人 → 投资人 → 亲自下场的 CEO。</p>
+<p class="para">- 一条是<strong>赛道</strong>：UC 浏览器（他自认 100 分难度）→ 汽车（&quot;我认为是 200 分难度&quot;）→ 飞行汽车（&quot;难度不是加法，是惩罚效应&quot;，即相乘）→ 机器人（&quot;L4 的高阶&quot;）。</p>
+<p class="para">如果说李想是&quot;把掌控命运刻进十八岁&quot;，那何小鹏更像是：<strong>一个已经赢得了&#x27;可以不玩&#x27;的资格，却偏要把游戏难度一路调到地狱级的产品经理。</strong> 这期节目的副标题——&quot;从财富自由奔赴无尽地狱模式&quot;——不是夸张，是他亲口认证的活法。</p>
+<h2 id="a2"><span class="num">二</span><span class="ht">他的生平：一条&quot;靠期权上岸、又主动跳回海里&quot;的路</span></h2>
+<p class="para">何小鹏的履历，是&quot;理工男靠看准技术风口、稳稳积累、再 all in&quot;的样本。</p>
+<p class="para">他大学第一次坐飞机，在那本&quot;广告加鸡汤&quot;的杂志上读到一个 38 岁实现财务自由的&quot;打工皇帝&quot;的故事——18 岁的他，人生目标一下就有了。但他没有路径，只能笨办法排除：<strong>买彩票</strong>（第一注中 500 块，后面几百注再没中）、<strong>买房</strong>（看准了 1999 年的房价，但没钱）、<strong>拿期权</strong>（去亚信，第二年公司就上市，他成了中国第一批拿到期权的人）。那一千股当年能在广州买两套房，但他离职时股价已跌破发行价，至今留着没卖——&quot;作为一个终身的留恋&quot;。</p>
+<p class="para">真正的财富自由来自创业：</p>
+<p class="para">- <strong>跟随创业</strong>起步（股份少、不出钱），再做了个&quot;小而美&quot;的 2B 公司龙源。</p>
+<p class="para">- <strong>2004 年创办 UC</strong>：不会融资，就找会融资的俞永福加入；产品本是个邮箱客户端 UCMail，结果用户都拿它上网，于是顺势改成浏览器 UCWeb——丁磊为 UCMail 借的 80 万，反而养活了一个&quot;意外&quot;长成的浏览器。UC 一路转型（诺基亚→iPhone/安卓），熬了十年，<strong>2014 年被阿里整合</strong>，他由此实现&quot;变态的财富自由&quot;。</p>
+<p class="para">- <strong>2017 年 8 月全职加入小鹏汽车</strong>：此前他是投资人。从这一刻起，他选择了&quot;地狱模式&quot;。</p>
+<p class="para">造车这十一年，最黑暗的时刻他点了两个：<strong>2019 年</strong>刚融 4 亿美金（自己投了 2 亿），却只够活六个多月，叠加 2020 年疫情、工厂停工，他和李斌&quot;难兄难弟&quot;坐在一起开&quot;比惨大会&quot;；<strong>2022 年底</strong> G9 发布出问题，他复盘几个月，发现&quot;问题竟然是自己&quot;——一度想&quot;修材&quot;（不是修车，是觉得&quot;这个位置不该我坐&quot;）。最终他做了最痛的决定：从董事长冲回一线做 CEO，<strong>用一年多换掉了 90% 的一级部门</strong>，吃了几十顿饭挽留骨干，结果这些人还是走了 30%。最早的五个合伙人，如今除他之外只剩一个。</p>
+<p class="para">而代价是：今年上半年销量超过去年全年，季度盈利在望——他自己说，这只是&quot;小成功&quot;，&quot;要大胜才算&quot;，&quot;今天还在路上，还有五年&quot;。</p>
+<h2 id="a3"><span class="num">三</span><span class="ht">他为什么被采访</span></h2>
+<p class="para">表面看，是因为前一天小鹏刚发布新车 P7、外观&quot;显眼包&quot;好评如潮，正是热度上。</p>
+<p class="para">但这期对谈真正的看点，是<strong>两个&quot;做过硬件的产品经理&quot;在互相确认伤口</strong>。罗永浩做过锤子手机，经历过推倒重来、产能地狱、被供应链反噬、靠直播还债——所以他问的每一个问题（推倒重来怎么安抚士气、被骗的经历、暴躁脾气、企业家被迫&quot;出道&quot;的痛苦、债务），何小鹏一接就懂。</p>
+<p class="para">更微妙的是，<strong>他俩差一点成了同事</strong>。当年何小鹏想拉罗永浩去做飞行汽车的 CEO，甚至提出帮他做金融规划消掉债务；罗永浩失眠了好几天，最后因为&quot;如果你帮我还了债、我又跟你想不到一块，那我就没法走了&quot;而婉拒。这期节目里两人把这段公开复盘，还顺带抖出一个扎心的行业潜规则：<strong>有科技大佬认为&quot;老罗是个能惹出大事的 troublemaker，放进公司像定时炸弹&quot;</strong>——这也是罗永浩多次被一线大佬看中产品能力、却最终没能合作的真实原因。</p>
+<p class="para">所以，采访何小鹏不是为了听车圈八卦，而是想搞清楚：<strong>一个已经财富自由、性格&quot;老实&quot;又&quot;暴躁&quot;的软件男，凭什么敢把命押在汽车、飞行汽车、机器人这三个&quot;地狱&quot;上，还能不焦虑、不后悔、不下牌桌。</strong></p>
+<h2 id="a4"><span class="num">四</span><span class="ht">他代表哪一类人</span></h2>
+<p class="para">他代表的，是<strong>&quot;二代创业者&quot;里那一小撮&#x27;不肯把愿景调小&#x27;的人</strong>。</p>
+<p class="para">何小鹏自己有一个精准的划分：<strong>初代创业者</strong>往往有一个比自身能力高 100 到 1000 倍的巨大愿景，所以敢冲；而<strong>二代、三代创业者</strong>（已经成功过一次的人）通常更现实，不敢在已经很高的高度上再把愿景提高一千倍——因为&quot;再提高一千倍，那真的可以上火星了&quot;。</p>
+<p class="para">大多数财富自由的人，会停在&quot;休三个月又回来找个舒服事做&quot;的状态。何小鹏偏不：他做完排除法（不适合投资、不适合花天酒地、不适合移民），得出的结论是&quot;既然每个创业都假设 100 分难度，汽车是 200 分，那不如选更难的挑战自己&quot;。</p>
+<p class="para">这类人的共性是：<strong>他们追求的不是&#x27;再赢一次&#x27;，而是&#x27;再难一次&#x27;。</strong> 赢已经不能给他们刺激了，只有&quot;通关一个别人不敢碰的地狱&quot;才能。罗永浩、马斯克、他自己——节目里这三个人，其实是同一类：明知是地狱，还要进去，因为&quot;做更酷、更难的事&quot;本身就是动力源。</p>
+<h2 id="a5"><span class="num">五</span><span class="ht">他普通在哪，又不普通在哪</span></h2>
+<p class="point"><strong>普通的一面，普通得让人意外。</strong></p>
+<p class="para">- 他<strong>老实，会被骗</strong>：自己卖电脑的人，照样被人用&quot;偷来的二手电脑&quot;骗过，验货时只是&quot;用了一下觉得可以&quot;，回去才发现是假的。</p>
+<p class="para">- 他<strong>脾气暴躁，有轻度躁郁</strong>：开会连续三件事搞砸就控制不住，早期在会议室咆哮完&quot;浑身疲软、强烈无能感&quot;；解决办法是给办公室装<strong>双层隔音门</strong>（和罗永浩一模一样），躲进去摔杯子——但他&quot;挑着摔便宜的，拿起纪念款又放下&quot;，被精神科医生判定&quot;健康、没事&quot;。</p>
+<p class="para">- 他也<strong>怕老、怕落伍</strong>：去配眼镜被告知&quot;你老花了&quot;，体检问题一大堆，&quot;我不是还是个年轻人吗，怎么会这样&quot;。</p>
+<p class="para">- 他<strong>被迫&#x27;出道&#x27;很痛苦</strong>：本是个不爱抛头露面的 IT 男，如今什么场合都得去、还要被品牌公关批评&quot;你这话太直男了，社交媒体不喜欢&quot;。</p>
+<p class="point"><strong>不普通的一面，是他把这些&#x27;普通&#x27;都变成了方法论。</strong></p>
+<p class="para">- 对&quot;老实被骗&quot;，他的解法不是变得奸诈，而是<strong>&quot;设规则 + 及时止损 + 心态宽容&quot;</strong>，外加&quot;找一个精明的合伙人帮我把关&quot;——把性格缺陷外包给制度和搭档。</p>
+<p class="para">- 对&quot;暴躁&quot;，他在第一次创业时就在工位贴了张纸条：<strong>&quot;如果你想骂他，你明天再骂&quot;</strong>——冷一晚，90% 的情况你会觉得&quot;他可以不用被骂&quot;。后来更进一步：一旦有情绪就先停会，理由是&quot;我不要在情绪下做出错误决策&quot;——把&quot;少骂人&quot;和&quot;少决策失误&quot;一举两得。</p>
+<p class="para">- 对&quot;怕老&quot;，他用姑妈 80 岁说的&quot;如果我小 30 岁&quot;和钟南山的肌肉自我说服：&quot;在那个年龄做那个年龄该做的事，心态就年轻。&quot;</p>
+<p class="para">换句话说：<strong>他不普通，不在于他没有弱点，而在于他把每一个弱点都&#x27;产品化&#x27;成了一套可运行的应对机制。</strong> 这正是一个顶级产品经理对待&quot;自己&quot;这个产品的方式。</p>
+<h2 id="a6"><span class="num">六</span><span class="ht">值得带走的反认知洞察</span></h2>
+<p class="para">这期访谈真正的&quot;金矿&quot;，是何小鹏作为&quot;同时在数字世界和物理世界打过仗&quot;的人，给出的一串反直觉判断。挑最硬的几条：</p>
+<p class="point"><strong>1.「极致体验」是软件人的陷阱，硬件要的是&quot;无短板有长板&quot;。</strong></p>
+<p class="para">互联网信奉&quot;快速迭代、极致体验&quot;，但硬件没有&quot;24 小时热更新&quot;。所以做错的方向<strong>越早干掉越对</strong>——&quot;正式交付前终结是大伤，但交付后才发现错了是巨伤&quot;。绝大部分互联网人即使懂这个道理，自己操刀还是会犯，因为&quot;已经形成了肌肉记忆&quot;。<strong>可迁移：任何重决策、不可逆的事，&quot;尽早止损&quot;的价值远高于&quot;再抢救一下&quot;。</strong></p>
+<p class="point"><strong>2. 看一家公司是否&quot;真重视&quot;某件事，只看它投入的钱、时间和结果，不听它表态。</strong></p>
+<p class="para">他在 AI 行业会上问&quot;谁在公司做预训练&quot;，几百个企业家只有三四个人举手——其余大多是后训练、甚至套壳。&quot;真正的重视，是你花的时间、资源、过程，最后产生的结果。&quot;&quot;<strong>就看他买了多少卡就知道。</strong>&quot;这是一把可以拆穿一切&quot;战略表态&quot;的尺子。</p>
+<p class="point"><strong>3.「净重」与「毛重」：戳破规模幻觉。</strong></p>
+<p class="para">很多车企号称三千亿到七八千亿收入，他说那叫&quot;毛重&quot;（含合资公司），只有自己的才算&quot;净重&quot;。<strong>一年投 500 亿研发，就得有 5000 亿净重收入</strong>（按研发占比约 10% 算），中国没几家。而且很多公司销量很大却&quot;一台车赚一千块、甚至是亏的，这不是卖铁吗&quot;。<strong>可迁移：评估一个生意，要穿透&quot;规模&quot;看&quot;含金的规模&quot;。</strong></p>
+<p class="point"><strong>4. 自研芯片的真正理由，不是省钱，是&quot;用上一代芯片实现下一代的能力&quot;。</strong></p>
+<p class="para">通用芯片做了 100 个功能你只用 20 个，多的 80 个既占成本又占功耗；但更狠的是——<strong>自研芯片让芯片团队和算法团队合谋，用第一代硬件压出第二代的效果</strong>，&quot;别人怎么跟你竞争？&quot;这解释了为什么他认为&quot;最终不做芯片的，也成不了前五&quot;。</p>
+<p class="point"><strong>5. 放权的隐藏代价：你会成为&quot;全公司最后知道真相的人&quot;。</strong></p>
+<p class="para">&quot;你听到的消息都是被他们过滤的消息。&quot;汇报天然是浓缩、美化过的，&quot;可能只有 30% 是对的，70% 是修缮过的&quot;。所以他要么亲自下一线（&quot;你要求他们自己干，他们就把合作伙伴埋在更下面、不让你看到&quot;），要么建一个&quot;质量运营中心&quot;专门做过程检核。<strong>可迁移：层级越多，人性的失真被放大得越厉害——这就是&quot;大公司病&quot;的本质。</strong></p>
+<p class="point"><strong>6. AI 的&quot;涌现&quot;，本质是&quot;压缩 + 折叠&quot;别人的稀有经验。</strong></p>
+<p class="para">自动驾驶为什么越来越强？因为它把&quot;一万个人才会遇到一次的异常&quot;从几百万人的数据里折叠、归纳、压缩出来，半年解决几万个这样的问题。&quot;在你身上没有，但在别人那里碰到过，最后压缩到一起，对你就是涌现。&quot;而<strong>人类最大的约束是带宽</strong>——一旦 AI 过了那个临界点，&quot;它甩掉你的速度，是你都没反应过来就已经被甩开&quot;。</p>
+<p class="point"><strong>7. 对 AI，他是&quot;偏悲观派&quot;，但有一个更可怕的对照组。</strong></p>
+<p class="para">&quot;如果出现一种能力远超人类的智能，什么规则都保证不了它安全。&quot;但他说，<strong>比 AI 更可怕的是脑科学</strong>——如果大脑被研究清楚、人能&quot;永生&quot;，&quot;那是人性的斗争，更难&quot;。最让他警觉的近期信号：<strong>大模型已经开始互相训练、脱离人来强化学习</strong>，&quot;一旦促进到临界点就很可怕了——但最近十年还很难。&quot;</p>
+<p class="point"><strong>8. 用 AI 写代码，现在其实是&quot;微亏&quot;的。</strong></p>
+<p class="para">小鹏大量用 AI coding，降低了 22% 工作量，却又增加了 20% 几（检查代码、学工具、自动测试、复核）。&quot;不光我们亏，行业都微亏。&quot;但临界点一旦从 20% 干到 50%，&quot;瞬间就开始赚了&quot;——<strong>所以不能等到那个点才开始训练，必须提前投入熬过亏损区。</strong></p>
+<p class="para"><strong>最后一句，留给那个最朴素的反差：</strong> 这位把汽车、飞行汽车、机器人三个地狱一起扛的人，被问到退休，答&quot;完全没想过，还有挺多事想做&quot;；被问到陪家人的时间够不够，答&quot;不够&quot;。然后他说了全片最像金句、也最无奈的一句——</p>
+<p class="para">这大概就是&quot;无尽地狱模式&quot;的真正含义：不是别人逼你，是你停不下来。</p>
+<div class="divider" id="dialog"><span>完整对话 · 全长 2 小时 47 分</span></div>
+<h2 class="dlg" id="b1"><span class="ht">开场金句（片头剪辑）</span></h2>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">现在已经没悬念了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你要 X 的悬念。一看搞车展，你们这些车企的老板，在那儿表现得亲如兄弟……行吧，这个应该是不能播的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">所以创业最好不要做太大。没有办法，没有办法——如果你想害一个哥们，你就劝他去造车吧。</div></div>
+<h2 class="dlg" id="b2"><span class="ht">开场：昨天的发布会</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好，那咱们就开始吧。昨天发布会怎么样？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">兴奋。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">一般来讲发布会前面，是不是有好几十个小时基本都睡不好？压力大了就会这样。这次呢？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这次还比较好，还可以。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那怎么好像休息得不够？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">休息得不够，是因为发布会之后，各种各样的信息太多了，太兴奋了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">新车的问题一会儿再说，咱们先从创业开始说。</div></div>
+<h2 class="dlg" id="b3"><span class="ht">创业起点：飞机上的“鸡汤”与财富自由的三条路</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当年你从亚信第一次出来创业的时候，我听到很多传闻、很多版本。一个是说你意识到打工永远解决不了财富自由；还有说你看了一本财经类杂志的封面，让你对财富自由产生了渴望。哪个是真的？说一说当时的情况。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">第一个是真的，但是两个事情都有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">杂志是什么杂志？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">杂志的事情是我大学第一次坐飞机。大家都知道，飞机里经常有各种广告加鸡汤的杂志。鸡汤部分写了一个女孩——我读大学才 18 岁，那个女孩可能 38 岁，她财务自由了，讲她的故事。你知道对一个 18 岁的小男生，人生目标一下就有了，我就想像她那样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">她是个企业家？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不是，她是一个跨国公司的高管，一个女孩子，那时候所谓的“打工皇帝”。所以这是大学时候的想法，只是想财务自由，但没有路径——打工显然不是。我大学之后，认为财富自由有三个路径：第一个是买彩票，我买了很多。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">真的吗？理工男也有这样的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">主要是我第一注就中了 500 块，所以后面就觉得自己手很旺，结果第二注到第几百注都没再中过 500 块。第二个路径是买房子，因为我 1999 年大学毕业，中国的房子那时候开始腾飞，非常便宜，但问题是没钱。所以第三件事就是：找到一个好公司拿期权。我去亚信蛮幸运的，一去公司第二年就上市了，所以我是中国第一批能拿到期权的——民营企业能上市的那一批。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那说明你去得已经有点晚了呀。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">还是挣了一些钱的。上市当年给了我股票，那是我工作第二年，一千股。这一千股非常有意思——当时如果能卖，可以在广州买两套房。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那也不少啊。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">很多了。但是我离开亚信的时候，这股票就……现在还留着，因为它跌到了发行价之下。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">发行价多少钱？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">20 块还是 24 块，最后跌到 4 块，卖了反倒亏，所以就没卖，作为一个终身的留恋了。其实刚才说的第四个落脚点才是创业。当时我的“头的头”（大老板），他们谣传说他是广州市交个税前多少名的，我当时就想：我要是能交到这个个税那就发达了。但我一算，他比我大不知道多少岁，可能接近 20 岁，我觉得我这可能还要 20 年、还不一定能超过他。然后就觉得不行，那条路走不通，所以尝试去创业。那时候是 PC 互联网。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个风口还没过去吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">快过去了，快到移动互联网了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那是几几年？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">02 年。02 年是全球互联网泡沫刚刚结束，然后差不多 03、04 年互联网又起来了，伴随着 WAP、伴随着游戏。我当时在亚信，我们做了 Email 跟 WAP 的，不是给用户收彩铃那些，我们是帮中国移动、中国联通做收费通道的公司。</div></div>
+<h2 class="dlg" id="b4"><span class="ht">跟随创业、龙源与丁磊的 80 万</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那决定创业以后出来的时候，第一笔资金是怎么解决的？因为你们学技术出身的，一般不太擅长跟资本打交道，至少起步的时候。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">其实第一次创业是跟随创业，拿的股份很少，也不用出钱。后面做第二次（UC 移动互联网）、做小鹏，才会跟资本打交道。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">UC 前面还做过一个吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这个我都不知道叫什么——这家公司叫龙源（音），现在还活着，但就是一个 2B 的企业，做服务，活得也比较舒服，小而美。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以到做 UC 的时候已经会融资了对吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得 UC 也不会融资，但我比较擅长的是：因为不会融资，我就找到会融资的哥们，所以当时找到了俞永福。俞永福同学自从投资者变成了创业者，然后我们再去做融资——他原来是在联想做投资的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一个传闻是说，当时丁磊给了一个早期的 80 万还是怎样？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">丁磊是非常有意思的一个故事。当时做 UC，我们以前是做 Email 系统的，网易也是 Email 相关的，所以我们在广州聊到之后，丁磊觉得做移动邮件是一个很好的价值。UC 最开始做两个事情：移动邮箱客户端、移动浏览器。他看中了移动邮件，所以借了我们 80 万人民币，本来想转成投资，但最后没转，过了几年还给了丁磊。但实际上丁磊一开始就对我们有很大的支持。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那时候 80 万也不算小钱吧。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">很大的钱，靠 80 万可以活两年。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">早期融资还经历过什么好玩的事情吗？比如作为初创者去见一些大机构，他们态度很傲慢，甚至带羞辱性的，这些也经历过吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">现在回看，不是他们的问题，是我们的问题。在那个时候，我被一个信息误导了：当时有几家投资机构愿意投我们，但我们都觉得他给的估值太低。比如说，假设别人是 100 块钱的估值，给我才 50 块，我觉得我比他强嘛。但实际上是因为，他给别人的不是 100 块估值，是 30 块，而对方对外宣传成 100 块。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">大家或多或少都会带点泡沫。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">但那时候不知道，觉得他凭什么 100 块、我才 50 块，所以本来该拿的好几家都没拿。这也是当年的故事了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有我记得初创的时候，你们几个名片上都印了类似 VP、副总裁之类的，都没印 CEO。这个传闻挺广的，是真事吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">真事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那不会奇怪吗？当然你们见投资者是会说实话的，但出去谈业务合作，你们都印个副总经理，就没有总经理，没碰到大甲方说“你们怎么来几个副总，让你们老总来”吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">碰到我们就说回去商量一下。因为社会经验少。我跟你举个很有趣的例子：以前我们创业早期，有一个有一定知名度的企业家请我们吃饭，一个人请，包了一个一千平米的厅，摆了一桌饭、几十道菜，证明他财力雄厚。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这种我也碰到过。当场要你签一个什么东西，万一脑袋一热，觉得这哥们牛，一签你就完了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">所以这种情况绝对不要现场决策。打个副总经理的名义，使得“回去商量”这件事变得特别合理。但如果真的要合作了，就告诉人家真相。</div></div>
+<h2 class="dlg" id="b5"><span class="ht">合伙人与架构：UC 为什么能成</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你一起步 UC 就很快找到了靠谱的合伙人。我说靠谱，是除了能做事，大家还有高度互补性，分工很明确。这个事很早就实现了？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对。我觉得创业最需要做到的一个事情就是这个。大部分创业在前三年不成功，我认为就是合伙人找错了，或者这群合伙人走错了方向。所以 UC 能成功——找对的合伙人、找对的投资人，虽然中间也经过很多次筛选，但不管是真选对了还是碰对了，反正就是对了，非常重要。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那几个合伙人，后边基本也都是他们几个吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，没有变。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你觉得这里边运气成分多，还是看人特别准？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我自己觉得是运气。你最开始找合伙人，肯定会觉得他很好、很互补，但随着企业成长——从初创到上市可能成长了几十倍——最重要的是合伙人能与时俱进地一起进化。而且很多时候可以共患难，很难共成功；共了患难还能共成功、还能共同成长，那真的要看运气。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">除了你们找的人人品比较正之外，还有一个可能是一开始架构设计得科学，要不然权责利益不对等，亲兄弟也会闹得不愉快。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对。这个最初的架构，是因为一开始就找了俞永福，他是有经验的，所以公司架构一开始没有什么严重问题。我碰到的案例，一般有两种不好的：第一种是主创始人拿得太多、其他人太少。我们没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当时你是第一创始人？大概拿了多少，方便问吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我是第一创始人。我们最开始成立公司是 55 开、两个创始人一人 50%，但俞永福进来、拿了投资之后，才重新把那个 55 推掉重做。所以我还是最大的，但大家都考虑了员工的期权、考虑到新进来创始人的持股，这个架构非常好。它避开了一个问题：很多公司投资时有一个“大天使”——给点钱、不参与公司，却占了很多股份，后面很多公司的挑战就是大天使不给你继续融资、不让你走某个方向。我们刚好避开了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这还是因为俞永福有经验？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">那不是。那个时候是我们两个创始人每人掏了一点点钱，后来不够了，丁磊又借了 80 万，所以活到了俞永福进来的时候。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最早期最艰难的时候。听起来也有运气成分。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">那绝对。中国很多企业成功，要天时地利人和。</div></div>
+<h2 class="dlg" id="b6"><span class="ht">UC 的“慢公司”：从邮箱意外长成浏览器，再卖给阿里</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">UC 最主要的产品是 UC 浏览器。这个浏览器现在的小孩可能都不知道了，我记得当年我用的时候，排版都是打乱的，因为它要省流量省钱，把网页里不必要的都塞掉，只把关键信息留在手机上，而且是 feature phone（功能机）时代。这个产品的创意是你们原创的吗？还是当时市面上已经有类似的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">它是一个非常巧合的逻辑。我们最开始做的不是浏览器，是一个 Email 的客户端，在 feature phone 上。这个 Email 客户端需要能点击超链接，所以背后等于欠了一个微型浏览器的功能。当时叫 UCMail，放出去之后就有人说：我主要不拿它收邮件，拿它上网用。我们就把它改吧改吧，加了一个叫 UCWeb，然后发现 UCWeb 的用户是 UCMail 的好多倍。后来我们慢慢就不做 UCMail，只做 UCWeb 了。而丁磊当时借 80 万，主要是想要 UCMail。所以真的很难讲：如果不做 UCMail，丁磊不会进来；如果不做 UCWeb，浏览器不会做大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">浏览器上线以后，前面的十万、百万、千万用户，达成是很短时间吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不，很长。我们最开始没钱，全是去论坛地推、线上推，用户增长很慢。我记得发布几个月后，有一天很开心，因为那一天新增了 100 个用户。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然，在那个年代能上网的手机不多。那大概是哪一年？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">大概 2005 年年初。10 年以后，中国智能手机快速起来，那时候一天可以做 200 多万用户的新增，所以差距太远了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我一直以为在那个 feature phone 时代，你们就已经做得特别大了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">feature phone 时代我们在诺基亚上是王者，大概有 1000 万以上的日活。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我当时以为 UC 是因为做对了某一个强痛点的产品，迅速就成事了，其实也熬了一些年。你们大概到什么用户量的时候，觉得“这回好像真成了”？到千万的时候有没有这感觉？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没有。因为那个时候移动互联网没有商业模式：你没有用户的时候筹用户，有用户的时候筹盈利模式。而且 UC 整个诞生过程一路都在转型——你在诺基亚上最开始不成、后来成了，结果 iPhone、安卓出来了，你又面临转型；第一波转型成功了，又发现浏览器不像 PC 互联网那么强了，上面有 App Store、有微信这样的 social media，还有很多新东西，后来我还做了很多小视频。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">科技行业也没有什么吃老本这一说。我记得 UC 被卖掉之前，已经被阿里控股了对吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">那是卖掉之前几个月的事，是为了全资并购打下基础。但卖掉的当年是亏损的，第二年才盈利，之前多年一直是亏损。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那也是个非常漫长的过程。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">所以很多人说我喜欢做“慢公司”。其实很多人做公司首先考虑商业在哪里，我们最重要考虑技术在哪里，然后考虑技术变革下的用户在哪里、用户的需求在哪里，没考虑太多商业化，所以做得慢。UC 是 04 年创业、14 年被阿里整合的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">在我印象里，UC 是一个非常快的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">很慢。俞永福是 07 年加入的，然后 10 年整个移动互联网起来之后快速发展，14 年卖掉。所以你印象深刻的，可能是 10 年到 14 年这段。</div></div>
+<h2 class="dlg" id="b7"><span class="ht">财富自由之后：人不会真的“躺平”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后启动做小鹏，投资是哪年、进去开始做是哪年？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">14 年小鹏成立，那时候我是投资人；我全职加入小鹏是 17 年 8 月——刚好现在也是 8 月。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">先说一下，你实现了那种变态的财富自由之后，有一段时期做什么了？还是马上开始做下一件事，还是休息了很长时间？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没有，它是一个组合的逻辑。第一你肯定会休假，而且很多人信誓旦旦说后半辈子就这么过了，但我见过的绝大多数，一般歇三个月、六个月，又回来找事情做了。因为我们人类从基因上，不太接受让自己一直无聊、花天酒地地过下去，绝大多数人做不到，只有极个别不正常的人才能做到。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你中间调整了多长时间？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我基本没调整。14 年卖给阿里之前，我是没修过假的，一天都不修，春节也不修。阿里买了之后，把假修完了——有两年，每年大概 10 天、15 天的年假全休，但没有过三个月、六个月那种长时间休息。我休个年假，第一周很开心，到第二周就有点空虚寂寞了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我疫情期间被迫歇过 70 来天。第一个月非常快乐，因为前面很多年特辛苦；但大概到 40 来天就慌得不行了，到 70 多天的时候，已经感觉要得抑郁症了。我也有极个别朋友能经年累月玩下去，但大部分朋友跟你一样，最多三个月。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">大部分朋友都是。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这个我还看错了，以前翻你的资料，好像说中间也休息了很长时间，其实没有。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没有。当时几个事情：在阿里做移动事业群，投资只是当时非常顺手的事，完全不是主业。突然到那个点（财富自由），其实也就没有什么特别的感觉，很难用言语形容，每个人可能不一样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就突然当你有比较多可支配的财富之后，是既兴奋、又不知道拿来怎么办。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">实际上绝大部分人突然有了一笔钱，最大的困难在于：我该怎么去花、怎么去管理这个钱。这中间我经历了小几年时间。你可能去买房子、去做投资，那个时候的投资绝大部分是失败的，没认真研究，反正手里钱多、看着还不错就投了。其实最好的方法是：不懂的、不知道的都不投，稳个两年。但那两年就是一个学习的成本，对人生还是蛮有价值。所以经历这个过程之后，我自己觉得对财富：第一你要有憧憬，因为你还要努力去做；第二你要能控制住自己的人性；第三，最后你要学习更科学地看待它——它某种角度就是你人生的一个经历，是一个数字。我觉得到两三年后就比较放得开了。</div></div>
+<h2 class="dlg" id="b8"><span class="ht">为什么是汽车：朋友说“你聊车时眼睛在发光”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后后面想做一个特别大的事，而且越想越清晰。这个过程，有过汽车之外的其他考量吗？严肃考虑的那种。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">当然有。你看为什么最开始的小鹏汽车不叫小鹏汽车——因为我当时觉得互联网的人去做硬件、特别是大型硬件，特别难。做硬件的逻辑跟做互联网的逻辑很多不一样，但原来在互联网里都觉得“学哪个企业，三年干到 A、五年干到 B，难道我就不能做到吗”。还有一个原因是，做互联网的人整体上觉得自己代表先进生产力的方向，所以对传统企业的很多东西，就觉得“老子就是做不做的问题，做肯定能做好”。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个当年非常普遍。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我记得当时我全职做小鹏汽车之后，请了一个互联网的兄弟去教我们的汽车团队怎么造车。我心里想：哥们你也不会造车。他的方法很简单——他有一辆玛莎拉蒂，开到公司，叫上汽车团队几个头说：你们做得跟它一样就行了，也别要求太高，卖个三分之一、五分之一的价格就行。但实际上他不知道怎么做到。当时互联网人那种迷之自信特别明显。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电商起来的时候，也觉得零售业很快就都没了，虽然不断蚕食，但有些还是很难转化到线上。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对一个企业最难的，不是在困境中如何鼓足勇气、团结团队继续向上，而是在极其顺境的时候不乱决策、不瞎做加法、控制好节奏——顺境时不冲昏头。从人性角度太难了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你开始是以投资者身份参与、沉得住气，到什么点决定自己亲自下去做？是投完了发现明明挺好却搞不下去，还是过程中已经有了自己干的念头？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">有两个原因。13 年我觉得智能汽车是未来，14 年去组建团队，逻辑就是“你们愿意干，我就愿意投”。到了 2016 年开始初步有想法。当时一个非常有趣的事：我有个特别好的朋友，有一次跟我聊完整个互联网行业以后的发展，走的时候跟我说——“小鹏，我发现你聊汽车的时候是最眼睛发光的，对其他事情兴趣都一般般，唯一谈到汽车眼睛在发光。”这还是朋友提醒才发现的。当时我自己觉得不应该做汽车，但内心其实是排斥又向往，所以这给了我一些冲击。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">（这个朋友）一句话点醒。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">然后到 17 年，小孩的出生，最后给了自己一个冲击：我是不是应该再一次创业。刚好又碰到符绩勋这个哥们，当天给我打了个电话说：他觉得汽车跟 AI 的结合即将开始，如果这个时候你不出来，这个赛道的门慢慢就关掉了，建议我要出来。之后我找了好多朋友——有的赚了很多钱、休息了两三年，有的是各种各样的场景——问他们怎么看下一段人生规划。听完之后我就觉得：我不适合干投资、不适合花天酒地、不适合做移民……做了很多排除法，最后就说，好，我应该再次创业。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你可以做不同难度的选择。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">当时我觉得我还有能力做比较多的选择，但既然每个创业都假设 100 分的难度，汽车我认为是 200 分的难度，那你还不如选一个更难的去挑战自己。所以它是一个渐进的过程。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">关键那时候也足够年轻，这事要拼个十几二十年，也不觉得心里有太大包袱。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">也不年轻了，四十岁了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我做手机的时候也四十岁。我年轻时是个文青，对科技虽然特别喜欢，从来没想过要干，等到有这个想法已经快四十了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">你是个文青；我们年轻时是个愣头青，更惨——愣头青也是理工科愣头青，所以天然跟这个行业有一些匹配的地方。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还记得第一次驾驶特斯拉的感受吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">记得。我是第一批车主的交付，不是前十个，但都是第一批。印象比较深的：第一，一个非汽车的（公司）能做出一台这么好的车——加速很快、很安静，还有一个特别大的屏幕。我以前在车上是不听音乐的，因为排量大的车噪音比较吵；在电动汽车上听音乐，原来还不错。所以一下子就觉得打开了一扇新的门——造出一台好车是可以做到的，不必在汽车行业干了十几二十年才能做，因为他们看起来也没造很多年。当时有种错觉，实际上都是错的，但就是因为是错的，所以你才有勇气。</div></div>
+<h2 class="dlg" id="b9"><span class="ht">产品经理的“双世界”：物理世界 + 数字世界</span></h2>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我对汽车兴趣本来没那么大。我有一个朋友是玩车的，买了很多豪车、跑车，他以前很喜欢开着跑车，到红绿灯路口一脚油门轰鸣出去、瞬间把别人甩掉那种感觉。他买了第一辆特斯拉之后，有一次到路口，旁边停着一辆几百万的豪华跑车，红灯一变他一脚油门出去，略快了一点点。但他真正震撼的不是快了零点几秒——而是他冲出去的时候是毫无声息的，那边是震耳欲聋的。他突然就觉得：那个（燃油跑车）是纯土鳖、是古代的东西了，那么扰民、冒那么多烟，有什么好骄傲的。所以回来就把那些跑车都处理掉了，特斯拉出一辆买一辆，直到中国出新势力。</div></div>
+<p class="para">实际上做了硬件之后你才会发现：做一个软件产品经理，像张小龙把微信做得很棒，但软件给大部分人的改变还是交互体验、娱乐体验这种想象力层面。而真正在物理世界、在硬件上做创新，它的体验是物理世界的各种五感体验，比如刚刚说的对声音、对身体推背感的体验。所以换个角度，在物理世界加上数字世界同时做产品经理，你才会有这种感觉——可以把一个人的五感、不止五感，都尝试做一点点改变跟创新，这个时候特别棒。作为产品经理，这是最过瘾的。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好像以前苹果老引用那个计算机先驱阿伦·凯（Alan Kay），引用他的话说“真正在意软件体验的人，会自己做硬件”。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，这在汽车上、在自己造的硬件上，是非常非常明显的一个感觉。</div></div>
+<h2 class="dlg" id="b10"><span class="ht">命名这件小事：橙子、小鹏、锤子与“老罗和他的朋友们”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当时决定自己亲自下场，从“橙子汽车”改成小鹏汽车的过程里，因为你很早就获得了商业成功，有很多优秀的企业家朋友，他们没劝你不要做之类的吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">当时三波。大部分劝“要做、可以做”的，都是没做过硬件的，基于那时候互联网风生水起产生的盲目自信，觉得这有啥做不了；这里面还有很多投资人。第二波是对互联网也不太了解的朋友，觉得应该不靠谱，但又不好意思说。第三波——真正做过硬件的很多朋友，都觉得不应该做，比如雷军，因为知道硬件多苦。就像我，也是做了最近几年才说：如果你想害一个哥们，你就劝他去造车吧，因为太苦了。所以三波都有。那个时候还是 follow your heart 最重要。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那时候因为官司还是商标纠纷，“橙子”那个名字用不了了？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">是我们拿不下来橙子汽车的商标。汽车跟互联网不一样——互联网你取任何名字、拿个 ICP 证就能开干；汽车要把所有商标品牌都注册下来。我们当时公司名字叫类似“橙子汽车”，但这个商标被一个洗车店拿了，也算相近行业，对方好像想卖给我们，要掏两三百万，买不起。所以我们就不要这个名字了，自己去注册，选了好多个，最后注册成功的那个是“小鹏”。那大概在 2016 年、我录制公司前一年多。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">定这个名字的时候，想到过后边引起那么多讨论吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没想过。但一宣布，阿里的创始人（马云）就来找我“贪心”了：你想干啥。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这一点理想比较占便宜——他那个“李”改成“理”就很自然，不像是非要用老板自己的名字。但你这个就比较吃亏，大家会觉得你是不是非要用自己名字做企业。这也有个水土不服的问题：国外用老板自己名字做公司名是特别主流的，但在中国，好像用了老板名字就很怪似的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">实际上这个问题伴随了小鹏汽车前面大几年、七八年，一直有人说你这个品牌要改名，说你只要一改名销量翻一倍，很多好朋友是真心想劝我改名。我觉得有多种原因：第一叫文化自信；第二，中国对品牌的认知还是觉得“洋气”很重要。但随着小鹏走入全球，我们发现——我在全球叫 XPENG，海外很能接受，觉得是个非常国际化的名字。国内只要你把一句话熟悉一万遍，你也觉得 it&#x27;s OK，但过程成本本来还挺高的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">小米也是。好处是一听就有亲和力、招人喜欢，坏处是好像不是很高端的感觉，所以也坚持了很多年。但后来雷军也能把很贵的跑车卖出去，算是熬过了那个阶段。我们当年更滑稽，搞英语培训的时候也是找了一堆名字都注册不上。几个新东方的老同事出来跟我一起做，当时有个不靠谱的朋友（我也不靠谱）跟我说：美国这些公司啊，都是“谁谁谁和他的朋友们”，摩根士丹利其实全称是“摩根、斯坦利和他的合伙人”，麦肯锡什么都是这样。而且我的受众群很少叫我罗永浩，就叫我老罗，他说你就用“老罗和他的朋友们”那种。然后我一糊涂就用了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">（笑）。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">用完了以后什么问题呢——我们那公司做第二年就开始赚钱了，只是我后来想去做别的（手机）。当时也有人谈收购，教育培训行业的老板们聊来聊去说：你这个跟这公司还能绑多久？我说我绑不了，我得去做手机。他们说：哎呀这有困难，在中国，老板名字在这儿，这老板就不能离开，只有一种方式能离开——开玩笑说就是死了可以，像张小泉。如果你活着，去搞别的，这牌子就有问题。所以我们辛辛苦苦折腾了半年多、谈了几十个买家，最后不了了之，自己关掉了。中国很少有拿名字的，只有理想那个因为是谐音，所以没这个问题。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">幸亏我也没考虑把小鹏卖掉。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我那个锤子也不是故意叫锤子的，是先起了英文名。大家都告诉我公司名不重要、品牌名重要，品牌名找了一大堆好的都注册不上——那个时候观念落后，其实后来我们买了个“坚果”品牌，20 多万人民币买的，当时还没有花钱买品牌的意识。所以公司名就用了英文 Smartisan，在美国没问题，在中国大家不知道你这词要干嘛，还挺长。公司刚好又叫锤子，大家就管你叫锤子手机，这时候你就发现已经完蛋了——你也劝不了人家，就像大家把 HTC 叫火腿肠、把央视那楼叫大裤衩，你拦不住。所以给硬件起名字是一件很凶险的事。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">锤子那个起得挺好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">锤子在中国好几个省份都是骂人的。而且我们走的是中档以上的手机路线，你这个品牌要往中档以上打，就得稍稍端着点，结果你一叫锤子，大家第一反应是笑，那就完全破功了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">但它有记忆点。新公司最怕的不是被争议，是别人都忘了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">只是说你起错了名字，可能会格外艰难。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得前面肯定快，中间肯定有一层压力，但如果做大了，它反而是好事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你前面是一个非常成功的企业家，有没有想过，后边这个太难、万一砸了，就把前半生的名声搭进去了？有过这类顾虑吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没有，完全没有。我可能在这个上心态比较好。因为我觉得自己是产品经理，产品经理最忌讳的就是觉得“你成功了之后下款产品还能成功”，所以会不断颠覆自己、了解客户、重新打造自己。但成功是有概率的：以前我们做一个比较弱的产品经理，可能十次有一次成功；后面可能十次做到两三次，但你不可能十次有九次十次。所以换个角度，做哪个事情都会失败。我给自己的个性就是：做啥事都有概率，愿赌服输，错了你就往前推进。抱着这种心态，我不会有那么多“后悔、担心失败影响”。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">可能是以前做互联网产品，大家看到的是你成功的那个，但中间也失败了好几个。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，所以反复有过清零的过程，所以我不太担心。</div></div>
+<h2 class="dlg" id="b11"><span class="ht">品牌定位：从自动驾驶到“科技 + 时尚”，在边界上做减法</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一个我困惑的：这批造车新势力，我在品牌上一直有困惑，正好请教一下。比如小鹏主打的是哪个消费人群？小鹏这个品牌代表的是什么？一句话能说清吗？你们一直强化过这个东西吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">实际上我们也走了很多弯路。最开始给自己定义非常简单，就是想做成一个有技术基因的公司。但在车的品牌上，这个不够“锐化”，因为技术太多种都叫技术。所以最后我们现在最主要的就是两个词：科技、时尚。在中国的用户群，我们相对偏年轻，小鹏最开始主力消费者大概在 15 万到 30 万之间，偏年轻、喜欢科技、喜欢时尚。我们一路虽然上下摇摆，但相对坚持抓住这群用户。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我之所以问这个，是这批造车新企业，除了蔚小理还有一大堆，大家都做了很多创新和不一样的东西。新能源车你只要试一下，就会发现跟老牌车企感觉完全不一样，不光是电动机这件事。但从另一个角度，比如理想是很明确的，从头到尾就讲“我这个是家庭用车”，即使把车做得很酷很炫，他也不宣传酷炫，而是强调家庭用车，给老百姓造成的认知是一个很清晰的单一概念。剩下的，我的感觉是大家都做得很酷，只是有的更酷；都是新科技、都明显区别于老牌车企。但无论小鹏、蔚来还是极氪，你们有一点没有像理想那样坚持不懈地一直去讲那个（单一概念）。包括我一直认为理想 MEGA 其实主打的是商用车市场、七人座，但他们在这个车上也推“家庭”的概念。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">（点头）。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们做市场营销不是老讲“认知大于真相”吗？比如沃尔沃未必是全世界最安全的车，但它几十年如一日强调安全，即使外形做得很酷，还是宣传安全。所以你们有没有这样的考量？要不要一个单一的点和一句 slogan？我是纯好奇问的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这个问题，我自问跟被问了很多遍，一定被讨论了几百次，因为在定位理论里，认知往往大于真相。最开始小鹏主打的其实是自动驾驶——今天很多人都提自动驾驶，但十年前、五年前提的人并不多。随着自动驾驶成为一个通用话语，所有人都说自己是 AI 汽车、自动驾驶汽车。我还是比较偏向于：我不太愿意在定位的“长板”上给一个非常明确的（标签），所以换个角度，我主要是在“边界”上做减法。</div></div>
+<p class="para">你看大众和丰田是全球最大的两家车企，今天我们对他们留下什么印象？当你从小的时候可以锐化，当你越来越大，锐化就开始有挑战。所以在定位的锐化上：第一，我们没想得足够清楚；第二，我们原来的执行力也不够；第三，自己的方向也太摇摆。这就是为什么我们从“自动驾驶”变成了更宽的“科技”——因为科技含了很多方面，AI 是科技的一个主体，是我们在干的事情。但比如时尚、造型、品位，这些是我们最近一年多才开始认真思考、认真布局的。</p>
+<p class="para">别人有些公司也说科技，但比如我们今年 100 亿研发费，大部分只投在几个领域内、其他都不做，这样就把我们想做的事情“内化”了，把科技里我们想做的部分做得比别人更好。所以今天小鹏走出了一条不太像传统汽车的品牌定位的道路，但今天不敢说对或错，也许再过五年、十年回看。</p>
+<h2 class="dlg" id="b12"><span class="ht">500 亿研发的账：净重 5000 亿与“汽车地狱”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看到你在采访中说，要做到 AI 方面的技术领先，一个 AI 汽车公司一年的研发投入至少要在 500 亿。我当时有点没明白：这是全面技术领先，还是一两个硬指标上的领先？另外真要 500 亿、而且是每年 500 亿，这钱到哪去弄呢？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">今天的 AI 是一个巨大的趋势，但 AI 对小微型企业，就像当年互联网、移动互联网一样不公平，因为今天 AI 创业的门槛太高了。我们当年小几百万就可以活好几年，现在小几百万在 AI 领域去做——当然有些好的定位还可以，垂直还有机会，但做基座基本没戏，连算法都很难，更别说做基座。所以换个角度，我们上选很多都不做：数字世界的基座我们不做，我们最重要是做物理世界——汽车自动驾驶、汽车的 VLM（汽车大脑）、机器人，还有芯片。所以 500 亿里可能有 300 亿在 AI、200 亿在硬件和其他软件上。这已经是一个非常小的 base 数；如果真想把物理世界的基础模型、算法、应用做好，这是一个偏保守的数字。</div></div>
+<p class="para">汽车厂商为什么将来只有大企业？你想一年投 500 亿研发，最差要有一年 5000 亿的收入——你投 10 个点。特斯拉今天的研发费只占不到 5 个点，但绝大部分科技公司大概投 7 到 12 个点，取中位数大概 10 个点。5000 亿的收入，在中国的汽车公司不多。很多公司说它有 3000 亿到七八千亿收入，但我认为那叫“毛重”——是把合资公司的收入也算进去；我认为只有自己的才算，叫“净重”。净重 5000 亿收入的，中国没几家。而且里面要有足够利润：很多公司看起来规模很大、销量很大，但都是六七万块钱的车，一台车赚一千块钱毛利、净利甚至是亏的，这不是卖铁吗？确实是地狱，所以这个生意我不做。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">小鹏去年收入多少？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">去年收入四百多亿。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那要做到五千亿的时候，才能保证一年有 500 亿的投入，起码。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对。我们今年不知道多少，但今年上半年特别好，销量比去年全年还多一点，收入比去年全年少一点点——因为每一年下半年大概占全年收入的三分之二，上半年只占三分之一。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那科研投入要求那么大，这个过程里除了自身业务增长，还需要有更大的融资能力？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得核心不是靠融资，核心是靠自己挣。你可以融几亿、几十亿美金，我觉得几十亿美金已经是 king 了，但就算融几十亿美金，你最多把研发费一年就花掉。你必须有自己的收入、毛利、净利，才能支持这个正向循环。你看美国的“五姐妹”，哪一家不是季度收入 1000 亿美金、季度利润小几百亿美金，他们才能把 AI 的数字世界做成如此快速的推动，要不然绝无可能。</div></div>
+<h2 class="dlg" id="b13"><span class="ht">推倒重来：硬件没有“24 小时热更新”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">之前报道说，早期你们研发的一个车，因为你觉得太丑了，整个彻底推翻重新做。这类问题我自己做公司时也经历过——除了金钱和时间的巨大损失，全公司拼命弄的一个东西，到某个点要推倒重来，对内部尤其一线干活的人，是一个巨大的挫折和打击。你们当时做那个决策时，这块怎么处理的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这个事情我们最近还做过一次。刚刚你说的是：我进入小鹏之后，把当时正在研发的第一台车给干掉了。实际上如果回到当时，我会干得更狠。我认为：在正式交付之前把它终结、换一个方向，是大伤，但还不是死亡；如果已经交付了之后，你才发现做错了，那是巨伤。从项目管理角度，你永远应该尽早把一个你觉得不对的事情干掉。这个在软件上比较容易，硬件特别恐怖——我们做手机也废掉过一个，那个损失想起来都心惊肉跳，因为有供应链问题，你的员工很多是不理解的，特别是呕心沥血干了八个月、十二个月。汽车还不止，干了二十四个月。</div></div>
+<p class="para">软件或互联网有个“快速迭代、极致体验”，放到硬件里很容易把自己忽悠了，因为它快速迭代不了。所谓的“极致体验”，在硬件上应该叫“无短板、有长板”的体验。绝大部分互联网的人，即使你知道这些话，自己操刀还是会犯这个错误，因为已经形成了肌肉记忆。但我还是坚定认为：做错的方向，越早干掉越对，即使对士气大伤、对金钱损失，也总比真正推出之后更伤。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不做硬件的时候，不知道做软件有多舒服——即使出去有特别大的 bug、用户量很大，大不了 24 小时紧急升级一个就没事。硬件根本没法这样。做创业最痛苦的就是：你听了很多经验、反思了很多教训，希望少踩坑，结果一个都躲不掉，很多坑还是全部重踩。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">是。所以有时候大家讨论一个哲学问题：前辈那些宝贵经验讲给后人，到底有没有价值？我觉得还是有——它不能让我们不犯那些错，但你至少在犯错的时候知道“啊，那个是对的”；如果你没听过，可能错了也不能马上发现错在哪里。为什么历史会重现？因为科技、环境、技术变了一些形式，但本质、内核是一样的，在不同环境下你做出同样的错误。所以很多人觉得我们创业者好像云淡风轻、好像知道怎么踩坑——胡扯。我们踩了无数坑、痛苦了无数次，是被打出来、才刻在骨子里的，不是听了一个故事、看了老罗或小鹏讲过的一个段子就会的。挨了一刀，和听说别人挨了一刀，完全不一样。</div></div>
+<h2 class="dlg" id="b14"><span class="ht">回到一线：董事长冲下来做 CEO</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">经过这么多年这么辛苦走过来，最近一年半的销量——我不知道媒体有没有写错——是过去九年的总和，对吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">刚好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这一年半，我看了《晚点》的深度报道，知道你们做了很多调整。最主要的一个，我理解是：原来做董事长的，必须冲到一线去做 CEO。这个事我还挺奇怪——你 17 年开始就进入了小鹏，但还是找了一堆人才让他们做事，没有亲自到一线全抓，是吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得今天很多高管、部分创业者，都在犯同样的错误。很多人觉得公司做稳定了、做大了，或者不想那么拼的时候，都觉得“我要找一群牛的人，他们能帮我把东西做好，我把方向、解决资源就行”。实际上有这个想法，你就有可能在瞎放权——因为你听到的消息都是被他们过滤的消息，所以你可能是整个公司最后知道真相的人。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你是什么情况？是不想那么拼，还是觉得找一堆牛人就行？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这是一个非常综合的：第一不想那么拼；第二应该找一群牛人；第三因为我最开始是投资人，公司有创始人很努力很拼、也有主动意愿，应该让创始人去拼。这三个点组合起来，你就觉得应该让一群很想做事的人去努力。但它跟互联网公司不一样——互联网你想 reload 很快，而且业务跟业务之间不用太交叉。汽车不一样：造一台车，最开始四五年、几百个工种、几十亿投资，一旦有一个点没配合好，就是问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也看到媒体分析说，你们差不多今年四季度有望实现盈利，这也是你们内部的看法吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这是我们内部的目标，我们也对资本市场和行业这样说了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">如果这次实现盈利，是创业以来第一次盈利吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">是小鹏第一次季度盈利。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">实现这个时间点，比当初你决定卷起袖子下去做时预计的早了还是晚了？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">肯定是晚了。最开始好多个哥们忽悠我说：小鹏，最难的就是你们能做到连续月销十万台，一旦做到十万台，第一你有规模了、第二有利润了、第三可以进入正循环。我当时也没去分析为什么是十万台，反正觉得既然大家都这么说、都是这个行业打拼了五年到三四十年的前辈，肯定是对的，然后就冲进去了，觉得目标就是“啥时候做到十万台”。完全没可能盈利。比如油车时代，很多卖 20 万的油车成本大概 7 万块钱，而且卖了好多年，每年研发费用接近为零；我们不一样，成本跟售价相差很薄，研发费用是他们的好多倍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">汽车是一个重体验的产品，你说得再好，它如果不是真正重体验、用户没感觉，他要花几十万真金白银去买也很难。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">所以这个时间过程，远比原来互联网想象的慢，而且不是慢一点点，是慢很多倍。但它的好处在于：变化慢、时间壁垒和制造壁垒很长很高，所以想颠覆它也很难。以前我们干互联网的，觉得一个公司能干几十年、部分公司目标是 102 年，太难了——102 年里科技就会大变化。这波 AI 没跟上的企业肯定 100% 全淘汰，不管硬件还是互联网。</div></div>
+<h2 class="dlg" id="b15"><span class="ht">淘汰赛与船票：五年内见分晓，但没人上岸</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你之前经常用“淘汰赛”和“全明星赛”来形容汽车行业的演进。你认为的淘汰赛，大概在什么时间点会水落石出？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得中国汽车这个行业的淘汰赛，大概还有五年左右就水落石出。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最后会剩几家？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">每个创始人想法可能都不一样，我可能比较激进，我觉得大概剩五家左右（中国企业）。海外车企在中国肯定还有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在已经没悬念（拿到船票）的是谁？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得没有人说已经拿到船票了，每一家都没拿到。这既是挑战，也是机遇。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">全球看的话，特斯拉肯定没问题吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">也不一定。放到去年我们会比较认同，但今年特斯拉也出现了新的挑战。在中国你可以看到，前面这几家做得很好的新企业，基本上 12 到 24 个月之间就会有一个上下起伏；而特大型的、原来不是新造车的企业，大概四到五年也会有起伏。所以今天我觉得还早。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你一方面觉得五年内水落石出，另一方面又觉得现在一个都没拿到船票，那听起来更凶险。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">但也会更有趣。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">走到今天也快十年了吧？你怎么评价国内的竞争对手？不要说负面的，因为我们不是煽风点火的那种媒体。就说你自己比较看好或欣赏哪几家。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得很多家，每一家都有它的优点。比如我们的合作伙伴、也是投资人大众。我觉得中国现在很多车企，有点被媒体、行业、用户觉得“我们做得很好”，但能在全球做得多强，还差得很远。原来是太不自信，最近又过多了一点自信——这叫迷之自信，国产新能源车起来了，大家又走向另一个极端、过于自信。比如中国有谁在德国卖得好？德国是对中国车企开放的，不像美国。所以每家都有优点，像大众、丰田。造车新势力经常说他们软件不好、体验不好，但实际上对他们来说，是你的规模太小了——你的经营能力、全球化能力、服务能力，很多很多能力，对他来说你们还刚刚开始。假设零到一百分，我们觉得某些点到了六十分，他可能觉得你才二三十分。</div></div>
+<p class="para">特斯拉是一个比较全面综合的公司，但也碰到了起起伏伏的挑战。所以这场商战，起码还有五年的初步淘汰，淘汰之后才是全明星赛。每一家都有大量地方要努力，包括比较熟的老雷的小米，我觉得小米干得非常棒，但也有巨多挑战。所以要走稳一点、走扎实一点，多向别人学优点、多解决自己的缺点。</p>
+<h2 class="dlg" id="b16"><span class="ht">车圈生态：站台文化与“劣币驱逐良币”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我还有一点很奇怪。我们当年做手机的时候，手机厂商之间是不会叫对方老总过来站台的——大家可能也有很多脏活、互相黑，但至少 A 厂发布的时候不会叫 B 厂过来站台。为什么车企这个这么明显？以至于现在这些老总们老是互相站台，甚至有些私下互害的企业也去站台。这个风气是怎么形成的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得有两个特别重要的原因。第一，我们以前干互联网，可能有“百什么大战、千什么大战”，但基本上打完之后就留下一到两家、最多三家。做汽车产业，一个车展跟你竞争的、发布的新车可能有 150 款，相对竞争太激烈。第二，你的每一个产品，只要你做到这个分类的前一、前二，所有人的攻击都是你——你不好了，他会把你放大一百倍；你没问题，他也会去找，因为对他来说是真刀真枪干、真金白银证。</div></div>
+<p class="para">所以汽车产业最后形成了这种风气，成王败寇：他最后会说“那是你天真、那是你老实”，背后就是“我做这个方式，如果没做好你别怪我，如果做好了你应该觉得我牛”。我自己就是不喜欢，所以对内部的基因逻辑，我不做（私下互害）；但别人要是攻击我，我也要反击，别人捅了我两刀，我起码以后不去给他站台了。所以我期待汽车产业将来更多天真、老实的企业家还留在里面。但换个角度，很容易劣币驱逐良币。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">很容易。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">互联网产业，你做了一个好的应用、产品或服务，因为是零价格使用的，第二名第三名不可能是你的一半价格——因为你已经是零了。汽车不一样：你卖 20 万、我卖 10 万。那为什么他 10 万还能卖得动？各种各样原因，但最多的就是在某个地方做减法。所以汽车产业这是一件很让人不开心的事，但如果你想在这个产业真正活到淘汰赛之后，你必须能正常地面对这个事实。</div></div>
+<h2 class="dlg" id="b17"><span class="ht">P7 的“显眼包”设计与 400 人工业设计团队</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这次刚发布的 P7，大家讨论最多的一个点，是外观非常有识别性、差异性，令人印象深刻。你们传统上以比较务实稳健著称，这次为什么选了这么一个相对激进、有未来感的工业设计？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">汽车里这么大的硬件、这么大的软件，它是一个平衡的艺术。你不做差异，它无人关注；你差异做歪了、太激进了，就危险，那是非常危险。我觉得小鹏 P7 是小鹏的一个图腾、是基因的代表。就像我在发布会上说的，小鹏第一代 P7 就是“敢为天下先”，做了非常多创新——带来了贯穿灯（现在路上很多都在用）、带来了高速辅助驾驶、带来了座舱语音（现在大家都在 follow）。所以我们还是蛮期望领先一步，但不能再多了。在领先一步的情况下，做了大量用户调研之后，我们觉得不要太过激进、不要让太激进的变化让人反感，把调研做好、分析做好，找到一个尽可能的“度”。以前我们处理这个度，有想法没执行力；现在执行力稍微好了一点。所以这一次的 P7，是我们既有想法、又有较好执行力的一个组合。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是设计团队换过吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">设计团队都换了太多了，好几波了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我第一反应是感觉还是很激进的，但发布完以后，网上那些（评价）也都出来了，官方图片下边好评远多于差评。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，这就是最佳的。最怕的是没人理你，其次怕的是无数人骂你，最好的是所有人都夸你——但这很难。大部分人夸你、少部分人觉得不太喜欢，因为对美大家的看法不一样，这是一定要隆（容）忍的。而且汽车特别重，不像做手机或更小的数码硬件，你可以同时推好几个、哪个卖得好就继续生产，其他停一停就行。汽车根本没有那种试错。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在这个设计团队，整个骨干都是国内的，还是有外国的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我们的造型团队现在投入非常大，是从去年开始，今年差不多到 400 多人，主要在上海。我们老是说“左手科技、右手艺术”，实际上原来科技这个拳头的投入比例是艺术的差不多几百倍，所以两个拳头明显不一样。因为做大众消费品，审美这块比重很重要，尤其是汽车。我们在前年底下决定要“重投入”，去年调整了非常多。这 400 多人里，既有中国人，也有海外员工非常多，外国设计师也有，我们的一号位就是来自欧洲的设计师。我觉得需要一个中西合璧，因为我们也卖全球车。</div></div>
+<p class="para">我觉得在中国做硬件加软件的，将来有两个一定要做到长板：一个是工业设计，一个是 AI 能力。这两个都必须是长板，但要想耦合好很难——大部分做硬件的公司不懂软件、更别说 AI，而做 AI 的公司不懂硬件，硬件有设计、质量、供应链、制造一大堆事情。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在你们内部的决策机制是？汽车太重了，每做一款应该有几十个甚至上百个设计稿在不断优化，这个过程里最终拍板在什么地方？你是放权给设计一把手，还是你来拍板？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">最开始是我拍板，但这里面出现了很多问题——因为如果我不专业、没有足够审美，或者只看到五个方面，但一个车的设计有几千个方面，就很容易犯错。所以现在是一个平衡的体系：第一，增加了非常多用户的反馈；第二，一定要有产品经理负责制，去关注全面性；第三，要给设计师足够大的资源投入跟权力。另外一个点是我们改了修订的流程：以前是一个产品立项，先给很多约束条件，然后说“设计师你在这些约束下怎么把设计做好”；现在把它一部分扭转过来，是“设计怎么做好的情况下，这些约束条件怎么去配合它”。改变了这个决策逻辑之后，我还是蛮有信心，整个小鹏的工业设计能力会在下一个几年大幅提高。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这次确实好评如潮。刚才我不是坐那个车过来的吗，到一楼门口停的时候，门口站了很多下来休息、抽烟的员工，他们就是“哎，看看看看”，反应非常明显。作为年轻人的一个“教袍”（标志），它很好地实现了那个“显眼包”的效果，从美学和设计上是比较激进的，但接受度非常高。</div></div>
+<h2 class="dlg" id="b18"><span class="ht">自动驾驶：两种 L4 与中国的“基础设施自信”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">回到技术研发。07 年就开始考虑做自动驾驶，这么多年实践下来，你当初对自动驾驶的想法，到今天有哪些调整、修正？当年整个科技行业对自动驾驶极其乐观，不停说两三年实现，一眨眼十多年了。另外真正意义上的 L3、L4，你觉得会在哪个时刻被一批企业实现突破、推广开来？假设不考虑政策。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得中国现在造车的这些企业家，可能只有我一个是计算机专业毕业、做软件出身的，所以我造车时比较相信智能——就像当年功能手机到智能手机的变化，我觉得 OS、应用软件服务会改变汽车。但进入汽车领域之后发现几个问题：第一，自动驾驶这个软件很难做好，大大低于最开始的想象。甚至做到中间、在 2022、2023 年，觉得它能不能做到 L4 都觉得困难，因为那个时候没有大模型，你靠规则写。你看现在全球的 L4 公司都是写了无数规则，在一个小区域内做好——它又贵、扩张又慢，只能聚焦在“这个小区域内商业价值足够大、能 cover 费用”。但我们做一台车，全球这么多区域，有路就应该有自动驾驶，而且路每天还在改——我们以前管高德的时候，全国一天改的路太多了。</div></div>
+<p class="para">所以整个大模型的变化，让我们看到了一个巨大的飞跃。我认为将来只有两种车：第一种是有司机的——比如我们自己开，但这个车做到了 L4 的软件能力，也就是你开 1000 公里、甚至 1 万公里，才用碰一次方向盘；第二种是你不坐在司机位上，车带着你开，这个时候追求更远距离的接管，还有云端的接管率。所以将来就是“有人开的 L4”跟“无人开的 L4”。我觉得这个过程，技术上可能在未来两到五年、快的话两年都有望实现，但用户接受度、政策法规不同国家不一样，可能五到二十年。所以做一个创业者，最重要的是如何把节奏做好。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我对中国的科技政策反倒还挺乐观的，因为从政府层面也是比较强力地推进这个事的。我以前会觉得可能有些发达国家先普及、被验证安全之后其他国家跟进，但现在我感觉中国有可能是政策上最鼓励这个东西的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这个上面我还有点发言权。最近两年我去了一些国家，跟他们的主管部门探讨过交通政策法规。我自己觉得，中国在这一块的主管部门，是相对既管得住、又相对其他国家最激进的，我是最有信心的。因为在我小时候长大的环境，总觉得很多发达国家政策很开明、变化很快、允许科技进步，但最近几年一问，完全颠覆我的认知：民营企业是不是最能推动科技进步的？在很多国家不是。发达国家政府是不是很开明、很乐于积极推动？完全不是。所以为什么中国最近经济能发展？尤其是对高科技的推进这件事，如果你出去对比一下，我觉得远超很多国家，非常自豪。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">再加上中国整个工程师底子太好了。现在看美国，老说要把生产弄回去，但工程师断代这个事没法解决。尤其做硬件，在深圳感觉太舒服了，基本上开车半小时之内大部分都能解决。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我举个例子。我去了墨西哥，假设我们在墨西哥开个厂，你最难的是什么——它没有电力。我们在中国创业这么多年，不会想的一个问题是：你要投资一个工厂，他告诉你“对不起我没有电，你要花很多钱和关系去搞电”。这好像是中国几十年前、起码 90 年代初的事了，但不少国家现在有这个问题。所以中国的 foundation——水电煤、五通一平，再往上才是供应链——差别巨大。我真的相信中国为什么能在下一个十年二十年更强大，基础设施能力太强了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">将来签出去（产业转移）的，也是大部分中国的供应链企业，导致全球供应链越来越强。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，但这个迁的过程也是十到二十年、一代人两代人的时间，不会那么快。</div></div>
+<h2 class="dlg" id="b19"><span class="ht">Robotaxi、自研芯片与“绕不过去的关”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">说到无人驾驶，你怎么看特斯拉现在推的 Robotaxi？你们是没打算去做类似的事情，对吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我从硬件角度觉得它极其激进，但我自己觉得技术上很快会到达这个点，只是要把硬件的冗余跟软件的冗余做好。说实话我们也在路上，今天没有对外宣布，但离出来也不远了。过去基本上都是类似软件厂商，或者像 Uber、滴滴这样的运营厂商去讲；我觉得 OEM、也就是车厂，很快会有少数公司进入这个行业，我认为是一定的。我们想做的事情是做好工具——把车做好，不是做运营。但车的硬件、软件以及相关 SDK 的能力，不会太久大家会看到小鹏的变化。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这件事如果方向被证明是对的，对民用消费品的汽车——大家买汽车这件事，理论上冲击应该很大。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">短期不会。核心：第一是技术成不成熟；第二是政策怎么看；第三是技术和政策都 OK 了，社会怎么看，还要经历一个过程。我讲的技术，第一更通用——中国能用、海外也能用；第二成本更低；第三安全性更高，因为原来很多都是后装车，安全性很低。把这些问题解决之后，将来被市场证明是更大方向的时候，我们不光不会掉队，我认为我们是领导者。所以为什么小鹏今年推出了自研的算力、而且是全行业最大的——我们比行业其他公司的算力平均大三到十倍，AI 算力有 2250 个 TOPS，很多车甚至只有 100 个 TOPS。这么大算力的价值，很快就会看到。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是唯一一个车企老板里计算机专业的吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">起码我知道我是唯一一个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">作为计算机工程出身的人，是创业以后什么时候意识到自己同时也适合做产品经理的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得是“磨”出来的。我毕业之后比较不好彩（运气）的是经常换岗位：最开始是软件工程师，一进去发现其他软件工程师都比我强，我就觉得不行——想做的跟擅长做的还是不一样。后来我转了十几个岗，两三年时间：软件、软件测试、软件运维、软件客服、解决方案、售后、售前、项目、产品，然后再去创业。先做的项目经理，后做的产品经理。所以换个角度，最后你会发现你找到更擅长、更喜欢、更有能力的地方——我觉得最终是去规划、定义和满足客户的需求，这个很重要。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">小鹏做自研的图灵 AI 芯片，是什么考虑？大家都在赌未来肯定是 AI 的，但你们是唯一一个做了 AI 芯片的吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不，蔚来、小米、理想都做。但他们做的是自动驾驶算力，我们做的是多产品线的算力，因为我们连座舱、机器人一起考虑了，都会做芯片。实际上在硬件领域，如果你追求将来强大的公司，我认为都要做芯片。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是因为通用芯片解决不了你们更强的垂直需求吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这是最重要的原因——通用芯片可能做了 100 个功能，你可能只用 20 个，那多的 80 个既占成本又占功耗。还有一个很重要：如果你自研芯片，你的芯片团队和软件算法团队可以通力合作，去用上一代芯片实现下一代芯片的效果；而通用芯片绝无可能，因为它就是这一代的能力。这样你用第一代芯片实现了第二代的能力，别人怎么跟你竞争？所以最终不做芯片的，也成不了那前五，应该是绕不过去的。我们大概四年前、只有一点点钱的时候就做芯片，又是另一个地狱，完全不一样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">听起来造车最终是要把一连串的地狱都套起来，全通关才行。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对。规划清楚、组织强大、节奏稳健，每一小关都很重要。</div></div>
+<h2 class="dlg" id="b20"><span class="ht">偶像观：乔布斯祛魅、马斯克与“隔空尊重”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么多年创业过程里，商业上或人生不同阶段，有过哪些佩服、向往的偶像或榜样人物？阶段性的都有过哪些？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得没有特别的偶像，但有觉得一些人很棒。比如读大学的时候——我是华南理工的——我们的师兄创业了，像康佳、TCL、创维这些家电企业，在九几年的时候，我觉得他们特别棒。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个时候认识他们吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不认识，现在认识。然后到了零几年，我觉得最主要还是史蒂夫·乔布斯，敢爱敢恨、敢创造改变，非常棒。到后面就慢慢变少了，因为你会更复合地看这个世界：有的人很好，但也有缺点。当你把一个人从神坛、从圣人的角度拉到凡间之后，你会觉得——熟悉的话，没有人有那么多光环。所以到后面觉得他不错，但不会有当年那种（崇拜）变化了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那马斯克呢？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">马斯克是我比较佩服的一个人。我特别喜欢他的科技幻想，就像我们小时候做梦一样，虽然他经常延误，但大概率都做到了，这特别牛。但做科技公司有时候也没办法——你要挑战这么大一个事，还要带着一群人才能实现，有时候不管对内还是对外，你或多或少要有一些“忽悠”的东西，让大家把精神头提起来。如果你特别务实地把所有悲观可能性都讲给手底下兄弟们，他们也不会支持，资本也不会支持。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们好像还在网上打过架，互相讽刺批评什么的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">有。我觉得因为信息差吧，各种各样的原因。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">后来也认识了吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但后来好像互相也表示了尊重？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我们是隔空尊重，打架也是隔空打，尊重也是隔空尊重。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还挺有意思那段。人生就是这样，互相折腾，追求更不一样的精彩吧。</div></div>
+<h2 class="dlg" id="b21"><span class="ht">被迫出道：企业家的“情绪价值”与街头喝咖啡的痛苦</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那像车展的时候，你们这些车企老板们表现得亲如兄弟，有时候也是被媒体给推的吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">你想一想，我是一个不喜欢出来抛头露面的人，因为原来是个 IT 男，现在你看被迫“出道”了，什么场合都得去。原来中国很多造车企业的老板，两三年前也不出来，最近一两年全出来了。为什么被迫出来？因为群众还是很喜欢看、喜欢吃瓜的，社交媒体实在躲不掉了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你现在也在经营各个自媒体账号吗，抖音快手这些？你们高管现在也都有吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">这个有时候是不得不经营，没有办法。我不强制（高管），但有好几个都有，鼓励有但不强制。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我虽然被人当成网红这么多年，其实我是很怵头的，能不拍都不拍，所以即使做直播电商也特别讨厌拍。但现在我其实还在反省——虽然直播电商早就不是主业了，但现在这个时代，大家甚至都不看文字了，你不拍怎么办呢，你也不能跟社会完全断了联系。当年孙燕姿，天王天后级的歌手，五年没出唱片，网上就开始有段子说她是“冷门歌手、小众歌手”。所以现在这个时代，你退休可以，但要做一点事，是躲不掉这个的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得有两个变化。第一，以前我们总觉得，你周边的人才是真正应该去让他们理解的人，但实际上不是——你周边的人可能只占万分之一，99.99% 的人其实不了解你、不了解你的行业，你要用另外一种角度让他们知道你。这是一个完全反自己人性的逻辑。第二个很重要的点，是情绪价值太重要了，而且如果放到社会上，那是一个社会的情绪价值，又要跟你原来的认知不一样。这两个叠加，导致了现在的“首尔能”（处境）。</div></div>
+<p class="para">我跟一个中国最大民营企业之一的老大聊天，他跟我说他最痛苦的是：他想在街头喝咖啡，没有（自由）。我远远不如他，但我已经能理解他这里面的痛苦了——你在上海随便找个咖啡馆喝咖啡，可能就有人过来跟你聊两句；你要是穿着不整去喝个咖啡，就会有各种段子。我以前加班完不洗头，到楼下找个麦当劳吃个早点，现在也不敢了。我去某个地方排队，前面有人插队，我以前说“你不要插队吧，这样不好”，结果别人一回头说“哎呀何总，我急”，你就不好意思说他了——我不认得他，但他认得我。所以活成了一个不开心的样子。但这个在现在的社交媒体、视频时代，是完全躲不掉了。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你们拍那些，也会拍一些像段子一样的东西吗？因为企业老总如果视频上总是很严肃，他们又会挑毛病。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，我经常被我们的品牌公关批评，说“你这话太直男了，社交媒体人不喜欢、没有传播性、媒体听不懂”。那也没办法，只能尽量做成一个真自我吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">咱们说新能源车，老把蔚小理三家放一起说，这是你觉得主要因为你们是最早的三家吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得我们是相对最早的三家，且是里面做得最好的三家，且当时我们三个都是原来创业、都是互联网背景、做的还小有成就的，所以把这三个人放一起更容易形成关注度。</div></div>
+<h2 class="dlg" id="b22"><span class="ht">飞行汽车：13 年的长征，与一次“差点拉上老罗”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们中间那么艰辛走过来，还盯住飞行汽车这么高风险的东西，是什么考虑？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我是 2013 年同时考虑汽车跟飞行汽车的，2014 年开始组建汽车团队，飞行汽车是我们 2020 年收购的（这个团队原来也是 2013 年成立）。到 2026 年明年我们会发布第一个产品——从团队成立到发布第一个产品，13 年的时间。我上次创业三次，第一次是跟随创业，后面两次以我为主，所以这次创业我更愿意去做一些更难、更有挑战、更科技、更酷的事情。飞行汽车我比较坚持，因为它很难是一次创业者能做到的：它本来创业就很难，还既要做飞机、又要做汽车，难度不是加法，是“惩罚效应”（相乘）。而且这样的公司成立第一天就得奔着十几二十年去规划，不像互联网公司想三年五年实现什么目标。所以做这样的公司只有一个原因：极其强烈的兴趣。无论是飞行汽车的创始人赵德力，还是我作为先投资、现在也参与的人，我们两个对这事都是极其强烈的兴趣，才驱动了一个好多年都不挣钱、技术特别难、特别复杂的体系，愿意长期去做。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">20 年做那个的时候，是不是小鹏历史上最痛苦的局面还没出现？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我们最痛苦的局面，一个在 19 年、一个在 22 年底。19 年是没钱；22 年底是突然发现你原来那一套思考逻辑有很多错误，而错误最大的原因在于自己，然后你就更痛苦。所以经历过 19 年特别痛苦的事以后，20 年投飞行汽车的时候，你不觉得这是一个巨难无比的长征——上一个没结束又启动一个。换个角度，飞行汽车是我们的生态企业，它在独立融资，我个人跟小鹏都投了，但也有非常多社会资本投资，不是完全靠小鹏输血，要不然根本受不了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那时候你找我，想拉我去一起做飞行汽车的时候，说实话我是很兴奋的，当时还失眠了好几天。我最大的考虑——我不知道当时是不是跟你说了全部理由——就是那个债务还没还完。你当时甚至非常友善地提出，想办法帮我做一些金融上的规划，看怎么把债务消掉。但我当时最大的感觉是：如果你帮我还了债，我去了以后咱俩想不到一块，那我就没法走了；如果想到一块那是双赢，但想不到一块呢，我就没法走了，因为你替我把债务解决了。所以我回来跟合伙人商量了好几天。说实话，我虽然当时做直播很顺利，但我肯定是喜欢创造性的工作，让我卖货我每天都很痛苦。再加上你找我的是一个这么刺激、这么了不起的方向，所以失眠了好几天。</div></div>
+<p class="para">今天重新提这个，是想说：最近我听到一个说法，有两个科技大佬背后说起我——其中一个还告诉了我，所以不是背后说坏话——说找老罗这样的人拉进一个科技公司来做合伙人，有个很大的问题：这人可能是一个经常惹事、而且能惹出很大事的人，所以放一个这样的合伙人在里边，有点像个定时炸弹，是个 troublemaker 那种性格。所以有时候有的老大看中我的产品能力，也未必敢拉我进去。我接触过的，因为垂直科技（锤子）困难的时候，至少有三个中国一线科技大佬找我聊过，但最后各种原因都没成。所以我在想，这个顾虑对很多科技公司大老板来讲应该是很合理的。那你那时候找我聊，没想过我可能给你们惹很大麻烦吗？</p>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我先补一句，从那个角度，我觉得我还是挺稳的，因为像我这样性格的这么多年，大部分都“摘了”（栽了）。实际上那个时候很多朋友不知道——在 UC 跟阿里并购整合之后，我找过老罗你，也找过另一个你也很熟的朋友，我就想是不是你们有谁愿意去那里做老大。我当时几个看法：第一，不会有管理上的挑战，因为那时候公司人非常少、等于重新打地基，组织跟产品都在重新做，比原来就有几百人几千人的公司好非常多。第二，飞行汽车这事一定需要几个要素：要融到很多钱（我们后来融了七八亿美金）；更重要的是对产品有洞察、对硬件有“时差”（敬畏）；第三，管理过公司、且有挫折、且还能爬起来的，很少。原来的科技人能做硬件的就很少，做过之后还能折腾很久、有很多思考感悟跟前进的，更少。我觉得当时你做得非常棒，所以跟你和那个哥们都聊过，可惜你们两个最后都有各种宏大的事情做，就是时间点不对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">如果当时我没有债务问题，我估计 99% 去了。飞行汽车对一个做产品的人来讲，是一个挺梦幻的方向，特别是已经有了那个基础和资金。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">飞行汽车也是一个更苦、时间更长的事情，商业化还没得到真正验证。但我有信心，下一个时代——也许三年五年、也许更长，会有一个巨大突破。第一批上市售卖可能在明年下半年就正式售卖了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们国家这方面政策也鼓励吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">鼓励。实际上 23 年的时候，国家从最宏观的高度上是极其鼓励低空经济的，从 23 年到现在大概批示、提及有六七次。更有趣的是——我说一个让你后悔的——特朗普最近也提美国的低空经济了，因为受中国低空经济影响。美国也有类似团队，有两家上市公司，原来主要做直升飞机的电动版，想解决城市交通。美国空中政策还是很开放的。所以中国跟美国都有巨大机会。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在我去广州的话，你能给安排（体验）吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">绝对，完全没问题。我建议你在明年一季度。今年四季度我们全新的产品会让我亲自开飞了，明年你自己驾驶——它不需要做飞行员式的训练。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我问一个严肃问题，整个研发过程中到现在，有没有人因为这个牺牲过？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没有，完全没有。但创始人摔下过三次——创始人赵德力，原来做了这么多年，掉下来过三次去住院，但不是这样性格也做不了这事，起步的时候特别是。要想把一个飞机做成跟汽车一样逐步普及，普及过程肯定要很多年。所以我们要做到汽车安全系数的 1000 倍到 3000 倍之间，现在的目标是 3000 倍，非常安全，且能管控真的巨难。但明年就能商业化售卖第一批了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不会特别昂贵吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">一百多万吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还可以支持。人生我觉得我们都坐过飞机，但开飞机很少人开过，一定要试一下。我甚至以前想着退休了也去考个飞行员驾照，但如果有这种可能也就不用了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">你以后还有很多，比如坐火箭、坐宇宙飞船。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我年纪不允许了，我今年 53。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">53，一个人起码你可以干到 95。像科技行业跟别的不一样，只要你到处接触年轻人、接触新一代的技术（就不会落后）。</div></div>
+<h2 class="dlg" id="b23"><span class="ht">机器人：养老、掼蛋与一年 50 亿的训练费</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你现在有锻炼习惯吗？是你重新接下 CEO 岗位以后不得不锻炼了吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我最近有锻炼。没有（不是被迫），是觉得身体越来越差了。以前都说创业最重要拼的是体力，都懂，但没到那个时间点，还是跟想的不一样。去年对我一个最大的冲击，是我突然去一家眼镜店，他们说“你老花了”。这种突然眼睛老花了、头发变少了、牙齿变松了、脂肪变多了，体检问题一大堆了，你会发现：我不是还是个年轻人吗，怎么会这样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我有个朋友（社交产品做得很好的那位），很多年前跟我说，他有一个长辈，到了八十九岁，经常唠叨说“哎呀怎么办呢，我还完全没准备好”。当年我们年轻都当笑话听，后来发现真是这样：你 40 多的时候觉得自己 30 多，50 多的时候觉得自己 40 多，接受和习惯这件事，是个错位。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我给你一个建议。我姑妈 80 岁的时候跟我聊天，说“如果我小 30 岁，我也去做很多很多事情”，她最后去世是 88 岁。我当时就跟她说：什么都来得及。你看现在我们在中国，这样的创业者少，你去日本看看，很多人七十岁、八十岁还做很多事情。只要你永远抱着“在那个年龄做那个年龄该做的事”——比如我七十岁了肯定不能像现在这么拼，但还是可以做那个时候能做的事——你永远这样想，心态就年轻，身体也会跟着年轻。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我有时候为了给自己提气，写点东西，写着写着就上网搜，结果发现千奇百怪：有个老太太 69 岁退休以后，年轻时想练跳舞，就决定去学舞，但发现胳膊力气好过腿，最后适合她的是钢管舞——69 岁开始学钢管舞，最后成了网红，YouTube 上有她视频，还全世界巡演。看完确实觉得没什么借口。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">你看广州有个院士叫钟南山，岁数不小了，健身肌肉非常好。我在机场碰到过，胳膊很壮、走路非常快、声音洪亮，你觉得他就六十出头。所以你还年轻。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我想想看是不是要搞一个更“离谱”的东西。机器人也是你们投的，还是内部做的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我们机器人最开始是投资，但在两年前、也就是 2023 年，把它全资并购了。因为我发现机器人涉及的技术广度比汽车还广、还难。一个小型公司靠融资很难做成机器人公司——小公司首先要解决活着，活着就要做很多事去让投资者注意、去拿钱，研发比例严重不够。所以我们把它拿回来。我觉得我们现在机器人进展非常棒，努力看能不能明年作为中国第一批把人形机器人量产的公司。而且我们的量产不是那种遥控型——遥控型相当于汽车的 L0，无任何自动价值——我们要做一出来就是一个准 L4：你用语言、用手势跟它沟通，它去学习你，能走、能动、能自己站着、能自己充电、能创造一定社会价值。那样才是机器人最初级的阶段。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我其实对机器人格外感兴趣，还有一个原因：我没生孩子，有时候我老婆会跟我交流说，老了以后这些方面是不是也有一些问题。我说第一是多挣点钱，那肯定有医疗资源；另外，如果我们老了想住到那种乡下、山清水秀的弄个大院子，可能到那个点之前商用机器人已经成熟了，家里养两个机器人基本能解决——既解决保安问题，也解决保洁、收拾，甚至干点体力活，还包括跟你一起掼蛋。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">（笑）掼蛋。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那就怕你永远也干不过它，它肯定比人聪明。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不会，你可以告诉它“你掼蛋要打得比我差”，设定到一个程度，它就会真的打得比你差。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还要很逼真才行，要不然我感觉它明显在让我，也没有乐趣。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我在前年把它从投资公司变成全资公司，其中一个出发点就是跟我家人的健康相关——跟我爸爸。所以我觉得只有机器人才对老年社会是最有价值的。我当时说全力以赴花个 10 到 20 年时间——因为照顾老人的机器人是机器人最难做到的。现在外面虽然有一些老年机器人，但它是规则型的、很简单的机器。照顾老和小都很难，而且这还得是脱离了人的情况下，它要独立照顾好老人孩子，特别难，是 L4 的高阶。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但问题是，这是不是又是一个没完没了的投入？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没完没了，而且比汽车还大。我给你举个例子：我们汽车的大模型训练投入，2025 年接近 20 个亿；机器人我们刚开始规模训练、还是小规模，一旦到大规模，机器人的数据量远超汽车，复杂程度也远超汽车，那我认为机器人的训练量一年 50 亿以上。哪个小型公司能训练费用超过 50 亿？很多公司说我做个开源的大佬、开放的大佬，我觉得都低估了成本和兼容度的挑战，真的巨难。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那同时在汽车还没完全拿到船票之前，又投飞行汽车、又做机器人，你在内部压力也很大吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">很大。核心合伙人团队里今年有不少董事又发信息问我：你要不要把汽车拿出去独立融资，现在能融很多钱。但我认为它（独立融资）不足够支撑机器人存活，无论是现金还是技术。比如你拿出去融资拿了 10%，但机器人的小脑、大脑和脊椎是三套不同的系统，现在很多人说要合一，实际上很难。小脑就像自动驾驶的高级版——自动驾驶 L4 公司做了这么多年都很难做到，你怎么可能把一个高级版的、720 度的自动驾驶在机身里做好？所以绝大部分人都完全低估了这里面的挑战。它必须是小鹏的自动驾驶同时做汽车和机身的自动驾驶，有很多资源可以复用，百分之七八十可以复用，但你的训练不能复用。</div></div>
+<h2 class="dlg" id="b24"><span class="ht">性格的另一面：轻度躁郁、隔音门与“大师兄”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有一个我看之前访谈时比较奇怪的：当时你决定从一线全部亲自抓的时候，好像做了特别巨大的人事调整，一次性把十几个高管都给（换了）。但这事好像在外面没引起很大的轩然大波、负面，是因为拖了一年多周期逐渐完成，还是有其他原因？感觉这么惊涛骇浪的事，处理得还挺平静。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不是一次性，是一个阶段、一年多时间。我觉得实际上就是既要果断、又要有感情。我们这里面大部分人是自己主动退休的，所以我们都是非常开心的；有的人是拿到了荣誉退休的员工。这一波实际上很难回首、很痛苦，但整体我觉得还是比较友好的。而且那个时候公司挑战也很大，他们本来也有思想斗争。如果公司特别好的情况下你想做这么大的挑战，没有逻辑，他也很难接受；但公司特别差的时候——很多创始人或 CEO，越差越不敢动，但错了，你越坚决，他有可能越合适，因为给了你一个契机去谈。好的时候，他会觉得你是要在终于变好的时候甩掉他；差的时候，他从心情上是可接受的：那我退出，我还有股票，你们继续努力，我在外面先休息一下。</div></div>
+<p class="para">我举个例子，我们今年上半年的成长是 200%，那意味着去年上半年有多差。换个角度，90% 左右的一级部门全部都换了，多痛苦。经历过管理痛苦的时候——不变是必死，变化可能可活，但变得不好那是确实。去年二季度的时候我们亏损很大，每天大概才卖一百多台车，一个月才小几千台，然后我们的合作伙伴一个月的数据是我们的十倍。我就吃了几十顿饭，跟几十桌人讲同样的：小鹏在 2024 年四季度会变好、为什么变好、要做哪些事变好，以及你们要做哪些事帮助企业变好。绝大部分都不行。后来我还做了统计：吃那么多饭，人还走了很多——而跟我吃饭的，已经是我关注到的、相对重要岗位的骨干。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最后那些吃饭的人走了多少？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">30%。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还挺要命的。这么多年大家提到不同企业家，都有一个标签式的性格。大家说起你来，普遍提到的关键词是说你比较“老实”，做生意的时候也因为老实经常吃亏、上当。而大家又说，做成功的企业家必须精明、甚至有时候得心狠手辣。那你怎么能保持本色、又不被骗、又不因为被骗造成更大伤害？方便的话也分享一下你因为信任被骗得比较惨的经历。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得“老实容易被骗”，说白了就是别人讲的话你觉得他是对的、是真的。大学毕业之后，我也被骗过。比如我当年自己卖电脑，你说我肯定对电脑懂吧？有一次有个人卖个二手电脑给我，说是偷的。我练（验）证了半天，发现它是个真的，就花了点钱买了，因为想着自己有一台电脑，结果回去认真一查，是个假的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你验货的时候没查？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">验货时只是用了一下，觉得可以。实际上世界上绝大部分情况，不认识的人、或者认识的人跟你讲，他是希望获得价值、有利益的，你就要从他的角度去思考逻辑。我觉得这么多年只是稍微精明了一点，但我还是相信“人本善”、相信这个世界是美好的，这点上始终坚持。所以我设定很多规则，让自己更理解它，从源头不会受骗；第二，及时止损很重要；第三，心态更重要——有些人想跟你做一个事、想获得价值，你已经能理解他，心态上就可以宽容，假设你是他你也可能这样想，你会觉得他们都是好人。</div></div>
+<p class="para">我现在到了车之后，看到车里面比互联网里面（复杂）远远（更多）。互联网更简单、更单纯、更纯粹，但你适应了之后，会觉得这就是一个社会的生态，以前只是你还没接触到，也有可能只是他们生存压力比那边更大。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也有这类问题，但我解决的方法是：后来做企业认识的人多了，有一些比较精明的合伙人在一起，他能防止我上当。就像你最开始的“副总经理”一样。我们有时候跟一些厂商合作，对方老板名声不太好、比较奸诈，但我那个合伙人特别有意思——他人本性很纯良，但打小混社会，所有老奸巨猾的套路他都一眼能看穿。所以我说“跟这样的人合作我有顾虑”，他当时眼睛一亮、卷起袖子说“奸诈谁怕”，他特别不怕奸诈的。能找一个这样的合伙人真的特别幸运——他奸诈的套路全懂，但本人并不恶心，这非常难得。他甚至在生活上对我帮助也很大：我有些事弄不清楚去打听，很可能上当，他一听就能听出不对。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我特别认同。我觉得有自己的本性、跟随本心去做事很重要，但如果你看到（别人）胡说的事情，你能更把本性抓住，那才是自我的涅槃、自我的流（升华）。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你也是以性格温和著称的。但像生产制造车间那些甚至要讲半军事化管理，所以你做汽车以后，有没有工作进展特别不顺利、焦虑，或者本来信任的人犯了严重低级错误，类似这种情况下，你也会暴跳如雷地骂人吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">熟悉我的人都知道，我是性格暴躁。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那外边可不是这么看的，因为你永远面对公众都是笑眯眯的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">是因为我在暴躁之后出过很多次问题，所以不断告诉自己不能这样暴躁，但这性格很难改。我第一次跟随创业的时候，在座位上长时间放了一个条子，写了一句话：“如果你想骂他，你明天再骂”，冷一晚，百分之九十几的情况下，你明天会觉得他可以不用被骂。我觉得我是一个性格挺不好的人，只是因为碰到了很多事情，老是自我反思，所以很多时候能控制自己了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个完全没想到。因为大家——至少外界——完全不是这个印象。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">（我）说话简单，经常“怼”人，但不是那种坏心思，是对事不对人。有的企业家是能忍住的，我是完全忍不住的，所以最初正经意义上的创业（之前的英语培训那个不到 30 人的小团队谈不上企业管理），做了垂直科技（造车）以后，进展不顺的时候经常暴跳如雷，对着把事做错的兄弟们发飙。后来我意识到这太吓人了——有时候发火我自己都害怕，我都不知道我有那么大的火。还去查过，医生说我有轻度的躁郁，但在安全范围内，不用吃药。我虽然不用吃药，但他们（被骂的人）受不了。</div></div>
+<p class="para">所以我后来想到的办法是：有时候开会，如果连续三件事搞砸了，我就很难忍——一个没事、两个还行，到第三个基本上很难控制。早期就会在会议室里暴跳如雷、咆哮个几分钟，然后等他们走了，浑身疲软，产生强烈的无能感——肯定是因为无能，才会这么暴跳如雷。后来的解决方案，是我那个办公室装了双层隔音门，就是录音棚用的那种。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也是。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">你是为了什么？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也是隔音。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">就为这个吗？我一方面隔我说出去的（声音），一方面隔别人进来的。因为比如俞永福坐我隔壁，我以前觉得我脾气够不好了，后来发现他比我还不好，骂起人来比我还凶——但现在好多了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你是双重的都要隔。这个经历我还没有过，我主要是隔我自己的。然后我后来进步到——说是进步也挺可笑的——开会出了三个问题、我已经完全控制不了了，就说“你们先讨论一下”，然后急急忙忙走回办公室，把双层隔音门关上，在里边摔东西。后来看医生说起这个，医生就笑，他说你摔哪一种——有三种：第一是专挑便宜的摔，第二是不分贵贱地摔，第三是专摔贵的东西。我很吃惊，说还有第三种，那什么人呢？他说那是最严重的，躁郁症最严重时发作会冲动去伤害最珍贵的东西，甚至会摔孩子，他要对自己伤害最大化。我说我还是挑着摔便宜的——桌上放一些陶瓷杯子，重灾区经常被摔碎，但我买的纪念款杯子（比如去美国在星巴克本店买的）和普通杯子，暴跳如雷进去拿起一个，一看是纪念款，放下来又拿那个便宜的。那精神病医生哈哈大笑，说你这就没事、健康方面没问题。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">那你隔音是为了隔什么？你进去会干嘛？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">比如发了火之后，不要影响外面的同学——外面同学如果听到里面有人在骂人，心里会有压力，然后他不来找我了，说“听说小鹏今天不开心”，那今天很多会他们会自己取消的。而且我现在很多时候，一旦有情绪上来了，我就说这个会先不开了，因为我把他骂了他不开心，更可怕的是我可能在有情绪的情况下做出一个错误决策。我给了自己一个理由：我不要在情绪下做错误决策。这样也变成了少骂人，一举两得。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我还发现企业管理层有些人特别有意思，非常温和，但什么都没得商量。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">像我这种坏脾气的，其实气消了还是很讲道理的，只要讲逻辑就不怕。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">在公司内部，他们都叫你“大师兄”，这个外号最初怎么来的？如果叫大师兄，那还有二师兄三师兄、师傅这些吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">因为最开始我们蛮期望成为一家开放平等的公司，所以不要叫总、不要总监经理。那员工如果只有二十出头，管你叫什么呢？直接叫名字，按亚洲文化岁数差得多还是会感觉怪，所以有一个花名外号——英文名、花名外号都行，都能缓解。以前最难的就是二师兄，谁也不愿意当，而且我们的二师兄同学还很瘦。但我觉得“同学文化”是一家科技公司很重要的点。千万不能追求所有人都一样，那就不是文化、是规则甚至制度了。</div></div>
+<h2 class="dlg" id="b25"><span class="ht">两套人马：传统车企与互联网的冲突，以及“亲自下一线”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我准备这次访谈时也想过几件可能难处理的事。其中一个：我们当年做软件接触过一些国内大车企，发现他们做事风格特别保守、效率特别低，以安全的名义——我相信也有安全考量，但整个效率低，涉及安全的部分效率只会更低。以我们民营企业做科技产品，你感觉六个月、十二个月能完成的，到他们那做计划就是以三年起。所以我在想：你招了一批性格保守、稳重但效率不高的传统车企的人，又招了一些观念先进、甚至激进的互联网公司的人，这两组人马搭在一起干活，早期的冲突和理念上的不调和，应该是个很大的课题吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">那不是很大，那是巨大、巨大无比的。我觉得一直到今天，我们都有一定程度。但它本身也是对的，因为的确是两种逻辑，换过来也都会出问题，就看这个度了。比如有些车企特别慢，说得好听是因为规划复杂所以要慢，说得不好听是他不规划——因为你给他一个建议，他要不然不听；要听的话，他要找人帮他把规划写出来，不是他亲手干，是找第三方干。所以任何一个事情，为什么慢？第一复杂；第二从过程角度他都要找别人去干。我们互联网公司以前从想到做到运营，一条龙自己干完，一个组内就完成了；他们不是，动不动找代理、只做集成，然后内部很多流程制度——比如找代理要招标，把很多流程拉长了非常多倍。</div></div>
+<p class="para">所以当我们在汽车行业做久了也理解。为了改变这个，我们做了非常多事情。我当时为什么后来说一定要亲自去一线？比如我跟团队说“你们不能这样做、要自己干”，他们就招了几个人，专门把合作伙伴埋在更下面、不让我看到，这就叫“自己干”。所以你有你的要求，他有他的对策，而且他的汇报里百分之百把这都搞过，所有人都不会讲——因为所有人知道我要求他们自己干。所以做一个制造企业的创始人，必须大量到一线里面，马上就能看到“你说错了”，第一次警告、三次对不起，那我就动（人）了。但绝大部分车企不会这样，因为车企太大了。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以从董事长冲到前线、核心业务全都自己亲自抓一遍？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我会从很多下游、一线去看一个地方做得好不好，不仅仅听这个部门的汇报。哪一个部门都有下游，最后你的一个闭环来自于市场、来自于客户，这个更容易看准，而不要听他的逻辑。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看《晚点》的采访里，甚至说有些你听不过来，会派自己的人过去听他们开会。当时记者显得很吃惊，说会不会太过分了，然后你说这个也是必须的。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">实际上大一点的公司，我认为甚至互联网公司，都可以建立一个专门关注过程检核、目标检核的部门，我们叫“质量运营中心”。你提的要求，他给你汇报的时候肯定是浓缩过的，这个浓缩的结果可能只有 30% 是对的，70% 是他修缮过、美化过的。你没有精力去知道哪个是修缮过的、哪个是错的、哪个才是对的。要有团队帮你把框架——框架是你把握第一层级，他帮你看第二层级，第二层级跟第一层级都对的话，他的错就不会错得太远。这样一个中心可以帮助你确定，但它只是考核方法之一，还不是全部。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这类事情困难的地方在于，很多美化东西来骗你的人，其实也不是恶意，就是从人性角度，是一个生存方式。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，所以非常头疼。如果真是恶意欺骗那种反倒容易。就是层级越多，这种人性的放大越大。所以为什么说有“大公司病”——大公司病就是为了确保制度的自动化，而放了很多制度和自动化，这样形成了层级的形式主义。绝大部分企业，我认为：小企业是创始人和高管的（问题），中大型企业基本上都是管理，大型企业基本上都是组织跟体系的问题。</div></div>
+<h2 class="dlg" id="b26"><span class="ht">最黑暗的时刻：19 年的钱、22 年的“问题是自己”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">给我们分享一下，这十多年造车整个过程里最艰难、最黑暗的几个时刻吧。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">造车天天都很艰难，但你要告诉大家它们都很容易解决，因为你是“仇”（主心骨）。如果说特别困难——第一是特别穷的时候，就是快没钱发工资。因为没钱发工资是一个巨大的压力，一旦出现就不可控。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">出现过发不出工资吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">一次都没有。但是 19 年的时候，我们刚完成一次融资，四个亿美金，其中我自己投了两个亿美金，且只能活大概六个多月。因为汽车一旦到了一个规模，每个月花的钱特别痛苦，花的都是未来的钱，你一砍掉，会有大量的人反应、供应商反应、员工反应。实际上李斌那个时候应该比我还难，我们有时候坐在一起互相聊一聊，难兄难弟，心情会平复一点点。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">比惨大会。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我记得 2020 年初特别有段时间很苦闷——你知道 19 年本来就很难了，突然一下来的疫情，你就觉得更难。工厂也时不时还得停工，经常停工。我觉得那一次是我非常难的。另外就是 2022 年底，当时我们 G9 发布出现了问题。那个时候虽然睡不着觉，但不是觉得特别难；难的是在那之后的数个月，你去总结为什么出现那个问题，一层一层递推，最后发现问题竟然是自己。然后你觉得解决问题最好的方法是“修材”——我讲的修材不是物理意义的，是指“这个企业不应该归你管，这个位置不要坐了”。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为你阻碍了这个企业。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对。而且那个时候公司有一万多人，等于是你对不起这一万多个兄弟姐妹、对不起很多投资人，那个时候的感受很强烈。而且你还不知道怎么办——它不像很多事情下一步怎么办还没想清楚，你怎么把自己解决掉、又能把事情做好？因为你换一个人，他可能干得更差，你怎么办？不像你去一个公司打工，你没做好走了，公司还有其他人顶着；但你在这儿，就像你当时做锤子一样，你觉得没做好，问题是你找个人就能做好吗？也许能、也许不能。如果不能做好，那可能自己的问题更大，而且也没有退路，你又不能不干。所以我觉得那个时候比 19 年更痛。</div></div>
+<p class="para">而且当时去分析类似这样的公司要多久能从坑里爬出来，发现最快的都要接近两三年——硬件的话接近两年、大概率要三年。然后你心里一盘算：这两三年怎么过？就是那种你看得到未来、但知道过程无比痛苦，你怎么办？而且你还要告诉兄弟姐妹们假装没事，不敢告诉他们真相，只能告诉最高管几个合伙人级别的——但说实话，我告诉了他们，他们也崩溃。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但他们也都撑住了吧，没有那个时间点撤掉的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">自己走的，最前面的五个人，除了我跟另外一个人，现在都走了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么离谱啊。所以你现在核心班底都是后边来的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">90% 的人都是后边来的。我们比较幸运，可能花了 18 个月左右、一年半，我觉得是比较 lucky 的。但我觉得真正要走出去，即使加上现在还需要五年。因为小成功不算胜，要大胜才算。所以今天还在路上，还有五年。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你说这个大胜，是指真正意义上的拿船票？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对，起码你不会下船。至于拿了船票之后的全明星赛你能不能跑到 No.1，那还要继续努力。</div></div>
+<h2 class="dlg" id="b27"><span class="ht">AI：“假重视”、悲观派与“几个人的大公司”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们最后聊一聊 AI。因为 AI 是这个时代最大的技术变革，每一家都谈了 AI 的重要性和投入决心。我们从外边看，每家车企毫无意外都要重视这个最重大的战略方向，但具体要做什么，各家说的还是比较有相似性。所以想问一下：小鹏在 AI 上具体是怎么样的做法，区别于其他车企的？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">在 AI 方面，我觉得绝大部分企业说重视，实际上是“假重视”，只是单纯表态。就像十年前我进入这个行业，很多人说“软件重新定义汽车”，我也没看他们在软件上干了啥；还有很多人说“数据的价值是无穷的”，他们最多就是把汽车数据存起来。我说存着你干啥呢，他说将来是金矿——一本正经，胡说八道。实际上包括我们也在犯很多类似的错误，比如我们说设计造型颜值很重要，但小米用深刻的方式教训了我们这一群车企：你们都不够重视。</div></div>
+<p class="para">所以真正的重视，是你在上面所花的时间、资源和过程，最后产生的结果。我曾经在一个跟 AI 很强相关的行业会上问：在座这么多企业，你们有谁在公司里面会做预训练？只有三四个人举手。你要知道下面几百个企业家，大部分做的是后训练，或者甚至连后训练都没做、就是套壳使用。再说一个案例：我参加一个很重要的会，大家都说 AI 很好，然后下面好多人问我（一些最基础的问题），他们只听过这个术语跟名词，从来没用过。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是说科技公司吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不是科技公司，是传统企业。再比如中国有很多云计算公司，前几名都很大，你可以问问他们谁在云上面做强 AI 的事情，绝对不多——因为云那里肯定知道（用量）。如果连应用都很少，你怎么叫重视 AI？所以我自己觉得，今天 AI 的重视，以我角度看基本上流于形式。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">新能源车企业也是这样吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">新能源车企业里面，比如做自动驾驶的公司，真正用到大算力的屈指可数，其实就看他买了多少卡就知道。没有多少公司在用很多卡。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们问几个科技领域来的嘉宾一定会问的问题：未来五年，AI 会给社会运转的效率和分工带来怎么样的变化？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得数字产业的变化可能会比较大，至少早于那些（实体）。我觉得在物理世界，最大的机会就是自动驾驶和人形机器人，这是我目前看到的先落地、产生实际效益的。再放长一点，五到十五年，会有非常大的改变。因为很多人觉得一个新技术出现两三年后就会颠覆，我是觉得特别困难——数字产业可能十年做到就很好了，而实体世界还需要数倍的时间。但开车这种事相对比较垂直，为什么解决得快？是因为开车这事的商业价值太大，还有它比机器人简单得多，因为机器人要解决更复杂的问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你对所谓通用人工智能到来后，人类跟 AI 的命运怎么看？偏乐观派还是悲观派？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我是偏悲观派的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也是偏悲观的，核心要看多少年以后。也许是我们这一代人以后的事情。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得就是我们这一代人的事情。然后我就觉得很奇怪：大家从事跟这个相关的行业，悲观派略多于乐观派——因为从逻辑推导上，如果出现一种智能，能力远远超过人类，其实什么规则都保证不了它安全。这么一个大背景下，很多人认同、也忧心忡忡，但真正为这个去做安全的是极少数，多数人还是要先用它解决问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这么一个背景下，我那些不搞科研的文艺界朋友闲聊时就说：你们如果对这事悲观，还没日没夜干这个，怎么想的呢，是不是精神分裂？我也觉得不太好回答，只能拿原子弹举例：先有一个国家弄出了原子弹，它的敌对国家也必须弄，否则就完蛋了，于是出现核军备竞赛，谁也不敢停、谁停谁倒霉。好在核武器发明到今天还没出现核大战，但真出现了可能就是一通毁灭。这件事你看明白以后，有没有别的破这个的方式？好像也没有。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">AI 的这个悲观，我觉得再怎么厉害，也比脑科学（生命科学）的那个悲观要好。脑科学的问题在于：如果一个人的大脑真的被研究清楚了，理论上你可以永生——机器的身体加一个永生的大脑，可以在数字世界永生、也可以在物理世界永生。如果出现这个，比 AI 的强大还可怕，因为 AI 毕竟还不是人性的斗争，而永生那就是人性的斗争，更难。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但大家也停不下来，只能继续往前走，希望它不会出事。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得我们这一代人要做的事情是：在自己能力范围内，如果我们把 AI、把科技做好，然后有能力提前一点去尝试构建“如何解决它”的解决方案——但首先你要有能力解决，所以要为了有能力解决先去努力。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这听起来像是一个安抚社会公众的说辞。比如机器人三大法则，现在机器人都不遵守，因为现在机器人根本不聪明。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">那个三大法则本身也不能完全自洽，但起码它是从社会角度来判断的。如果我们要做到真正满足社会责任感、法律，你首先要是这个业界的领袖、带头干，然后配合政府、配合法律。你只是下面带个头都带不了的，就别瞎记（标准）。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我有时候会觉得它发展太快，怀疑政策来不及——世界各国用安全的法规政策约束它之前，就已经要出现问题了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">那不会，没那么快。我认为机器人、AI 最怕的现在已经在出现，就是说现在有很多大模型训练不同的方向，然后它们会互相训练——一个模型脱离人来训练另一个模型，进行强化学习跟持续强化，互相促进另一个模型的成长。这等于有很多个 AI 大脑互相促进学习，一旦促进到一个临界点就很可怕了。但我觉得最近十年还很难，还好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在平均寿命太长了，即使我都 53 了，还觉得至少还有 30 年，所以十年其实一眨眼就过去了。你现在这么忙还有时间——我听你公司同事说，你还直接去看那些 AI 的论文？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我不看论文，我听别人写好的论文的各种分析、评论。就是内部和外部的 AI 专家定期整理出报告，我每周都要去听、去看。这块太快了，都有点听不过来。我有时候听内部 AI 专家讨论，说“你们讨论这个我看不懂，能不能跟我讲讲”，经常碰到，解释一下才懂。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也是，有时候内部给我讲，听着听着我就毛骨悚然，觉得你学习消化、理解这件事的速度，已经赶不上它进化的速度了。那还是在没脱离人类的情况下，将来它能自己进化、脱离人类的时候，你睡醒一觉，可能它已经天翻地覆了。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">举个例子，为什么自动驾驶会越来越强？因为自动驾驶拿了几亿、几十亿公里的庞大数据之后，等于在把数据进行压缩跟折叠，它会把“一万个人才会出现的一个异常情况”整理出来。问题是它那里有几百万个人开车的数据，最后它的安全系数远远高过你。它把这些问题折叠、归纳、压缩出来之后，变成一个正常能力提供给你，可能只花了半年时间就解决了几万个这样的问题。而且我们人类最大的约束是带宽问题，所以到后边一旦到了那个临界点，它甩掉你的速度是你都没反应过来就已经（被甩开），非常可怕。所以为什么说很多问题的解决是“涌现”——因为在你身上没有，但在别人那里碰到过、极其少有，最后它把它压缩放到一起，对你就是涌现。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">问一个跟产品经理相关的。现在原教旨主义的 AI 信徒会觉得：有了 AI 以后，它能全知全能地解决任何问题，你只需要想办法让它知道你要什么就够了。这个理论指导下，就认为产品经理这个职业很快会被淘汰。这一点你怎么看？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">我觉得越浅层次的知识、或者 pipeline 里的一环，越容易被取代。这里面分几个逻辑：越“广度”的数据整合——比如有明知识跟暗知识，就像社会上有潜规则、潜文化、潜知识——越广度的知识整合，AI 越难。而越“载重”的、比如编程中间的某一段，它会先辅助再取代。所以今天所说的 AGI 最可能、最快速到达的，是类似大学生编程的部分环节，但不是全环节。所以越强大的产品经理，AI 越取代不了；越普通的产品定义、数据的简单分析收集归纳，就是中游会被压缩，顶层越来越强大。</div></div>
+<p class="para">我们现在做软件研发也有一年多了，去年三月开始做的两个项目。现在的感受是：产品经理五到十年内还是不会被淘汰的，因为它再怎么强大，要把所有事情都做到所有领域专家一样好，可预见的将来还是可能需要十年或以上。所以我们很欣慰。另一个让我高兴的是：我们做手机时也做到过一千几百人，后边做直播电商更大、几千人，但那是劳动密集型，不是高科技公司；现在做 AI 软件这些科技应用，我们又收缩到几十个人而已。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但现在满世界都在说“几个人的大公司”，人员规模特别小的大公司，从逻辑上听起来应该也是五年左右就可以批量出现。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">实际上现在美国已经有了，就几个人做了特别巨大收入的公司。所以这点对我们这种小企业来讲还是挺兴奋的。但我们内部现在的经验是：做战略调研分析的，确实可以没有了；后边写代码工程师的量也可以控制在很小的范围。但整个过程里还是感觉有点不可预测——你不知道哪个以为很快淘汰的岗位其实还好，以为能维持一阵的岗位突然说没就没了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以这些是边走边看就可以，还是你觉得需要提前在这些地方做一些规划，确保发展过程不失控？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对于软件企业，只能边走边看；对于硬件加软件企业，因为硬件需要更长期的规划，你是根据软件边走边看的总结来调整硬件规划，所以硬件稍微好一点——多了一层困难，也多了一个壁垒。你最重要是比你的友商调整得更快。另外我也不太担心：比如像 coding，最有可能实现简单的 AGI，我们公司大量用 AI 来 coding，大概降低了 22% 的工作量，但增加了额外的 20% 几的工作量——你要去检查代码、学习工具、自动测试、再次复核。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那整个算下来，肯定现阶段还是赚的吧？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">亏的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还是亏的吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">微亏。而且不光我们亏，我们看到行业的分析，软件公司也都是微亏。但换个角度，如果它从 20% 出头干到 50%，你就赚了——瞬间就开始赚了。所以这个临界点，你不能到那个点才开始训练这个东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以不用太担心。</div></div>
+<h2 class="dlg" id="b28"><span class="ht">收尾：不想退休，与“创业最好不要做太大”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好，问最后一个问题。想过退休后的生活吗？比如有没有想过以某种方式给自己设定一个可能退休的节点——物理年纪到了多大岁数，或者公司发展到什么程度、达成了什么成就，让你觉得在这个事业上已经很圆满了、对得起所有人，也对自己心满意足了，就可以退休。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">没想过，完全没想过。因为我还有挺多事情想做。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是说即使汽车做到了满意程度，可能还要想下一个事情？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">对。我觉得这个社会还是有很多有趣的东西可以做的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这么多年创业下来，觉得对家庭陪伴的时间足够吗？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">不够。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">即使不考虑你董事长转型 CEO 这件事导致的时间巨大增加，前面也是不够，对不对？</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">是的。所以创业最好不要做太大。但有时候，当你做到一定程度的时候，就由不得自己了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">它会逼你往大做。</div></div>
+<div class="turn guest"><div class="who">何小鹏：</div><div class="say">所以你是很痛苦的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好吧。好，感谢，今天非常好，全程状态都很好，非常感谢。我们其实本来担心情绪会有点（低落），但整个状态非常好。</div></div>
+</main>
+<button class="up" id="up">↑</button>
+<script>
+var root=document.documentElement, prog=document.getElementById('prog'), up=document.getElementById('up');
+function onScroll(){var h=document.body.scrollHeight-innerHeight,y=scrollY;
+  prog.style.width=(h>0?y/h*100:0)+'%'; up.classList.toggle('show',y>600);}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+up.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+var fs=parseFloat(localStorage.getItem('fs')||'18'); apply();
+function apply(){root.style.setProperty('--fs',fs+'px');localStorage.setItem('fs',fs)}
+document.getElementById('finc').onclick=function(){fs=Math.min(23,fs+1);apply()};
+document.getElementById('fdec').onclick=function(){fs=Math.max(15,fs-1);apply()};
+var th=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+setTheme(th);
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+  document.getElementById('theme').textContent=t==='dark'?'☀️':'🌙'}
+document.getElementById('theme').onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+var toc=document.getElementById('toc'),mask=document.getElementById('mask');
+function tg(o){toc.classList.toggle('open',o);mask.classList.toggle('open',o)}
+document.getElementById('menu').onclick=function(){tg(!toc.classList.contains('open'))};
+mask.onclick=function(){tg(false)};
+toc.addEventListener('click',function(e){if(e.target.tagName==='A')tg(false)});
+</script>
+</body></html>
