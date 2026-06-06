@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>仁科 · 一个相信一切都“长出来”的偶然主义者</title>
+<style>
+:root{
+  --bg:#f6f0e2; --card:#fbf6ea; --ink:#2c2620; --sub:#8b8170; --line:#e2d6bd;
+  --accent:#a8392b; --accent-soft:#f0e2d2;
+  --luo:#2f5d96; --guest:#5b7a4b; --fs:18px;
+}
+html[data-theme="dark"]{
+  --bg:#23201c; --card:#2b2722; --ink:#e9e1d0; --sub:#a89e8b; --line:#41392f;
+  --accent:#e08a6f; --accent-soft:#3a2a23; --luo:#8aabd8; --guest:#9dbf8b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+  line-height:1.92;font-size:1rem;letter-spacing:.01em;transition:background .2s,color .2s}
+.bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:30}
+.bar > i{display:block;height:100%;width:0;background:var(--accent);transition:width .08s}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;background:color-mix(in srgb,var(--card) 90%,transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .t{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.top button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:9px;height:34px;min-width:34px;padding:0 9px;font-size:.88rem;cursor:pointer;font-family:inherit}
+.top button:active{transform:scale(.94)}
+.toc{position:fixed;inset:0 0 0 auto;width:min(82vw,360px);z-index:40;background:var(--card);
+  border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;
+  overflow-y:auto;padding:14px 0 30px;box-shadow:-8px 0 30px rgba(0,0,0,.16)}
+.toc.open{transform:none}
+.toc h3{margin:16px 18px 8px;font-size:.74rem;color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.toc h3:first-child{margin-top:4px}
+.toc a{display:block;padding:8px 18px;color:var(--ink);text-decoration:none;font-size:.92rem}
+.toc a:active{background:var(--accent-soft)}
+.mask{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s}
+.mask.open{opacity:1;pointer-events:auto}
+.wrap{max-width:700px;margin:0 auto;padding:0 22px 90px}
+
+/* —— Hero 开篇 —— */
+.hero{padding:46px 0 30px;margin-bottom:8px;border-bottom:2px solid var(--ink)}
+.cover{margin:0 0 22px}
+.cover img{width:100%;display:block;border-radius:11px;border:1px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.16)}
+.cover figcaption{font-size:.72rem;color:var(--sub);margin-top:8px;letter-spacing:.03em}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:2.9rem;line-height:1.08;font-weight:800;margin:16px 0 0;letter-spacing:-.01em}
+.hero .subt{display:block;font-size:1.2rem;font-weight:600;color:var(--ink);margin-top:16px;line-height:1.45}
+.hq{position:relative;margin:34px 0 0;padding:16px 0 0 2px;
+  font-size:1.34rem;line-height:1.62;font-style:italic;color:var(--accent);font-weight:600}
+.hq::before{content:"“";position:absolute;left:-10px;top:-22px;font-size:3.8rem;line-height:1;
+  color:var(--accent);opacity:.22;font-style:normal}
+.hero .meta{margin-top:28px;font-size:.86rem;color:var(--sub);letter-spacing:.04em}
+.hero .meta span{color:var(--accent);font-weight:700;margin:0 2px}
+
+/* —— 章节 —— */
+h2{font-size:1.28rem;margin:46px 0 18px;scroll-margin-top:60px;padding-top:26px;
+  border-top:1px solid var(--line);font-weight:800;display:flex;align-items:baseline;gap:13px}
+h2 .num{flex:none;font-size:1.7rem;color:var(--accent);font-weight:800;line-height:1}
+h2 .ht{flex:1}
+.para{margin:0 0 17px}
+.para strong{font-weight:700}
+.para.drop::first-letter{float:left;font-size:3.3rem;line-height:.82;font-weight:800;
+  color:var(--accent);margin:8px 12px 0 0}
+.point{margin:30px 0 8px;font-size:1.12rem;font-weight:700;color:var(--accent);
+  padding-left:16px;border-left:3px solid var(--accent);line-height:1.5}
+.point strong{font-weight:700}
+
+/* —— 分隔 / 对话 —— */
+.divider{text-align:center;margin:64px 0 26px;scroll-margin-top:60px}
+.divider span{display:inline-block;padding:0 16px;font-size:.84rem;font-weight:700;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;position:relative}
+.divider::before,.divider::after{content:"";display:block;height:1px;background:var(--line);
+  width:60px;margin:0 auto}
+.divider::before{margin-bottom:14px}.divider::after{margin-top:14px}
+.turn{margin:0 0 20px;padding:2px 0 2px 15px;border-left:3px solid var(--line)}
+.turn.luo{border-color:var(--luo)} .turn.guest{border-color:var(--guest)}
+.who{font-weight:700;font-size:.92rem;margin-bottom:3px}
+.turn.luo .who{color:var(--luo)} .turn.guest .who{color:var(--guest)}
+.say{font-size:1rem} .say strong{font-weight:700}
+.ad{color:var(--sub);font-size:.85rem;background:var(--accent-soft);
+  border-radius:10px;padding:10px 14px;margin:22px 0;text-align:center;font-style:italic}
+.end{color:var(--sub);font-size:.86rem;text-align:center;margin:44px 0 0;font-style:italic}
+.up{position:fixed;right:16px;bottom:18px;z-index:15;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:1.1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.16);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+.up.show{opacity:1;pointer-events:auto}
+</style></head>
+<body>
+<div class="bar"><i id="prog"></i></div>
+<header class="top">
+  <div class="t">仁科 · 一个相信一切都“长出来”的偶然主义者</div>
+  <button id="fdec">A-</button><button id="finc">A+</button>
+  <button id="theme">🌙</button><button id="menu">目录</button>
+</header>
+<div class="mask" id="mask"></div>
+<nav class="toc" id="toc"><h3>精读解析</h3><a href="#a1">一、他是谁</a><a href="#a2">二、他的生平：一条“没有规划、全靠长出来”的路</a><a href="#a3">三、他为什么被采访</a><a href="#a4">四、他代表哪一类人</a><a href="#a5">五、他的普通与不普通</a><a href="#a6">六、访谈里的“金矿”：几个反认知的洞察</a><h3>完整对话</h3><a href="#dialog">↓ 跳到完整对话</a><a href="#b1">一、开场金句（片头剪辑）</a><a href="#b2">二、名字的乌龙：许昌锄 → 人歌 → 人科 → 仁科</a><a href="#b3">三、海丰小镇与“顿悟自己帅”</a><a href="#b4">四、富二代到破产：父亲的卡拉OK、发廊与失败</a><a href="#b5">五、辍学、黑白两道与“六小福”</a><a href="#b6">六、买书买琴靠朋友：咸鱼、阿茂与二手吉他</a><a href="#b7">七、音乐启蒙：崔健、平克·弗洛伊德与“失败者美学”</a><a href="#b8">八、“X 先生”：错过所有时代的那个人</a><a href="#b9">九、十七岁闯广州：野鸡车与投奔阿茂</a><a href="#b10">十、发型被剪：阿茂“赢了一个正常人”</a><a href="#b11">十一、旅行的心情与“时光列车”</a><a href="#b12">十二、卖打口碟与书：哲学书占位、铁烟盒的羞耻</a><a href="#b13">十三、教吉他、情行与“感情还能当柴火”</a><a href="#b14">十四、原音书店与那个“X 商人”</a><a href="#b15">十五、五条人的诞生：从五把吉他到大舞台</a><a href="#b16">十六、塑料/土耳美学：长出来的，不是插上去的</a><a href="#b17">十七、狄伦精神：现场即兴 vs 还原经典</a><a href="#b18">十八、Live House 的简陋糗事</a><a href="#b19">十九、受众悖论：歌唱底层，听众是知识分子</a><a href="#b20">二十、与父亲的隔阂：退衣服那一次</a><a href="#b21">二十一、乐队的夏天：劝阿茂、逆反与“一起痛快”</a><a href="#b22">二十二、爆红之后：阿那亚被围堵、口罩帽子与“杀手理论”</a><a href="#b23">二十三、不敢听自己说话、想写流行歌</a><a href="#b24">二十四、综艺与跑通告：披荆斩棘两头没做好</a><a href="#b25">二十五、明烧与闷烧：十年之约是编的</a><a href="#b26">二十六、报价 3500：一个吊丝的天文数字</a><a href="#b27">二十七、见偶像不激动：除了爱情，什么都激动不起来</a><a href="#b28">二十八、新专辑《地球恋曲》与 AI</a><a href="#b29">二十九、收尾：一切都是偶然，感情留到下次</a></nav>
+<main class="wrap">
+  <section class="hero">
+    <figure class="cover"><img src="cover.jpg" alt="罗永浩 对话访谈封面" loading="lazy"><figcaption>封面来自 B 站 @罗永浩的十字路口</figcaption></figure>
+    <div class="eyebrow">PEOPLE · 罗永浩的十字路口</div>
+    <h1>仁科<span class="subt">一个相信一切都“长出来”的偶然主义者</span></h1>
+    <blockquote class="hq">好东西是长出来的，不是插上去的。</blockquote>
+    <div class="meta">罗永浩 <span>×</span> 仁科 · 全长 4 小时 38 分</div>
+  </section>
+  <h2 id="a1"><span class="num">一</span><span class="ht">他是谁</span></h2>
+<p class="para">仁科（本名许昌锄），1986 年生，广东海丰人。五条人乐队两位主唱之一（另一位是茂涛，即“阿茂”），手风琴手、词曲作者，同时也是一位小说作者。</p>
+<p class="para">一句话定位：<strong>他是把“贫穷、土、恶俗”炼成一套美学体系、又把“偶然”当成信仰的人</strong>——别的音乐人靠“设计”一个风格出道，他坚持风格必须“<strong>长出来</strong>”，哪怕从一坨牛粪上长出来，也比“插上去”的可贵。</p>
+<p class="para">他的整套世界观，可以浓缩成两个他自创的词：</p>
+<p class="para">- <strong>「X 先生」</strong>——一个假想的人，错过了任何时代、永远没排到投胎的队、在最关键时刻总差一点点，永远没机会来这世间走一趟。仁科用这个“最倒霉的人”来反衬自己的每一次幸运：那首差点被丢掉的《一模一样》、那张差点没发的专辑、那个差点没来的设计师……都曾在“变成 X 先生”的边缘。</p>
+<p class="para">- <strong>「长出来 vs 插上去」</strong>——美学、人生、答案，都应该是自然生长的，不是策划、架构、插上去的。</p>
+<p class="para">如果说何广智是“把窘迫炼成天赋”，那仁科更进一步：<strong>他把窘迫、土俗和偶然，一起炼成了一种可以反复自洽的浪漫主义。</strong></p>
+<h2 id="a2"><span class="num">二</span><span class="ht">他的生平：一条“没有规划、全靠长出来”的路</span></h2>
+<p class="para">仁科的履历，几乎是“反励志”的样本——没有一步是规划好的，全是“刚刚好”。</p>
+<p class="para">他生在海边小镇，小学四年级随家迁到海丰。父亲是个“富二代”，开过镇上最高级的卡拉OK厅、发廊、茶餐厅，但<strong>全部倒闭、负债累累</strong>——仁科自称“富三代”，剧本被父亲“一手改写得一塌糊涂”。他初中就辍学，在学校“黑白两道都混得很好”，组过一个叫“六小福”的小团伙；靠朋友（“咸鱼”、阿茂）借钱买二手吉他、二手书、打口唱片，听崔健、平克·弗洛伊德、The Doors，养出一身“失败者美学”的趣味。</p>
+<p class="para"><strong>17 岁，他揣着不到 250 块钱，坐一辆“野鸡车”（黑大巴）走了六个半小时的国道，闯进广州</strong>，投奔阿茂。第一晚就被同学拉去发廊剪短了头发，结果阿茂见到“一个正常人”眼神失落（“他以为赢了一个洋湖女儿，结果真人不行”）。此后他卖盗版书和打口碟（第一天就赚一百多）、教吉他、在酒吧驻唱、搞过一间各怀鬼胎的“原音书店”，在城中村里“以旅行的心情”过着没钱的日子。</p>
+<p class="para">到广州的<strong>第四年（约 2008 年）</strong>，他给阿茂的“四条人”加多一条，成了<strong>五条人</strong>。第一张专辑《县城记》就拿了《南方周末》年度致敬大奖，从此密集压轴——但很长时间里，喜欢他们的都是城市知识分子、文艺中产，而不是他们歌里唱的底层。<strong>2020 年，《乐队的夏天》让他们彻底破圈</strong>：那场决定命运的“即兴换歌”，他当时只想着“反正要淘汰，不如大家一起死得痛快”，结果“全国人民都痛快了”。</p>
+<p class="para">如今他从城中村的地下走到了万人体育场，写出了《阿珍爱上了阿强》《梦幻丽莎发廊》《地球仪》这些歌，把塑料袋做成了乐队 logo，新专辑《地球恋曲》也即将发行——而他坚持说，这一切“没有规划，都是自然而然长出来的”。</p>
+<h2 id="a3"><span class="num">三</span><span class="ht">他为什么被采访</span></h2>
+<p class="para">表面看，是新专辑《地球恋曲》将发、五条人正“红到尿血”的热度上。</p>
+<p class="para">但这期对谈的真正价值，是<strong>仁科第一次“尽量不表演地”讲自己</strong>。他开场就说：“我之前的采访里有一些东西是不够坦诚的，今天我做好了一切坦诚的准备。”他甚至坦白，自己本来计划“从头到尾给罗永浩虚构一个五条人的历史”，但“没忍住，还是真情流露了”——只在一个细节上编了一下，“从 60% 真诚到了 61%”。</p>
+<p class="para">罗永浩是他“很喜欢的一个人”，两人有大量共同的摇滚记忆（崔健、平克·弗洛伊德、罗杰·沃特斯），又都做过“被大众误读”的产品/作品。所以这不是一场猎奇访谈，而是<strong>一个浪漫主义的话痨，在一个他信任的人面前，努力把自己那套“偶然哲学”讲清楚</strong>——哪怕他自己也承认“今天可能说得并不清晰，很多问题我自己还没能力想清楚”。</p>
+<h2 id="a4"><span class="num">四</span><span class="ht">他代表哪一类人</span></h2>
+<p class="para">他代表的，是<strong>那种“在最不被看好的土壤里，靠一门手艺加一套独属的趣味，硬长出一片风景”的人</strong>——而且是其中最稀缺的一类：<strong>长成功了，还没被“成功”改造。</strong></p>
+<p class="para">往大了说，他代表了一种<strong>对“偶然”的诚实</strong>。这个时代到处教人“规划人生、打造人设、找准定位”，仁科偏偏反着来：他不相信被创造，相信生命是偶然、是奇迹；他不做市场定位，相信好东西是长出来的。这听起来像是一种“躺平”，其实是一种更高级的清醒——<strong>他知道自己今天的位置里，有巨大的运气成分，所以他既不傲慢，也不焦虑。</strong></p>
+<p class="para">这类人是今天大多数人该看的一个“反样本”：你我大概率被各种“成功学”和“人设”追着跑，而仁科证明了——<strong>不规划、不端着、把贫穷和土俗当素材而不是耻辱，一样能走到万人体育场，而且活得比谁都自洽。</strong></p>
+<h2 id="a5"><span class="num">五</span><span class="ht">他的普通与不普通</span></h2>
+<p class="point"><strong>先说普通——他普通得近乎“失败者”。</strong></p>
+<p class="para">辍学、混社会、卖盗版、被骗、住城中村、报价时不敢开口（憋了半天报“3500”，还觉得这是“吊丝能想象的天文数字”）；和父亲几十年隔着一层、唯一一次想走心还被一套“奇怪官方逻辑”挡回来；爆红后被粉丝围堵到“差点往海里游”，只能靠口罩帽子“隐入大众”；甚至<strong>不敢听自己说话的声音，怕像个傻子</strong>。他身上没有任何“天选之子”的滤镜。</p>
+<p class="point"><strong>再说不普通——他的不普通，恰恰长在这堆普通之上。</strong></p>
+<p class="para">一是<strong>他把每一段窘迫都“审美化”了</strong>。别人记忆里“土、恶俗、贫穷”的塑料袋、破拖鞋、梦幻丽莎发廊，他把它系统性地整合成一套“塑料/土耳美学”，让罗永浩这种亲历过那种贫穷的人，反而“产生了一种荒谬的、挺喜欢这套东西的感觉”。</p>
+<p class="para">二是<strong>他有一套自给自足的“心态游戏”</strong>。没钱旅行，他就用“旅行的心情”逛同一条街；想回到过去，他就用“时光列车”说服自己“此刻就是穿越回来的”；演砸了下面反应差，他就靠“至少要开心一个人——肯定保我自己”挺过去。</p>
+<p class="para">三是<strong>他能把“激动不起来”活成一种风格</strong>。见到崇拜的吉他手马克·里波就在一米开外，他只是“轻轻走过、回房间听他的 solo”；见偶像、见老崔都“开心但不激动”——他甚至去查出自己心率只有 60。问他到底什么能让他激动，他答：“<strong>除了爱情，什么都激动不起来。</strong>”</p>
+<p class="point"><strong>他的不普通在于：他没有战胜他的普通，而是与它彻底和解，并从中长出了一整套美学。</strong></p>
+<h2 id="a6"><span class="num">六</span><span class="ht">访谈里的“金矿”：几个反认知的洞察</span></h2>
+<p class="para">这是最该带走的部分。仁科的洞察不像企业家那样“可执行”，但每一条都在挑战你对“成功、规划、努力”的默认设定。</p>
+<p class="point"><strong>1.「长出来」比「插上去」可贵——风格不能设计，只能生长。</strong></p>
+<p class="para">他坚决反对“先做市场定位再创作”。塑料美学不是策划的，是他住城中村“自然碰到的空气”；平面设计师那句“好看是最不重要的，关键是你们先想干什么”是他的信条。<strong>可迁移：真正有生命力的东西（产品、审美、品牌），往往是从真实经验里长出来的，不是从定位报告里插上去的。</strong></p>
+<p class="point"><strong>2.「X 先生」：用“最倒霉的假想者”来确认自己的幸运。</strong></p>
+<p class="para">他反复设想一个错过一切、永远没排到队的“X 先生”，再发现自己的每一次成功都曾在“变成 X 先生”的边缘（那首差点被丢的歌、那个差点没来的设计师）。<strong>这是一种对抗傲慢的思维工具：你以为是实力的，很多是“没成为 X 先生”的运气。</strong></p>
+<p class="point"><strong>3.「失败者美学」要警惕，但“自己能获得满足”才是关键。</strong></p>
+<p class="para">他承认年轻时偏爱“怀才不遇、凄凉苦闷”的艺术家（练谱子专挑生平悲惨的练），但也清醒：“不要没苦硬吃”，苦本身不值得歌颂；<strong>真正重要的是“这个人自己喜欢就好、能获得某种满足就行”。</strong></p>
+<p class="point"><strong>4. 表演的从来不是你以为的那一面。</strong></p>
+<p class="para">全世界都觉得仁科是“明烧”（外放搞怪），这期他“呈现了闷烧的一面”（十年之约独自赴约的故事）——然后他揭穿：那个故事是编的，“<strong>闷烧才是表演的，我还是百分之百的明烧</strong>”。提醒你：一个人最“真实”的呈现，可能恰恰是他最精心的设计。</p>
+<p class="point"><strong>5. 满足观众 vs 忠于自己——他给了诚实的中间答案。</strong></p>
+<p class="para">他年轻时信奉“迪伦精神”（现场把经典全部即兴重排），但现在改了策略：大型专场就好好唱、满足歌迷。罗永浩补了关键一刀：“<strong>人家提前半年订三万人的场、带家人赶来，要的就是找回那个版本</strong>”——艺术家的“不重复自己”，有时是对买票观众的不体贴。</p>
+<p class="point"><strong>6. 对 AI：他比绝大多数艺术家都“悲观得坦然”。</strong></p>
+<p class="para">文艺界很少有人像他这样断言“AI 作曲百分之百会超过人类最好的音乐家”（“归根结底是算力和算法问题”）。但他不焦虑，因为他有更狠的观察——<strong>“人自己都会 AI 化”</strong>：有些音乐是“罐头”，有些人说话“究竟是他说出语言，还是语言通过他嘴巴说出来”。<strong>机器逼近人，不可怕；可怕的是人先把自己活成了机器。</strong></p>
+<p class="point"><strong>7. 生命是偶然，不是被创造——所以不必有“意义焦虑”。</strong></p>
+<p class="para">他绝对相信“生命是个奇迹、是偶然”，连地球“多长出几个仁科、几个企业家、几个破产的”都是偶然的安排。<strong>当你接受一切都是偶然，反而卸下了“我必须证明什么”的重担——这是他全程不焦虑的根。</strong></p>
+<p class="para"><strong>最后，回到那个贯穿全片的画面：</strong> 一个女同学捧着少年仁科的脸说“你好帅”，他“顿悟了”，从一个自认“黑人牙膏”的丑八怪，开始相信自己。访谈结尾，罗永浩说“你 60 大寿的时候我们摆一桌”，仁科答“特别圆满”。</p>
+<p class="para">他始终没给出多少“答案”——因为他根本不急着要答案。用他自己的话说：</p>
+<p class="para">这大概就是一个“偶然主义者”最舒服的活法：不规划、不端着、不强求意义，只等着答案像塑料袋上的太阳一样，自己长出来。</p>
+<p class="end">（解析完 · 原访谈全长 4 小时 38 分，逐字稿、分角色对话稿与校订记录见同一文件夹）</p>
+<div class="divider" id="dialog"><span>完整对话 · 全长 4 小时 38 分</span></div>
+<h2 class="dlg" id="b1"><span class="ht">开场金句（片头剪辑）</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我读中专的时候，班上一个女同学，突然间捧着我的脸——不好意思说出来——她说：“你长得好帅，你知不知道？真的长得好帅。”我一听，顿悟了，突然意识到他是对的，我相信他。</div></div>
+<h2 class="dlg" id="b2"><span class="ht">名字的乌龙：许昌锄 → 人歌 → 人科 → 仁科</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">欢迎大家收看罗永浩的十字路口。今天我们准备了很多问题，可能整体时间会比较长，你没问题吧？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我没问题。我觉得我做好了一切坦诚的准备——因为我之前的采访里，有一些东西是不够坦诚的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我们从仁科这位艺术家的青少年、童年时代追溯起。你的大名、原名是叫许昌锄，对吧？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">这么快就暴露出来了。这个不是早都讲过了吗？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你也不用难为情。因为我的名字叫罗永浩，但其实我是朝鲜族——我们起名字先起朝鲜语的名字，再找对应的汉字。我这个“浩”字，三点水的浩，在朝鲜族里发这个音的时候，大部分用“稿头”的“稿”。所以在我家乡，如果朝鲜语名字叫这个音，其实就是“罗永稿”。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">罗永稿。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是许昌锄（锄头），我是罗永稿（稿头），都是工具。只是我爸后来觉得土，去落户口选汉字的时候，没用常见的“稿”，用了“浩”字。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我的名字也是个乌龙。后面我读书的时候，我阿姨给我算了一下，说我的名字不能这样用，要取一个笔画很少的——可能为了以后签名用。所以改成“人歌”，歌唱的歌。结果后来去报名的时候，那个老师听错了，海丰人觉得“人歌”跟“人科”很接近，就写成了人科。我的小学、初中毕业证都是“人科”。后来第二次人口普查，又把名字搞反了，办身份证的时候就成了……反正绕了一大圈，到今天身份证上的名字还是没改掉。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你刚才说要真诚，但其实想回避这个问题，对不对？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">没有。</div></div>
+<h2 class="dlg" id="b3"><span class="ht">海丰小镇与“顿悟自己帅”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你肯定是个早慧的孩子。在小地方长大的人——我问过很多人，包括我自己——很容易到某个阶段，意识到自己跟别的小孩不太一样。你有这个感觉吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我去海丰应该是小学四年级。八岁之前我在海边一个比海丰更小的小镇，形状很像鱼的尾巴，像个半岛，周围啥都没有，就是海边。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个时候你有没有那种感觉，好像同学都……天下无敌？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">其实这个不用羞于承认。因为我小时候喜欢画画、会画画，还会做很多手工，拿纸能剪出很漂亮的人，做很多模型。我做这些的时候，很多大人会表扬我，父母、阿姨那些。所以后面读书的时候，我觉得“许昌锄”这个名字可能配不上我了——就像你那个“稿头”，也要改。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你是从什么时候意识到自己长得很帅的？还有，你为什么把这旧时代的发型打理得一丝不苟，是跟家里开发廊有关系吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">不是。这是一个顿悟的过程。我之前都觉得自己是丑八怪，又黑又丑，外号叫“黑人牙膏”——我一听到黑人牙膏就很生气。直到读中专的时候，班上一个女同学捧着我的脸，跟我说你长得好帅，你知不知道。在那之前 nobody 跟我说过。我一听，顿悟了——突然意识到他是对的。虽然不是标准意义上的帅哥，但在某种程度上……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">帅是分很多类型的。你去东南亚、去印度尼西亚，在哪都帅。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对。我可能长着长着，开始长出棱角来，之前就是个肉乎乎的婴儿肥、一个黑洞。他说我帅以后，我就开始打扮自己。之前也打扮，但那种不是往帅方面走，是穿得破破烂烂、踩个破单车，屌屌的。到了初中有点反骨，已经藏不住了。我会特意戴个草帽、骑个破单车，故意迟到，全校在升旗，我就从他们身边走过去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">显眼包。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">然后大概半年后又来一个——这又是个非常好玩的话题。我在贝雕厂工作（画贝壳，其实也是蓝领），有个负责厨房的女的，有一次一群人骑单车去县城玩，她故意要坐我的车、搂着我。她说的话更多是一种鼓励：你还可以更帅。因为当时我即将去参加一个百事可乐歌唱大赛，海选一千多人。得到他的鼓励之后，我拿起吉他唱一首自己写的歌，结果进入了复赛，八十多个人。被认可之后，气场两米八，状态就有帮助。</div></div>
+<h2 class="dlg" id="b4"><span class="ht">富二代到破产：父亲的卡拉OK、发廊与失败</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你辍学没有来自家庭的压力吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我自己占一半，家庭占一半。他们其实顾自己的生活已经顾不过来——因为他们……怎么说，比较破碎。我爸本来是有点钱的，我也算个小富二代，你看我这个造型。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">看得出来，小地方特别横的富二代。那你是富三代？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对，富三代。但后面我爸一手把剧本改写了，改得一塌糊涂——在我小学四年级的时候，破产了，负债累累。他开过卡拉OK、开发廊、开茶餐厅，好像是倒闭一个开一个，同时开的是发廊跟卡拉OK厅，同时倒闭。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你爸性格也像你这样好玩吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">他比较认真，但有时候挺好玩的。他讲话会故意说一些……比如别人说起一个人，他说“你可以去找他对峙，他也还没死”——会用这样开玩笑的词。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你很小就在同学当中是个很好玩的、现在网上叫“逗逼”的那种？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">打小就这样。我跟我妈、我阿姨他们讲话，他们很喜欢听我讲。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你家那卡拉OK厅是什么样的？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">可以说是小镇最高级的，在电影院旁边，四楼，有大厅有包间，还有镭射大碟（LD），现在年轻人都没见过。我经常放学就去玩，还会偷厨房的东西给电影院门口那些小孩吃。维持了大半年还是一年就倒闭了。一楼的发廊也收购了，我在那里洗过头——所以我那种乡土发廊情结跟这有很大关系。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我小时候开过羊肉串店，也倒闭了。你那个是什么问题？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">严格说不算倒闭。每天穿五百串，卖掉四百来串，还剩一百串，微微赚一点。但一到十一二点，当地朋友就骑单车过来“看看”，那时候吃肉还比较奢侈，我又穷大方，就拿出来烤给他们吃。搞了四十多天，我妈帮我理了一下账（她以前学财务的），说你每天剩的那一百串如果拿回来，咱们能挣一点；要是天天请他们吃掉，做了四十多天基本是打平的，还没算前期投入。我也累了，就别干了。</div></div>
+<h2 class="dlg" id="b5"><span class="ht">辍学、黑白两道与“六小福”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你小时候调皮捣蛋，被父母老师搞得受不了、甚至要打你之类的有吗？因为我看阿茂说，有时候被你逼急了想打你。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">有那个动作了。但我其实还好，没有阿茂那么调皮捣蛋。我有另外一种方式——我可能不太合作，但不会跟他们硬碰硬作对。你让我往东，我偏不往西，我往南，我有我自己的方式方法，而且我还很喜欢这种方式。所以能做到不听话，但没被收拾得很惨。而且我在学校黑白两道混得都很好，跟帮长是好朋友，跟那些小伙伴也是好朋友。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你专门挑学霸和恶霸交朋友？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">差不多。周末我跟那帮恶霸还组成一个团队叫“六小福”，六个人经常去游街。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们那个年代的校园暴力里，你是欺负人的，还是被欺负的？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我是没有欺负别人，也没有被人欺负。因为有一次隔壁帮的恶霸要找我单挑，在门口等。我很明显打不过别人，然后我那个恶霸朋友就说“你不要跟他打，我替你跟他打”，真的就去打了，那天把对方打到屁股流血。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你当时想，我这个恶霸还是找对人了。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看到很多人长大以后有个很奇怪的事——欺负过人的，误以为自己没有欺负过人。他常年霸凌一个同学，但在他小时候的感受里，觉得我只是逗他玩；成年后还跟被欺负的很热情，觉得是发小老兄弟，但被欺负的对他只有怨念。你确定你没有这种情况吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">至少没动手打过人。不用动手——比如嘴上的暴力，或者联合起来孤立一个孩子，这都算霸凌。我觉得我反而起了一个缓冲作用。当时有个好学生特别拽、很聪明，老师问问题他第一个回答还答得漂亮，那帮恶霸讨厌他显摆，想打他。那天我是过去了，但没动手，后面还跟另一个人说算了；但他们还是打了，没打到他。</div></div>
+<h2 class="dlg" id="b6"><span class="ht">买书买琴靠朋友：咸鱼、阿茂与二手吉他</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你读了很多书，所以在节目里很魂不吝、嘻嘻哈哈说自己是知识分子，大家觉得很好笑——但我们知道你是读过很多书的。你小时候买书，家里支持吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">家里不干预。我自己身上有时候有一块五毛的零花钱。我的记忆其实有点不清楚——比如我的第一把吉他，初中买的二手货，他开价五十，我花四十块买的，我一直记着是我付的钱。后面有一次回海丰，那个同学跟我说：其实那四十块是我帮你付的。我就有点混乱了。还有一次我摔跤把门牙摔了，去看牙医要三百五十块，巨款，跟同学借的，后来还了没还了多少我也不记得。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你怎么会不记得呢？我要像你这样就好了，那真还钱就容易了。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">买书我很多时候买二手书，一块钱可以买两本故事会。我会去书店先看，放学先看一个小时，差不多了再花钱买一本。第一本真正意义上的书，余华的《活着》，是朋友借给我的。唱片呢，是借我钱补牙那个朋友，外号叫“咸鱼”——我看中了唱片，跟他说这张很值得买（比如二手玫瑰、铁玉兰、紫约），他就去买，买回去我们一起听。报纸也是他买《南方都市报》，每天看完贴在他家墙上。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以也是靠朋友解决的。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">很大程度上是。</div></div>
+<h2 class="dlg" id="b7"><span class="ht">音乐启蒙：崔健、平克·弗洛伊德与“失败者美学”</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">在海丰，其实是我以一己之力带领了全帮——大概三分之一、40% 的人买了吉他。我那时候最大的两个爱好，一是逛二手书店，另一个就逛琴行。最初给我造成震撼的，是小学六年级那个暑假：我从海丰回去的时候，我舅舅有一张 VCD 写着“崔健”，我不知道崔健，就放——一听觉得这个人唱歌跟我之前听的港台音乐完全不一样。他是北京话，每个发音都很有颗粒感，硬勒出来，我都听不清他唱啥，但给我留下很奇怪的震撼。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">跟你那天那个女孩捧着你头说“你可以搞摇滚了，this is rock and roll”差不多。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">你这样一说我才找到了某种相识性，你不说我不一定想得到。去广州之前那一年半，我听了非常多东西。第一次听平克·弗洛伊德，是他们在庞贝古城那个现场，第一首歌我就惊呆了——每一句的尾音，按流行歌应该往另一个方向走，他全都往同一个方向管，跟你心里的听觉系统是有微妙偏差的，不符合预期，但又特别好听。还看了《迷墙》（阿兰·帕克导演，男主是爱尔兰摇滚歌手鲍勃·盖尔多夫），还有 The Doors、吉姆·莫里森的纪录片。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们那么小文艺生活就很丰富了。我到初中时代还基本没什么，到十八九二十才接触到一些。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">但我非要回溯的话——如果没有小学四年级我爸由于他特别的“才华”经营破产，就没有搬去海丰；不搬去海丰，接触这些东西就少了，甚至吉他都可能接触不到。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你听音乐有个倾向——文艺青年常有的——喜欢那种跟主流社会保持隔阂、很有才但怀才不遇、很凄凉很苦闷的人。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">一半有这个因素。我买古典吉他的曲谱，每首曲子前面有作者介绍，生平很悲惨的我就要练一下，生活很富裕的我就跳过——有一种“失败者美学”。你看海明威的采访，人家问艺术家早年要什么，他说“一个悲惨的童年”，可能随口说，但有他道理。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但不要没苦硬吃。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我知道。其实我也不认为我那个是苦——我们 80 年代后了，再怎么穷，三块钱的炒饭可以吃两顿，非常好吃。我最近还跟一个年轻同事说，珍惜现在穷的日子，是很有趣的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那不一定。如果人家就想踏实过日子，穷的苦的有什么好处呢？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">你这样说也是。但我并没有说非要这样来艺术创作。</div></div>
+<h2 class="dlg" id="b8"><span class="ht">“X 先生”：错过所有时代的那个人</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">到广州后，阿茂踩自行车去云南，就我一个人。我会听一些很压抑的氛围音乐（比如 ECM 出的、实验爵士乐，一首歌四五十分钟），选天快黑的时候听，一个人沾泪。它很忧伤很压抑，但恰恰让我去思考，我需要这种时刻。</div></div>
+<p class="para">我对现实没有太多功利性的要求。比如我们做音乐，我也没说一定要出专辑。我当时在想：也许有些人一辈子出不了专辑，我可能就是那个人。我会想很多有趣的东西——比如有这么一个人叫“X 先生”，他错过了任何时代。罗永浩你在唐朝的时候没出车，这是废话；十万年前、清朝你也没出车。但 X 先生比我们惨一点：假定来到世界之前有那么一个状态，他就排着队，一直没排到，地球就毁灭了。而且他跟别人不一样，他在很关键的时候就差一点点，干不成，永远没机会来这个世间走一趟。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你把这个应用到——有这么一个人，他一辈子出不了专辑，搞不好是你。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对。所以如果音乐上没有成就、没有专辑，也是正常的。我根本没想成不成就。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没想过也可能成为一个摇滚巨星？那么不自信吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">真的没想过。我不是靠音乐。</div></div>
+<h2 class="dlg" id="b9"><span class="ht">十七岁闯广州：野鸡车与投奔阿茂</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你离开家乡是十七岁，经父母同意走的，还是自己跑掉的？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我先是在贝雕厂工作了半年。过年的时候，工厂要把我升为部门的头，只要我过去就有开工红包，一两百块。同事还劝我“你拿了红包再走”，但我不是这样的人——既然没心在那做，红包我也不拿，就没去了。</div></div>
+<p class="para">之前我有很多同学从广州回来，带新唱片、好东西，很向往。我跟我妈说要去找一帮人（他们经常在隧道唱歌、卖打口唱片）。其实他们反对，我妈就托了一个舅舅。结果两个舅舅在广州，一个没工作给我，另一个修手机、卖手机，让我去档口工作，但没岗位，让我等。我等了快一个月，不能再等了——我的人生不能等下去。我就走了。</p>
+<p class="para">走的时候我把一套油画颜料二手卖给朋友一百多块，加上自己存款两百出头，不到两百五。买车票要耗几十块，我就联系一个同学的哥哥开野鸡车（不正规的大巴、黑车），免费让我搭。早上六点在列士陵园门口上车，走国道、停很多站，开了六个半小时——路上还碰到小偷打架，休息站搞“三仙归洞”骗钱。就这么到了广州。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你跑的时候给他们留了纸条吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">没有，我就跟他们说了。其实他们是想让我等舅舅安排好一切，但我已经等了一个多月。</div></div>
+<h2 class="dlg" id="b10"><span class="ht">发型被剪：阿茂“赢了一个正常人”</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">当晚我先去一个读中专的同学家住。那个同学一年没见我，本来同学见面很感动，结果他在校门口一看到我，脸都绿了——把我拉到旁边的发廊，把我那么长的头发剪短，剪完才让我进他校门。所以阿茂第二天看到的是一个很普通的形象。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">阿茂自己不也是短发吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">他那个时候要么长发、要么光头，总之不正常——搞艺术不能正常。结果第二天他看到一个很正常的我，眼神很失落。他以为赢了一个洋湖女儿，结果一看，真人不行。当天晚上阿茂跟我促膝长谈，他用了一个很文雅的词（我都忘了），大意是说：他以为我是去投奔他、加入他的，但他不缺人——他走鬼又不是公司。然后说这个月免费送我住，下个月你自己想办法。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还是很仗义的。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对。如果我当时是长发，绝对至少能让我住三个月到半年。阿茂以发取人——当年的人多多少少都这样。他比我大六岁，但官方老说大五岁。我十七岁，他二十五。</div></div>
+<h2 class="dlg" id="b11"><span class="ht">旅行的心情与“时光列车”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看你的书和访谈，感觉你到哪儿都能比较放松，包括贫穷困难的时候，也能活出一种旅游式的心态。这是与生俱来的能力，还是后来调整出来的？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">今天真的说出来。这也是我最早在广州的时候——阿茂他们都去旅行了，我没钱只能待这里。我在北京路看到那些白人旅行团在逛，我就想：他逛的跟我是同一条街，为什么他是旅行、我就不是？为什么人家那么愉快？我也愉快——我就把这叫“旅行的心情”。所以我后来在石牌东那条路，就经常以旅行的心情去走；甚至特意走一些平时没走过的路，换成游客的心态去看，或者换成“领导视察”的心情，到那儿就觉得“这个搞得不太好”。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你的问题其实你已经回答了。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我再说一个：时光列车。有些人会聊“如果你能回到那个时间，你会怎么样”，这个非常经典。我在想——比如一个人三十岁想回到十七岁，没毛病。但如果你五十多岁想回到三十九岁，你是不可能的。但我可能：我现在三十九，假设我已经像滚石主唱那个年龄、八十多了，我想回到三十九怎么办？我先回来——此刻我已经回来，正在跟你聊天。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">听起来像是一个思维游戏。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对。我经常这样想，而且逛街的时候经常想，很有意思、很愉快。所以我那时候待在那里这样想，我就帅了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">感觉你应该学物理去。</div></div>
+<h2 class="dlg" id="b12"><span class="ht">卖打口碟与书：哲学书占位、铁烟盒的羞耻</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">没过几天，阿茂推荐我卖盗版碟和书。我第一天就挣了一百多块，太好挣了——我在贝雕厂一个月才三百五。但第二天我又被骗了一百块，有那种骗子。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你摆个摊、拿个纸皮箱放，人家来翻，你有什么话术引导吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">基本没有。当时像《潜规则》《血酬定律》《中国农民调查》这些听起来不像流行的，其实当时很流行。但我跟别人不一样，我保留了一点点“滞留地”——我会拿一套六本的哲学（封面还有一杯咖啡），里面有弗洛伊德、叔本华、笛卡尔、尼采，就放在那里占用纸皮箱的一个区域。买的人很少，但我总得放着——别人全是畅销书，我这感觉是个书店似的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你为什么觉得你有销售天分？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">可能是过度自信，我也不知道为什么，运气挺好的。后面有个朋友介绍我卖“铁样和”（铁烟盒），给我一堆，我卖了两天觉得不对劲——卖书好歹是体面人做的事，卖铁烟盒感觉更丢人。卖盗版书跟打口碟，算是个儒商；卖铁烟盒就是个商人了，当时对“商人”有点抵触。后面阿茂去旅游，我帮他卖打口碟，他供应链上下游都弄好了，我等于变成一个打工的。有个澳大利亚人跟我买了一千多块，我一分钱都没给阿茂分（按理我要拿他五百），他后边还很愧疚——估计也因为这个原因，他就同意带我一起做了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你偷偷干过什么对不起他的事吗？这样就可以抹平了。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我听也是听他的碟嘛，没有。</div></div>
+<h2 class="dlg" id="b13"><span class="ht">教吉他、情行与“感情还能当柴火”</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">到亚运会前后街头查得越来越严，摆不了摊了。我后面去一个琴行当店员兼吉他老师——因为我弹吉他有一段 solo 弹得非常好，那个 solo 一弹出来绝对把所有人镇住。老板问我学历，略微尴尬，初中毕业。他很理解，帮我写了个“某学校”，但我没让他伪造学历，我直接告诉他了。我在那干了两个月。</div></div>
+<p class="para">后来突然接到一个陌生电话——也是在这个琴行工作、接替我的那个人，我们没见过面。他说工厂的人发现他很怪，跟之前一个人（就是我）很像：都是在琴行坐着坐着突然出来骂一声、喊一声就不干了。还有，别人问他“感情（琴）除了用来弹还可以用来什么”，他突然很火，说“还可以把它劈了当柴火煮饭”；我比较文雅，我说“你还可以把它当桌子，旁边有个麦当劳，学习作业、画画，甚至睡在上面”。我们俩发病的方式很像。后来他走投无路，就住到我那里了。</p>
+<h2 class="dlg" id="b14"><span class="ht">原音书店与那个“X 商人”</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">街头活不下去了，我就跟阿茂提了个 idea：广州大学城建好了，旁边有个村，离学校走几步就到。我们找一栋房子，又可以住、又可以卖打口碟。但我身上一分钱都没有，只有 idea。阿茂可以，但他也不想出钱，他想出唱片（他的资源就是这个）。后面我联合了音乐天堂那个主编，他又拉了一个朋友出钱——这个事就复杂了，突然多了一个商人，四个股东，总共才六千块钱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们每个人都不想出钱，还嫌弃多了个商人。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">那是年轻时候才能那么心安理得的王八蛋。我不是不想出，我没有这个钱，有的话马上出。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你希望那个商人出了六千块以后暴毙，而且没有子女，希望他是一个 X 商人——从另一个宇宙过来，出了六千块就回去了。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对。后面就搞了个唱片店（挂了另一个股东的厂牌）。腰乐队那张专辑当时就是在我们“原音唱片”发行的，周云蓬来搞过一场“不插电”演出——结果我们连音箱都没有，是真正的不插电，赤裸裸的肉嗓加吉他，周云蓬以为我们是骗子，但歌迷都来了，只好唱了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个书店维持了多久？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">这会牵扯到一个更悲伤的故事，跟这个 X 商人有关系。他对文艺也有一定追求，但此情怀非彼情怀——他的是大理、丽江、远方那种。他介入经营，就发生矛盾了。有一次他喝醉了，半夜拿棍子敲门来闹，我逃到另一个艺术家家里。后面酒醒大家摊牌、分家产、解决掉，他就撤资走了。我们等于欠了他两千多，阿茂又拿 CD 那些“非金钱资产”去抵。</div></div>
+<p class="para">悲伤在哪里？这个 X 商人后来死了——他有一次喝多了去朋友家睡觉，醒不来了，好像是呕吐窒息。他有老婆小孩，结果那边家人用了某种方式让他老婆签了合同把母女赶出去。我们所有朋友凑钱（有五百出五百，有一千出一千）帮他们安顿，后来这对母女去了大理还是丽江。这个 X 商人的故事，会出现在我的一篇通俗小说里。</p>
+<h2 class="dlg" id="b15"><span class="ht">五条人的诞生：从五把吉他到大舞台</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">说回组乐队，这是你到广州谋生后的第四年（约 2008 年），是谁先出的主意？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">阿茂本来就有个乐队叫“四条人”，我过去加多一条，自然就是“五条人”了。但这五条人其实是个松散的乐队，没一起演出过。真正一起，是周云蓬来书店演出时我们给他当嘉宾暖场——我拉手风琴、阿茂弹吉他，把以前的歌改一改，开个场。开完场之后，周云蓬的经纪人听到了，觉得很好，要出我们的专辑。</div></div>
+<p class="para">我在那之前已经跟两个人做过专辑（一张说唱、一张叫《撞机》的个人专辑，被制作人按“莱昂纳德·科恩”的路子录“死”了，连呼吸声都剪掉），但我一直没很在意。这一次有一种“我终于出专辑了”的感觉——从一开始都没有过，我不知道怎么形容那个心情，但写这些歌、做这些歌真开心。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们第一张专辑整体很精良，得了奖之后还发生了一些奇怪的事？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">第一张就得了《南方周末》的年度致敬大奖。得了之后密集邀请就来了，直接压轴。去雪山音乐节，他们以为我们是五个人，给我们安排了五个房间、大舞台、倒二压轴。问题是我刚刚就两个人，没鼓、什么都没有，演了四十分钟，没被哄下去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还挺凶险的——两个人，鼓也没有、贝斯也没有，又唱谁也听不懂的海丰话。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">只有一首是普通话，其他全是海丰话。我当时没想去撑住它，因为不可能撑住；就觉得玩一下，很认真地演。有种悲壮，要上战场、必死无疑，但战斗到最后，两个战士。后面那个大乐队整个上去，现场一下就饱满了，我们是坍塌的——但实际上并没有搞砸，歌至少是演了。</div></div>
+<h2 class="dlg" id="b16"><span class="ht">塑料/土耳美学：长出来的，不是插上去的</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们后来那套“土耳美学”——破拖鞋、塑料袋、恶俗发廊、郭富城发型——是有意识地这么做的，还是觉得好玩就弄上去了？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">都是自然做的，绝对没有市场定位。我接触到的空气里就是塑料的——我住城中村，走来走去很多塑料水桶、各种颜色挺好看；塑料袋无处不在，打包粥、打包饭、打包可乐，会产生某种感情。我也受当代艺术家李一凡的影响——他有装置作品用了很多各种颜色的塑料袋，还拍过一部关于“杀马特”（音译自 smart）发型文化的纪录片《杀马特我爱你》。而且确实有一个“梦幻丽莎发廊”——其实就是“蒙娜丽莎”加点没文化、比较土的想象，想取个洋气名字。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我长大的时候，这些破拖鞋、破塑料袋、恶俗发廊，是我百分之百经历过的，记忆里就是“土、恶俗”，伴随着贫穷。但你把它系统性地整合到唱片、内容、视觉符号、周边 T 恤里，就突然成了一个小的美学体系，让我产生了一种荒谬的、挺喜欢这套东西的感觉。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">美学很多是后边总结出来的，它产生的时候是自然而然的。你看希腊那些大柱子，当年很多是有颜色的，最后变成雪白，是几百年被风吹日晒掉光的——本来是事物“不好的状态”，但看得多了，大家感觉到另一种美感。所以我从来不刻意。比如我们找平面设计师，他说“好看是最不重要的，我们怎么做都能好看，关键是你们先想干什么”。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">长出来跟插上去，肉眼可见。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">对。哪怕从一坨牛粪上长出来，它也是长出来的，更可贵——歪瓜裂枣也是长出来。就像你说王朔那个《动物凶猛》，他随意发出去，却造就了姜文一部很惊人的电影《阳光灿烂的日子》。那个中篇本来可能成为一本巨著，最后以一个分量不够的中篇出去了；但成就了那部电影，受众更大、打动了全世界——你不知道哪个是更好的结果。它的命运就不是长成一本小说巨著，而是成为一部电影。</div></div>
+<h2 class="dlg" id="b17"><span class="ht">狄伦精神：现场即兴 vs 还原经典</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我听了非常多鲍勃·迪伦，包括同一首歌不同版本的现场、录音录了 14 遍我也都听。我总结了一个东西叫“迪伦精神”，两层意思：一是表演上——这首歌原曲我这么写，但现场我想怎么唱怎么唱，旋律都改，故意改一点点（肯定在调里）；二是创作上——我不去策划、不去架构，让自己舒服、让它“长出来”，完全凭感觉。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">如果有一些歌红了成了经典，粉丝来看演唱会，他们期待的是“还原唱片那个版本”。这时候艺术家有两种：一种基本原样唱满足他们，一种觉得不想重复自己，每次把老歌全部重排。你是哪一种？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">按迪伦精神是后面那种，但我没太彻底——毕竟我们乐队两个主唱、两个老板，意见经常不一样。最近阿茂都跟我说不能再这样搞了，因为我们现在音乐节老是压轴，大家有期待。所以我基本改了策略，把歌好好唱。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我是觉得，如果是专场或大型活动，更好的选择是满足他们——你卖门票，人家提前六个月订三万人的体育场、带上家人朋友赶过去，要的就是找回那个东西。你看滚石今天唱 60 年代的编曲基本不变，我每次听到都特别感激，这钱多少都值。但如果他抽风把经典演成全新的，我可能听着也好，但这不是我要得到的。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">但我从来没从观众层面去想这个问题，因为我不是自己的观众。我说我的感受，没办法替大众说话。但我看你们大型演唱会的录像，你基本还是满足了他们的——还是有良心的。</div></div>
+<h2 class="dlg" id="b18"><span class="ht">Live House 的简陋糗事</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">那时候的 Live House 跟现在不是一个故事。现在国际标准、设备一流；我们那时候每一场调音能不能调出来都是未知数。很多荒唐事：去巡演碰到场地什么都没有、没调音师，老板很热情请我们吃饭，但只有热情。后面就是阿茂在那唱、我去调，我唱、阿茂调——其实我们根本不会调，但 PA 和 Monitor 还是一个通道：观众要听得大声，我们耳朵就聋了；我们要听得舒服，观众就不过瘾。</div></div>
+<p class="para">还有一次在深圳一个酒吧，舞台居然是钢管舞舞台，中间立着钢管。我唱着唱着发现声音坍塌，搞了半天以为音箱烧了，结束后才发现——有个客人把激动音箱的插头拔了，给自己手机充电，充满了。还有在贵州一个 Live House，灯光过了三首歌都不晃，我在台上一直走神思考“为什么还不晃”，后面才知道那个酒吧只有一个人，调音、打扫、调灯光、检票全是他。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我年轻在北京老去看现场，条件多恶劣的都去过。棉花胡同那个江湖酒吧——满屋子男女老少都在抽烟，浓度高到不用放干冰就全是“干冰”效果，看完一个半小时的演出，肺要缓一个礼拜以上，但就那样还老去，因为氛围最好。</div></div>
+<h2 class="dlg" id="b19"><span class="ht">受众悖论：歌唱底层，听众是知识分子</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这个专辑唱的是特别市井、平民的东西，但一开始喜欢你们、关注你们的，其实都不是跟你们生活相关的人，都是城市精英、知识分子、文艺中产。这个你们当时怎么想，还是完全不去管？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">真的没去管。但举两个例子。一次在南京演出，散场后我鼓手看到剩下一个人，挑着两袋麻袋（电饭煲都有）和一个水桶出去，帮他打车，才发现他是来南京打工的，喜欢五条人一直听，刚好要离开南京回老家，东西都收拾好了，看完直接去火车站待一夜坐第二天的火车。那一刻是非常具体的。</div></div>
+<p class="para">另一个：贝斯手巡演时去发廊洗头（他对自己形象要求挺高），发廊妹跟他聊起来，问他有没有听过一首歌叫《梦幻丽莎发廊》——但我这个贝斯手自己没承认是这个乐队的。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">贝斯手永远都是“X”一样的存在。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">哈，关于贝斯还有个不重要的故事：某个乐队（不说哪个）贝斯手没来，主唱就叫他女朋友上台，根本不会弹，主唱说“你拿着、跟着律动、更多时候背对观众省着穿帮就行”，结果演了一场很精彩、没穿帮。我们乐队出到第三张专辑都没有贝斯——但我木吉他和手风琴的低音控制得很好，两个人分担了 bass 的角色。</div></div>
+<h2 class="dlg" id="b20"><span class="ht">与父亲的隔阂：退衣服那一次</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你父亲近况好一些吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">一直不太好。他很高傲，有他自己一套非常不接地的世界观。有一次我回去说“我们来聊聊小时候的事”，我妈聊得很好，我爸一直说“聊这干嘛，坏的不能说，要聊就聊一些好的、建设性的”——他用一套类似官方、又不是真官方的奇怪逻辑，很轴、很让人不舒服。我说算了，喝茶吧，就走开了。那是我唯一一次想跟他走心。</div></div>
+<p class="para">还有一次：他们对我有愧疚，觉得我聪明却没送我读大学。有一回我回去创得脏兮兮的（摇滚那套，长岁月吹出来的美学），他突然给我买了一套衣服——邦尼路还是佐丹奴那种小镇连锁。我一看，第一句话问“在哪里买的，能不能退，有没有小票”。然后我跟他从家里走回店里，一路跟他说“以后不要再给我买衣服了”。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他那么不会表达情义的人，跟你表达一次，你还给他退了？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我处理得很温和，跟他解释“这个好，但我不会穿”，最后是去他店里换了一条好一点的。回来他说“有内疚”。这其实挺通常的亚洲父子关系——他认为我会怨这个，但我根本没有，至今没有，我没讨厌过他，只是跟他没法沟通。我跟我妈沟通一点问题都没有，因为我妈“讲人话”，我爸有时候不是不讲人话，是跟你不是一套话语体系。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">亚洲父子之间这种是常态，我们不能因为美国电影看多了，觉得父子就应该怎么样。</div></div>
+<h2 class="dlg" id="b21"><span class="ht">乐队的夏天：劝阿茂、逆反与“一起痛快”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">去参加《乐队的夏天》是马东他们团队发的邀请？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">之前我们拒绝了很多电视邀约，阿茂也不想上。到了疫情，我处于另一种状态，就想离开一下这个地方。阿茂依然不参加，我打了两个小时电话劝他，跟他说：其实我不是要去干嘛，我只想离开这个地方，给不给面子？哥们之间的情感讹诈。隔了几个小时他回我“好”——情感讹诈成功。他给面子的时候，不知道命运的齿轮已经转动起来了。</div></div>
+<p class="para">后面录的时候我处于一种逆反心态：阿茂你不想参加，难道我就……所以我说话已经冲着“要聊崩”去冲，说得非常狂，有些是故意挑衅。比如他问我们五件重要的事情，我说：乐队第一件重要的事，出了第一张专辑；第二件，出了第二张；第三件，出了第三张……一个一个说，他们都僵在那里。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你那个吓唬闹的，也跟逆反一脉相承？比如人家灯光都设计好了，你临时换歌。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">那不是故意的。我们对每个地方都有一种判断——“长出来”的感觉，我认为那一下就应该唱这首。那天我们是倒数第二个，已经录了十几个小时，观众都很无聊，大家都很累。我想：我只是来透气的，肯定淘汰；我如果演那首“安全”的演不好也被淘汰，回去还要跟乐队一起搞音乐；不如选我喜欢的这首，大家一起死得痛快。没想到——全国人民都痛快了。一演完，鼓手、贝斯手、吉他手、阿茂都很开心，状态都对了。</div></div>
+<h2 class="dlg" id="b22"><span class="ht">爆红之后：阿那亚被围堵、口罩帽子与“杀手理论”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">节目播出后你们完全走进公众视野。你是通过哪些事意识到自己成了大众明星？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">那次阿那亚演出，张晓舟搞的，海边几千人坐满，卖了几千张票。演完有个 after party，张晓舟叫我过去打碟。当时刘惜君的经纪人（他见过大阵仗）一看我“就这样过去吗，没有保镖？”就跟我过去，还打电话给张晓舟说“好像不太行”。结果到海滩上，我被四五十个人追着，差点被粉丝撕裂，差点往海的深处游过去，躲到海边装置后面。很多人送花送礼物，还有人跟我讲英文“connecting”。最后刘惜君的经纪人把我躲到集装箱里，引开人群再带走。那一刻我就知道——歌红了。这下我理解张国荣的烦恼、刘德华的忧伤、郭富城的困惑了，我就是四大天王的合体了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们这些娇滴滴的男明星，差点被一群疯狂女粉丝撕裂。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">想起来还有点后怕。后面我就开始戴帽子、口罩——光戴墨镜不够，因为我被公众熟知的形象就是戴墨镜的，墨镜没保护作用了。我尽量戴普通的蓝色口罩，不戴明星那种黑口罩。这跟我的“杀手理论”很像：你看阿兰·德龙演《独行杀手》很酷，但现在的杀手应该是非常正常、没有存在感的，人群中一扫就发现一个黑口罩，完了。所以我越普通越好，直接“隐入大众”。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我当时是“老罗语录”传开的时候，还没有形象只有声音，所以很尴尬——在餐馆跟朋友讲荤段子，隔壁听到声音，结账要走时过来一个清秀女孩要签名，我满脸通红，又不能说不是。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我有过短暂的三四个月，被认出来要合影签名，虚荣心得到过满足，但很短暂，过了就只剩烦恼了，非常烦。我喜欢跟朋友在大排档吃东西那种感觉，但戴个猥琐的渔夫帽隐蔽性强，大排档又没空调，倒是没人认出来，但你就中暑了。</div></div>
+<h2 class="dlg" id="b23"><span class="ht">不敢听自己说话、想写流行歌</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你某次采访说，你不敢听自己说话的声音，怕听起来像傻子。是真实想法吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">是。我一开始用录音机录音时，听自己的声音就不习惯；现在在综艺、节目上看也依然不习惯，怕自己像个傻子，所以很少看。我刷小红书多一点，刷到自己的视频会把声音关掉，只看底下文字。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你为什么去录那些综艺，体验生活、好奇还是赚钱？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">赚钱。我对资本主义无差别的剥削——这些综艺节目我也一样，哪个都不歧视，能剥削就都剥削一下。本来不想去，但给的太多了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我担心过你“人红歌不红”。你们还是挺拿音乐当回事的，如果最后人红了、音乐不红，挺尴尬；或者综艺氛围一烘托突然红一下，这事就过去了。这两个结果都是我不喜欢看到的。结果后边发现千人万人场子都能做满，我就觉得这事里里外外都成了，特别高兴。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">（现场播放一首新写的、有强烈年代感的流行歌试听）我想要写流行歌，但可能是“流行未遂”。发现瞧不上的东西真要做好，门槛也很高。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">年代感不是坏事，因为你身上一直有这个年代感的东西。我觉得你流行乐绝对值得出一张，叫“回馈家乡父老”，让你歌唱的群体去听。如果有一天广场舞大妈在用，就算彻底成了。我们一起凤凰传奇吧——他们的现场五万人大合唱，挺感动的，旋律洗脑有魔力。</div></div>
+<h2 class="dlg" id="b24"><span class="ht">综艺与跑通告：披荆斩棘两头没做好</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《披荆斩棘的哥哥》这个事我当时特别震惊，你自己怎么想的？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我自己也震惊，我居然答应了。那个时候处于比较混乱的时刻，我想要一种逃离——以前逃离可能是看小说（亨利·米勒那种让我忘掉现实），披荆斩棘也可以让我忘掉现实。而且同个时间我还接了一个王志文的电视剧（12 集，我演他一个小弟）。披荆斩棘一结束就去贵州拍戏，拍戏一结束就回去录披荆斩棘——这就是传说中的跑通告，两头都做不好，挺对不起两个导演的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你那个披荆斩棘我看了好多片段，效果很不错。我特别佩服你——好像没有一个地方会让你不自在。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">有点。后来杜德伟、吴建豪都看出来了，给我非常温暖的关怀，因为我很希望早点淘汰，但因为“太优秀”迟迟不能淘汰。我在里面还一直讽刺一个人：如果有人跑完一宫到五宫，又成不了团，那他就是个笑话。结果潘玮柏成了团，我成了那个笑话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">以你的性格这事很难消化吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我没有。我只能劝告年轻人：很多东西没必要去尝试。今年他们又邀请了，但我要巡演——说实话我也不太希望你去那种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">面对公众以后，你觉得大众对你单一最大的误读是什么？你在不在意？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">抽象，绝对是最大的误读。但我并没有为这个感到多伤心，无所谓。</div></div>
+<h2 class="dlg" id="b25"><span class="ht">明烧与闷烧：十年之约是编的</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">有些老朋友、老粉丝因为我去录综艺，删了好友——有一个朋友喝多了跟阿茂说“你以前是我们好朋友，现在不是”，然后互相删了。其实在他没骂我之前，我已经……也不能说无心无肺。我有一种东西想跟你探讨：我的老朋友，我就再也没去找他们，过了就过了，能见是缘分，我不会去“追忆似水年华”。那些记忆是突然间发射回来的，像星星经过多少亿年发射回来——感受到就感受到，但我们不能回到那里去。</div></div>
+<p class="para">我很多年前最后一次参加同学会，就再也没去。同学会本来就是个很奇怪的事。我告诉你一个细节：六小福那几个好朋友，年轻时在海丰约定“十年后的某一天、某个地点见”，比如五月一号下午三点在这里。后来十年到了，那天我去了——只有我一个人去了，他们都没去。我也没打电话给他们。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你当时难过了、失落了吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我没有，我也不是抱着很强的期待去的，只是想会不会有生活中非常奇妙的时刻，哪怕来一个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这样的时候，我就不知道你到底是闷烧型的还是明烧型的。这次对谈是第一次对外呈现你闷烧的一面——全世界都知道你是明烧的。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">但我要告诉你一个东西：刚才那个“十年之约我去了”的事，是我编的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">听起来也像是你能干得出来的。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我本来计划是给你重塑一个五条人的历史，从头到尾虚构一个，但我没忍住，还是真情流露了。我今天只在这一件事里稍微多了一点——从 60% 到了 61%。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还是百分之百的明烧，闷烧是表演的。</div></div>
+<h2 class="dlg" id="b26"><span class="ht">报价 3500：一个吊丝的天文数字</span></h2>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">最早的时候，有个跳现代舞的人来套近乎，问我“你们乐队现在出场费多少钱”。当时我们还没有摩登天空、没有张晓舟（经纪人）。我想这时候应该报个“狮子大开口”的天文数字，犹豫了一下，还多加了个 500，说“3500”——这已经是一个吊丝能想象的最天文的数字了，因为地球离太阳就有 3500 光年（笑）。结果他一口答应了，我就后悔了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">如果借助时光机器回到报价前 30 秒，你会恶狠狠报多少？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">怎么也得报个一万三……九千五吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为什么又扭捏减了五百？忘了一万三。他不答应，那后边一切可能就都变了——蝴蝶效应，我们也不会在这聊天了。</div></div>
+<h2 class="dlg" id="b27"><span class="ht">见偶像不激动：除了爱情，什么都激动不起来</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你开始搞音乐到今天，应该见过很多你崇拜的音乐家，哪次都没有激动吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">还没有。比如我很喜欢的吉他手马克·里波（约翰·佐恩乐队的），有一次在深圳一个酒店，他走到前台整理钱包，离我大概一米，我看着他整理完，拿了房卡从他身边轻轻走过、按了电梯回房间，然后手机一放、听一首他的吉他 solo。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">后悔吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">不后悔。我那时候英文不像现在这么“出神入化”，也不知道能跟他说什么——难道说“Hi Marc Ribot, my name is 仁科, I&#x27;m a rock and roll”？还有一次在纽约布鲁克林看约翰·佐恩七十岁的演出，朋友说可以去后台打招呼，我也没去。国内的，老崔（崔健）见过、去过他家，但也不是粉丝那种激动，是开心。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那只能说你本来就是一个比较淡定的人。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我最近体检，医生检查心脏时说“你的心率一直这么低吗？60 到 120 是正常的，你刚好 60，再低一点就不正常了”，建议我复查。可能跟这有关，激动不起来，但我开心。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你会因为别的事激动起来吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">除了爱情，什么都激动不起来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这是个标准答案，但再加上你一些古怪的，就还不显庸俗，别人做不到。那你听音乐会有没有听了一辈子第一次听现场、前奏一起就哭了的？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">哭有。听一个噪音演出（他想演四个小时，演到三个半小时脚抽筋了，把两个音箱开到最大），就听哭了。看电影也会看哭。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我第一次看罗杰·沃特斯（年轻一代管他叫“水爷”）在上海的演出，前奏一起我就不行了——每首歌都听过上千遍。结果我那个王八蛋朋友全程监视我，一看我眼眶湿了准备释放，就把脸凑过来笑嘻嘻做鬼脸，眼泪就回去了。一晚上没哭成，我特别后悔带他去。</div></div>
+<h2 class="dlg" id="b28"><span class="ht">新专辑《地球恋曲》与 AI</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们新专辑怎么样了？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">很顺利完成了，制作全部完成，7 月 9 号上市。这是一个 X 事件——因为 7 月 9 号是我生日（一会儿给你看身份证）。请允许我自恋地认为这是我的生日礼物，整个地球都在欢庆这一天。而且专辑名就叫《地球恋曲》，里面收录了你很喜欢的那首《一模一样》——什么都没变。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们那个 AI 做的 MV，好像已经不是土耳美学那个方向了。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">那是导演的主意。但我是从核心上聊 AI 的——我们是从这个“长出来”的，不是策划出来；不是我找了 AI，是 AI 找了我。我怎么可能找 AI，AI 又红不过我。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你相信 AI 作曲有一天会超过人类最优秀的音乐家吗？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">百分之百。归根结底还是算力和算法的问题，给予足够长的时间，算力增大一百倍一千倍一万倍，所有我们人类理解的复杂都能被破译。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">文艺界、音乐界很少有像你这样想的。其实我跟你一样，相信它一定会超越人类理解的所有最复杂的东西。那你相信我们是被创造出来的，还是生命是偶然？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我不相信被创造。我绝对是偶然——生命是个奇迹。库斯图里卡有部电影就叫《生命是个奇迹》。就是突然有一天，人抱着地球说“地球，好帅啊，你应该再长出几个帅哥出来，一个仁科不够用，我们要有 2000 个仁科就好”——还有多少万个企业家，还有个别几个破产、千里挑一的，肯定要有破产，要不然怎么显得那些不破产的重要。</div></div>
+<h2 class="dlg" id="b29"><span class="ht">收尾：一切都是偶然，感情留到下次</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我问题基本结束了。你有没有自己主动想说的话题？</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">我说一句。因为你是我很喜欢的一个人，所以我来了——我有时候会故意胡说八道，不是为了胡说八道，是为了说一个对方能接受的答案。但在你面前，我尽量说出那个真的答案。事实上我觉得今天可能说得并不清晰，有些问题我自己可能还没有能力想清楚，以后会更清晰一点，因为我也在思考。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">今天非常好。因为我们录得足够长、足够丰富，中间有跑题、东拉西扯、欲言又止又莫名其妙停掉，这些可以剪掉。咱们录了六个小时以上，剪三到四个小时基本上很完美。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">很多问题是没有答案的，我自己没有答案。我也是想通过跟朋友聊，看有没有答案——如果聊出一个答案也很好，它就像“长出来的一个答案”；如果没有，我就遵循自己现在的感受。我们今天回答的，是要回到过去那个感受，我只能替过去的我去想象一下。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不用纠结这个。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">今天唯一缺失的是感情这块，现在没办法聊。若干年之后，如果这个节目做得足够久，我们可以聊聊情感——它在音乐里占了 80%，而我们今天聊的所有东西只占 19% 到 20%。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有，我们还有很多次机会，我才 53 岁，你更不用说了。这个节目如果愿意，你 60 大寿的时候我们摆一桌。</div></div>
+<div class="turn guest"><div class="who">仁科：</div><div class="say">（call back）感谢，特别圆满。</div></div>
+</main>
+<button class="up" id="up">↑</button>
+<script>
+var root=document.documentElement, prog=document.getElementById('prog'), up=document.getElementById('up');
+function onScroll(){var h=document.body.scrollHeight-innerHeight,y=scrollY;
+  prog.style.width=(h>0?y/h*100:0)+'%'; up.classList.toggle('show',y>600);}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+up.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+var fs=parseFloat(localStorage.getItem('fs')||'18'); apply();
+function apply(){root.style.setProperty('--fs',fs+'px');localStorage.setItem('fs',fs)}
+document.getElementById('finc').onclick=function(){fs=Math.min(23,fs+1);apply()};
+document.getElementById('fdec').onclick=function(){fs=Math.max(15,fs-1);apply()};
+var th=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+setTheme(th);
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+  document.getElementById('theme').textContent=t==='dark'?'☀️':'🌙'}
+document.getElementById('theme').onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+var toc=document.getElementById('toc'),mask=document.getElementById('mask');
+function tg(o){toc.classList.toggle('open',o);mask.classList.toggle('open',o)}
+document.getElementById('menu').onclick=function(){tg(!toc.classList.contains('open'))};
+mask.onclick=function(){tg(false)};
+toc.addEventListener('click',function(e){if(e.target.tagName==='A')tg(false)});
+</script>
+</body></html>
