@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>贾樟柯 · 一个从汾阳街头长出来、把一个时代&quot;毛骨悚然地&quot;还原下来的人</title>
+<style>
+:root{
+  --bg:#f6f0e2; --card:#fbf6ea; --ink:#2c2620; --sub:#8b8170; --line:#e2d6bd;
+  --accent:#a8392b; --accent-soft:#f0e2d2;
+  --luo:#2f5d96; --guest:#5b7a4b; --fs:18px;
+}
+html[data-theme="dark"]{
+  --bg:#23201c; --card:#2b2722; --ink:#e9e1d0; --sub:#a89e8b; --line:#41392f;
+  --accent:#e08a6f; --accent-soft:#3a2a23; --luo:#8aabd8; --guest:#9dbf8b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+  line-height:1.92;font-size:1rem;letter-spacing:.01em;transition:background .2s,color .2s}
+.bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:30}
+.bar > i{display:block;height:100%;width:0;background:var(--accent);transition:width .08s}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;background:color-mix(in srgb,var(--card) 90%,transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .t{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.top button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:9px;height:34px;min-width:34px;padding:0 9px;font-size:.88rem;cursor:pointer;font-family:inherit}
+.top button:active{transform:scale(.94)}
+.toc{position:fixed;inset:0 0 0 auto;width:min(82vw,360px);z-index:40;background:var(--card);
+  border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;
+  overflow-y:auto;padding:14px 0 30px;box-shadow:-8px 0 30px rgba(0,0,0,.16)}
+.toc.open{transform:none}
+.toc h3{margin:16px 18px 8px;font-size:.74rem;color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.toc h3:first-child{margin-top:4px}
+.toc a{display:block;padding:8px 18px;color:var(--ink);text-decoration:none;font-size:.92rem}
+.toc a:active{background:var(--accent-soft)}
+.mask{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s}
+.mask.open{opacity:1;pointer-events:auto}
+.wrap{max-width:700px;margin:0 auto;padding:0 22px 90px}
+
+/* —— Hero 开篇 —— */
+.hero{padding:46px 0 30px;margin-bottom:8px;border-bottom:2px solid var(--ink)}
+.cover{margin:0 0 22px}
+.cover img{width:100%;display:block;border-radius:11px;border:1px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.16)}
+.cover figcaption{font-size:.72rem;color:var(--sub);margin-top:8px;letter-spacing:.03em}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:2.9rem;line-height:1.08;font-weight:800;margin:16px 0 0;letter-spacing:-.01em}
+.hero .subt{display:block;font-size:1.2rem;font-weight:600;color:var(--ink);margin-top:16px;line-height:1.45}
+.hq{position:relative;margin:34px 0 0;padding:16px 0 0 2px;
+  font-size:1.34rem;line-height:1.62;font-style:italic;color:var(--accent);font-weight:600}
+.hq::before{content:"“";position:absolute;left:-10px;top:-22px;font-size:3.8rem;line-height:1;
+  color:var(--accent);opacity:.22;font-style:normal}
+.hero .meta{margin-top:28px;font-size:.86rem;color:var(--sub);letter-spacing:.04em}
+.hero .meta span{color:var(--accent);font-weight:700;margin:0 2px}
+
+/* —— 章节 —— */
+h2{font-size:1.28rem;margin:46px 0 18px;scroll-margin-top:60px;padding-top:26px;
+  border-top:1px solid var(--line);font-weight:800;display:flex;align-items:baseline;gap:13px}
+h2 .num{flex:none;font-size:1.7rem;color:var(--accent);font-weight:800;line-height:1}
+h2 .ht{flex:1}
+.para{margin:0 0 17px}
+.para strong{font-weight:700}
+.para.drop::first-letter{float:left;font-size:3.3rem;line-height:.82;font-weight:800;
+  color:var(--accent);margin:8px 12px 0 0}
+.point{margin:30px 0 8px;font-size:1.12rem;font-weight:700;color:var(--accent);
+  padding-left:16px;border-left:3px solid var(--accent);line-height:1.5}
+.point strong{font-weight:700}
+
+/* —— 分隔 / 对话 —— */
+.divider{text-align:center;margin:64px 0 26px;scroll-margin-top:60px}
+.divider span{display:inline-block;padding:0 16px;font-size:.84rem;font-weight:700;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;position:relative}
+.divider::before,.divider::after{content:"";display:block;height:1px;background:var(--line);
+  width:60px;margin:0 auto}
+.divider::before{margin-bottom:14px}.divider::after{margin-top:14px}
+.turn{margin:0 0 20px;padding:2px 0 2px 15px;border-left:3px solid var(--line)}
+.turn.luo{border-color:var(--luo)} .turn.guest{border-color:var(--guest)}
+.who{font-weight:700;font-size:.92rem;margin-bottom:3px}
+.turn.luo .who{color:var(--luo)} .turn.guest .who{color:var(--guest)}
+.say{font-size:1rem} .say strong{font-weight:700}
+.ad{color:var(--sub);font-size:.85rem;background:var(--accent-soft);
+  border-radius:10px;padding:10px 14px;margin:22px 0;text-align:center;font-style:italic}
+.end{color:var(--sub);font-size:.86rem;text-align:center;margin:44px 0 0;font-style:italic}
+.up{position:fixed;right:16px;bottom:18px;z-index:15;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:1.1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.16);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+.up.show{opacity:1;pointer-events:auto}
+</style></head>
+<body>
+<div class="bar"><i id="prog"></i></div>
+<header class="top">
+  <div class="t">贾樟柯 · 一个从汾阳街头长出来、把一个时代&quot;毛骨悚然地&quot;还原下来的人</div>
+  <button id="fdec">A-</button><button id="finc">A+</button>
+  <button id="theme">🌙</button><button id="menu">目录</button>
+</header>
+<div class="mask" id="mask"></div>
+<nav class="toc" id="toc"><h3>精读解析</h3><a href="#a1">一、他是谁</a><a href="#a2">二、他的生平：一条被汾阳和时代&quot;喂大&quot;的路</a><a href="#a3">三、他为什么被采访</a><a href="#a4">四、他代表哪一类人</a><a href="#a5">五、他的普通与不普通</a><a href="#a6">六、访谈里的&quot;金矿&quot;：几个反认知的洞察</a><h3>完整对话</h3><a href="#dialog">↓ 跳到完整对话</a><a href="#b1">一、开场：墨镜、汾阳与卡车司机梦</a><a href="#b2">二、文学的种子：父亲、口头作文与评书</a><a href="#b3">三、书报摊、少年写诗与诗社</a><a href="#b4">四、街头江湖：打架、猎枪与“赖赖”</a><a href="#b5">五、文艺大哥：口琴、幻灯与北伐军服</a><a href="#b6">六、汾阳：一个有来头的县城</a><a href="#b7">七、霹雳舞岁月：看七遍、阴阳鞋与“害虫队”</a><a href="#b8">八、看电影的启蒙：从老片到录像厅</a><a href="#b9">九、晃荡的一年与“中等教育”的劝说</a><a href="#b10">十、《黄土地》的光：决定做电影</a><a href="#b11">十一、学画，考北京电影学院文学系</a><a href="#b12">十二、“找熟”、贵人与中年人的打架</a><a href="#b13">十三、电影学院：晨跑、看罗丹与“两个电影学院”</a><a href="#b14">十四、务实生存：写电视剧、演狮子、写专栏</a><a href="#b15">十五、《小武》诞生：从《小山回家》到香港短片展</a><a href="#b16">十六、贵人：柯达先生与作家田东照</a><a href="#b17">十七、不赔钱的文艺片与《站台》风波</a><a href="#b18">十八、为什么总用流行音乐</a><a href="#b19">十九、世界名著、图像时代与不听的两个忠告</a><a href="#b20">二十、第一次见世面、“Mr.OK”与阿城解心结</a><a href="#b21">二十一、见陈冲、塞勒斯与北野武</a><a href="#b22">二十二、看两百部短剧的金狮导演</a><a href="#b23">二十三、怎么当导演：演员、真实与赵涛</a><a href="#b24">二十四、表白、感谢与推荐嘉宾（结尾）</a></nav>
+<main class="wrap">
+  <section class="hero">
+    <figure class="cover"><img src="cover.jpg" alt="罗永浩 对话访谈封面" loading="lazy"><figcaption>封面来自 B 站 @罗永浩的十字路口</figcaption></figure>
+    <div class="eyebrow">PEOPLE · 罗永浩的十字路口</div>
+    <h1>贾樟柯<span class="subt">一个从汾阳街头长出来、把一个时代&quot;毛骨悚然地&quot;还原下来的人</span></h1>
+    <blockquote class="hq">我没想到，我这么熟悉的生活，会出现在电影里。</blockquote>
+    <div class="meta">罗永浩 <span>×</span> 贾樟柯 · 全长 3 小时 46 分</div>
+  </section>
+  <h2 id="a1"><span class="num">一</span><span class="ht">他是谁</span></h2>
+<p class="para">贾樟柯，1970 年生，山西汾阳人。中国&quot;第六代导演&quot;的领军人物。</p>
+<p class="para">一句话定位：<strong>他是华语电影里极少数&quot;用电影把一个普通县城和一个剧变的时代，真实到毛骨悚然地还原下来&quot;的人</strong>——《三峡好人》拿过威尼斯电影节金狮奖，《天注定》拿过戛纳最佳编剧；他用约 38 万元拍出处女作《小武》，此后几乎每两年一部、却几乎没有一部赔钱；他还创办了平遥国际电影展，如今是中国电影导演协会会长。</p>
+<p class="para">但这期访谈最精准的&quot;定位&quot;，其实出自结尾罗永浩的一句表白：<strong>&quot;好像不是每一代人，都有他们的贾樟柯——能把他们生活经历过的那个时代，那么真实、细腻、有质感地，在屏幕上还原出来。&quot;</strong></p>
+<h2 id="a2"><span class="num">二</span><span class="ht">他的生平：一条被汾阳和时代&quot;喂大&quot;的路</span></h2>
+<p class="para">贾樟柯的来路，是&quot;非天才、非科班、却处处是养分&quot;的样本。</p>
+<p class="para">他出生在山西汾阳一个普通家庭，父亲是中学语文老师，母亲在糖业烟酒公司。父亲爱《古文观止》、训练他做&quot;口头作文&quot;（抽个题目五分钟现想现讲，等于演讲），这是他最早的叙事训练；街上的&quot;文艺大哥&quot;们则给了他另一半启蒙——一星期学会口琴、自己做幻灯片放映、停电的天光里有人穿着北伐军服慷慨陈词。他是街头打架长大的孩子（小学打得最凶，被同学的妈妈拎着猎枪追过），也是看美国电影《霹雳舞》七遍、组&quot;害虫队&quot;在路灯下跳舞的少年。</p>
+<p class="para">转折来得很偶然：高考落榜（数学 17 分），他晃荡了无比快乐的一年，被父亲用&quot;你完成了中等教育、最好再接受高等教育&quot;半哄半骗地送去太原学画。某个等不到朋友的下午，他一个人钻进电影院，循环放映里正好接上一部《黄土地》——<strong>那片他无比熟悉的黄土、那些半天不说话坐在炕头抽烟的人，第一次出现在银幕上</strong>。他哭着看完，走出来决定：我要做电影。</p>
+<p class="para">此后是三次报考北京电影学院文学系（不是导演系——&quot;我啥都不会，考啥导演系&quot;），1993 年考上。在校期间拍学生短片《小山回家》，又写出《小武》的剧本。《小山回家》意外拿了香港短片展的奖，让他认识了一生的搭档、摄影师余力为。回汾阳过年，撞上整座老城要拆，他赶紧写出《小武》、用&quot;2 比 1&quot;的胶片硬上——制片费几乎为零。一路上全是贵人：柯达办事处一位至今没记住名字的负责人，自掏腰包多塞给他十本胶片；作家田东照，被他敲门拜师、一路鼓励；后来还有北野武，连续支持了他《站台》《世界》等好几部。</p>
+<h2 id="a3"><span class="num">三</span><span class="ht">他为什么被采访</span></h2>
+<p class="para">这是「罗永浩的十字路口」的一期深度人物对谈，标题就叫《成为贾樟柯（上）》，主题就是<strong>系统地讲他&quot;成为导演之前&quot;的全过程</strong>。</p>
+<p class="para">这期对谈的特别，在于<strong>两个&quot;从小地方长出来的同代人&quot;的同频</strong>。罗永浩是 70 后、东北人，做过新东方老师、做过手机、当过网红；贾樟柯是 70 后、山西人。两人聊童年的物资匮乏、街头打架、翻录磁带听错歌词、跳霹雳舞，几乎句句能接上。说到底，这期不是来听导演的获奖八卦，而是想搞清楚一件事：<strong>一个山西县城的街头少年、一个数学考 17 分的文科生、一个用 40 万拍处女作的人，凭什么长成了拿金狮的导演。</strong></p>
+<h2 id="a4"><span class="num">四</span><span class="ht">他代表哪一类人</span></h2>
+<p class="para">每个时代都不缺&quot;天选之子&quot;。贾樟柯不是——他代表的是<strong>从中国最普通的小地方长出来、不靠天赋异禀和背景、靠对&quot;真实&quot;近乎偏执的敏感，把自己真正想表达的东西一直做成、还做得起的创作者。</strong></p>
+<p class="para">往大了说，他代表了那一类&quot;被时代变迁碾过、又把这碾压本身变成创作母题&quot;的人。他镜头里全是小偷、打工者、走穴艺人、被拆掉的老城——<strong>那正是大多数普通中国人真实经历、却很少在银幕上被严肃看待的生活</strong>。他反复说：&quot;很多人劝我换个地方拍，别老拍山西。可对我来说哪儿都一样——一个县城、一个十字路口、一个电影院、一个邮局，全中国的小镇都长一个样。&quot;</p>
+<p class="para">这类人，正是今天大多数人该看的样本：<strong>你我大概率不是天选，但贾樟柯证明了——把你最熟悉、最不起眼的来处当成富矿，比追逐远方更有力量。</strong></p>
+<h2 id="a5"><span class="num">五</span><span class="ht">他的普通与不普通</span></h2>
+<p class="para"><strong>先说普通。</strong> 贾樟柯身上几乎没有&quot;大师&quot;的滤镜。他是县城平民子弟、典型文科男（数学 17 分、英语靠突击混到 59 分）；他社恐，刚到北京读书&quot;见生人就不说话，到人家觉得我不礼貌&quot;；他爱开玩笑、爱看热闹；他街头打过架，到中年还在酒吧为服务员出头干过一架；他甚至沉迷微短剧，一口气看了约两百部，&quot;捏着鼻子嫌臭，又忍不住看下去&quot;。这些都太像一个普通人。</p>
+<p class="para"><strong>再说不普通。</strong> 他的特别，不在天赋，而在几样东西：</p>
+<p class="para">一是<strong>对&quot;熟悉&quot;的敏感</strong>。同样的黄土地、同样的县城，别人熟视无睹，他却能被《黄土地》击中——&quot;原来你从另一个角度看，这么熟悉的生活那么有诗意、那么让人毛骨悚然&quot;。<strong>他的天赋不是发现远方，而是重新看见近处。</strong></p>
+<p class="para">二是<strong>极度务实、却不拧巴</strong>。他见过太多文艺圈的人&quot;过于拧巴、把自己搞得苦哈哈&quot;，而他写电视剧当枪手、在儿童节目里演狮子老虎、写乐评专栏赚生活费——小钱也赚，毫不别扭。&quot;你内心有一个真正要做的事，知道赚这些是为了实现另一个东西，你就很从容。&quot;</p>
+<p class="para">三是<strong>有一个&quot;退得回去&quot;的精神归宿</strong>。&quot;我大不了回汾阳，跟家乡的朋友、家人在一起，过得很愉快。&quot;正因为一开始就想着能回去，所以他真能回得去；也正因为回得去，他才<strong>没有后顾之忧、敢一直往前</strong>。</p>
+<p class="para"><strong>他的不普通，恰恰长在他的普通之上</strong>：正因为是县城街头长大的、对底层和真实有切肤之感，他才有了那种&quot;毛骨悚然的真实还原&quot;能力——别人需要采风去找的东西，是他的童年本身。</p>
+<h2 id="a6"><span class="num">六</span><span class="ht">访谈里的&quot;金矿&quot;：几个反认知的洞察</span></h2>
+<p class="para">这是最该带走的部分。</p>
+<p class="point"><strong>1. 没有&quot;条件成熟&quot;的那一天——先做起来。</strong></p>
+<p class="para">&quot;没有条件成熟的时候，永远没有你想象中的制作条件。所有东西你说要成熟了才去干，其实很难达到。&quot;他用约 38 万、2 比 1 的胶片（一个镜头只能拍两次）硬拍出《小武》。<strong>别等万事俱备，多数好东西都是在&quot;还差得远&quot;的时候先动手做出来的。</strong></p>
+<p class="point"><strong>2. 务实不等于不纯粹。</strong></p>
+<p class="para">拧巴的艺术家把&quot;不会赚钱&quot;当清高，贾樟柯反过来：<strong>赚小钱养着那个真正要做的事，恰恰是一种从容。</strong> &quot;不能把艺术家想象成神仙、靠喝露水就能活。&quot;——能养活自己的理想，才走得远。</p>
+<p class="point"><strong>3. &quot;能回得去&quot;，是往前冲的底气。</strong></p>
+<p class="para">&quot;有时候你焦虑、放不下，是因为你觉得自己回不去了。其实回得去——每个角落都有它的乐趣。&quot;<strong>一个你确信永远会接纳你的地方，不是退路，是让你敢冒险的安全感。</strong> 怕的从来不是失败，是&quot;觉得没有退路&quot;。</p>
+<p class="point"><strong>4. 创作不是去远方找新东西，是把最熟悉的重新看见。</strong></p>
+<p class="para">真正击中他的，不是奇观，是《黄土地》里那条他无比熟悉的黄土地——&quot;熟悉的陌生感&quot;。<strong>你最不起眼的来处、你熟视无睹的日常，换个角度看，可能就是别人没拍过的富矿。</strong></p>
+<p class="point"><strong>5. 把宏大的才华问题，落回最朴素的身体。</strong></p>
+<p class="para">他在电影学院见一位老教授晨跑备战——&quot;我下个月要进组了&quot;，体能都在准备。&quot;电影是个体力活，进入拍摄每天 12 小时高强度。&quot;<strong>才华再大，第一个要说服的是你的身体；很多事拼到最后，拼的是体力和耐力。</strong></p>
+<p class="point"><strong>6. 限制激发想象——匮乏不只是匮乏。</strong></p>
+<p class="para">去不了军渡、去不了乌兰巴托，他就把它们想象成&quot;世界的尽头&quot;，后来全拍进了电影。&quot;你去不了，就狂想象。&quot;<strong>约束有时不是创作的敌人，而是想象力的助产士。</strong></p>
+<p class="point"><strong>7. 一个作品能&quot;活下来&quot;，就是它的命运——别为等&quot;更好的时机&quot;而推迟。</strong></p>
+<p class="para">有人劝他&quot;手里多攒几个题材、看市场再决定先拍哪个&quot;，他没听：&quot;就跟孩子出生在 60 年代还是 80 年代，那是他的命运。你不能说怀孕了先不生、等条件好十年再生。&quot;<strong>最想表达的那个，现在就把它生出来——拖到&quot;更好的条件&quot;，往往就再也生不出来了。</strong></p>
+<p class="point"><strong>8. 贵人哲学：你受过的帮，要还给下一个人。</strong></p>
+<p class="para">&quot;不是我们幸运，是我们幸运遇到了一些人。&quot;那位多送他十本胶片的柯达先生，他至今没记住名字、却一直记得这份&quot;萍水相帮&quot;。所以后来他办平遥影展、扶持青年导演——不是责任感，<strong>只是&quot;想起那些帮过我的人，能帮一把就帮一把&quot;。</strong> 善意是会顺着时间往下传的。</p>
+<div class="divider" id="dialog"><span>完整对话 · 全长 3 小时 46 分</span></div>
+<h2 class="dlg" id="b1"><span class="ht">开场：墨镜、汾阳与卡车司机梦</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">欢迎大家收看罗永浩的十字路口。最重要的是一键三连和加关注，还欢迎随时发送弹幕评论跟我互动。好，那我们开始吧。开始前先问一下，为什么又戴墨镜了？上次咱们在直播间里，你解释过戴墨镜，是因为眼睛有点问题还是什么？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">是，这个现在还摘不了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，上次说过这个原因。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">就因为剪片嘛，剪片就眼睛受伤，怕光，老流眼泪。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">去过医院吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">去，大夫说没事，你就不看屏幕就行了。我说那我这个工作怎么能不看屏幕呢？说那你就戴个墨镜吧，保护一下，然后就戴习惯了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白。好像王家卫也是这个借口。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">确实是很多人有这个问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我知道，我开玩笑的。好，那我们开始了。我们一般都是从小时候开始聊起，说说这个贾导小时候成长的环境，大概是一个什么样的情况？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">小时候，要说成长的环境，肯定先说我成长的地方。我觉得首先一个大的地方，就是我是出生成长在山西汾阳，汾阳县。那个时候还没有由县变市，是一个县城里面。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这个家庭环境呢？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我父亲是中学的语文老师，教语文的。我妈呢，原来在武装部工作，后来就转到糖业烟酒公司。据我妈说，为什么她要从武装部转到糖业烟酒公司？因为你想，我70年出生，我五六岁时候物资比较匮乏，什么都要供应。我妈觉得去了糖业烟酒公司，这物资就有点不发愁了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">管用吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">管用，真的管用。你想今天想起来你觉得很普遍的那个物资——烟酒茶糖嘛，那个年代不容易买的。我妈那个公司一到八月十五，红糖管购，你去买吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那一般家庭要打个月饼，买红糖还得凭号凭票。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对啊。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">确实，这个物质上改善了很多。说起来我稍稍有一点羞耻感，我们家也是类似的情况，我妈在食品公司工作，跟她赚差不多钱的这些人比起来就稍稍会好一些。但其实有一些我现在想也挺心酸的，比如说小时候特别缺肉，我妈经常从食品公司能摸回来一块酱肉什么的，晚上回家。那些都是很难买到、或者买不起的，她说是买的很便宜。但小时候她没告诉我们，那个其实是病猪肉。病猪肉是吃不了的，但是他们食品公司——不也是收那些养猪的，统一收购再卖嘛。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有的时候来了病猪肉，病猪肉是不能卖的，就扣下了。扣下了以后，老百姓家里没有，他们食品公司有那种超大的专业高压锅消毒。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，做深度的消毒。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后炖出来，那个病毒就杀灭了，就可以吃。但是我们小时候吃不到肉的时候，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">偶尔吃一下那个，就觉得哎呀，我妈在食品公司上班挺好的。但其实长大以后回想还挺可怕的，吃了好多病毒。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我妈在那工作，他们那不卖肉，因为它是糖业烟酒公司嘛。但是有一个东西是不缺的，一个是糖果，一个是糕点，那时候是非常奢侈的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">比如那个糕点，店里面有耗损的额度，比如一百斤糕点你可以耗损五斤或者三斤，有规定。实际上耗损不了那么多嘛，那我妈那些同事那些阿姨们就，来来来，块投酥来一块，找泥糕来一块，嘴上就没有太吃亏。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那小时候读书的时候，想过长大要做什么文艺工作吗？先不说是不是导演。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那没有，没有过，小时候没有。我觉得现在回想起来，可能一直到初中吧，才开始会想一想将来要做什么。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那小学时候根本不想这回事？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">还没这个概念，还是个孩子。那我最初想做什么呢？因为初中啊，我家有一个搬迁，原来我们家是在汾阳县陆鲁八街五号这个大宅院长大的，到了初二的时候，我们家就搬到了一个新房，靠近县城的边上了。从我们家走出来，走个三五分钟就是一条公路，新公路。那个公路是从太原到陕北这条交通干线。那个时候主要靠公路运输，铁路那时候整个我们汾阳、吕梁这一块是没有铁路的，那车辆就很繁忙，拉什么的都有。我比如见过拉那个硫磺，一大块一块硫磺，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">呼啸而过。我自己呢，就很喜欢站在公路边看这些车来车往。因为那时候没出过远门，特别向往。我觉得如果能当个卡车司机多自由啊。所以我第一个想做的职业是卡车司机，很向往开车，向往能到处跑、看看世界。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看你的电影里没有公路边的这种意象，也可能是我记错了，但是我记得铁路边上的是有的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我家门口有铁路，所以我拍那个《站台》的时候，就有很多灵感来自小时候那个经验——有一条铁路，走的时候还不是直的，有点弯的，然后你就看着那个，远处无限向往。因为那时候汾阳没有铁路，但是汾阳边上另一个县叫孝义，孝义是有铁路的，离了有几十公里。有一天，那时候我们家还住大宅院，我跟我父亲在扫地，早上起来收拾院子，就听到一个很奇怪的声音，我说，爸这什么声音啊？我爸说，这是火车的声音，应该是因为风的原因把那个汽笛声给吹过来了。但没见过火车，就特别特别向往，拍《站台》的时候就把它拍进去。但是真的有实感的就是公路，就是我家门口那条公路，所以最早就想当卡车司机。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们小的时候太穷了，那个年代。我到美国去出差的时候发现，他们那儿为什么小镇的青年有一天突然下个决心说走就走，都是因为14岁爹妈就给买了车。所以家里虽然穷，买的是个破车，但破车也是说走就走。哪像我们那会儿，看着那个公路铁路都要意淫半天，你就想象嘛。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以他们那儿的小孩，突然有一天叛逆期到了，踩个油门就走了，混不下去又溜溜回来了，也没事。过了两年想清楚了又走了，也都没事。所以我到那以后感觉，这个事对我们的限制还是挺严重的，小的时候你老想着远方，其实是去不了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">你说限制嘛，同时也激发了想象力。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，因为你去不了，就狂想象。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这个除了对艺术创作有好处，对别的有啥好处？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没啥好处。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">想象是很重要的。你看以前那条公路、山西的尽头叫做军渡，是一个黄河的渡口，汽车通过军渡的大桥就进入陕北、进入陕西了。这个交通都知道，但是没去过军渡，所以我就幻想军渡是一个——哇，横跨两省啊，对我来说是一个非常神秘的地方。后来拍《站台》的时候第一次去了军渡，就一条铁桥，破破烂烂的，两边两岸都一样。但也有那个年代这个香烟还有走私，我们就看到桥旁边那个小路上停了几辆卡车，都是拉着香烟的，准备夜里头趁无人看管冲卡的那种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就确实像黑帮片一样。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，有点像后来看《教父》里面那种交易。还有土炼油的也是一卡车一卡车，那个油罐车在那停着，说是陕北那边炼的土油要拉到山西来。还是有很奇特的景观。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">怎么全是违法的那些东西？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">因为你平常见不到，它在那存在。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你父亲是语文老师，这个家庭背景，</div></div>
+<h2 class="dlg" id="b2"><span class="ht">文学的种子：父亲、口头作文与评书</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对你小时候读书还是有帮助的吧？是不是家里会比别的孩子多一些可读的书？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">其实书也少得可怜。我记得那个时候买不起书，主要一个是传阅，比如一个文学杂志从邻居家或者我爸的同事那传过来，读一读又还回去了。还有一个，他在学校工作嘛，他有些期刊——图书馆的纯书也很少，但是期刊比较新鲜，有时候会拿回来看。书架上其实很简单，我父亲特别喜欢古文、唐诗宋词、古文观止。我爸最爱的书就《古文观止》，那书不知道翻了多少回了。然后《三国演义》《红楼梦》《西游记》，也就这些最基本的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有更多？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有更多。但是另外一个，因为我父亲是教师，他的朋友都是教师，那时候是星期六下午学校休息，上午还上课，一到星期六下午我爸那些同事就来了。我那个视觉上记忆特别清楚，那时候他们也就二十多岁、三十岁的样子，统一的衣服，蓝色的、黑色的、灰的中山装。因为是教师呢，每个人胸前插一只钢笔，有时候是两只。当年还有段子：插三只就是修钢笔的，插两只就是高知，插一只就正常人。插了钢笔就是他身份嘛。几个人坐在那聊什么呢？当然先是瞎聊，我小时候在旁边玩，慢慢他们会聊文学。我记得有一次，我父亲他们在争论一个什么呢，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">争论一个文学概念，就是意识流。那时候王蒙写了几个小说，讲现代派的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，现代派的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那个手法被称为意识流，他们就在讨论这个意识流究竟是什么。这种讨论，我虽然也听不懂，但是你会关注到这一块，你会想象意识的流动是什么东西。另外一个，因为我父亲是语文老师，他就比较像一个幼教一样，教我唐诗、宋词，囫囵吞枣地背、记，必要的家庭功课。那慢慢长大之后，特别是创作之后，因为有个印象，有时候你会突然想起那些诗句，还是受益的。那个意境好像一下就唤醒了。虽然那个时候不是爱理解，但它毕竟是个种子嘛，慢慢会萌芽。我觉得最难忘的是什么呢？我父亲是一个特别热爱教育的人。学生写的作文他要批阅。我记得有几次，小时候老停电，一停电我父亲那个批阅作文就停下来了，点个蜡烛，把冬天那个灶堂的火盖打开，灶堂里面的火就映射出来红彤彤的。那我爸就做什么呢？他有一些学生很好的、很得意的作文，就给我念，也给我姐姐、给我母亲念：你说这孩子写得多好。他为他那些学生的作文骄傲，就讲，你看这段写得多好，这个比喻多好，这个感受多好。我觉得这个反而对我，可能比读唐诗</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">更重要的一种启发。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">会让你较劲吗，也想写那么好？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有，就听得开心。那我觉得是一个。另外一个，我父亲那个时候老训练我什么呢，口头作文。不知道你们在东北有没有这个习惯，我们呢，在那时候山西的语文教育里面，有一个很重要的教育叫口头作文。就出一个作文题目，比如说&quot;我与老罗的一天&quot;，给你五分钟准备，然后你就要出口成章，上台就讲一篇作文，就相当于一个演讲。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有，我们没有。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">你们没有？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得这很好。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我父亲呢，他也是这个口头作文的一个创办者，他们几个同仁就一起做这个事情。我爸经常就给我出题让我来作文。后来小学三年级开始就打比赛，我们的语文老师推荐我去参加这些比赛，我经常得一等奖、二等奖，就会觉得这个训练也挺重要的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他是现场给个命题？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">现场给个命题，然后你完全用口头讲述。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">很严肃的，比如一个信封，你就抽中了它，撕开一看里面，比如叫&quot;一件小事&quot;，或者叫&quot;在雨中&quot;，或者&quot;故乡的秋天&quot;，现想现说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这压力很大。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">压力很大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们从来没有这个训练，但听起来是个非常好的训练。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，那时候开始有录音了，我们录完音之后，它会整理好，出一个叫&quot;活跃作文选&quot;，就这些优秀的口头作文印出来给同学们传阅。我经常上那个活跃作文选，就开始有点小得意。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个对孩子，现在回头长大了以后</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">看这些早期的正向回馈，对孩子帮助特别大。我小时候也是写作文，我比较淘气，经常是被老师批评的对象，但有时候有几样学得好的，包括写作文写得好，老师一夸我能高兴好几天，然后就特别愿意把语文学好。这些东西对孩子特别重要。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">所以就给你一些信心，而且确实有训练。比如这个口头作文，你一开始脑子是空的嘛，从何谈起？那就是老师、包括我父亲，教你简单的结构，一篇文章应该怎么结构，从何起、从何落。类似传统的写作原理，什么虎头、猪肚、豹尾，你要有一个有力的结尾。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那明显清醒、有意识地对文学产生兴趣是什么时候，到高中了？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">到高中有意识了。这个兴趣有一个过渡，一开始对我来说不是阅读，是听。因为那时候每天12点还是12点半，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">评书吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">有一个评书节目，评书联播。先是《岳飞传》，然后是《杨家将》，然后各种各样的，也有现代什么《敌后武工队》《平原游击队》《铁道游击队》这种书。后来这些古书讲完了，就开始小说联播节目。我印象很深，那时候一边吃午饭一边听，有一个小说联播节目讲这个叫《黄河在这里拐了个弯》，这是我们山西作家田东照当时很轰动的一个小说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我没听过。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这个小说讲什么呢，如果没记错的话，就是在一个山区，还存在冥婚的这种习俗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">什么婚？冥婚？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">比如说有一个老光棍，他一生没有娶妻，然后就买一个死去的女性跟他婚配，等他去世之后就合葬。然后有一个寡妇，大概有一个孩子过世了，在这个过程中这两个人反而相爱了——其实它有很多冲破禁忌的东西。因为整个是山西作家写的嘛，写的我们那片的风土人情，包括很多山西方言的使用，听着就听进去了。后来有很多这样的文学作品，慢慢由这个听就变成想看，像文学期刊《当代》《十月》《收获》这些就开始读了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那些杂志都订了吗？已经有钱订了吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没钱订，还是传阅。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">传阅。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">一开始传阅。后来有了一个天然的便利——我上高中，从高一开始有了一帮新同学，我有一个好朋友，也是我们结拜弟兄里的老六。一般都是全班九个同学一起结拜，或十三个同学一起结拜。我奇了怪了，在历次的结拜弟兄里，我总排老二，排不到老大，也排不到老三。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是按年纪排吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">按年纪，其实就是按年月日，年的差异很小，一般都同年生的，然后按几月。我们那按农历，几月初几，比如我是初三，他初四的就是我的弟弟，就这么排。我们家这个老六呢，他家是邮电局的，那时候邮局就开始有书报这个摊，</div></div>
+<h2 class="dlg" id="b3"><span class="ht">书报摊、少年写诗与诗社</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这个书报摊就摆在我们那个市中心，我们叫鼓楼底那个十字路口的边上，一个报刊亭，一个铁的小推车，里面就是最新的杂志都会有，那就变成我读书的一个地方。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这种家庭背景当时真是好横的。我小时候路过报刊亭想买的可能有50本杂志，只买得起一本，所以我小时候特别羡慕那个报刊亭。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，这就是机缘嘛，正好我这个弟弟、老六他家是干这个的。为什么呢，他到了周末周六下午不上课，就替他爸去出摊了，他看着那个摊，我们就围在那，有聊天的、有看书的。那时候除了文学杂志我还爱看什么呢？爱看《武林》，《武林》杂志。小时候喜欢张恨水小说，喜欢武术。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他是介绍武术的？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">小时候因为看武打片喜欢武术嘛。《武林》有两部分，一部分是一些武术套路，教你怎么打；再一部分就是武林的掌故，什么杜心武的故事啊、王子平的故事啊。现在一想很多都是胡编的，但看得津津有味，就当武侠小说看了，什么打败俄国大力士。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">特别有趣。然后还有章回小说杂志，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《今古传奇》。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对，《今古传奇》。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《今古传奇》。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，哎呀现在一想。还有《故事会》。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，你看现在不是短剧崛起了吗？我看这些短剧就很熟悉，因为它跟《故事会》差不多。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">本质是一样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">本质是一样，就爽剧爽文，意想不到又能符合大家的心态。《故事会》杂志现在还有吗？还是上海出的吗，阿拉桑？还出的吗？我以为早就没了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">现在一说全想起来了。那个时候我最羡慕的就是家里</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">开书报摊的那个孩子，我们放学的路上，是为他可以看所有的杂志。我们那个借阅其实借不了那么全，买是真买不起，所以印象里永远是一百本只买得起一两本。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">借阅一般都是那种突然有一个爆火的小说，因为那个时候娱乐方法很少，小说确实会全民都看。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，你比如借阅来看，像路遥的《人生》这些就轰动一时的，大家会传都在看。而且很多是盖一个戳，比如上面写的是&quot;汾阳柴油机厂阅览室&quot;、什么什么工会，都是从厂矿里面借出来的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你小时候偷过书吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没偷过。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个时候第一次尝试写一些东西是什么时候，也是高中时期吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">第一次自主写东西，不是老师布置的作文，就是高中时代。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">高中时代。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">高中时代是从写诗开始的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">写诗开始的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">从写诗开始的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">投个稿吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">投过，投，无消息。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？那你第一次被发表是什么时候？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">第一次被发表，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是不是当了导演之后？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有没有。我第一次被发表，那个不算文学作品——是我小学五年级时候写了一篇作文叫《尤静词》，被我们语文老师投寄到《小学生》杂志社，给登了，这是我第一次发表作品。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么早就有机会发表？后来呢，就是你自己写一些东西给文学杂志投过，高中？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那就到高中时候了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你说的都是诗歌吗？小说散文这些投过吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有，没投过，一开始就是诗歌。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那最后诗有发表的吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没发表过，应该是写得很烂吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也写过诗，我小说、诗和散文都写过，但小说和散文发表过，诗是想起来最有羞耻感的。当时有一个诗刊杂志登了一个——是《诗神》杂志，远不如《诗刊》影响大，就叫《诗神》，神话的神。他那搞了一个什么&quot;中国青年诗人千人千首&quot;的选拔赛，我觉得是个比赛我就投了，前面也是捋投捋不中那种。然后投完了以后收到一封来信，我在东北山沟里当时兴奋的不行，结果他一看，说恭喜，这个选中了，进了那个千人千首，他要出一本书，要交钱了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">要交钱了。我当时就产生了强烈的精神分裂，一方面觉得这是骗钱的，一方面又觉得可能是个机会，挣扎的不行。然后我哥就讽刺我，说这就是骗你们这些傻的，然后我就被说得星星全崩塌了，就没有去上这个当。我投的第一个杂志是《星星》杂志，应该是四川，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，四川办的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">四川一个大杂志，《星星》诗刊。那时候不敢投《星星》这些大杂志啊，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">但人家《星星》其实也是大杂志，我以为是比较小。我投的第一首诗是一个长诗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">多少？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">好几百行那种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">好几百行那种。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后呢，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这么爱写诗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。那个名字呢，叫做——非常惊世骇俗，名字叫《黄河的五千年谎言》。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《黄河的五千年谎言》，那时候就会标题党。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">标题党，然后很反叛嘛，就石沉大海。后来因为我同时也写很多诗，我们在高中的时候成立了诗社，叫&quot;沙派&quot;。这个沙派出了两本诗集，因为是同学自己玩嘛，里面有很多爱情诗。这诗过了多年，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我发现我那些爱情诗比那个《黄河》写得好多了。那个《黄河》就属于想发表要来个严肃命题、宏大叙事。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">宏大叙事。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">反而是我那些对爱情的想象，我今天看起来非常可爱，什么&quot;什么什么一文&quot;，类似这种题目。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们那个时候写诗还能吸引女学生吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">能啊，对女同学还是管用的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吧？我印象里我只小了两岁，但是我们写诗的时候好像都已经在女生眼里是怪物了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那不会。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们可能区域不一样，可能我们东北那边就是比较少兴。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我们这边是大家很有机会跟女同学交流文学。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为写诗吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">类似。我印象里写小说散文还是有一些能吸引女同学的效果，女同学会问你问题，你觉得为什么说文学就是人学呢？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">一开始太好了，可以聊两小时了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">在哪聊呢，学校的双杠上，坐在双杠上，很开心你知道吗？对，我就全想起来了，愉快的那些全想起来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是我们那会儿写诗就好像特别不吃香，被认为是挺怪的，&quot;怎么现在还有人写诗&quot;，经常有这种说法。那可能还是不如你们山西的文学氛围浓。但是我们也听过前辈的，比如比我们大十几岁的那个年代，好像会写诗的文学青年是很受欢迎的。我听说以前有一个叫青春诗会——就是那个年轻诗人们的青春诗会，听那个前辈讲，那个青春诗会全国到处啊，就像武林大会一样，都是年轻人聚集在一个风景名胜，搞这个青春诗会，然后有很多新诗的发表、很多演讲，还有妙曼的女孩子，很多爱情故事产生。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我非常羡慕，所以你们那时候也不如前辈的时候了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那跟那个传说中的青春诗会那差远了，人家是全国大会。还有你们那时候，一群调皮捣蛋的，经常打架，又同时写诗，这个现在的人听起来可能挺分裂的，但你们那会儿就觉得很自然，对吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">非常自然。上午去打个架，下午我写一首诗什么的。我觉得事过多年，我觉得心灵层次饱满丰富的人才爱打架，因为他经常是情感方面的原因才会打架。不动感情的人谁去打架，就不理你，走了就行了。高度的敏感性跟自尊性，包括这个情感的细腻，趋势到了一种程度才会打架。但是最早打架最密集的时候，那个时候还没有诗歌，那时候我觉得是小学。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是初中吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">是小学，小学是打得最凶的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我的小学是战斗的历程，那绝对是街头，我就是幸存者。我觉得今天来说是一个幸存者，那几大战役今天想起来都后怕，你知道吗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">小学时候你们那儿就打那么凶？我印象里我们那儿校园暴力比较凶的都是初中高中。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">初中当然也有，高中也有，但是频次啊没有小学时候那么频繁。而且那个初中高中之后，他往往是确实有一个具体的理由，小学时候那是没理由的，不知道怎么就打起来了，互相看一眼马上就打起来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你们也会用山西口音说什么&quot;你瞅啥&quot;之类的？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">会啊。&quot;你瞅啥？&quot;&quot;我瞅你啊，不好看吗？&quot;&quot;不好看啊！&quot;就打起来了，就能打起来，就打起来了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是发育早吗？或者包括那个，这个我印象里最叛逆、</div></div>
+<h2 class="dlg" id="b4"><span class="ht">街头江湖：打架、猎枪与“赖赖”</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最冲动打架都是到了至少到了初中，你们那是小学。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我们是小学，我觉得它是一个有机的衔接。为什么说有机衔接？就我们在这个开始记事还没上小学就开始参与街头战争。为什么呢？你知道有个词叫待业青年，很多返乡的，就是这个插队的回来了，就是初中高中毕业之后没工作的，大家都整天工作都在街上，那个年龄差呢，可能就是二十二三岁的，到我们这个五六岁的，都在街上。这个都在街上的那些大孩子是不排斥我们的，就一条街的。然后这个以街区为单位，我们是属于什么街呢？我们是一条很短的街叫陆路把街，旁边一条街叫三皇庙街，然后再旁边叫城隍庙街，所以这三条街是一个街区，就兄弟。然后另一条街叫西府街，西方的西，那个政府的府，府门的府。这两条街就是两个对立的街区，那就是经常大家不同的势力地区。大孩子们一打，我们就负责什么呢？运送砖啊、石啊、瓦啊，我们是属于后勤补给的，前面的哥哥们在打，我们在后勤补给。这个打完之后呢，他有很多仪式感。先是就是打之前，双方就通知了要打，打之前首先战前会议，所有人蹲在电线杆底下围好几圈，说他们可能会怎么攻击我们，我们要做好什么准备，排兵布阵，谁守着那一摊、谁守那摊、谁负责什么。开打，开打的时候，打呢，一般我看后来那个很多小说啊、电影那个描写啊，那都扯淡。打架的时间啊一般是，就我测算过，真正的打架、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">特别短，不会超过15秒或者20秒就打完了，一阵混乱打完之后呢，双方各有挂彩的什么的，各有伤吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有死？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有死。接下来呢就是这个战后总结，谁冲得厉害，然后谁胆小，然后得到批评。然后那个我们这些小孩呢还负责，我有一个特别喜欢完成的工作，就叫做你去什么医院看看，就对方不是给打了、打破脑袋了吗，要去。那时候我们有最主要这个小诊所，就去一个医院叫做这个叫城关医院，我们那有个大医院叫汾阳医院，还有一个小的医院，不叫城关，叫地区医院。然后我就负责什么呢？带我们几个同龄人，然后大孩子去了又打起来了，我们这些小孩子不惹眼，去看人家包扎，说这哥们儿去急诊室看对方的大哥在被包扎，了解状况缝了几针回来，大家开心，你看缝了几针，把它打坏了，如果咱们这边缝了三针，那边缝了十六针，那就赢了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那就赢了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">而且就战后总结。所以这种经历他带到小学，都真有好胜。那绝对是。</div></div>
+<p class="para"><strong>（广告口播）</strong>想要聊得好，咖啡不能少，感谢合作伙伴瑞幸，把瑞幸咖啡店开在了罗永浩的十字路口。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你跟在大哥屁股后面打的，有没有落单被暴揍一顿的时候？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那没有，大哥们很会保护我们，而且我们都是我们的街区，一转身去了哪个家就待那儿，人家也不敢进来。但是真正就是这种你自己惹事是上学以后。上学以后我很难忘的一个，就我经历过最恐惧的时候，就是这个、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我们有一个同学，在街上，我都忘了是怎么古迹，也是你瞅我我瞅你，然后推了几下。推了几下呢，对方不经推嘛，就可能摔了一下，或者不开心了，不开心了也就过去了，就早上的事啊。然后我们两节课以后中午要干嘛呢？做广播体操。然后我们全校的师生在那个操场里面，就&quot;啊，发展体育运动&quot;，然后就开始做体操。正做体操呢，我这个同学叫四锅子，这个用方言才知道什么意思，他妈来了，拿了个猎枪，找我，在那个操场上找我，把我吓坏了你知道吗。然后我从同学的腿里面爬出去，然后从学校逃回去，跑到我们那个邻居家那个柴房里躲了好久好久，躲了很久很久。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">民风这么凶悍吗？孩子他妈还能拿个猎枪来抓另一个孩子？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那个年代家庭还有猎枪，还没收枪呢。然后呢他妈就拿个猎枪来找我。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那比我们那凶悍多了，那是。我们那也有妈妈出来打架的，拎个猎枪也太恐怖了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我就经历拎着猎枪，我吓坏了。这是最难忘的吧。其实孩子们推推搡搡这个东西，我就说的十几秒就过去了，哪怕头破血流也是十几二十秒就过去了，怕的是后遗症。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你们那时候打架那么频繁，没有孩子打出脑震荡之类的？肯定也有吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也有，纷争是必然的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你自己被揍过最惨的一次什么情况？刚才那个还不够惨，我觉得刚才那个有惊无险。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我那个真很吓人的呀，那个恐惧。你街上打哪怕脑袋打破了，没有这种恐惧感，那个恐惧感是、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">躲在那黑暗的柴房里也不知道过了多久，也没表你知道吗，约莫着肚子饿了，估计快下学了，偷偷溜出来溜回家。但是呢就那个时候其实他也有一种，虽然很小，但整个你能有很多判断。那比如说这个下午就正常上学了，因为我觉得经过上午我跑了，他妈也发泄，我下午就没事了。那果然下午就没事了，也不再恼了。然后呢就是低头上对，然后再过个一两个月我俩又成哥们儿。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这种是是那个、打过那时候还有那种尴尬，就是你跟一个人打，然后有一个朋友很帮忙，他也跟着去打，打完了过了一阵你们俩成好兄弟，就把他撂在那很尴尬。但是由于某种原因这个哥们儿还跟那个不愿意和解，可是他当初跟他结仇是因为帮你才结的仇。就我小时候这种经历也很多。你说被打得很惨的一次，是在电影院门口，我们三个朋友，然后跟那个真的是不认识的人就打起来了，那个对方那个打架能力很强啊，我们打不过，人家打不过，确实被揍得有点惨，有点半专业那种打架。那你们那会儿的家长应该也是挺习惯的吧？就是家里人对孩子某一天头破血流地回家也不会特别吃惊？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也会骂，但是基本上不会像四锅子他妈那样去找对方，基本上打完也就算了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你父亲还是读书人嘛，就骂你一顿？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后骂你一顿，然后这个一两天没好脸色也就过去了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有你们上学的时候、</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我以前看那个访谈里说你们都是留那个长发了，那些学校都不管吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那是到高中了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不管吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">到高中。为什么长发呢？就是那个时候，这个应该是高二还是高一的时候，那时候开始有一些摇滚乐的信息了，那些国外的乐手全是长发，然后那个艺术家们也是长发披肩，就模仿嘛。然后我就上高中留过披肩长发，真的长到这儿。我父亲每天回去说说不动你知道吗，我妈呢就笑。然后呢这个，但我遇上了一个特别好的校长。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我们老师不干，我们班主任不干，就没事就拎出来骂我。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后呢，那个你越骂我越不剪。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你的学校还是挺温和的，我小的时候上的学校是堵着校门口拿剪的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我们没有这个。但是我们后来呢，我们中学的校长宋校长找我谈话，然后他就跟我聊别的，然后首先说我这个偏科发展的问题，就这个语文历史学得不错啊，我学文科的嘛，但你这数学、这个英语太差了吧，这个不得要平衡发展啊。然后这个别老写诗，弄一堆同学这个不上课还印小册子。最后呢其实他就拐到我这个头发上，但他呢就这个，就我那个校长就跟我说，说你这个头发几天洗一回啊，问我。大概那时候也没淋浴，就端个脸盆洗，这一星期可能周末洗一次吧。他说你这麻烦不麻烦。我从他那出来我就剪了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他这么会做工作。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我也不知道他是什么打动了我，我觉得是他的那种某种包容。他不说你要剪掉，他就说你这多久洗一次，麻烦不麻烦，那我出来我就剪掉他了，就告别了长发岁月。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这校长不是一般人，我觉得他是教育家。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">是教育家，而且对着那么一群孩子。初中时候啊大家能骑自行车了，但就是因为打架什么东西，我这个可能从小协调能力比较强，然后慢慢的这个同学有什么矛盾我来帮着解决，这种协调，我周围的那个同学就比较多。我初中时候用今天话来说我开始有司机了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为什么会骑自行车了？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后每天早上我们同学轮流骑自行车带我去学校。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为什么呢？你没有自行车？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我有自行车，威风啊，要那个范儿，要那个范儿你知道吗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你当时能够混得这么风生水起，在那个小的时候是靠哪方面的优势呢？因为体格上是很重要的一个优势？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">体格那是不行的。这个东西我说到的感觉你练什么都没用，这个打架它主要靠力量。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对啊，当然你没力量、没体重、没身高，你练啥都不管用，那成武侠小说了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">靠协调能力，这个完全没有想到。我小时候是一直被欺负的，然后被打击了以后，有几个城邦结伙开始反抗，然后才获得了不再被欺负的那种获得新生。我那个小时候一战成名是、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">最小时候一战成名叫做，我开玩笑今天津津乐道，都当笑话听听，不是什么好事，那时候就魂我们家巷子叫陆路把街，陆路把街杀人事件，开玩笑的。我觉得小时候也拥有很多寂寞的时刻，比如说突然有一天你的玩伴啊、朋友们、兄弟们各自有事，你就落单了，落单了就在哪呢？就从我家那个院门出来，站在马路上，站在那发呆，就想着该去哪玩一玩，去找谁。马路上也没人，然后呢就这么站一会就回去了，回去在家再待一会又出来站着了，就很不知道。小县城很小，每个地方都去过两百遍，两百遍都很清晰了。然后就有一次这样的时候，我从我家出来又回去又出来，站在那的时候，突然我们家邻居找出来，隔壁院子找出来，比我大好几岁一个哥哥要打我。我说你为什么要打我？他说我往他家的那个院子里扔石头了，他家后墙正在我们的院门前面，就他家的后墙。我说我真的没有扔。他就说我扔了，然后直接给我两个嘴巴把我抽晕了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">抽晕嘛，哥们儿赢了嘛，就回去了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">他又比我个儿高，又那个什么年纪又长我，我就气得不行，气得不行伙伴们都不在，就没人应援啊，没人支援。我气了回去之后，我这个院子里哥哥、</div></div>
+<h2 class="dlg" id="b5"><span class="ht">文艺大哥：口琴、幻灯与北伐军服</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">练武术嘛，有把刀，就单刀，没开刃的单刀。我临这事，是吧，二话不说，直接就冲进去，冲到他家要砍他，然后那个哥哥就冲出来跑出来，我就追着他，巷子里都来都去都来都去，越多人越多，誓言要把他砍掉。这么几进几出之后，那大人就拉嘛，就训训他训训我，是吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">也有拉偏架的是吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">当然是拉我的偏架了。然后这个事之后，这个大家觉得，那个什么陆路把街，陆路把街三人世界，说这个，我小名叫赖赖，说这个赖赖真赖，咱还是别惹他了。那时候叫什么什么什么，怕浑的、怕愣的、怕不要命的，什么真是逼急了还有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是你有一次访谈的时候说，那些做大哥的都得是文艺青年，那是开玩笑的还是你确实见过很多文艺青年型的大哥？确实真的？那你们那儿真的很怪啊，我们老家那些做大哥的可没有什么文艺青年型。具体是什么情况？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">具体你像就是那几年，就是七八岁那个时候吧，那些大哥都在街上。都在街上之后呢，除了刚才说的那些所谓战役之外，更多时间是什么呢？就比如说有一次我们大哥，就那时候就流行什么呢？两首歌，一首是这个《流浪者》这个&quot;到处流浪&quot;，阿巴拉古这个歌，一个是《啊朋友再见》&quot;朋友再见&quot;。大哥买了个口琴，就练学口琴，然后接下来呢，就所有的大哥都买了口琴，马路边蹲一溜，要吗十几个人一人一个口琴在那练，我不瞒你说不到一星期、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">口琴吹得一流，就那么聪明，就在音乐上我非常佩服他们。我特别爱音乐，我到现在简谱不识，更不要说会一种乐器了，完全不会。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我完全明白你说这个文艺的大哥是怎么回事了，因为那个时候音乐其实比文学泡妞更管用，潇洒嘛，相对更直接、更潇洒。对对对，你要这么说的话，我小时候那些欺负人的流氓大哥有很多也是会弹唱的，唱得贼帅。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。然后呢就是你看这个口琴啊，人家一星期就能拿下，然后就这个从《流浪者》这个&quot;到处流浪&quot;开始，到这个&quot;啊朋友再见&quot;，然后到其他，哥哇无师自通，真的是无师自通啊。然后这个之后呢，就是什么，我们这个街上有另一个哥哥自己做了台幻灯机，自己做台幻灯机之后自己画幻灯，然后我们去他家就像放映会一样，自己解说自己放幻灯，就很神奇的，就那个创造。我觉得他们天工开悟，就查基础都没有，初中都没读下来的人，这种聪明才智叹为观止。那后来呢就是这个，包括像这个，当然看电影是更必不可少的。有一场电影我特别印象特别深，就那种县城里面的神秘感，就四个字《卧虎藏龙》。然后我们那天看一个电影，就是大家街上孩子都在看，看看看，突然停电了，停电那时候停电了怎么办？大家就出来蹲在那个外面等着来电继续演，或者起哄，先起哄，起完哄就出来了，就各个团伙，我们那个就蹲在电影院的一角就聊、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">就两个哥哥就吵起来了，大概就摆各自的家世，说我爸是参加过抗美援朝的，那个说我爸是八路军我家更老资格。然后我们有个哥哥说我爸参加过北伐，大家都惊呆了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">岁数好像不太对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对啊，岁数不太对啊。然后那个关键是北伐太遥远了，那二几年还是哪一年的，是吧，那时候都七十年代，都五十年过去了，说他参加过北伐。他说&quot;哟，你爸参加过北伐？&quot;不相信，把那哥哥给逼急了，人家回家过了十几分钟，穿了一身真的是那个《大浪淘沙》里那种那种军装就出来了，&quot;是不是参加过北伐？&quot;我在那个停电的、停电了的那个天光里，一个穿着北伐军服的同学，那个哥哥在那慷慨陈词，非常魔幻，就这个背后的这个架势太太神秘了。所以其实小地方挖一挖还有很多这种奇怪的，这种是吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我总觉得你们那可能不太一样，我小时候还是印象里还是挺沉闷无趣的，没有这么多传奇的事，就是我长大的那。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">可能跟汾阳这个地方，它其实是一个地位很特殊的一个县，古代的时候还是挺重要的一个地方。主要是近代，你像近代呢，它首先是这个庚款之后，就开始一开始之前就有这种各种教会进入，这个就教会势力就进来了，庚款之后呢，汾阳中学呢，就汾阳中学应该是跟清华大学是一个董事会的，然后汾阳医院呢，跟协和医院是一个董事会的，然后汾阳医院的那个修盖的那个楼呢、</div></div>
+<h2 class="dlg" id="b6"><span class="ht">汾阳：一个有来头的县城</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">跟协和一模一样，就小一号而已，就是嘛。所以你说是小地方县城，实际上它是有来头的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">不像我们那儿是真的就是纯山沟。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。然后同时呢它又是那个，就是一个大县，就商业很发达。商业很发达呢，主要是跟哪儿这个营商呢，那时候汾阳人营商主要有两条线，一条线是在天津，我爷爷就是在天津行医的，他外科大夫，然后后来这个抗战后回了山西开医院，然后呢那个天津有很多汾阳人。然后另一条线就是通那个，这个叫什么蒙古到俄罗斯那条线，就晋商的那条线，这个人就很复杂。我小时候记得我们院子里有一个人家办喜事，突然来了很多陌生的亲戚，他家从蒙古回来的，就华侨，蒙古华侨回来了。然后这里面因为这种历史人就很复杂，包括冯玉祥也在汾阳隐居过，各种各样乱七八糟的，其实就是个有来头的，它是一个信息交汇的地方。然后一直到我大伯，我父亲的大哥，我们家我爷爷去世，他叫我们家长，我大伯活了九十多岁，前几年过世的，时候快过世，身体不太好了，我去看他，他已经有点糊涂了。然后我大伯见了我，他说&quot;奶奶回来了&quot;，我小名叫奶奶，我说我回来了，这是清醒。一转头说，说你现在谁帮你翻译啊，因为他以为他知道我老那个，知道我老出国，以为我需要翻译。我说就我自己、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">把它能应付嘛，也没什么深的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你这一次是从恰克图回来的吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我惊呆了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">恰克图是什么？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">恰克图是一个就是蒙俄边境一个茶叶中转的一个城市，你没去过对吧？我没去过，很多晋商在那。我觉得他应该是穿越到他的青年时代，应该有很多他的同龄人是在恰克图，晋商那时候晋商好几年才回来一次，他估计是一时飘到了他的年轻时代。他一开始知道是我，过几分钟他就以为是他的朋友回来，问我说你这次是从恰克图回来的吗？就很多线索。你看我《站台》里面这个有一个情节，就几个年轻人没事干，就在这个听广播，那时候山西的天气预报，到冬天经常报寒流，一般来说这个寒流这个意象，就是从一股从乌兰巴托吹来的冷空气，经过二连浩特然后进入到了华北大地，几号就到咱们山西了。那我对这个乌兰巴托这个词就非常的就是神秘，然后就对我来说就意味着是非常遥远的那种极寒之地。而且那个地方就你从小因为听这些故事啊往来，你就知道那有可能有很多山西人，就是在他们青年时代会远逐到那些地方谋生啊。所以对我来说就变得很长时间有一个乌兰巴托情结，因为它对我意味着就像今天人们说起北极或者南极一样，对我来说那是世界的尽头，最荒凉或者说最遥远、离家最远的地方。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你刚才说冷空气那个，我也是在广播电台里可能听了一千遍一万遍。</div></div>
+<p class="para"><strong>（广告口播）</strong>人生可以有很多选择，咖啡我劝你就别选了，喝瑞幸就对了，感谢瑞幸咖啡支持。</p>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那那首歌你也听过对吧？</div></div>
+<h2 class="dlg" id="b7"><span class="ht">霹雳舞岁月：看七遍、阴阳鞋与“害虫队”</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">《乌兰巴托的夜》。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《乌兰巴托的夜》。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我是在上大学的时候，那时候在北京有一个蒙古风格的酒吧，那儿的驻唱歌手就会唱这首歌，我很喜欢，后来就把它，04年时候在《世界》这部电影就用了这个歌。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个时候你们还包括就是都跳霹雳舞对吧？咱们去那个鲁豫那个节目当年还是聊过那个事。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">霹雳舞到高中了。现在怎么一回想全是好玩的事，其实过得挺苦的，就是挑好玩的说，可能是才有这种特别就感觉新鲜事物比较多。而那些新鲜事物它又比较直接，它可能就是它要用，你要用身体去感受它。那时候就霹雳舞呢，是这个就直接很简单，就有个电影，美国电影叫《霹雳舞》Breaking，然后呢那个主角叫旋风马达。然后那个电影就看了，就也不知道什么是霹雳舞，反正那些闲得无事，感觉进去看了，看了之后哇太棒了这个舞。然后那时候一个电影他在一个地方放三到四天，他不像现在就大片各个地方同时放，比如说汾阳放的时候孝义或者旁边的县并没放，要等汾阳放完这三四天才到他那放，拷贝要跑。所以我利用这三天或者四天时间，我看了七遍霹雳舞，就在县城里只要有片就看，看了七场。第一场被故事被舞蹈吸引，后面就是盯着学，就印象，然后就开始练，还有模有样的，有些动作就真的就琢磨出来了，有些动作呢、</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">确实琢磨不出是怎么回事，不像现在有视频教材。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有视频教材。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后呢，但是就可以跳了，就不会的嘛咱就瞎比划两下，会的嘛就多展示几下，是吧。那包括那个我小时候不是练过几天武术吗，那里面就你可以自由结合一些翻跟头啊什么的，是吧，高难的动作。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，高难的动作。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那时候我主要是压阵压轴，我们很多同学他就是那个标准舞蹈跳得很好，他悟性比我高，人家那什么过电啊、什么柔姿啊做得很好，但是我有一个拿手，就是硬动作，就是地板打坐一起跳，然后突然啪啪啪啪几个跟头之后转几圈你知道吗，鲤鱼打挺站起来，这个一般人搞不了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">一般人搞不了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后武术跟那个舞蹈结合起来也能应付。我真正这个霹雳舞精进是什么时候？是有一年春节，然后我们有个朋友，我们那时候呢有一个就汾阳有个很著名的施工队伍叫网架队，什么叫网架队呢？就以前做那个比如大饭堂、体育馆，它那个屋顶啊是用那个一个钢球然后各种那种钢管撑起来的一个网架结构，造价比较低。然后那时候基建开始起来，从亚运会开始就比较多了这些东西，亚运会前后。然后我们这个同学呢，他好像他们就在做亚运会的场馆的时候，他从北京回来，北京有很多这个霹雳舞高手，哇他的动作做得那个标，哇真的像电影里一样，就把他扣住教我们。然后教了我们好几天，然后呢当然就教完喝个酒吃吃饭啊，联络一下感情啊，然后那个才跳得真的相对有模有样，之前完全靠武术功底。就他那个时候我们最难的是因为没有录像机放慢动作分解。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">分解不了，对，只能看到结果，不知道是怎么跳出来的，这种笑话多了。那时候我们最早听到崔健的那个《一无所有》，人家这个广播电台——那时候不知道为什么，三星广播电台放了几次。放了几次呢，我们就记住一点旋律。很长时间我一直以为第一句叫&quot;我曾经问个不休&quot;，我一直听成了&quot;我曾经是块木头&quot;，都一直唱&quot;我曾经是块木头&quot;，就这样接受了很多东西。很多年以后我看到一个网站，叫&quot;最容易被听错的歌词&quot;，就是英文的那个上面有，就是历史上的经典歌曲被大家、整个一个时代的人都听错的。那时候没有网络，没地方查歌词，所以你买那个唱片或磁带里边印了歌词你就知道，如果没印你就完全不知道。还有那种专门的网站，所以我们很多歌都是这样听错的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我没想到你们会把那个&quot;我曾经问个不休&quot;听成&quot;我曾经是块木头&quot;。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，一开始我们琢磨了，&quot;我曾经是个木修&quot;，说这&quot;木修&quot;不通啊，不通嘛，那肯定是&quot;我曾经是块木头&quot;。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有这样的事。所以你们磁带也是听的都是翻录的，大家很少会买得起原版的磁带。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">上高中买得起，之前你要从磁带的年代，还是从最早就是七七、七八年那个时候。就我们那些……就我们整个街上有一个特别有感情的大哥，这个大哥他就是吹口琴那一位，那他也最早有了录音机嘛，喇叭裤、录音机，那时候就围在他身边听这些磁带。一开始就是两个歌手，张帝。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">张帝问答，机智问答。第二个就是邓丽君，那后来才有了刘文正啊什么这些啊，还有个女歌手张蔷。张蔷那后来翻唱了无数歌，那已经后来一点了。就小时候磁带年代，一开始磁带年代就是这样，后来就是各种翻录。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你们当时跳那个霹雳舞也都是在马路上跳吧，没有地方去吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">一个是马路，一个是我们那个……我们中学有活动室。我们中学确实，今天想起来很匪夷所思的一个教学方法，就我们是怎么呢，就是上午四堂课，下午两堂课，两堂课结束之后晚上七点是晚自习，所以从这个两堂课到七点之间是自由时间。这个自由时间呢，你踢足球也行，打篮球也行，然后学生呢也有点自治，体育室的器材和什么美术室啊、什么琴房啊都学生自己掌握的，我们跟同学借个，有时候在琴房里面地方大嘛，跳一跳。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我怎么越听你长大那个环境越好呢？我们那种学校都管得特别严，就是有点……</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我们那个中学有点像大学。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你们很容易得到那些社会有的资源，然后呢比如说美术教室也很大，把那些画架子什么隔一隔就在里面。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">反正利用各种场地，只要是有块平地。或者说那个最不好的场地就是那些画室，因为它是砖头地比较硬，最好是木地板，木地板太奢侈了，水泥地也很好因为它平整。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">滑布什么都不平整，没法练。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，那最难解决是装备，没有那种很酷的衣服。首先那个年代，你要跳霹雳舞有几件——我告诉你你也经历过……</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我还打过比赛。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，要有一个手套吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">切了手指的手套。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">切了手指的手套。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后要一个类似蝙蝠衫的，这些手套好解决，弄一副手套剪了咱们就有了嘛。最难解决就是那个鞋，就类似匡威高帮鞋那个，那个时候是很奢侈的，而且是不知道哪儿卖的，没卖的地方。而且最标准的呢，我们自己起了个名字叫阴阳鞋，因为它有黑跟红颜色不一样，红对红、黑对黑，就是那种颜色不一样的。那得到这双鞋简直是一个梦想，这个装备是好难得到的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有一套在校园里横着膀子走那很**了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后后来是……那时候太原有一个商场叫天龙商场，然后我们同学传回消息天龙商场卖这个鞋。那时候从太原到……从汾阳到太原坐公共汽车，不是长途汽车，2块8的票价，攒钱攒好这个两块八，再把那个鞋钱攒好，几个同学偷偷的假装着说我去补英语去了，其实骗家里，就坐这个车去了太原，找到这个天龙商场真有卖，买回来。之后呢这个衣服啊、手套啊、这个鞋我不敢带回家，你知道吗，这个装备都在哪呢，都在我们一个同学家，开书摊的一个同学家，然后这个换下来都放到他家，然后就回去了，假装下了课了。第二天准备去跟人比武了，什么大家玩斗舞了，再去他家换上。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这怎么听都比我们条件好。我们当时是买那个白色的回力球鞋自己涂，是吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我也涂过，有过这个过渡期。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，但整体感觉比我们条件好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有特别好奇一个事，你后来知道我们当年练的那个所谓霹雳舞跟现在那个流派里是哪几种吗？现在不是什么locking、popping、什么breaking分很多吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我没研究这么细，但我觉得街舞基本上跟我们小时候那差不多。完了以后我发现，我长大的时候还有一个很不好的事，现在想起来有羞耻感，就是我们那时候真的是在马路边上跳，还没有你们那个条件，都是在马路边上练的，然后都是晚上吃完了晚饭出去，路灯很亮，然后我们就在路灯底下放个那个录音机。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们也干过这样。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也干过。后来我去……三十多岁去教书上课，然后年轻人呢有时候跟我装，他就说什么&quot;这个你不懂&quot;，我说什么不懂，都是我玩剩下的。然后就忍不住跟他们装，&quot;你看你们都是在空调房里练街舞，你们还好意思叫街舞，我们小时候练街舞都是在街头练的。&quot;</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，那才是街舞。那时候小时候我觉得有一个很困惑是什么呢，困惑就在于那个录音机声音太小了你知道吗，音乐不够震撼。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。我们倒是有一个同学家里有钱，有那个夏普800，很大，那个放在马路上声音也挺过瘾的，晚上。但是他要用八节一号电池，那个很奢侈。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">取之嘛，主要是耗电嘛。对。所以哎呀那个时候真是……反正我印象里是我因为一直在马路边跳，后来还跟年轻人装逼说你们是空调房里跳的，我们那个才是街舞，但是这是三十多岁干的事。我觉得练可以在空调房里练，这个舞玩呢应该在街上玩。但是我四十多岁以后突然想起来，有一次我就说哎呀我三十多为什么要跟二十多的装，这个很奇怪。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你有没有因为玩过这些，后边跟年轻一代显白、卖弄过这些吗？有过吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有，我觉得人家跳得挺专业的，比我们跳得好，我们都是土法炼钢自己瞎琢磨出来的。但我们后来也上过班，就是上不起他那个一期班很贵，我们一堆人凑钱一个人进去听头两节课出来给我们讲，然后第二个进去再听后两节课，就把它拼凑起来。其实是一个人去可以，但是谁也舍不得，就一次都不去，所以就变成有的时候去了个笨的，然后学了半天没学下来。他老是在台上讲的时候是给你分解动作的，但他没有学会，回来我们都骂他。这种也都有过。但是现在不知道为什么回想起来很快乐，可能是因为老了，那时候条件都很差，但现在一想还是很快乐。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得经过一段时间之后，无论什么年龄段的，回想过去总是有点甜蜜的东西在里面。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">可能是。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你们还起了一个团队名，还有一个名叫害虫，是因为当时那广告吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，就因为我们是害虫……我们是害虫，正义的来福灵，就因为这个广告。然后呢同时确实有点那个，自己也觉得自己是害虫，走哪都破坏，你知道吗，就起名叫害虫队。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">哎呀，聊这段我们两个老男人有点沉浸了，沉浸往事。然后那个当时应该学习成绩是比较差的吧，这么贪玩和样样都精？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我小学成绩跟初中初一初二成绩还可以，那时候是聪明就行，一学期都玩，对，突击一下就行。到高中就不行了，但其实初三就有一点不行了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">初三呢我记得那时候开始应该有化学跟物理了吧，然后就不太行了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不太行。那就面临一个问题——考高中。考高中对我是人生大考啊，就玩了、玩了，这个到处这个各种这个专车接送啊、什么出出进进有轿子啊这种岁月，你知道吗，完全陶醉在这里面，然后根本学习根本不上心你知道吗。然后真的要考高中了，面临一个什么问题，我们那个地方，我们县一共有三所高中，一所高中叫省立汾阳中学，1905还是07年就创办了，真的教学资源行，就我后来读那个高中。还有一个叫杏花中学，是在杏花镇，是在一个镇上。还有一个中学叫三泉中学，在三泉镇。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你就选择这三所？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不是你没法选择，按成绩划分。我不想去村里上学，县城里的孩子去村里受不了。那汾阳中学我是绝对考不上的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为你父亲是老师，但那时候你还有点小侥幸，就觉得还……让我爸……人情社会就跟小时候不一样？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">考高中时候我爸非常决绝，说你自己处理吧，不行你就去杏花上吧，你要想上汾中呢你自己想办法。一个是你成绩弄起来，成绩没弄起来分不够，然后我说爸你能不能跟谁说，哪个叔叔说一下，我不管你你自己去处理。然后说你去问问吧看有什么办法。我这是第一次硬着头皮去找一个我爸的朋友，他在汾中教书，我硬着头皮去了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">让你自己去找。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">去找，我就去找。那叔叔说，你没考上你没办法，你就好好学吧，大学再上个好学校。我说叔叔我真不想去那个杏花，上那个学校。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">因为我的分差不多可以去杏花中学，然后我叔叔有啥办法。我叔叔说你有体育特长吗，说体育特长可以按特长生招。我说真的？然后说你会这个会那个吗，什么篮球啊，我哥们我喜欢足球，我不喜欢篮球，那我劣势，抢球抢不过人家。我说篮球不行，不过有足球。他说没足球。说还有啥，你会跑步吗，你短跑怎么样？我说短跑不行。那你长跑怎么样？长跑应该还可以。然后说那你去测个长跑吧，看能不能达标，达标了的话那有可能降几分你能进来。哇塞那压力大的呀，就真的，绝对是拼了命了，我真的测过了。所以我是以体育特长生考上了汾阳中学。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后考上汾阳中学之后呢，很自然你是体育队的嘛？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">早上五点就要起床受罪，五点半到了学校就要集训了，天不亮就跑，一个冬天下来发愁死了，还不如没考上。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还是比没考上强一点。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我是体育生在汾阳中学，然后这个高一吧，高一就训练比较多，一到冬天早上要跑。高二就也就散了，大家其他的也就准备高考了，分科了嘛，分文理科。高一那个时候真的是夏天也好冬天也好都五六点钟要起床。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那老天基本还是公平的，你不好好学习肯定是……</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，罚你跑步，早上，也说不上哪个更受罪。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后那个时期是看电影人很多吗，在高中的时代？因为看到早期的采访里说是看了那个《黄土地》然后想当导演，那个是高中时代吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那是在后来了。其实看电影我最初呢……</div></div>
+<h2 class="dlg" id="b8"><span class="ht">看电影的启蒙：从老片到录像厅</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">看电影一开始……回顾看电影一开始是跟着我妈看，因为我妈是个影迷爱看电影，记事以来我妈带着看的电影都是我不爱看的。就那时候我小时候有很多老片子在重放，老片子重放的像《一江春水向东流》啊什么这些影片，跟着我妈看我就睡觉，然后看一会就睡着，而且一部电影看好几回一年。她是因为喜欢里边的某个男明星之类的吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就家常里短嘛，《八年离乱》是吧，就抗战，然后里面有这种情感的背叛啊什么是吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我妈里面我看这些都是她……有那些老一辈的男明星，她是他粉丝，但那个时候还没有这些词。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那应该也有，应该有她喜欢的演员是吧，要不然解释不了一个电影反复看反复看。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也是这个电影它也反复演，因为没多少电影。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后就跟着我妈看，我妈还看什么《桃花扇》啊什么后来。但是跟着她看这些电影。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">听起来看的还挺痛苦。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那个年代看的，就主体上觉得没劲，但有两部影片我是觉得特别来劲的，是我爸带我看的，我妈跟我爸看电影选的不一样。我爸带我看过一场什么呢，很早，是这个《平原游击队》，哇那个好开心啊，看起码打仗的那种惊险的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">男孩都爱。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。然后再长大一点大概到十岁左右吧，十岁十一岁，是那个《戴手铐的旅客》，彩色电影，然后这个惊险的、又是公路片，从北京一直遮藏到云南，一路风光的转换，猫捉老鼠那种，火车上打斗那些，后来直升飞机好像也出现了，飞机也出现了，看得特别过瘾。我父亲带我看的这种影片很吸引我。后来再长大一些，我妈的商场他们整个公司——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">在我们汾阳剧院前面建了一个叫做剧院门市部，然后我妈就调到那个门市部来工作。那个门市部呢，它就是因为后面有汾阳大剧院，所以就有一个附属的这样的一个卖烟啊、卖酒啊、卖副食的地方，可以不用买票。然后就跟那些看门的叔叔们混得很熟你知道吗，然后我那时候就开始自己看电影也不用买票，有时候不买票就点个头就进去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">怎么听起来你青少年时代这么幸福，现在是随便吃糖，然后又能那个什么。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也就这点东西了，这个不是什么特权，这是人情社会，那个年代就是这样的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你赶上了那个，对，就命运的巧合嘛。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">就有时候看个开头，有时候看个结尾，有时候从头看到尾。有几部电影我印象特别深，就是那个三口百惠跟三浦友和，有一个电影叫《绝恋》还是什么什么《恋》。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也看过，那时候引进的就那么几部。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对。然后看完之后有一种很惆怅的感觉，那时候还不懂爱情但很惆怅，毛孩子第一次有那种惆怅。对。然后接下来呢就主要是录像厅了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电影院就被我们抛弃了，因为没有好片子。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有好片子，不刺激。然后就开始有录像厅，录像厅那就有时间就去，两毛钱一部。然后我看的第一部录像是《广东好汉》，第二部录像叫做《独臂刀》，张彻的，后来我知道是张彻的，小时候也不知道那是什么。第三部叫做《惩罚》，这是我看的头三部录像，记忆犹新，后面就看乱了就忘了是什么了。头几部我记得，但反正看了很多很多，那就完全进入到一个另外一个电影世界了，那确实就变成一个影迷。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">像什么？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">后来像这个《喋血双雄》啊、《英雄本色》啊、这个什么《侠女》啊，胡金铨的、张彻的，几乎就看全了。那后来我跟我合作的制片人跟摄影师都香港人，我们聊起那个年代的香港片，他们真的没我看得多，一说&quot;啊你这个也看过那个也看过&quot;，都是在录像店看的，有的很清楚啊，有的那录像带已经模糊的就……定睛那么看，而且看着看着有时候还有什么三十秒一分钟全是雪花点，他就给你快倒过去，什么都有，那种也有，偶尔也会有演唱会，像邓丽君演唱会什么也看一看。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你看那些的时候并没有想过要从事这个行业？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有，就觉得好玩被吸引，也可能觉得离我们太遥远了，我根本觉得怎么可能拍电影，怎么可能进入到电影。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">在我们的生活里是个神话般的存在。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">天外来物吧，当然你知道它是从遥远的地方来的，可能从首都来的，从省会来的，有一帮人是神一样的人在做这件事情，产生了这么多的电影。但是后来也是各方面条件好起来了，然后才会有有这样的想法。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就有点像我小的时候看很多那种世界知名的汽车、电子巨头那些创业故事、企业家传记什么的，感觉像看神话故事、武侠小说那种感觉。但是等到后边我们国家这个制造业起来了之后，突然有一天发现好像能做手机，然后去做的时候，当时很多人问说你个文科生怎么想到做手机，我说我做梦都没想过、没奢望过这个事，但没想到到了一个点，时代机遇来了竟然能做这样的事。那你看《黄土地》是高中毕业以后？</div></div>
+<h2 class="dlg" id="b9"><span class="ht">晃荡的一年与“中等教育”的劝说</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">高中毕业了以后我晃荡了一年，我特别开心。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当时是没考上大学？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没考上啊。就我高考数学考了17分，然后英语考了59分，这是我记得最清楚的。我为什么记得数学考了17分能记住呢，是因为数学是我的最短板。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">跟我一模一样。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后为什么这个英语考了59分我记得呢，因为英语也是我的短板，我发愤学了几天竟然混到了59，我觉得好有成效。真的一个学期，或者真的三年都没学，然后突击个几天，还是聪明。那当然就没考上了。没考上呢就晃荡，我爸觉得这个……那时候人生处在一个十字路口，我是一点不受影响，我开心极了你知道吗。我那时候的生活是什么呢，因为我很多同学，我的同学是这样的，小学毕业一批就不上了，他们已经就业很久你知道吗，这个初中毕业又有一批不上了，然后高中我毕业了没得上了是吧，我们这些朋友就会合了，在街上。那我那时候的生活我觉得非常的潇洒，每天特别愉快，就是下午下午的时候，我们山西人都有睡午觉的习惯，中午吃完面条得眯一个半小时，然后眯一个半小时起来之后精力充沛，感觉世界全是新的，骑一个自行车去哪呢，比如说今天去我朋友开的店，他干嘛的呢卖轴承的，就坐在那，他的业务也有一搭没一搭的，我们好多同学就聚在那了，就聊天，然后吹牛，然后呢一会儿又去另一个同学家，晚上呢可能看个电影或者喝顿酒。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我现在都非常怀念这样的日子，生活里没别的内容，就生活两个字。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有焦虑迷茫？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有，好好活着。那当然有就业的问题了，我妈呢真的是无所谓啥大学不大学的，那个年代家长想得开的不多，我妈能想得开，看……我妈觉得可能也可能就我们家就我一个儿子，我妈觉得你不出去更开心是吧，守着她。然后我妈呢就要准备给我找工作了，给我找的这个我记得，我们那时候开始成立这个保险公司，好像是什么人保还是什么保险公司要招人，我妈后来转做这个商场的财务人员，她觉得这个财务工作特别好，保险公司特别有前途，就很想让我去保险公司上班。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但这不需要财务背景吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">要考试。然后我说我数学不行，我妈说你去考吧，你不看重那个，你可以做别的岗位，保险公司有很多岗位可以做，办事员嘛、打字嘛、办公室。然后我也不愿意，我不愿意被人管着。然后我那时候其实私底下我想开个小店，就是不用上下班，自己安排自己的时间，然后开个小的食品店也行，开个小的烟店也行是吧，怎么样都可以。然后我不太想上班，确实这是一次机会，我当时要是去考肯定能上这个班。然后接下来呢就是……应该忘了哪一年了，就是建设银行在我们那儿筹建，中国建设银行又招人，我妈说保险公司你就没去，这个银行很好啊，我还是不愿意去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就多傻。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后这个我爸呢也不积极。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我爸一心想让我上大学。然后后来我爸就跟我……我就混了这么一段时间。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有多长时间？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">有一年吧，荒废了有一年。对。然后我父亲就跟我说，你啊……我爸说话有时候特别有技巧，我爸说你啊完成了中等教育——对，高中——一个人啊最好能接受高等教育，他这个中等教育跟高等教育把我搞晕了，确实让我深思了，很自卑，我是中等教育，你应该接受一个高等教育。我说爸我考不上，你别让我补习啊，我不是考不上。我爸说你这样吧，你学美术吧。说学美术？那时候考美术院校，我不知道现在怎么样，那时候那个美术院校不用考数学，说数学不计入分，而且这个招生分数很低，主要是专业。我说我也不会画吧。我爸说那就学嘛。那我说这个我去哪儿学啊，咱们汾阳也没学的地方。我爸说去太原啊，太原有美术班啊。我一听来劲了，去太原啊，不用在家待着了是吧，我爸还同意，又是完成他的使命。然后我说行，然后我就去了太原。那当时呢太原是山西大学美术系，就是有一个考前学习班，一年制的，就你这一年学到这个考专业考试你就去考。那时候我的理想是什么呢，最高考到山西大学美术系，然后保底呢是吕梁师专或者晋中师专的美术系，都有美术系，我觉得这两个师专那时候应该算专科吧，也算个大学嘛。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那山西大学就是我梦想的一个顶点。然后就去学了。那在学的过程中就很偶然看了《黄土地》，我觉得人有时候有一些东西进入到你的意识里面它是突然的，就像飞进来一个光或者飞进来一个东西一样。之前其实没有一个明确的生活目标或者一个自己非做不可的事情。那当然中间呢，比如说写小说也好，也试着写过小说，也写过诗，我那时候小说写得还不错，虽然只发表了两篇，但是当时……对，我那瞎混的那一年啊，在哪混呢，有段时间我是在山西作协混的，那时候我投稿投了一个短篇小说，就被我们作协的老师看中了，正好那个作协有个叫读书改稿班，就是你来还发生活费呢，然后有一些老师教你怎么改稿子，然后再给你开点书目，我就参加了这个班你知道吗，就开始写小说什么的。但是看了《黄土地》之后，那时候也没立志要做作家，我也觉得写作我并不是那么热爱，也没那么有能力。有时候它跟你的能力有关，你如果一写感觉自己很被自己写的东西激动感染，你会往下走吗？我觉得我写的还行，但是离我读过的那些东西差了远去了，没有人家那种语言能力、那种想象力和那种洞察力，完全理解。但是写的也还过关还可以，但是也没说是要作为我的职业。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我那时候是没理想的一个人。我觉得经常有人问孩子们说，你的理想是什么，我觉得那么小他能有啥理想啊？这个理想，南方人讲叫&quot;还魂&quot;。南方人有一种说法，是孩子们到了十一二岁才能获得灵魂。获得灵魂，是你相对有一个稳定的人格了，不是那么闹了，什么场合都哭，哭闹不分场合。那成长一定有这个阶段，他们认为十几岁有一个魂魄回来的感觉，叫回魂。我很认同这个说法，因为我们一开始动物性很强嘛，小孩嘛，你还没有心智，没成熟。那么其实从这个还魂到你真正确立一个目标，它是需要时间的，就是很茫然的，而且生活本身的吸引力是很大的——开心啊，聊天、下棋、打麻将、喝酒、看电影，我觉得这是生活的全部内容了，你还要什么理想？我觉得过好日子就可以了。但是真的有时候有些契机，他就好像一个光一样，就像你再次还魂一样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">老天注定的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，那天是很偶然。因为我们有很多朋友在太原，那时候还没电话，没有手机，传呼机什么都没有。我们比如上次约会约好了，这个周末我们几点几分在哪见，一起玩。那一天我约好朋友，在我们学画的宿舍等了很久，大概约了两三点还没来。那个年代就这样，三点没来咱就走吧，肯定是有事耽搁了，他也没法通知你。我就出来了，又像小时候一样，走到那个街上，不知道该往哪去。</div></div>
+<h2 class="dlg" id="b10"><span class="ht">《黄土地》的光：决定做电影</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">去哪呢？去书店转转，去再找哪个朋友，不知道，那天就瞎溜达吧。我说去看电影吧。因为我们旁边有一个山西公路局的俱乐部，叫公路俱乐部，那个地方平常放电影。那个时候放电影已经变成什么呢？变成跟录像一样，循环放好几部，反正你买张票进去，演到哪儿算哪儿，你有本事你又看七八个小时。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电影院也有这样的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也有这样的，就循环放映。那我就买了张票进去了。进去之后呢，循环了一会儿就有个新电影在放了，上一个电影结束了，放《黄土地》。《黄土地》这个电影我当然知道了，他八十年代就有了。那时候因为它是黄土地嘛，不知道为什么那时候山西电视台老介绍这个电影，我知道，没看过，可能是因为拿了很多奖吧，当时是新电影，新一代导演的开山之作，知名度很高。但我没看过，但我真正看就看进去了，越看越激动。不瞒你说，眼泪汪汪，哭着看完的。那个电影其实是很弱情节、闪回化的一个电影。但是我家就是在黄土地。这个汾阳呢，它是这样的，一半是在晋中平原，平原就是平原，然后一半在吕梁山区，往西走大概五公里、十公里就进入黄土地了。然后我妈妈那边，我的两个姨妈她们都在农村生活，我妈是考学考到县城，然后在县城落户，等于变成所谓市民。但我的大姨、二姨她们都是农村的，都在那个黄土地上，我一般来说寒暑假总会去住几天，所以我非常熟悉那个地貌、人的衣着、表情、状态。那《黄土地》讲的是三四十年代的故事。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">但是里面人的状态、样貌，那种劳作、困顿，几乎没有变化。就我没有想到，我这么熟悉的生活会出现在电影里，这么熟悉的那个土地、空间、人的样貌，那半天不说话坐在那儿。确实你知道吗，小时候我那些姨父们坐在炕头抽着烟，确实一晚上，灯很昏暗，啪嗒啪嗒抽着烟，然后灯一吹，睡吧，就睡了，就这样子。我很感动，看完之后出来，我觉得我要做电影，就好像是所谓还魂一样，你又有了一个更清晰的生活。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那当时的想法，是觉得这些也是你想表达的呢，还是觉得这个我也能干？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不是我也能干，我觉得就是佩服自己。佩服自己就是什么呢，我们都在日常里，都在这个生活里，这个《黄土地》它带给我的是熟悉的陌生感。我没有用这样的角度看到、这样地观察我们的生活，我觉得它这个电影独特的观察角度就吸引了我。我觉得我想能做到这样，能发现自己这么熟悉、熟视无睹的生活，原来你从另一个角度看，还那么有诗意、那么悲伤，或者说那么让人产生非常复杂的情绪。包括里面很多华彩段落，像求雨啊，像这个腰鼓啊。这些里面有一个细节，是我眼泪哗就下来了，它跟我个体的生活经验有关。你知道我们山西啊，我不知道其他省市县怎么样，汾阳在我小时候——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这个鱼啊吃不上的，只有冬天有带鱼。什么鲤鱼啊、鲈鱼啊，鲤鱼还听说过，其他我们现在日常那些鱼都没听说过，带鱼也是冻了不知道多少年的，都是冷冻的。那里面呢就有一个镜头，就是这个喜宴，然后上来一个木头鱼，浇了汁，那里面的人物就拿筷子敲了敲那个木头，说咱就图个喜庆。就这种鱼这个东西我们吃不上，但它又必须搬上桌子，说不清啥感觉，我这眼泪就下来了，好委屈的感觉你知道吗。然后就觉得这电影拍得太美了，咱能不能学这个，慢慢的也能拍一个这样的东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你小伙子的时候看了那么多那种警匪片、黑帮片，那种也看得那么心潮澎湃，但从来没想过要去拍摄这些？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有。你看我小时候看那个武打片、录像，最直接的生理感受是什么呢，就我一看完之后——一般是我们连看两部，看完之后从那个录像厅出来，碰到同龄人，撞人家一下，准备来一场战争，你知道吗，是这种感受。它是不一样的。但是看完《黄土地》，我觉得怎么才能拍电影。感觉好像那些是更偏生理的爽感。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">而且可能是那个年龄，那个年龄看了之后很爽，然后就很想在这个身体上发泄。然后那个《黄土地》可能也年纪大了，有那种心灵上的感叹，19岁了、20岁了，有那个心灵上的——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你确实有了一些自己的内心世界了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">明白，完全理解。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们当年也是差不多同样岁数，你看过的我几乎每个都看过那种。我倒没想当导演那时候，但就感觉很震撼，电影还能这个样子。然后我想知道的是，那个时候美术就没再学下去，然后就去报考电影学院了？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，就报电影。一开始也不知道该怎么弄。然后你知道我们那个学画啊，我觉得有机会拍个这样的电影。我们那个学画的同学里面，有这个二十四五岁的，考了六次七次，没考上都有，但我不知道这位仁兄现在怎么样啊。过去我们有一个跟我们不是同学，但是在同一个学画的环境里，因为那时候中央美院在王府井嘛，在王府井那儿，然后我们这个同学姓王吧，他直接就改名叫王府井，我们不知道他真名叫什么，反正他叫王府井，很好的艺名。然后也是从西藏回来的，或者从版纳回来的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就算镀过金了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，就是采风过的，穿一个大风衣，留着披肩长发这种状态。我们就属于这种琢磨着，我自己就琢磨着，学画是个过渡，你不能每天没事干嘛，但我就想考电影学院，我就想做电影。因为有王府井这样的前辈，他们很懂考学的。比如说闻所未闻的，学画的，我有一次人家同学跟我说，你可以考景德镇陶瓷学院，我说为什么我学画我考陶瓷？陶瓷学院考美术啊，这样的。然后又说什么苏州纺织学院、</div></div>
+<h2 class="dlg" id="b11"><span class="ht">学画，考北京电影学院文学系</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">北京服装学院，这都是以前——我们都知道这个美术系。那个美院老前辈才教我们说，那些都是，包括什么上戏啊、中戏啊都有美术部门的，你才明白美术院校其实很多的，还有这种什么工业设计啊什么都属于美术。那我们这个考学老前辈就跟我说，你喜欢电影你就考北京电影学院，我说北京电影学院怎么考啊，然后跟我那个招生指南讲得很清楚，说你注意《大众电影》会登北京电影学院的招生启事，就考专业。我按照这个前辈们的指引买杂志，关注到了，大概应该就是12月或者1月、2月，我忘了，反正专业考试之前，《大众电影》真的就登了北京电影学院明年要招生什么什么专业、每个专业多少人、几号报名、几号考试，就有这么一个启事了，那就比较清晰了。接下来一个问题就是怎么准备呢？我一看咱都不会啊，是吧。这个考啥呢，有文学系，文学系我觉得这咱可以啊，咱不是写诗吗，能混一混吗，那就考文学。但是那个考试课程里面有这种叫什么文艺理论基础、电影基础常识类似这种吧，具体我忘了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你觉得学嘛，去哪儿学呢？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">肯定没地方学嘛，就买书嘛。接下来就发愁了，买不到书啊。我把太原的书店跑遍了，我找到两本跟电影有关的书，一本是浙江教育出版社出版的大学什么美学教程，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">里面大概有个四五十页是介绍电影的，还不是专门的，就美学教程里的一部分。还有一个，买到了一本意大利新现实主义电影剧本集，我忘了它分为上下两集，我不是买到上集就是买到下集，还没买全。就这两本书是能买到的教材。另外一个呢，他这个招生启事上要有口试，分初试、复试是吧，复试还要口试，口试怎么准备呢？老前辈又说了，肯定会问你喜欢什么电影、你最近看过什么。OK，那咱就多看点电影吧。也没地方看，人家那个书里面讲的那些电影咱也没看过，那时候也找不到。那时候是什么年代呢，LD时代，还是录像厅，但是升级了，画质好极了。反正就考前了，那两年我记得最深的，就是看那个《与狼共舞》。《与狼共舞》是LD经常放的，然后就有奥斯卡获奖片，就是艺术片，然后就去看《与狼共舞》，看好几遍，就以《与狼共舞》作为一个切入口。我就想，反正万变不离其中，只要口试问到，不管是你最喜欢的电影场面还是最喜欢的电影，咱都是《与狼共舞》，而且还跟得上时代形势。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，还是比较新的电影。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">反正就这样，可想而知嘛，就跌跌撞撞到93年才到了电影学院。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">几次才去？三次？还听说前面两次是考的导演系，最后一次——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有没有，我从来没报过导演系，那个是谣传，从来没报过导演系，一直是文学系。因为咱真的啥都不会，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">你考啥导演系啊？那导演系我猜着都知道要有很多相对要专业一些的问题，是吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">偏实战的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那时候确实，最大的一个目标也不是当导演，能从事跟电影相关的工作就满足了，先混进去再说。我们那个时候很多思路都是那样的，因为条件太差了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我听你还有一个比较幸运的，就是这个长大过程里还经常碰到一些特别聪明、特别有世俗化精明的这种大哥，这个还挺重要的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那有，是吧，那有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我小时候在山沟里，好像身边也没有这种大哥，真有什么人生困惑或者要解决一个大一点的问题，也没人能教我。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我比较幸运的就是我姐。她看我一直在家乡鬼混，她就很担心，她说你要没想好干啥——我那时候还挺迷茫的——她说你要没想好干啥，你鬼混也行，你到大城市鬼混，别在村里鬼混，把自己混成傻子的。然后我说我怎么到城里鬼混呢？她说她当时在天津工作，为了投资，她在郊区一个合资企业工作，也不回家，就住那的宿舍，但她为了投资在天津市里买了个房子。她说你看我买那个房子空着，你也不用住宿的钱，然后你自己想办法解决吃饭的问题，你到大城市鬼混。然后我一想挺吸引人的，我就到天津鬼混，这是我一个命运的转折点。但是我在老家的时候真的没有任何聪明一点的、很懂的那种大哥你去请教点什么，印象里一个都没有。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但你听起来你那时候还少了好几个有几个关键的人生节点，确实有一些——也不一定是大哥了，有些老师，就是大几岁的那种。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我有一个很奇怪的，我好多好朋友是比我大的，</div></div>
+<h2 class="dlg" id="b12"><span class="ht">“找熟”、贵人与中年人的打架</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">甚至大十岁，就能够相处得很好，然后变成朋友，这个其实也是挺幸运的事，可能也会相对来说会找熟吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">小时候你像在街头，就是跟着大哥魏东哥什么的，他们带来那种，把张帝带到你的身边，把邓丽君带到你身边，是吧，带着。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">有一个哥哥，他是带我看电视的。我懂事以后开始有电视了，但是家庭没有，你说我们怎么看电视呢，我也不知道去哪看，就我那哥哥带着我，有时候比如说我们家旁边是公安局，汾阳公安局，就带我去公安局看电视。连着看了两三天之后，公安局就把我轰出来了，不让孩子们看了，又带我去另一个单位教育局，看几天又被哄出来了，带我去广播局看。就完全是哥哥们来打理，说咱去哪定个目标，去了悄悄地坐进去，坐在后面安静地看，人家也看，看算了你就看吧。什么《家里生赶死队》，什么《大西洋底来的人》，类似这些都是这么看下来的，就是你有人带。因为我家庭，我只有一个姐姐，我姐姐比我大六岁，女孩嘛很本分的，那我在街上全靠这些哥哥们。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那还是你有某些特质能吸引他们愿意带你玩吧。我小时候也很羡慕跟着那些哥哥玩，他老嫌你小屁孩就不带你玩，没有这种吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">倒没有。我也追着屁股后边想跟一些我哥哥的朋友们玩之类的，他们都嫌小屁孩不愿意带我，那我也不知道为什么他们喜欢带着我。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你还是找熟。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">但你知道吗，我老罗，你知道我有从上小学前到上小学，我是有我的收入来源的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为什么呢？收入很重要。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，当然，小时候说我有一个哥哥带着我干嘛呢，我真的是提着那个笼子啊跟他，他带着我到那个荒郊野岭捡碎玻璃、捡铁、捡废品，拿到废品之后再卖，有时候卖两块钱。那个年代还没上小学，一两块钱在手很陡的。然后到了我小学时候——我今天想起来，为什么小学时候他有时候跟你的一些经济能力是有关的——小学时候我发现了一个秘密，一天弄个五六毛钱是没问题的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电影院怎么弄？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">电影院那时候售票窗口是一个只能伸进一只手的窗口，它一共有两个窗口，两个售票员，手伸进去拿票拿钱，找的钱出来。然后有一天我就发现，这个电影一开演售票口就没人了，小屁孩在那玩，我发现那个土里面有钢镚，我就捡起来，然后一踢又一个钢镚，一踢又一个钢镚，我就发现哇塞这个地方是有钢镚的地方。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你说在售票口那个地上？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那边都没有水泥，都是土地。浮土一层，那个浮土把它盖住，盖住之后也没人关注，结果我很偶然就发现了，所以我就发现这个地方是可以捡到钱的，真是捡钱啊，虽然是很少。然后你踢一踢，踢个两毛钱、一毛钱、三毛钱是没问题的，而且没有空走过，只要卖完票你去踢，总能踢出钱来。那手里有点钱挺重要的，你得做事嘛是吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这个可能还有一个原因，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在的年轻人已经不知道，你记得我们小的时候中国就没有排队这一说。北京上海不知道，小县城小村镇是没有排队这一说的。你记得我们当年那个电影院门口，一到开场前大家热门的票抢的时候，当年有那个新闻照片，现在我在网上找得到，拍下来的照片，所有的人没有任何体面的感觉，互相挤啊，男女老少互相挤，基本上是叫做垂直发展。买票一般最少分两层，一层是站在地面上，另一层是被举起来的，趴在人家脑袋上，这么伸手进去的。现在看全是野蛮人，但我们小时候就这样。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">正因为这样可能会掉了，可能会掉下来掉些钢镚也没发现，所以你很早就能想办法弄到这些零花钱。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">反正稀里糊涂的，就那个年代，特别小学那个年代。后来为什么我说小学呢，到初中高中就规范了，水泥地了，这种东西没了，长大了也不好意思了。小孩呢，八九岁的时候正淘气的时候。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">随着建筑的改变，这个生财之道也就没有了。还能想到找碎玻璃、废钢铁什么弄。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那不是想到，是跟着人家，跟着那些大哥。那些大哥确实是很早有经济头脑，逼的，一点零花钱，穷的。不像现在比如说家长定期给孩子零花钱，没零花。我们那个年代哪有零花钱，恨不得连买课本、买作业本都买不起。那个年代就逼着孩子去找，各想其路。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你像我们也有那种，你像我们上初中时候很多同学寒暑假都要打工的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那打工啊。初中才多大，十几岁，十二三岁，我不知道算不算童工。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">算童工，只不过那时候没这个概念。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没这个概念。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那当时说计划是三年，就是如果第三年又失败的话你还会坚持吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">你觉得我就不坚持了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你自己定了就是准备拼个三年？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我是这样的。我就很激动，很想从事电影工作，但是同时我觉得，你就拼几年考不上咱就回家了。我可能也跟山西人很恋家，我觉得家庭乐趣，到现在我有时候很怀念我高考后的那种状态。我写过一篇文章叫《高考后放虎归山》，确实有那种放虎归山的感觉。我是体验过这种日常生活，一个小的县城、城市间的快乐，没有任何压力，然后人来人往，充满了人情。当然人情里面也难免有很多磕碰，我给你举个例子，我差不多十几年前回老家，我们同学吃饭，我就特别感慨，我们同学吃饭吃得要打起来了。为啥打起来了？就一些鸡毛蒜皮的事，打得我们就拉，把我们同学拉开之后，双方冷静了，拥抱着，一直很快乐地哭着。然后我有一个同学说了一句金句，他说这是他们交流情感的方法，打一架是他们这几个接近中年的人交流情感的方法，很久没有肢体这么亲密地碰过了，到了中年还是这个习惯。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还是这个习惯。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后他不是各自回家，要拥抱着哭，哭完之后很畅快。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们年轻时候是一直有这个习惯的，有的时候一帮朋友老也没见，见着聊着聊着就打起来，打完了以后又高高兴兴散了。但是到中年以后好像就很少见。是你自己也这样吗？你中年以后还跟人有过肢体冲突吗，包括什么老家的哥们之类的？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">疫情前打过一架，那都已经很大了。这个打架很有趣，这个我是完全正义的一方，不像小时候经常是混蛋的一方。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我是后来——确实小时候很危险，在于很多机会你确实就可能变成个混蛋，确实就沦陷了。但是我想可能也跟喜欢写诗或者这些有关，有时候它会挽救你，把你拎起来，就是你跟混蛋和混蛋在一起的时候，你就觉得我至少还是个读书的混蛋。你慢慢的会有一些底线，有些事是不能触碰的，有些原则就不能调皮到那个程度。你说坏吧，不坏，就调皮你知道吗。然后就是那些时候把你拉回来，没有突破这个底线，最后你慢慢的被某种东西拯救，你变得很有原则、很有规矩。我觉得它也是一个自然的成长的阶段。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，可能也有很多偶然性。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">非常多偶然性。对，那就是我那个时候，有一天我剪完片子，剪完片子很晚了，因为你要剪片子——要不我现在都磨黑镜——我一般都十几个小时坐在剪辑室一直干。而剪辑室我没办法关灯，然后就看那个显示器，看素材，试着各种方案，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个为什么关灯呢？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">特别伤眼睛了，一种心理暗示，咱看电影不是关着灯看吗，觉得那个氛围才是电影感。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">太上眼了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，所以就眼睛受伤嘛，这是后话了。就有一天我剪完片子，大脑高度兴奋，然后快到我们家楼下，我们家楼下有一排咖啡厅、酒吧，我说我坐会吧。然后我就跟我朋友一起喝东西、抽烟，然后旁边呢就有几个人，谩骂那个女服务员，骂得那个脏啊，完全是人格侮辱。然后真的听不下去，一个正常的人在旁边是听不下去的，我就生气了。然后我呢，当然是年纪已经不轻了是吧，也知道怎么处理了。我就跟那个服务员说，姑娘你进去吧，因为那姑娘是被骂傻了，不动地就接受骂。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你走开，我说你进去吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对，姑娘就进去了。这三个大哥不开心了，这三个大哥觉得我给这个服务员出头，直接要打我你知道吗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">多大岁数？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">他们应该比我大个五六岁吧，他们也这么大了，还不是年轻的混蛋。不是年轻人，年轻人很礼貌，现在年轻人基本上都比较有规则，不会乱来的。就比我们大几个人，可能比我们更野，我们是后天的克服自己弱点，他们可能还保留了这些，可能也喝了点。他非要打我，我是无比理性，我说大哥咱真的要打吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我说这个不好，咱们都年纪不轻了，这个不好看，不体面，咱不要打了。这个对方呢，他就觉得我示弱你知道吗，上头了你知道吗，推推嚷嚷的。我说真的要打吗？我已经打你了，怎么是真的假的呀，就蹬鼻子上脸的。那个是非常非常有仪式感你知道吗，就极其冷静，然后我把我的表摘下了。小时候留的习惯，我上初中就戴表了，我妈给我买的电子表，那时候很珍贵，哪怕是个电子表，不能坏。我把表摘下来揣到我的裤兜里，保护好，袖子卷起来。其实我觉得就你推两下就算了，别继续了，哎呀不行，你越跟他说咱体面点这个不好，只要你动手是违法的，越来劲你知道吗。我说大哥非要打，那打得过我，我没动手，我就散，大哥就直接自己摔到花池里面了，俩大哥都摔得血乎拉碴的。哇，你知道当时的感觉是什么吗，我还行，中年人很需要这个，像经历了一次全面体检，你知道吗，我还行，很敏捷，我没出一拳、没出一腿，就是躲闪，就身形，两个人自己摔，那不怪我啊，你打我我不能不躲，我又没碰你，你自己摔花池里，摔得流血。那这两张哥直接就打电话报警，他们报警。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他还有脸报警？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，有脸报警。报完警之后警察就来了，很简单，调监控，一调监控，这位先生你回去吧，我就回家了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后那两位先生直接跟服务员，又告他们骂什么的，就解决去了。完了之后我觉得真的像一个全面体检，来劲，特别高兴，特别高兴。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你这些年还有锻炼吗？身体什么的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">有锻炼，平时也锻炼。我现在是很规律，一般七点起床，起床之后跑步。不是那种，就是快走，一般走50分钟，每天50分钟。完了之后有时候就是八段锦打一下，有时候这个形意拳耍两下，动动筋骨。因为走路它有时候运动幅度不是太大。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我作为你的铁粉，对这块还完全不了解呢。我一直就觉得你特别文艺，然后小时候呢，反正我们小地方长大，淘气什么的都胡闹过，但我不知道你现在还都保持得这么好，还每天锻炼。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">跟我们职业有关，电影它是个体力活，真是个体力活，伤身体的活。一般来说比如说进入拍摄阶段，两个月或者三个月，每天是高强度的工作。因为我们电影一般成本也很低，就是靠精力来换取一些拍摄空间。一般我自己平均是12个小时的拍摄，拍完之后作为导演你还得处理很多第二天的事情，所以他对体力的要求是很高的。可能因为这个吧，再加上我也喜欢运动，然后就保持了运动习惯。但是关于这个职业跟运动的关系，其实我是有一个对我印象很深的故事。我们那时候电影学院的头两年，</div></div>
+<h2 class="dlg" id="b13"><span class="ht">电影学院：晨跑、看罗丹与“两个电影学院”</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">头两年是要求早上晨跑的、跑步的。但说实话你必须去签个到，回去睡没问题。但我呢就是喜欢运动，晨跑也晨跑跑。有一天我们有一个老教授，叫什么呢，林洪桐老教授，他是表演系的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">林教授之前没出现过？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">有一天他就出现了，出现了他就跑步，一圈一圈地跑，那么连续地跑了有个几天。学生就跟老师就说，林老师您怎么以前不出来现在出来？林老师说，我下个月要进组了。我特别感动，就是他们准备一个电影，不单是说我案头做得多好、我分镜头，人家体能都在准备。当时那时候我二十出头，就是体力正好的时候。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没有意识到这个问题，没有特别敏感。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，你看那个就一下子，他说要进组了，我觉得真的很感动，就是人家为了拍一部电影体能都在准备，都在准备。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我也是打小听崔健，后来到了四五十岁，他比我大，他到了四五十岁，我看了新闻报道说他那个演唱会即将开了，然后就恢复去那个健身房健身了。我当时也感动得不行，我说还能这样。其实确实别人到中年发现不这样也不行。然后那个当时刚到北京电影学院的时候，有什么很大的冲击或震撼的这些东西吗？有没有印象？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">因为93年去电影学院，其实对北京整个有一些认识了。我自己第一次来北京，我忘了是哪一年了，那时候我在学画画。然后有一年呢，突然我们同学说在开这个，中国美术馆在办一个罗丹的雕塑展，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那就哇，是吧，就学美术嘛，你很激动，朝圣，很激动要来朝圣。然后我们一帮同学就从太原去北京。那时候还没有高速公路，还是绿皮火车年代。然后我们就买了火车票，是很精打细算的，因为大家都没什么钱。那我们买的票呢是什么呢，就是我们晚上大概七点多的一班这个火车，然后兜兜转转到了北京大概是不到早上六点钟。那今天如果开车从太原到北京最快五个小时就到了，那个绿皮火车年代在山里转啊转一夜，每一站都停。然后我们就选一个正好可以在火车上过一夜，然后一大早到了北京呢，我们就坐那个电车，108还是十几路啊，从北京站一直坐到美术馆，下来还没开门呢，然后在旁边就等，等那个开门之后就进去看。看完之后呢，回头坐电车坐到北京站，坐晚上的火车回太原。这一趟呢等于是两个夜晚都在火车上，你不用住店，省了一些钱。然后呢这个展览也看了。最初对北京的记忆就是这个，火车站到美术馆，美术馆到火车站，直接就回去了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">没逛？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有更多的钱，但是你眼睛会看嘛，周围你看那个时候它整个那个形态，其实北方城市都差不多。当然是有很多高楼，但是实际上还是成片的胡同、成片的平房，所以北京很熟悉，没有很大视觉冲击。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你们天安门也没去吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没去，就奔着美术馆去的。我生平第一次到北京，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">落地就跟个土鳖似的，一个劲问天安门在哪。然后司机说咱们先得去什么，明天才去。然后我就说那能不能今天走的路上路过一下，我们看一眼。然后他说那个实在太绕了。完了我还后边有怨气，我心里说能有多绕呢。那个时候没有那种一个巨大的城市可以大到什么程度那种概念，没有一站有多少距离的那个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你们这帮文艺青年就是去看罗丹，那么兴奋，然后也没想到去什么景点看看，是吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没条件。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你一住，留不得住一夜吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">就没有第二天的费用，这费用没有啊，你必须坐那天的回去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你们几个坏小子没想到逃票什么的？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我们的前辈那个年代是逃票的，我们已经不做这种事情了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">明白规矩，人啊，就是体面了。所以说的是第一次到北京。那后来到电影学院的时候是已经去过几次北京了？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">去过，因为考试嘛，考了三年，考专业都要来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那后来考试来呢，当然就瞎逛了，是吧？颐和园逛一逛，什么北海逛一逛，天安门转一转。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后还有书店。那个时候呢，就是这个西四有一个电影书店，我不知道这个书店还在不在，是那个电影出版社的一个书店，它紧挨着西四的新华书店。然后每次来都要去书店，叫电影书店。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">买一店，专门卖电影书籍的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，那时候出版物也相对就丰富了。然后这个就买些书，逛逛书店，然后就回去。北京慢慢就相对熟悉了。那上学之后我觉得最大的冲击还是电影，就是你什么都能看到了。因为作为一个爱好者，那个年代就，我说的就一部《与狼共舞》就想包打天下，那个年代是吧。因为其实虽然没上电影，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">虽然，但你也有些判断力。那有些电影它明显的，你仔细看它、研究它也没意义，你自己都不喜欢，是吧。那《与狼共舞》觉得还很激动啊，看的啊。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后那个，什么都没看过实际上。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有那时候可能看了很多电影史的书，都是纸上谈兵，一个片子都没看。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">都是纸上谈兵。因为那时候没有盗版光碟什么，没有，都还没有，网络更没有。所以首先电影学院第一个就是看电影，我觉得太幸福了，这个学上的第一课、课堂上是在看电影。好多课就是老师来了讲一会儿，大家看吧，就看电影，当然是录像的形式。然后呢每周二周三呢各两部电影，四部电影，所以天天看电影，而且全是好片子，全是只有读电影专业才能看到的这些电影。它不像今天我们在网络上什么都能找到，在那个电影资源非常匮乏的年代，确实就完全，哪怕你不是学习、作为一个影迷也是很幸福的，超级幸福。当然有时候看多了吧，这个看个半小时又睡着的时候难免。但是有时候就是在这样的一个高强度的观影里面，确实有很多东西变成一种下意识的东西。有时候电影它跟写作有关，它也是讲究语感的，某一种语感的形成，也可以说就电影感的形成。它并不是说你深入地研究每部电影，所谓拉片，一个镜头一个镜头那么去研究，那反而是可能是某一种在你掐头去尾、片段式的观看，有时候是沉浸其中，有时候也看不进去。在这个广泛的观看里面，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">逐渐会形成一个电影的感觉，就所谓语感。当你叙事的时候，当你用视听去呈现一个氛围的时候，你能下意识地、身体能产生一种、你能找到一种语态语感。我觉得这个就是，就整个上电影学院，其实无论是动手的这个训练还是理论的训练，那当然是重要了，我觉得这个更重要。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">拉片那个是理性分析的，你说的这个就泡在这个环境里，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，变成直觉，是很重要的。还有就算休息和玩的时候，同学们也都是在讨论电影，这东西不在里边泡个几年是很难有这个东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个年代我们就流传的一个就是说，我们每个人都在上两个电影学院，一个电影学院是我们的实体的北京电影学院，另一个电影学院是宿舍，特别是熄灯以后，那是另一个电影学院。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对，而且那个收获，和那个学院安排课程的收获，说不定哪个更大呢。我觉得最起码是，同学跟同学之间的那种启发，那是真的是很了不起的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以后来很多合作搭档，长期合作搭档也是那时候的同学吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">都是那时候的同学。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其实我也带着、在电影学院鬼混过一年，我跟你说过吧？没说过。他不是有对社会招生的那种破的那种班吗，就一年的那种进修班。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">金秀班。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，金秀班。然后我也去，那个是就交钱报名就能上。那是我在新东方教书的时候，那时候我的电影梦想还没有熄灭，然后跑到那个北京电影学院去报那个班。结果很幸运，是有一个老的领导，就是老院长的一个孩子，姓王的，然后这个孩子是我在新东方的学生，他看我到那去报班，</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">特别高兴，在校园碰上的，然后他特高兴就过来跟我说，他说他是在校读书的，然后他说这个班基本上就是蒙事的，都是很水的老师去讲比较水的课，跟社会上就是增加一点收入吧，就算是那种。他说你要上真正的好课呢，他说艺术类学校管得比较松，老师们都很友善，他说你就去蹭课听就行了。然后他就把电影学院整个的那个课表，连本科带研究生的课表，他认识人，全给拿出来，复印了一份，然后拿笔在那给我挑、勾画，然后我就在那。他说你就去听这些，你们那个交钱的那些班基本上都没法听。他说你不信你就试试，结果果然就是那些确实没法听，他给我挑勾的都是好课。然后甚至连研究生班我都进去蹭课。他说这个班就几个人，他说你就别那么无耻，在那还跟着发言讨论了，那会把老师激怒的，会把其他几个学生激怒。他说这种小班授课的进去，你就在边上乖乖听不说话，大家也知道你干嘛来的，但是都很友善不会赶你走，只有那个巡逻的那个教管老师可能会赶你走。他说他赶你你就走，嬉皮笑脸下次再来，他也就那样了，不会出什么事。然后我就拜他所赐，然后就在这舒舒服服听了一年，还上了不少课。印象比较深的是那个教摄影的包小冉老师，他每次讲到那个拉片的那个课的时候，他有一个特点，就是他进来的时候是很蔫的，越讲越激动，越讲越激动，讲到临结束的时候我们都担心他心脏病发作，就是他特别热爱这个东西，讲着讲着情绪就控制不了。所以在那也滚混了一年，但是还是拖延症没出息，加上后期认清楚自己这方面才华严重不足，所以就放弃了。但是真的还是感觉挺幸运的。还有那个时候我们虽然买很多盗版碟，有一些特别冷门的经典片也看不到，也是在电影学院上看。</div></div>
+<h2 class="dlg" id="b14"><span class="ht">务实生存：写电视剧、演狮子、写专栏</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有那个时候说，你在读书期间就是个夜店小王子，经常去迪厅什么的，这个你也跟很多媒体讲过之前。但我看那个的时候有个困惑，那时候你家境好吗？因为去那个，还是那时候已经就是业余的会挣一些钱了？因为我印象里我年轻的时候要去迪厅什么的，那个消费还是一个挺大的压力，不是说完全去不起，但你要说频繁去好像也很大压力。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我上电影学院之后呢，首先我记得我第一个收入来源是什么呢，是当时北京电视台有一档节目，是有点像那个德国的夺标节目，就是体育的那些，今天来说有点像《中意》那种。然后当时北京电视台有一档这样的节目，是我们的师哥们，师哥师姐，那时候他们开始工作了，在这些栏目工作，然后呢就找一些下面的这个师弟什么的干点杂活，然后给人家编这个，怎么说呢，就是创意吧，弄这个节目的这一期怎么比、下一期怎么比，那时候有一点收入。后来我有一个比较稳定的收入来源，就是写电视剧。我们因为都是学生，没有什么渠道，但是我们怎么接电视剧呢，就是给一些资深的编剧来做初稿，你也可以说是枪手，但我也不觉得全是枪手，确实就给人家写个初稿，人家还得再统稿，那个收入就比较稳定，而且是比较高了，就一直有。我从800块钱一集，慢慢地写得质量还不错，写到1500，到我拍《小武》之前我差不多是3000一集。一般我们都是石击起，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">比如说20集电视剧两个人写初稿，一人写时机，那时候算很大一笔钱了。1500的话九几年那很好了。所以缺钱就去赚，这是我一直的一个务实的态度。因为那个年代也是经商热，然后也有很多同学就每天在谈那些大的项目、大的活，我自己是很务实的。我有很长时间，就是拍完《小武》之后在剪辑期间，那时候钱都花尽了，然后要生活，我有一个好朋友在那个《音乐生活报》，当时金兆军老师有一张报纸叫《音乐生活报》，那《音乐生活报》呢，开专栏写那个音乐评、乐评。因为我学电影的，我主要写跟电影音乐有关的，那是就每周一次的一个专栏。包括其他一些媒体，然后呢就写专栏，一个月我差不多专栏费用是将近三千块钱，能够这个我很满足，我也没有什么焦虑感，我觉得够花，然后呢就安心地做后期。那另外一个呢，就是那个年代也做过什么呢，我们有个同学，现在在电影学院做副院长，我好朋友，在摄影系的，他呢就是在给北京电视台一个栏目拍节目，这个栏目是个儿童节目，儿童节目里就需要一些演员，因为他有很多动画，不是动画，这个动物的呀什么故事，是吧，一会儿演个狮子，一会儿演个老虎，一会儿演个什么小动物啊、猴子啊，我也都演。收入不错的，因为人家栏目嘛是很规律，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">每周一期，每周都也在拍，那我就挣着这份散工钱，慢慢剪我的电影。我不觉得委屈，我也不觉得恐慌，我觉得挺舒服的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这些你以前对媒体讲过吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我偶尔也会讲这些，我应该讲过，没太多讲。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是咱们这次聊，我挺惭愧的，我一直跟人说我是你的铁粉，但是你很多那些事我还真不知道。就比如说，大家会觉得拍文艺片的导演很多都有一些过于严重的艺术家气质，所以导致缺乏世俗的精明，然后会把自己啊、或者团队啊、或者这些打理得有点乱，你知道我意思吧，就经济上也经常处于拮据，但只是有才华，然后运气好，再加上有人愿意投资拍才能维持。但听起来你是这方面世俗的精明这些一直都不缺，也活得比较从容。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我不觉得我是精明。我说的精明还不是说像生意人那种精明，我觉得我是务实，也可以说我自己并没有太多的把自己架起来那种虚荣的东西。你需要钱那就小钱也赚呗，咱就干这份工作，解决问题就好了，是吧。那另外一方面呢，我觉得你内心有一个你真的要做的事情，你只要想到我做这些事情、我维持我的生活是为了实现另一个东西，你就很从容嘛，那我无所谓啊。你比如说我做《小武》时候，这个写专栏啊、或者我演个狮子老虎啊，我知道我要靠它来生活，同时呢我同步地在完成我的剪辑，我有一个更重要的使命要完成，那这些事情我觉得是值得的。我不能说我每天剪电影我不吃不喝吧。那不能把艺术家想象成他是神仙、靠喝露水就能活的，那活不了，是吧。那另外一方面，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不因为这个东西第一次500块600块我就不干，是吧，那我觉得要感恩人家，真的这个给你个机会让你有个收入，我觉得是挺好的事情。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是我觉得你这些都特别好，但我想说的是，我见过很多文艺圈的朋友，他们就是过于拧巴了你知道吧，他确实有才华，但相应的呢就是日常生活里就是活得特别拧巴，有很多就是不适合一个正常社会里生存的那些偏执的东西，所以就把自己搞得很苦哈哈的，实际上我觉得没必要，但他们就是这样。所以我以前以为你某种程度上也有一些这个，但听起来完全没有，就一直活得都挺游刃有余的，你也没感觉到有什么过程是特别艰难、或特别拧巴、或特别纠结？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">艰难肯定有很多艰难的时刻，但是拧巴就很少了。就是遇到什么问题解决什么问题，有的问题能解决那当然好，解决不了就放一放，也就没办法，就这东西不跟自己较劲吧。我觉得可能是不跟自己较劲，因为我自己一直有个归宿吧，可以说我内心中有一个终极的归宿。我觉得我无论遇到什么样的问题，或者我人生起起伏伏，总有一个地方一定会接纳我，而且那个地方我一定会过得非常愉快，那个地方就是汾阳的街道。我觉得我大不了我回老家，我跟我那些家乡的朋友们在一起生活，跟我的家人们在一起生活。我们贾家在汾阳是个比较大的家族，有很多亲戚，我们可以，</div></div>
+<h2 class="dlg" id="b15"><span class="ht">《小武》诞生：从《小山回家》到香港短片展</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">所以某种程度我觉得，如果今天回头看，我觉得因为我一开始就想回去，所以我能回得去，正因为我能回得去，所以我觉得我没有后顾之忧。我不觉得我离开汾阳我就再也回不去了，我觉得它很美、很愉快，过得会很舒服。我有一个，我觉得我可以回。我觉得有时候你回不去，是因为你回不去了，其实能回去，是你自己觉得回不去了，有什么回不去的，每个地方每个角落都有它的乐趣。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你觉得你老了有可能回去养老吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">有可能，有可能，对。所以你像我现在就是，有时候我们不是、我在汾阳建了个电影院吗，然后呢有时候我回去在电影院坐一坐，喝个茶，然后在那感受，有时候我就觉得挺好的。就是老了干不动了回来，喝个茶，下午朋友们来聊聊，然后想看什么电影隔壁进去看一下，我觉得打理得挺好的，很惬意。人不一定要一直无止境地追逐下去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是，心态真好。那你那个最初拍《小武》的时候是怎么筹措的资金，那些钱怎么找的？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">《小武》是这样的，说《小武》就要说到《小山回家》，因为单说《小武》这个故事是讲不明白的。那个时候我是在95或者96年，大二大三的时候，就是拍了这个《小山回家》这个短片。因为为什么会拍呢，就是因为我们是文学系的同学，我们文学系同学呢，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">就是也有拍摄学生作品的这个机会，应该是两次。两次呢，大概就是我们那时候去那个实验中心，会借给你一台那个小摄像机，JVC的摄像机，你可以用一天或者两天，你拍个短片，老师会评嘛，是吧。它就是一两天的周期，而且它就是摄录一体机，也不需要录音，那机器就能录，大概就是比划一下，实际上实践的机会是很少的。那不像摄影系或者导演系同学，他们都有这个一个阶段的作业，像摄影系同学16毫米、35毫米都会拍。所以很想实践，那更主要是很想表达，那时候开始有很多想要讲的话。所以当时就写了《小山回家》这个短片的剧本。这个钱从哪来呢，钱它是很复杂，首先这个最大的支持就是我们同学，我们当时是成立了一个叫青年实验电影小组。那实际上这个半开玩笑的，你要不要，很松散的那种，就哥几个吃完饭的时候，咱们就是青年实验电影小组了，慢慢大家就当回事了你知道吗。然后呢我们这个里面，我们摄影器材是怎么来的呢，我们这个管理系有个同学，他爸是报社的，那个时候报社开始，我也不知道为什么，有了一台摄像机，还不是电影摄影机，还不是电视台专业级的摄像机，不是电视台，是报社的，说我爸单位有这个，没人用，咱可以借出来。那摄影设备有了，录音设备呢，我们有一个录音系的同学，是一个女生，说我去戏里借。那电影圈就是很开放的，同学借说你们要拍短片，那你保护好，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">你去用吧，也就借出来了。那制片费用是哪来的呢，一部分钱也不多，最后一共花两万多块钱。这一部分是我写电视剧有些结余就能拿出来。这一部分呢，是我有一个学画的同学，他呢一早就考学了，刚毕业，毕业之后我们那儿太原有一个宾馆他要换那个房间的画，他就揽了这个工程，比如说你有100个房间，我画一部分，我跟同学发一部分，然后他赚了点钱，我跟他借了一点钱。说是借嘛，同学说你就别还了，你喜欢电影你就去拍吧。就那时候的交情真的是这样，朋友有一块钱愿意花五毛钱帮你，所以又很感激，我们到现在都是特别好的朋友，还在一起。然后呢这个就开始拍了，七拍八拍，拍完之后呢，那你这个是个无底洞，你得做后期啊什么，就想各种方法。那个我两个同学，像王宏伟跟这个顾峥，我大学同学。王宏伟呢，老姐你用了吧，关键时刻这个又缺钱了，这个顾峥他妈给他寄了生活费，老姐你用吧，不过我要没钱打饭了，我得跟着你吃饭，我说没问题。然后就反正就这么拍了，拍出来之后呢，我们这个短片呢就去了这个，然后我们就在学校放啊什么，乱七八糟煞有介事的，去北大放啊、中戏放啊，很有热情嘛，也经历很多挫折。这个我也讲过很多次，反正一开始同学确实拍得不好。我今天人家有时候写我的简历说我首部作品是《小山回家》，我就生气，我说那不是我首部作品。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我首部作品是《小武》，《小山回家》是我学生作业，都不愿意承认。确实拍得不好，但它是第一部。那个片子呢是讲民工的，是比较早地开始有这个民工现象，就很质感，就写了这么一个人物。那也得到很多同学的支持，说拍的毛病很多，不过这个题材还不错。然后后来呢，因为我有个同学是香港留学生，他跟我一起做这个短片，然后他的一个朋友也是另一个香港留学生，就跟我们讲说你们拍了个短片，香港正在搞一个短片展，说你们可以报名啊。我说好啊，你去报名。我们那个同学就报了——我很感激她，是我们一个女留学生同学，香港过来的，她叫陈佳琪，后来我不知道她现在，很久没见了——然后她就把我们的片子带到了香港。那个香港短片展呢，它的赛制很有趣，搁了好久都忘了这事了，突然陈佳琪通知我们说，小贾你去香港领奖吧，中奖了。说中奖了？说什么奖？不知道，反正你中奖了，你可以去领奖。这么山寨，什么奖都不知道。然后我说，这个，说路费不管，你自己解决。然后就稀里糊涂，反正就很激动嘛，你想得到别人认可，就去了香港。那时候去香港还挺啰嗦，得办什么很啰嗦。我办的是旅游，得跟团。我办的旅游不是去香港，香港就办不了，是去马来西亚的团，然后从香港，他那个旅游线路是先到香港。我就记得那时候个人还去不了香港，留几天你可以转到那个去马来西亚。所以我第一次去香港领完这个奖，又去吉隆坡玩了两天，又返回来香港住了两天。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">被迫玩了两天。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">被迫玩了。所以我出国去的第一个国外国家是马来西亚，就热情年代。然后在这个香港短片展呢，就认识了三个朋友。一个是后来一直跟我合作的摄影师余力为，他刚从比利时留学回来，他拍了一个纪录片叫《美丽的魂魄》，也同步参展，他拿了全场大奖。因为他拿大奖我肯定得看嘛，他自己摄影的，也是在北京拍了一个纪录片，我很喜欢。然后我就想认识他，我觉得他摄影风格配我的电影很合适。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是你脑子里的画面。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那余力为呢就给我介绍了两个朋友，一个是李杰明，当时在香港报社工作，在香港经济日报做编辑，但他也是学电影出身，也参加很多香港的影迷会、放映会的组织，然后也做制片。还有一个是周强，刚从美国留学回来，在艺术中心工作。我们就起心发愿要一起拍电影，干点大事，大家都年轻人。然后我就回了北京。回了北京之后没过不久，余力为就回北京住了，他在北京就找了一个房子，等于就北漂了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我俩在一起是因为为了一起做事过来的吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">一起做事，因为那时候真的，我说你来吧，我要拍长片，然后就来了。然后当时呢还没长片拍，我们有个计划，说我想拍一个叫《夜色温柔》的短片。我说我们先——我没拍过胶片，《小山回家》是录像嘛——我说我们先拍个让我熟悉一下胶片的流程，先拍个短片叫《夜色温柔》。《夜色温柔》这个剧本呢，我觉得挺好的，写在那时候。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这个剧本是写什么呢，一对男女两个人相爱了，总想过一夜你知道吗，找不到地方。然后这个男生呢，他朋友就出差了，有一个单元房，他就约着女生借这个房子，两人要共度良宵嘛。所以就是两个人物、一个夜晚、一个房子的故事。我觉得形式上非常有局限，就一个房子，我们能把它怎么拍。就充满了那种戏剧性，独幕剧，一幕一幕的。我们转场都是什么客厅、卧室、洗手间、阳台，就让它虽然是一个单调的咱们北京的单元房，但是让它非常丰富。在这个限制里面，就一个夜晚的限制、一套房子的限制、两个人物的限制里，来透过他们的情感关系看很多当下的生活。我很喜欢那个剧本叫《夜色温柔》。然后这就快过春节了，我们就回家嘛，回了家之后就正好汾阳整个老城要拆掉了，要去旧图新了，当时也要由县变市，整个基建起来了。我们那个县城是一个明代留下来的县城，有很多老房子、老店铺，我前面也说它是一个山西商业很发达的地方。整个回去，我父亲跟我吃饭的时候说，你回来就去街上看看吧，马上就都拆掉了。我就去看，然后你心里面很不平静。然后呢就又接触很多同学，我那些同学有的结婚了、生子了，朋友见了就诉苦聊天嘛，家里遇到什么、跟父母吵架，乱七八糟。就你一下发现，那个恒定的某种生活方法改变了，因为那个时候经济开始快速发展，整个私营经济也起来了，城市化、娱乐也起来了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">很多歌厅、很多个人话也到来了，所以对我冲击很大。我就觉得，那我赶紧写一个剧本，就叫《小武》。我就写了《小武》这个剧本。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那《小武》这个剧本写的时候是按短片写的还是按一个长片写的？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">长片写的。写完之后，因为我们为了这个《夜色温柔》呢，我们筹集了一点钱，然后我写完之后呢，我就跟这个香港制片聊，我说我们能不能用短片的预算，我拍16毫米，然后我们把这个长片拍出来。然后算一算，其实这个钱连租器材加胶片钱都不够，胶片钱够是够什么呢，够2比1的片比。我当时预测，写完剧本我说我这电影是100分钟的电影，最后是拍了107分钟，所以我们按100分钟的电影，就是能买200分钟的胶片，那个片比也就二比一，就一个镜头只能拍两次，然后也无所谓。制片费用是没有的，但也是年轻，然后我就说没事，真没事，穷有穷的拍法，只要摄影机转起来，我相信这个电影能拍起来。大伙一拍即合，就激动了，就拍了。所以这个呢，我觉得最难忘的一个事情，一个是年轻啊，真的毫无顾虑，甚至我觉得拍一半也无所谓，拍一半没拍完，我自己想一想，戈达尔说了电影都是在剪辑台完成的，咱就拍多少算多少，咱就剪一个东西总能完成一个作品。长片拍不出来就拍个短片也无所谓，没有那么多算计，反正拍是最激动的，要紧拍好了要去拍。然后接下来就发生一个事情，因为那个时候16毫米胶片基本上不怎么用了，因为主流电影工业都是35了，那我们之所以选用16毫米——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是因为它便宜。</div></div>
+<h2 class="dlg" id="b16"><span class="ht">贵人：柯达先生与作家田东照</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">是因为它便宜。16毫米你要用它呢，你就得去预定胶片，因为它没有现货。所以我们就去柯达的办公室、销售处来预定，说我们要拍一个东西，要多少尺的胶片、多少本，就按我们刚才说的2比1的片比定了这个胶片。定了这个胶片之后呢，一切都很顺利，定完之后我们就拿着钱，去预定的日子去取这个胶片。说实话，买完这个胶片再租完摄影机，钱上就是零了，基本上没制片费用，反正先把胶片买出来再说。然后我们就去了柯达的办事处，那个接待我们的是他一个负责人，说啊你们订好胶片啊，当时也是随便问，说你是哪的，我们说电影学院的，确实也还没毕业。然后就订了，订了之后聊天，付钱、取胶片。聊天呢聊了半天，说啊你们是拍长片啊，说你别开玩笑了，你这点胶片顶多拍个45分钟的短片，你不可能拍长片的，那你太困难了。我说反正就这样吧，能拍多少算多少，我们也就乐呵呵的。我估计他看着我们就是一群傻孩子，行吧。然后我们两个就抱着这个胶片往外走，刚走了几步，他说你回来。然后你就回来，他知道我姓贾，小贾你确定你是要拍长片吗？我说是拍长片，我不是拍短片。他说这样吧，我个人出钱给你买十本胶片，你好好拍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有这样的贵人。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">他就给了我十本胶片，他说我自己付钱，你拿走吧。因为他已定了，他会定一些多余的，你都拿走，还有十本你拿走吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这样你变成三比一的片比了。因为那时候差不多一卷可以拍十分钟，十本不就一百分钟吗，所以你基本上是三比一了，你宽裕一点。我到现在没记住他的名字。我真的有时候遇到困难，我会想起他，萍水相逢，就看你想拍电影，他有这个条件帮你一把。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这人后来找不到了吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我们还见过，他给过名片，我现在一下想不起来叫什么名字，我当面也谢过他。最近几年包括我自己做平遥电影展，也有很多热心的朋友说，你干的事太多了，不值得，你自己创作吧。其实对我来说并不是什么责任感，也没有谁让我去承担这些责任，你就是个导演，你要拍电影就行了。但是我自己想起帮过你的人那些往事吧，我觉得咱能帮一把就帮一把吧，能做一点，有时候会费一点精力。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有时候确实，我也有这样的时候。有时候其实也只是举手之劳，是吧，就干一点。就你说我们是幸运儿，不是我们幸运，是我们幸运遇到了一些人。那回过头来讲，你刚才说到贵人——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那我还特别感谢一个，对我影响也很大的另一个人，就是我喜欢写作，那个时候写作乱写一气，然后我自己写完一个小说。那个年代讲究这个名师指点，你要找个老师来指点一下。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">其实咱们周围也没有什么文学人物，那当时我就说，我听说《黄河在这里转了个弯》的田东照老师，他当时在省作协工作。我写完这个小说，我就找他吧。为什么我想找他呢，因为他成长的那个县跟汾阳县我们同属吕梁地区，所以在山西省内我们算某种意义上的老乡。就投奔老乡，完全不认识。然后就问说省作协在哪，什么东华门几号。我就拿着这个小说我就去了，去了之后不知道人家住哪，他那时候单位都是办公室后面就宿舍。那时候人和人没防备的，就问看门大爷，说田老师家住哪，田老师啊他在几单元几号你去找他吧。我就去了，找到了几单元几号，一敲门，门打开之后那房间跟着了火一样，烟啪啪啪就出来了。田老师在写作，夏天穿了个二股筋，满头大汗，叼着根烟，那个桌上铺着稿纸，想想还挺酷的。你是谁？我说我叫贾樟柯，我是个文学爱好者，我是汾阳的，汾阳的老乡，我说我写了个小说你能不能给我指点一下。那时候人真淳朴，田老师说，小说我正写着呢，我没时间给你看，你那多少字？我说有几千字吧。说你这样放下来，说你哪来？我说你在哪工作？我说还没工作，我在山西大学那个美术培训班，在学画画。他说好好你放下吧。反正如梦如幻，就拜拜关门就走了。你知道吗，走了之后——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我觉得这事就结束了，因为咱也不懂吗，咱那个稿子上都没留个联系地址，奇奇怪怪人家也没指点上，人家在写着呢，确实也没时间拿你几千字，人家怎么可能当着你。反正我觉得咱努力到了，然后我就回去学画画去了。过了个把月吧，突然我们那个美术老师，他是山大的教授，他说贾樟柯，昨天我接到省作协一个电话找你，让你赶紧去找一下田东照老师。我留了句话我在山大美术系办的，他给记住了，他也找不见我，他就给美术系打电话。我们这个培训班老师是美术系的老师嘛，就告诉我。我就去了作协，又找到田老师。田老师给我讲，这个小说应该怎么样，鼓励我说你写的不错，语言感觉很好。那年代讲究感觉，一说艺术就艺术感觉很好，你的艺术感觉很好，语言感觉也很好，你要努力啊。然后变得是什么呢，就经常让我去他家，周末吃个饭，聊聊，说你那个约好了，然后他儿子跟我是同龄人，他儿子也写作，你们应该看看最近有什么小说，这个很重要，你们应该读一下。然后就给我很多鼓励，他就深信我可以变成一个作家。我说我真的可以吗？说你可以。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你想，对于你是多大的一个，特别重要。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这么愿意帮助晚辈。然后之后呢，我不是想搞电影了吗，我就去跟田老师讲。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我说田老师我想搞电影，田老师非常失望。在他心目中文学是至高无上的殿堂，孩子你怎么可惜了。不过这个年轻人吧，那东西更时髦，这个你就去做吧。说得我还挺感伤的。我觉得我在反思我自己，一个对不起田老师，再一个我也在想我是不是因为电影是个时髦的事我才喜欢上，确实写作是个书斋的事，更寂寞的事。我想我是不是因为喜欢热闹，就弄得我也是挺难受的。但是当然，你对电影的喜爱它会战胜这些东西。所以我觉得都是萍水相逢，这没任何交情，就敲门伸进去的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对现在的人是不可思议的。这些人可能紧张了，你藏我家干嘛呀，是吧，你谁呀你怎么藏到。而且对现在人你去问大爷，大爷肯定不告诉你他家住哪，是吧。上次那个宋方金老师来我们这聊天，宋老师他说他当年也是，因为是山东老乡，直接跑到莫言家去敲门，说他是一个文坛的晚辈，过来请教一下，然后那个莫言就领他出去吃了个饭。现在想都是不可思议的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">但以前是，咱们以前年轻的时候也会说，民国的时候有些老师经常借学生钱、请学生吃饭，然后我们讲这个有古风嘛，会讲这个东西。但现在看也是，其实我们年轻的时候也看到很多这种东西，就希望我们年轻的时候能经历这些事，别变成古风，现在如果能保留一些他肯定还会以某种形式出现。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，其实现在的人可能方法不一样了。</div></div>
+<h2 class="dlg" id="b17"><span class="ht">不赔钱的文艺片与《站台》风波</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对，距离感这些可能会变，但是帮助人这些我觉得不会消失的，只是换了一种形式。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，今天讲的很多特别特别好，完全没有想到，特别意外惊喜的。那说回《小武》，连制作费用都没有就硬着头皮上马。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">反正就像我说的，你只要这个摄影机转开，腾挪展闪总能把它拍完，是吧。拍完之后进入后期怎么样咱再想辙。我觉得这之后我就意识到一个东西，没有条件成熟的时候，永远没有你想象中的制作条件。所有东西你说要成熟了你才去干，其实很难达到。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">当然现在可能制作电影的整个电影工业体系比较完整，也有很多导演可以这样，但是对于当时的我来说，包括现在，有所谓条件并不成熟，我觉得先做吧，不要等那个条件成熟，做起来再说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有一个传闻，我不知道是不是真的，就是据说你从《小武》开始，每个电影都没有赔钱，对吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">可以说大部分电影没有赔钱，不能说每一个电影都没赔钱。那赔的最厉害的是《海上传奇》。《海上传奇》纪录片虽然有商业支持，但是我自己也投了一些，作为一个纪录片，它市场反应是不好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是纪录片应该就很难吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">纪录片确实市场本来就不是太容易做，再一个当时因为那个题材的原因，我自己规模稍微有点大，因为它是讲上海人的离散，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">特别是抗战跟49年很多上海人去了世界各地。当时我的想法是上海、香港、台北、纽约、圣保罗，追到各地去拍，这个规模肯定是很大的。后来我们就实现不了，但是也花很多钱，就实现了香港跟台北拍摄，那整个制作费是比一般纪录片制作预算要高很多，那市场反应又不太好，所以就算是我目前最艰难的一个电影。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">其他都还好，故事片基本上都没亏吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">基本上都平衡。我记得在国内特别小众的时候，好像是在海外的艺术院线也都收回本了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">国际的销售一直不错。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">从《小武》开始基本的收支平衡我们完全能做到，除了《海上传奇》之外。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，国际呢一直反响特别好。你看《三峡好人》就特别好。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后基本上都不错吧，很稳定。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《三峡好人》还挺有意思的。你记得那时候咱们见过一面，然后你那个片子还没有上，还在剪的时候，咱俩见了一面，因为什么事我也忘了。然后当时你特别沮丧，说这个欧洲的什么出品方还是投资人，反正就是跟你抱怨，说我记得你的原话，说我们欧洲的观众为什么要看你们两个中国人一直在那走来走去。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对。《三峡好人》在法国发得特别好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">结果呢，而且拿了金狮吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">拿了金狮。然后这个老板娘呢，又支持过我的《站台》跟《任逍遥》，他前面也都投过，也算我的一个支持者、恩人，我觉得他是我的知音来的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对啊，要不然怎么会再更早期投《站台》。有时候就一个作品，</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不同情绪下看可能确实，甚至不同的体力之下观感确实不一样。《站台》我主要是北野武的公司支持的。北野武公司支持之后，我们威尼斯首映，在威尼斯的时候，因为首映是在威尼斯，首映之后反响特别好，就完全属于那种用今天话来说就是爆款。几乎国际媒体、新经典嘛，都说《站台》今年的金狮奖没问题。那法国一家公司就买了它的销售，这家公司买了销售之后呢——我不说哪家公司了，后来我们没再跟它合作——签好约之后呢，颁奖了，一个奖都没有。那个年代或者包括这个年代，确实对年轻人，资深导演没问题，大家不在乎这个奖项了，但对初出茅庐的导演，你的头一两部电影来说，有个奖项确实那个价钱、对生意会好做一点，尤其是文艺片价钱会好一点。那家买了国际发行权的公司就态度有点变了，你知道吗，就迟迟没有发行计划、发行方案。我觉得威尼斯是九月，到一月份我们在鹿特丹见面的时候，我说这个东西你们怎么做啊，是不是你们得做啊，不能放手里啊。那时候已经签约了。然后呢人家就提出来，很直接，说你没得奖，然后我们觉得那个价钱高了。那有几种模式，一种模式就是便宜点，减半；一种模式就咱们解约吧，谁有能力做这个电影谁去做。然后呢就吵起来了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我真的很气，在鹿特丹电影节，我记得在鹿特丹电影节的早餐，他周围全是电影工作者，我真气了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他说了一句什么吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">他说了一句，我们是做生意的，我们不是做慈善的，我凭什么赔钱，那个要做。我说凭什么？凭你之前跟我签约了，你要遵守你的合约。然后他又说一遍，说这个我不是做慈善的。纯无赖嘛。然后呢，OK你不做，好，解约没问题，不做了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有一些也是缘分。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">有一些也是缘分。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个《站台》我至少买过、洗过六七版盗版碟，就是最后什么欧洲版、日本版，所有版都凑齐了，看了好几遍。然后那个制作，时长吧我记得三个多小时，有两个版本，一个版本是三个小时十分，一个版本是两个小时四十分。我记得我后边看的，就是二刷三刷，都是那个三个多小时的版本。可能也跟我刚好是咱们同龄有关系，所以那段看的我很多镜头画面都是毛骨悚然的。而且我们第一次认识，我还问你，我说那个小镇上的那些东西怎么能一笔还原成那样，后来你说还原啥呀，那都是实景。你说你当时问我，很多地方弄一弄就拍了。你说是不是很多地方你那个小时候的地方没再回去过，你说很多地方没发展起来，就是那样。后来我一直记得你这个话，很多年以后回我老家的时候——我是从一个县里跑到那个我们延边朝鲜族自治州首府延吉市那生活的，但我脑子里画面里都是那个在县城的时候，所以我就回去专门看了一次，结果到那一看就跟那个电影里一模一样。而且很奇怪，那时候怎么可能我们东北的一个县城，</div></div>
+<h2 class="dlg" id="b18"><span class="ht">为什么总用流行音乐</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">跟你们山西的一个县城长得都一模一样，可能那时候中国城市标准就那么规划的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">小城镇，这就是说另外一个问题。很多人跟我说，贾樟柯你不能换个地方拍吗，为什么老来老拍山西？其实对我来说哪都一样，我跑你们延边拍跟在山西拍，除了天气冷掉，有什么区别吗？我就这个感觉都一样。至少整个北方是一样的，南方的话景观有点差异。因为你们那个就是一个小县城，一个十字路口有一个电影院，然后有一个百货公司、有个邮局，全中国的小镇旁边有个城关镇派出所，就构成了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在你回去还那样吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">后来是发展起来变化。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">咱们那次见都是快20年前，我在新东方的时候。哎呀有意思。然后你在电影里特别喜欢用那个时代金曲，这个是有意的行为？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">下意识的行为。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">因为我们都知道音乐会产生串联记忆，所以当你听到你那个时期听到的，一放那个音乐能把很多东西都给关联起来，都想起来，这是我们大脑工作机制嘛。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">其实完全是下意识的行为。因为无论是《小武》开始用很多流行音乐，还是《站台》，一直到现在，现在用的稍少一点，但是也还用。因为其实对我来说它是我生活的一部分、现实的一部分，它就在我，最少在我这个年龄、或者我个人生活里占很大的比重。经常有人批评说贾樟柯这个叫什么乐评很差，所谓乐评很差，就老用通俗歌曲、流行歌曲，其实这里面有几个。第一个呢，就是当你面对一个</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我所拍摄的故事发生地那样一个空间的时候，它是一个现实声场里面存在的东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对啊，你不是一天到晚在县城里或者中小城市马路上都在放交响乐，都不可能的嘛，是吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。那另外方面呢，就是他在成长的过程中，每个阶段这些流行音乐其实挺准确地能把当时的情况说出来。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以我作为老影迷，我的理解就是，你那些曲目是为了准确，跟什么喜好、品味都没关系，就那个声场里面存在这个东西。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那只是你在创作的时候，什么场合出现什么歌，你有些选择。因为同样有五首流行音乐，你为什么不用这个，但是从流行音乐的选择来，那就是我们生活声音的一部分、或者我们生活内容的一部分。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我看你电影刚开始，后来习惯了，刚开始看最惊讶的就是这个，就感觉这个画面就得是这首歌，或者是某几首歌中的一个，如果不是那些就完全不对了。没经历过的人可能不一定有这感觉，但是我们经历过的人看那个，就是那几首歌，如果换了歌感觉就都不对了。但你这个是下意识的行为，后来成了特色以后可能还有一些有意，但初期就是完全下意识的行为？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">初期一个是我比较不喜欢电影配乐，就主观配乐。在这种情况下我又喜欢流行音乐，某种程度上我使用这些歌曲承担了一些主观配乐的、情绪性的渲染工作。到现在呢，因为主观配乐在我电影里面比重也比较大了，但是回到、还原到那个历史的、当时的情景现场，流行音乐还是必不可少的。你比如说我下面一个电影，12月左右准备新拍一个电影，它是一个当下的故事，那不一定就会有流行音乐了，因为当下流行音乐</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没那么重要了，是吧。对，它还在，但没那么重要，因为这个时代年轻人的娱乐形式多了。我觉得最好玩的、有一个时代烙印的事，就是我有一个比我大八岁的表哥，他们那个年代蓝领全看世界名著，你知道吗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，就比我们大个十几岁的人。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">蓝领工人全都看世界名著，什么《红与黑》啊。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对，《包法利夫人》。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，在上班要讨论的。对。我年轻的时候去我表哥的那个宿舍，他是铁路工人，结果他那个宿舍里边每一个人床头都摆着几本世界名著。我当时很困惑这件事，但后来才慢慢明白，还跟我表哥也聊过这个事。其实是那个时候我们的文艺作品、出版物太匮乏了，所以不是说他们的平均水平都能欣赏世界名著，而是说咱们当时除了那些非常刻板的那些出版物以外，能够看到一点鲜活的人的东西，甚至还有一些爱情描写，甚至可能还有一些亲热的描写，只能在世界名著里找。所以才会有，包括人们怀念80年代的文学，说一部小说家喻户晓、全民皆看，它也跟当时那个匮乏有关。我觉得今天并不能说今天的文学就下降了、水平就下降了，是选择太多了，总的出版量是比那时候大得多，而且水平也不一定低，某种程度文学性可能进步了很多，但是它的媒体环境不一样了，已经变成视觉的时代了，文字的时代它慢慢地过去了。甚至我看最近一个文章讲，就是更年轻一代其实思维模式，我们大部分人都是文字性思维，那现在逐渐地在像图像思维转发。</div></div>
+<h2 class="dlg" id="b19"><span class="ht">世界名著、图像时代与不听的两个忠告</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">因为他们都不怎么读东西。对。而这个图像思维呢，它就带来一个，就是没有过程，因为它的图像都是一些记忆点，那个描述它是文字的擅长，是描述；图像的擅长是结果，是实时的一个状态。所以人类的思维模式也在变化，你在一个图像为主、视频为主的这个时代，你苛求文学要有广泛的影响力，这个确实是很难的。但是当然文学是不可或缺的了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我就是，你从第一部长篇就开始非常鲜明地确立了个人风格，然后包括题材也是，虽然会有一些变化，但是整体上还是一直在反映这种时代变迁下的乡村生活到城镇生活的这些东西。这个也是自然形成的，还是有意识地一直朝这个方向去挖掘或者耕耘？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">自然形成的吧。因为我给你讲个故事。刚才我们聊到说我有很多年龄比我大的朋友，很多朋友他们都会给我很多经验，但是有一个朋友跟我说的两个意见我真的是没有听。当时我记得我是在《三峡好人》威尼斯结束之后我去了巴黎，然后我这个朋友他是一个香港导演，后来他就移居到巴黎，然后在巴黎跟我见面。他恭喜我嘛，然后他说了两个观点，也让我思考了很久，但是我觉得我很感谢他给我一些提醒，但同时呢我确实没按他的。那他呢就跟我说第一点，他说你啊拍电影就先出牌。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">你手里要多几个牌，你不要想拍什么就拍个啥，你要想四五个想拍的，然后你手里有三四个题材，然后你要看看现在电影市场发生什么变化了，甚至周围的导演在拍什么，你要考虑你这三个电影应该先打哪个，不一样，先出哪个。我觉得他是很善意的提醒，但我觉得跟我的脾气性格完全不符合。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我觉得就想拍啥就拍啥。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不至于吧，对，这个我没听他的。所以反过来说，这也是我一直想拍啥就拍啥，我不会考虑周围环境，或者说是不是有同类型题材别人刚刚拍过，或者说现在这个题材不行了、这种模式这种故事观众不看了，对我都不重要，重要的是我这个时刻想拍什么。那我觉得一个作品拍完，你有能力让它拍完、让它存活，它有，就跟孩子你出生在60年代还是70年代，这就是他的命运嘛，但不是说你怀孕了你不把这个孩子生下来，说我等等十年我让他生在80年代条件更好一些。所以我觉得这个我觉得一直是这样拍电影。那另外一个呢，他就跟我讲，他说你啊——这当然是也点夸奖我了——你啊现在正红，攒点钱吧。我说攒钱我之前没想过这个问题。他说你看很多导演啊老年是很凄凉的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">很凄凉的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">说那个忘了是谁了，好像是奥逊·威尔斯还是谁，忘了哪个导演。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">很多艺术家都对，对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">说年纪大了是卖烟的。然后这个，就是他有一个香港导演——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">说年纪大了靠一些以前合作过的演员资助才能生活，说你呀趁红多攒点钱。对，我觉得说也挺好的，但我也没太听他的。因为其实我能够保持每两年——除了疫情干扰之外——每两年都拍一部电影，而且差不多，其实我那些电影都是想拍了写剧本，写完准备好就拍了，其实很多时候并没有一个融资条件成熟才开机，大部分是就那样开了。开了之后就我们自己公司的钱先出，然后器材朋友的器材公司你先用着，工作人员，好的我们等你融到资我们就先干了，先干了。就是可以说吃干喝净，然后拍完了或者什么我们再融资再什么。所以我觉得这也是往前走的一个动力吧，因为其实很多老的合作伙伴朋友们，他看我有这种决心，就觉得那就还是一起做吧，你看这个人都把家底都扔进去了，咱就帮他一下，就一起做。所以我觉得这两点是我没太听别人的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我觉得你就是也是真的很幸运啊，你这辈子拍的片子大部分都是忠于表达的，是高度个人风格化的，是文艺的，然后是作者电影，但是基本上都没赔过钱。这个其实也挺罕见，放到整个影史上也挺罕见的。大部分导演的命运是拍自己想表达的时候，特别是文艺的时候票房就很差，然后甚至为了能支持做自己这个喜欢做的事，再去拍几个不想接的，挣了钱回来再补贴这个。你是一路就拍——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我没有拍过我不想拍的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是是。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">所以这个也是——</div></div>
+<h2 class="dlg" id="b20"><span class="ht">第一次见世面、“Mr.OK”与阿城解心结</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我拍很多广告，但是我觉得那是另外一件事，我分得很清楚。就是广告嘛，它是一个服务业，你服务客户，你是用你的专业能力为他的一个意念、为他的一个概念来服务的。我一直跟我们同事说拍广告比较劲，我们是服务业，服务品牌的，但电影我要完全忠实于自己。这个我就觉得作为艺术家还是很幸运的，大部分人都做不到这个。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我还有一个比较八卦无聊的那些问题，这也是我们内部征集问题的时候。比如说当年第一次去参加那些国际影展吧，不管是哪一个，我们是同时代过来的，所以可以知道我们当年还都是没见过世面、挺土的，也没怎么出过国的。所以你去参加那个时候有什么——就第一次去的时候有什么样的感受吗？比如说你性格上是社恐的吗？那种交际场合就是会不会慌啊，或者是有没有这类的好玩的事情？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">所以说第一次去见世面，我第一次去电影展就是香港短片展，但香港短片展因为在中国嘛，那还都中国人嘛，都中国人，语言什么，虽然广东话，人家也努力说普通话，没任何障碍。然后呢去马来西亚的时候，对，去马来西亚那又跟着个团，所以没啥感觉，你知道吗。那景观肯定不一样。我第一次真正的那个就是孤身前往是98年的柏林电影节，那也是我第一次去欧洲，那就跟亚洲地区变化就很大了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">98年是哪个片子？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">《小武》。《小武》去的时候呢，因为我是兵分两路的，就是我们的摄影师余力为，他是香港人，他呢英语特别好，同时呢他在比利时读书。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">法语也特别好。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">余老师是香港人？我一直以为他是大陆人。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">他是香港人。他从香港去柏林跟我会合，但是他比我会晚到两天。我呢是从北京去柏林，那我一个人拿了这个机票啊，我就要去这个柏林，中间要在法兰克福转机，咱没转过机你知道吗，怎么弄是吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后那个当时这个柏林是有人接吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">柏林有人接，就约好了，转机没人管。所以这个出门之前呢，咱们是英语59分嘛是吧，也懂点是吧，但是没用过。没用过之后呢，那个特别搞笑，所以我找了《不论英语900句》，绿皮那个，就揣在身上，这咱都会念，但是年久了，不会就忘了怎么组合了，吃个饭啊问个路啊，只能带着《英语900句》就上飞机了。上飞机之后，那个飞机在法兰克福机场给delay了，我根本就——后来知道是delay了，要换飞机下一班——完全不知道发生了什么，完全语言不通。然后就是跟着工作人员，工作人员也发现我那个完全就是没法沟通这人，然后就跟我比划嘛，你总知道，把我带到一个这个转场的bus，又开到另一个地方，又开始上另一个飞机，然后我说柏林柏林，我们动了动了，就转去柏林。就这么奇里古怪去了柏林，去了柏林之后就有电影的人接我，接我去了之后呢——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那些工作人员已经会说中文了吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不会啊，也不会，都是英文，你能听懂几个单词，但大概就是完全是靠一种想象力知道他要说什么。然后就一接到我，大概什么什么什么，听懂一个office，office不就办公室吗，就靠这个单词我明白他的意思是让我先到办公室。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">先不去酒店，果然就先去了办公室。然后整个就如云里雾里，然后呢我看他们都很善意，所以别人一说什么大概捕捉到几个字的意思，就是说你这个早饭可以在酒店吃，然后这个breakfast总能听懂吧是吧，hotel总能听懂吧，明白了，早饭就你自己可以。然后我不知道怎么回人家，所以那个时候那两天余力为没到，那两天我理解了之后的回复永远是OK OK。所以一直熬到余力为来了，然后他就可以一个翻译了，就一切正常了。然后我临走的时候我才知道，我在柏林电影节有个外号叫Mr. OK，永远在OK，永远只会说OK OK。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后后来我就OK哥，对，我就学英语啊。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">就复习啊学复习，后来但是也张不开嘴。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">张不开嘴。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">后来其实我那时候单词量也可以了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你那59分？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">不不，我后来学啊。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，没上你们那个京东方。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，但是这个有很大进步，但张不开嘴。张不开之后，一个人解了我的心结，阿城老师。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">钟阿城吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">钟阿城老师。有一次我们一个机会见着，聊天聊很晚，就说起这个讲英语这件事，我就说我张不了嘴。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你能说一点，按理说我可以说，但我不好意思说，我那发音也不对，都山西口音的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">阿城老师太会解人的心结了，他说小贾我告诉你，你这种英语我告诉你那才叫个性感，你说特别流利没意思，你是中国人带着中国文化说着中国式的英语，这个才性感。我一听我豁然，行吧，我就乱说吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">反正我是乱性感，对，又不是我母语，我就乱说乱性感呗。然后从此各种乱说，语法什么时态全部，对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但确实大部分都能听懂。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">慢慢咱也在进步，慢慢也在规范。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以这个脸皮薄特别吃亏，在这个世界上就放得开。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，我觉得我也很感谢，就我们开玩笑，阿城老师一下子把我给——把包袱卸掉了，说你就是个中国人，你说外语你又不是说你母语，说成什么，那你非常性感，没问题，乱说。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你其实本来性格上是社恐的吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没有，我性格有改变。我在刚上学、刚到北京读书的时候，我属于那种什么呢，因为之前没有这个感觉，因为之前都是老家朋友或者是一起成长的朋友，没这个感觉。后来我刚读书的时候发现，我是就是只要有两三天交往我特别爱说笑，但是没有交往刚见面生，你知道吗，就不说话了，有时候不说话到人家觉得我不礼貌。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是这个怎么改变了这种性格？就是有点反差。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">其实本质上我觉得我是一个很热闹的人，很爱说笑的人，但是有点认生，就在生人面前不愿意讲太多话。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这就算社恐。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那我就是一个社恐。以前大家心理学这边研究的不够，老把社恐和内向说成一件事，所以我经常困惑我到底是内向还是外向，因为我觉得我有特内向的时候，也有特外向的时候，但是后来弄明白——我还跟心理医生聊过——咱们这种就是社恐，就属于社恐，就刚认识的时候放不开，但一旦熟了以后呢就可以聊得很热闹。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，开玩笑啊说笑啊都没问题。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这就是外向加社恐。还有一种是社恐加内向，那就一直不熟。那我就属于外向加社恐。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我也是这种。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那我觉得后来有点改变是什么呢，就是跟导演这个职业有关，就是因为拍电影你总会要跟大量的陌生人打交道嘛，慢慢的也就有点克服了，我现在基本没什么问题，聊挺好的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你当年去柏林影展的时候，有那种就是很体面的正装什么的吗？因为它是有那个dress code的，甚至很多穿的像礼服什么的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我应该就是一个衬衫加一个厚外套，因为柏林没西装。我是到什么时候有西装呢，到这个——不是《三峡好人》，是到《站台》，因为《站台》是第一次入围主竞赛。因为《小武》是柏林的论坛单元，他是一个青年导演的平行单元，他没有这个衣着的要求，所以就随便瞎穿嘛。然后到《站台》呢，就因为入围了威尼斯主竞赛，人家说要求了，你要穿正装。正装呢，我记得我是在哪弄了套西装啊——哦，我这个香港同学带我去了，香港有个裁缝店，这个裁缝店叫关旗还是关河，是关什么洋服，就那种。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，关什么，天天打广告那种，然后两体裁。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对，就后来我一看那个不太陌生，是因为好多香港那个电视剧里。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">电视剧什么赞助商，对对对，那个到处这个尖沙咀那边，好像就叫关旗，到处是那个广告。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对，我同学就是带我去那个做了两体裁。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">名店哎，做了一身，你知道吗，那是第一次穿正装。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">穿正装。不过也就，领带还是领结？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">领带领带。我也试过领结，我超不喜欢领结，因为我长得个儿矮，然后一带领结，不管这个衣服是什么质量，绝对是服务员，是这个效果。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对，然后不带它的非常高大威猛才好看。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后呢后来去戛纳也就带了，因为他手册里面也写着你必须打领结，还有强制要求领结的，领带也不行。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有强制？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">这几年放松一点，以前我第一次去戛纳是02年，那年代就要求很严的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是我们比如说很多来自世界各国导演，不也有穿民族服装的吗？咱们穿中山装不行吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">中山装我没想过。然后那个年代有穿那个唐装的，就那种盘扣的，那种室友——我不太喜欢穿盘扣。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">咱们大陆不穿那个吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也有人穿，也有导演穿布鞋、穿盘扣的这种礼服，但我觉得老像个龙虎武师，这个人好像是打功夫去了，我也不穿。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">港台一直有穿唐装的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，我自己就穿，我喜欢衬衫就穿个衬衫，我到现在都喜欢穿衬衫。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以你其实只是有一点社恐，但是一旦熟了的话就完全没问题。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没问题，我特别爱开玩笑。所以这种电影节去了其实也不受罪，因为如果是纯内向的人他全程都难受，他就会全程都受罪。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">一直都是笑话。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我不受罪，我不受罪，只是刚开始比如生人多的话会有点放不开、噤词而已。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，一开始就是生人。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">人家跟我聊我也不知道该聊啥，就笑，就不咸不淡地说几句。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那头几次去影展的时候——</div></div>
+<h2 class="dlg" id="b21"><span class="ht">见陈冲、塞勒斯与北野武</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">见到过自己比如说喜欢或钦佩已久的什么明星导演这些有吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那我印象最深的应该就第一年见到陈冲，那年陈冲的那个《天浴》在柏林是主竞赛。然后呢我就是在一个希尔顿还是什么酒店大堂里，然后我在办事，我就看到他坐那跟人在谈事聊天，我说呦呦，这不是陈冲老师吗，想上去打个招呼，一看人家在谈事，远远的还看了一会儿。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">呀，陈老师毕竟是看着陈老师电影长大。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对啊。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">《小花》嘛，他比我们大十几岁吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对啊，包括那个也有那个，但那个当时其实更有共鸣的是差不多同龄人更有共鸣。我记得我98年时候看了沃尔特·塞勒斯那个《中央车站》，他在主竞赛，后来得了金熊奖，我特别喜欢，然后就想跟他聊。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那一年那时候英语已经解决了吗？还是Mr. OK那年代？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">Mr. OK那时候。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那怎么沟通呢？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">带翻译过去，余力为，全靠余老师了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在没问题吧？参加这些社交？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">没问题。你要谈深一点那做不了，要聊到作品、聊到解释你的作品这些还是需要翻译，但是大家聊聊天吃吃喝喝这没问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那北野武导演是怎么认识的？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">北野武导演跟《小武》有关。因为北野武那个时候，《小武》那个时候在柏林放映完之后，然后呢反响当然很好了，然后就有一个这个日本制片人——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">然后就跟我认识。认识之后呢，因为那时候我年轻穷，参加party哪有party趁吃趁喝，去喝一杯老能碰到他，我走哪都能碰到他。这个人是谁呢，就后来一直跟我合作的市山尚三。然后这个市山尚三呢，他是刚从松竹公司海外制片，然后去了北野武的Office Kitano，就是北野武工作室事务所，当这个制片。然后呢他看完《小武》之后就很喜欢。那当时北野武有一个计划，就是每年要投资两三个亚洲年轻导演，帮助亚洲电影发展，那他就负责，市山尚三就负责来寻找这些导演，然后寻找他们作品。他很喜欢《小武》之后呢，就给北野武看，他们就决策，北野武当然也很喜欢了，他们就决策，就是我的《站台》就要一起做了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">为什么很快会到《站台》这个片子？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">因为《站台》这个片子的剧本是我写的第一个剧本，所以在拍《小武》时候已经有《站台》了，但是《站台》它有十年的跨度，它花钱会比较多嘛，那实际上就是你一开始没制作条件，所以就先拍了《小武》。《小武》完了之后开始有国际的制片人想一起合作，包括当时像贝纳通什么这些，都包括像荷兰的这个资助年轻导演的基金都有参与，那条件成熟了就拍了《站台》，主要是北野武的支持，拍了《站台》。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">当然支持了你好几个片子，一直到《江湖儿女》吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">《江湖儿女》之后没有，是因为北野武离开了，北野武他离开了自己的公司，这个公司不存在了，那也就没有再抗承这块，就停掉了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就停掉了。到18年吧，那个时候我印象很深——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是买的那个《小武》的盗版碟，上边有一个就是有各国的影评嘛，永远印着第一句的是一个欧洲评论家吧，我忘了他叫什么名字了写的，我一直印象很深，说这个亚洲什么新导演当中什么闪耀着什么耀眼光芒的什么什么一位新人。对，你记得那个吧。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我记得那个，其实那个是柏林青年论坛的主席，也是他的专著叫《世界电影史》，乌利奇·格利高尔先生，他当时在报纸上写的一句话，他说——反正通过《小武》我就觉得他是发现了一个天才导演、一个人才，所以我印象很深。然后至于认识北野武，是因为他的制片人喜欢你的、给推荐的。但我特别感谢北野武，一个是支持我这么多年，其实有一个片子它真的是我觉得某种程度上有点像柯达公司的那一位，就是我的《世界》，04年的《世界》。我在03年筹备的时候，因为合作完《站台》《任逍遥》，然后该到《世界》了，然后我就写了一个剧本。那个时候他们日本人是程序性很强的，你首先评估剧本，《世界》这个剧本寄给Office Kitano之后，Office Kitano的经纪人看完之后他就说，大概意思就是说这个片子我们评估肯定赚不到钱，但是北野武的做头是赚钱了，我想应该是可以支持你，赔点也要支持，然后你等一下消息。然后呢没过几天呢，说北野武先生说了——</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">做头是赚了些钱，咱就拍吧。对，所以这一路真的前辈们的支持还真是特别管用。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后你最喜欢他哪个电影，北野武？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">《那年夏天，宁静的海》，也是我看的他的第一部电影。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，那个《坏孩子的天空》你喜欢吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也喜欢，然后就是如果排序的话，就是《那年夏天，宁静的海》，还有叫《花火》，《花火》很喜欢。我是他的电影我大部分都喜欢，当然后边也有一些不好看的，像什么《兄弟》那些，那个像是个三流的港片就那种感觉，除去那个以外大部分他的我都特别喜欢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后我感触最深的、因为看哭了的是那个《坏孩子》。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">《坏孩子的天空》，对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那个就不知道为什么就特别不动声色的，最后让人彻底绝望，就那个感觉。然后里边跟有一些，我印象里跟《站台》的有一些也是产生类似共鸣的，对。你最喜欢的是那个《那年夏天，宁静的海》，那个是他偏早期的了吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">早期的。他也是一个很邪门的一个神人。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后除了那个，跟这个导演你们平时接触多吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">大部分是在东京或者在电影节，因为工作，在电影节上。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他生活里也那么好玩吗？因为他拍很多搞怪的东西吗？原来还是做漫才出身的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">他生活中基本上挺严肃的，有点严肃。也可能因为我们差了辈了是吧，差了辈，所以平时感觉是很严肃的，也会说笑。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我突然想一个问题，就是你有没有想过拍一部喜剧片呢？这个可以是很商业的喜剧片，</div></div>
+<h2 class="dlg" id="b22"><span class="ht">看两百部短剧的金狮导演</span></h2>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">也可以是像伍迪·艾伦那样的喜剧片。就是我一直感觉你的幽默感是一流的，但是你只是不动声色的在一些电影里点缀性的弄了一些，我一直觉得你没想过这个吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我没有动过这个念头，但是呢我自己确实生活中也喜欢开玩笑，所以电影里面也有很多开玩笑的地方，或者也可以说是自嘲啊，这个相对幽默的地方。对，但是真正的去完成一部喜剧确实没有起心发念，没有这个想法。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你喜欢看喜剧电影吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">喜欢看。我做导演、我自己拍片跟我看电影其实反差挺大的，我是什么都爱看，很杂。你看现在我看短剧，有一阵我挺迷短剧的，一直看。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">现在有好的短剧吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我看的都很吓人，我就喜欢有很多甚至像胡闹的。就我看短剧有的是什么感觉呢，特别像我们高中时候晚自习的时候，看坎，就你明知道是虚构的看坎的，但是特来劲，特别狗血的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对对对，但依然很来劲。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也很来劲。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">看了很多吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我看了两百部吧。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你觉得它从市场上有可能大规模的侵蚀电影吗？还是有一个理论是说它是两个不同的受众，其实没什么影响？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我觉得没什么大影响。就有时候电影上不去，然后就归咎于周围的媒体环境，其实你说完全没影响确实也会有一些影响，但是说威胁到电影我觉得还不至于。因为观看的，你比如说我看短剧我一般是睡觉前看一会儿，那睡觉前谁会去看电影，是不是，又不占你正常的看电影的时间。然后有时候比如说我坐高铁无聊了看一会儿，飞机在停机一停——</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">40分钟等着起飞，我再看一会儿，那这些时间。你也不会看电影，它占用你是这些时间。但是说，你是不是因为你用这些碎片化的时间看了这些，就对于看影像、看电影没兴趣了？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也不会。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但我听说很多年轻人这个一边充值一边看，能一晚上几个小时都一直看下去，那算是体力好吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那是体力好吗？但我们以前看个电影也两个小时。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">他们刷这个都能刷三四个小时。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">关键是，就是唯一的可能就是短剧，我觉得它可能比电影更符合大众的心态、大众的心理。因为比如说短剧里面有很多题材是这种所谓反转，是这种个人的这种屈辱，然后再不停地反转。比如说我们说的三宝题材，保安、保姆、保洁。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这个反转在于哪儿？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">就人物一出现都是以这三种职业出现的，这三种职业的劳动者备受欺凌跟侮辱，那个侮辱不停的，什么下跪啊、什么磕几个头啊、伤几个全师啊。然后你就知道，这个就是压抑在这个普通这个劳动阶层里面，这种屈辱感它是很强的。然后呢，他就开始慢慢复仇，就是原来其实他是亿万富翁。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">双文吗？不是亿万，万亿富翁。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，然后就开始反转了。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那他同样拿回自己的尊严，是因为他其实更有权力、更有财富的人，那这方面是比较拧巴的，就是拿回尊严还是靠钱跟那个什么。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">但是你普遍的你能了解到大家的痛点在那，就解决不了这个问题，就寄希望于你是更大的boss。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这里面，就你有时候看到，你会也会想一些严肃的问题。我很难想象你会看这些东西，因为开始我们身边……</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我就观察到有趣的现象，就开始我们身边这些年轻人看他们还假装不看，扭扭捏捏念念，然后最后呢闲聊闲聊闲聊，聊到某一天大家都突然就说放下包袱，承认，勇敢地承认，说其实我也是偷偷看短剧的。然后就大家都承认了，都承认了以后呢，就是因为一直以来被认为是那种剧情狗血、品味恶俗的一个低级趣味的一个享受。结果他们突然放开了，都承认了，然后我自己到这个点我还没看。然后他们都这样，包括我认为我身边有些年轻同事品味非常好的也看，我就忍不住好奇了。然后我就去翻了翻，结果我一边捏着鼻子觉得有臭味，一边忍不住又看了好几集。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">要跟下去。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，然后就感觉这个东西真的特别奇怪。其实我觉得这种尝试，或者说人有多种欲求。我始终觉得，就是其实你比如说你可以把我叫做贾樟柯一个山西人、贾樟柯一个七零后、贾樟柯一个导演、贾樟柯甚至可能是一个制片人，都可以。但是你要我自我定位，其实我觉得就贾樟柯一个饮食男女。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，人有……也不能说不要装，这个跟装好像有点关系。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">也没关系，你就是个正常人，你有你的弱点，有你的优点，你有你的小欲望，咱就这么一个人，咱就是一个红尘世界的饮食男女。以前夜三作家叶三给我讲过一个好玩的事，他就说我们那会儿刚开始都玩那个转盘式的那个iPod嘛，然后大家坐一块，因为这不是手机，所以很自然地互相拿起来看对方都在听什么。然后叶三一拿他的，他就不让碰，他说这是绝对隐私。我说为什么呢？他说你的iPod没几首丢人的歌你自己偷偷听的吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我说有啊。他说你既然有，为什么要拿别人的？我说那你拿我的也没事啊。他说那你不嫌丢人？我说我还嫌丢人。然后他就提一个理论，说这个iPod上的曲目是一个绝对隐私。我想了想还挺有道理。就是我们不管什么短剧，对我来讲也是这其中的一个。我其实音乐听得很深入啊，我有几千张唱片，然后各种类型都听，然后很多音乐家也是朋友，所以我们这些共同员很多。但是这些音乐家跟我也承认，他们也在自己的曲库里有几首很丢人的歌，他就羞于承认他听那些歌，但那几首歌他听的时候每次都很愉快。所以我觉得人性就是很复杂，这个需求是很复杂的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那你觉得你将来有可能尝试微短剧什么的吗？因为现在像我们上次跟那个宋方金老师聊的时候，他就觉得现在这个东西是也蛮生长长出来的，但是后边会有专业选手陆续进去，因为它有利益驱动，会有专业选手进去，进去以后就会出现精品的微短剧和优质的高水准的微短剧，是完全可能出现的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我觉得我会看很多微短剧，但我估计我不会拍。因为微短剧这个形式，它跟我关心的感受差异挺大的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，就比如说？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">那比如说有一些时刻我是特别想表现，比如我们刚才说到我小时候我们家离公路很近，我有一个特别美妙的时刻的记忆。就是我刚五岁起，我们山西人都要睡个午觉的，睡起来午觉迷迷糊糊的准备起床的时候，又听到远处呼啸而过的大卡车，因为随着风传过来那个卡车过来声音，它是呼带呼啸就过去了，传很远，渐渐地消失，就像用沈从文的话来说，就像四月的棉絮就拉了丝了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">慢慢的才能够消失的那种时刻，我觉得特别想拍到电影里。但这东西你要拍成个短剧，这是个啥呀？谁看啊？谁去听你的声音感受你的那个东西。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，短剧是容不得铺垫的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，所以我需要描述，我需要用时间去展开描述一个事情。所以我觉得我应该不会拍，但是我应该是个短剧的观众。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">你觉得短剧会像宋方金想的那样有专业选手进来，把它弄得拍出很多有品质的东西吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我对这个事有一点怀疑，是我觉得它篇幅决定了就很难。你看以前小说有微型小说吗？微型小说可以写得很好玩很抓人，但是它很难承载一些有分量的东西。但我觉得单就短剧本身来说，它的，你说短剧进步肯定是会存在的。因为它从比如说我看的初代短剧里面，有一个特别有想象力的叫《爷爷在地府造反》。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我借你看一下，《爷爷在地府造反》。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对，那它制作特别特效就有点搞笑了，但是它很有想象力，我觉得挺好的看的。那它现在当然就不一样了，很多它那些都在进步。但是我觉得更主要一个现象，实际上是其他的，比如说目前已经有像这个网剧、长篇网剧短剧化的这个倾向。所谓短剧化，不是篇幅短了，是它里面很多叙事节奏什么在变。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，我最近看了一集这个，有一个网剧叫《许你荣耀》，我没看，就看了一集还没看完，我觉得开头好像短剧叙事结构很快，它的叙事的桥段也很像短剧。</div></div>
+<h2 class="dlg" id="b23"><span class="ht">怎么当导演：演员、真实与赵涛</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">拍得也很精致。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">拍得很精致。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">它本身不是短剧，它是网剧，长篇的网剧，它已经学习了很多短剧的叙事手法，这方面一定会有影响。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是你说，但就很多人去实践，我觉得他的精致化是短剧从业者才精致化，他不是说只有人家才能让短剧精致化，不是说什么电影导演下场、长篇这个剧的导演下场，他才能精致化。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">但其实有一些专业选手已经悄无声息的进入了，只是不公开说而已。我觉得没什么不可以说的。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还有就是有一点，我多年以来看你的访谈没有看到，也可能我漏看了，因为有一些事今天我才知道，刚才挺不好意思的。就是你在性格上、就是工作风格上是哪种类型的导演，是特别折磨人、特别惊异秋经、特别一个镜头没完没了拍，还是就是比如说到那跟演员们交流也比较多，大家能互相给一些意见，然后风格是比较好相处的，是哪种类型的导演？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我是很好相处的导演。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">然后呢，你说偶尔发脾气这是难免的，会有把演员逼疯？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">跟演员不会逼疯演员，但是我自己会用另一个方法来把我的要求达到。就比如说这场戏真的不满意，我不会一直拍一直拍拍到一定程度，就不拍了，那就拍别的，隔两三天重拍。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我会用这种方法，我不会把演员搁在那，所以从早上一直要拍到晚上，这场戏就过不去。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那这样的方法都对，因为有时候……</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">其实跟工作的认识有关。就早期嘛也有这种死磕的情况，但是我后来发现跟演员合作是这样，有时候演员演得不好，大部分时候是剧本有问题。因为有很多时候我们剧本也是自己写的，会很自信，但是有时候比如说一个特别好的演员，他演来演去他这一场就是没感觉，比如我们觉得是不是他累了，或者是不是他对这个人物有点没想明白，就找人家的原因。后来我发现找自己的原因，就只要是演员这个突然卡壳，90%是剧本有问题。就你那个剧本可能不近人情，说服不了他，可能说服不了人家，进不去。因为演员嘛他很感性，他也给你提不出意见，但他就不舒服。这个时候呢，我觉得停下来，不拍了，这场戏先拍别的那些演员发挥得很好的，这场戏你去反省一下，可能是自己的问题。那大部分是这种情况。有时候呢确实也是那天演员就不舒服，身体就不舒服，身体的问题也可能是那天天气的原因。比如说有时候演员他是很敏感，他们这也是赵涛教我的，一开始我不懂，他说其实演员是很生物性的。就比如说今天阳光很好，这种演一场戏跟今天是阴天演一场戏，他需要的调整情绪是不一样的，他需要转化的、需要培育的。比如今天阴云密布，然后这场戏要拍的是很放松很喜悦的，那他的演员得在生理上跟天气来做一个对抗，我要调到那个很放松很那什么的。有时候是这种原因，原因很复杂，但是大部分时候呢，就是还是剧本的问题。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吧。还有就是我看你这么多年电影，尤其是早期的时候，因为后期有一些明星合作，我们都认识了，比如像廖凡什么就认识了。然后早期的时候，你当时是新人导演，用的演员也是新人，然后当时我都感觉那些人都不是这个行业的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">大部分不是这个行业的，对，但是也有一些是。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是都能调教成非常真实的这种质感，这个东西主要是受谁的影响？在你学电影的时候，就你的电影里的那种真实质感，很多像是就不像是电影，就完全没有表演痕迹吧，或者说……</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">你要说这个呢，我觉得这有两点吧。其实从这个角度来说，是一个反作用力。这个反作用力就是在于我们在学电影的那个时代所看到的，特别是咱们自己的国产电影，表演太浮夸了。然后呢，你就觉得，嗯，可不可以生活化一些是吧。那那个年代呢，也有一些这方面的尝试，比如说像《秋菊打官司》啊、像宁瀛老师的这个《找乐》啊、《民警故事》啊，他们这些前辈导演已经在实验这种非常真实的，虽然很稀缺，但是我们能看到这一类型的影片，你也会受到启发。那再一部分呢，跟电影理论有关，就是所谓电影它是一个物质现实世界的还原，那你要考虑什么是现实世界，那包括我们这个现实世界的人，那就是松松垮垮，就是它有很多自然的反应嘛。那从很多角度来说，那我自己就是深受这个……</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">理论的影响。我觉得电影它可以做很多事情，电影很戏剧性、很偶像化、很传奇性，科幻片、灾难什么都可以。但是电影这个媒介它最重要一个美感，是对这个世界能事无巨细地还原，这是它最美的地方。那我喜欢这个东西，我的生活环境是这样子的，那我就用这样的方法、用这样的演员来合作。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">所以就是风格和美学上的偏好，对，喜欢这一派的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">因为其实我觉得也是从咱们那个资源匮乏的年代来临的。其实我自己有非常多的不同类型电影的想象，但是每一次拍电影，当你就是说心里有个感觉了，说这段咱准备新电影吧，从剧本写起是吧，坐在那了，就你总觉得拍次电影不容易，其他的类型咱就放一放吧，咱先拍一个咱这个阶段最揪心的、最想表达的、感触最强的，那就拍了。所以其他类型比如说戏剧性的我也有很多，这样我很爱看，我有这些构思，像说了很久的什么《在清朝》啊、《双雄会》啊，都是强戏剧的。但是真的坐下来想拍的时候，你还是目前的这个感受里面最真实、最迫切的东西总会优先。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">就是现实优先。我印象里跟你聊过两次，一个是很早的时候咱们吃饭的时候，你聊到当时准备那个书童的那个《在清朝》，然后再有一次是我们那个我办英语培训学校的时候，邀请你去给学生做演讲，你讲准备拍一个武侠片，那就是《在清朝》。那个年代已经是在牛街那边，那已经是刚刚准备拍《在清朝》的时候。</div></div>
+<h2 class="dlg" id="b24"><span class="ht">表白、感谢与推荐嘉宾（结尾）</span></h2>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我现在在豆瓣上还能看到，说什么什么2028年之类的，希望实现，都报网友。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">还没有开拍吧。最后一个问题，那我就要表白一下。我一直有一个想跟你说的话，但是这种东西吧，比如咱们见面吃饭聊天说呢，又显得过于场景不对，就不太正式的时候你说那种很正式的话就会怪。今天我们刚好录制这个，首先非常感谢你来帮我们录制这期节目。然后我就一直有个感受，就是说有一个流行的说法，说每一代人都有自己的什么什么，有这种流行的句式。但是我这次准备咱俩的这个访谈的时候，我自己想了一下，好像不是每一代人都有他们的贾樟柯，然后能把他们所生活经历过的那个时代，那么真实细腻有质感的在屏幕上还原出来。所以比如说我是70后，我在你的电影上看到很多毛骨悚然的真实还原。然后但它不是简单的还原，简单还原我们看纪录片就好了，它是一个故事片被还原回来。但是就是那个真实的，自改是让人毛骨悚然的。但是我回想，说如果60后他们有没有这样的一个导演去做了这个事，80后有没有这样的导演去做了这个事，我是没有想到有的。你觉得有吗？我是没有想到有跟你做了高度类似的这种还原的工作，就是把整个时代的那个感觉和画面和所有细节，在屏幕上以作品的形式还原出来。所以从这点上我一直想跟你说一声感谢。今天借着录这个，这么正式，非常正式，尤其是这次筹备咱们这个对话的时候，我们组织那些采访问题的时候，然后又把一些旧片子捋了一遍，就还是这个感觉。对，我就想说一个这个非常感谢，今天非常感谢。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">谢谢老罗，你虽然没睡午觉，但状态非常好，非常感谢。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">有锐信在不困，这可以保留吗？这句话可以保留？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">最后一个问题，就是我们照我们这个节目的惯例，就是说结束的时候能不能给我们推荐三位建议我去访谈的嘉宾。这个里边既有建议的成分，有可能对我们是个提醒，也有一些我们不认识，你帮着给牵个线，什么他同不同意是他的事，这个我不一定能牵得了线。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">但是我就是我一直很好奇，就是特别想听一听，我不知道人家现在生活状态是什么样子。就是那个有一位配音老师，两位吧，简肇强跟姚锡娟。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">这我也是年轻人都知道，就是霍元甲跟那个雪姨。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">我知道，都是他们就在我这个初中年代，他们的声音占了非常大的主导。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，就是我很好奇姚锡娟，姚锡娟就是给幸子配音，《血疑》里面的幸子。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">姚锡娟就是给霍元甲跟那个大岛茂配音的。因为他们应该是广东话剧院的，就这两部剧结束之后，他们的配音已经成为我个人的一个记忆，但是不知道他们现在怎么样。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我们可以去打听一下，很有趣，如果他们退休了闲着没什么事干，也有可能会接受我们采访，但是这个可能就是观众群就会高度高龄化了。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">但是我还是有兴趣试一下。还有别人吗？影视圈的。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">陈冲呢？</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">对，陈冲老师。陈冲老师平时在国内吗？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">很多时间在，对对对。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">是吗？你跟他认识对吧？</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">认识。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那能给牵个线吗？我们很想采访。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">可以可以。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">那我解好感谢。好嘞好嘞。</div></div>
+<div class="turn guest"><div class="who">贾樟柯：</div><div class="say">谢谢老罗。</div></div>
+<div class="turn luo"><div class="who">罗永浩：</div><div class="say">我们合格一样。</div></div>
+<p class="para">（广告口播）最后一道来想要聊的好，咖啡不能少，感谢合作伙伴瑞幸，把瑞幸咖啡店开在了罗永浩的十字路口。欢迎大家收看罗永浩的十字路口，最重要的是一键三连和加关注，还欢迎随时发送弹幕评论跟我互动。</p>
+</main>
+<button class="up" id="up">↑</button>
+<script>
+var root=document.documentElement, prog=document.getElementById('prog'), up=document.getElementById('up');
+function onScroll(){var h=document.body.scrollHeight-innerHeight,y=scrollY;
+  prog.style.width=(h>0?y/h*100:0)+'%'; up.classList.toggle('show',y>600);}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+up.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+var fs=parseFloat(localStorage.getItem('fs')||'18'); apply();
+function apply(){root.style.setProperty('--fs',fs+'px');localStorage.setItem('fs',fs)}
+document.getElementById('finc').onclick=function(){fs=Math.min(23,fs+1);apply()};
+document.getElementById('fdec').onclick=function(){fs=Math.max(15,fs-1);apply()};
+var th=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+setTheme(th);
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+  document.getElementById('theme').textContent=t==='dark'?'☀️':'🌙'}
+document.getElementById('theme').onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+var toc=document.getElementById('toc'),mask=document.getElementById('mask');
+function tg(o){toc.classList.toggle('open',o);mask.classList.toggle('open',o)}
+document.getElementById('menu').onclick=function(){tg(!toc.classList.contains('open'))};
+mask.onclick=function(){tg(false)};
+toc.addEventListener('click',function(e){if(e.target.tagName==='A')tg(false)});
+</script>
+<script>
+/* 续读记忆 v1 —— 记住每篇读到哪，下次进来可一键续读（按页面路径分别存于本机 localStorage） */
+(function(){
+  var KEY='read:'+location.pathname, saved=null;
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+  var st=document.createElement('style');
+  st.textContent='.resume{position:fixed;left:50%;bottom:74px;transform:translateX(-50%) translateY(18px);z-index:25;'
+    +'max-width:calc(100vw - 28px);display:flex;align-items:center;gap:10px;background:var(--card);'
+    +'border:1px solid var(--line);border-radius:12px;padding:9px 11px;box-shadow:0 8px 30px rgba(0,0,0,.24);'
+    +'opacity:0;pointer-events:none;transition:opacity .28s,transform .28s;font-size:.86rem;color:var(--ink)}'
+    +'.resume.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}'
+    +'.resume b{color:var(--accent);font-weight:700}'
+    +'.resume .go{border:none;background:var(--accent);color:#fff;border-radius:8px;padding:7px 12px;'
+    +'font-size:.84rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}'
+    +'.resume .go:active{transform:scale(.95)}'
+    +'.resume .x{border:none;background:transparent;color:var(--sub);font-size:1.15rem;line-height:1;cursor:pointer;padding:2px 5px}';
+  document.head.appendChild(st);
+  var t=0;
+  function save(){
+    var h=document.body.scrollHeight-innerHeight, y=scrollY, pct=h>0?Math.round(y/h*100):0;
+    if(pct<2||pct>97){try{localStorage.removeItem(KEY)}catch(e){}return;}
+    try{localStorage.setItem(KEY,JSON.stringify({y:y,pct:pct,ts:Date.now()}))}catch(e){}
+  }
+  addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=0;save()},400)},{passive:true});
+  addEventListener('pagehide',save);
+  addEventListener('visibilitychange',function(){if(document.hidden)save()});
+  if(saved&&saved.y>200&&saved.pct>2&&saved.pct<97){
+    var bn=document.createElement('div'); bn.className='resume';
+    bn.innerHTML='<span>上次读到 <b>'+saved.pct+'%</b>，继续？</span>'
+      +'<button class="go" type="button">继续阅读</button><button class="x" type="button" aria-label="关闭">×</button>';
+    document.body.appendChild(bn);
+    var hideT=setTimeout(function(){bn.classList.remove('show')},7000);
+    setTimeout(function(){bn.classList.add('show')},450);
+    bn.querySelector('.go').onclick=function(){clearTimeout(hideT);scrollTo({top:saved.y,behavior:'smooth'});bn.classList.remove('show')};
+    bn.querySelector('.x').onclick=function(){clearTimeout(hideT);bn.classList.remove('show')};
+  }
+})();
+</script>
+</body></html>
