@@ -1,0 +1,1664 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书博主炼成记 · 交互练习册</title>
+<style>:root{
+  --paper:#faf6ec; --paper-2:#f4eedf; --card:#fffdf7;
+  --ink:#322e28; --ink-soft:#6f675a; --ink-faint:#9a9384;
+  --accent:#1f7a6b; --accent-deep:#16584d; --accent-tint:#eaf2ef;
+  --warn:#c0392b; --line:#e6ddcb; --line-soft:#efe8d8;
+  --maxread:720px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;}
+header.topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#f5efe0;
+  display:flex;align-items:center;gap:14px;padding:10px 18px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+.topbar .burger{display:none;background:none;border:none;color:#f5efe0;font-size:22px;cursor:pointer;line-height:1;}
+.topbar h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+.topbar .spine{font-size:12.5px;color:#cfe3dd;border-left:1px solid #3c7c70;padding-left:14px;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .progress{font-size:12.5px;background:#15504675;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.wrap{display:flex;align-items:flex-start;}
+nav.toc{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);overflow-y:auto;
+  width:255px;flex:0 0 255px;background:var(--paper-2);border-right:1px solid var(--line);padding:16px 10px 60px;}
+nav.toc .grp{font-size:12px;color:var(--ink-faint);font-weight:700;margin:16px 8px 6px;letter-spacing:.5px;}
+nav.toc a{display:flex;align-items:flex-start;gap:7px;text-decoration:none;color:var(--ink-soft);
+  font-size:13.5px;padding:6px 9px;border-radius:7px;margin:1px 0;line-height:1.45;}
+nav.toc a:hover{background:var(--accent-tint);color:var(--accent-deep);}
+nav.toc a.active{background:var(--accent-tint);color:var(--accent-deep);font-weight:700;box-shadow:inset 3px 0 0 var(--accent);}
+nav.toc a .ck{flex:0 0 auto;width:15px;color:var(--accent);font-weight:700;}
+nav.toc a.special{color:var(--accent-deep);font-weight:600;}
+main{flex:1;min-width:0;padding:0 28px 120px;}
+.reader{max-width:var(--maxread);margin:0 auto;}
+section.sec{padding-top:30px;scroll-margin-top:60px;}
+.sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:10px;margin:8px 0 6px;}
+.sec-h h2{font-size:23px;margin:0;color:var(--accent-deep);font-weight:800;}
+.badge-time{font-size:12px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.badge-axis{font-size:12px;color:var(--accent-deep);background:var(--accent-tint);border:1px solid var(--line);padding:2px 10px;border-radius:20px;}
+.done-btn{margin-left:auto;font-size:12.5px;background:none;border:1px solid var(--line);color:var(--ink-soft);padding:4px 12px;border-radius:20px;cursor:pointer;}
+.done-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.step{margin:22px 0;}
+.step-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin:0 0 8px;}
+.step-h .ic{font-size:18px;}
+.step-body{padding-left:2px;}
+.step-body>p:first-child{margin-top:0;}
+p{margin:.55em 0;}
+strong{color:var(--ink);}
+.accent{color:var(--accent-deep);font-weight:700;}
+code{background:var(--paper-2);border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:13.5px;}
+.blk{font-size:15.5px;font-weight:800;color:var(--ink);margin:18px 0 6px;}
+.quote{border-left:3px solid var(--line);background:var(--paper-2);border-radius:0 8px 8px 0;padding:10px 15px;margin:13px 0;}
+.quote>p:first-child{margin-top:0;} .quote>p:last-child{margin-bottom:0;}
+pre{background:#f3ecdb;color:#3b362d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;overflow-x:auto;
+  font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13px;line-height:1.65;margin:12px 0;white-space:pre;}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--card);border-radius:8px;padding:12px 15px;margin:14px 0;font-size:15px;}
+.callout .c-h{font-weight:800;color:var(--accent-deep);margin-bottom:4px;}
+.callout.ok{border-left-color:var(--accent);background:var(--accent-tint);}
+.methodcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0;}
+.methodcard h4{margin:0 0 8px;color:var(--accent-deep);font-size:15px;}
+.methodcard ol{margin:0;padding-left:22px;} .methodcard li{margin:5px 0;}
+ul.check{list-style:none;padding-left:2px;margin:10px 0;}
+ul.check li{position:relative;padding-left:26px;margin:7px 0;}
+ul.check li::before{content:"❌";position:absolute;left:0;font-size:14px;}
+.warn-x{color:var(--warn);font-weight:700;}
+ul.selfck{list-style:none;padding-left:2px;margin:10px 0;}
+ul.selfck li{position:relative;padding-left:26px;margin:7px 0;}
+ul.selfck li::before{content:"☐";position:absolute;left:0;color:var(--ink-faint);font-size:16px;}
+.ta-label{font-size:13px;color:var(--ink-soft);margin:10px 0 5px;}
+textarea.ta{width:100%;min-height:74px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 13px;font-family:inherit;font-size:15px;line-height:1.7;color:var(--ink);resize:vertical;}
+textarea.ta:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint);}
+.saved-tag{font-size:11.5px;color:var(--accent);margin-left:8px;opacity:0;transition:opacity .3s;}
+.saved-tag.show{opacity:1;}
+.recall{background:var(--accent-tint);border:1px dashed var(--accent);border-radius:9px;padding:11px 14px;margin:12px 0;font-size:14.5px;}
+.recall .rh{font-weight:700;color:var(--accent-deep);font-size:13px;margin-bottom:4px;}
+.recall .rc{white-space:pre-wrap;color:var(--ink);}
+.recall.empty{border-style:dotted;}
+.recall.empty .rc{color:var(--ink-faint);font-style:italic;}
+details.fold{border:1px dashed var(--accent);border-radius:9px;margin:12px 0;background:var(--card);}
+details.fold>summary{cursor:pointer;list-style:none;padding:11px 15px;font-weight:700;color:var(--accent-deep);user-select:none;}
+details.fold>summary::-webkit-details-marker{display:none;}
+details.fold>summary::before{content:"\25B8 ";color:var(--accent);}
+details.fold[open]>summary{border-bottom:1px solid var(--line-soft);}
+details.fold[open]>summary::before{content:"\25BE ";}
+details.fold .fold-in{padding:8px 16px 14px;}
+.lead-callout{background:var(--accent-deep);color:#eef4f1;border-radius:10px;padding:13px 17px;margin:14px 0;}
+.lead-callout b{color:#fff;}
+.intro-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:18px 0;}
+.intro-card h3{margin:.2em 0 .4em;color:var(--accent-deep);}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.tbl-scroll{overflow-x:auto;margin:12px 0;}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--card);}
+th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;}
+thead th{background:var(--paper-2);color:var(--ink);font-weight:700;}
+tbody tr:nth-child(even){background:#fcf9f1;}
+.note{color:var(--ink-soft);font-size:14px;}
+.scrim{display:none;position:fixed;inset:48px 0 0;background:rgba(0,0,0,.3);z-index:25;}
+.do-zone{background:linear-gradient(180deg,#fffdf6,#fbf5e6);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:6px 16px 14px;margin:20px 0;}
+.dz-flag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--accent);border-radius:6px;padding:2px 9px;letter-spacing:.5px;}
+.anno{font-size:12.5px;color:var(--accent-deep);background:var(--accent-tint);border-radius:5px;padding:1px 7px;margin:0 1px;font-weight:600;}
+#totop{position:fixed;right:18px;bottom:22px;z-index:35;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--accent-deep);font-size:20px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.14);opacity:0;pointer-events:none;transition:opacity .2s;}
+#totop.show{opacity:1;pointer-events:auto;} #totop:hover{background:var(--accent-tint);}
+.navlinks{display:flex;justify-content:space-between;gap:12px;margin:30px 0 4px;}
+.navlinks a{flex:1;min-width:0;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--card);color:var(--ink-soft);font-size:13.5px;line-height:1.4;}
+.navlinks a:hover{border-color:var(--accent);color:var(--accent-deep);background:var(--accent-tint);}
+.navlinks a.nl-next{text-align:right;} .navlinks a .nl-k{display:block;font-size:11px;color:var(--ink-faint);font-weight:700;margin-bottom:2px;}
+.navlinks a.nl-disabled{visibility:hidden;}
+@media (max-width:560px){pre{font-size:12px;}}
+@media (max-width:820px){
+  nav.toc{position:fixed;top:48px;left:0;z-index:28;transform:translateX(-100%);transition:transform .2s;box-shadow:2px 0 14px rgba(0,0,0,.15);}
+  nav.toc.open{transform:translateX(0);}
+  .scrim.open{display:block;}
+  .topbar .burger{display:block;} .topbar .spine{display:none;}
+  main{padding:0 16px 100px;}
+}
+@media print{
+  header.topbar,nav.toc,.done-btn,.scrim,.saved-tag,#totop,.navlinks{display:none!important;}
+  main{padding:0;} textarea.ta{border-color:#bbb;} details.fold{border-color:#bbb;}
+  details.fold[open] .fold-in,details.fold>summary{display:block;}
+  body{font-size:12pt;background:#fff;}
+}</style>
+</head><body>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="目录">☰</button>
+  <h1>小红书博主炼成记 · 交互练习册</h1>
+  <div class="spine">动手练 · 先写后照 · 13单元+结课实战</div>
+  <div class="progress" id="progress">已学 0 / 15</div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav class="toc" id="toc">
+<a href="#sec-0" class="special"><span class="ck" data-ck></span>《小红书博主炼成记》学习训练册（完整版）</a>
+<a href="#sec-1"><span class="ck" data-ck></span>第 0 单元　爆款规律·用户思维</a>
+<a href="#sec-2"><span class="ck" data-ck></span>第 1 单元　给账号找定位</a>
+<a href="#sec-3"><span class="ck" data-ck></span>第 2 单元　挖爆款选题</a>
+<a href="#sec-4"><span class="ck" data-ck></span>第 3 单元　做爆款封面</a>
+<a href="#sec-5"><span class="ck" data-ck></span>第 4 单元　写一个爆款标题</a>
+<a href="#sec-6"><span class="ck" data-ck></span>第 5 单元　写爆款图文</a>
+<a href="#sec-7"><span class="ck" data-ck></span>第 6 单元　写视频文案</a>
+<a href="#sec-8"><span class="ck" data-ck></span>第 7 单元　算法涨粉</a>
+<a href="#sec-9"><span class="ck" data-ck></span>第 8 单元　把流量变成真粉丝：价值 + 人设涨粉</a>
+<a href="#sec-10"><span class="ck" data-ck></span>第 9 单元　数据复盘</a>
+<a href="#sec-11"><span class="ck" data-ck></span>第 10 单元　AI 辅助创作</a>
+<a href="#sec-12"><span class="ck" data-ck></span>第 11 单元　运营避坑</a>
+<a href="#sec-13"><span class="ck" data-ck></span>第 12 单元　落地变现</a>
+<a href="#sec-14" class="special"><span class="ck" data-ck></span>🎓 结课大实战：从 0 起号到第一笔变现</a>
+</nav>
+<main><div class="reader">
+<section class="sec" id="sec-0"><div class="sec-h"><h2>《小红书博主炼成记》学习训练册（完整版）</h2><button class="done-btn" data-done="0">标记学完</button></div>
+<div class="quote"><p>这是配套《详解版讲义》的<strong>动手练习册</strong>。详解版负责"讲透、可查"，训练册负责"换你做、真的会"。</p>
+<p>每个单元走同一条 8 步动线，灵魂是<strong>先动手、再对照</strong>——别只看，一定要把空填上。</p></div>
+<div class="step"><div class="step-h"><span class="ic"></span>怎么用这本训练册</div><div class="step-body"><p>每个单元固定 8 步：</p>
+<ol><li>🎯 <strong>先卡你一下</strong> —— 一个真实场景先把你卡住，<strong>先别看答案</strong>，写下你的第一反应</li><li>🔑 <strong>只攻一个动作</strong> —— 这个单元唯一要拿下的招牌动作</li><li>🧠 <strong>高手怎么想</strong> —— 精简框架 + 1 个最该记的案例</li><li>✍️ <strong>跟着做一遍</strong> —— 用 🎯 那个场景，看高手怎么做，再拿你的第一反应对照</li><li>🪜 <strong>换你做</strong> —— 一个新场景，留空你来写（答案在折叠里，先写后照）</li><li>🃏 <strong>随身方法卡</strong> —— 明天就能用的步骤清单</li><li>⚠️ <strong>易错 + 自测</strong> —— 3 条自查 + 1 道全新自测题</li><li>🧭 <strong>挂回全景图</strong> —— 这个单元在大图里的位置</li></ol>
+<div class="quote"><p>折叠 <code>👉</code> 里是参考答案，<strong>一定先自己写、再点开对</strong>——这是训练册和讲义最大的区别。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>🗺 全景图</div><div class="step-body"><div class="map">
+  <div class="m-box lead"><b>内核 · 用户思维</b>：每个动作都回到同一句话——"关用户什么事 / 对他有什么好处？"</div>
+  <div class="m-box"><div class="m-cap">① 找准定位</div>
+    <div class="m-row"><a class="chip" href="#sec-2">U1 给账号找定位</a></div></div>
+  <div class="m-box"><div class="m-cap">② 做出爆款</div>
+    <div class="m-row"><a class="chip" href="#sec-1">U0 爆款规律</a><a class="chip" href="#sec-3">U2 挖选题</a><a class="chip" href="#sec-4">U3 做封面</a><a class="chip" href="#sec-5">U4 写标题</a><a class="chip" href="#sec-6">U5 写图文</a><a class="chip" href="#sec-7">U6 视频文案</a></div></div>
+  <div class="m-box"><div class="m-cap">③ 放大流量</div>
+    <div class="m-row"><a class="chip" href="#sec-8">U7 算法涨粉</a><a class="chip" href="#sec-9">U8 价值人设</a><a class="chip" href="#sec-10">U9 数据复盘</a><a class="chip" href="#sec-11">U10 AI辅助</a><a class="chip" href="#sec-12">U11 运营避坑</a></div></div>
+  <div class="m-box"><div class="m-cap">④ 落地变现</div>
+    <div class="m-row"><a class="chip" href="#sec-13">U12 落地变现</a></div></div>
+  <div class="m-box"><div class="m-cap">🔗 起号主线（一条龙）</div>
+    <div class="m-note">定位 → 选题 → 封面/标题 → 图文/视频 → 涨粉 → 复盘 → AI 提效 → 守规 → 变现</div>
+    <div class="m-row"><a class="chip" href="#sec-14">🎓 结课大实战：把整条链连起来走一遍</a></div></div>
+  <div class="m-note">怎么用：先看你卡在哪个 <b>阶段</b>（没定位？没流量？不会变现？），点对应单元直接跳过去；每个单元落在哪一<b>层</b>（思维/框架/模板）看它结尾的 🧭。</div>
+</div>
+<div class="quote"><p>怎么用这张图给自己定位：先看你卡在哪个<strong>阶段</strong>（没定位？没流量？不会变现？），再看你缺的是哪一<strong>层</strong>（是没想通的"思维"、不会用的"框架"、还是没落地的"模板"），直接翻对应单元。</p></div></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>📅 学习路径表</div><div class="step-body"><div class="tbl-scroll"><table><thead><tr><th>路径</th><th>适合谁</th><th>单元顺序</th><th>建议节奏</th></tr></thead><tbody><tr><td><strong>最小可用</strong>（先开张）</td><td>时间紧、想尽快发出第一篇</td><td>U1 定位 → U4 标题 → U3 封面 → U5 图文 → U7 算法涨粉</td><td>每天 1 单元，1 周开张</td></tr><tr><td><strong>完整深读</strong>（系统起号）</td><td>想系统做好一个号</td><td>U0 → U1 → U2 → U3 → U4 → U5 → U6 → U7 → U8 → U9 → U10 → U11 → U12 → 🎓结课</td><td>每天 1 单元，2 周读完</td></tr><tr><td><strong>按目标加餐</strong></td><td>已在做、想补短板</td><td>没流量补 U7/U8/U9；不会变现补 U12；想提效补 U10；怕违规补 U11</td><td>哪痛补哪</td></tr></tbody></table></div>
+<hr class="soft">
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-1"><div class="sec-h"><h2>第 0 单元　爆款规律·用户思维</h2><button class="done-btn" data-done="1">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 25–30 分钟　·　主导阶段：<strong>做出爆款</strong>　·　颗粒度层：<strong>思维（心法）层</strong></p>
+<p>（本单元抽自《详解版讲义》第二章第一节；详解版负责"讲透可查"，本单元负责"先判断再理解"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你养了两只猫，最近开始运营小红书，想做宠物博主。昨天拍了一段视频，内容是：<strong>猫咪在阳台晒太阳、打哈欠、互相舔毛的日常片段</strong>，15 秒，画面很有生活感。</p>
+<p>发布前，你打算写这个标题：</p>
+<div class="quote"><p>《今天天气很好，猫咪们享受阳光浴🌞》</p></div>
+<p><strong>先别往下看</strong>，把你的判断写在这儿：</p>
+<div class="quote"><p>这条笔记，按照你现在的直觉，觉得它能不能爆？为什么？</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的判断：____</div>
+<textarea class="ta" data-save="u1-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要拿这个判断跟分析框架对照，看自己想到了什么、漏掉了什么。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">把"我想发什么"的问题，换成"用户为什么要看这个"。</p>
+<p>后面的三大特点、四个要素，都是这句话的延伸工具——先把这个底层开关拨对，框架才有用。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">一个前提 + 两套工具：</p>
+<pre>前提：用户思维（不是自嗨）
+  自嗨：以自我为中心 → 发自己想发的
+  用户思维：以用户为中心 → 发用户想看的
+  核心问题：用户是谁？他们的痛点/渴望是什么？
+
+工具一：爆款内容三大特点（至少命中一个）
+  具有实用性 → 帮用户解决实际问题 → 高收藏
+  勾起好奇心 → 留悬念/稀缺体验   → 高点击
+  引爆情绪点 → 共鸣/爱恨/暖心    → 高点赞+评论
+
+工具二：打造爆款的四个核心要素（缺一不可）
+  选题 → 决定有多少人感兴趣
+  封面 → 决定用户会不会停下来
+  标题 → 决定用户会不会点进去
+  正文 → 决定用户会不会互动留下</pre>
+<div class="quote"><p>🧷 <strong>记住这个对照：</strong></p>
+<p>一位有 7 年运动经验的健身达人来咨询，她在小红书发了不少笔记，播放量都少得可怜。</p>
+<p>她发的标题是：《我健身的三个蜕变阶段》《我是什么时候下定决心要加强上肢肌肉力量的》……</p>
+<p>被问到"为什么做这些内容"，她说："因为我亲身经历过，比较有经验。"</p>
+<p>作者反问她："你观察过小红书上关于健身的爆款笔记在讲什么吗？"</p>
+<p>她思考后发现：<strong>"动作跟练""瘦身瘦腿"方向的视频才是爆款</strong>——这命中了<strong>实用性</strong>，帮用户解决"想减脂/想练好动作"的问题。</p>
+<p>她之前发的内容，发在朋友圈也许会有人点赞；但在小红书，没有人认识她，没有人会为自嗨式的表达买单。</p>
+<p class="blk">有 7 年经验不等于有流量——发用户想看的，才能有流量。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>回到 🎯 那条「猫咪晒太阳」视频，用框架过一遍：</p>
+<p class="blk">第 1 步 · 检验是否有用户思维</p>
+<p>问自己：这条视频的目标用户是谁？他们有什么痛点或渴望？</p>
+<ul><li>目标用户：养猫的人 + 喜欢看萌宠的人</li><li>但这条视频让用户"感觉到跟自己有关"了吗？→ <strong>没有</strong>。用户不认识你的猫，不知道看这只猫晒太阳对自己有什么意义。这是典型的<strong>自嗨</strong>：你觉得猫咪很可爱，但用户需要的不只是"看别人家的猫"，他们需要的是共鸣、信息、或者情绪触动。</li></ul>
+<p class="blk">第 2 步 · 对照三大特点，检查命中了几个</p>
+<ul><li>实用性？❌ 没有干货，没帮用户解决任何问题。</li><li>好奇心？❌ "猫咪晒太阳"不稀奇，没留悬念、没反差。</li><li>情绪点？⚠️ 勉强算有一点暖感，但画面平淡，情绪刺激不够强烈，很难引爆点赞和评论。</li></ul>
+<p>→ 这条视频<strong>三大特点都没有强命中</strong>，大概率没有爆款潜力。</p>
+<p class="blk">第 3 步 · 检查四个要素，定位问题出在哪</p>
+<ul><li>选题：养猫这个领域受众有，但"猫咪日常"的选题太泛，感兴趣的只是少数；</li><li>标题：《今天天气很好，猫咪们享受阳光浴》—— 以"今天"开头，以自我视角叙述，用户看不到"关我什么事"；</li><li>封面和正文：内容本身可能不错，但如果前两关（选题/标题）没人点进来，后面再好也没用。</li></ul>
+<p class="blk">第 4 步 · 如果换成用户思维，这条视频能怎么改？</p>
+<p>先问：这批猫咪内容，有没有哪个角度能命中三大特点之一？</p>
+<p>→ 可以改成<strong>实用性方向</strong>：《猫咪总喜欢晒太阳？原来这个行为有这3个含义》—— 帮用户解答一个他们可能好奇的知识点；</p>
+<p>→ 或者<strong>好奇心方向</strong>：《两只猫同住，每天中午发生了这件事》—— 用悬念勾起好奇；</p>
+<p>→ 或者<strong>情绪点方向</strong>（需要剪辑出更有感染力的片段）：《这个下午，我突然理解了为什么养猫的人都说"被治愈了"》</p>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你之前的判断，有没有从"用户为什么要看"这个角度出发？有没有对照三大特点？如果只凭直觉觉得"猫咪可爱所以有人看"——这就是自嗨思维在悄悄作怪的时刻。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u1-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你判断。</p></div>
+<p>你运营一个<strong>职场穿搭</strong>账号，粉丝主要是<strong>刚入职场、不知道怎么穿才得体的应届生</strong>。现在手头有两个选题：</p>
+<ul><li><strong>选题 A</strong>：《我买了一件奶奶家传下来的老旗袍，穿着去上班了》</li><li><strong>选题 B</strong>：《应届生进大厂第一天该穿什么？3 套不出错的职场穿搭》</li></ul>
+<p class="blk">请你完成以下三步判断，把答案写在空格里：</p>
+<div class="quote"><p>① 选题 A 和 B，哪个更可能是自嗨思维？为什么？</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的判断：____ ／ ② 选题 B 命中了爆款三大特点中的哪一个（或哪几个）？ ／ 我的判断：____ ／ ③ 如果你要让选题 A 也具备爆款潜力，你会怎么改写它的方向/标题，让它命中三大特点之一？ ／ 我的改写思路：____</div>
+<textarea class="ta" data-save="u1-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u1-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">① 选题 A 更接近自嗨思维。</p>
+<p>"我买了件奶奶家传的老旗袍去上班了"——出发点是"我有这段有趣经历，想分享"，没有先问"应届生粉丝为什么要看这个、这对他们有什么用"。即便内容好看，也很难让目标用户（刚入职场的应届生）感觉"这跟我有关"。</p>
+<p class="blk">② 选题 B 命中了实用性。</p>
+<p>"应届生进大厂第一天该穿什么"直接戳中了目标用户的痛点（不知道怎么穿），"3 套不出错的穿搭"提供了干货解决方案。用户看完能直接借鉴，收藏率会高。同时标题里"大厂""应届生"是精准的人群标签，也增加了点击欲。</p>
+<p>（本条运用方法：用户思维 + 实用性特点 + 四要素里的"选题"判断）</p>
+<p class="blk">③ 改写选题 A 的思路：</p>
+<p>让它命中情绪点或好奇心——</p>
+<ul><li>情绪点方向：《奶奶传给我的旗袍，我穿着它去上班的那天，同事问了我一个问题》——制造情感共鸣，让看到的人想起和长辈之间的故事；</li><li>好奇心方向：《旗袍能不能穿进现代职场？我做了个实验》——留悬念，引发好奇。</li></ul>
+<p>关键：把"我的经历"变成"引发用户共鸣或好奇的钩子"。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：用底层规律检验一条笔记的 4 步</div><div class="step-body"><ol><li><strong>问"关用户什么事"</strong>：这条内容让目标用户感觉到"跟自己有关"了吗？（自嗨 vs 用户思维）</li><li><strong>对照三大特点</strong>：命中了实用性（帮用户解决问题）/ 好奇心（留悬念/稀缺）/ 情绪点（共鸣/触动）中的哪一个？一个都没命中，大概率不会爆。</li><li><strong>拆四个要素</strong>：选题有受众吗？封面有冲击力吗？标题让人想点进去吗？正文能留住人吗？</li><li><strong>找最弱的一环</strong>：四个要素里最差的那个，就是这条笔记的短板——优先补它。</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>把"我有经验"当作发内容的充分理由——经验是素材，不是理由；理由是"用户想看"；</li><li>以为命中三大特点之一就够了，却忽视了四要素里某一环节明显拖后腿（比如选题很好但标题平淡）；</li><li>刷到爆款只看内容本身，不去问"它为什么爆"——缺乏拆解习惯，网感永远提升不了。</li></ul>
+<p class="blk">自测（判断 + 改写题，全新场景）：</p>
+<p>你在刷小红书时，刷到同领域的一位<strong>亲子阅读博主</strong>，她发了一篇笔记，数据很差——点赞 12，收藏 8，评论 1。</p>
+<p>笔记内容是：<strong>分享了一本她最近读给 3 岁女儿的绘本《月亮晚安》，写了几段读后感，说自己很喜欢这本书的画风，觉得很治愈。</strong></p>
+<p>标题是：《《月亮晚安》——我最近读给宝宝的一本书》</p>
+<p>请你完成两个判断：</p>
+<div class="quote"><p><strong>① 这篇笔记数据差的根本原因是什么？</strong>（从用户思维/三大特点/四要素中至少找出 2 个问题）</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的分析：____</div>
+<textarea class="ta" data-save="u1-test6" placeholder="把你的答案写在这里…"></textarea>
+<div class="quote"><p class="blk">② 如果你是这位博主，如何用用户思维改造这篇笔记的方向和标题，让它命中三大特点之一？</p></div>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u1-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">① 数据差的根本原因：</p>
+<p>问题一（用户思维缺失）：笔记出发点是"我喜欢这本书、觉得治愈"，而不是"我的粉丝（宝妈们）有什么痛点或渴望"。她的读后感对用户的价值是什么？不清楚。</p>
+<p>问题二（三大特点未命中）：实用性？没有——没告诉宝妈们这本书能帮孩子解决什么发展问题。好奇心？没有——《月亮晚安》是一本几十年的经典绘本，不新奇。情绪点？有微弱的治愈感，但"我觉得治愈"没有足够强的情绪刺激，很难引爆点赞。</p>
+<p>问题三（标题拖后腿，四要素里"标题"这一环失守）：标题"我最近读给宝宝的一本书"——以"我"为视角，没有告诉用户关注这篇笔记能得到什么。</p>
+<p class="blk">② 改造方案（任选其一即可，关键是把用户痛点/好处挖出来）：</p>
+<ul><li>实用性方向：《3岁宝宝睡前总是不肯睡觉？这本绘本让我女儿5分钟内安静下来》——痛点"睡前磨蹭"＋具体效果，宝妈们会大量收藏。标题运用方法：用户思维（宝妈痛点）＋ 实用性特点。</li><li>情绪点方向：《读完这本绘本，我和女儿都哭了——推荐给每一个妈妈》——情绪共鸣，戳中亲子情感。标题运用方法：情绪点特点。</li></ul>
+<p>判分点：改造后的方向能不能让目标用户（有 3 岁左右孩子的宝妈）看到标题就想点进来？能的话就达标了；如果改完还是"我读了一本书，感觉不错"，说明用户思维没有真正切换过来。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：做出爆款（这是"爆款四要素"的前置认知，做任何笔记之前先要装进脑子的底层开关）。</li><li><strong>颗粒度层</strong>：思维（心法）层——这一单元不教具体动作，只校正出发点：从"我想说什么"切换到"用户为什么要看"，是后续所有爆款动作的根基。</li><li><strong>回到内核</strong>：本专栏的内核是用户思维——<strong>"关我什么事 / 对我有什么好处？"</strong> 这个问题，贯穿选题、封面、标题、正文每一个环节。这一单元，就是把这句话真正装进脑子的第一步。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-2"><div class="sec-h"><h2>第 1 单元　给账号找定位</h2><button class="done-btn" data-done="2">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>找准定位</strong>　·　颗粒度层：<strong>思维（心法）→ 模板（落地）层</strong></p>
+<p>（本单元合并自《详解版讲义》第一章第一节·第二节·第三节；三节合为"一口气练完找到并写出自己的定位"，详解版继续作教材可查）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你在朋友的鼓励下，想开一个小红书账号。你一边吃饭一边想了半个小时，列了这四个方向：</p>
+<ul><li><strong>A. 每日穿搭打卡</strong>（自己喜欢搭配，但不确定够不够有特色）</li><li><strong>B. 职场干货</strong>（做过 3 年行政，同事常来问工作流程和效率工具）</li><li><strong>C. 下午茶探店</strong>（工作附近确实有很多特色咖啡馆，经常打卡）</li><li><strong>D. 自律成长</strong>（最近在看各种自律类书籍，觉得自己有变化）</li></ul>
+<p><strong>先别往下看</strong>，把你现在的直觉选择写在这儿：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我会先做方向 ____，理由是：____</div>
+<textarea class="ta" data-save="u2-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要拿自己的判断和"六字口诀"对一对，看自己选的理由站不站得住脚。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">用"金喜擅特付有"六字口诀，从自身挖掘出 1–2 个能持续输出的定位方向，并写出一句话定位宣言。</p>
+<p>取名方法、头像选择、简介写法，都是这个定位的"外包装"——定位是根，包装是枝叶，先把根扎稳。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">三步定位框架：</p>
+<pre>第一步：选对领域（看平台热度，找受众基础）
+  小红书八大热门领域：
+  美妆护肤 → 流量最大、变现最易
+  时尚穿搭 → 风格多元、参考需求强
+  减肥塑形 → 永恒话题、多元变现
+  母婴育儿 → 精致妈妈消费力强
+  美食饮品 → 门槛低、受众广
+  家居家装 → 广告报价高、近年增速快
+  知识教育 → 泛知识即可、无需学术背景
+  兴趣技能 → 垂直粉丝黏性高
+
+第二步：找准自己（六字口诀）
+  金：有直接变现的产品/服务 → 围绕产品建号
+  喜：有兴趣爱好且乐此不疲 → 兴趣驱动持续
+  擅：有一技之长或拿过成果 → 专业优势赋信任
+  特：有常人没有的特殊经历 → 真情实感易出圈
+  付：过去投入最多时间精力的事 → 已有丰厚积累
+  有：拥有实体/人脉/地理资源 → 差异化天然优势
+
+第三步：破解卡点（没特长也能找定位）
+  觉得"不够专业"？→ 搜集整理 + 用心呈现 = 爆款完整公式
+  多方向纠结？    → 不靠直觉，靠数据：每方向各发 3~5 条，数据决定定位
+  担心枯竭？      → 一边学习，一边输出；定位是"磨"出来的，不是"想"出来的
+
+第四步：包装主页（定位写成"个人名片"）
+  名字：简短好记（7字符内）＋ 好写好搜（简体中文）＋ 有辨识度
+        六种取法：领域+昵称 / 地名+昵称 / 职业+昵称 / 称呼+昵称 / 特征+昵称 / 本人姓名
+  头像：关联定位 ＋ 匹配风格 ＋ 清晰美观
+  简介：从六项要素中选 3~5 项（人设/技能/故事/价值/态度/联系方式），不超过 100 字
+        核心：至少有一句话直接告诉用户"关注我能得到什么"</pre>
+<div class="quote"><p>🧷 <strong>记住这个故事：</strong></p>
+<p>学员沙白白，一开始没想好定位，随便发了一些育儿、收纳笔记，灵感很快枯竭。</p>
+<p>在作者指导下，她认真回想近期在哪件事上投入了最多——发现自己在<strong>新家装修</strong>上花了大量资金和精力，选家居产品、研究软装好物，已经积累了丰富的经验。</p>
+<p>她重新定位在家居领域，分享"居家好物系列""新家的100个快递"等内容，受到了许多粉丝的喜爱。</p>
+<p class="blk">启示：定位不是"天降灵感"，而是对自己已有积累的一次盘点——把"付出最多的事"挖出来，往往就是最稳、最不会枯竭的定位素材。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那四个方向（A穿搭 / B职场干货 / C探店 / D自律成长），跟着走一遍高手的定位流程：</p>
+<p class="blk">第 1 步 · 用六字口诀给四个方向打分</p>
+<p>逐一过一遍：这个方向对我来说，符合六字口诀里的哪一维度？</p>
+<div class="tbl-scroll"><table><thead><tr><th>方向</th><th>符合哪维</th><th>能持续输出的底气</th></tr></thead><tbody><tr><td>A 穿搭</td><td>喜（有兴趣）</td><td>如果只是"喜欢搭配"但没有拿过成果，竞争激烈的穿搭赛道里很难有差异化</td></tr><tr><td>B 职场干货</td><td>擅（3年行政经验，同事常来问）</td><td>有拿过结果的维度支撑，内容来源稳定，可延伸到效率工具等垂直细分</td></tr><tr><td>C 探店</td><td>有（地理资源：工作周边咖啡馆多）</td><td>差异化天然，但内容形式较单一，需要持续走动</td></tr><tr><td>D 自律成长</td><td>喜（最近在看书、有变化）</td><td>"最近在看书"积累较浅，容易枯竭；缺乏具体成果支撑，易沦为搜集整理型</td></tr></tbody></table></div>
+<p>→ <strong>B（职场干货）底气最足</strong>：符合"擅"维度，有具体积累，同事经常来问说明内容有价值；且知识教育是小红书热门领域，受众基础好。</p>
+<p class="blk">第 2 步 · 验证能不能持续输出</p>
+<p>问自己：如果选 B，能不能列出至少 30 条内容不枯竭？</p>
+<p>→ 3 年行政经验 → 可拆：会议管理技巧 / 邮件高效写法 / Excel 常用公式 / 向上沟通技巧 / 职场新人必知惯例 / 效率工具推荐……列出来轻松超过 30 条。持续学习还能不断补充新内容。</p>
+<p class="blk">第 3 步 · 写一句话定位宣言</p>
+<p>格式：「我的账号帮助 [某类人群] 解决 [某类问题]，通过 [某种内容形式] 实现 [某种价值]」</p>
+<p>→ 示例：「我的账号帮助<strong>职场新人和效率控</strong>解决<strong>工作流程混乱、不知道怎么向上沟通</strong>的问题，通过<strong>干货图文 + 真实案例</strong>，让他们在职场少走弯路。」</p>
+<p>（本句运用方法：六字口诀"擅"维度 + 知识教育领域 + 用户思维内核：明确说出了对用户的价值）</p>
+<p class="blk">第 4 步 · 把定位落进主页三件套</p>
+<ul><li><strong>名字</strong>：选"职业+昵称"取名法 → 候选：「行政Emily」「职场攻略Amy」（7字内、简体中文、有辨识度）</li><li><strong>头像</strong>：选真人工作照（专业感强，和职场干货定位匹配；匹配定位 + 匹配风格 + 清晰美观）</li><li><strong>简介草稿</strong>（选人设+技能+价值三要素）：</li></ul>
+<div class="quote"><p>3年大厂行政 | 流程控&amp;效率控</p>
+<p>帮职场新人少踩坑，每周分享实用职场干货</p>
+<p>效率工具 | 向上沟通 | 职场生存手册</p></div>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你刚才凭直觉选的方向，有没有想过"我有没有拿过成果""能不能发 30 条不枯竭"？如果选的理由只是"我比较感兴趣"——这不够，因为兴趣是必要条件，但不是充分条件；还需要问"我在这个方向上有没有能让用户信任的积累"。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u2-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你完整走一遍。</p></div>
+<p class="blk">你的情况：</p>
+<p>你是一位 <strong>34 岁的全职宝妈</strong>，孩子刚满 2 岁。结婚前在服装厂做了 5 年质检，专门负责童装和女装面料的品质把关。现在全职在家，觉得自己"一事无成"，想开小红书账号，但总觉得"我没有什么特别的"。</p>
+<p class="blk">请完成以下三步：</p>
+<p><strong>① 用六字口诀"金喜擅特付有"梳理她的定位线索</strong>（每个维度写出你的判断，没有也要写出"可能有/可能没有"并给理由）：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">金：____ ／ 喜：____ ／ 擅：____ ／ 特：____ ／ 付：____ ／ 有：____</div>
+<textarea class="ta" data-save="u2-step4" placeholder="把你的答案写在这里…"></textarea>
+<p class="blk">② 给出 1–2 个最有把握的候选定位方向，说明优先测哪个、为什么：</p>
+<p class="blk">③ 为优先方向写出主页三件套草稿（名字候选 1 个 + 简介不超过 60 字）：</p>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u2-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">① 六字口诀梳理：</p>
+<ul><li>金：暂无直接变现产品，但如果做母婴/童装方向，可以后期接好物种草。</li><li>喜：全职带孩子阶段，大概率在育儿上有大量学习输入，可以验证一下是否真的乐此不疲。</li><li>擅：★<strong>这是最强的维度</strong>★ — 5年童装面料质检经验，普通宝妈根本没有这个专业背景；能帮粉丝避开"买到劣质面料"的坑，这是有具体成果支撑的擅长。</li><li>特：服装厂质检→全职宝妈，这个身份转变是有一定特殊性的，但不是最强的牌。</li><li>付：5年质检 = 在服装面料上投入了大量时间，积累非常扎实；同时带孩子这两年也是付出密集的阶段。</li><li>有：可能有供应链/厂商资源，后续变现空间大。</li></ul>
+<p>→ <strong>最强线索：擅（面料质检）+ 付（5年经验）</strong>，两个维度叠加，且在"母婴童装选购"这个细分方向上有极强的差异化。</p>
+<p class="blk">② 候选定位方向：</p>
+<ul><li><strong>方向一（优先）：儿童童装选购 + 面料避坑</strong></li></ul>
+<p>— "教宝妈看懂童装面料、避开劣质品"，目标用户精准（有孩子的宝妈），自己有不可复制的专业背景，内容来源充足（5年积累），差异化极强。优先测这个。</p>
+<p>（方法来源：擅维度 + 母婴育儿热门领域）</p>
+<ul><li><strong>方向二（备选）：宝妈成长/育儿干货</strong></li></ul>
+<p>— 用身份代入法，做同类宝妈的陪跑账号；但与其他宝妈账号区分度不高，不如方向一有专业壁垒。</p>
+<p class="blk">③ 主页三件套草稿：</p>
+<ul><li>名字候选：「质检妈妈小慧」（取名法：职业+特征+昵称；7字内，突出质检身份和妈妈身份）</li><li>简介草稿（用人设+技能+价值三要素）：</li></ul>
+<div class="quote"><p>5年童装面料质检 | 现役宝妈</p>
+<p>帮你看懂成分表、挑出真正安全的娃衣</p>
+<p>童装面料 | 好物避坑 | 妈妈的选购手册</p></div>
+<p>（本简介运用方法：技能数字化"5年"；价值句直接回答用户能得到什么——"帮你看懂/挑出"）</p>
+<p><strong>关键点：</strong>"觉得自己一事无成"是自我评估偏低，六字口诀的作用就是把"已有但没被看见的积累"挖出来。5年质检经验对普通宝妈来说是真实的知识壁垒，这才是最不枯竭、最有差异化的定位素材。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：找准账号定位的 5 步</div><div class="step-body"><ol><li><strong>浏览八大领域</strong>：在小红书搜索 2–3 个感兴趣方向，看头部账号在发什么，判断自己能做、愿意持续做吗</li><li><strong>六字口诀打分</strong>：逐一对"金喜擅特付有"写出具体答案，找出最强的 1–2 个维度</li><li><strong>检验持续力</strong>：能不能列出 30 条以上的内容不枯竭？能不能"一边学一边输出"？</li><li><strong>发布测试（磨位）</strong>：多方向纠结时，每个方向各发 3–5 条，让数据说话；定位是磨出来的</li><li><strong>写主页三件套</strong>：名字（7字内/好搜/有辨识度）→ 头像（关联定位/匹配风格/清晰美观）→ 简介（3–5要素/100字内/必须有价值句）</li></ol>
+<p>最后钉住一句话：「我帮助 [人群] 解决 [问题]，通过 [内容形式]」</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>选定位只凭"我感兴趣"，没有问"我在这方向有没有可信的积累/成果"？（❌ 兴趣是必要条件，不是充分条件）</li><li>简介里全是"自我介绍"，没有一句话直接告诉用户"关注我能得到什么"？（❌ 用户关心的是"对我有什么用"）</li><li>账号名字超过 7 个字、用了繁体字或大量英文符号，让用户搜不到、记不住？</li></ul>
+<p class="blk">自测（全流程演练，全新场景）：</p>
+<p>你的朋友小林，<strong>32 岁，手工皮具爱好者</strong>，过去两年自学手缝皮具，做了 30 多件成品（钱包、卡包、钥匙扣），朋友圈里经常有人问她在哪买的、能不能帮忙做一个。她工作是会计，朝九晚五，想把皮具账号当副业做起来。她来找你咨询，问：<strong>"我该怎么开始？"</strong></p>
+<p>请你扮演顾问，完成以下三项输出，每项都要用上本单元的方法，并在答案里标注用了哪个方法步骤：</p>
+<div class="quote"><p class="blk">① 用六字口诀，找出小林最强的 1–2 个定位维度，并给出定位方向建议：</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">____</div>
+<textarea class="ta" data-save="u2-test6" placeholder="把你的答案写在这里…"></textarea>
+<div class="quote"><p class="blk">② 如果小林同时想做"手缝教程"和"成品好物展示"两个方向，你会怎么建议她取舍？（用本单元的卡点破解方法回答）：</p></div>
+<div class="quote"><p class="blk">③ 为小林写出账号名字（1 个候选，标注取名法）+ 简介（不超过 70 字，标注用了哪几项要素）：</p></div>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u2-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">① 六字口诀分析：</p>
+<p>最强维度有两个：</p>
+<ul><li><strong>擅</strong>：2年自学 + 30多件成品，有具体的作品积累，说明真的会做；朋友圈有人问"在哪买的"也是他人背书，属于"别人来请教"的擅长信号。</li><li><strong>金</strong>：朋友圈有真实变现需求（有人问能不能帮忙做），账号可以直接承接私单，围绕产品建号。</li></ul>
+<p>→ 定位方向建议：<strong>手工皮具教程 + 成品种草</strong>（兴趣技能领域），目标用户是喜欢手工、想学皮具或想购买精致手工皮具的人。</p>
+<p>（方法：六字口诀"擅"+"金"双维度支撑，选兴趣技能热门领域）</p>
+<p class="blk">② 两个方向取舍建议：</p>
+<p>不要在脑子里硬选——用<strong>发布测试（磨位）</strong>。具体做法：为"手缝教程"准备 3–4 条内容、为"成品展示"准备 3–4 条内容，两周内依次发出，对比点赞+收藏+评论+涨粉数据，哪个方向反馈更好就聚焦哪个。</p>
+<p>提示：小红书用户喜欢学技能（教程有高收藏潜力），但成品展示也能直接带销售转化——两者其实可以并行，最终看数据哪个更好再主攻。</p>
+<p>（方法：卡点破解·锦囊二"靠数据磨位"）</p>
+<p class="blk">③ 主页三件套：</p>
+<ul><li>名字候选：「皮具林林」（取名法：领域+昵称；6字内，突出皮具方向，昵称亲切易记）</li><li>简介草稿（人设+技能+价值三要素）：</li></ul>
+<div class="quote"><p>手缝皮具爱好者 | 自学 2 年 30+ 件成品</p>
+<p>分享零基础入门皮具教程 &amp; 手工成品展示</p>
+<p>不接受平庸，每件都认真做 🧵</p></div>
+<p>（运用方法：技能数字化"2年/30+件"增加可信度；价值句"分享教程+成品展示"让用户一眼知道关注后能得到什么；态度句"不接受平庸"增加人格特色）</p>
+<p class="blk">判分点：</p>
+<ul><li>① 要找到"擅"或"金"这两个最强维度，而不只是说"她喜欢皮具所以可以做"；</li><li>② 要给出发布测试的具体方案，而不是"凭感觉选一个"；</li><li>③ 简介里必须有价值句（"分享×× 教程/帮你××"），只有自我介绍没有价值点则不达标。</li></ul></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：找准定位（这一单元是整个专栏的起点，定位不稳，后面所有的爆款动作都是沙滩上建城堡）。</li><li><strong>颗粒度层</strong>：思维层（六字口诀是心法，帮你找到"凭什么做"）→ 模板层（主页三件套是落地，帮你把定位写成别人看得懂的名片）。两层一口气走完，从"知道自己定位是什么"到"能让陌生人秒懂你是谁、关注你有什么好处"。</li><li><strong>回到内核</strong>：定位不是"我有什么就发什么"，而是"我有什么"能回答用户那句话——<strong>"关我什么事 / 对我有什么好处？"</strong> 主页包装的名字、头像、简介，每一个细节都在回答这句话。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-3"><div class="sec-h"><h2>第 2 单元　挖爆款选题</h2><button class="done-btn" data-done="3">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>做出爆款</strong>　·　颗粒度层：<strong>框架</strong></p>
+<p>（本单元抽自《详解版讲义》第二章第二节；详解版负责"讲透可查"，本单元负责"换你挖、真的会评估"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你运营一个「室内绿植」账号，粉丝主要是<strong>租房族和新手养植小白</strong>。你手头有三个选题方向想做：</p>
+<ul><li>A. 《薜荔与球兰的区分方法》</li><li>B. 《养死过多少绿植？新手必踩的 5 个坑》</li><li>C. 《室内绿植起源地大全——原产地地图》</li></ul>
+<p><strong>先别往下看</strong>，凭直觉把三个选题按"爆款概率从高到低"排一下顺序，并在这里写出理由：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的排序：____　&gt;　____　&gt;　____ ／ 我的理由：____</div>
+<textarea class="ta" data-save="u3-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要用本单元的方法重新评估一遍，看和直觉差在哪。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">用"覆盖人群 × 痛点程度"两把尺，评估并挖出一个爆款选题。</p>
+<p>五种挖选题的方法是"铲子"，两大内核才是"罗盘"——先把罗盘拿稳，铲子才知道往哪挖。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">两大内核（先用这把尺评估任何选题）：</p>
+<pre>爆款选题 = 覆盖人群大 × 痛点程度高
+
+覆盖人群大
+  → 对这个话题感兴趣的潜在观众越多，播放量越高
+  → 人群太小众 → 几乎注定低流量
+  → 判断方法：换一个普通用户站在她的视角问——"我会搜这个吗？"
+
+痛点程度高
+  → 选题越直击用户最强烈的需求，点击欲越强
+  → 弱痛点（无关紧要）→ 无人在意
+  → 强痛点（必须解决/本能焦虑）→ 忍不住点开
+  → 判断方法：这个问题"解决了也行、不解决也行"？
+    还是"不解决会痛、会损失、会后悔"？</pre>
+<p class="blk">五种挖选题的方法（按需取用）：</p>
+<pre>① 近期爆款笔记法
+   搜领域关键词 → 按"最热"排序 → 取近半年点赞过千/过万的选题
+
+② 痛点搜索法
+   搜"领域词 + 怎么/如何" → 看系统下拉词 → 整理为选题候选
+
+③ 对标同行法
+   找 3~5 个对标账号 → 记录数据好的选题 → 借鉴不抄袭
+
+④ 高赞评论法
+   看爆款评论区高赞留言 → 提炼用户真实需求 → 变成选题
+
+⑤ 热点法
+   查各平台热搜榜 + 小红书热点榜 → 结合自身领域切入</pre>
+<div class="quote"><p>🧷 <strong>记住这个例子（原书最值得记的一组数据）：</strong></p>
+<p>同一个咖啡博主，同样制作精美的两篇笔记——</p>
+<p>笔记 1《咖啡馆 12 种基础咖啡种类》获得 <strong>2.1 万点赞</strong>；</p>
+<p>笔记 2《世界咖啡产区之亚洲篇》只有 <strong>5 个点赞</strong>。</p>
+<p>差别不在制作，只在覆盖人群：笔记 1 的受众是"所有对咖啡感兴趣的人（数千万乃至上亿）"，笔记 2 只有从事咖啡行业的资深玩家才会看。</p>
+<p class="blk">人群尺寸决定流量天花板，先过这一关，再谈内容质量。</p></div>
+<p class="blk">选题库两步搭建（持续作战用）：</p>
+<pre>第一步：规划选题栏目
+  把账号内容分门别类（像电视栏目一样）
+  → 定位清晰，涨粉更快
+
+第二步：填充爆款选题表
+  记录：栏目类别 / 爆款标题 / 来源 / 点赞数 / 收藏数
+  至少先填 50 条，随刷随补充</pre>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那三个「室内绿植」选题，跟着走一遍高手的评估流程：</p>
+<p class="blk">第 1 步 · 用"覆盖人群"这把尺量一遍：</p>
+<div class="tbl-scroll"><table><thead><tr><th>选题</th><th>覆盖人群估算</th><th>判断</th></tr></thead><tbody><tr><td>A. 薜荔与球兰的区分</td><td>只有同时养了这两种植物、且已遇到分辨困难的人 → 极小圈层</td><td>人群太窄</td></tr><tr><td>B. 新手养植 5 个坑</td><td>所有买过或想买绿植的新手 → 租房族/新手小白大量存在</td><td>人群宽 ✓</td></tr><tr><td>C. 绿植原产地大全</td><td>只有对植物学有研究兴趣的人 → 偏学术/博物小众</td><td>人群太窄</td></tr></tbody></table></div>
+<p class="blk">第 2 步 · 用"痛点程度"这把尺量一遍：</p>
+<div class="tbl-scroll"><table><thead><tr><th>选题</th><th>痛点程度判断</th></tr></thead><tbody><tr><td>A. 薜荔与球兰区分</td><td>弱痛点——分不清顶多买错一株，损失小，无紧迫感</td></tr><tr><td>B. 新手养植 5 个坑</td><td>强痛点——刚买的植物总养死，又心疼钱又挫败，必须解决 ✓</td></tr><tr><td>C. 绿植原产地大全</td><td>弱痛点——知不知道原产地对大多数人没影响</td></tr></tbody></table></div>
+<p class="blk">第 3 步 · 结论：</p>
+<p>B《养死过多少绿植？新手必踩的 5 个坑》</p>
+<p>→ 覆盖人群大（新手绿植用户基数庞大）× 痛点程度高（养死植物=钱打水漂+挫败感）</p>
+<p>→ 爆款概率最高，值得做。</p>
+<p class="blk">第 4 步 · 用"痛点搜索法"验证并加固选题：</p>
+<p>在小红书搜索"绿植 怎么养不死"→ 下拉词出现"绿植怎么养不死新手""绿植养不活怎么办"→ 市场已有大量搜索需求，验证成立。</p>
+<p class="blk">↩️ 回头对照你的 🎯 第一反应</p>
+<p>你刚才的直觉排序和现在的分析一致吗？如果你当时凭感觉选了 B，说明你已经有了"用户思维"的本能；如果你把 C 排在前面（容易被"内容丰富"的错觉带跑），说明你还在用"我有什么"代替"用户要什么"——这就是本单元要修正的核心思维。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u3-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你来。</p></div>
+<p>你运营一个「家庭烘焙」账号，粉丝大多是<strong>第一次尝试自己在家做甜点的上班族女生</strong>。你手头有四个选题备选：</p>
+<ul><li>甲. 《可颂起源与历史，原来来自奥地利》</li><li>乙. 《为什么我的戚风蛋糕每次都塌腰？找到了！》</li><li>丙. 《法式甜点名字全解析，看懂菜单不踩坑》</li><li>丁. 《烤箱品牌横向测评，5 款家用烤箱哪个值得买》</li></ul>
+<p>请你：<strong>用"覆盖人群"和"痛点程度"两个维度逐一评估</strong>，选出爆款概率最高的 1 个，并说明理由；再用至少 1 种挖选题的方法验证你的判断。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我选：____　理由：____ ／ 验证方法：____　验证结果：____</div>
+<textarea class="ta" data-save="u3-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u3-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">逐项评估：</p>
+<div class="tbl-scroll"><table><thead><tr><th>选题</th><th>覆盖人群</th><th>痛点程度</th><th>综合判断</th></tr></thead><tbody><tr><td>甲. 可颂起源历史</td><td>仅对食物历史感兴趣的人，极小众</td><td>弱痛点，知不知道无所谓</td><td>爆款概率极低</td></tr><tr><td>乙. 戚风蛋糕塌腰</td><td>所有做过或想做戚风的新手</td><td>强痛点——失败了浪费食材，又沮丧，迫切想解决 ✓</td><td>爆款概率最高</td></tr><tr><td>丙. 法式甜点名称</td><td>有点宽，但需求偏休闲，不算强痛点</td><td>弱到中等，用处不那么迫切</td><td>中等</td></tr><tr><td>丁. 烤箱测评</td><td>准备购入烤箱的人，一次性需求</td><td>中等，购买决策类，有需求但人群有限</td><td>中等</td></tr></tbody></table></div>
+<p><strong>结论：乙</strong> 最佳。"蛋糕塌腰"是新手烘焙最常遇到的具体失败——钱+时间都打了水漂，强痛点。</p>
+<p class="blk">验证方法（痛点搜索法）：</p>
+<p>在小红书搜"戚风蛋糕 怎么"→ 下拉词出现"戚风蛋糕怎么不塌腰""戚风蛋糕怎么判断熟了"→ 高频搜索词，验证需求真实存在。也可用"近期爆款笔记法"搜"戚风蛋糕"按最热排序，看点赞过千的选题是否也集中在"失败/塌腰/失败原因"这类解决问题型选题上。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：评估一个选题是否值得做</div><div class="step-body"><ol><li><strong>量覆盖人群</strong>：换一个普通用户——"她会主动搜这个话题吗？感兴趣的人有多少？"</li><li><strong>量痛点程度</strong>：这个问题"不解决会痛/会损失/会焦虑"？还是"解决了锦上添花、不解决也没所谓"？</li><li><strong>搜市场验证</strong>：在小红书用关键词搜索，按"最热"排序，近半年有没有点赞过千的爆款？有 → 值得做；没有 → 谨慎</li><li><strong>选挖题方法</strong>：爆款法/痛点搜索/对标同行/高赞评论/热点法——5 选 1 扩充选题池</li><li><strong>加原创视角</strong>：借鉴同行爆款选题时，加入自己的原创见解，借鉴选题 ≠ 照搬内容</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>选题是在写"我有什么"，而不是"用户需要什么"？（❌ 最常见的死法：内容再好也没人看）</li><li>把"内容丰富/专业度高"误判为"爆款潜力高"？（❌ 专业度是加分项，覆盖人群才是地基）</li><li>只建了一次选题库就再也没更新？（❌ 选题库是活文档，要随刷随补充）</li></ul>
+<p class="blk">自测（判断 + 应答题，全新场景）：</p>
+<p>你的朋友小林运营一个「中老年健康」账号，她发来消息：</p>
+<div class="quote"><p>"我刚想到两个选题，感觉都还不错——A.《中医二十四节气养生全攻略》；B.《血压忽高忽低怎么办？这 3 件事千万别做》。我打算先做 A，因为内容更全面、更系统。你怎么看？"</p></div>
+<p>请你用本单元的两大内核，帮她分析这两个选题——她的判断逻辑哪里有问题？你会建议她先做哪个？写出你的分析（3~5 句话）。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的分析：____</div>
+<textarea class="ta" data-save="u3-test6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u3-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">小林的判断哪里出问题：</p>
+<p>她用"内容全面/系统"来评估爆款潜力——这是"我有什么"的思维，不是"用户要什么"的思维。内容全面是制作层面的标准，不是选题层面的标准。</p>
+<p class="blk">两大内核分析：</p>
+<div class="tbl-scroll"><table><thead><tr><th>选题</th><th>覆盖人群</th><th>痛点程度</th></tr></thead><tbody><tr><td>A. 二十四节气养生全攻略</td><td>对传统养生感兴趣的人——宽，但兴趣偏休闲</td><td>弱到中等：知不知道节气养生，当下没有紧迫感</td></tr><tr><td>B. 血压忽高忽低怎么办</td><td>中老年人群中高血压患者极多，精准命中</td><td>强痛点：血压问题直接关系健康和安全，本能焦虑 ✓</td></tr></tbody></table></div>
+<p class="blk">建议：先做 B。</p>
+<p>理由：B 直击中老年群体最焦虑的健康痛点（血压=身体安全），用户看到标题会本能点开；A 是"锦上添花型"内容，适合有了稳定粉丝基础后再做系列。</p>
+<p>判分点：只要你指出"全面/系统"不等于"爆款潜力高"，并用"痛点强弱"区分了两个选题，就达标了。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：做出爆款（选题是决定笔记成败的最前一关，内容做之前先把这道门过了）。</li><li><strong>颗粒度层</strong>：框架——"覆盖人群大 × 痛点程度高"是评估框架，五种挖选题方法是操作框架，两者构成"先判断方向、再寻找素材"的完整思维结构。</li><li><strong>回到内核</strong>：爆款选题的本质就是"用户思维"——不写你有什么，只写用户需要什么；覆盖人群越大、痛点越强，越接近内核。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-4"><div class="sec-h"><h2>第 3 单元　做爆款封面</h2><button class="done-btn" data-done="4">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>做出爆款</strong>　·　颗粒度层：<strong>模板</strong></p>
+<p>（本单元抽自《详解版讲义》第二章第三节；详解版负责"讲透可查"，本单元负责"换你选版式、真的会做"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你运营一个「手账与文具」账号，粉丝主要是<strong>喜欢手写记录的学生和上班族</strong>。你刚拍好一批素材，要为这篇笔记做封面——内容是：<strong>分享 6 款适合手账新手的入门钢笔，含书写手感测评</strong>。</p>
+<p>你手头有两个封面方案：</p>
+<ul><li><strong>方案 A</strong>：把 6 支钢笔都拍进一张照片，旁边配文字："新手入门钢笔推荐·书写测评·6款对比·适合哪类纸·性价比·适合什么墨水·初学注意事项·买前必看"（共约 40 字，小字排成两列）</li><li><strong>方案 B</strong>：用一张清晰的单支主图（光线充足、背景简洁），配文字："手账新手入门，这 6 支钢笔不踩坑"（15 字，大字）</li></ul>
+<p><strong>先别往下看</strong>，写下你会选哪个方案，以及你认为另一个方案的最大问题是什么：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我选：____　　另一个方案最大的问题是：____</div>
+<textarea class="ta" data-save="u4-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要用本单元方法把你的判断说得更准。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">为一篇笔记选对版式，再把封面文字砍到 ≤ 20 字。</p>
+<p>四个制作要点（尺寸/清晰度/文字/字体）是保证"合格"的底线，版式 + 文字精简是决定"好不好"的关键——先拿这两件事，封面就从"没人停"变成"让人多看一眼"。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">五种版式（按内容类型选，不按个人喜好选）：</p>
+<pre>版式              最适合的内容类型
+① 高颜值美图    → 美妆/穿搭/美食/家居/摄影/旅游（靠视觉冲击取胜）
+② 单图＋文字    → 干货经验/好物种草（最高频——扬长避短，不靠颜值靠主题）
+③ 对比图        → 美妆/减肥/健身/穿搭（前后反差越大越有力）
+④ 拼图          → 好物盘点/旅游攻略/穿搭/美食（展示元素多时用）
+⑤ 纯文字图片    → 硬核教程/知识科普/干货分享（背景干净，文字醒目）</pre>
+<p class="blk">四个制作要点（合格底线，逐项自检）：</p>
+<pre>① 竖版 3:4 尺寸   双瀑布流中占屏更大，更显眼；横版和正方形比它小
+② 图片清晰美观   光线充足、画质清晰、色调明亮；构图布景用心
+③ 文字可读性强   ≤ 20 字、字号大、字体规范（黑体/方正字体优先）
+                  文字颜色与背景深浅搭配，形成反差才清晰
+④ 字体风格协调   符合账号调性（硬核知识配稳重字体；萌娃号配活泼字体）
+                  不因主观喜好乱用字体</pre>
+<div class="quote"><p>🧷 <strong>记住这个例子（原书最值得记的对比）：</strong></p>
+<p>同一个"好书分享"选题，两篇笔记封面都是博主自己拍的书籍照片——</p>
+<p>笔记 1 因为逆光拍摄、没有正确对焦，背景过亮主体过暗，整张照片暗淡模糊，<strong>点赞寥寥</strong>；</p>
+<p>笔记 2 画面清晰干净，色调温暖明亮，赏心悦目，<strong>收获 1.8 万点赞</strong>。</p>
+<p>可变量几乎只有清晰度——用户连书的封面都看不清，凭什么点开？</p>
+<p class="blk">清晰美观是封面的底线，过不了这关，内容再好也没人看。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那篇「6 款手账新手入门钢笔」，跟着走一遍高手的封面制作流程：</p>
+<p class="blk">第 1 步 · 选版式：</p>
+<p>内容类型是"好物种草 + 干货测评"，不是靠单张大图的颜值取胜，需要文字来点明主题和价值——选 <strong>② 单图＋文字</strong>。</p>
+<p>（如果想展示多支钢笔全貌，也可考虑 ④ 拼图，但初学者优先用单图控制质量。）</p>
+<p class="blk">第 2 步 · 定尺寸：</p>
+<p>一律用竖版 3:4，在双瀑布流中占屏更大，更醒眼。</p>
+<p class="blk">第 3 步 · 处理图片：</p>
+<p>把一支颜值最高的钢笔放在干净的白纸或手账本上，选光线充足的窗边拍摄；检查构图是否居中、主体是否清晰；后期若偏暗，用修图软件提亮，色调保持明亮温暖。</p>
+<p class="blk">第 4 步 · 砍封面文字（方案 A 的问题在这里）：</p>
+<ul><li>方案 A 的文字："新手入门钢笔推荐·书写测评·6款对比·适合哪类纸·性价比·适合什么墨水·初学注意事项·买前必看" → 约 40 字，密密麻麻，用户刷屏时无法一眼抓住关键，直接略过</li><li>正确做法：<strong>提炼核心主题 + 用户最关心的一句话</strong>，压到 ≤ 20 字：</li><li>初稿："手账新手入门，这 6 支钢笔不踩坑"（15 字）✓</li><li>加数字加标签："文具新手必看｜6 支入门钢笔，书写不踩坑"（18 字）✓</li></ul>
+<p class="blk">第 5 步 · 查字体风格：</p>
+<p>手账/文具调性偏温暖文艺，用笔画规范的黑体或热门花字，文字颜色与背景有足够反差（浅背景配深色字）。</p>
+<p class="blk">↩️ 回头对照你的 🎯 第一反应：</p>
+<p>如果你当时选了 B 并指出 A 的问题是"文字太多"——你已经抓住了核心。现在你能用"文字可读性强"这条要点，把"感觉文字太多"说得更准确：<strong>封面文字超过 20 字、字号又小，用户刷屏时无法一眼识别关键信息，本能略过</strong>。这就是把直觉转化为可操作判断的过程。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u4-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你来。</p></div>
+<p>你运营一个「极简通勤穿搭」账号，粉丝是<strong>注重职场形象但不想花太多时间搭配的女性上班族</strong>。你今天的笔记内容是：<strong>用同一条黑色西裤，搭配出适合周一到周五 5 天不重样的通勤造型</strong>。</p>
+<p>请你完成以下两步：</p>
+<ol><li><strong>选定版式</strong>：从五种版式中选 1 种，并写一句话说明理由</li><li><strong>写封面文字</strong>：把核心主题浓缩成 ≤ 20 字的封面文案</li></ol>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我选的版式：____　理由：____ ／ 我的封面文字（≤20字）：____</div>
+<textarea class="ta" data-save="u4-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u4-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">版式选择分析：</p>
+<ul><li>内容展示的是"一条裤子×5天5种搭配"→ 有前后变化+多套造型 → <strong>③ 对比图</strong> 或 <strong>④ 拼图</strong> 都合理</li><li>对比图：用"素色西裤"和"5天搭配成品图"做前后或多图对比，视觉冲击强</li><li>拼图：把 5 套造型各取一张拼到一起，一眼看到"5 套不重样"的信息密度感</li><li>如果主打"一条裤子的万能性"，对比图更有力（反差感大）；如果主打"5 套穿法参考"，拼图更直观</li></ul>
+<p>两种选择都成立，关键是<strong>选了之后坚持用这类版式</strong>，保持账号主页风格统一。</p>
+<p class="blk">封面文字参考：</p>
+<ul><li>"同一条黑西裤，5 天通勤不重样"（14 字）——点名了"一件单品+多种变化"的核心价值，贴标签"通勤"，命中目标人群</li><li>"上班族看过来｜黑西裤穿出 5 天新花样"（18 字）——贴标签"上班族"，暗示实用性</li></ul>
+<p><strong>判分点：</strong> 版式理由能说出"这类内容适合这种版式，因为……"；封面文字 ≤ 20 字且包含了"对用户有什么用（省搭配时间/不重样）"这一价值点，就达标了。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：做一张爆款封面的 5 步</div><div class="step-body"><ol><li><strong>选版式</strong>：颜值类 → 高颜值美图；干货/种草 → 单图+文字；效果展示 → 对比图；元素多 → 拼图；纯干货 → 纯文字图片（按内容类型选，不按喜好选）</li><li><strong>定尺寸</strong>：一律竖版 3:4</li><li><strong>处理图片</strong>：光线充足、画质清晰、色调明亮；构图合理、布景用心；必要时后期调亮度/滤镜</li><li><strong>砍文字</strong>：提炼核心一句话，压到 ≤ 20 字；字号放大；选笔画方正的字体；文字与背景深浅对比</li><li><strong>查风格</strong>：字体符合账号调性？与上一篇封面相比，整体排版/配色/字体是否统一？</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>在封面上放了太多文字，想"把所有价值都说清楚"？（❌ 文字越多用户越快略过，一句话胜过十行）</li><li>选版式时按"我喜欢哪种"而不是"这类内容适合哪种"？（❌ 颜值不够硬偏用纯图，干货内容不加文字，都是白白浪费选题的好内容）</li><li>每篇笔记封面风格都不一样，字体颜色随心情换？（❌ 主页杂乱，用户不会关注）</li></ul>
+<p class="blk">自测（改写 + 判断题，全新场景）：</p>
+<p>你刷到一个运营「家庭园艺」账号的博主发了一篇笔记，她为这篇笔记设计了如下封面：</p>
+<div class="quote"><p><strong>版式</strong>：一张拍摄于强烈阳光直射下的多肉植物照（照片偏白、主体过曝、细节看不清），配文字："盆栽多肉植物夏季养护注意事项全整理·浇水频率·遮阳方式·通风要点·施肥时机·修剪方法·常见病害·多肉品种差异注意"（共 55 字，小字排三列）</p>
+<p>她问你："为什么这篇发出去几乎没人点？我内容写得很详细的。"</p></div>
+<p>请你从<strong>四个制作要点</strong>中，找出这张封面至少 2 个具体问题，并给出改进建议（不需要重写全文，说清楚"改什么、怎么改"即可）。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我找到的问题 1：____　改进方向：____ ／ 我找到的问题 2：____　改进方向：____</div>
+<textarea class="ta" data-save="u4-test6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u4-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">问题 1：图片清晰度不合格（对应要点②）</p>
+<p>强阳光直射导致过曝，多肉主体细节看不清——用户连图里的植物都看不清楚，没有点开的理由。</p>
+<p>改进：换到散射光环境（窗边/阴影处）重拍，或后期调整曝光补偿，确保主体颜色和纹理清晰可见。</p>
+<p class="blk">问题 2：文字严重超标，可读性差（对应要点③）</p>
+<p>封面文字 55 字、小字排三列——用户刷屏速度很快，无法一眼抓住关键信息，直接略过。</p>
+<p>改进：提炼最核心的一句话，压到 ≤ 20 字。比如："多肉夏季不死指南，5 个养护关键点"（16 字）——把"强痛点（夏天多肉容易死）+ 具体干货（5 个要点）"都说清了，比 55 字更有吸引力。</p>
+<p class="blk">可选加分项（问题 3）：版式可以更好（对应要点①~②）</p>
+<p>内容是"多品种 + 多养护方法"，如果手头有几株颜色好看的多肉可以用拼图版式；如果只有一株，用"单图+文字"也可以，但图片质量必须先过关。</p>
+<p><strong>点睛：</strong> 内容详细是"笔记正文"的优势，不是"封面"的优势——封面的唯一任务是让用户停下来点进去，靠的是清晰美观和一句话戳中用户。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：做出爆款（封面是用户在双瀑布流中决定"要不要点开"的第一关，选题定了天花板，封面决定能不能让流量进来）。</li><li><strong>颗粒度层</strong>：模板——五种版式是现成可套用的<strong>视觉模板</strong>，四个要点是检查封面是否合格的<strong>操作模板</strong>，本单元全在这一层落地。</li><li><strong>回到内核</strong>：封面的每个决策都在回答"用户思维"那句话——<strong>"这张图能让用户停下来吗？用户一眼能看出'这和我有什么关系'吗？"</strong> 版式选对了让人停，文字砍精了让人懂，两件事都做到，封面才算完。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-5"><div class="sec-h"><h2>第 4 单元　写一个爆款标题</h2><button class="done-btn" data-done="5">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>做出爆款</strong>　·　颗粒度层：<strong>框架 → 模板</strong></p>
+<p>（本单元抽自《详解版讲义》第二章第四节；详解版负责"讲透可查"，本单元负责"换你写、真的会"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你运营一个「快手家常菜」账号，主要粉丝是<strong>下班懒得做饭的上班族</strong>。今天你拍完了一篇笔记，内容是：<strong>3 道 10 分钟就能上桌的快手菜，新手不翻车，下班再累也能吃口热乎的</strong>。</p>
+<p>发布前，平台让你填标题。<strong>先别往下看</strong>，把你脑子里冒出来的第一个标题，写在这儿：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的第一反应标题：____</div>
+<textarea class="ta" data-save="u5-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要拿它跟"高手版"当面对一对。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">选对 1 个标题公式，再叠 1 个技巧。</p>
+<p>别的都是细节——公式负责"结构对不对"（用户为什么点），技巧负责"再加一脚油"（数字/标签/夸张）。先把这一招拿稳，标题就从"随手起"变成"有章法"。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">七个标题公式（选 1~2 个套）：</p>
+<pre>公式            结构              戳中的心理
+痛点型     痛点 ＋ 解决方案        共鸣/焦虑，急着找答案
+利益型     具体干货 ＋ 好处         "占便宜"、不能错过
+速成型     低付出 ＋ 高回报         好逸恶劳，想被瞬间满足
+劝告型     负面消息 ＋ 劝告         厌恶损失、趋利避害
+对比型     对比 ＋ 疑问            反差制造好奇
+颠覆型     事实 ＋ 反常规言论       认知冲突，"竟然还能这样？"
+热点型     热点词 ＋ 干货/观点      借热点自带的流量</pre>
+<p><strong>四个加分技巧：</strong> 加数字（用阿拉伯数字）／贴标签（点名人群）／抱大腿（名人机构背书）／善夸张（绝绝子、yyds…）。</p>
+<div class="quote"><p>🧷 记住这个对照（详解版里最值得记的一个例子）：</p>
+<p>同一个体态管理选题，两篇笔记封面风格、干货、粉丝量都差不多——</p>
+<p>笔记 2《体态问题分析，每天必练的几个黄金动作》数据平平；</p>
+<p>笔记 1《每天五分钟，改善体态巨有效》却远远爆掉。</p>
+<p>差别只在标题：笔记 1 套了<strong>速成型</strong>——"每天五分钟"是<strong>低付出</strong>，"改善体态巨有效"是<strong>高回报</strong>，用户一读就觉得"我也能做到"。</p>
+<p class="blk">内容差不多时，标题就是点击率的胜负手。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那篇「3 道 10 分钟快手菜」，跟着走一遍高手的拟题流程：</p>
+<p><strong>第 1 步 · 定人群和痛点</strong>：粉丝是下班的上班族 → 痛点是"想吃好但没时间、怕做菜翻车"，渴望是"快、简单、零失败"。</p>
+<p><strong>第 2 步 · 选公式</strong>：主打"低付出（10 分钟）+ 高回报（不翻车的热乎饭）"→ 选 <strong>速成型</strong>，再借一点 <strong>利益型</strong>（具体干货"3 道菜"）。</p>
+<p class="blk">第 3 步 · 套出初稿（先写 3 个）</p>
+<ul><li>《3 道 10 分钟快手菜，新手不翻车》</li><li>《下班懒得做饭？3 道 10 分钟快手菜，零厨艺也能吃口热的》</li><li>《打工人福音！3 道 10 分钟快手菜，新手 0 翻车，下班再累也能吃顿好的》</li></ul>
+<p><strong>第 4 步 · 叠技巧</strong>：加数字（3 道 / 10 分钟）✓；贴标签（打工人 / 新手）✓；这就让第 3 个明显更抓人。</p>
+<p><strong>第 5 步 · 过雷区定稿</strong>：字数压到 16~18 字、去生僻词、加 1 个 emoji。最终：</p>
+<div class="quote"><p>✅ <strong>《打工人福音🍳3 道 10 分钟快手菜，新手 0 翻车》</strong></p></div>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你刚才写的那个标题——有没有点名人群（打工人/新手）？有没有说清"对用户的好处"（快、不翻车）？有没有用阿拉伯数字？少了哪样，就是它没爆的原因。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u5-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你写。</p></div>
+<p>你运营一个「年轻人攒钱」账号，粉丝大多是<strong>存不下钱的月光族</strong>。你写好了一篇笔记：<strong>工资到手先做这 4 件事，一年下来多存了 3 万</strong>。</p>
+<p>请你：<strong>选 1 个公式 + 至少叠 1 个技巧，写出 2 个候选标题</strong>，并标注你用了哪个公式、哪个技巧。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">候选 1：____（公式：____　技巧：____） ／ 候选 2：____（公式：____　技巧：____）</div>
+<textarea class="ta" data-save="u5-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u5-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>痛点很清晰（存不下钱）、有具体干货（4 件事）和强好处（多存 3 万），最顺手的是 <strong>利益型</strong>（具体干货＋好处），也可叠一点<strong>痛点型</strong>开头：</p>
+<ul><li>《月光族必看！工资到手先做这 4 件事，我一年多存了 3 万》——贴标签（月光族）＋ 加数字（4 件事 / 3 万）＋ 利益型</li><li>《总也存不下钱？工资到账先做这 4 件事，一年偷偷多攒 3 万》——痛点型开头 ＋ 加数字</li></ul>
+<p>要点：<strong>4 件事</strong>（具体干货）和 <strong>3 万</strong>（好处）必须留在标题里，这俩是"占便宜感"的来源；去掉它们就垮成"教你怎么存钱"这种没人点的平淡标题。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：写一个爆款标题的 5 步</div><div class="step-body"><ol><li><strong>定人群与痛点</strong>：这篇写给谁？他正烦什么、想得到什么？</li><li><strong>选公式</strong>：痛点强→痛点型；干货多→利益/速成型；有反差→对比/颠覆型；蹭节点→热点型（选 1~2 个）</li><li><strong>套初稿</strong>：按公式结构先写 3~5 个候选</li><li><strong>叠技巧</strong>：能加数字就加阿拉伯数字；能贴标签就点名人群；有权威可借就抱大腿；适当加 1 个情绪词</li><li><strong>过雷区定稿</strong>：字数 16~18（不超 20）、加 1~2 个符号/emoji、去生僻词、多用"你"，挑点击欲最强的发</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>标题是不是"标题党"——和正文内容不符？（❌ 夸张到货不对板，会被反感＋限流）</li><li>标题只写了"我想说的"，没回答"关用户什么事 / 有什么好处"？（❌ 最常见的死法）</li><li>该用数字的地方用了阿拉伯数字吗？字数超 20 了吗？有没有生僻词、有没有用"你"？</li></ul>
+<p class="blk">自测（改写题，全新场景）：</p>
+<p>你刷到一篇同行的笔记，选题其实不错，但标题平淡到没人点——原标题是：</p>
+<div class="quote"><p>《我家厨房的收纳方法》</p></div>
+<p>请你把它<strong>改写成一个爆款标题</strong>：至少用上 <strong>1 个公式 + 1 个技巧</strong>，并写一句话说明你用了哪个公式、哪个技巧、为什么这么改。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">你的改写：____ ／ 我用了：____</div>
+<textarea class="ta" data-save="u5-test6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u5-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>原标题为什么没人点：没痛点、没数字、没好处——纯粹在陈述"我做了件事"。</p>
+<p>改写思路（任选其一即可，关键是把"痛点/数字/好处"补进去）：</p>
+<ul><li><strong>痛点型 + 加数字</strong>：《厨房总是乱糟糟？5 个收纳神器，让台面瞬间清爽》——"厨房总是乱"是痛点，"5 个 / 瞬间"是数字＋速成感。</li><li><strong>利益型 + 贴标签</strong>：《租房党必收！6 招让小厨房多出一倍空间，房东看了都想学》——贴标签（租房党）＋ 好处（多出一倍空间）。</li></ul>
+<p>判分点：只要你的改写让人一眼看到"关我什么事（痛点/人群）＋ 我能得到什么（好处/数字）"，就达标了；如果改完还是"分享一下…/我的…方法"，说明公式没真正套上。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：做出爆款（标题是"爆款四要素"里决定点击率的那一环）。</li><li><strong>颗粒度层</strong>：框架 → 模板——你先用"7 公式"这个<strong>框架</strong>判断该往哪个方向写，再套成具体<strong>标题模板</strong>落地。</li><li><strong>回到内核</strong>：标题的每一个字都在回答内核那句话——<strong>"关用户什么事 / 对他有什么好处？"</strong> 套公式、加技巧，本质都是把这句话说得更直接。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-6"><div class="sec-h"><h2>第 5 单元　写爆款图文</h2><button class="done-btn" data-done="6">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 35–40 分钟　·　主导阶段：<strong>做出爆款</strong>　·　颗粒度层：<strong>框架 → 模板</strong></p>
+<p>（本单元抽自《详解版讲义》第三章第一节、第二节；详解版负责"讲透可查"，本单元负责"换你写、真的会"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你运营一个「初入职场女生穿搭」账号，主要粉丝是<strong>刚毕业不知道怎么买职场穿搭的新人</strong>。你最近入手了一条<strong>显瘦显气场的通勤连衣裙</strong>，穿了两周感觉非常好，想写一篇笔记推给粉丝。</p>
+<p>发布前需要先写好文案正文。<strong>先别往下看</strong>，把你现在脑子里冒出来的第一反应文案开头（哪怕三句话也行），写在这儿：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的第一反应开头：____</div>
+<textarea class="ta" data-save="u6-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等一下你要拿它跟"高手版"当面对一对。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">选对文案模板（罗列式 or 种草式），把一篇图文从框架搭到排版写完。</p>
+<p>选题、封面、标题都是前置工作；写出来之后怎么排版、配什么图，都是后续细节。<strong>这一招才是图文笔记从"写完"到"写好"的核心关卡</strong>——模板没选对，写到一半就会卡壳、结构散、发出去没人看完。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p>### 第一步：先判断用哪个模板</p>
+<pre>你要发的是——
+  多干货 / 多好物 / 有步骤 / 想做合集？   →  罗列式
+  种草单个产品 / 想让人买买买？           →  种草式</pre>
+<p class="blk">两个模板结构对照：</p>
+<pre>【罗列式模板】（万能，适合干货/清单/多品种草）
+
+  第一段 · 开头   ——  点明主题，说清"这篇能给你什么收获"
+  第二段 · 中间   ——  分点罗列干货（步骤一/二/三… 或 好物一/二/三…）
+  第三段 · 结尾   ——  金句升华，或引导互动（"你最喜欢哪个？评论区告诉我！"）
+
+适合：干货类、清单类、故事类、多好物种草
+
+【种草式模板】（单品种草专用）
+
+  第一段 · 我和单品的故事   ——  从自己遇到的问题/困扰切入，说清楚为什么用它
+  第二段 · 产品亮点        ——  具体描述产品怎么解决问题（感官体验/成分/使用感）
+  第三段 · 个人感受        ——  收尾抒情，号召行动（"快去试试！"）
+
+适合：单品种草、好物推荐</pre>
+<p><strong>爆款图文的两个底层特征</strong>（框架选对之后，还要过这两关）：</p>
+<pre>① 简洁干脆  →  只留"树干"（核心信息+步骤），删掉所有铺垫和论证
+             小红书不是公众号，用户在碎片时间刷，3秒没看到重点就划走
+
+② 信息量大  →  多做清单/合集，满足"收藏以后再看"的冲动
+             单品种草 &lt; 多品合集；单角度分享 &lt; 多维度覆盖</pre>
+<div class="quote"><p>🧷 记住这个数据（详解版里最值得记的一个例子）：</p>
+<p>小红书上一篇《健身房女生新手攻略｜不请私教》，获得了 <strong>6.5 万个点赞、5.9 万个收藏</strong>。</p>
+<p>为什么？因为它覆盖了装备清单、训练内容、训练频率、一周计划、器械科普五个维度——用户一打开就觉得"整个流程都有，一篇够了"，于是收藏。</p>
+<p><strong>高收藏 = 信息量大到"一次消化不完，先存着"</strong>——这才是爆款干货笔记的本质。</p></div>
+<p class="blk">写完文案之后：排版三件事</p>
+<pre>① 分段 + 空行    段落之间双回车，再放一个符号（"。"或"-"）占位
+② 控制行数      每段 70～100 字 = 显示 3～5 行，超 5 行就拆段
+③ 加表情符号    用 emoji/序号让版面生动；⚠️❗✅ 用来标重点；不要堆砌</pre>
+<p class="blk">配图怎么选</p>
+<pre>展示产品外观 / 使用场景     →   简单实拍图 + 字（工具：醒图）
+文字信息多 / 干货体现专业   →   纯色背景图 + 字（工具：醒图/黄油相机）
+想体现精致感 / 审美人设     →   氛围感美图 + 字（拼图→调色→花字，工具：醒图 + 黄油相机）</pre>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那篇「初入职场女生 × 显瘦通勤连衣裙」，跟着走一遍高手的制作流程：</p>
+<p><strong>第 1 步 · 选模板</strong>：这篇是种草单品（一条裙子），直接选<strong>种草式模板</strong>。</p>
+<p class="blk">第 2 步 · 搭三段框架（先写骨架，再填肉）</p>
+<ul><li>第一段（我和单品的故事）：锁定"初入职场女生"的痛点——刚工作，不知道怎么穿才不显嫩又有气场，试了一堆裙子都踩雷，然后发现了这条裙。</li><li>第二段（产品亮点）：写具体感官体验——面料垂感、颜色百搭、版型压腿围/腰线……不说"很好看"，说"穿上去腰线高了整整一截，站会议室里不觉得矮"。</li><li>第三段（个人感受）：情绪收尾 + 号召行动——"穿了两周，每次出门都被同事问在哪买，你们也去试试"。</li></ul>
+<p class="blk">第 3 步 · 写出完整文案（套种草式模板）</p>
+<div class="quote"><p>💼 刚工作那年我买穿搭几乎全踩雷——不是显嫩就是太老气，站会议室里一点气场都没有。</p>
+<p>上个月被同事安利了这条通勤裙，穿上去才知道什么叫"选对一件抵十件"——</p>
+<p>✅ <strong>版型</strong>：A字微收腰，遮肉显腿细，身高 160 以下穿不显矮</p>
+<p>✅ <strong>面料</strong>：哑光压褶布，不起皱、不透、坐一天起身还是板板正正</p>
+<p>✅ <strong>颜色</strong>：烟灰色，搭白衬衫/薄针织都行，开会出差穿都合适</p>
+<p>穿了快两周，上班下班都在穿，被同事问了三次"在哪买的"。职场新人真的可以先收这一条，气场拉满🙌</p></div>
+<p>（字数约 160 字，实际发布时可把三个亮点各扩充 1-2 句，控制全文 500-800 字）</p>
+<p><strong>第 4 步 · 做排版检查</strong>：三段之间各加空行 ✓；表情符号适量 ✓；每段不超 5 行 ✓。</p>
+<p><strong>第 5 步 · 选配图类型</strong>：种草单品 → <strong>简单实拍图 + 字</strong>，用醒图在裙子图片上标注三个亮点的文字。</p>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你刚才写的那几句——</p>
+<ul><li>有没有先说自己的困扰（为什么买这条裙），还是直接上产品优点？</li><li>亮点描述是"很显瘦"这类空洞词，还是写出了具体的感官体验（版型/面料/穿着感受）？</li><li>结尾有没有引导互动或号召行动？</li></ul>
+<p>少了哪样，就是"读完没感觉、不想收藏"的根本原因。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u6-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你写。</p></div>
+<p>你运营一个「0-3岁亲子早教」账号，粉丝大多是<strong>想给宝宝做早期启蒙但不知道买哪些绘本的新手妈妈</strong>。你想发一篇笔记，<strong>推荐你精心筛选的「0-1岁启蒙绘本必入 5 本」</strong>。</p>
+<p>请你：</p>
+<ol><li><strong>判断用哪种文案模板，写出三段框架</strong>（每段一句话说明这段要写什么）</li><li><strong>写出文案第一段的完整内容</strong>（至少 3 句话，真的套进模板去写）</li><li><strong>标出你选了哪个模板 + 理由</strong></li></ol>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">模板：____（罗列式 / 种草式） ／ 理由：____ ／ 框架第一段要写的内容：____ ／ 框架第二段要写的内容：____ ／ 框架第三段要写的内容：____ ／ 第一段完整内容： ／ ____ ／ ____</div>
+<textarea class="ta" data-save="u6-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u6-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p><strong>模板判断</strong>：推荐 5 本绘本 = 多个品 + 有清单感 → <strong>罗列式模板</strong>。</p>
+<p>（如果只推荐某一本，才选种草式；推多本要用罗列式，让用户感受到"信息量大、值得收藏"。）</p>
+<p class="blk">三段框架</p>
+<ul><li>第一段（开头）：点明主题——"新手妈妈最头疼的绘本坑，我替你踩完了，0-1岁必入5本清单来了"</li><li>第二段（中间）：分点罗列5本，每本写书名 + 一句适合的原因/使用感受（操作性：让妈妈知道每本什么时候用）</li><li>第三段（结尾）：引导互动——"你家宝宝最爱哪本？评论区交流！"或"还想要1-2岁版本合集的扣1"</li></ul>
+<p class="blk">第一段参考写法（罗列式 · 开头 · 点主题 + 说收获）</p>
+<div class="quote"><p>给宝宝选绘本真的太难了——书架上一堆"口碑好"的买回来，宝宝一眼都不看，妈妈白花几百块💸</p>
+<p>我家宝宝 8 个月时我几乎把淘宝热卖款扫了一遍，踩雷无数之后，终于筛出了 5 本真正适合 0-1 岁宝宝、能让他主动去摸去看的启蒙绘本。</p>
+<p>分享给同样在踩坑边缘的新手妈妈们，建议直接收藏📌</p></div>
+<p>判断要点：开头有<strong>用户的真实痛点</strong>（选绘本难/踩雷）+ <strong>明确收获</strong>（5本筛好的清单）→ 用户会觉得"有用，先存着"，这就是罗列式开头的核心逻辑。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：写出一篇图文笔记的 6 步</div><div class="step-body"><ol><li><strong>选模板</strong>：多品/干货/清单 → 罗列式；单品种草 → 种草式（二选一，别混用）</li><li><strong>搭框架</strong>：按三段结构先写"每段要写什么"——骨架出来再填内容，不卡壳</li><li><strong>填内容</strong>：每个亮点/步骤/好物写具体感官体验，不说"很好用/很好看"</li><li><strong>控字数</strong>：全文 500～800 字；超 1000 字拆成多篇；能做合集的尽量做合集（信息量大）</li><li><strong>做排版</strong>：分段 + 空行 + 每段 ≤5 行 + 适量 emoji；种草笔记尤其要避免大段密文</li><li><strong>选配图</strong>：展示产品→实拍图；文字多→纯色背景图；精致审美→氛围感美图（2～5 张）</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>种草笔记是不是直接从"产品有三大优点"开始——没有个人故事开头，用户感觉像在读广告，不想往下看，也容易被平台限流？</li><li>罗列式笔记的"中间段"，分点之后每个点只写了名字/标题，没有写具体怎么用/感受如何——用户看完了解不了，不会收藏？</li><li>排版时直接整段堆字，没有分段、没有空行、没有 emoji——哪怕内容再好，视觉上"一堵墙"，用户直接划走？</li></ul>
+<p class="blk">自测（改写题，全新场景）：</p>
+<p>你刷到一位做「咖啡探店」的博主，她写了一篇推荐家附近新开的特调咖啡馆的笔记，文案是这样开头的：</p>
+<div class="quote"><p>"这家咖啡馆有三个优点：一是出品稳定，二是性价比高，三是环境适合拍照。强烈推荐大家去！"</p></div>
+<p>请你：</p>
+<ol><li><strong>指出这段文案违反了本单元哪个原则</strong>（具体说是哪条，为什么）</li><li><strong>用正确的种草式模板，改写这段话的第一段</strong>（写出"我和单品的故事"这一段，至少 3 句话）</li></ol>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">违反的原则：____ ／ 改写后第一段： ／ ____ ／ ____</div>
+<textarea class="ta" data-save="u6-test6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u6-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">① 违反了哪条原则</p>
+<p>种草式模板的第一段应该是<strong>「我和单品的故事」</strong>——从自己遇到的问题/困扰切入，先建立共鸣，再引出产品。</p>
+<p>原文案直接从"有三大优点"开始，跳过了"为什么我要去/我遇到了什么"这个关键的共鸣开头，用户感受不到真实感，像在读广告文案，不想往下读，也容易被平台判为营销内容限流。</p>
+<p class="blk">② 改写后第一段参考（种草式 · 第一段 · 我和单品的故事）</p>
+<div class="quote"><p>最近朋友问我"附近有没有适合一个人呆着又不尴尬的咖啡馆"，我突然意识到我家楼下就新开了一家——进去之前没报什么期望，没想到一坐下就不想走了。</p>
+<p>点了一杯招牌特调，第一口喝到直接拍桌子：这个价位居然能做到这个浓度，比连锁品牌的某款饮品好喝太多了。</p></div>
+<p>判断要点：这段先给出了<strong>触发场景</strong>（朋友问/自己路过），再写<strong>真实的使用体验</strong>（喝到第一口）——用户读完之后会好奇"到底多好喝"，自然想往下看第二段的具体亮点。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：做出爆款——写图文是"爆款四要素"中内容生产的核心动作，有了好选题和好封面，文案和排版决定用户愿不愿意看完、收藏、转发。</li><li><strong>颗粒度层</strong>：框架 → 模板——先用"五种类型"这个<strong>框架</strong>判断发什么，再用"罗列式/种草式"两个<strong>模板</strong>把一篇文章结构搭出来，最后填排版和配图的具体动作。</li><li><strong>内核</strong>：图文的每一个字都在回答<strong>用户思维</strong>那句话——"关我什么事 / 对我有什么用"。种草式的个人故事是让用户觉得"这说的就是我"，罗列式的清单是让用户觉得"这篇能帮我解决问题"；排版让内容"不费力就能看进去"，配图让用户"一眼就想点进来"——所有环节都指向同一个问题：这篇笔记对用户来说有没有价值？</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-7"><div class="sec-h"><h2>第 6 单元　写视频文案</h2><button class="done-btn" data-done="7">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>做出爆款</strong>　·　颗粒度层：<strong>框架 → 模板</strong></p>
+<p>（本单元抽自《详解版讲义》第四章第二节；详解版负责"讲透可查"，本单元负责"换你写、真的会"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你在运营一个「职场穿搭」账号，粉丝大多是<strong>刚入职场的应届生</strong>。你拍了一条视频，内容是：<strong>5套不踩雷的面试穿搭，从快时尚品牌里挑，每套预算不超过 500 元，显成熟又不死板</strong>。</p>
+<p>发布前你要写视频文案。<strong>先别往下看</strong>，把你第一反应想到的文案开头（2~3 句）写在这里：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的第一反应开头：____</div>
+<textarea class="ta" data-save="u7-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要用高手的流程把这个场景走一遍，最后拿你的版本来对照。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">判断视频类型 → 套对应文案结构写出骨架 + 一个吸睛开头。</p>
+<p>开头 7 种技巧、结尾 5 种技巧、3 个改稿口诀，都是这一招的"加分动作"，不是并列的独立技能。先把"选对结构、写出骨架"这件事做熟，再往上叠细节。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">三大文案结构（3 选 1，先判断类型）：</p>
+<pre>视频类型            文案骨架
+─────────────────────────────────────────────────────
+解决问题类   ① 描述痛苦状态（直击用户最烦的事）
+             ② 低行动成本 + 理想效果（"只要X步/X分钟，就能Y"）
+             ③ 解决方案罗列（方法一、二、三…）
+             ④ 引导互动
+
+盘点推荐类   ① 推荐理由（1~2句：看完能得到什么）
+             ② 推荐元素罗列（3~10个，各点亮点）
+             ③ 引导互动
+
+观点态度类   ① 提出观点（有争议/反认知/新颖，必须一句话亮出来）
+             ② 论述观点（案例/故事/数据撑场）
+             ③ 金句升华
+─────────────────────────────────────────────────────
+判断口诀：
+  → 帮用户"解决一个烦恼/学会一件事"  → 解决问题类
+  → 帮用户"整理一批资源/好物"        → 盘点推荐类
+  → 帮用户"看清一个道理/立场"        → 观点态度类</pre>
+<p class="blk">七种吸睛开头（选 1~2 种叠用）：</p>
+<pre>价值式   先告诉用户"看完能得到什么"，让人觉得值
+颠覆式   讲一个反常事 / 反认知观点，引发好奇
+优越式   摆出自己某个厉害成果，让用户产生期待
+提问式   问一个目标用户有共鸣的直接问题
+共鸣式   描绘目标用户的典型感受场景，让人说"说的就是我"
+悬念式   话说一半，不挑明，勾着用户往下看
+危机式   展示错误行为的严重后果，制造危机感</pre>
+<p><strong>三个改稿口诀（写完必做）：</strong> 啰唆变精简（删掉没用的字词）／长句变短句（每句不超 15 字）／书面语变口语（出声读，改生硬语句）</p>
+<div class="quote"><p>🧷 记住这条数据（详解版原文）：</p>
+<p>小红书上一篇"3招懒人学习法，边玩边学，躺赢学霸"的视频，获得了 <strong>2.6万点赞、4.9万收藏</strong>。</p>
+<p>拆开看，它是完整的解决问题类四步结构——开头"为什么他追剧追星睡懒觉、考试还是第一，而你认真记笔记却成绩倒数"直击痛苦状态；"三招懒人学习法，让你彻底和学渣说拜拜"是低行动成本＋理想效果。</p>
+<p class="blk">结构不是限制，是脚手架——先把四步填满，再打磨遣词，比凭感觉乱写快得多，效果也更稳。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那篇「5套不踩雷面试穿搭」，跟着走一遍高手的流程：</p>
+<p><strong>第 1 步 · 判断类型</strong>：内容是帮应届生"整理 5 套具体穿搭方案" → 是在盘点资源/好物 → <strong>盘点推荐类</strong>。</p>
+<p class="blk">第 2 步 · 套骨架，先填三步</p>
+<ul><li>① 推荐理由：目标粉丝最怕"面试穿错衣服给自己减分" → 开门见山说"这5套面试穿搭帮你避开最常见的 3 个雷区，快时尚品牌买，每套不超 500 元"</li><li>② 推荐元素罗列：依次介绍 5 套（每套说场合适配/品牌/为什么不踩雷，言简意赅）</li><li>③ 引导互动：收尾引导收藏 + 问评论区有没有其他需求</li></ul>
+<p class="blk">第 3 步 · 重写开头，叠一种技巧</p>
+<p>骨架有了，现在单独打磨开头——盘点推荐类容易犯"推荐理由太平淡"的毛病，这里叠一个<strong>危机式</strong>开头，先戳痛点，再给价值：</p>
+<div class="quote"><p>"应届生穿着最容易踩的 3 个雷，面试官一眼就看出来了——</p>
+<p>版型太学生气、颜色太随意、没有腰线显拖沓。</p>
+<p>今天给你 5 套快时尚品牌的面试穿搭方案，每套 500 以内，显成熟、不死板。"</p></div>
+<p>（危机式：先点出错误行为的后果"一眼就看出来了"；再接推荐理由，用户已经被钩住了。）</p>
+<p class="blk">第 4 步 · 出声读改稿</p>
+<p>读一遍上面的开头，检查：最长那句"版型太学生气、颜色太随意、没有腰线显拖沓"是三个短分句并列，刚好在 15 字以内 ✓；"快时尚品牌"算口语 ✓；没有废话可删 ✓。</p>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你开头那 2~3 句——有没有先判断这条是盘点推荐类，然后从"推荐理由"起笔？有没有用任何一种开头技巧戳到用户？如果开头写的是"大家好，今天给大家分享 5 套面试穿搭……" → 属于平铺直叙，等下拿高手版对一对，找到差在哪一步。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u7-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你来。</p></div>
+<p>你在运营一个「宝妈副业」账号，粉丝大多是<strong>全职在家、想找点事做的宝妈</strong>。你拍了一条视频，内容是：<strong>3 种适合宝妈的居家副业，不用出门，利用碎片时间，平均每月能多进账 800~1500 元</strong>。</p>
+<p>请你：</p>
+<ol><li>判断这条视频应套哪种文案结构，并写出<strong>完整骨架</strong>（只需要写出各步的核心一句话，不用展开正文）</li><li>从 7 种开头技巧中选 1~2 种，写出<strong>2~3 句开头</strong>，并标注你用的是哪种技巧</li></ol>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我判断的类型：____（解决问题类/盘点推荐类/观点态度类） ／ 文案骨架： ／ - ① ____ ／ - ② ____ ／ - ③ ____ ／ - （④ ____，如有） ／ 我的开头（用的是：____式）： ／ 「____」</div>
+<textarea class="ta" data-save="u7-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u7-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p><strong>类型判断</strong>：内容是帮宝妈"学 3 种副业"——是帮用户解决"没钱赚/不知道能干什么"的烦恼，并教会 3 种方法 → <strong>解决问题类</strong>（也可以认为是盘点推荐，两种结构均可，但解决问题类有"痛苦状态"这一步，更适合戳宝妈焦虑的痛点）。</p>
+<p class="blk">骨架（解决问题类四步）：</p>
+<ul><li>① 描述痛苦状态：每天带娃，钱不够花，想赚钱又出不了门</li><li>② 低行动成本＋理想效果：碎片时间上手，不需要专业技能，每月能多进账 800~1500 元</li><li>③ 解决方案罗列：依次介绍 3 种副业（各说名称、怎么接单、大概月收）</li><li>④ 引导互动：想知道哪种最容易上手，评论区告诉我</li></ul>
+<p class="blk">开头示例（共鸣式＋危机式叠用）：</p>
+<div class="quote"><p>"孩子睡着了，你有没有坐在那里发呆，想着：我是不是在慢慢废掉？</p>
+<p>全职带娃三年，同龄朋友涨薪升职，你的简历空白了整整三行。</p>
+<p>今天给你 3 种不用出门、碎片时间能做的副业，平均每月多进账 800~1500 元。"</p></div>
+<p>要点：先用共鸣式描绘宝妈的典型焦虑（让人说"说的就是我"），再用危机式轻轻放大对比（简历空白），然后接推荐理由。让用户在前三句之内就决定继续看。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：写一条视频文案的 5 步</div><div class="step-body"><ol><li><strong>判断类型</strong>：帮用户解决问题 → 解决问题类；盘点资源/好物 → 盘点推荐类；表达观点立场 → 观点态度类</li><li><strong>套骨架填内容</strong>：先按框架逐步填，把骨架写完整，再回头打磨每步的语言</li><li><strong>单独重写开头</strong>：从 7 种技巧中选 1~2 种，让前 2~3 句内有"理由让用户不刷走"——不能是"大家好，今天给大家分享……"</li><li><strong>设计结尾收口</strong>：目标是涨粉 → 长期价值式；目标是互动 → 引导互动式；目标是预热下期 → 下集预告式</li><li><strong>出声读改稿</strong>：边读边改——长句拆短（单句不超 15 字）、废话删掉、书面语换口语；读顺了再发</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>是不是还没判断类型就动笔写了？——结构选错，改再多遍也是徒劳（❌ 最常见的浪费）</li><li>开头是不是停留在"大家好，今天给大家分享……"？——用户推荐页的耐心只有几秒，平铺直叙开头等于主动劝退（❌ 开头不抓人）</li><li>文案写完有没有出声读一遍？——没读就发布，长句和书面语往往自己看不出来（❌ 改稿偷懒）</li></ul>
+<p class="blk">自测（应答题，全新场景）：⏱ 约 8 分钟</p>
+<p>你的朋友小林刚开了一个「中年男士穿搭」账号，第一条视频内容是：<strong>"很多 35＋ 男生买衣服都往宽松大码挑，以为这样显瘦，其实越穿越显老——真正显瘦的逻辑是合身感，不是面积感"</strong>。</p>
+<p>他把文案发给你看，开头是这样写的：</p>
+<div class="quote"><p>"大家好，我是小林，今天给大家分享一下中年男士穿搭的一些心得，我觉得很多男生在选衣服的时候可能会有一些误区，如果你也有这方面的困惑的话，希望这条视频能帮到你。"</p></div>
+<p>请你：</p>
+<ol><li>判断这条视频适合哪种文案结构，说明理由</li><li>指出原开头有哪两个问题</li><li>用原文案的核心观点，按你判断的结构重写一个开头（2~3 句），标注你用的是哪种开头技巧</li></ol>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的回答：____</div>
+<textarea class="ta" data-save="u7-test6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u7-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p><strong>1. 文案类型</strong>：这条视频核心是"大多数中年男生对穿搭有一个根本性的认知错误，我来颠覆它"——是在表达一个有争议/反认知的观点（宽松≠显瘦）→ <strong>观点态度类</strong>。三步骨架：① 提出观点（宽松不显瘦）→ ② 论述观点（对比案例/解释合身感的逻辑）→ ③ 金句升华。</p>
+<p class="blk">2. 原开头的两个问题</p>
+<ul><li>平铺直叙，全程在说"我"——"大家好我是小林，我觉得，希望能帮到你"，没有一句话戳到用户的痛点或好奇心（缺乏任何一种开头技巧）</li><li>句子太长、书面感重——"如果你也有这方面的困惑的话，希望这条视频能帮到你"读起来费劲，明显没有出声测试过</li></ul>
+<p class="blk">3. 参考改写（颠覆式）</p>
+<div class="quote"><p>"你花大价钱买的那件宽松大衣——其实正在让你看起来更胖、更显老。</p>
+<p>真正显瘦的秘密不是面积，是合身感。</p>
+<p>今天告诉你 35＋ 男生穿搭最常踩的这个坑，以及怎么改。"</p></div>
+<p>（颠覆式：把大众认知"宽松显瘦"直接推翻，第一句就制造认知冲突，逼用户继续看"为什么"。）</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：做出爆款——文案结构决定内容是否逻辑清晰、用户愿不愿意看完；开头决定前几秒留不留人，这两件事直接影响完播率和互动数据。</li><li><strong>颗粒度层</strong>：框架 → 模板——你先用"三大结构"这个<strong>框架</strong>判断内容该怎么组织，再套成具体的<strong>文案模板</strong>逐步落地。</li><li><strong>回到内核</strong>：用户思维贯穿全单元——三大结构都在回答"这条视频对用户有什么用"；七种开头都在回答"用户为什么应该看下去"；改稿三招都在服务"用户听起来舒不舒服"。文案好不好，最终由用户的耐心说了算。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-8"><div class="sec-h"><h2>第 7 单元　算法涨粉</h2><button class="done-btn" data-done="8">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>放大流量</strong>　·　颗粒度层：<strong>框架</strong></p>
+<p>（本单元抽自《详解版讲义》第五章第一节；详解版负责"讲透可查"，本单元负责"换你布局、真的会"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你在做一个「宠物猫护理」账号，粉丝以新手铲屎官为主。刚写好一篇图文笔记，内容是：<strong>给猫咪剪指甲总被抓？5 个让猫咪乖乖配合的安抚小技巧</strong>。</p>
+<p>你准备把它发出去了，但有个朋友提醒你："你这篇写得不错，但感觉系统不知道推给谁。"</p>
+<p><strong>先别往下看</strong>，把你现在的打算写下来：</p>
+<div class="quote"><p>我打算怎么让系统识别这篇笔记、推给精准人群？</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">1. 标题我会这么改：____ ／ 2. 发布后我会在评论区发第一条评论，内容是：____</div>
+<textarea class="ta" data-save="u8-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要拿它跟"高手版"对照。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">给一篇笔记做关键词全链路布局（标题 / 正文 / 话题）+ 设计一条评论区引导。</p>
+<p>其余的——弹幕引导、笔记内互动话术——都是加分动作；但只要你把这条主链路打通，算法识别精准度和评论互动量就能同时提升。先把这一招做扎实。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">算法链路：系统凭什么把你的笔记推给对的人？</p>
+<pre>发布笔记
+  → 平台审核（内容合规检查）
+  → 系统打标签 + 匹配推送
+  → 一级流量池（初始曝光 100～300）
+      ↓ 互动指标达标（点击 / 点赞 / 收藏 / 评论 / 转发）
+  → 二级流量池（更大曝光）→ 持续滚雪球
+      ↓ 互动指标不达标
+  → 停止推荐</pre>
+<div class="quote"><p>底层逻辑：算法替用户"投票"——<strong>关键词</strong>让系统知道"推给谁"，<strong>互动量</strong>让系统知道"值不值得推"。两件事都做到，流量才滚起来。</p></div>
+<p class="blk">关键词全链路布局（三个位置）：</p>
+<div class="tbl-scroll"><table><thead><tr><th>位置</th><th>作用</th><th>操作要点</th></tr></thead><tbody><tr><td>标题</td><td>系统识别的第一入口</td><td>明确写出 1～2 个核心关键词，让系统一眼打标</td></tr><tr><td>正文</td><td>强化主题相关性</td><td>关键词自然重复 3～10 次，分布在首段、中段、结尾；不堆砌</td></tr><tr><td>结尾话题标签</td><td>进一步锁定内容分类</td><td>添加 3～5 个含关键词的话题，强化系统标签识别</td></tr></tbody></table></div>
+<p class="blk">评论区引导的 4 种打法：</p>
+<pre>① 抛出问题     ——发起有互动性的话题，激发用户回复
+② 主动帮忙     ——用自己的技能为用户提供帮助，吸引求助留言
+③ 设置金句     ——精辟有力的金句，触发情感共鸣和讨论
+④ 引导许愿     ——发起跟笔记主题相关的许愿接龙，带动评论接力</pre>
+<div class="quote"><p>🧷 <strong>锚点故事（原书真实案例，数字原样保留）：</strong></p>
+<p>作者发布了一条"小红书运营干货"视频后，第一时间在评论区发出：「老规矩，新博主流量不好，涨粉慢，可以评论区留言，我帮大家看号，粉丝宝宝优先哦。」</p>
+<p>用的是<strong>主动帮忙</strong>策略——评论区很快累积到 <strong>800 多条评论</strong>，高评论数被系统识别为"受欢迎"信号，笔记进入更大流量池，涨粉速度随之加快。</p>
+<p class="blk">启示：互动量不是等来的，是设计出来的。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那篇「猫咪剪指甲」笔记，跟着走一遍高手的全链路布局流程：</p>
+<p><strong>第 1 步 · 确定核心关键词</strong>：内容聚焦"猫咪剪指甲+安抚技巧"，受众是新手铲屎官 → 核心关键词：<strong>猫咪剪指甲</strong>（痛点词）、<strong>新手铲屎官</strong>（人群词）。</p>
+<p><strong>第 2 步 · 标题嵌入关键词</strong>：原标题"给猫咪剪指甲总被抓？5 个让猫咪乖乖配合的安抚小技巧"已含关键词，但人群词不够突出 → 优化为：</p>
+<div class="quote"><p>✅ <strong>《新手铲屎官必看🐾猫咪剪指甲总被抓？5个安抚技巧，从此乖乖配合》</strong></p>
+<p>— 标出关键词：「新手铲屎官」（人群词，系统打标精准）＋「猫咪剪指甲」（痛点词，决定推给谁）</p></div>
+<p class="blk">第 3 步 · 正文布局关键词（3～10 次，分段自然出现）：</p>
+<ul><li>首段："今天分享 5 个<strong>猫咪剪指甲</strong>时的安抚技巧，专门为刚养猫的<strong>新手铲屎官</strong>整理……"（出现 2 次）</li><li>中间核心段：在讲每个技巧时，自然带入"<strong>猫咪剪指甲</strong>""<strong>铲屎官</strong>"……（累计共 6～8 次）</li><li>结尾："掌握这些技巧，<strong>猫咪剪指甲</strong>就不再是噩梦了，<strong>新手铲屎官</strong>可以收藏备用！"（再出现 2 次）</li></ul>
+<p class="blk">第 4 步 · 结尾话题标签：</p>
+<p>在正文最后添加：<code>#猫咪剪指甲</code> <code>#新手铲屎官</code> <code>#养猫技巧</code> <code>#猫咪护理</code></p>
+<p class="blk">第 5 步 · 设计评论区第一条（发布后立即发）：</p>
+<p>选用<strong>主动帮忙</strong>策略，因为本笔记受众是新手，痛点集中 →</p>
+<div class="quote"><p>「新手铲屎官们，评论区说说你家猫猫剪指甲时会几级暴走？我帮大家看看是哪个环节出了问题😂」</p></div>
+<p>这条评论一抛，有剪指甲困扰的用户自然留言，评论区热度起来，系统持续推送。</p>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你刚才写的标题——有没有同时出现"内容主题词"和"人群词"？评论区那句话，是在等用户说话，还是主动给他们一个开口的理由？两个位置都补上，才是完整链路。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u8-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你来。</p></div>
+<p>你做的是「职场新人减压」账号，粉丝以刚入职场 1～3 年的年轻人为主。你写好了一篇图文笔记，内容是：<strong>周一综合征发作？6 个让你快速从周末状态切回工作模式的方法</strong>。</p>
+<p>请你完成以下两件事，并标注用了哪条规则：</p>
+<p class="blk">1. 关键词全链路布局</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我选的核心关键词（1～2 个）：____（说明为什么选这个） ／ 优化后的标题：____ ／ 正文首段我会这样开头（自然带入关键词）：____ ／ 结尾话题标签（3～5 个）：____</div>
+<textarea class="ta" data-save="u8-step4" placeholder="把你的答案写在这里…"></textarea>
+<p class="blk">2. 评论区第一条评论</p>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u8-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">关键词选择</p>
+<ul><li>核心关键词：<strong>职场新人</strong>（人群词）＋<strong>周一综合征</strong>（痛点词/情绪共鸣词）</li><li>之所以选这两个：人群词让系统知道推给谁；情绪共鸣词让用户看到标题就"被击中"</li></ul>
+<p class="blk">优化标题参考</p>
+<p>《职场新人注意⚠️周一综合征又发作了？6招快速切换工作模式，周一不emo》</p>
+<p>— 点名人群（职场新人）＋痛点词（周一综合征）＋具体干货（6招）＋情绪共鸣（emo）</p>
+<p class="blk">正文首段参考</p>
+<p>「每到周一，是不是觉得脑子还停在假期里根本转不动？这种<strong>周一综合征</strong>对<strong>职场新人</strong>来说尤其明显——我整理了 6 个能帮你快速切回状态的方法……」</p>
+<p><strong>评论区策略</strong>：用<strong>许愿接龙</strong>或<strong>抛出问题</strong>都合适</p>
+<ul><li>许愿版：「评论区来许愿🙏周一打工魂上线，今天的工作顺顺利利！」（带动接龙，评论量快速起来）</li><li>提问版：「你们周一早上最难熬的是哪一刻？评论区说说，看看我有没有说到你！」（激发共鸣，让用户主动倾诉）</li></ul>
+<p>要点：评论策略要和笔记内容"情绪同频"——减压类笔记适合情绪共鸣型（许愿/提问），干货攻略类适合主动帮忙型。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：算法涨粉全链路操作清单</div><div class="step-body"><ol><li><strong>发布前 · 锁定关键词</strong>：确定 1～2 个核心词（内容主题词 ＋ 人群词），贯穿标题、正文、话题三个位置</li><li><strong>标题 · 明确嵌入</strong>：标题里清晰出现关键词，让系统第一时间打标</li><li><strong>正文 · 自然重复</strong>：关键词分布在首段、中段、结尾，共出现 3～10 次，不堆砌不影响阅读</li><li><strong>结尾 · 加话题标签</strong>：添加 3～5 个含关键词的话题，进一步锁定内容分类</li><li><strong>发布后 · 立发评论</strong>：笔记上线后立即在评论区发第一条（抛问题 / 主动帮忙 / 金句 / 许愿），绝不让评论区空着</li><li><strong>视频加弹幕引导</strong>（视频笔记额外做）：在开头或结尾加一句"公屏打下……"类话术，拉高弹幕互动量</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>关键词在标题里够不够突出？是不是只写了笔记主题，没有点明人群？（❌ 系统知道你写什么，但不知道推给谁）</li><li>正文关键词是不是在 3～10 次之间？有没有密集堆砌在某一段？（❌ 堆砌被判定为营销广告，触发限流）</li><li>发布后有没有立刻自己发第一条评论？（❌ 评论区空着 = 白白浪费首批流量带来的互动机会）</li></ul>
+<p class="blk">自测（全新情境）：</p>
+<p>你在做一个「亲子烘焙」账号，粉丝是带娃在家的宝妈。你刚发了一篇笔记：《超简单！5 步做出孩子最爱的卡通饼干》，发布 3 小时后，数据很惨淡——曝光 150，点赞 2，评论 0。</p>
+<p>你复盘发现：</p>
+<ul><li>标题里没有出现人群词</li><li>正文里"亲子""宝妈""宝宝"这些词只各出现了 1 次</li><li>发布后评论区空了 3 小时，你没有发第一条评论</li></ul>
+<p class="blk">请你做三件事：</p>
+<ol><li>把标题改写成关键词更完整的版本（加上人群词）</li><li>设计一条评论区的第一条评论话术（选用主动帮忙或许愿策略）</li><li>用一句话说明：为什么评论区空着 3 小时，比标题没有关键词的伤害更大？</li></ol>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p class="blk">① 标题改写参考</p>
+<p>《宝妈必收🎉5步做出孩子超爱的卡通饼干，0基础不翻车，娃当场吃光光》</p>
+<p>— 加入人群词「宝妈」「孩子」，补入痛点词「0基础不翻车」，系统识别更精准，同时用户看标题就有点击欲。</p>
+<p class="blk">② 评论区第一条话术参考</p>
+<ul><li>许愿版：「评论区来许个愿🙏愿我们家的小馋猫今天也把饼干吃完！」（带动宝妈们跟上来晒娃）</li><li>主动帮忙版：「宝妈们，第一次做饼干最常问我：烤箱温度怎么调？评论区留下你的疑问，我逐一回复！」（用专业服务拉动评论量）</li></ul>
+<p class="blk">③ 为什么评论区空着 3 小时伤害更大</p>
+<p>一级流量池通常在发布后 1～2 小时内完成数据考核，这 3 小时是算法最关键的判断窗口。评论区空着 = 互动量为 0 = 系统判定笔记"不受欢迎" → 停止推送。关键词布局不好只影响"推给谁"，评论区空着直接导致"不推了"，比前者更致命。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：放大流量——关键词布局让笔记被精准人群看到，评论区设计让互动量驱动算法继续推送。</li><li><strong>颗粒度层</strong>：框架——算法链路（发布→打标→流量池→互动判定）是这一单元的核心框架，操作方法都是从这个框架里长出来的。</li><li><strong>回到内核</strong>：用户思维贯穿全链路——关键词选哪个？要想用户会搜什么词；评论区说什么？要想用户最想听到哪种回应。算法本质上是在替用户"投票"，你的每一步布局，都是在替用户找到"和我相关的内容"的路径。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-9"><div class="sec-h"><h2>第 8 单元　把流量变成真粉丝：价值 + 人设涨粉</h2><button class="done-btn" data-done="9">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>放大流量</strong>　·　颗粒度层：<strong>模板 / 落地</strong></p>
+<p>（本单元合并自《详解版讲义》第五章第二节"价值涨粉"＋第三节"人设涨粉"；一口气练完"把路过的流量变成真粉丝"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你做了一个「职场穿搭」账号，前天发了一篇笔记，选题是<strong>"显瘦又显高？5 套 155cm 小个子通勤穿搭"</strong>，意外涨了 600 粉。</p>
+<p>你进自己主页一看，发现：</p>
+<ul><li>简介写的是："分享日常穿搭，热爱生活 ✨"</li><li>账号共 4 篇笔记，除了这篇，还有一篇聊"最近看的书"、一篇晒"旅游照片"、一篇"今日午餐"</li><li>封面全是衣服平铺图，没有真人出镜</li><li>那篇爆了的笔记评论区有人问："博主你平时都在哪里买衣服呀？"你没有回复</li></ul>
+<p><strong>先别往下看</strong>，把你的判断写下来：</p>
+<div class="quote"><p>这 600 个新粉进了主页之后，大概会发生什么？他们会留下来吗？为什么？</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的判断：____</div>
+<textarea class="ta" data-save="u9-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下要看差在哪。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">用简介凸显价值 + 设计一个固定人设动作（刷脸 / 故事 / 价值观），让进了主页的流量变成真粉丝。</p>
+<p>其余的——更新节奏、系列化内容——都是放大器；但只要你把"简介说清楚你是谁、账号里能看见你这个人"这两件事做到，转粉率就能显著提升。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">为什么有的爆款带不来粉丝？</p>
+<pre>用户关注路径：
+  刷到笔记 → 觉得有意思 → 点头像进主页
+  → 看简介 + 翻其他笔记 → 判断"这个账号对我有没有持续价值"
+  → 有价值 → 关注
+  → 没价值（看不懂是谁 / 内容杂乱 / 找不到博主这个人）→ 退出
+
+爆款 ≠ 涨粉：
+  爆款带来的是"路过的人流"
+  账号长期价值留住的才是"真正的粉丝"</pre>
+<p class="blk">把流量转成粉丝的两条主线：</p>
+<pre>主线一：账号价值清晰（"这个账号对我有什么用"）
+  ① 简介凸显高价值
+     让用户 10 秒看懂：你是谁 + 分享什么 + 为什么值得关注
+  ② 内容垂直
+     同一领域深耕 → 用户知道关注后能持续得到什么
+     ❌ 内容杂乱 → 用户看不懂定位，不知道为什么关注你
+
+主线二：账号有人格（"我喜欢这个博主这个人"）
+  ① 反复"刷脸"（视觉感知）
+     封面/内页真人照 + 每篇固定自我介绍文案
+  ② 多分享故事（情感连接）
+     故事类选题 / 干货中融入亲身经历
+  ③ 表达价值观（深度认同）
+     输出具体的、有态度的观点，而不是空喊口号</pre>
+<div class="quote"><p>底层原则：用户关注的本质是"我预期这个账号未来还会持续给我带来价值"——价值清晰 + 有人格，才能把"路过的流量"变成"真的因为你而留下的粉丝"。</p></div>
+<div class="quote"><p>🧷 <strong>锚点故事（原书真实案例，数字原样保留）：</strong></p>
+<p>小红书上两个以"女性成长"为定位的图文账号，都产出了大量爆款内容，获得的赞与收藏都是 <strong>29 万</strong>。</p>
+<p>账号 1 大量用明星/名人照片作为封面，正文全是高密度干货，整个账号找不到博主本人的任何痕迹；结果：粉丝 <strong>9264</strong> 人。</p>
+<p>账号 2 的博主在封面中大量展现自己学习、工作、健身等真实场景，同时用"<strong>38岁我决定重养自己一遍</strong>"等标题将一个励志女性的形象鲜活呈现出来；结果：粉丝 <strong>8.9 万</strong>，相差近 <strong>10 倍</strong>。</p>
+<p class="blk">启示：干货让用户点赞收藏，人设让用户关注——同样的内容，有没有展示"博主这个人"，粉丝量可以相差十倍。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那个「职场穿搭」账号，跟着走一遍高手的改造流程：</p>
+<p class="blk">诊断：那 600 个新粉进主页后大概发生了什么？</p>
+<ul><li>简介"分享日常穿搭，热爱生活"→ 没有说清"你是谁 / 对用户有什么价值"，没有关注理由</li><li>账号 4 篇笔记，内容散射（穿搭 / 读书 / 旅游 / 午餐）→ 垂直度几乎为 0，用户看不出账号的持续价值</li><li>封面全是衣服平铺图 → 用户看不见博主这个人，账号等于"无人格的货架"</li><li>评论区的问题没回复 → 流量互动机会白白流失</li></ul>
+<p>结论：这 600 个新粉里，大多数进了主页，不到 10 秒就退出了——<strong>流量白跑了</strong>。</p>
+<p class="blk">改造第 1 步 · 重写简介（凸显价值）：</p>
+<p>原版：「分享日常穿搭，热爱生活 ✨」</p>
+<p>改造思路：你是谁（身份/背景）+ 账号分享什么 + 用户关注能得到什么</p>
+<div class="quote"><p>✅ 改造版参考：</p>
+<p>「155cm 小个子 | 上班族穿搭日记📐每周分享 5 套显高显瘦通勤穿搭 | 关注我，再也不用为"不知道穿什么上班"发愁」</p></div>
+<p>拆解：「155cm 小个子」= 博主身份，让精准人群（小个子）一秒认出自己；「每周……通勤穿搭」= 账号分享什么；「再也不用……」= 关注的直接理由。</p>
+<p class="blk">改造第 2 步 · 设计固定人设动作（刷脸）：</p>
+<p>选择每篇笔记<strong>结尾固定嵌入</strong>一段人设签名文案（50 字以内）：</p>
+<div class="quote"><p>✅ 参考：「我是 [昵称]，155cm 打工人，每周帮你搞定"不知道穿什么上班"这件难事。觉得有用就关注我～」</p></div>
+<p>这段话每篇都出现，博主的身份特质（155cm / 打工人 / 帮你解决穿搭难题）不断强化。</p>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你当时判断"600 粉会留下吗"——现在看清楚了吗？简介没价值 + 内容杂乱 + 账号没有人格，流量进来就流走，和爆款有多厉害无关。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u9-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你来。</p></div>
+<p>你在做「家庭收纳整理」账号，粉丝以 30 岁左右有娃的宝妈为主。账号目前状态：</p>
+<ul><li>简介：「收纳爱好者，家里一直很整洁」</li><li>已发 12 篇，其中 8 篇是收纳干货，2 篇晒了家装，2 篇是育儿心得</li><li>封面用的是家里某个角落整理前后的对比图，没有真人出镜</li><li>每篇笔记结尾直接结束，没有任何自我介绍</li></ul>
+<p>请你完成两件事，标注用了哪条方法：</p>
+<p><strong>1. 重写账号简介</strong>（用"你是谁 + 分享什么 + 关注理由"三段式）</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">你是谁（身份/背景标签）：____ ／ 分享什么内容：____ ／ 关注这个账号用户能得到什么（一句让人想点关注的话）：____ ／ 完整简介（合成一段，50 字左右）：____</div>
+<textarea class="ta" data-save="u9-step4" placeholder="把你的答案写在这里…"></textarea>
+<p><strong>2. 设计一个固定人设动作</strong>（从刷脸 / 故事 / 价值观里选 1 个，说明怎么落地）</p>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u9-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">简介改造参考</p>
+<p>三段式拆解：</p>
+<ul><li>你是谁：「两娃妈 / 家里 80㎡ 住四口人」（具体的身份背景，让有相同处境的宝妈立刻共鸣）</li><li>分享什么：「每周分享真实可落地的家庭收纳方案」</li><li>关注理由：「关注我，把杂乱小家变成你的治愈系空间」</li></ul>
+<p>合成版参考：</p>
+<p>「两娃妈 80㎡住四口人🏠每周分享真实可落地的家庭收纳方案 | 关注我，把杂乱小家变成你的治愈系空间」</p>
+<p><strong>人设动作参考</strong>（推荐选"刷脸 + 固定文案"，最容易落地）：</p>
+<p>在每篇笔记结尾加一段 40 字左右的固定自我介绍：</p>
+<p>「我是 [昵称]，两个娃的妈妈，专门研究小户型家庭收纳。每周更新，帮你把家从"藏污纳垢"变成"每天想回去"。觉得有用可以关注～」</p>
+<p>执行要点：每篇发布前检查结尾有没有这段话——重复出现是刷脸的核心，偶尔出现没用。</p>
+<p>另一种选法——<strong>故事类选题</strong>（增加温度）：策划 1 篇「两娃家庭收纳最崩溃的那个周末」，用真实经历破冰，让用户感受到"这是一个真实的人，不只是一本收纳手册"。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：把流量变成真粉丝的 5 步</div><div class="step-body"><ol><li><strong>重写简介</strong>：明确写出"你的身份背景 ＋ 账号分享什么 ＋ 用户关注后能得到什么"，给陌生人一个 10 秒决定关注的理由</li><li><strong>清理垂直度</strong>：翻看最近所有笔记，把与账号定位明显无关的内容标记出来——后续聚焦本领域深耕，不跟风蹭不相关热点</li><li><strong>建立视觉存在感（刷脸）</strong>：在每篇笔记的开头或结尾嵌入固定的人设签名文案（昵称 ＋ 身份特质 ＋ 内容方向 ＋ 关注引导），每次发布都带上</li><li><strong>让故事说话</strong>：每月策划 1～2 篇故事类笔记，或在干货笔记里找 1 个段落融入亲身经历——让账号从"信息工具"变成"有人味的地方"</li><li><strong>亮出价值观</strong>：提炼 1 个核心观点，具体说出你对某件事的真实态度，不要空喊口号——价值观契合的用户会成为最忠实的粉丝</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>简介里有没有清楚说明"分享什么内容、对用户有什么价值"？（❌ 只写"热爱生活 / 记录日常"，用户读完不知道你是干什么的）</li><li>账号里有没有博主本人的痕迹——真人照片 / 真人出镜 / 固定自我介绍文案？（❌ 全是素材图，账号等于"无人格的搬运站"）</li><li>最近发布的笔记有没有明显偏离账号定位的"蹭热点"内容？（❌ 那类内容互动高，但带来的不是你的粉丝，是热点的流量）</li></ul>
+<p class="blk">自测（全新情境）：</p>
+<p>你的朋友运营一个「户外徒步」账号，已发了 20 篇笔记。他来找你分析：账号有几篇路线攻略点赞过千，但粉丝只有 400 多，涨粉一直很慢。</p>
+<p>你帮他看了一下账号，发现：</p>
+<ul><li>简介：「爱爬山的普通人，记录每一次出发」</li><li>20 篇笔记里有 5 篇是热门景区的旅游打卡（跟徒步无关），其余是徒步攻略</li><li>封面全是风景照，看不见博主本人</li><li>所有笔记都没有固定的结尾文案，每篇戛然而止</li></ul>
+<p class="blk">请你做三件事：</p>
+<ol><li>用一句话说清这个账号"涨粉慢"最根本的原因是什么</li><li>帮他改写账号简介（三段式，50 字左右）</li><li>设计一个他可以从下一篇笔记开始就用起来的固定人设动作，说明具体话术</li></ol>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p class="blk">① 涨粉慢的根本原因</p>
+<p>账号既没有清晰价值定位（简介只说"普通人记录出发"，用户不知道关注能得到什么），也没有人格化（封面全是风景，找不到博主这个人）。流量进来看一眼，没有留下的理由。</p>
+<p class="blk">② 简介改写参考</p>
+<p>「徒步老手🥾每周更新一条真实可踩的线路攻略 | 北京 / 华北地区为主 | 关注我，每次出发前再也不踩坑」</p>
+<p>— 点出博主的"资历"（徒步老手）＋ 内容（线路攻略）＋ 区域特色（北京/华北）＋ 关注理由（不踩坑）</p>
+<p><strong>③ 固定人设动作参考</strong>（每篇结尾嵌入）：</p>
+<p>「我是 [昵称]，爬了 XX 年的山，踩过不少坑也走过不少好路。每周更新真实线路分享，不加滤镜，只说实话。觉得有用可以关注，下次出发前来翻翻我的攻略～」</p>
+<p>判分点：</p>
+<ul><li>简介改写后，用户 10 秒内能判断"这个账号是给爱户外/徒步的人看的"——信息密度提升了，关注转化率才会跟上</li><li>固定结尾文案：关键在于要每篇都出现，博主昵称＋内容方向反复出现，才能在用户脑子里留下印象</li></ul></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：放大流量——这一单元解决的是"算法把用户送来了，但为什么关注率这么低"的问题；是流量放大链路的最后一环。</li><li><strong>颗粒度层</strong>：模板 / 落地——简介三段式（你是谁 + 分享什么 + 关注理由）和固定人设签名文案，都是可以直接复制套用的<strong>落地模板</strong>。</li><li><strong>回到内核</strong>：用户思维——账号长期价值和人格化，本质都是在回答用户心里那个问题："如果我关注了你，你能持续给我什么？"简介要回答，人设要回答，每一篇笔记的结尾文案也要回答。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-10"><div class="sec-h"><h2>第 9 单元　数据复盘</h2><button class="done-btn" data-done="10">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>放大流量</strong>　·　颗粒度层：<strong>框架</strong></p>
+<p>（本单元抽自《详解版讲义》第六章第二节；详解版负责"讲透可查"，本单元负责"读数→定位→给动作"的判断演练）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你运营一个「手账教程」账号，发了这篇视频笔记 7 天，打开后台看到以下数据：</p>
+<div class="tbl-scroll"><table><thead><tr><th>指标</th><th>数据</th></tr></thead><tbody><tr><td>观看数</td><td>3800</td></tr><tr><td>互动量（点赞+收藏+评论）</td><td>112</td></tr><tr><td>点击率系统评价</td><td><strong>有待提升</strong></td></tr><tr><td>完播率</td><td>41%</td></tr><tr><td>涨粉数</td><td>87</td></tr><tr><td>观众离开趋势图</td><td>前5秒内离开比例约 <strong>51%</strong></td></tr></tbody></table></div>
+<p><strong>先别往下看</strong>，把你的判断写在这里：</p>
+<div class="quote"><p>这篇笔记最大的问题出在哪个环节？你觉得该怎么优化？</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的判断：____</div>
+<textarea class="ta" data-save="u10-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要拿它跟"高手读法"对照，看自己是不是真的读懂了这组数据。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">读懂单篇后台指标（点击率/完播率/互动量/涨粉）→ 定位问题环节 → 给出优化方向。</p>
+<p>其余步骤（账号概览、粉丝画像、复盘表格）都是它的延伸——先把"一篇笔记出了什么问题、卡在哪里"这一套读法练稳，才谈得上横向对比和放大流量密码。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">四指标诊断框架：读数→定位→给动作</p>
+<pre>指标            数据信号              问题环节          优化方向
+点击率（低）  → 封面/标题不够吸睛    曝光→点击         优先改封面和标题
+完播率（低）  → 内容节奏/亮点不够    点击→看完         结合离开趋势图找流失点
+互动量（低）  → 内容价值/引导不足    看完→互动         增加干货感和互动引导
+涨粉数（低）  → 主页吸引力不足       互动→关注         优化主页价值感和人设感</pre>
+<div class="quote"><p>关键逻辑：这四个指标代表"一个用户从看到封面到最终关注"这条路上的四个关口——哪个关口漏得最多，哪里就是优先要修的地方。不要看到所有数字都低就全改，<strong>找最上游的那个卡点，先把它修掉</strong>。</p></div>
+<div class="quote"><p>🧷 锚点故事（原书真实数据）：书里记了一篇视频，观众离开趋势图显示：超过 <strong>44%</strong> 的用户在 5 秒内就离开了。这直接说明视频开头没抓住人——完播率低不是剪辑问题，是开头问题。找到具体流失节点之后，运营者重新检查了开头文案和画面节奏，修改后重发，数据有了明显提升。<strong>数据不是结果，是信号——信号要精准到"是哪5秒出了问题"这个层级，才算真的读懂了。</strong></p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那篇「手账教程」视频，跟着走一遍高手的诊断流程：</p>
+<p class="blk">第 1 步 · 找最上游的卡点</p>
+<p>先从漏斗最顶层看起：点击率评价是"有待提升"——说明曝光出去了，但用户不愿点进来。<strong>第一个关口就卡住了</strong>，这是最上游的问题，优先处理。</p>
+<p class="blk">第 2 步 · 再看完播率</p>
+<p>完播率 41%，看起来不算太差——但离开趋势图显示前 5 秒内离开比例达 51%，<strong>超过一半的人在开头就走了</strong>。这说明：点进来的那部分用户，开头也没被抓住。</p>
+<p>两个问题叠加：① 封面/标题没吸引到足够多的人点进来；② 视频开头没有留住点进来的人。</p>
+<p class="blk">第 3 步 · 看互动和涨粉</p>
+<p>观看 3800，互动 112，互动率约 3%，偏低——但在点击率和完播率都有问题的情况下，能互动到 3% 说明内容本身还有价值，先把前两个卡点修好，互动数据大概率会跟着改善。涨粉 87，在互动量本就不高的前提下属正常。</p>
+<p class="blk">第 4 步 · 给优化方向（按优先级）</p>
+<ol><li><strong>优先</strong>：重新设计封面——当前封面的信息层级或视觉吸引力不够，导致点击率低（封面是最值得先花时间的地方）</li><li><strong>其次</strong>：重做视频开头的前 3–5 秒——用"直接抛痛点/结论"或"强视觉钩子"代替铺垫式开场，把 5 秒内离开的比例压下去</li><li><strong>最后</strong>：内容本体暂时不动，等上面两项改完再看数据变化</li></ol>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你刚才写下的判断——有没有看到"点击率低"就先定位到封面/标题？有没有把"前 5 秒离开 51%"和"完播率 41%"结合起来判断是开头问题？如果没有，说明诊断时还是在"看单个数字"而不是"读漏斗逻辑"——这就是最常见的误区。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u10-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你读。</p></div>
+<p>你运营一个「家庭健身」图文账号（图文笔记，无完播率），发了一篇「在家练背，3 个动作够了」，7 天后打开后台：</p>
+<div class="tbl-scroll"><table><thead><tr><th>指标</th><th>数据</th></tr></thead><tbody><tr><td>观看数</td><td>6200</td></tr><tr><td>互动量（点赞+收藏+评论）</td><td>67</td></tr><tr><td>点击率系统评价</td><td><strong>很好</strong></td></tr><tr><td>涨粉数</td><td>11</td></tr></tbody></table></div>
+<p>请你按"读数→定位→给动作"的流程，回答以下三个问题：</p>
+<ol><li>这篇笔记的问题<strong>不是</strong>出在哪里？（先排除掉那个健康的指标）</li><li>问题最可能出在哪个环节？（用四指标框架定位）</li><li>你会给出什么优化方向？</li></ol>
+<div class="quote"><p>我的判断：</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">①排除哪个指标：____ ／ ②问题环节：____ ／ ③优化方向：____</div>
+<textarea class="ta" data-save="u10-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u10-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p><strong>① 排除</strong>：点击率"很好"——说明封面和标题很有吸引力，这个关口通畅，不需要动。</p>
+<p class="blk">② 定位问题环节</p>
+<ul><li>互动量 67 / 观看 6200 → 互动率约 1%，极低。6200 人看了，绝大多数没点赞没收藏——说明<strong>内容价值感不够强，或者没有引导互动</strong>，用户看完没有"要收藏/要点赞"的冲动。</li><li>涨粉 11 / 观看 6200 → 几乎没人因为这篇笔记关注账号——<strong>主页吸引力或人设感不足</strong>，用户没有理由关注。但这个问题往往是"互动量低"的下游症状，先把互动做起来更关键。</li><li><strong>核心卡点</strong>：内容有人点进来看，但看完没有获得感——是"看完→互动"这一关卡住了。</li></ul>
+<p class="blk">③ 优化方向</p>
+<ul><li>重新检查笔记正文——3 个动作的讲解是否够具体、够可操作？有没有"配图+步骤分解"让用户觉得"这我直接能用"？</li><li>在笔记结尾加互动引导，比如"你平时练背用什么动作？评论区说说"或"收藏备用，下次居家健身直接翻出来"</li><li>检查主页：账号定位是否清晰，主页的已发笔记能否让第一次来的用户产生"这个账号值得关注"的感觉</li></ul></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：单篇笔记数据诊断 4 步</div><div class="step-body"><ol><li><strong>先看点击率</strong>：系统评价是"有待提升"→ 问题在封面/标题，优先改；评价"很好"→ 这关通过，往下看</li><li><strong>再看完播率</strong>（视频笔记专有）：完播率低 → 结合"离开趋势图"找具体流失节点（如 5 秒内离开超过 40%→ 开头没抓住人）</li><li><strong>看互动量</strong>：观看高但互动低 → 内容价值不够强，或缺乏互动引导；加干货感和引导互动语句</li><li><strong>看涨粉数</strong>：点击+互动都还不错但涨粉少 → 主页吸引力不足；优化主页长期价值和人设感</li></ol>
+<div class="quote"><p>口诀：<strong>点击看封面，完播看开头，互动看价值，涨粉看主页。</strong></p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>看到数据低，有没有先找"最上游的卡点"？（❌ 看到所有数字都低就全改，其实要按优先级来，先修最上游）</li><li>完播率低时，有没有看离开趋势图找具体流失节点？（❌ 只知道完播率 30% 很低，不知道具体是哪里掉人）</li><li>点击率"很好"时，有没有停止优化封面？（❌ 继续在封面上死磕，忽视真正出问题的互动量）</li></ul>
+<hr class="soft">
+<p class="blk">自测（判断题，全新场景）：</p>
+<p>你运营一个「咖啡冲泡教程」账号，发了一篇视频笔记，7 天后看到后台数据：</p>
+<ul><li>点击率评价：<strong>很好</strong></li><li>完播率：<strong>68%</strong>（观众离开趋势图显示全程比较平稳，无明显流失节点）</li><li>互动量：<strong>点赞 480 / 收藏 1100 / 评论 23</strong></li><li>涨粉数：<strong>12</strong></li></ul>
+<p>你的朋友给出了下面三个判断，<strong>找出其中判断有误的那一条</strong>，说明错在哪里，并给出正确判断：</p>
+<div class="quote"><p>A. 这篇笔记的封面和标题做得不错，不需要大改。</p>
+<p>B. 完播率 68% 算高，说明视频内容抓人，内容质量是这篇笔记的优势。</p>
+<p>C. 涨粉 12 太少，说明内容价值不够，应该先去优化内容干货量。</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的判断：错的是 ____，因为：____</div>
+<textarea class="ta" data-save="u10-test6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u10-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">答案：错的是 C。</p>
+<p class="blk">为什么 C 错了：</p>
+<p>这篇笔记的收藏数高达 1100，互动量是健康的——说明内容干货价值相当强，用户愿意收藏备用。涨粉少（12）的问题不出在内容上，出在<strong>主页吸引力不足</strong>：用户看完觉得内容有用，但去主页一看，没有"这个账号值得长期关注"的感觉，所以不关注。优化方向应该是检查主页定位和已发笔记的整体感，而不是增加内容干货量。</p>
+<p class="blk">A 和 B 的判断都是对的：</p>
+<ul><li>A 正确：点击率"很好"，封面/标题这一关通过。</li><li>B 正确：完播率 68%，趋势图平稳，说明视频节奏和内容质量过关。</li></ul>
+<p><strong>判分点：</strong> 能识别"互动量高但涨粉少 → 是主页问题，不是内容问题"，就掌握了这道题的核心逻辑。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：放大流量——数据复盘的本质是"找到哪类内容在你的账号上更容易跑量，然后定向放大它"，直接服务于流量放大这一阶段。</li><li><strong>颗粒度层</strong>：框架——四指标诊断是一套<strong>读法框架</strong>，让你不再凭感觉判断，而是有系统有顺序地读出"问题出在哪里"。</li><li><strong>回到内核</strong>：数据的每一个数字背后，都在回答内核那个问题——<strong>"用户在哪个环节离开了，他需要什么才肯留下来？"</strong></li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-11"><div class="sec-h"><h2>第 10 单元　AI 辅助创作</h2><button class="done-btn" data-done="11">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 30–40 分钟　·　主导阶段：<strong>放大流量</strong>　·　颗粒度层：<strong>模板</strong></p>
+<p>（本单元抽自《详解版讲义》第六章第三节；详解版负责"讲透可查"，本单元负责"换你写一条能用的提示词"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你运营一个「宠物兔护理」账号，准备让 AI 帮你写一篇图文笔记，主题是：<strong>新手养兔第一周必做的 5 件事</strong>。</p>
+<p>你给了 AI 这条指令：</p>
+<div class="quote"><p>"帮我写一篇小红书笔记，主题是养兔子。"</p></div>
+<p><strong>AI 输出来的东西你觉得又泛又空，完全不是你要的风格。先别往下看</strong>，把你的判断写在这里：</p>
+<div class="quote"><p>你觉得这条指令哪里出了问题？如果换你重新写这条指令，你会加上什么？</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的判断：____</div>
+<textarea class="ta" data-save="u11-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要用"身份＋任务＋要求"重写这条指令，再和你刚才写的对照，看差在哪里。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">用"身份＋任务＋要求"三要素，写出一条能用的 AI 提示词。</p>
+<p>批量生成标题、生成图文、生成视频文案——这些都是它的应用场景。三要素写对了，AI 的输出质量就会提升；三要素缺一个，AI 就只能给你泛泛而谈的通用内容。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">提示词三要素模板</p>
+<pre>身份（Identity）  → 赋予 AI 一个具体角色
+                    "你是一位资深的小红书××博主"
+                    → 让 AI 知道从哪个领域视角/知识储备来输出
+
+任务（Task）      → 明确要做什么
+                    "请你写出 10 个……的爆款标题"
+                    "请你写一篇关于……的图文笔记"
+                    → 目标越具体，AI 越不会跑偏
+
+要求（Requirement） → 细化输出标准
+                    字数 / 风格 / 结构 / 语气 / 是否加 Emoji
+                    → 要求越详细，输出越精准；没有要求等于"给啥我要啥"</pre>
+<div class="quote"><p><strong>三要素的关系</strong>：身份决定"AI 以什么身份说话"，任务决定"AI 要做什么"，要求决定"AI 要做到什么程度"。少了任何一个，指令就是不完整的。</p></div>
+<div class="quote"><p><strong>追加优化的逻辑</strong>：输出不满意 → 不是换工具，是追加更具体的指令（"再写 10 个""把第 3 条改得更口语化""突出妈妈焦虑感"）。AI 的质量上限不是它本身，是你的提示词精细度。</p></div>
+<div class="quote"><p>🧷 锚点故事（原书真实案例）：一位运营者想让 AI 生成育儿领域的爆款标题。她先给了身份："你是一位资深的小红书育儿博主"；再下达任务："请你写出 10 个育儿领域中的热门话题，以小红书爆款标题的形式呈现"；再加上要求："多用夸张对比手法、情绪化表达、数字关键词，突出痛点价值，加 Emoji"。AI 一次性输出的标题涵盖了"宝宝辅食""宝宝哄睡""儿童疫苗接种"等话题，写法也符合小红书风格，直接可以挑用。<strong>提示词越详细，输出质量越高——不是 AI 不够好，是你的指令不够细。</strong></p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那篇「宠物兔护理」笔记，跟着走一遍高手的提示词写法：</p>
+<p class="blk">第 1 步 · 确定身份</p>
+<p>这是一篇宠物兔护理类图文笔记，给新手看的，需要有"亲身养过兔子的博主"的视角——</p>
+<div class="quote"><p>身份：<strong>你是一位有 3 年养兔经验的小红书宠物博主</strong></p></div>
+<p class="blk">第 2 步 · 明确任务</p>
+<p>要写的是：清单类图文笔记，主题是新手第一周必做的 5 件事——</p>
+<div class="quote"><p>任务：<strong>请你以"新手养兔第一周必做的 5 件事"为主题，写一篇小红书图文笔记</strong></p></div>
+<p class="blk">第 3 步 · 给出要求（至少 4 条）</p>
+<div class="quote"><p>要求：</p>
+<ol><li>笔记第一段直接点题，说明这篇对新手养兔者的价值</li><li>列出 5 件事，每一件都给出具体操作，不要只说"要注意"，要说"具体怎么做"</li><li>语气亲切自然，像养兔老手在跟新朋友聊天，不要像教科书</li><li>多用空行和 Emoji，结尾引导读者评论互动</li><li>字数 400–500 字</li></ol></div>
+<p class="blk">完整提示词（三要素拼好）：</p>
+<div class="quote"><p>你是一位有 3 年养兔经验的小红书宠物博主，请你以"新手养兔第一周必做的 5 件事"为主题写一篇小红书图文笔记，要求：1. 笔记第一段直接点题，说明这篇对新手养兔者的价值；2. 列出 5 件事，每一件都给出具体操作，不要只说"要注意"，要说"具体怎么做"；3. 语气亲切自然，像养兔老手在跟新朋友聊天，不要像教科书；4. 多用空行和 Emoji，结尾引导读者评论互动；5. 字数 400–500 字。</p></div>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你刚才写下的判断——有没有提到"要给 AI 一个身份"？有没有想到要具体说语气和字数？如果你说"加上更多要求"但没拆成三要素结构，说明你感受到了方向但还没有系统化——三要素是把这个感受变成可操作步骤的工具。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u11-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你写。</p></div>
+<p>你运营一个「极简穿搭」账号，粉丝以 25–35 岁的职场女性为主。你想用 AI 生成一篇<strong>干货类</strong>图文笔记，主题是：<strong>用 5 件基础款，搭出一周不重样的职场通勤穿搭</strong>。</p>
+<p>请你写出一条完整的 AI 提示词（三要素必须齐全），并在"要求"部分列出至少 4 条具体标准。</p>
+<div class="quote"><p>我写的提示词：</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">身份：____ ／ 任务：____ ／ 要求： ／ 1. ____ ／ 2. ____ ／ 3. ____ ／ 4. ____</div>
+<textarea class="ta" data-save="u11-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u11-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p><strong>参考提示词</strong>（关键是三要素结构完整、要求具体）：</p>
+<p><strong>身份</strong>：你是一位小红书极简穿搭博主，专注职场女性通勤风格，有丰富的基础款搭配经验</p>
+<p><strong>任务</strong>：请你写一篇干货类图文笔记，主题是"用 5 件基础款，搭出一周不重样的职场通勤穿搭"</p>
+<p class="blk">要求</p>
+<ol><li>笔记开头直接点题，告诉读者这篇笔记能帮她解决什么问题（如"买了好多衣服却感觉没衣服穿"）</li><li>介绍 5 件基础款时，每件都说清楚"是什么款式 + 为什么值得买 + 可以搭什么"，有具体感</li><li>给出至少 3 套具体搭配方案，要能直接参考实操</li><li>语气像好闺蜜推荐，不要说教，不要"应该""必须"，多用"我通常会""我发现"等口吻</li><li>字数 500 字左右，多用空行和 Emoji，结尾引导粉丝晒出自己的基础款</li></ol>
+<p class="blk">要点</p>
+<ul><li>身份里加了"职场女性通勤风格"——AI 知道这不是普通穿搭，而是有场景限制的</li><li>要求里说了"3 套具体搭配方案"——AI 就不会只泛泛说"可以搭很多"</li><li>要求里说了"语气像好闺蜜推荐"——AI 就不会写成教科书体</li></ul></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：写一条有效 AI 提示词的 3 步</div><div class="step-body"><ol><li><strong>先给身份</strong>：想清楚"这篇内容需要 AI 以什么专业视角输出"，写出来（如"资深××博主""有××年经验的××"）</li><li><strong>再下任务</strong>：说清楚"写什么类型的内容、什么主题、产出几个"——目标越具体越好，避免模糊的"写一篇笔记"</li><li><strong>最后加要求</strong>：至少写 4 条具体标准，覆盖这几项：字数 / 语气（口语化/亲切/活泼）/ 结构（开头怎么写/结尾引导互动）/ 内容深度（要有案例/要有具体操作，不要泛泛而谈）</li></ol>
+<div class="quote"><p>提示词写完后，可以先在自己脑子里"对照标准过一遍"：如果你是 AI，拿到这条指令，是否清楚应该输出什么？如果有模糊地方，就是要补充的地方。</p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>提示词里有没有三要素都写到？（❌ 只写了任务"帮我写一篇笔记"，没给身份也没给要求）</li><li>要求部分有没有写语气？（❌ 没写语气，AI 默认写成正式书面体，完全不像小红书风格）</li><li>AI 输出不满意时，有没有追加具体指令？（❌ 直接放弃或换工具，其实应该追加"把第 2 条改得更口语化"等具体反馈）</li></ul>
+<hr class="soft">
+<p class="blk">自测（改写题，全新场景）：</p>
+<p>你运营一个「学生党平价护肤」账号，下面这条提示词交给 AI 之后，输出了一篇毫无亮点的平平无奇笔记。</p>
+<div class="quote"><p>"你是小红书博主，请帮我写一篇护肤笔记，字数 500 字。"</p></div>
+<p><strong>找出这条提示词缺失的问题</strong>，然后把它改写成一条完整的三要素提示词（要求部分至少 4 条）：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">原指令的问题：____ ／ 我的改写： ／ 身份：____ ／ 任务：____ ／ 要求：1. ____　2. ____　3. ____　4. ____</div>
+<textarea class="ta" data-save="u11-test6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u11-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">原指令的问题（3 处）：</p>
+<ol><li>身份不够细——"小红书博主"没有说是什么类型的博主，AI 无法代入特定领域的知识和风格</li><li>任务不明确——"护肤笔记"不知道是什么主题（补水？防晒？平价好物推荐？），AI 只能随机发挥</li><li>要求严重不足——只有字数，没有语气/结构/内容深度/目标人群，AI 就会写成通用模板</li></ol>
+<p><strong>参考改写</strong>（任意覆盖上述三个问题即可）：</p>
+<p><strong>身份</strong>：你是一位小红书学生党平价护肤博主，专注 50 元以内的平价好物推荐，对大学生护肤需求非常了解</p>
+<p><strong>任务</strong>：请你写一篇"学生党平价护肤入门，100 元搭一套基础护肤套装"的干货类图文笔记</p>
+<p class="blk">要求</p>
+<ol><li>开头直接说明这篇笔记适合谁（预算有限的大学生）以及它的价值（不踩雷不浪费钱）</li><li>推荐 3–4 个具体产品，每个都说清楚：品牌名 + 价格范围 + 适合什么肤质 + 有什么实际效果</li><li>语气像学姐分享，亲切有温度，不要说教，不要用"必须""一定要"</li><li>字数 450–500 字，多用空行和 Emoji，结尾引导读者分享自己用的平价好物</li></ol>
+<p><strong>判分点</strong>：三要素齐全、要求能让 AI 明白"写什么主题""写给谁看""写成什么语气"——达到这三点，这道题就对了。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：放大流量——AI 的核心价值是帮你把出内容的速度提上来，从"一天写一篇"变成"一小时出五个候选稿"，让你有更多时间测试和放大有效内容。</li><li><strong>颗粒度层</strong>：模板——"身份＋任务＋要求"本身就是一个<strong>可填空的提示词模板</strong>，每次用都是把这个模板填具体，而不是每次重头想怎么问 AI。</li><li><strong>回到内核</strong>：AI 是工具，但驾驭工具的是内核——<strong>"这篇内容对用户有什么价值、给哪类用户看"</strong>，这两个问题想清楚了，提示词自然就能写对；想不清楚，再好的 AI 工具也输出不了有用的东西。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-12"><div class="sec-h"><h2>第 11 单元　运营避坑</h2><button class="done-btn" data-done="12">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 25–30 分钟　·　主导阶段：<strong>放大流量</strong>　·　颗粒度层：<strong>思维/规则</strong></p>
+<p>（本单元抽自《详解版讲义》第六章第四节；详解版负责"讲透可查"，本单元负责"记规则+做判断"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你关注了一个「英语学习打卡」账号，它最近的几条笔记你觉得很不错，于是去主页仔细逛了逛，发现有几处让你隐隐觉得"这好像有问题"——</p>
+<p class="blk">下面是这个账号的真实截图描述，先别往下看，圈出你认为有问题的地方（可以不止一处），并说说你的判断依据：</p>
+<div class="quote"><ul><li>账号简介里写着：「合作请加 wx: xxxx888」</li><li>最近一篇笔记「我用这 3 个 APP 练听力，一个月听力涨了 20 分」，文末写着：「感觉这篇对你有用的话，帮我转到抖音上去，谢谢」</li><li>另一篇笔记封面上有明显的抖音水印</li><li>评论区置顶了一条运营者自己的留言：「喜欢就关注我！一起打卡 💪」</li></ul></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我认为有问题的地方：____ ／ 我的判断依据：____</div>
+<textarea class="ta" data-save="u12-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要对照四大雷区的规则逐条核查，看自己找对了几处。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">熟记四大违规雷区 + 五个新手疑问，在具体场景里快速判断"合规还是违规/正确还是误区"。</p>
+<p>这是纯认知单元：不需要写话术，不需要算数——你要训练的是"看到一个操作，立刻能判断它属于哪个雷区、会受到什么处罚"的反应速度。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p class="blk">四大违规雷区（轻则限流，重则封号）</p>
+<pre>雷区            具体行为                    平台处罚
+① 数据造假      互关互赞 / 花钱刷赞刷收藏      清除异常数据，账号功能受限
+② 搬运抄袭      搬用他人内容 / 带其他平台水印   删笔记，账号限流
+③ 不合规导流    留微信/手机号/二维码/外链       违规处理（唯一合规联系方式：简介里的邮箱）
+④ 违规内容      暴力/低俗/伪科学/灵异/密集/炫富  违规删除或被举报</pre>
+<p class="blk">五个新手疑问（判断对错是考核重点）</p>
+<pre>Q1. 需要养号吗？         → 不需要，直接发笔记（养号是伪命题）
+Q2. 旧账号能继续用吗？   → 大概率能（隐藏乱内容+重新定位即可）
+                           例外：曾被禁言/限流/频繁违规 → 换新号
+Q3. 流量差是被限流了吗？ → 大概率不是（平台限流会有后台通知；无通知=未限流）
+                           先反思内容质量，再看后台有无通知
+Q4. 需要实名认证吗？     → 不认证也能发笔记；开专业号/直播/蒲公英才需要
+                           ⚠️ 一个身份证只能认证一个账号，认证后无法解除绑定
+Q5. 一机能登多账号吗？   → 频繁切换会被识别为营销号，最好一机一卡一号
+                           正常换手机/手机卡不受影响</pre>
+<div class="quote"><p>底层原则：平台规则保护的是原创者和正常生态——踩规则走捷径的人短期快，但处罚记录不可撤销；老老实实做原创，才是最稳的路。</p></div>
+<div class="quote"><p>🧷 锚点故事（原书真实案例）：某运营者刚起号时为了让笔记看起来更有人气，加入了一个互赞群，每天互相点赞收藏。没几天，后台出现系统通知：检测到账号存在<strong>异常互动数据，所有异常数据被清除，账号部分功能（如投放推广）暂时受限</strong>。前几天辛苦"刷"出来的数据全部清零，账号反而比刷数据之前更难发展。<strong>违规的成本远高于收益——与其后来花时间补救，不如从一开始就在规则边界内做正确的事。</strong></p></div>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那个「英语学习打卡」账号，逐条对照四大雷区核查：</p>
+<p class="blk">问题 1：简介写着「合作请加 wx: xxxx888」</p>
+<p>→ 对应<strong>雷区③：不合规导流</strong></p>
+<p>→ 在任何位置留微信号都违规，唯一允许的联系方式是简介里的<strong>邮箱</strong></p>
+<p>→ 处罚风险：违规处理（删除信息，情节重者封号）</p>
+<p class="blk">问题 2：文末写「帮我转到抖音上去」</p>
+<p>→ 对应<strong>雷区③：不合规导流</strong>（引流到其他平台）</p>
+<p>→ 不能出现任何形式的"去其他平台找我"引导</p>
+<p>→ 处罚风险：同上</p>
+<p class="blk">问题 3：笔记封面带抖音水印</p>
+<p>→ 对应<strong>雷区②：搬运抄袭</strong></p>
+<p>→ 小红书要求图文/视频不能带有其他平台水印</p>
+<p>→ 处罚风险：删笔记，情节重者账号限流</p>
+<p class="blk">问题 4：评论区置顶「喜欢就关注我！」</p>
+<p>→ <strong>不违规</strong>——在评论区发自己的留言引导关注，属于正常互动引导，这不是导流行为</p>
+<p>→ 很多人误以为"所有联系方式相关的话"都违规，其实规则针对的是把用户引导到站外，而不是引导在站内关注</p>
+<p><strong>↩️ 回头对照你的 🎯 第一反应</strong>：你找出了几处？有没有把"评论区置顶关注引导"也标为违规？如果标了，说明混淆了"引导站内关注"和"引流站外"的区别——这是本单元最容易踩的误区之一。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u12-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次是找茬题，换你来揪雷区。</p></div>
+<p>下面是一位刚起号的美食博主「小橙子」一周的运营记录，<strong>找出其中所有违规或错误认知，标出对应雷区/误区，并说明正确做法</strong>：</p>
+<hr class="soft">
+<p class="blk">小橙子的运营日记（第一周）：</p>
+<div class="quote"><p>第1天：听说新号要先养号，于是花了两天专门刷美食类视频、疯狂给别人点赞收藏，没有发笔记。</p>
+<p>第3天：终于发了第一篇笔记，把自己上周发在抖音的一段做饺子的视频（带抖音 logo）直接发了上来。</p>
+<p>第4天：笔记阅读量只有 83，小橙子觉得肯定是被限流了，非常焦虑，在评论区留言"被限流了呜呜"。</p>
+<p>第5天：朋友建议她去找互赞群，互相刷数据冲一下。小橙子想了想，加入了一个 100 人的互赞群，互相点赞收藏。</p>
+<p>第6天：小橙子在笔记正文末尾写道：「想看更多食谱，关注我的微信公众号，搜索"小橙子厨房"」。</p>
+<p>第7天：笔记阅读量还是不理想，她打算注销这个账号重新开一个，因为觉得这个号已经"废了"。</p></div>
+<hr class="soft">
+<div class="quote"><p>我找到的违规/误区：</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">第1天：____（属于哪类问题）→ 正确做法：____ ／ 第3天：____（属于哪类问题）→ 正确做法：____ ／ 第4天：____（属于哪类问题）→ 正确做法：____ ／ 第5天：____（属于哪类问题）→ 正确做法：____ ／ 第6天：____（属于哪类问题）→ 正确做法：____ ／ 第7天：____（属于哪类问题）→ 正确做法：____</div>
+<textarea class="ta" data-save="u12-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考答案（参考，不是唯一表述）</summary><div class="fold-in"><div class="recall empty" data-recall="u12-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">第1天：养号是伪命题（Q1）</p>
+<p>→ "养号"没有任何依据，浏览行为和发布流量是两个独立通道，互不影响</p>
+<p>→ 正确做法：直接发笔记，把时间用在打磨内容上</p>
+<p class="blk">第3天：带其他平台水印（雷区②搬运抄袭）</p>
+<p>→ 小红书要求内容不能带有其他平台水印</p>
+<p>→ 正确做法：去掉水印后重新上传，或在小红书重新录制/生成原版内容</p>
+<p class="blk">第4天：流量差≠被限流（Q3）</p>
+<p>→ 平台限流有后台通知，无通知即未限流；阅读量低大概率是内容质量问题</p>
+<p>→ 正确做法：先反思内容（选题/封面/标题/价值），查后台有无限流通知，再做判断</p>
+<p class="blk">第5天：互赞刷数据（雷区①数据造假）</p>
+<p>→ 异常互动数据会被平台检测清除，账号功能可能受限</p>
+<p>→ 正确做法：老老实实做内容，靠内容质量获得真实互动</p>
+<p class="blk">第6天：在笔记正文引流微信公众号（雷区③不合规导流）</p>
+<p>→ 任何形式的站外引流都违规，包括微信公众号搜索名</p>
+<p>→ 正确做法：删除公众号引导，如需合作联系，可在简介处留邮箱</p>
+<p class="blk">第7天：因为数据差就想注销重来（Q2的误区）</p>
+<p>→ 旧账号没有违规记录，不需要注销——小红书按单篇推荐，旧内容不影响新内容流量</p>
+<p>→ 正确做法：继续用现有账号，隐藏数据差的笔记，重新定位方向发布内容</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：运营前合规自查 5 步</div><div class="step-body"><ol><li><strong>通读社区公约</strong>：「我→三→社区公约」，通读一遍，画出容易踩的条目</li><li><strong>扫已发内容</strong>：所有笔记有无留联系方式（微信/手机号/二维码/外链）、有无其他平台水印，有则立刻修改或隐藏</li><li><strong>确认账号状态</strong>：后台有无违规/限流通知，有则按提示处理，或评估是否换号</li><li><strong>实名认证决策</strong>：确认长期要用这个账号再认证（一个身份证仅限一个账号，不可解绑）</li><li><strong>流量差先自查内容</strong>：先看后台有无限流通知，无通知→反思选题/封面/标题/价值，不要先抱怨平台</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>有没有把"在评论区引导关注"也误认为违规？（❌ 这是站内互动，不违规；违规的是把人引流到站外）</li><li>实名认证前，有没有确认这个账号是长期要用的？（❌ 认证后绑定无法解除，不可撤销）</li><li>笔记流量低时，有没有先查后台有无限流通知？（❌ 无通知即未限流，先反思内容质量再说）</li></ul>
+<hr class="soft">
+<p class="blk">自测（二选一 + 改写题，全新场景）：</p>
+<p>你运营一个「书单推荐」账号，粉丝约 800。最近有一位读者在评论区问："在哪里能看到你的完整书单？"你想告诉她在哪里找你。</p>
+<p><strong>第一问（二选一）</strong>：以下两种回复方式，哪种合规？</p>
+<div class="quote"><p>A. 在评论区回复：「我的完整书单都在主页的合集里，点头像进来就能看到～」</p>
+<p>B. 在评论区回复：「可以加我微信 readmore2024，我发给你」</p></div>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的判断：合规的是 ____，因为：____</div>
+<textarea class="ta" data-save="u12-test6" placeholder="把你的答案写在这里…"></textarea>
+<p><strong>第二问（改写题）</strong>：你的账号简介目前是这样写的：</p>
+<div class="quote"><p>「爱读书的打工人 📚 | 每周更新书单 | 合作微信：booklover666」</p></div>
+<p>请把这条简介<strong>改成合规版本</strong>（保留核心信息，去掉违规内容，可以加上合规的联系方式）：</p>
+
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><div class="recall empty" data-recall="u12-test6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">第一问：合规的是 A。</p>
+<p>A 是把用户引导留在小红书站内（去主页看合集），这是正常的站内互动，不违规。</p>
+<p>B 是把用户引流到微信（站外），任何形式在评论区留微信号都属于雷区③——不合规导流，违规。</p>
+<p class="blk">第二问：改写参考</p>
+<div class="quote"><p>「爱读书的打工人 📚 | 每周更新书单 | 合作邮件：booklover@xxx.com」</p></div>
+<p>改动点：把"合作微信：booklover666"换成邮箱地址。</p>
+<p>小红书唯一允许的联系方式是<strong>简介处的邮箱</strong>，其他地方（包括简介、笔记正文、评论区）留微信/手机号/二维码都违规。</p>
+<p><strong>判分点</strong>：知道"邮箱是唯一合规联系方式"这条规则，就能准确改写。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：放大流量——踩了规则是流量的反面，被限流/封号是对流量最彻底的归零；理解规则边界，才能在规则内放心地放大内容。</li><li><strong>颗粒度层</strong>：思维/规则——这一单元没有公式、没有话术，训练的是"看到一个行为，能快速判断合规还是违规"的认知判断力，是规则记忆和情境辨别的综合运用。</li><li><strong>回到内核</strong>：规则的本质是保护平台生态，也保护认真做内容的博主——理解这一点，规则就不再是限制，而是筛掉投机者、给真正的原创者腾出空间的保障。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-13"><div class="sec-h"><h2>第 12 单元　落地变现</h2><button class="done-btn" data-done="13">标记学完</button></div>
+<div class="quote"><p>⏱ 预计 35–40 分钟　·　主导阶段：<strong>落地变现</strong>　·　颗粒度层：<strong>框架 → 模板</strong></p>
+<p>（本单元合并《详解版讲义》第七章第一至四节；详解版负责"讲透可查"，本单元负责"选定路径、第一步动起来"）</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic">🎯</span>先卡你一下</div><div class="step-body"><p>你运营一个「家居改造」账号，专门分享出租屋布置技巧，粉丝 <strong>1800</strong>，出过 2 篇点赞过千的爆款笔记，后台偶尔收到品牌私信。你想靠这个账号开始变现，但一时没想清楚该怎么走。</p>
+<p><strong>先别往下看</strong>，把你对自己账号"该走哪条变现路"的第一判断，写在这里：</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的第一判断：我应该走 ____ 路，因为 ____</div>
+<textarea class="ta" data-save="u13-hook0" placeholder="把你的答案写在这里…"></textarea>
+<p>（写完再往下——等下你要拿它跟高手的判断框架对一对。）</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🔑</span>这单元只攻一个动作</div><div class="step-body"><p class="blk">根据账号情况，选定一条变现路径，说清启动门槛与第一步。</p>
+<p>广告、带货、专栏、引流——四条路都能变现，但每条路的门槛不同、适配账号不同。乱撒网等于白忙。本单元唯一要拿下的招牌动作，就是：<strong>在四条路里找到最适合你当前账号的那条，并迈出可执行的第一步</strong>。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧠</span>高手怎么想</div><div class="step-body"><p>### 变现路径树（选路框架）</p>
+<pre>你的账号现在适合走哪条变现路？
+│
+├── 【广告变现】最易上手，适合大多数内容号
+│     门槛：有消费场景的领域（美妆/家居/母婴/穿搭/好物等）
+│           蒲公英官方：粉丝 ≥ 1000 + 实名认证 + 年龄 ≥ 18
+│           非官方置换：无粉丝下限，有爆款即可
+│     适合你：账号内容天然"种草产品"，想最快跑通第一个盈利闭环
+│     第一步：粉丝 ≥ 1000 → 入驻蒲公英、设报价；
+│             粉丝未到 → 主页留邮箱，等品牌私信来找
+│
+├── 【带货变现】有货用店铺，无货用买手
+│     门槛：
+│       店铺带货：开通专业号即可（零粉开店）；保证金个人 1000 元、企业 20000 元
+│       买手合作：专业号 + 粉丝 ≥ 1000 自动解锁
+│     适合你：有自己的产品或货源；或者粉丝已过千、内容带货属性强
+│     第一步：无货源 → 进选品中心挑和账号强相关的商品挂卡片；
+│             有货源 → 升级专业号后直接开店
+│
+├── 【专栏变现】"录一次、卖无数次"的睡后收入
+│     门槛：粉丝 ≥ 10000
+│           有一段可拆解教给别人的具体经验（不需要是专家）
+│     适合你：粉丝过万、有知识/技能可系统化、愿意做课程
+│     第一步：今天就列出 3～5 个你能教别人的具体经验，
+│             用"人群＋痛点＋结果"的格式写成课程主题草稿
+│
+└── 【引流变现】"低粉高盈利"，适合有自己产品/服务的人
+      门槛：已有成熟商业模式（线下门店/咨询服务/实物商品）
+            不需要追粉丝量，核心是内容精准
+      适合你：本职是个体经营者/自由职业者，用小红书做获客渠道
+      第一步：把小红书号改为微信号（只能改一次）；
+              简介留邮箱，设收件后自动回复微信号</pre>
+<div class="quote"><p>⚠️ 门槛数字以平台最新规则为准，上述数字忠实书中原文，实操前建议在蒲公英/创作中心确认。</p></div>
+<hr class="soft">
+<p>### 🧷 记住这个对照（最值得记的一个案例）</p>
+<div class="quote"><p class="blk">博主"弱冠年华"：0 基础水彩课，1595 人购买，销售额超 47 万元。</p>
+<p>单价 298 元，普通人的绘画经验，课程录一次持续卖。他不是专家，是"比目标用户多走了一步、并把这一步拆解清楚"的普通博主。</p>
+<p>这个案例不只是专栏路的故事——它背后那条逻辑同样适用于所有变现路：<strong>账号真正的商业价值，不是粉丝数，而是"你能给谁解决什么具体问题"</strong>。想清楚这句话，四条路都走得通。</p></div>
+<hr class="soft">
+<p>### 四条路横向对比</p>
+<pre>          广告      带货      专栏      引流
+门槛      低        中        较高      无粉限
+启动速度  快        中        慢        快
+需要粉丝  ≥1000    ≥1000    ≥10000   不重要
+需要货/品  不需要   需要      需要      需要
+睡后收入   ✗        △         ✓         ✗
+最适合     内容号   有货号   知识号   个体经营者</pre>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">✍️</span>跟着做一遍</div><div class="step-body"><p>还是 🎯 那个「家居改造」账号（粉丝 1800，有爆款，收到品牌私信），跟着走一遍选路流程：</p>
+<p class="blk">第 1 步 · 对照门槛</p>
+<ul><li>广告：粉丝 1800 ≥ 1000 ✓；内容是家居改造，有消费场景（家具/装饰品/收纳用品）✓ → <strong>蒲公英门槛已达</strong></li><li>带货：粉丝 ≥ 1000 ✓，但账号没有自有货源 → 买手路径可走</li><li>专栏：粉丝 1800，未到 10000 ✗ → 暂不适合</li><li>引流：本职不是线下门店/服务，账号定位是内容分享号 → 不是第一优先项</li></ul>
+<p class="blk">第 2 步 · 判断账号天然优势</p>
+<p>家居改造属于高消费场景领域，品牌方有主动找博主合作的习惯（后台已经收到私信就是信号）。广告路径上，已经满足蒲公英条件，且笔记里天然可以植入家居产品。</p>
+<p class="blk">第 3 步 · 定下主路 + 第一步动作</p>
+<p>主路：<strong>广告变现</strong>（最快跑通盈利，门槛已满足，账号定位匹配）</p>
+<p>并行：同步试行<strong>买手带货</strong>（不需要额外货源，直接在内容里挂相关商品卡片）</p>
+<p>第一步（今天能做的事）：</p>
+<ol><li>进创作中心 → 博主合作 → 入驻蒲公英，设置图文和视频笔记报价</li><li>同步在主页简介里补一个联系邮箱（为非官方合作做兜底）</li><li>回复后台等待的品牌私信，谈置换或付费合作</li></ol>
+<p class="blk">第 4 步 · 补一步广告位自查</p>
+<p>翻出最近 3 篇爆款笔记的配图——有没有只拍了改造效果图，而没有把改造用到的家具/装饰品清晰出镜？有则补拍，让品牌方一眼看到植入空间。</p>
+<p><strong>↩️ 回头对照你的 🎯 第一判断</strong>：你刚才写下的那条路，是否对照过粉丝门槛？是否想清楚了账号内容的消费场景？如果你的账号和「家居改造」情况相近却还在等着粉丝再多一些才变现——其实现在就够了。</p>
+<hr class="soft">
+<div class="recall empty" data-recall="u13-hook0"><div class="rh">👀 你在 🎯 写的第一反应：</div><div class="rc">（还没写，写了会自动显示在这里）</div></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🪜</span>换你做</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><div class="quote"><p>这次没有示范，换你来判断。</p></div>
+<p>你的朋友小宋，做了一个「手机摄影教程」账号，粉丝 <strong>680</strong>，主要教普通人用手机拍出好看的人像和风景，内容干货扎实，目前有 1 篇笔记涨了 500 赞。他本职是摄影爱好者，没有货源，也没有线下门店，但有一套自己总结的"手机拍人像的 12 个避坑技巧"，觉得可以整理成课程。</p>
+<p>请你帮小宋分析：<strong>他现在该走哪条变现路、不该走哪条（说清理由），以及第一步该做什么。</strong></p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">小宋应该走：____，理由：____ ／ 小宋暂时不适合走：____，理由：____ ／ 第一步具体行动：____</div>
+<textarea class="ta" data-save="u13-step4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 写完再看：参考思路（参考，不是唯一答案）</summary><div class="fold-in"><div class="recall empty" data-recall="u13-step4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p class="blk">推荐路径：广告（非官方置换先跑通）+ 引流（把手机摄影课程引流到私域）</p>
+<ul><li>粉丝 680，蒲公英官方门槛（≥1000）还差一点，但已有爆款、内容质量不错 → 主页留邮箱，有爆款就可以等品牌私信置换合作（非官方广告对粉丝量无要求）。这是当前能最快见到收益的路。</li><li>他有系统化技能（"12个避坑技巧"）→ 专栏路有潜力，但粉丝还不到 1 万，门槛未达，现在做的是把技能持续输出，把粉丝涨到1万再开专栏。</li><li>引流路：如果他已经有人询问"能不能付费学习"，可以开始把有付费意向的用户引到微信私域做小规模一对一或小班教学，不用等粉丝量。</li><li>不推荐现在走带货：账号内容是摄影教程，天然消费场景是相机/摄影器材，但他无货源、粉丝还不到1000，买手路也未解锁，暂时跳过。</li></ul>
+<p class="blk">第一步（最小可执行）</p>
+<p>① 主页留邮箱，设邮件自动回复联系方式（引流+广告双用）</p>
+<p>② 把"12个避坑技巧"整理成一篇笔记发出，在文末加一句引导"想系统学的私信我"，测试付费意向</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🃏</span>随身方法卡：选定变现路径的 4 步</div><div class="step-body"><ol><li><strong>对照门槛</strong>：广告（≥1000 走蒲公英，&lt;1000 走非官方）/ 带货买手（≥1000）/ 专栏（≥10000）/ 引流（有自有产品/服务即可，无粉丝门槛）</li><li><strong>判断账号属性</strong>：内容有消费场景→广告优先；有自有货源→开店带货；有可教的具体经验且粉丝够→专栏；本质是个体经营者用小红书获客→引流</li><li><strong>选主路 + 并行路</strong>：主路是"现在就能做"的一条；并行路是"门槛差一点、跑通主路同时顺便测试"的一条；专注一条，别四条齐上</li><li><strong>说出第一步</strong>：不是"我要做广告"，而是"今天进创作中心、完成蒲公英入驻并设好报价"——第一步要具体到今天能打开的那个界面</li></ol>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic">⚠️</span>易错 + 自测</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p class="blk">3 条易错自查：</p>
+<ul class="selfck"><li>是否在四条路都没做之前，就陷入"做哪条好"的纠结循环？（❌ 先对照门槛排除，再选最容易启动的那条；完美选择是选路最大的陷阱）</li><li>是否觉得"带货佣金高就选高佣金商品"，而不管商品和笔记内容是否相关？（❌ 商品与内容不相关→平台限流笔记曝光，带货为零）</li><li>专栏路是否把课程主题设计得过于宏大？（❌ "摄影教程全套"→太宽泛，改成"手机拍人像的 12 个光线避坑"→具体有吸引力）</li></ul>
+<p class="blk">自测（判断+应答题，全新场景）：</p>
+<p>你认识一位叫阿琳的博主，她是自由插画师，在小红书分享插画创作过程，粉丝 <strong>4200</strong>，从来没变现过。最近她同时收到了三个"机会"：</p>
+<ul><li>A：某文具品牌私信，问能不能做一篇插画工具推荐笔记，提供免费样品但没有广告费</li><li>B：一位粉丝在评论区问"有没有系统教插画的课，愿意付费学"</li><li>C：一位同学建议她开通小红书店铺，卖自己画的插画印刷品</li></ul>
+<p>请你：① 判断 A/B/C 分别属于哪种变现路径；② 阿琳应该优先回应哪一个，说明理由；③ 针对 B，如果阿琳想把这位粉丝引流到私域，她在评论区该怎么回复（写出具体一句话）。</p>
+<details class="fold"><summary>👉 参考解析</summary><div class="fold-in"><p class="blk">① 路径判断</p>
+<ul><li>A：非官方广告变现（免费置换，品牌直接私信，无需蒲公英）</li><li>B：引流变现（把有付费意向的精准客户引流到私域，或者是未来专栏变现的测试信号）</li><li>C：店铺带货（开通专业号→开店→上架商品，个人店保证金 1000 元）</li></ul>
+<p><strong>② 优先回应 A</strong>，理由：阿琳粉丝 4200，已满足蒲公英门槛，但更重要的是 A 能"立刻跑通第一个盈利闭环"——置换虽然没有广告费，但证明了账号商业价值，是接后续付费合作的信心基础；B 需要阿琳自己先建立私域转化机制；C 开店需要 1000 元保证金和后续运营精力，是三件事里启动成本最高的。</p>
+<p>不过 B 也值得同步回应——有明确付费意向的粉丝要抓住。</p>
+<p><strong>③ 评论区回复参考话术</strong>（使用"私聊引导"方法，隐晦引导）：</p>
+<div class="quote"><p>"有的～感兴趣的同学后台私信我'插画课'三个字，我单独发你～"</p></div>
+<p>关键要素：不直接在评论区写微信号或手机号（违规）；给粉丝一个明确触发词（"插画课"），让私信有效识别；语气轻松自然，不像硬广。</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic">🧭</span>挂回全景图</div><div class="step-body"><ul><li><strong>主导阶段</strong>：落地变现——这是小红书运营"找准定位 · 做出爆款 · 放大流量 · 落地变现"四阶段的最后一环，把前三阶段积累的内容力和粉丝，转化成真实收益。</li><li><strong>颗粒度层</strong>：框架 → 模板——本单元先用"变现路径树"这个<strong>框架</strong>判断走哪条路，再落到"第一步操作模板"（入驻蒲公英/挂商品卡片/改小红书号/五步做课程）。</li><li><strong>回到内核</strong>：变现路径的底层判断，依然是<strong>用户思维</strong>——不是"我想做哪条路"，而是"我的账号能给哪类用户解决什么具体问题，他们愿不愿意为此付钱"。想清楚这个，路径自然就清晰了。</li></ul>
+<hr class="soft"></div></div></section>
+<hr class="soft">
+<section class="sec" id="sec-14"><div class="sec-h"><h2>🎓 结课大实战：从 0 起号到第一笔变现</h2><button class="done-btn" data-done="14">标记学完</button></div>
+<div class="quote"><p>前面 13 个单元，每个练的是一个单项动作。真实做号是把它们<strong>连起来用</strong>。</p>
+<p>下面是一个连续剧本——你扮演主角，依次完成 6 个任务。每个任务都是"糊"的（有情绪、有隐情、藏陷阱），先自己写出该怎么做，再翻开参考对照。</p>
+<p>⏱ 建议留 60–90 分钟，一口气走完，体会"一条龙"的感觉。</p></div>
+<hr class="soft">
+<div class="step"><div class="step-h"><span class="ic"></span>人物设定</div><div class="step-body"><p><strong>林夏</strong>，30 岁，辞职在家带 1 岁娃。辞职前在一家连锁烘焙店做了 5 年店长，从揉面、配方到带徒弟、管门店都很熟。她想做小红书副业，但完全没做过账号，心里既兴奋又没底。</p>
+<hr class="soft"></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>任务一 · 找定位（用第 1 单元）</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p>林夏纠结了一周，列了三个方向，来问你：</p>
+<div class="quote"><p>"我到底做哪个？<strong>A 烘焙教程</strong>——我会做，但小红书上烘焙博主好多，我怕没特色；<strong>B 带娃日常</strong>——现在天天在带娃，素材最多；<strong>C 探店</strong>——我以前是店长，对烘焙店门道熟。你帮我选选？"</p></div>
+<p><strong>你的任务</strong>：用六字口诀帮她锁定 1 个主方向，并说清为什么。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的建议：____</div>
+<textarea class="ta" data-save="u14-task1" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考</summary><div class="fold-in"><div class="recall empty" data-recall="u14-task1"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>最强维度是 <strong>擅 + 付</strong>：5 年烘焙店长 = 既有专业手艺（擅），又有 5 年的密集积累（付）——这是普通带娃宝妈给不了的壁垒。</p>
+<p>→ 主方向选 <strong>A 烘焙教程</strong>，但要做出"店长级"差异化：不是又一个家庭烘焙号，而是"开过店的人教你做不翻车、可复制的配方"。B 带娃日常缺壁垒、同质化严重；C 探店是"有"维度但变现和内容延展不如 A。</p>
+<p>一句话定位：「我帮<strong>想在家做烘焙的新手</strong>解决<strong>配方翻车、步骤看不懂</strong>的问题，通过<strong>5 年店长的实操教程</strong>，让他们第一次就成功。」</p>
+<p>（方法：六字口诀擅+付维度 → 美食饮品热门领域 → 用户思维价值句）</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>任务二 · 选题 + 标题（用第 2、4 单元）</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p>定位定了，林夏要发第一篇。她想发《我最拿手的法式可颂》。</p>
+<p><strong>你的任务</strong>：① 用"覆盖人群 × 痛点程度"判断这个选题好不好，要不要调整；② 给调整后的选题写一个爆款标题。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">选题判断：____　标题：____</div>
+<textarea class="ta" data-save="u14-task2" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考</summary><div class="fold-in"><div class="recall empty" data-recall="u14-task2"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① <strong>法式可颂覆盖人群偏小、难度高</strong>（新手会被劝退），痛点不强。往"覆盖人群大 + 痛点强"调：新手最痛的是"做了就塌、就硬"。改成 <strong>《新手第一次做面包不塌不硬，照着做就成功》</strong> 这类——覆盖所有想入门的人，直击"翻车"痛点。</p>
+<p>② 标题套<strong>速成型 + 痛点型</strong>，叠数字和标签：</p>
+<p>《烘焙小白必看！3 个细节，第一次做面包就松软不塌（5 年店长私藏）》</p>
+<p>（方法：痛点+速成公式 / 加数字 / 贴标签"小白" / 抱大腿"5 年店长"）</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>任务三 · 写内容（用第 5 或 6 单元）</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p>林夏决定用<strong>图文</strong>发这篇。她准备直接写："第一步放酵母，第二步揉面……"</p>
+<p><strong>你的任务</strong>：提醒她图文该用哪个文案模板、第一段该怎么开，避免一上来就干巴巴列步骤。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的建议：____</div>
+<textarea class="ta" data-save="u14-task3" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考</summary><div class="fold-in"><div class="recall empty" data-recall="u14-task3"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>干货教程用<strong>罗列式模板</strong>（开头点价值 → 中间分步骤 → 结尾引导），但开头别直接进"第一步"。先用一句话点价值、戳痛点：</p>
+<div class="quote"><p>开头："做了 5 年烘焙，发现新手面包失败 90% 栽在 3 个细节上。今天这篇照着做，第一次就能出松软的面包，建议先收藏 🍞"</p></div>
+<p>然后再分步骤（每步配图），结尾引导"做成功的姐妹回来扣 1"。</p>
+<p>（方法：罗列式模板三段 / 开头先给价值不直接列步骤 / 结尾引导互动）</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>任务四 · 发布涨粉（用第 7 单元）</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p>笔记做好了，林夏点了发布。发完她就去带娃了，想着"做得好自然有人看"。</p>
+<p><strong>你的任务</strong>：拦住她——发布前后还有两件事必须做，是什么？给出具体动作。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的建议：____</div>
+<textarea class="ta" data-save="u14-task4" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考</summary><div class="fold-in"><div class="recall empty" data-recall="u14-task4"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>① <strong>布局关键词</strong>：标题、正文（重复 3~10 次"新手/面包/不塌"）、结尾带话题 #烘焙教程 #新手烘焙 #面包，让系统给笔记打准标签、推给对的人。</p>
+<p>② <strong>发完别走，做冷启动 + 评论区第一条</strong>：自己先发一条引导评论，比如"姐妹们做的时候卡在哪一步？评论区告诉我，我来帮你看看哪儿出了问题"——主动帮忙式引导，把评论区盘活，评论权重高、最能撬动推流。</p>
+<p>（方法：关键词全链路布局 / 评论区"主动帮忙"引导）</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>任务五 · 数据复盘（用第 9 单元）</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p>发了 5 篇后，有一篇爆了：点击率系统评价"很好"，收藏 8000+，但<strong>只涨了 40 个粉</strong>。林夏很沮丧："是不是被限流了？"</p>
+<p><strong>你的任务</strong>：判断问题出在哪个环节，给她下一步动作。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的诊断：____</div>
+<textarea class="ta" data-save="u14-task5" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考</summary><div class="fold-in"><div class="recall empty" data-recall="u14-task5"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p><strong>不是限流</strong>（限流后台会通知，且点击率"很好"说明在正常推流）。问题是典型的<strong>"点击/收藏好但涨粉少 = 主页留不住人"</strong>：用户被这一篇吸引、收藏走人，但点进主页没看到"持续关注的理由"。</p>
+<p>下一步（落到第 8 单元的活）：① 简介加一句价值钩子（"5 年店长，每周教你一个不翻车配方"）；② 做内容连续性，比如开一个"新手面包不翻车"系列、标上①②③，让人想追更；③ 每篇结尾加引导关注。</p>
+<p>（方法：数据三看——点击好+涨粉少→主页问题，不是内容问题）</p></div></details>
+<hr class="soft"></div></div></div>
+<div class="step"><div class="step-h"><span class="ic"></span>任务六 · 落地变现（用第 12 单元）</div><div class="step-body"><div class="do-zone"><span class="dz-flag">✍️ 练习</span><p>3 个月后，林夏到了 5000 粉。同时来了两件事：<strong>一个烘焙工具品牌私信</strong>想合作；<strong>好几个粉丝问"能不能买你做的私房面包"</strong>。她问你该接哪个、怎么起步。</p>
+<p><strong>你的任务</strong>：判断她适合走哪条变现路、第一步怎么动；并提醒一个合规红线。</p>
+<div class="ta-label">✍️ 写在这里（先自己写，再点开下面对照）：<span class="saved-tag" data-tag>已存本地</span></div>
+<div class="note">我的建议：____</div>
+<textarea class="ta" data-save="u14-task6" placeholder="把你的答案写在这里…"></textarea>
+
+<details class="fold"><summary>👉 参考</summary><div class="fold-in"><div class="recall empty" data-recall="u14-task6"><div class="rh">👀 你刚才写的：</div><div class="rc">（你还没在上面写，写了这里会自动显示）</div></div><p>她其实可以<strong>两条腿走</strong>，但有先后：</p>
+<ul><li><strong>广告（先跑通）</strong>：5000 粉已过蒲公英门槛（≥1000＋实名＋18 岁），先入驻蒲公英、设报价，承接那个烘焙工具品牌的官方合作——安全、有平台保障，先跑通第一个商业闭环。品牌方私信若走非官方，记得先验产品、要 30% 定金。</li><li><strong>引流变现（试水私房）</strong>：粉丝问"能不能买"是真实的引流盈利信号。可走"小红书+微信"私域：把小红书号改成微信号、简介留邮箱，承接私房订单。</li></ul>
+<p>⚠️ <strong>合规红线</strong>：绝对不能在笔记正文/评论区直接贴微信号、手机号——会被限流甚至禁言。引流只能用"改小红书号 / 简介留邮箱自动回复 / 私信隐晦给"这些合规方式。</p>
+<p>（方法：变现路径选择——有粉丝基础先走官方广告，有产品需求叠加引流私域；避坑——站外联系方式是硬红线）</p></div></details>
+<hr class="soft">
+<div class="quote"><p class="blk">走完这 6 步，你就把"定位 → 选题 → 标题 → 内容 → 涨粉 → 复盘 → 变现"这条链打通了一遍。</p>
+<p>真实做号就是这样循环：复盘的结论喂回选题和内容，账号才会越做越顺。现在，把林夏换成你自己的账号，再走一遍。</p></div></div></div></div></section>
+</div></main></div>
+<script>(function(){
+  var LS = "xhs_lianxice_v1";
+  function load(){ try{ return JSON.parse(localStorage.getItem(LS)||"{}"); }catch(e){ return {}; } }
+  function save(d){ try{ localStorage.setItem(LS, JSON.stringify(d)); }catch(e){} }
+  var data = load();
+  document.querySelectorAll("textarea.ta").forEach(function(ta){
+    var key = ta.getAttribute("data-save");
+    if(data[key]) ta.value = data[key];
+    var tag = ta.parentElement.querySelector("[data-tag]") || (ta.previousElementSibling && ta.previousElementSibling.querySelector && ta.previousElementSibling.querySelector("[data-tag]"));
+    var timer;
+    ta.addEventListener("input", function(){
+      data[key] = ta.value; save(data); syncRecall(key, ta.value);
+      if(tag){ tag.classList.add("show"); clearTimeout(timer); timer=setTimeout(function(){ tag.classList.remove("show"); },1200); }
+    });
+  });
+  function syncRecall(key, val){
+    document.querySelectorAll('[data-recall="'+key+'"]').forEach(function(box){
+      var rc = box.querySelector(".rc");
+      if(val && val.trim()){ rc.textContent = val; box.classList.remove("empty"); }
+      else{ rc.textContent = "（你还没在上面写，写了这里会自动显示）"; box.classList.add("empty"); }
+    });
+  }
+  document.querySelectorAll("textarea.ta").forEach(function(ta){ syncRecall(ta.getAttribute("data-save"), ta.value); });
+  var doneSet = data.__done || {};
+  function refreshProgress(){
+    var n = Object.keys(doneSet).filter(function(k){return doneSet[k];}).length;
+    var p = document.getElementById("progress");
+    if(p) p.textContent = "已学 " + n + " / 15";
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){
+      var m = (a.getAttribute("href")||"").match(/^#sec-(.+)$/);
+      var ck = a.querySelector(".ck[data-ck]");
+      if(m && ck) ck.textContent = doneSet[m[1]] ? "✓" : "";
+    });
+  }
+  document.querySelectorAll(".done-btn").forEach(function(btn){
+    var id = btn.getAttribute("data-done");
+    if(doneSet[id]){ btn.classList.add("on"); btn.textContent="✓ 已学完"; }
+    btn.addEventListener("click", function(){
+      doneSet[id] = !doneSet[id];
+      btn.classList.toggle("on", doneSet[id]);
+      btn.textContent = doneSet[id] ? "✓ 已学完" : "标记学完";
+      data.__done = doneSet; save(data); refreshProgress();
+    });
+  });
+  refreshProgress();
+  var secs = [].slice.call(document.querySelectorAll("section.sec"));
+  var links = {};
+  document.querySelectorAll("nav.toc a[href]").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
+  function onScroll(){
+    var pos = window.scrollY + 90, cur = null;
+    secs.forEach(function(s){ if(s.offsetTop <= pos) cur = s.id; });
+    Object.keys(links).forEach(function(id){ links[id].classList.toggle("active", id===cur); });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  var toc=document.getElementById("toc"), scrim=document.getElementById("scrim");
+  if(toc&&scrim){
+    document.getElementById("burger").addEventListener("click", function(){ toc.classList.toggle("open"); scrim.classList.toggle("open"); });
+    scrim.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); });
+    document.querySelectorAll("nav.toc a[href]").forEach(function(a){ a.addEventListener("click", function(){ toc.classList.remove("open"); scrim.classList.remove("open"); }); });
+  }
+  var totop=document.createElement("button"); totop.id="totop"; totop.innerHTML="↑"; totop.setAttribute("aria-label","返回顶部");
+  document.body.appendChild(totop);
+  totop.addEventListener("click", function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+  window.addEventListener("scroll", function(){ totop.classList.toggle("show", window.scrollY>420); }, {passive:true});
+  function navTitle(s){ var a=links[s.id]; if(a) return a.textContent.replace(/^[\s✓]+/,"").trim(); var h=s.querySelector("h2"); return h?h.textContent.trim():s.id; }
+  secs.forEach(function(s,i){
+    var nav=document.createElement("div"); nav.className="navlinks";
+    var prev=secs[i-1], next=secs[i+1], pa=document.createElement("a"), na=document.createElement("a"); na.className="nl-next";
+    if(prev){ pa.href="#"+prev.id; pa.innerHTML='<span class="nl-k">← 上一节</span>'+navTitle(prev); } else { pa.className="nl-disabled"; pa.href="#"; }
+    if(next){ na.href="#"+next.id; na.innerHTML='<span class="nl-k">下一节 →</span>'+navTitle(next); } else { na.className="nl-next nl-disabled"; na.href="#"; }
+    nav.appendChild(pa); nav.appendChild(na); s.appendChild(nav);
+  });
+})();</script>
+</body></html>
