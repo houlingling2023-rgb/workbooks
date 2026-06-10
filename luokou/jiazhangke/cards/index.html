@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<title>贾樟柯 · 观点速刷卡</title>
+<style>
+:root{--bg:#f6f0e2;--card:#fbf6ea;--ink:#2c2620;--sub:#8b8170;--line:#e2d6bd;--accent:#a8392b;--accent-soft:#f0e2d2;--luo:#2f5d96;--guest:#5b7a4b}
+:root[data-theme=dark]{--bg:#23201c;--card:#2b2722;--ink:#e9e1d0;--sub:#a89e8b;--line:#41392f;--accent:#e08a6f;--accent-soft:#3a2a23;--luo:#8aabd8;--guest:#9dbf8b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;-webkit-font-smoothing:antialiased}
+.prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:70;transition:width .3s}
+.topbar{position:fixed;top:0;left:0;right:0;height:46px;z-index:60;display:flex;align-items:center;gap:8px;padding:0 9px;background:var(--bg);border-bottom:1px solid var(--line)}
+.tbtn{flex:none;font-size:1rem;line-height:1;background:var(--card);border:1px solid var(--line);color:var(--ink);width:30px;height:28px;border-radius:20px;cursor:pointer}
+.filterbar{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.filterbar::-webkit-scrollbar{display:none}
+.fb{flex:none;font-family:inherit;font-size:.8rem;color:var(--sub);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:5px 12px;cursor:pointer;white-space:nowrap}
+.fb.on{color:#fff;background:var(--accent);border-color:var(--accent)}
+.counter{flex:none;font-size:.74rem;color:var(--sub);min-width:54px;text-align:right}
+.nav{position:fixed;top:calc(50% + 23px);transform:translateY(-50%);z-index:55;width:33px;height:33px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:.98rem;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.38;transition:opacity .15s}
+.nav:hover,.nav:active{opacity:.96;background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav.prev{left:6px}.nav.next{right:6px}
+.feed{position:relative;display:flex;height:calc(100dvh - 46px);margin-top:46px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.feed::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;height:100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:clamp(14px,4vw,28px)}
+.card{width:min(560px,100%);height:min(80dvh,740px);perspective:1700px;cursor:pointer}
+.flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.75,.2,1)}
+.card.flipped .flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 22px 60px rgba(60,40,20,.20),0 3px 10px rgba(60,40,20,.08);padding:clamp(22px,5vw,32px);display:flex;flex-direction:column;overflow:hidden}
+.face.front{overflow-y:auto}
+.face.back{transform:rotateY(180deg)}
+.top{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex:none}
+.no{font-size:.82rem;letter-spacing:.12em;color:var(--accent);font-weight:800}
+.tag{font-size:.74rem;color:var(--sub);border:1px solid var(--line);padding:2px 9px;border-radius:20px;margin-left:auto}
+.byline{font-size:.85rem;font-weight:700;color:var(--ink);margin:0 0 16px;flex:none}
+.byline .src{font-weight:400;color:var(--sub);font-size:.78rem}
+.blk{flex:none;margin-bottom:13px}
+.lab{font-size:.68rem;font-weight:800;letter-spacing:.1em;margin-bottom:5px}
+.labv,.labq{color:var(--sub)}
+.laby{color:var(--accent)}
+.title{font-size:clamp(1.34rem,4.7vw,1.86rem);line-height:1.26;font-weight:800;margin:0;letter-spacing:-.01em}
+.quote{margin:0;padding:1px 0 1px 14px;border-left:3px solid var(--accent);font-size:clamp(.96rem,3.5vw,1.08rem);line-height:1.55}
+.take{font-size:clamp(.9rem,3.3vw,1rem);line-height:1.55;margin:0}
+.ftip{margin-top:auto;padding-top:16px;font-size:.8rem;color:var(--sub);text-align:center}
+.ftip.swipe{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+.solo{justify-content:center;text-align:center}
+.kicker{font-size:.82rem;letter-spacing:.14em;color:var(--accent);font-weight:700;margin-bottom:16px}
+.hero{font-size:clamp(2.2rem,9vw,3.1rem);font-weight:800;margin:0;letter-spacing:-.02em}
+.intro{font-size:clamp(.95rem,3.6vw,1.06rem);color:var(--ink);margin:16px 0 6px;line-height:1.62}
+.who{font-size:clamp(.95rem,3.8vw,1.1rem);color:var(--sub);margin:4px 0 24px;line-height:1.5;font-style:italic}
+.lead{font-size:clamp(1rem,3.7vw,1.12rem);line-height:1.7;margin:0}
+.solo .ftip{margin-top:30px}
+.bhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;margin-bottom:4px}
+.bh{font-size:.9rem;font-weight:700;color:var(--accent)}
+.bback{font-size:.78rem;color:var(--sub);border:1px solid var(--line);border-radius:20px;padding:2px 10px}
+.bmeta{flex:none;font-size:.74rem;color:var(--sub);margin:6px 0 12px;padding-bottom:12px;border-bottom:1px solid var(--line);line-height:1.5}
+.bbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-right:4px}
+.bbody::-webkit-scrollbar{width:0}
+.scene p{margin:0 0 13px;line-height:1.72;font-size:.99rem}
+.scene .luo b{color:var(--luo)}
+.scene .guest b{color:var(--guest)}
+.scene .aside{color:var(--sub);text-align:center;font-size:.84rem;letter-spacing:.08em}
+.hl{background:var(--accent-soft);font-weight:700;padding:1px 3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+</style>
+</head><body>
+<div class="prog" id="prog"></div>
+<div class="topbar"><button class="tbtn" id="tbtn" title="深色/浅色">🌓</button><div class="filterbar"><button class="fb on" data-theme="all">全部</button><button class="fb" data-theme="内容">内容</button><button class="fb" data-theme="商业">商业</button><button class="fb" data-theme="心态">心态</button><button class="fb" data-theme="元认知">元认知</button></div><span class="counter" id="counter">封面</span></div>
+<div class="feed">
+<div class="slide cover" data-kind="cover"><div class="card static"><div class="flip"><div class="face front solo"><div class="kicker">罗永浩《十字路口》· 观点速刷</div><h1 class="hero">贾樟柯</h1><p class="intro">第六代导演领军人物——山西汾阳人，《三峡好人》威尼斯金狮、《天注定》戛纳最佳编剧，用约 38 万拍出处女作《小武》。</p><p class="who">一个从汾阳街头长出来、把一个时代“毛骨悚然地”还原下来的人</p><p class="lead">这场对谈，扒成 <b>22 张</b>观点卡。<br>正面是观点，<b>点一下卡片翻到背面</b>看访谈原文。</p><div class="ftip swipe">顶上选主题 · 左右滑动翻卡 →</div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.01</span><span class="tag">创作·归因</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">演员演不好，90%是剧本的错——卡壳多半是剧本不近人情、说服不了人</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“后来我发现找自己的原因，就只要是演员这个突然卡壳，90%是剧本有问题。就你那个剧本可能不近人情，说服不了他，可能说服不了人家，进不去。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">别怪执行的人差，先回头查你给的本子是不是不近人情、自己都说服不了。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:33]–[03:35]｜《对话稿》二十三、怎么当导演：演员、真实与赵涛（对话稿第1516行起；金句在第1542行）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我多年以来看你的访谈没有看到……你在性格上、工作风格上是哪种类型的导演？是特别折磨人、一个镜头没完没了拍，还是到那跟演员们交流也比较多、大家能互相给一些意见、比较好相处的，是哪种类型的导演？</p>
+<p class="guest"><b>贾樟柯</b>：我是很好相处的导演。</p>
+<p class="luo"><b>罗永浩</b>：那你说偶尔发脾气难免，会有把演员逼疯？</p>
+<p class="guest"><b>贾樟柯</b>：跟演员不会逼疯演员，但是我会用另一个方法来把我的要求达到。比如这场戏真的不满意，我不会一直拍一直拍，拍到一定程度就不拍了，那就拍别的，隔两三天重拍。我不会把演员搁在那，从早上一直拍到晚上，这场戏就过不去。</p>
+<p class="luo"><b>罗永浩</b>：那这样的方法都对，因为有时候……</p>
+<p class="guest"><b>贾樟柯</b>：其实跟工作的认识有关。早期也有这种死磕的情况，但我后来发现跟演员合作是这样，有时候演员演得不好，大部分时候是剧本有问题。因为很多时候剧本是自己写的，会很自信，但有时候一个特别好的演员，他演来演去这一场就是没感觉，我们觉得是不是他累了、是不是对人物没想明白，就找人家的原因。<mark class="hl">后来我发现找自己的原因，就只要是演员这个突然卡壳，90%是剧本有问题。就你那个剧本可能不近人情，说服不了他，可能说服不了人家，进不去。</mark>因为演员他很感性，他也给你提不出意见，但他就不舒服。这个时候我觉得停下来不拍了，先拍别的那些演员发挥得很好的，这场戏你去反省一下，可能是自己的问题……有时候确实也是那天演员身体不舒服，也可能是天气的原因。这也是赵涛教我的，演员是很生物性的：今天阳光很好演一场戏，跟阴天演一场戏，需要调整的情绪是不一样的……原因很复杂，但大部分时候还是剧本的问题。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.02</span><span class="tag">创作·审美</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">艺术真正打动人的是&#x27;熟悉的陌生感&#x27;——把你熟视无睹的日常换个角度呈现</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“这个《黄土地》它带给我的是熟悉的陌生感。我没有用这样的角度看到、这样地观察我们的生活，我觉得它这个电影独特的观察角度就吸引了我。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">想抓住人，不必找新鲜题材，把大家熟视无睹的日常换个角度拍出来就够了。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[01:30]｜《对话稿》十、《黄土地》的光：决定做电影</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：那当时的想法，是觉得这些也是你想表达的呢，还是觉得这个我也能干？</p>
+<p class="guest"><b>贾樟柯</b>：不是我也能干，我觉得就是佩服自己。佩服自己就是什么呢，我们都在日常里，都在这个生活里，<mark class="hl">这个《黄土地》它带给我的是熟悉的陌生感。我没有用这样的角度看到、这样地观察我们的生活，我觉得它这个电影独特的观察角度就吸引了我。</mark>我觉得我想能做到这样，能发现自己这么熟悉、熟视无睹的生活，原来你从另一个角度看，还那么有诗意、那么悲伤，或者说那么让人产生非常复杂的情绪。包括里面很多华彩段落，像求雨啊，像这个腰鼓啊。这些里面有一个细节，是我眼泪哗就下来了，它跟我个体的生活经验有关……</p>
+<p class="luo"><b>罗永浩</b>：所以你小伙子的时候看了那么多那种警匪片、黑帮片，那种也看得那么心潮澎湃，但从来没想过要去拍摄这些？</p>
+<p class="guest"><b>贾樟柯</b>：没有。你看我小时候看那个武打片、录像，最直接的生理感受是什么呢，就我一看完之后——一般是我们连看两部，看完之后从那个录像厅出来，碰到同龄人，撞人家一下，准备来一场战争，是这种感受。它是不一样的。但是看完《黄土地》，我觉得怎么才能拍电影。感觉好像那些是更偏生理的爽感。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.03</span><span class="tag">内容·大众心理</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">短剧靠&#x27;三宝题材&#x27;戳中底层屈辱感——它比电影更符合大众心理</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“唯一的可能就是短剧，我觉得它可能比电影更符合大众的心态、大众的心理。因为比如说短剧里面有很多题材是这种所谓反转，是这种个人的这种屈辱，然后再不停地反转。比如说我们说的三宝题材，保安、保姆、保洁。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">爆款不是&#x27;狗血&#x27;，是精准戳中了被压抑的屈辱感——先看清观众的真实情绪再下判断。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:25]–[03:27]｜《对话稿》二十二、短剧与电影</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你觉得它从市场上有可能大规模地侵蚀电影吗？还是有一个理论是说它是两个不同的受众，其实没什么影响？</p>
+<p class="guest"><b>贾樟柯</b>：我觉得没什么大影响。有时候电影上不去，就归咎于周围的媒体环境，其实说完全没影响也会有一些影响，但说威胁到电影我觉得还不至于。你比如说我看短剧一般是睡觉前看一会儿，那睡觉前谁会去看电影，又不占你正常看电影的时间。有时候坐高铁无聊了看一会儿，飞机停机一停……</p>
+<p class="luo"><b>罗永浩</b>：40分钟等着起飞，我再看一会儿。这些时间你也不会看电影。但是说，你是不是因为用这些碎片化的时间看了这些，就对看影像、看电影没兴趣了？</p>
+<p class="guest"><b>贾樟柯</b>：也不会。</p>
+<p class="luo"><b>罗永浩</b>：但我听说很多年轻人一边充值一边看，能一晚上几个小时一直看下去……他们刷这个都能刷三四个小时。</p>
+<p class="guest"><b>贾樟柯</b>：关键是，<mark class="hl">唯一的可能就是短剧，我觉得它可能比电影更符合大众的心态、大众的心理。因为比如说短剧里面有很多题材是这种所谓反转，是这种个人的这种屈辱，然后再不停地反转。比如说我们说的三宝题材，保安、保姆、保洁。</mark></p>
+<p class="luo"><b>罗永浩</b>：那这个反转在于哪儿？</p>
+<p class="guest"><b>贾樟柯</b>：人物一出现都是以这三种职业出现的，这三种职业的劳动者备受欺凌跟侮辱，那个侮辱不停的，什么下跪啊、磕几个头啊。然后你就知道，这就是压抑在普通劳动阶层里面的屈辱感，它是很强的。然后他就开始慢慢复仇——原来其实他是亿万富翁。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.04</span><span class="tag">内容·心理代偿</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">短剧反转的内核：现实解决不了，就幻想自己其实是个更大的boss</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“但是你普遍的你能了解到大家的痛点在那，就解决不了这个问题，就寄希望于你是更大的boss。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">爆款叙事的引擎往往是心理代偿——现实给不了的尊严，就靠&#x27;我其实更大&#x27;的幻想补回来。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">03:25 一带（位于 [03:27] 时间戳之前的同一话题节内）｜《对话稿》二十二、看两百部短剧的金狮导演（对话稿文件第 1463–1476 行；金句在第 1476 行）</div><div class="bbody scene"><p class="guest"><b>贾樟柯</b>：关键是，唯一的可能就是短剧，我觉得它可能比电影更符合大众的心态、大众的心理。因为短剧里面有很多题材是这种所谓反转，是这种个人的屈辱，然后再不停地反转。比如说我们说的三宝题材，保安、保姆、保洁。</p>
+<p class="luo"><b>罗永浩</b>：那这个反转在于哪儿？</p>
+<p class="guest"><b>贾樟柯</b>：人物一出现都是以这三种职业出现的，这三种职业的劳动者备受欺凌跟侮辱，那个侮辱不停的，什么下跪啊、磕几个头啊。然后你就知道，这个就是压抑在普通劳动阶层里面，这种屈辱感它是很强的。然后呢，他就开始慢慢复仇——原来其实他是亿万富翁。</p>
+<p class="luo"><b>罗永浩</b>：不是亿万，万亿富翁。</p>
+<p class="guest"><b>贾樟柯</b>：对，然后就开始反转了。</p>
+<p class="luo"><b>罗永浩</b>：那他拿回自己的尊严，是因为他其实更有权力、更有财富的人，那这方面是比较拧巴的，拿回尊严还是靠钱。</p>
+<p class="guest"><b>贾樟柯</b>：<mark class="hl">但是你普遍的你能了解到大家的痛点在那，就解决不了这个问题，就寄希望于你是更大的boss。</mark></p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.05</span><span class="tag">创作·真诚</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">为发表而硬上宏大叙事，反而写得差；不为发表的真诚表达更经得起时间</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“我发现我那些爱情诗比那个《黄河》写得好多了。那个《黄河》就属于想发表要来个严肃命题、宏大叙事。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">为了被看见而硬凹深刻，往往最差；真诚写自己在意的东西，反而更耐看。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[00:26]｜《对话稿》三、书报摊、少年写诗与诗社</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：那最后诗有发表的吗？</p>
+<p class="guest"><b>贾樟柯</b>：没发表过，应该是写得很烂吧。</p>
+<p class="luo"><b>罗永浩</b>：我也写过诗，小说、诗和散文都写过，但小说和散文发表过，诗是想起来最有羞耻感的。当时有个《诗神》杂志搞了个&quot;中国青年诗人千人千首&quot;的选拔赛，我就投了。投完收到一封来信，我在东北山沟里兴奋得不行，结果一看，说恭喜选中了，要出一本书，要交钱了……我哥就讽刺我，说这就是骗你们这些傻的，然后我就没去上这个当。</p>
+<p class="guest"><b>贾樟柯</b>：我投的第一首诗是一个长诗，好几百行那种。那个名字呢，叫做——非常惊世骇俗，名字叫《黄河的五千年谎言》。</p>
+<p class="luo"><b>罗永浩</b>：那时候就会标题党。</p>
+<p class="guest"><b>贾樟柯</b>：标题党，然后很反叛嘛，就石沉大海。后来因为我同时也写很多诗，我们在高中的时候成立了诗社，叫&quot;沙派&quot;。这个沙派出了两本诗集，里面有很多爱情诗。这诗过了多年，我发现<mark class="hl">我那些爱情诗比那个《黄河》写得好多了。那个《黄河》就属于想发表要来个严肃命题、宏大叙事。</mark></p>
+<p class="luo"><b>罗永浩</b>：宏大叙事。</p>
+<p class="guest"><b>贾樟柯</b>：反而是我那些对爱情的想象，我今天看起来非常可爱。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.06</span><span class="tag">媒介·怀旧</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">80年代一本书全民皆读，不是文学更高，而是出版物匮乏、选择太少</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“包括人们怀念80年代的文学，说一部小说家喻户晓、全民皆看，它也跟当时那个匮乏有关。我觉得今天并不能说今天的文学就下降了、水平就下降了，是选择太多了。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">别把&#x27;过去更好&#x27;当真——很多怀旧其实是当年没得选，不是当年质量更高。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:55]｜《对话稿》十八、为什么总用流行音乐</div><div class="bbody scene"><p class="guest"><b>贾樟柯</b>：（流行音乐）没那么重要了，是吧。它还在，但没那么重要，因为这个时代年轻人的娱乐形式多了。我觉得最有时代烙印的，就是我有一个比我大八岁的表哥，他们那个年代蓝领全看世界名著，你知道吗。</p>
+<p class="luo"><b>罗永浩</b>：对，就比我们大个十几岁的人。</p>
+<p class="guest"><b>贾樟柯</b>：蓝领工人全都看世界名著，什么《红与黑》啊。</p>
+<p class="luo"><b>罗永浩</b>：对对，《包法利夫人》。</p>
+<p class="guest"><b>贾樟柯</b>：在上班要讨论的。我年轻的时候去我表哥那个宿舍，他是铁路工人，结果宿舍里边每一个人床头都摆着几本世界名著。我当时很困惑，但后来才慢慢明白……其实是那个时候我们的文艺作品、出版物太匮乏了，所以不是说他们的平均水平都能欣赏世界名著，而是说除了那些非常刻板的出版物以外，能够看到一点鲜活的人的东西，甚至还有一些爱情描写、亲热的描写，只能在世界名著里找。所以才会有，<mark class="hl">包括人们怀念80年代的文学，说一部小说家喻户晓、全民皆看，它也跟当时那个匮乏有关。我觉得今天并不能说今天的文学就下降了、水平就下降了，是选择太多了</mark>，总的出版量是比那时候大得多，而且水平也不一定低，某种程度文学性可能进步了很多，但是它的媒体环境不一样了，已经变成视觉的时代了，文字的时代慢慢地过去了。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.07</span><span class="tag">创作·表演</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">演员是很&#x27;生物性&#x27;的——晴天和阴天演同一场戏，需要调整的情绪都不一样</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“其实演员是很生物性的。就比如说今天阳光很好，这种演一场戏跟今天是阴天演一场戏，他需要的调整情绪是不一样的，他需要转化的、需要培育的。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">人的状态受天气、生理这些&#x27;软因素&#x27;牵动，带人做事别只盯结果，也要照顾当下的身体节律。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:35]｜《对话稿》二十三、怎么当导演：演员、真实与赵涛</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你在工作风格上是哪种类型的导演，是特别折磨人、一个镜头没完没了拍，还是跟演员交流比较多、比较好相处的？</p>
+<p class="guest"><b>贾樟柯</b>：我是很好相处的导演。</p>
+<p class="luo"><b>罗永浩</b>：偶尔发脾气难免，会把演员逼疯吗？</p>
+<p class="guest"><b>贾樟柯</b>：不会逼疯演员，但我会用另一个方法达到要求。比如这场戏真的不满意，我不会一直拍，就先拍别的，隔两三天重拍。我不会把演员搁在那，从早拍到晚，这场戏还过不去。</p>
+<p class="luo"><b>罗永浩</b>：那这样的方法都对，因为有时候……</p>
+<p class="guest"><b>贾樟柯</b>：早期也有死磕的情况，但我后来发现，演员演得不好，大部分时候是剧本有问题。只要演员突然卡壳，90%是剧本不近人情、说服不了人家。这时候我就停下来，先拍别的演员发挥得好的，这场戏自己去反省。有时候确实也是那天演员身体不舒服，身体的问题也可能是天气的原因。这也是赵涛教我的，一开始我不懂，他说<mark class="hl">其实演员是很生物性的。就比如说今天阳光很好，这种演一场戏跟今天是阴天演一场戏，他需要的调整情绪是不一样的，他需要转化的、需要培育的。</mark>比如今天阴云密布，这场戏要拍的是很放松很喜悦的，那演员得在生理上跟天气做一个对抗。原因很复杂，但大部分时候，还是剧本的问题。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.08</span><span class="tag">媒介·图像时代</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">图像擅长呈现结果与状态、缺少过程，这削弱了文学的广泛影响力</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“图像的擅长是结果，是实时的一个状态。所以人类的思维模式也在变化，你在一个图像为主、视频为主的这个时代，你苛求文学要有广泛的影响力，这个确实是很难的。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">图像给你结果和状态，文字给你过程——明白二者所长，才知道该用哪种介质讲你的东西。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:57]｜《对话稿》十九、世界名著、图像时代与不听的两个忠告</div><div class="bbody scene"><p class="guest"><b>贾樟柯</b>：当下流行音乐没那么重要了，因为这个时代年轻人的娱乐形式多了。最有时代烙印的事，是我有一个比我大八岁的表哥，他们那个年代蓝领全看世界名著，你知道吗。</p>
+<p class="luo"><b>罗永浩</b>：对，就比我们大个十几岁的人。</p>
+<p class="guest"><b>贾樟柯</b>：蓝领工人全都看世界名著，什么《红与黑》啊。</p>
+<p class="luo"><b>罗永浩</b>：对对，《包法利夫人》。</p>
+<p class="guest"><b>贾樟柯</b>：对，在上班要讨论的。我年轻的时候去我表哥那个宿舍，他是铁路工人，结果宿舍里每个人床头都摆着几本世界名著……其实是那个时候出版物太匮乏了，能看到一点鲜活的人的东西，只能在世界名著里找……我觉得今天并不能说文学就下降了，是选择太多了，但媒体环境不一样了，已经变成视觉的时代了，文字的时代慢慢过去了。更年轻一代其实思维模式在变，我们大部分人都是文字性思维，现在逐渐地像图像思维转。而这个图像思维呢，它就带来一个，就是没有过程，因为它的图像都是一些记忆点，描述是文字的擅长；<mark class="hl">图像的擅长是结果，是实时的一个状态。所以人类的思维模式也在变化，你在一个图像为主、视频为主的这个时代，你苛求文学要有广泛的影响力，这个确实是很难的。</mark>但是当然文学是不可或缺的了。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.09</span><span class="tag">内容·形式上限</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">短剧难承载有分量的东西——篇幅就是天花板，像微型小说</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“我对这个事有一点怀疑，是我觉得它篇幅决定了就很难。你看以前小说有微型小说吗？微型小说可以写得很好玩很抓人，但是它很难承载一些有分量的东西。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">形式自带天花板，短平快能抓人但难承重——别指望一个轻量载体扛起厚重的东西。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:31]｜《对话稿》二十二、短剧能否精品化（文件中无此独立小标题，对应「二十一、见陈冲、塞勒斯与北野武」第1353行 与「二十三、怎么当导演」第1516行 之间的短剧话题；金句在第1508行）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：那你觉得你将来有可能尝试微短剧什么的吗？因为现在像我们上次跟那个宋方金老师聊的时候，他就觉得现在这个东西是野蛮生长长出来的，但是后边会有专业选手陆续进去，因为它有利益驱动，会有专业选手进去，进去以后就会出现精品的微短剧和优质的、高水准的微短剧，是完全可能出现的。</p>
+<p class="guest"><b>贾樟柯</b>：我觉得我会看很多微短剧，但我估计我不会拍。因为微短剧这个形式，它跟我关心的感受差异挺大的。</p>
+<p class="luo"><b>罗永浩</b>：就比如说？</p>
+<p class="guest"><b>贾樟柯</b>：那比如说有一些时刻我是特别想表现……我刚五岁起，我们山西人都要睡个午觉的，睡起来午觉迷迷糊糊的准备起床的时候，又听到远处呼啸而过的大卡车……渐渐地消失，就像用沈从文的话来说，就像四月的棉絮就拉了丝了。慢慢的才能够消失的那种时刻，我觉得特别想拍到电影里。但这东西你要拍成个短剧，这是个啥呀？谁看啊？谁去听你的声音、感受你的那个东西。</p>
+<p class="luo"><b>罗永浩</b>：短剧是容不得铺垫的。</p>
+<p class="guest"><b>贾樟柯</b>：对，所以我需要描述，我需要用时间去展开描述一个事情。所以我觉得我应该不会拍，但是我应该是个短剧的观众。</p>
+<p class="luo"><b>罗永浩</b>：你觉得短剧会像宋方金想的那样有专业选手进来，把它弄得拍出很多有品质的东西吗？</p>
+<p class="guest"><b>贾樟柯</b>：<mark class="hl">我对这个事有一点怀疑，是我觉得它篇幅决定了就很难。你看以前小说有微型小说吗？微型小说可以写得很好玩很抓人，但是它很难承载一些有分量的东西。</mark>但我觉得单就短剧本身来说，你说短剧进步肯定是会存在的。因为比如说我看的初代短剧里面，有一个特别有想象力的叫《爷爷在地府造反》。它制作、特效就有点搞笑了，但是它很有想象力，挺好看的。现在当然就不一样了，都在进步。但是我觉得更主要一个现象，实际上是其他的，比如说目前已经有像长篇网剧短剧化的倾向。所谓短剧化，不是篇幅短了，是它里面很多叙事节奏在变。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.10</span><span class="tag">美学·立场</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">电影最美的地方，是对物质现实世界事无巨细的还原</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“但是电影这个媒介它最重要一个美感，是对这个世界能事无巨细地还原，这是它最美的地方。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">做内容先想清楚你这个介质最美在哪，再围着这个核心使劲，而不是堆技巧。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:39]｜《对话稿》二十三、怎么当导演：演员、真实与赵涛</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：还有就是我看你这么多年电影，尤其是早期的时候……早期的时候，你当时是新人导演，用的演员也是新人，然后当时我都感觉那些人都不是这个行业的。但是都能调教成非常真实的这种质感，这个东西主要是受谁的影响？就你的电影里的那种真实质感，很多像是就不像是电影，就完全没有表演痕迹吧……</p>
+<p class="guest"><b>贾樟柯</b>：我觉得这有两点吧。其实从这个角度来说，是一个反作用力。这个反作用力就是在于我们在学电影的那个时代所看到的，特别是咱们自己的国产电影，表演太浮夸了。然后呢，你就觉得，可不可以生活化一些是吧……那再一部分呢，跟电影理论有关，就是所谓电影它是一个物质现实世界的还原，那你要考虑什么是现实世界，那包括我们这个现实世界的人，那就是松松垮垮，它有很多自然的反应嘛。那我自己就是深受这个理论的影响。我觉得电影它可以做很多事情，电影很戏剧性、很偶像化、很传奇性，科幻片、灾难什么都可以。<mark class="hl">但是电影这个媒介它最重要一个美感，是对这个世界能事无巨细地还原，这是它最美的地方。</mark>那我喜欢这个东西，我的生活环境是这样子的，那我就用这样的方法、用这样的演员来合作。</p>
+<p class="luo"><b>罗永浩</b>：所以就是风格和美学上的偏好，对，喜欢这一派的。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="商业"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.11</span><span class="tag">商业·消费场景</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">短剧威胁不到电影——它占用的是碎片时间，跟看电影是不同的消费场景</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“其实你说完全没影响确实也会有一些影响，但是说威胁到电影我觉得还不至于。因为观看的，你比如说我看短剧我一般是睡觉前看一会儿，那睡觉前谁会去看电影，是不是，又不占你正常的看电影的时间。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">判断&#x27;新东西会不会杀死旧东西&#x27;，先看它们抢的是不是同一段时间——场景错位就不是真竞争。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:23]（金句处于 03:23 与 03:25 两个时间戳之间，属 03:23 段）｜《对话稿》二十二、看两百部短剧的金狮导演（对话稿原小节标题；提示给的&quot;二十二、短剧与电影&quot;为同一节的概括叫法）。文件：/Users/hll/Desktop/高手进阶：数据分析能力提升 的大型指南（第二次更新）/罗永浩的十字路口/贾樟柯/对话稿(分角色·贾樟柯×罗永浩).md，金句位于第 1451 行</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：看了很多吗？</p>
+<p class="guest"><b>贾樟柯</b>：我看了两百部吧。</p>
+<p class="luo"><b>罗永浩</b>：你觉得它从市场上有可能大规模的侵蚀电影吗？还是有一个理论是说它是两个不同的受众，其实没什么影响？</p>
+<p class="guest"><b>贾樟柯</b>：我觉得没什么大影响。就有时候电影上不去，然后就归咎于周围的媒体环境，<mark class="hl">其实你说完全没影响确实也会有一些影响，但是说威胁到电影我觉得还不至于。因为观看的，你比如说我看短剧我一般是睡觉前看一会儿，那睡觉前谁会去看电影，是不是，又不占你正常的看电影的时间。</mark>然后有时候比如说我坐高铁无聊了看一会儿，飞机停机一停——</p>
+<p class="luo"><b>罗永浩</b>：40分钟等着起飞，我再看一会儿，那这些时间你也不会看电影，它占用你是这些时间。但是说，你是不是因为你用这些碎片化的时间看了这些，就对于看影像、看电影没兴趣了？</p>
+<p class="guest"><b>贾樟柯</b>：也不会。</p>
+<p class="luo"><b>罗永浩</b>：但我听说很多年轻人一边充值一边看，能一晚上几个小时一直看下去，那算是体力好吗？</p>
+<p class="guest"><b>贾樟柯</b>：那是体力好吗？但我们以前看个电影也两个小时。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.12</span><span class="tag">人性·情感</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">心灵丰富的人才爱打架——打架源于敏感、自尊与情感，不动感情的人不屑于打</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“我觉得心灵层次饱满丰富的人才爱打架，因为他经常是情感方面的原因才会打架。不动感情的人谁去打架，就不理你，走了就行了。高度的敏感性跟自尊性，包括这个情感的细腻，趋势到了一种程度才会打架。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">冲动不一定是粗鲁，往往是太在乎、太敏感——别急着把动感情的人当成没修养。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[00:28]｜《对话稿》三、书报摊、少年写诗与诗社</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：……还有你们那时候，一群调皮捣蛋的，经常打架，又同时写诗，这个现在的人听起来可能挺分裂的，但你们那会儿就觉得很自然，对吧？</p>
+<p class="guest"><b>贾樟柯</b>：非常自然。上午去打个架，下午我写一首诗什么的。我觉得事过多年，<mark class="hl">我觉得心灵层次饱满丰富的人才爱打架，因为他经常是情感方面的原因才会打架。不动感情的人谁去打架，就不理你，走了就行了。高度的敏感性跟自尊性，包括这个情感的细腻，趋势到了一种程度才会打架。</mark>但是最早打架最密集的时候，那个时候还没有诗歌，那时候我觉得是小学。</p>
+<p class="luo"><b>罗永浩</b>：是初中吧？</p>
+<p class="guest"><b>贾樟柯</b>：是小学，小学是打得最凶的。我的小学是战斗的历程，那绝对是街头，我就是幸存者，那几大战役今天想起来都后怕。</p>
+<p class="luo"><b>罗永浩</b>：小学时候你们那儿就打那么凶？我印象里我们那儿校园暴力比较凶的都是初中高中。</p>
+<p class="guest"><b>贾樟柯</b>：初中当然也有，高中也有，但是频次没有小学时候那么频繁。而且初中高中之后，往往确实有一个具体的理由，小学时候那是没理由的，互相看一眼马上就打起来了。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.13</span><span class="tag">心态·退路</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">心里有终极归宿就不拧巴——知道有个地方一定接纳你，遇事才从容</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“我觉得可能是不跟自己较劲，因为我自己一直有个归宿吧……我觉得我无论遇到什么样的问题，或者我人生起起伏伏，总有一个地方一定会接纳我，而且那个地方我一定会过得非常愉快。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">给自己留一个心里一定接纳你的退路，反而敢从容向前、不跟自己较劲。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:17]（金句段落所属时间码，承接 02:15–02:17 的&quot;务实生存&quot;话题）｜《对话稿》十四、务实生存：写电视剧、演狮子、写专栏（行 1009；金句所在话题节起自行 1031 罗永浩问&quot;拧巴&quot;）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我见过很多文艺圈的朋友，他们就是过于拧巴了你知道吧，他确实有才华，但相应的呢就是日常生活里活得特别拧巴，有很多不适合一个正常社会里生存的偏执的东西，所以就把自己搞得很苦哈哈的，实际上我觉得没必要，但他们就是这样。所以我以前以为你某种程度上也有一些这个，但听起来完全没有，就一直活得都挺游刃有余的，你也没感觉到有什么过程是特别艰难、或特别拧巴、或特别纠结？</p>
+<p class="guest"><b>贾樟柯</b>：艰难肯定有很多艰难的时刻，但是拧巴就很少了。就是遇到什么问题解决什么问题，有的问题能解决那当然好，解决不了就放一放，也就没办法，就这东西不跟自己较劲吧。<mark class="hl">我觉得可能是不跟自己较劲，因为我自己一直有个归宿吧</mark>，可以说我内心中有一个终极的归宿。<mark class="hl">我觉得我无论遇到什么样的问题，或者我人生起起伏伏，总有一个地方一定会接纳我，而且那个地方我一定会过得非常愉快</mark>，那个地方就是汾阳的街道。我觉得我大不了我回老家，我跟那些家乡的朋友们在一起生活，跟我的家人们在一起生活……</p>
+<p class="guest"><b>贾樟柯</b>：如果今天回头看，我觉得因为我一开始就想回去，所以我能回得去，正因为我能回得去，所以我没有后顾之忧。我不觉得我离开汾阳我就再也回不去了，我觉得它很美、很愉快。有时候你回不去，是因为你回不去了，其实能回去，是你自己觉得回不去了，有什么回不去的，每个角落都有它的乐趣。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.14</span><span class="tag">人性·需求</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">每个人都有偷偷喜欢的&#x27;丢人&#x27;东西——承认需求的复杂才是承认自己正常</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“这些音乐家跟我也承认，他们也在自己的曲库里有几首很丢人的歌，他就羞于承认他听那些歌，但那几首歌他听的时候每次都很愉快。所以我觉得人性就是很复杂，这个需求是很复杂的。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">别为自己偷偷喜欢的&#x27;低级&#x27;爱好羞愧，需求本就复杂，承认它才是承认自己是个正常人。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">03:29｜《对话稿》二十二、看两百部短剧的金狮导演</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：那这里面，你有时候看到，也会想一些严肃的问题。我很难想象你会看这些东西……</p>
+<p class="guest"><b>贾樟柯</b>：我就观察到有趣的现象。开始我们身边这些年轻人看，还假装不看，扭扭捏捏，然后闲聊到某一天大家都突然说放下包袱，勇敢地承认：其实我也是偷偷看短剧的。一直以来它被认为是剧情狗血、品味恶俗的低级趣味，结果他们突然放开了，都承认了。包括我身边有些品味非常好的年轻同事也看，我就忍不住好奇，去翻了翻，结果我一边捏着鼻子觉得有臭味，一边忍不住又看了好几集。</p>
+<p class="luo"><b>罗永浩</b>：要跟下去。</p>
+<p class="guest"><b>贾樟柯</b>：对，这东西真的特别奇怪。我觉得人有多种欲求。你可以把我叫做一个山西人、一个七零后、一个导演，但你要我自我定位，其实就贾樟柯一个饮食男女。</p>
+<p class="luo"><b>罗永浩</b>：人有……也不能说不要装，这个跟装好像有点关系。</p>
+<p class="guest"><b>贾樟柯</b>：也没关系，你就是个正常人，你有你的弱点、你的优点、你的小欲望，咱就是一个红尘世界的饮食男女。作家叶三给我讲过一个事：那会儿大家都玩转盘式的iPod，坐一块很自然地拿起来看对方在听什么。叶三的不让碰，说这是绝对隐私。我问为什么，他说你的iPod没几首丢人的歌你自己偷偷听的吗？我说有啊。他说你既然有，为什么要拿别人的？……他提一个理论，说iPod上的曲目是绝对隐私。我想了想还挺有道理。短剧对我来讲也是这其中的一个。我音乐听得很深入，有几千张唱片，各种类型都听，很多音乐家也是朋友。<mark class="hl">但是这些音乐家跟我也承认，他们也在自己的曲库里有几首很丢人的歌，他就羞于承认他听那些歌，但那几首歌他听的时候每次都很愉快。所以我觉得人性就是很复杂，这个需求是很复杂的。</mark></p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.15</span><span class="tag">约束·创造力</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">限制不只是损失——它同时激发想象力，匮乏反而成了想象的养料</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“你说限制嘛，同时也激发了想象力。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">条件受限别只当倒霉，匮乏逼出来的想象力常常是别人没有的资源。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[00:08]｜《对话稿》一、开场：墨镜、汾阳与卡车司机梦</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我们小的时候太穷了，那个年代。我到美国去出差的时候发现，他们那儿为什么小镇的青年有一天突然下个决心说走就走，都是因为14岁爹妈就给买了车。所以家里虽然穷，买的是个破车，但破车也是说走就走。哪像我们那会儿，看着那个公路铁路都要意淫半天，你就想象嘛。</p>
+<p class="guest"><b>贾樟柯</b>：对。</p>
+<p class="luo"><b>罗永浩</b>：所以他们那儿的小孩，突然有一天叛逆期到了，踩个油门就走了，混不下去又溜溜回来了，也没事。过了两年想清楚了又走了，也都没事。所以我到那以后感觉，这个事对我们的限制还是挺严重的，小的时候你老想着远方，其实是去不了。</p>
+<p class="guest"><b>贾樟柯</b>：你说限制嘛，<mark class="hl">同时也激发了想象力</mark>。</p>
+<p class="luo"><b>罗永浩</b>：对，因为你去不了，就狂想象。</p>
+<p class="guest"><b>贾樟柯</b>：这个除了对艺术创作有好处，对别的有啥好处？</p>
+<p class="luo"><b>罗永浩</b>：没啥好处。</p>
+<p class="guest"><b>贾樟柯</b>：想象是很重要的。你看以前那条公路、山西的尽头叫做军渡，是一个黄河的渡口，汽车通过军渡的大桥就进入陕北、进入陕西了……但是没去过军渡，所以我就幻想军渡是一个——哇，横跨两省啊，对我来说是一个非常神秘的地方。后来拍《站台》的时候第一次去了军渡，就一条铁桥，破破烂烂的，两边两岸都一样。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.16</span><span class="tag">心态·退路</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">很多&#x27;回不去&#x27;是你自己认定的——其实每个角落都有它的乐趣</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“我觉得有时候你回不去，是因为你回不去了，其实能回去，是你自己觉得回不去了，有什么回不去的，每个地方每个角落都有它的乐趣。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">&#x27;回不去&#x27;多半是心里设的限，不是事实——肯回头，前路反而没有后顾之忧。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:17]–[02:19]｜《对话稿》十五、《小武》诞生：从《小山回家》到香港短片展（金句在小节标题前一段「[02:17]/[02:19]」处，对话稿第1011–1013行）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我见过很多文艺圈的朋友，他们就是过于拧巴了，确实有才华，但日常生活里活得特别拧巴，有很多不适合在一个正常社会里生存的偏执的东西，把自己搞得很苦哈哈的，实际上我觉得没必要。所以我以前以为你某种程度上也有一些这个，但听起来完全没有，一直活得都挺游刃有余的，你也没感觉到有什么过程是特别艰难、特别拧巴、特别纠结？</p>
+<p class="guest"><b>贾樟柯</b>：艰难肯定有很多艰难的时刻，但是拧巴就很少了。遇到什么问题解决什么问题，能解决当然好，解决不了就放一放，这东西不跟自己较劲。因为我自己一直有个归宿，内心中有一个终极的归宿。我无论遇到什么样的问题，人生起起伏伏，总有一个地方一定会接纳我，而且那个地方我一定会过得非常愉快，那个地方就是汾阳的街道。我大不了回老家，跟家乡的朋友们、跟家人们在一起生活……所以某种程度，如果今天回头看，因为我一开始就想回去，所以我能回得去；正因为我能回得去，所以我没有后顾之忧。我不觉得我离开汾阳就再也回不去了，我觉得它很美、很愉快。<mark class="hl">我觉得有时候你回不去，是因为你回不去了，其实能回去，是你自己觉得回不去了，有什么回不去的，每个地方每个角落都有它的乐趣。</mark></p>
+<p class="luo"><b>罗永浩</b>：那你觉得你老了有可能回去养老吗？</p>
+<p class="guest"><b>贾樟柯</b>：有可能，对。你像我现在，我在汾阳建了个电影院，有时候我回去在电影院坐一坐，喝个茶，感受一下，我就觉得挺好的。老了干不动了回来，喝个茶，下午朋友们来聊聊，想看什么电影隔壁进去看一下，很惬意。人不一定要一直无止境地追逐下去。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.17</span><span class="tag">成长·茫然</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">灵魂是十几岁才慢慢成形的，从立目标到找到方向之间的茫然是必经阶段</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“那么其实从这个还魂到你真正确立一个目标，它是需要时间的，就是很茫然的，而且生活本身的吸引力是很大的——开心啊，聊天、下棋、打麻将、喝酒、看电影，我觉得这是生活的全部内容了，你还要什么理想？”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">找不到方向的那段茫然不是失败，是必经的过程——别因为一时没目标就否定自己。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[01:26]｜《对话稿》九、晃荡的一年与&quot;中等教育&quot;的劝说（行 687；金句在行 722）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：没有焦虑迷茫？</p>
+<p class="guest"><b>贾樟柯</b>：没有，好好活着。…我那时候是没理想的一个人。我觉得经常有人问孩子们说，你的理想是什么，我觉得那么小他能有啥理想啊？这个理想，南方人讲叫&quot;还魂&quot;。南方人有一种说法，是孩子们到了十一二岁才能获得灵魂。获得灵魂，是你相对有一个稳定的人格了，不是那么闹了。那成长一定有这个阶段，他们认为十几岁有一个魂魄回来的感觉，叫回魂。我很认同这个说法，因为我们一开始动物性很强嘛，小孩嘛，你还没有心智，没成熟。<mark class="hl">那么其实从这个还魂到你真正确立一个目标，它是需要时间的，就是很茫然的，而且生活本身的吸引力是很大的——开心啊，聊天、下棋、打麻将、喝酒、看电影，我觉得这是生活的全部内容了，你还要什么理想？</mark>我觉得过好日子就可以了。但是真的有时候有些契机，他就好像一个光一样，就像你再次还魂一样。</p>
+<p class="luo"><b>罗永浩</b>：老天注定的。</p>
+<p class="guest"><b>贾樟柯</b>：对，那天是很偶然。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="元认知"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.18</span><span class="tag">择业·自我判断</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">判断一件事值不值得当志业，看你会不会被自己做出来的东西打动</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“你如果一写感觉自己很被自己写的东西激动感染，你会往下走吗？……但是写的也还过关还可以，但是也没说是要作为我的职业。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">选不选一条路，别看&#x27;还行/过关&#x27;，看你做的时候会不会被自己做的东西激动——不激动就走不远。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[01:22]–[01:24]｜《对话稿》九、晃荡的一年与&quot;中等教育&quot;的劝说</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：有多长时间？</p>
+<p class="guest"><b>贾樟柯</b>：有一年吧，荒废了有一年。然后我父亲就跟我说……我爸说话有时候特别有技巧，我爸说你啊完成了中等教育——高中——一个人最好能接受高等教育。这个中等教育跟高等教育把我搞晕了，确实让我深思了，很自卑。我说爸我考不上。我爸说你这样吧，你学美术吧，那时候考美术院校不用考数学。我一听来劲了，去太原啊，不用在家待着了。那当时太原是山西大学美术系，有一个考前学习班，山西大学就是我梦想的一个顶点。</p>
+<p class="guest"><b>贾樟柯</b>：在学的过程中就很偶然看了《黄土地》。那当然中间呢，比如说写小说也好，也试着写过小说，也写过诗，我那时候小说写得还不错，虽然只发表了两篇……但是看了《黄土地》之后，那时候也没立志要做作家，我也觉得写作我并不是那么热爱，也没那么有能力。有时候它跟你的能力有关，<mark class="hl">你如果一写感觉自己很被自己写的东西激动感染，你会往下走吗？</mark>我觉得我写的还行，但是离我读过的那些东西差了远去了，没有人家那种语言能力、那种想象力和那种洞察力。<mark class="hl">但是写的也还过关还可以，但是也没说是要作为我的职业。</mark></p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="元认知"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.19</span><span class="tag">行动·拖延</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">不要等条件成熟——你想象中的理想制作条件永远不会自动到来</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“没有条件成熟的时候，永远没有你想象中的制作条件。所有东西你说要成熟了你才去干，其实很难达到。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">别等万事俱备，理想条件永远不会自己来，先做起来。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:43]｜《对话稿》十七、不赔钱的文艺片与《站台》风波</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：今天讲的很多特别特别好，完全没有想到，特别意外惊喜的。那说回《小武》，连制作费用都没有就硬着头皮上马。</p>
+<p class="guest"><b>贾樟柯</b>：反正就像我说的，你只要这个摄影机转开，腾挪展闪总能把它拍完。拍完之后进入后期怎么样咱再想辙。我觉得这之后我就意识到一个东西，<mark class="hl">没有条件成熟的时候，永远没有你想象中的制作条件。所有东西你说要成熟了你才去干，其实很难达到。</mark></p>
+<p class="luo"><b>罗永浩</b>：是的。</p>
+<p class="guest"><b>贾樟柯</b>：当然现在可能制作电影的整个电影工业体系比较完整，也有很多导演可以这样，但是对于当时的我来说，包括现在，有所谓条件并不成熟，我觉得先做吧，不要等那个条件成熟，做起来再说。</p>
+<p class="luo"><b>罗永浩</b>：有一个传闻，我不知道是不是真的，就是据说你从《小武》开始，每个电影都没有赔钱，对吧？</p>
+<p class="guest"><b>贾樟柯</b>：可以说大部分电影没有赔钱，不能说每一个电影都没赔钱。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="元认知"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.20</span><span class="tag">技艺·学习方法</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">语感靠广泛沉浸式观看变成直觉，而不是逐镜拉片式的理性拆解</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“它并不是说你深入地研究每部电影，所谓拉片，一个镜头一个镜头那么去研究……在这个广泛的观看里面，逐渐会形成一个电影的感觉，就所谓语感。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">练任何手艺，先大量沉浸养出直觉，别一上来就逐帧拆解把感觉拆没了。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:04]–[02:06]｜《对话稿》十三、电影学院：晨跑、看罗丹与&quot;两个电影学院&quot;（对话稿行 957-965）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：还有那时候可能看了很多电影史的书，都是纸上谈兵，一个片子都没看。</p>
+<p class="guest"><b>贾樟柯</b>：都是纸上谈兵。因为那时候没有盗版光碟，网络更没有。所以首先电影学院第一个就是看电影，我觉得太幸福了，上的第一课、课堂上就是在看电影。每周二周三各两部，四部电影，所以天天看电影，而且全是只有读电影专业才能看到的这些电影。在那个电影资源非常匮乏的年代，哪怕你不是学习、作为一个影迷也是很幸福的。当然有时候看多了，看个半小时又睡着的时候难免。但是有时候就是在这样一个高强度的观影里面，确实有很多东西变成一种下意识的东西。电影它跟写作有关，它也是讲究语感的，某一种语感的形成，也可以说就电影感的形成。<mark class="hl">它并不是说你深入地研究每部电影，所谓拉片，一个镜头一个镜头那么去研究</mark>，那反而可能是某一种在你掐头去尾、片段式的观看，有时候是沉浸其中，有时候也看不进去。<mark class="hl">在这个广泛的观看里面，逐渐会形成一个电影的感觉，就所谓语感。</mark>当你叙事的时候，当你用视听去呈现一个氛围的时候，你能下意识地、身体能产生一种、你能找到一种语态语感。整个上电影学院，无论是动手的训练还是理论的训练当然重要，我觉得这个更重要。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="元认知"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.21</span><span class="tag">创作·时机</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">作品诞生在哪个时代就是它的命运，别为&#x27;更好的条件&#x27;推迟创作</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“就跟孩子你出生在60年代还是70年代，这就是他的命运嘛，但不是说你怀孕了你不把这个孩子生下来，说我等等十年我让他生在80年代条件更好一些。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">你的作品属于它出生的当下，别为&#x27;十年后条件更好&#x27;而把它压着不生。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:59]–[03:01]（贾樟柯讲两个没听的忠告之一·“先出牌”）｜《对话稿》十九、世界名著、图像时代与不听的两个忠告</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你从第一部长篇就非常鲜明地确立了个人风格，题材整体上也一直在反映这种时代变迁下、从乡村生活到城镇生活的东西。这个是自然形成的，还是有意识地一直朝这个方向去耕耘？</p>
+<p class="guest"><b>贾樟柯</b>：自然形成的吧。因为我给你讲个故事。我有很多年龄比我大的朋友，他们都会给我很多经验，但是有一个朋友跟我说的两个意见我真的是没有听。当时我在《三峡好人》威尼斯结束之后去了巴黎，这个朋友是一个香港导演，后来移居到巴黎，在巴黎跟我见面。他恭喜我，然后说了两个观点，让我思考了很久……他说第一点，你拍电影要先出牌。你手里要多几个牌，你不要想拍什么就拍个啥，你要想四五个想拍的，手里有三四个题材，然后看看现在电影市场发生什么变化了，甚至周围的导演在拍什么，你要考虑这三个电影应该先打哪个。我觉得他是很善意的提醒，但跟我的脾气性格完全不符合。</p>
+<p class="luo"><b>罗永浩</b>：我觉得就想拍啥就拍啥。</p>
+<p class="guest"><b>贾樟柯</b>：对，这个我没听他的。我一直想拍啥就拍啥，我不会考虑周围环境，或者是不是有同类型题材别人刚刚拍过，对我都不重要，重要的是我这个时刻想拍什么。一个作品你有能力让它拍完、让它存活，<mark class="hl">就跟孩子你出生在60年代还是70年代，这就是他的命运嘛，但不是说你怀孕了你不把这个孩子生下来，说我等等十年我让他生在80年代条件更好一些。</mark>所以我觉得一直是这样拍电影。</p></div></div></div></div></div>
+<div class="slide" data-kind="card" data-theme="元认知"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.22</span><span class="tag">创作·优先级</span></div><div class="byline">贾樟柯<span class="src"> · 罗永浩《十字路口》</span></div><div class="blk"><div class="lab labv">观点</div><h2 class="title">真正坐下来要做时，最真实、最迫切、最揪心的东西总会优先</h2></div><div class="blk"><div class="lab labq">贾樟柯 原话</div><blockquote class="quote">“但是真的坐下来想拍的时候，你还是目前的这个感受里面最真实、最迫切的东西总会优先。”</blockquote></div><div class="blk"><div class="lab laby">搬给你</div><p class="take">脑子里的&#x27;聪明构思&#x27;很多，但动手时让当下最迫切、最揪心的那个先上——它才是真的。</p></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 贾樟柯</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:39]｜《对话稿》二十三、怎么当导演：演员、真实与赵涛</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：但是都能调教成非常真实的这种质感，这个东西主要是受谁的影响？就你的电影里的那种真实质感，很多像是就不像是电影，就完全没有表演痕迹……</p>
+<p class="guest"><b>贾樟柯</b>：你要说这个呢，我觉得这有两点吧。其实从这个角度来说，是一个反作用力。这个反作用力就是在于我们在学电影的那个时代所看到的，特别是咱们自己的国产电影，表演太浮夸了。然后呢，你就觉得，可不可以生活化一些。那再一部分呢，跟电影理论有关，就是所谓电影它是一个物质现实世界的还原，那你要考虑什么是现实世界，那包括我们这个现实世界的人，那就是松松垮垮，有很多自然的反应嘛。我觉得电影它可以做很多事情，电影很戏剧性、很偶像化、很传奇性，科幻片、灾难什么都可以。但是电影这个媒介它最重要一个美感，是对这个世界能事无巨细地还原，这是它最美的地方。那我喜欢这个东西，我的生活环境是这样子的，那我就用这样的方法、用这样的演员来合作。</p>
+<p class="luo"><b>罗永浩</b>：所以就是风格和美学上的偏好，喜欢这一派的。</p>
+<p class="guest"><b>贾樟柯</b>：因为其实我觉得也是从咱们那个资源匮乏的年代来临的。其实我自己有非常多的不同类型电影的想象，但是每一次拍电影，当你心里有个感觉了，说这段咱准备新电影吧，从剧本写起，坐在那了，你总觉得拍次电影不容易，其他的类型咱就放一放吧，咱先拍一个咱这个阶段最揪心的、最想表达的、感触最强的，那就拍了。所以其他类型比如说戏剧性的我也有很多，我有这些构思，像说了很久的什么《在清朝》啊、《双雄会》啊，都是强戏剧的。<mark class="hl">但是真的坐下来想拍的时候，你还是目前的这个感受里面最真实、最迫切的东西总会优先。</mark></p>
+<p class="luo"><b>罗永浩</b>：就是现实优先。</p></div></div></div></div></div>
+<div class="slide end" data-kind="end"><div class="card static"><div class="flip"><div class="face front solo"><div class="kicker">22 张刷完</div><h2 class="title">想再往里走一层？</h2><p class="lead">· 想看人物全貌 → 翻《精读解析》<br>· 想钻原片 → 照每张背面的节号 / 时间戳去对话稿</p><div class="ftip">来源：罗永浩《十字路口》× 贾樟柯</div></div></div></div></div>
+</div>
+<button class="nav prev" id="navprev" aria-label="上一张">❮</button>
+<button class="nav next" id="navnext" aria-label="下一张">❯</button>
+<script>
+var root=document.documentElement;
+(function(){var t=localStorage.getItem('sk-theme');if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';root.setAttribute('data-theme',t);})();
+document.getElementById('tbtn').onclick=function(e){e.stopPropagation();var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem('sk-theme',n);};
+var feed=document.querySelector('.feed'),prog=document.getElementById('prog'),counter=document.getElementById('counter');
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+var content=slides.filter(function(s){return s.dataset.kind==='card';});
+function vis(){return content.filter(function(s){return s.style.display!=='none';});}
+function visAll(){return slides.filter(function(s){return s.style.display!=='none';});}
+var prevBtn=document.getElementById('navprev'),nextBtn=document.getElementById('navnext');
+function curIndex(){return Math.round(feed.scrollLeft/feed.clientWidth);}
+function updateArrows(){var v=visAll(),i=curIndex();prevBtn.style.visibility=(i<=0)?'hidden':'visible';nextBtn.style.visibility=(i>=v.length-1)?'hidden':'visible';}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;
+  if(t.dataset.kind==='cover'){counter.textContent='封面';prog.style.width='0%';}
+  else if(t.dataset.kind==='end'){counter.textContent='完';prog.style.width='100%';}
+  else{var v=vis(),i=v.indexOf(t)+1;counter.textContent=i+' / '+v.length;prog.style.width=(i/v.length*100)+'%';}
+  updateArrows();
+});},{root:feed,threshold:.6});
+slides.forEach(function(s){io.observe(s);});
+function go(dir){var v=visAll(),i=curIndex(),j=Math.min(Math.max(i+dir,0),v.length-1);feed.scrollLeft=v[j].offsetLeft;updateArrows();}
+prevBtn.onclick=function(e){e.stopPropagation();go(-1);};
+nextBtn.onclick=function(e){e.stopPropagation();go(1);};
+feed.addEventListener('scroll',updateArrows,{passive:true});
+document.querySelectorAll('.fb').forEach(function(b){b.onclick=function(){
+  document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('on');});b.classList.add('on');
+  var th=b.dataset.theme;
+  slides.forEach(function(s){
+    if(s.dataset.kind!=='card'){s.style.display=(th==='all')?'':'none';return;}
+    s.style.display=(th==='all'||s.dataset.theme===th)?'':'none';
+  });
+  feed.scrollLeft=0;updateArrows();
+};});
+document.querySelectorAll('.card[data-flip]').forEach(function(card){
+  var sx=0,sy=0,moved=false;
+  card.addEventListener('pointerdown',function(e){sx=e.clientX;sy=e.clientY;moved=false;});
+  card.addEventListener('pointermove',function(e){if(Math.abs(e.clientX-sx)>9||Math.abs(e.clientY-sy)>9)moved=true;});
+  card.addEventListener('pointerup',function(e){if(moved)return;card.classList.toggle('flipped');});
+});
+</script>
+</body></html>
