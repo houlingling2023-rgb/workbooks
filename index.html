@@ -2,93 +2,99 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0c0d12">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
-<title>向前 · 观点速刷</title>
+<meta name="theme-color" content="#f4ecd8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%23a8392b'/%3E%3Ctext x='50' y='73' font-size='60' text-anchor='middle' fill='%23f4ecd8' font-family='Songti SC,serif' font-weight='700'%3E%E5%88%B7%3C/text%3E%3C/svg%3E">
+<title>向前 · 我的内容库</title>
 <style>
-:root{--bg:#0c0d12;--surface:#15171f;--surface2:#1d2029;--line:rgba(255,255,255,.07);
---ink:#eef0f6;--sub:#8f96a8}
+:root{--bg:#f4ecd8;--card:#faf5e9;--ink:#2c2620;--sub:#8b8170;--line:#d8ccb2;
+--accent:#a8392b;--accent-soft:#f0e2d2;--luo:#44597a;
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+html[data-theme=dark]{--bg:#211e1a;--card:#292520;--ink:#e9e1d0;--sub:#a89e8b;--line:#43392e;
+--accent:#d88a6e;--accent-soft:#3a2a23;--luo:#8fa7c9}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--ink);
-font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","SF Pro SC","HarmonyOS Sans SC","Noto Sans SC","Microsoft YaHei",sans-serif;
--webkit-font-smoothing:antialiased;line-height:1.6}
+font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+body::before{content:"";position:fixed;inset:0;background:var(--grain);pointer-events:none;z-index:0}
 a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;color:inherit}
 
-body{min-height:100dvh}
-.glow{position:fixed;width:64vmax;height:64vmax;border-radius:50%;filter:blur(100px);opacity:.13;pointer-events:none;z-index:0}
-.glow.a{top:-34vmax;left:-20vmax;background:#5b8cff}
-.glow.b{bottom:-36vmax;right:-22vmax;background:#a855f7}
-.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 22px 80px}
-.hero{padding:64px 0 30px}
-.brand{font-size:.74rem;letter-spacing:.3em;color:var(--sub);font-weight:700;text-transform:uppercase}
-.hero h1{font-size:clamp(2.6rem,8vw,4rem);font-weight:850;line-height:1.1;margin:16px 0 0;letter-spacing:.01em}
-.hero h1 .grad{background:linear-gradient(95deg,#5b8cff,#38d4e4 45%,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .lead{margin-top:18px;font-size:1.02rem;color:var(--sub);max-width:34em;line-height:1.75}
-.actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
-.act{display:flex;align-items:center;gap:7px;font-size:.88rem;font-weight:700;color:var(--ink);
-background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:10px 18px;transition:.15s}
-.act:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.18)}
-.act.star{background:linear-gradient(90deg,#5b8cff,#38d4e4);color:#0c0d12;border-color:transparent}
-.act .n{font-size:.74rem;background:rgba(0,0,0,.25);border-radius:10px;padding:1px 8px}
-.act.star .n{background:rgba(255,255,255,.3)}
-.sect{margin-top:38px;display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px}
-.sect h2{font-size:1.15rem;font-weight:800}
-.sect .ct{font-size:.78rem;color:var(--sub)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;margin-top:22px}
-.deck{position:relative;display:block}
-.deck::before,.deck::after{content:"";position:absolute;inset:0;border-radius:22px;background:var(--surface2);
-border:1px solid var(--line);transition:.2s;z-index:0}
-.deck::before{transform:rotate(-2.2deg) translateY(4px)}
-.deck::after{transform:rotate(1.6deg) translateY(2px)}
-.deck:hover::before{transform:rotate(-3.4deg) translateY(6px)}
-.deck:hover::after{transform:rotate(2.6deg) translateY(3px)}
-.dk{position:relative;z-index:1;background:linear-gradient(165deg,var(--t12),rgba(255,255,255,0) 50%),var(--surface);
-border:1px solid var(--line);border-radius:22px;padding:20px 20px 18px;display:flex;flex-direction:column;min-height:208px;
-transition:.2s;box-shadow:0 14px 40px rgba(0,0,0,.35)}
-.deck:hover .dk{transform:translateY(-4px);box-shadow:0 22px 60px rgba(0,0,0,.5),0 6px 24px var(--t18);border-color:var(--t30)}
-.dk .row{display:flex;align-items:center;gap:9px;margin-bottom:12px}
-.dk .ix{font-size:.78rem;font-weight:800;letter-spacing:.08em;background:linear-gradient(90deg,var(--c1),var(--c2));
--webkit-background-clip:text;background-clip:text;color:transparent}
-.dk .fd{font-size:.68rem;color:var(--sub);border:1px solid var(--line);background:var(--surface2);border-radius:16px;padding:2px 10px;margin-left:auto}
-.dk h3{font-size:1.3rem;font-weight:800;letter-spacing:.01em}
-.dk .who{font-size:.84rem;color:var(--sub);line-height:1.65;margin-top:7px;flex:1;
-display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.dk .meter{margin-top:14px}
-.dk .mtxt{display:flex;justify-content:space-between;font-size:.7rem;color:var(--sub);margin-bottom:6px;font-variant-numeric:tabular-nums}
-.dk .bar{height:4px;border-radius:3px;background:var(--surface2);overflow:hidden}
-.dk .fill{height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .6s ease}
-footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);color:var(--sub);font-size:.78rem;text-align:center;letter-spacing:.05em}
-@media(max-width:600px){.hero{padding:48px 0 22px}.wrap{padding:0 16px 64px}}
+.theme{position:fixed;top:16px;right:16px;z-index:10;width:38px;height:38px;border-radius:3px;
+border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:1rem;
+box-shadow:0 4px 14px rgba(60,40,20,.10)}
+.theme:active{transform:scale(.93)}
+.wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 28px 90px}
+.hero{padding:76px 0 42px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+.eyebrow{font-size:.74rem;letter-spacing:.38em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:clamp(3.2rem,11vw,5rem);line-height:1;font-weight:800;margin:20px 0 0;letter-spacing:.05em}
+.hero h1 .en{display:block;font-size:1rem;font-weight:600;letter-spacing:.3em;color:var(--sub);text-transform:uppercase;margin-top:16px}
+.hero .lead{margin-top:28px;font-size:1.14rem;line-height:1.78;color:var(--ink);max-width:31em;font-style:italic}
+.hero .lead .accent{color:var(--accent);font-style:normal;font-weight:700}
+.actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+.act{display:flex;align-items:center;gap:7px;font-size:.84rem;font-weight:700;letter-spacing:.16em;color:var(--ink);
+background:var(--card);border:1px solid var(--line);border-radius:3px;padding:9px 20px;transition:.15s}
+.act:hover{transform:translateY(-2px);border-color:var(--accent)}
+.act.star{background:var(--accent);color:var(--card);border-color:var(--accent)}
+.act .n{font-size:.72rem;letter-spacing:0;background:rgba(255,255,255,.25);border-radius:8px;padding:0 7px}
+.col{margin-top:52px}
+.col-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:26px}
+.col-head .no{font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
+.col-head .nm{font-size:1.4rem;font-weight:800;flex:1;letter-spacing:.04em}
+.col-head .ct{font-size:.8rem;color:var(--sub);letter-spacing:.08em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card.book{display:flex;flex-direction:column;color:inherit;background:var(--card);
+border:1px solid var(--line);border-radius:4px;padding:24px 22px;transition:.2s ease}
+.card.book:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 30px rgba(60,40,20,.12)}
+.card.book .tag{font-size:.7rem;letter-spacing:.2em;font-weight:700;color:var(--accent);margin-bottom:12px}
+.card.book h3{font-size:1.26rem;font-weight:800;line-height:1.35;margin-bottom:9px}
+.card.book p{font-size:.9rem;color:var(--sub);line-height:1.72;flex:1}
+.meter{margin-top:14px}
+.mtxt{display:flex;justify-content:space-between;font-size:.72rem;color:var(--sub);margin-bottom:6px;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.bar{height:3px;background:var(--accent-soft);overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent);transition:width .6s ease}
+.card.book .go{margin-top:13px;font-size:.82rem;font-weight:700;letter-spacing:.1em;color:var(--accent);display:flex;align-items:center;gap:6px}
+.card.book .go .ar{transition:.2s} .card.book:hover .go .ar{transform:translateX(5px)}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);color:var(--sub);font-size:.8rem;text-align:center;letter-spacing:.14em}
+@media(max-width:600px){
+.hero{padding:56px 0 32px}.hero .lead{font-size:1.04rem}
+.wrap{padding:0 20px 70px}.col-head .nm{font-size:1.2rem}}
 </style>
 </head><body>
-<div class="glow a"></div><div class="glow b"></div>
+<button class="theme" id="tbtn" title="深色/浅色">◐</button>
 <div class="wrap">
 <header class="hero">
-<div class="brand">Xiang Qian · Onward</div>
-<h1>刷点<span class="grad">观点</span>。</h1>
-<p class="lead">把罗永浩《十字路口》访谈里最扎的观点，榨成一张张 30 秒能刷完的卡——正面是观点和原话，翻过去是访谈现场。看到在意的就标记，回头去收藏夹复盘。</p>
+<div class="eyebrow">A Personal Library</div>
+<h1>向前<span class="en">Xiang Qian · Onward</span></h1>
+<p class="lead">把罗永浩《十字路口》访谈里最扎的观点，榨成一张张 <span class="accent">30 秒能读完</span>的卡——正面是观点和原话，翻过去是访谈现场。看到在意的就标记，回头去收藏夹复盘。</p>
 <div class="actions">
-<a class="act star" href="luokou/shoucang/">⭐ 我的收藏 <span class="n" id="markn" style="display:none">0</span></a>
-<button class="act" id="rand">🎲 随机来一张</button>
+<a class="act star" href="luokou/shoucang/">★ 我的收藏 <span class="n" id="markn" style="display:none">0</span></a>
+<button class="act" id="rand">随机一张</button>
 </div>
 </header>
-<div class="sect"><h2>对谈者</h2><span class="ct">256 个观点 · 10 位 · 每位一副卡组</span></div>
+<section class="col">
+<div class="col-head"><span class="no">No.01</span><span class="nm">观点速刷</span><span class="ct">256 个观点 · 10 位对谈者</span></div>
 <div class="grid">
-<a class="deck" href="luokou/tim/cards/" style="--c1:#5b8cff;--c2:#38d4e4;--t12:rgba(91,140,255,0.12);--t18:rgba(91,140,255,0.18);--t30:rgba(91,140,255,0.3)"><span class="dk"><span class="row"><span class="ix">NO.01</span><span class="fd">影像 · 31 张</span></span><h3>影视飓风 Tim</h3><span class="who">一个用极致理性丈量一切、却想死在火星的影像偏执狂</span><span class="meter" id="p-tim"><span class="mtxt"><span class="l">31 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/zhouhongyi/cards/" style="--c1:#ff5252;--c2:#ff9446;--t12:rgba(255,82,82,0.12);--t18:rgba(255,82,82,0.18);--t30:rgba(255,82,82,0.3)"><span class="dk"><span class="row"><span class="ix">NO.02</span><span class="fd">互联网 · 28 张</span></span><h3>周鸿祎</h3><span class="who">一个把“别错过”刻进骨子里、次次跳进新浪潮的红衣老兵</span><span class="meter" id="p-zhouhongyi"><span class="mtxt"><span class="l">28 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/lixiang/cards/" style="--c1:#2fd383;--c2:#a3e635;--t12:rgba(47,211,131,0.12);--t18:rgba(47,211,131,0.18);--t30:rgba(47,211,131,0.3)"><span class="dk"><span class="row"><span class="ix">NO.03</span><span class="fd">汽车 · 35 张</span></span><h3>李想</h3><span class="who">一个把掌控命运刻进十八岁的产品经理</span><span class="meter" id="p-lixiang"><span class="mtxt"><span class="l">35 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/hexiaopeng/cards/" style="--c1:#1fc7b8;--c2:#3fa9f5;--t12:rgba(31,199,184,0.12);--t18:rgba(31,199,184,0.18);--t30:rgba(31,199,184,0.3)"><span class="dk"><span class="row"><span class="ix">NO.04</span><span class="fd">汽车 · 28 张</span></span><h3>何小鹏</h3><span class="who">一个财富自由后主动跳进无尽地狱的产品经理</span><span class="meter" id="p-hexiaopeng"><span class="mtxt"><span class="l">28 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/yeguofu/cards/" style="--c1:#ff5c9e;--c2:#ff8a5b;--t12:rgba(255,92,158,0.12);--t18:rgba(255,92,158,0.18);--t30:rgba(255,92,158,0.3)"><span class="dk"><span class="row"><span class="ix">NO.05</span><span class="fd">零售 · 27 张</span></span><h3>叶国富</h3><span class="who">一个总在别人看不懂时下注的零售老兵</span><span class="meter" id="p-yeguofu"><span class="mtxt"><span class="l">27 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/renke/cards/" style="--c1:#ffd34d;--c2:#f59e0b;--t12:rgba(255,211,77,0.12);--t18:rgba(255,211,77,0.18);--t30:rgba(255,211,77,0.3)"><span class="dk"><span class="row"><span class="ix">NO.06</span><span class="fd">音乐 · 11 张</span></span><h3>仁科</h3><span class="who">一个相信一切都“长出来”的偶然主义者</span><span class="meter" id="p-renke"><span class="mtxt"><span class="l">11 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/heguangzhi/cards/" style="--c1:#ff8a3d;--c2:#ffc53d;--t12:rgba(255,138,61,0.12);--t18:rgba(255,138,61,0.18);--t30:rgba(255,138,61,0.3)"><span class="dk"><span class="row"><span class="ix">NO.07</span><span class="fd">脱口秀 · 27 张</span></span><h3>何广智</h3><span class="who">一个把窘迫炼成天赋的清醒人</span><span class="meter" id="p-heguangzhi"><span class="mtxt"><span class="l">27 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/jiazhangke/cards/" style="--c1:#9aa7bd;--c2:#6b7a94;--t12:rgba(154,167,189,0.12);--t18:rgba(154,167,189,0.18);--t30:rgba(154,167,189,0.3)"><span class="dk"><span class="row"><span class="ix">NO.08</span><span class="fd">电影 · 22 张</span></span><h3>贾樟柯</h3><span class="who">一个从汾阳街头长出来、把一个时代“毛骨悚然地”还原下来的人</span><span class="meter" id="p-jiazhangke"><span class="mtxt"><span class="l">22 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/zhengzhi/cards/" style="--c1:#7dd3fc;--c2:#bfc8ff;--t12:rgba(125,211,252,0.12);--t18:rgba(125,211,252,0.18);--t30:rgba(125,211,252,0.3)"><span class="dk"><span class="row"><span class="ix">NO.09</span><span class="fd">文学 · 20 张</span></span><h3>郑执</h3><span class="who">一个总在赶末班车的手艺人</span><span class="meter" id="p-zhengzhi"><span class="mtxt"><span class="l">20 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
-<a class="deck" href="luokou/lixiang-ai/cards/" style="--c1:#a855f7;--c2:#6366f1;--t12:rgba(168,85,247,0.12);--t18:rgba(168,85,247,0.18);--t30:rgba(168,85,247,0.3)"><span class="dk"><span class="row"><span class="ix">NO.10</span><span class="fd">AI · 27 张</span></span><h3>李想（AI专场）</h3><span class="who">一个想用AI把“富豪生活”平民化、又坚信“AI在放大差距”的人</span><span class="meter" id="p-lixiang-ai"><span class="mtxt"><span class="l">27 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span></span></a>
+<a class="card book" href="luokou/tim/cards/"><span class="tag">观点速刷 · 影像</span><h3>罗永浩 × 影视飓风 Tim</h3><p>一个用极致理性丈量一切、却想死在火星的影像偏执狂。</p><span class="meter" id="p-tim"><span class="mtxt"><span class="l">31 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/zhouhongyi/cards/"><span class="tag">观点速刷 · 互联网</span><h3>罗永浩 × 周鸿祎</h3><p>一个把“别错过”刻进骨子里、次次跳进新浪潮的红衣老兵。</p><span class="meter" id="p-zhouhongyi"><span class="mtxt"><span class="l">28 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/lixiang/cards/"><span class="tag">观点速刷 · 汽车</span><h3>罗永浩 × 李想</h3><p>一个把掌控命运刻进十八岁的产品经理。</p><span class="meter" id="p-lixiang"><span class="mtxt"><span class="l">35 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/hexiaopeng/cards/"><span class="tag">观点速刷 · 汽车</span><h3>罗永浩 × 何小鹏</h3><p>一个财富自由后主动跳进无尽地狱的产品经理。</p><span class="meter" id="p-hexiaopeng"><span class="mtxt"><span class="l">28 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/yeguofu/cards/"><span class="tag">观点速刷 · 零售</span><h3>罗永浩 × 叶国富</h3><p>一个总在别人看不懂时下注的零售老兵。</p><span class="meter" id="p-yeguofu"><span class="mtxt"><span class="l">27 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/renke/cards/"><span class="tag">观点速刷 · 音乐</span><h3>罗永浩 × 仁科</h3><p>一个相信一切都“长出来”的偶然主义者。</p><span class="meter" id="p-renke"><span class="mtxt"><span class="l">11 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/heguangzhi/cards/"><span class="tag">观点速刷 · 脱口秀</span><h3>罗永浩 × 何广智</h3><p>一个把窘迫炼成天赋的清醒人。</p><span class="meter" id="p-heguangzhi"><span class="mtxt"><span class="l">27 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/jiazhangke/cards/"><span class="tag">观点速刷 · 电影</span><h3>罗永浩 × 贾樟柯</h3><p>一个从汾阳街头长出来、把一个时代“毛骨悚然地”还原下来的人。</p><span class="meter" id="p-jiazhangke"><span class="mtxt"><span class="l">22 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/zhengzhi/cards/"><span class="tag">观点速刷 · 文学</span><h3>罗永浩 × 郑执</h3><p>一个总在赶末班车的手艺人。</p><span class="meter" id="p-zhengzhi"><span class="mtxt"><span class="l">20 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
+<a class="card book" href="luokou/lixiang-ai/cards/"><span class="tag">观点速刷 · AI</span><h3>罗永浩 × 李想（AI专场）</h3><p>一个想用AI把“富豪生活”平民化、又坚信“AI在放大差距”的人。</p><span class="meter" id="p-lixiang-ai"><span class="mtxt"><span class="l">27 张待刷</span><span class="r"></span></span><span class="bar"><span class="fill"></span></span></span><span class="go">开始刷 <span class="ar">→</span></span></a>
 </div>
+</section>
 <footer>256 个观点 · 一直向前</footer>
 </div>
 <script>
+var root=document.documentElement;
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t)}
+setTheme(localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+var tb=document.getElementById('tbtn');
+if(tb)tb.onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+
 var G=[{"slug": "tim", "count": 31, "nos": [1, 2, 3, 29, 5, 10, 13, 14, 16, 23, 27, 28, 6, 8, 11, 17, 18, 19, 22, 25, 7, 9, 12, 20, 21, 30, 31, 4, 15, 24, 26]}, {"slug": "zhouhongyi", "count": 28, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]}, {"slug": "lixiang", "count": 35, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]}, {"slug": "hexiaopeng", "count": 28, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]}, {"slug": "yeguofu", "count": 27, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]}, {"slug": "renke", "count": 11, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}, {"slug": "heguangzhi", "count": 27, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]}, {"slug": "jiazhangke", "count": 22, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]}, {"slug": "zhengzhi", "count": 20, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]}, {"slug": "lixiang-ai", "count": 27, "nos": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]}];
 function load(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}}}
 var R=load('vp-reactions'),S=load('vp-seen');
@@ -99,7 +105,7 @@ G.forEach(function(g){
  var seen=cnt(S,g.slug),m=cnt(R,g.slug);
  var el=document.getElementById('p-'+g.slug);if(!el)return;
  el.querySelector('.l').textContent=seen?('已刷 '+seen+'/'+g.count):(g.count+' 张待刷');
- el.querySelector('.r').textContent=m?('⭐ '+m):'';
+ el.querySelector('.r').textContent=m?('★ '+m):'';
  el.querySelector('.fill').style.width=Math.min(100,seen/g.count*100)+'%';});
 document.getElementById('rand').addEventListener('click',function(){
  var g=G[Math.floor(Math.random()*G.length)];

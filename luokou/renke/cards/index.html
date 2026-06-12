@@ -2,163 +2,191 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#0c0d12">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
+<meta name="theme-color" content="#f4ecd8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%23a8392b'/%3E%3Ctext x='50' y='73' font-size='60' text-anchor='middle' fill='%23f4ecd8' font-family='Songti SC,serif' font-weight='700'%3E%E5%88%B7%3C/text%3E%3C/svg%3E">
 <title>仁科 · 观点速刷卡</title>
 <style>
-:root{--bg:#0c0d12;--surface:#15171f;--surface2:#1d2029;--line:rgba(255,255,255,.07);
---ink:#eef0f6;--sub:#8f96a8}
+:root{--bg:#f4ecd8;--card:#faf5e9;--ink:#2c2620;--sub:#8b8170;--line:#d8ccb2;
+--accent:#a8392b;--accent-soft:#f0e2d2;--luo:#44597a;
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+html[data-theme=dark]{--bg:#211e1a;--card:#292520;--ink:#e9e1d0;--sub:#a89e8b;--line:#43392e;
+--accent:#d88a6e;--accent-soft:#3a2a23;--luo:#8fa7c9}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--ink);
-font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","SF Pro SC","HarmonyOS Sans SC","Noto Sans SC","Microsoft YaHei",sans-serif;
--webkit-font-smoothing:antialiased;line-height:1.6}
+font-family:Georgia,"Times New Roman","Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+body::before{content:"";position:fixed;inset:0;background:var(--grain);pointer-events:none;z-index:0}
 a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;color:inherit}
 
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-.glow{position:fixed;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px);opacity:.14;pointer-events:none;z-index:0}
-.glow.a{top:-30vmax;left:-18vmax;background:#ffd34d}
-.glow.b{bottom:-32vmax;right:-20vmax;background:#f59e0b}
-.prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#ffd34d,#f59e0b);z-index:70;transition:width .25s;border-radius:0 3px 3px 0}
-.topbar{position:fixed;top:0;left:0;right:0;height:50px;z-index:60;display:flex;align-items:center;gap:8px;
-padding:0 10px;background:rgba(12,13,18,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.hback{flex:none;width:32px;height:30px;border-radius:16px;border:1px solid var(--line);background:var(--surface);
-color:var(--sub);font-size:.95rem;display:flex;align-items:center;justify-content:center}
+.prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:70;transition:width .25s}
+.topbar{position:fixed;top:0;left:0;right:0;height:48px;z-index:60;display:flex;align-items:center;gap:8px;
+padding:0 10px;background:var(--bg);border-bottom:1px solid var(--line)}
+.hback,.tbtn{flex:none;width:30px;height:28px;border-radius:3px;border:1px solid var(--line);background:var(--card);
+color:var(--sub);font-size:.9rem;display:flex;align-items:center;justify-content:center;line-height:1}
 .filterbar{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .filterbar::-webkit-scrollbar{display:none}
-.fb{flex:none;font-size:.78rem;color:var(--sub);background:var(--surface);border:1px solid var(--line);
-border-radius:18px;padding:5px 12px;white-space:nowrap;transition:.15s}
-.fb.on{color:#0c0d12;background:linear-gradient(90deg,#ffd34d,#f59e0b);border-color:transparent;font-weight:700}
-.counter{flex:none;font-size:.72rem;color:var(--sub);min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
-.nav{position:fixed;top:calc(50% - 4px);transform:translateY(-50%);z-index:55;width:34px;height:34px;border-radius:50%;
-border:1px solid var(--line);background:var(--surface);color:#ffd34d;font-size:.95rem;display:flex;align-items:center;
-justify-content:center;opacity:.4;transition:opacity .15s,background .15s}
-.nav:hover,.nav:active{opacity:1;background:#ffd34d;color:#0c0d12;border-color:transparent}
-.nav.prev{left:7px}.nav.next{right:7px}
-.feed{position:relative;z-index:1;display:flex;height:calc(100dvh - 106px);margin-top:50px;overflow-x:auto;overflow-y:hidden;
+.fb{flex:none;font-size:.78rem;letter-spacing:.08em;color:var(--sub);background:var(--card);
+border:1px solid var(--line);border-radius:3px;padding:4px 12px;white-space:nowrap}
+.fb.on{color:var(--card);background:var(--accent);border-color:var(--accent);font-weight:700}
+.counter{flex:none;font-size:.72rem;color:var(--sub);min-width:48px;text-align:right;font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.nav{position:fixed;top:calc(50% - 4px);transform:translateY(-50%);z-index:55;width:32px;height:32px;border-radius:3px;
+border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:.9rem;display:flex;
+align-items:center;justify-content:center;opacity:.4;transition:opacity .15s}
+.nav:hover,.nav:active{opacity:.96;background:var(--accent);color:var(--card);border-color:var(--accent)}
+.nav.prev{left:6px}.nav.next{right:6px}
+.feed{position:relative;z-index:1;display:flex;height:calc(100dvh - 100px);margin-top:48px;overflow-x:auto;overflow-y:hidden;
 scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .feed::-webkit-scrollbar{display:none}
-.slide{flex:0 0 100%;height:100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3.5vw,26px)}
-.card{width:min(560px,100%);height:min(82dvh,750px);perspective:1700px;cursor:pointer}
+.slide{flex:0 0 100%;height:100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:clamp(13px,3.8vw,26px)}
+.card{width:min(560px,100%);height:min(81dvh,745px);perspective:1700px;cursor:pointer}
 .flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.75,.2,1)}
 .card.flipped .flip{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-background:linear-gradient(165deg,rgba(255,211,77,0.06),rgba(255,255,255,0) 45%),var(--surface);
-border:1px solid var(--line);border-radius:26px;
-box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 0 1px rgba(255,211,77,0.08),0 8px 28px rgba(255,211,77,0.1);
-padding:clamp(20px,4.6vw,30px);display:flex;flex-direction:column;overflow:hidden}
+background:var(--card);border:1px solid var(--line);border-radius:8px;
+box-shadow:0 14px 40px rgba(60,40,20,.16),0 2px 8px rgba(60,40,20,.08);
+padding:clamp(22px,5vw,34px);display:flex;flex-direction:column;overflow:hidden}
+.face::after{content:"";position:absolute;inset:8px;border:1px solid var(--line);border-radius:4px;pointer-events:none;opacity:.65}
 .face.front{overflow-y:auto;scrollbar-width:none}
 .face.front::-webkit-scrollbar{display:none}
 .face.back{transform:rotateY(180deg)}
-.top{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex:none}
-.no{font-size:.8rem;letter-spacing:.1em;font-weight:800;background:linear-gradient(90deg,#ffd34d,#f59e0b);
--webkit-background-clip:text;background-clip:text;color:transparent}
-.byline{font-size:.78rem;color:var(--sub)}
-.chip{font-size:.7rem;color:var(--sub);border:1px solid var(--line);background:var(--surface2);padding:3px 10px;border-radius:18px;margin-left:auto;white-space:nowrap}
-.title{font-size:clamp(1.32rem,4.6vw,1.8rem);line-height:1.3;font-weight:800;letter-spacing:.01em;margin-bottom:16px}
-.qlab,.tlab{font-size:.66rem;font-weight:800;letter-spacing:.12em;margin-bottom:6px;color:var(--sub)}
-.tlab{color:#ffd34d}
-.qwrap{margin-bottom:14px}
-.quote{padding:2px 0 2px 14px;border-left:3px solid #ffd34d;font-size:clamp(.94rem,3.4vw,1.05rem);line-height:1.6;color:#d7dbe6}
-.take{background:rgba(255,211,77,0.1);border:1px solid rgba(255,211,77,0.14);border-radius:16px;padding:12px 14px;margin-bottom:6px}
-.take p{font-size:clamp(.9rem,3.3vw,.99rem);line-height:1.6}
-.reacts{margin-top:auto;display:flex;gap:7px;padding-top:14px;flex:none}
-.rx{flex:1 1 0;min-width:56px;font-size:.74rem;color:var(--sub);background:var(--surface2);border:1px solid var(--line);
-border-radius:18px;padding:8px 4px;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;transition:.13s}
-.rx.on{color:#0c0d12;background:linear-gradient(90deg,#ffd34d,#f59e0b);border-color:transparent;font-weight:700}
-.ftip{margin-top:10px;font-size:.76rem;color:var(--sub);text-align:center;flex:none}
-.botbar{position:fixed;bottom:0;left:0;right:0;height:56px;z-index:60;display:flex;
-background:rgba(12,13,18,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
-padding-bottom:env(safe-area-inset-bottom)}
-.bt{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:1.1rem;color:var(--sub);position:relative}
-.bt b{font-size:.64rem;font-weight:600}
-.bt.on{color:#ffd34d}
-.badge{position:absolute;top:5px;left:calc(50% + 9px);min-width:15px;height:15px;line-height:15px;font-size:.6rem;
-color:#0c0d12;background:linear-gradient(90deg,#ffd34d,#f59e0b);border-radius:8px;padding:0 4px;text-align:center;font-weight:700}
+.top{display:flex;align-items:baseline;gap:9px;flex:none;padding-right:92px}
+.no{font-size:.92rem;letter-spacing:.14em;color:var(--accent);font-weight:800;flex:none}
+.byline{font-size:.76rem;color:var(--sub);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{align-self:flex-start;flex:none;margin-bottom:14px;font-size:.68rem;letter-spacing:.1em;color:var(--sub);border:1px solid var(--line);padding:3px 10px;border-radius:2px;white-space:nowrap}
+/* 正面内容组：上下弹性空隙 → 垂直居中，治头重脚轻 */
+.sp{flex:1 1 0;min-height:10px}
+.blk{flex:none;margin-bottom:16px}
+.lab{font-size:.68rem;font-weight:800;letter-spacing:.22em;margin-bottom:7px;color:var(--sub)}
+.lab.red{color:var(--accent)}
+.title{font-size:clamp(1.36rem,4.8vw,1.9rem);line-height:1.32;font-weight:800;letter-spacing:-.01em}
+.quote{padding:2px 0 2px 15px;border-left:3px solid var(--accent);font-size:clamp(.96rem,3.5vw,1.08rem);line-height:1.62}
+.take p{font-size:clamp(.92rem,3.4vw,1.02rem);line-height:1.62;color:var(--accent);font-weight:700}
+.reacts{display:flex;gap:8px;padding-top:12px;flex:none}
+.rx{flex:1 1 0;min-width:58px;font-size:.78rem;letter-spacing:.12em;color:var(--ink);background:var(--card);
+border:1px solid var(--line);border-radius:3px;padding:8px 4px;display:flex;align-items:center;justify-content:center;
+gap:5px;white-space:nowrap;transition:.12s}
+.rx:hover{border-color:var(--sub)}
+.rx.on{color:var(--card);background:var(--accent);border-color:var(--accent);font-weight:700}
+.ftip{margin-top:10px;font-size:.74rem;letter-spacing:.1em;color:var(--sub);text-align:center;flex:none}
+.botbar{position:fixed;bottom:0;left:0;right:0;height:50px;z-index:60;display:flex;background:var(--bg);
+border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.bt{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font-size:.82rem;letter-spacing:.18em;color:var(--sub);position:relative}
+.bt.on{color:var(--accent);font-weight:700}
+/* 记忆:默认续读,顶部轻提示条(几秒后自动消失;点"从头读"才跳第1张) */
+.rehint{position:fixed;top:58px;left:50%;z-index:65;display:none;align-items:center;gap:11px;
+background:var(--accent);border:none;border-radius:22px;padding:7px 8px 7px 16px;
+font-size:.8rem;letter-spacing:.04em;color:var(--card);box-shadow:0 10px 28px rgba(60,40,20,.28);
+transform:translateX(-50%) translateY(-10px);opacity:0;transition:opacity .25s,transform .25s}
+.rehint.show{display:flex;opacity:1;transform:translateX(-50%) translateY(0)}
+.rehint b{color:var(--card);font-weight:800;font-size:.92rem}
+.rehint button{font-family:inherit;font-size:.78rem;letter-spacing:.06em;color:var(--accent);background:var(--card);
+border:none;border-radius:14px;padding:5px 13px;white-space:nowrap;font-weight:700}
 @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
 .ftip.swipe{animation:pulse 2s ease-in-out infinite}
-/* 封面 */
-.solo{justify-content:center;text-align:center;cursor:default;
-background:linear-gradient(165deg,rgba(255,211,77,0.2),rgba(255,255,255,0) 55%),var(--surface)}
-.kicker{font-size:.76rem;letter-spacing:.2em;color:var(--sub);font-weight:700;margin-bottom:18px}
-.hero{font-size:clamp(2.3rem,9.5vw,3.2rem);font-weight:850;letter-spacing:.01em;line-height:1.15;
-background:linear-gradient(95deg,#ffd34d,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
-.who{font-size:clamp(.95rem,3.7vw,1.08rem);color:var(--ink);margin:14px 0 6px;line-height:1.55;font-weight:600}
-.intro{font-size:clamp(.86rem,3.2vw,.95rem);color:var(--sub);margin:12px 0 4px;line-height:1.7;text-align:left}
-.solo .ftip{margin-top:26px}
+/* 标记动效：墨红星芒（✦✧ 排印饰符，只用主色，不破坏色板）。
+   注：不再给按钮本身做 scale 动画——Safari 会把按钮红边框在缩放时留下错位残影(ghost) */
+.spark{position:fixed;z-index:90;pointer-events:none;color:var(--accent);line-height:1;
+animation:sparkfly .62s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes sparkfly{0%{transform:translate(-50%,-50%) scale(.3) rotate(0deg);opacity:1}
+100%{transform:translate(-50%,-50%) translate(var(--dx),var(--dy)) scale(var(--sc)) rotate(var(--rt));opacity:0}}
+/* 印记：盖 AI 生成的真·汉印朱文 PNG（阅/趣/思,已抠白底),标记在章就在。位置A=卡右上角,位置B=按钮文字右边。
+   背景图由 JS 按反应设到 background-image;正片叠底让朱印印进纸里(深色模式改 normal 防变暗看不见) */
+.sealmark,.rxseal{display:none;background-repeat:no-repeat;background-position:center;background-size:contain;
+pointer-events:none;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+/* 右上角大章：印进纸里、半透(右上角更轻) */
+.sealmark{mix-blend-mode:multiply;opacity:.66;
+position:absolute;top:16px;right:16px;width:72px;height:72px;z-index:2;--rot:-7deg;transform:rotate(-7deg)}
+html[data-theme=dark] .sealmark{mix-blend-mode:normal;opacity:.8}
+/* 按钮内小章：选中时盖在字右边。normal 混合(不用multiply)→白字能压在红底按钮上 */
+.rxseal{flex:none;width:23px;height:23px;margin-left:1px;--rot:-5deg;transform:rotate(-5deg)}
+.sealmark.show{display:block}
+.rx.on .rxseal{display:block}
+.sealmark.in,.rxseal.in{animation:sealin .42s cubic-bezier(.2,1.35,.4,1)}
+@keyframes sealin{0%{transform:rotate(var(--rot)) scale(2.2);opacity:0}55%{transform:rotate(var(--rot)) scale(.92);opacity:1}100%{transform:rotate(var(--rot)) scale(1);opacity:1}}
+/* 封面（海报化） */
+.solo{justify-content:center;text-align:center;cursor:default}
+.kicker{font-size:.76rem;letter-spacing:.32em;color:var(--accent);font-weight:700;margin-bottom:20px}
+.hero{font-size:clamp(2.5rem,10vw,3.6rem);font-weight:800;line-height:1.12;letter-spacing:.05em}
+.rule{width:46px;height:3px;background:var(--accent);margin:18px auto 0}
+.who{font-size:clamp(.96rem,3.8vw,1.1rem);color:var(--sub);margin:15px 0 6px;line-height:1.55;font-style:italic}
+.intro{font-size:clamp(.88rem,3.3vw,.97rem);color:var(--ink);margin:12px 0 0;line-height:1.74;text-align:left}
+.seal{display:inline-block;background:var(--accent);color:var(--card);font-size:.7rem;font-weight:700;
+letter-spacing:.34em;padding:5px 7px 5px 13px;border-radius:2px;margin-top:18px}
+.solo .ftip{margin-top:20px}
 /* 背面 */
-.bhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;margin-bottom:6px}
-.bh{font-size:.86rem;font-weight:700;background:linear-gradient(90deg,#ffd34d,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
-.bback{font-size:.74rem;color:var(--sub);border:1px solid var(--line);border-radius:18px;padding:2px 10px}
-.bmeta{flex:none;font-size:.72rem;color:var(--sub);margin:4px 0 12px;padding-bottom:11px;border-bottom:1px solid var(--line);line-height:1.5}
+.bhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;margin-bottom:5px}
+.bh{font-size:.86rem;font-weight:800;letter-spacing:.06em;color:var(--accent)}
+.bback{font-size:.72rem;letter-spacing:.14em;color:var(--sub);border:1px solid var(--line);border-radius:3px;padding:2px 10px}
+.bmeta{flex:none;font-size:.73rem;color:var(--sub);margin:5px 0 12px;padding-bottom:11px;border-bottom:1px solid var(--line);line-height:1.5}
 .bbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-right:4px;scrollbar-width:none}
 .bbody::-webkit-scrollbar{display:none}
-.scene p{margin:0 0 13px;line-height:1.74;font-size:.95rem;color:#cfd4e0}
-.scene .luo b{color:#82aaff}
-.scene .guest b{color:#ffd34d}
-.scene .aside{color:var(--sub);text-align:center;font-size:.82rem;letter-spacing:.08em}
-.scene mark.hl,.scene .hl{background:rgba(255,211,77,0.22);color:#fff;font-weight:700;padding:1px 4px;border-radius:4px;
+.scene p{margin:0 0 13px;line-height:1.74;font-size:.97rem}
+.scene .luo b{color:var(--luo)}
+.scene .guest b{color:var(--accent)}
+.scene .aside{color:var(--sub);text-align:center;font-size:.84rem;letter-spacing:.08em}
+.scene mark.hl,.scene .hl{background:var(--accent-soft);color:inherit;font-weight:700;padding:1px 3px;border-radius:2px;
 -webkit-box-decoration-break:clone;box-decoration-break:clone}
 </style>
 </head><body>
-<div class="glow a"></div><div class="glow b"></div>
 <div class="prog" id="prog"></div>
-<div class="topbar"><a class="hback" href="../../../" title="回首页">←</a><div class="filterbar"><button class="fb on" data-theme="all">全部</button><button class="fb" data-theme="AI">AI</button><button class="fb" data-theme="内容">内容</button><button class="fb" data-theme="商业">商业</button><button class="fb" data-theme="心态">心态</button><button class="fb" data-theme="元认知">元认知</button></div><span class="counter" id="counter">封面</span></div>
+<div class="topbar"><a class="hback" href="../../../" title="回首页">←</a><button class="tbtn" id="tbtn" title="深色/浅色">◐</button><div class="filterbar"><button class="fb on" data-theme="all">全部</button><button class="fb" data-theme="AI">AI</button><button class="fb" data-theme="内容">内容</button><button class="fb" data-theme="商业">商业</button><button class="fb" data-theme="心态">心态</button><button class="fb" data-theme="元认知">元认知</button></div><span class="counter" id="counter">封面</span></div>
 <div class="feed" id="feed">
-<div class="slide" data-kind="cover"><div class="card" style="cursor:default"><div class="flip"><div class="face front solo"><div class="kicker">罗永浩《十字路口》· 观点速刷</div><h1 class="hero">仁科</h1><p class="who">一个相信一切都“长出来”的偶然主义者</p><p class="intro">本名许昌锄，1986 年生，广东海丰人，五条人乐队主唱、手风琴手、词曲作者，也写小说。把「贫穷、土、恶俗」炼成一套美学、又把「偶然」当信仰的人——别人靠「设计」一个风格出道，他坚持风格必须「长出来」，哪怕从一坨牛粪上长出来，也比「插上去」的可贵。</p><div class="ftip swipe">顶上选主题 · 左右滑动翻卡 →</div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="1" data-theme="AI"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.01</span><span class="byline">仁科</span><span class="chip">AI与创造力</span></div><h2 class="title">AI 作曲一定百分百超过人类——复杂只是还没被算力破译的东西</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“百分之百。归根结底还是算力和算法的问题，给予足够长的时间，算力增大一百倍一千倍一万倍，所有我们人类理解的复杂都能被破译。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>别把「人类创造力」供成 AI 的禁区——你以为不可还原的复杂，多半只是算力还没追上，趁早想清楚你的不可替代在哪。</p></div><div class="reacts" data-cardid="renke:1"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[04:16:00]｜《对话稿》二十八、新专辑《地球恋曲》与 AI</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你们新专辑怎么样了？</p>
+<div class="slide" data-kind="cover"><div class="card" style="cursor:default"><div class="flip"><div class="face front solo"><div class="kicker">罗永浩《十字路口》· 观点速刷</div><h1 class="hero">仁科</h1><div class="rule"></div><p class="who">一个相信一切都“长出来”的偶然主义者</p><p class="intro">本名许昌锄，1986 年生，广东海丰人，五条人乐队主唱、手风琴手、词曲作者，也写小说。把「贫穷、土、恶俗」炼成一套美学、又把「偶然」当信仰的人——别人靠「设计」一个风格出道，他坚持风格必须「长出来」，哪怕从一坨牛粪上长出来，也比「插上去」的可贵。</p><div><span class="seal">十字路口</span></div><div class="ftip swipe">顶上选主题 · 左右滑动翻卡 →</div></div></div></div></div>
+<div class="slide" data-kind="card" data-no="1" data-theme="AI"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.01</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">AI与创造力</span><div class="blk"><div class="lab">观点</div><h2 class="title">AI 作曲一定百分百超过人类——复杂只是还没被算力破译的东西</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“百分之百。归根结底还是算力和算法的问题，给予足够长的时间，算力增大一百倍一千倍一万倍，所有我们人类理解的复杂都能被破译。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>别把「人类创造力」供成 AI 的禁区——你以为不可还原的复杂，多半只是算力还没追上，趁早想清楚你的不可替代在哪。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:1"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[04:16:00]｜《对话稿》二十八、新专辑《地球恋曲》与 AI</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你们新专辑怎么样了？</p>
 <p class="guest"><b>仁科</b>：很顺利完成了，制作全部完成，7 月 9 号上市。这是一个 X 事件——因为 7 月 9 号是我生日。请允许我自恋地认为这是我的生日礼物，整个地球都在欢庆这一天。而且专辑名就叫《地球恋曲》，里面收录了你很喜欢的那首《一模一样》——什么都没变。</p>
 <p class="luo"><b>罗永浩</b>：你们那个 AI 做的 MV，好像已经不是土耳美学那个方向了。</p>
 <p class="guest"><b>仁科</b>：那是导演的主意。但我是从核心上聊 AI 的——我们是从这个&quot;长出来&quot;的，不是策划出来；不是我找了 AI，是 AI 找了我。我怎么可能找 AI，AI 又红不过我。</p>
 <p class="luo"><b>罗永浩</b>：你相信 AI 作曲有一天会超过人类最优秀的音乐家吗？</p>
 <p class="guest"><b>仁科</b>：<mark class="hl">百分之百。归根结底还是算力和算法的问题，给予足够长的时间，算力增大一百倍一千倍一万倍，所有我们人类理解的复杂都能被破译。</mark></p>
 <p class="luo"><b>罗永浩</b>：文艺界、音乐界很少有像你这样想的。其实我跟你一样，相信它一定会超越人类理解的所有最复杂的东西。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="2" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.02</span><span class="byline">仁科</span><span class="chip">创作方法论</span></div><h2 class="title">迪伦精神：不策划、不架构，让作品自己长出来，全凭感觉</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“我总结了一个东西叫&quot;迪伦精神&quot;，两层意思：一是表演上——这首歌原曲我这么写，但现场我想怎么唱怎么唱，旋律都改，故意改一点点（肯定在调里）；二是创作上——我不去策划、不去架构，让自己舒服、让它&quot;长出来&quot;，完全凭感觉。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>别先搭骨架再填血肉——给自己一个能即兴改动的余地，让东西边做边长，比照着蓝图执行更鲜活。</p></div><div class="reacts" data-cardid="renke:2"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:08:00]｜《对话稿》十七、狄伦精神：现场即兴 vs 还原经典</div><div class="bbody scene"><p class="guest"><b>仁科</b>：我听了非常多鲍勃·迪伦，包括同一首歌不同版本的现场、录音录了 14 遍我也都听。<mark class="hl">我总结了一个东西叫&quot;迪伦精神&quot;，两层意思：一是表演上——这首歌原曲我这么写，但现场我想怎么唱怎么唱，旋律都改，故意改一点点（肯定在调里）；二是创作上——我不去策划、不去架构，让自己舒服、让它&quot;长出来&quot;，完全凭感觉。</mark></p>
+<div class="slide" data-kind="card" data-no="2" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.02</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">创作方法论</span><div class="blk"><div class="lab">观点</div><h2 class="title">迪伦精神：不策划、不架构，让作品自己长出来，全凭感觉</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“我总结了一个东西叫&quot;迪伦精神&quot;，两层意思：一是表演上——这首歌原曲我这么写，但现场我想怎么唱怎么唱，旋律都改，故意改一点点（肯定在调里）；二是创作上——我不去策划、不去架构，让自己舒服、让它&quot;长出来&quot;，完全凭感觉。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>别先搭骨架再填血肉——给自己一个能即兴改动的余地，让东西边做边长，比照着蓝图执行更鲜活。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:2"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[02:08:00]｜《对话稿》十七、狄伦精神：现场即兴 vs 还原经典</div><div class="bbody scene"><p class="guest"><b>仁科</b>：我听了非常多鲍勃·迪伦，包括同一首歌不同版本的现场、录音录了 14 遍我也都听。<mark class="hl">我总结了一个东西叫&quot;迪伦精神&quot;，两层意思：一是表演上——这首歌原曲我这么写，但现场我想怎么唱怎么唱，旋律都改，故意改一点点（肯定在调里）；二是创作上——我不去策划、不去架构，让自己舒服、让它&quot;长出来&quot;，完全凭感觉。</mark></p>
 <p class="luo"><b>罗永浩</b>：如果有一些歌红了成了经典，粉丝来看演唱会，他们期待的是&quot;还原唱片那个版本&quot;。这时候艺术家有两种：一种基本原样唱满足他们，一种觉得不想重复自己，每次把老歌全部重排。你是哪一种？</p>
 <p class="guest"><b>仁科</b>：按迪伦精神是后面那种，但我没太彻底——毕竟我们乐队两个主唱、两个老板，意见经常不一样。最近阿茂都跟我说不能再这样搞了，因为我们现在音乐节老是压轴，大家有期待。所以我基本改了策略，把歌好好唱。</p>
 <p class="luo"><b>罗永浩</b>：我是觉得，如果是专场或大型活动，更好的选择是满足他们——你卖门票，人家提前六个月订三万人的体育场、带上家人朋友赶过去，要的就是找回那个东西……但如果他抽风把经典演成全新的，我可能听着也好，但这不是我要得到的。</p>
 <p class="guest"><b>仁科</b>：但我从来没从观众层面去想这个问题，因为我不是自己的观众。我说我的感受，没办法替大众说话。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="3" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.03</span><span class="byline">仁科</span><span class="chip">创作立场</span></div><h2 class="title">你不是自己的观众：只能说你的感受，别替大众代言</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“但我从来没从观众层面去想这个问题，因为我不是自己的观众。我说我的感受，没办法替大众说话。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>停止脑补「大家会怎么想」——你猜不准大众，你唯一握得住的素材是你自己的真实感受，先把它说准。</p></div><div class="reacts" data-cardid="renke:3"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[02:08:00]（小节起始时间码；本话题节紧随其后）｜《对话稿》十七、狄伦精神：现场即兴 vs 还原经典</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：如果有一些歌红了成了经典，粉丝来看演唱会，他们期待的是&quot;还原唱片那个版本&quot;。这时候艺术家有两种：一种基本原样唱满足他们，一种觉得不想重复自己，每次把老歌全部重排。你是哪一种？</p>
+<div class="slide" data-kind="card" data-no="3" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.03</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">创作立场</span><div class="blk"><div class="lab">观点</div><h2 class="title">你不是自己的观众：只能说你的感受，别替大众代言</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“但我从来没从观众层面去想这个问题，因为我不是自己的观众。我说我的感受，没办法替大众说话。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>停止脑补「大家会怎么想」——你猜不准大众，你唯一握得住的素材是你自己的真实感受，先把它说准。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:3"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[02:08:00]（小节起始时间码；本话题节紧随其后）｜《对话稿》十七、狄伦精神：现场即兴 vs 还原经典</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：如果有一些歌红了成了经典，粉丝来看演唱会，他们期待的是&quot;还原唱片那个版本&quot;。这时候艺术家有两种：一种基本原样唱满足他们，一种觉得不想重复自己，每次把老歌全部重排。你是哪一种？</p>
 <p class="guest"><b>仁科</b>：按迪伦精神是后面那种，但我没太彻底——毕竟我们乐队两个主唱、两个老板，意见经常不一样。最近阿茂都跟我说不能再这样搞了，因为我们现在音乐节老是压轴，大家有期待。所以我基本改了策略，把歌好好唱。</p>
 <p class="luo"><b>罗永浩</b>：我是觉得，如果是专场或大型活动，更好的选择是满足他们——你卖门票，人家提前六个月订三万人的体育场、带上家人朋友赶过去，要的就是找回那个东西。你看滚石今天唱 60 年代的编曲基本不变，我每次听到都特别感激，这钱多少都值。但如果他抽风把经典演成全新的，我可能听着也好，但这不是我要得到的。</p>
 <p class="guest"><b>仁科</b>：<mark class="hl">但我从来没从观众层面去想这个问题，因为我不是自己的观众。我说我的感受，没办法替大众说话。</mark>但我看你们大型演唱会的录像，你基本还是满足了他们的——还是有良心的。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="4" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.04</span><span class="byline">仁科</span><span class="chip">创作认知</span></div><h2 class="title">想做流行却「流行未遂」：瞧不上的东西，真要做好门槛也极高</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“我想要写流行歌，但可能是&quot;流行未遂&quot;。发现瞧不上的东西真要做好，门槛也很高。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>「看不上」不等于「做得到」——你随手鄙视的通俗活儿，自有一套你没掌握的高门槛，先放下傲慢去试一把。</p></div><div class="reacts" data-cardid="renke:4"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">《对话稿》想写流行歌——“流行未遂”</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我担心过你“人红歌不红”。你们挺拿音乐当回事，如果最后人红了、音乐不红，挺尴尬。</p>
+<div class="slide" data-kind="card" data-no="4" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.04</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">创作认知</span><div class="blk"><div class="lab">观点</div><h2 class="title">想做流行却「流行未遂」：瞧不上的东西，真要做好门槛也极高</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“我想要写流行歌，但可能是&quot;流行未遂&quot;。发现瞧不上的东西真要做好，门槛也很高。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>「看不上」不等于「做得到」——你随手鄙视的通俗活儿，自有一套你没掌握的高门槛，先放下傲慢去试一把。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:4"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">《对话稿》想写流行歌——“流行未遂”</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我担心过你“人红歌不红”。你们挺拿音乐当回事，如果最后人红了、音乐不红，挺尴尬。</p>
 <p class="guest"><b>仁科</b>：（现场播放一首新写的、有强烈年代感的流行歌试听）<mark class="hl">我想要写流行歌，但可能是“流行未遂”。发现瞧不上的东西真要做好，门槛也很高。</mark></p>
 <p class="luo"><b>罗永浩</b>：年代感不是坏事，你身上一直有这个年代感的东西。我觉得你流行乐绝对值得出一张，叫“回馈家乡父老”，让你歌唱的群体去听——如果有一天广场舞大妈在用，就算彻底成了。咱俩一起凤凰传奇吧，他们现场五万人大合唱，旋律洗脑有魔力。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="5" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.05</span><span class="byline">仁科</span><span class="chip">创作价值观</span></div><h2 class="title">「长出来」比「插上去」可贵：歪瓜裂枣也胜过外加的设计</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“哪怕从一坨牛粪上长出来，它也是长出来的，更可贵——歪瓜裂枣也是长出来。就像你说王朔那个《动物凶猛》，他随意发出去，却造就了姜文一部很惊人的电影《阳光灿烂的日子》……你不知道哪个是更好的结果。它的命运就不是长成一本小说巨著，而是成为一部电影。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>别死磕你预设的「最佳形态」——东西自然长成的样子，可能比你硬加设计的更值钱，放手让它走它的命。</p></div><div class="reacts" data-cardid="renke:5"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[01:53:00]｜《对话稿》十六、塑料/土耳美学：长出来的，不是插上去的</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你们后来那套土耳美学——破拖鞋、塑料袋、恶俗发廊、郭富城发型——是有意识地这么做的，还是觉得好玩就弄上去了？</p>
+<div class="slide" data-kind="card" data-no="5" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.05</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">创作价值观</span><div class="blk"><div class="lab">观点</div><h2 class="title">「长出来」比「插上去」可贵：歪瓜裂枣也胜过外加的设计</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“哪怕从一坨牛粪上长出来，它也是长出来的，更可贵——歪瓜裂枣也是长出来。就像你说王朔那个《动物凶猛》，他随意发出去，却造就了姜文一部很惊人的电影《阳光灿烂的日子》……你不知道哪个是更好的结果。它的命运就不是长成一本小说巨著，而是成为一部电影。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>别死磕你预设的「最佳形态」——东西自然长成的样子，可能比你硬加设计的更值钱，放手让它走它的命。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:5"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[01:53:00]｜《对话稿》十六、塑料/土耳美学：长出来的，不是插上去的</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你们后来那套土耳美学——破拖鞋、塑料袋、恶俗发廊、郭富城发型——是有意识地这么做的，还是觉得好玩就弄上去了？</p>
 <p class="guest"><b>仁科</b>：都是自然做的，绝对没有市场定位。我住城中村，走来走去很多塑料水桶、各种颜色挺好看；塑料袋无处不在，打包粥、打包饭、打包可乐，会产生某种感情。而且确实有一个梦幻丽莎发廊——其实就是蒙娜丽莎加点没文化、比较土的想象，想取个洋气名字。</p>
 <p class="luo"><b>罗永浩</b>：你把它系统性地整合到唱片、视觉符号、周边T恤里，就突然成了一个小的美学体系，让我产生一种荒谬的、挺喜欢这套东西的感觉。</p>
 <p class="guest"><b>仁科</b>：美学很多是后边总结出来的，它产生的时候是自然而然的。你看希腊那些大柱子，当年很多是有颜色的，最后变成雪白，是几百年被风吹日晒掉光的——本来是事物不好的状态，但看得多了，大家感觉到另一种美感。所以我从来不刻意。</p>
 <p class="luo"><b>罗永浩</b>：长出来跟插上去，肉眼可见。</p>
 <p class="guest"><b>仁科</b>：对。<mark class="hl">哪怕从一坨牛粪上长出来，它也是长出来的，更可贵——歪瓜裂枣也是长出来。就像你说王朔那个《动物凶猛》，他随意发出去，却造就了姜文一部很惊人的电影《阳光灿烂的日子》</mark>……你不知道哪个是更好的结果。<mark class="hl">它的命运就不是长成一本小说巨著，而是成为一部电影。</mark></p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="6" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.06</span><span class="byline">仁科</span><span class="chip">美学/审美</span></div><h2 class="title">美学是事后总结、源于缺陷：希腊白柱本有颜色，掉光了才成了美</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“美学很多是后边总结出来的，它产生的时候是自然而然的。你看希腊那些大柱子，当年很多是有颜色的，最后变成雪白，是几百年被风吹日晒掉光的——本来是事物&quot;不好的状态&quot;，但看得多了，大家感觉到另一种美感。所以我从来不刻意。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>别强行设计「美感」——很多美是缺陷被时间磨出来、事后才被命名的，你现在的「不好的状态」可能正是日后的风格。</p></div><div class="reacts" data-cardid="renke:6"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[01:53:00]｜《对话稿》十六、塑料/土耳美学：长出来的，不是插上去的</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你们后来那套&quot;土耳美学&quot;——破拖鞋、塑料袋、恶俗发廊、郭富城发型——是有意识地这么做的，还是觉得好玩就弄上去了？</p>
+<div class="slide" data-kind="card" data-no="6" data-theme="内容"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.06</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">美学/审美</span><div class="blk"><div class="lab">观点</div><h2 class="title">美学是事后总结、源于缺陷：希腊白柱本有颜色，掉光了才成了美</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“美学很多是后边总结出来的，它产生的时候是自然而然的。你看希腊那些大柱子，当年很多是有颜色的，最后变成雪白，是几百年被风吹日晒掉光的——本来是事物&quot;不好的状态&quot;，但看得多了，大家感觉到另一种美感。所以我从来不刻意。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>别强行设计「美感」——很多美是缺陷被时间磨出来、事后才被命名的，你现在的「不好的状态」可能正是日后的风格。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:6"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[01:53:00]｜《对话稿》十六、塑料/土耳美学：长出来的，不是插上去的</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你们后来那套&quot;土耳美学&quot;——破拖鞋、塑料袋、恶俗发廊、郭富城发型——是有意识地这么做的，还是觉得好玩就弄上去了？</p>
 <p class="guest"><b>仁科</b>：都是自然做的，绝对没有市场定位。我接触到的空气里就是塑料的——我住城中村，走来走去很多塑料水桶、各种颜色挺好看；塑料袋无处不在，打包粥、打包饭、打包可乐，会产生某种感情……还有一个&quot;梦幻丽莎发廊&quot;——其实就是&quot;蒙娜丽莎&quot;加点没文化、比较土的想象，想取个洋气名字。</p>
 <p class="luo"><b>罗永浩</b>：这些破拖鞋、破塑料袋、恶俗发廊，是我百分之百经历过的，记忆里就是&quot;土、恶俗&quot;，伴随着贫穷。但你把它系统性地整合到唱片、视觉符号、周边 T 恤里，就突然成了一个小的美学体系，让我产生了一种荒谬的、挺喜欢这套东西的感觉。</p>
 <p class="guest"><b>仁科</b>：<mark class="hl">美学很多是后边总结出来的，它产生的时候是自然而然的。你看希腊那些大柱子，当年很多是有颜色的，最后变成雪白，是几百年被风吹日晒掉光的——本来是事物&quot;不好的状态&quot;，但看得多了，大家感觉到另一种美感。所以我从来不刻意。</mark>比如我们找平面设计师，他说&quot;好看是最不重要的，我们怎么做都能好看，关键是你们先想干什么&quot;。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="7" data-theme="商业"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.07</span><span class="byline">仁科</span><span class="chip">金钱/态度</span></div><h2 class="title">对资本无差别剥削：能剥削就都剥削，本来不想去，给太多了</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“赚钱。我对资本主义无差别的剥削——这些综艺节目我也一样，哪个都不歧视，能剥削就都剥削一下。本来不想去，但给的太多了。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>别用清高把钱推门外——把「上不上得了台面」换算成「给的够不够多」，是一种比道德化更清醒的交易立场。</p></div><div class="reacts" data-cardid="renke:7"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:14:00]｜《对话稿》二十三、不敢听自己说话、想写流行歌</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你某次采访说，你不敢听自己说话的声音，怕听起来像傻子。是真实想法吗？</p>
+<div class="slide" data-kind="card" data-no="7" data-theme="商业"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.07</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">金钱/态度</span><div class="blk"><div class="lab">观点</div><h2 class="title">对资本无差别剥削：能剥削就都剥削，本来不想去，给太多了</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“赚钱。我对资本主义无差别的剥削——这些综艺节目我也一样，哪个都不歧视，能剥削就都剥削一下。本来不想去，但给的太多了。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>别用清高把钱推门外——把「上不上得了台面」换算成「给的够不够多」，是一种比道德化更清醒的交易立场。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:7"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[03:14:00]｜《对话稿》二十三、不敢听自己说话、想写流行歌</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你某次采访说，你不敢听自己说话的声音，怕听起来像傻子。是真实想法吗？</p>
 <p class="guest"><b>仁科</b>：是。我一开始用录音机录音时，听自己的声音就不习惯；现在在综艺、节目上看也依然不习惯，怕自己像个傻子，所以很少看。我刷小红书多一点，刷到自己的视频会把声音关掉，只看底下文字。</p>
 <p class="luo"><b>罗永浩</b>：那你为什么去录那些综艺，体验生活、好奇还是赚钱？</p>
 <p class="guest"><b>仁科</b>：<mark class="hl">赚钱。我对资本主义无差别的剥削——这些综艺节目我也一样，哪个都不歧视，能剥削就都剥削一下。本来不想去，但给的太多了。</mark></p>
 <p class="luo"><b>罗永浩</b>：我担心过你&quot;人红歌不红&quot;。你们还是挺拿音乐当回事的，如果最后人红了、音乐不红，挺尴尬；或者综艺氛围一烘托突然红一下，这事就过去了。这两个结果都是我不喜欢看到的。结果后边发现千人万人场子都能做满，我就觉得这事里里外外都成了，特别高兴。</p>
 <p class="guest"><b>仁科</b>：（现场播放一首新写的、有强烈年代感的流行歌试听）我想要写流行歌，但可能是&quot;流行未遂&quot;。发现瞧不上的东西真要做好，门槛也很高。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="8" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.08</span><span class="byline">仁科</span><span class="chip">处世/反侦察</span></div><h2 class="title">现在的高手不该酷，该没有存在感——越普通越好，直接隐入大众</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“你看阿兰·德龙演《独行杀手》很酷，但现在的杀手应该是非常正常、没有存在感的，人群中一扫就发现一个黑口罩，完了。所以我越普通越好，直接&quot;隐入大众&quot;。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>真正的低调不是装备酷，而是抹掉一切识别特征——你越想用「酷」来藏，越显眼；要藏就藏到平庸里去。</p></div><div class="reacts" data-cardid="renke:8"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[03:01:00]｜《对话稿》二十二、爆红之后：阿那亚被围堵、口罩帽子与&quot;杀手理论&quot;（对话稿第372–380行，金句在第380行）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：节目播出后你们完全走进公众视野。你是通过哪些事意识到自己成了大众明星？</p>
+<div class="slide" data-kind="card" data-no="8" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.08</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">处世/反侦察</span><div class="blk"><div class="lab">观点</div><h2 class="title">现在的高手不该酷，该没有存在感——越普通越好，直接隐入大众</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“你看阿兰·德龙演《独行杀手》很酷，但现在的杀手应该是非常正常、没有存在感的，人群中一扫就发现一个黑口罩，完了。所以我越普通越好，直接&quot;隐入大众&quot;。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>真正的低调不是装备酷，而是抹掉一切识别特征——你越想用「酷」来藏，越显眼；要藏就藏到平庸里去。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:8"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[03:01:00]｜《对话稿》二十二、爆红之后：阿那亚被围堵、口罩帽子与&quot;杀手理论&quot;（对话稿第372–380行，金句在第380行）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：节目播出后你们完全走进公众视野。你是通过哪些事意识到自己成了大众明星？</p>
 <p class="guest"><b>仁科</b>：那次阿那亚演出，海边几千人坐满。演完有个 after party，张晓舟叫我过去打碟……结果到海滩上，我被四五十个人追着，差点被粉丝撕裂，差点往海的深处游过去，躲到海边装置后面。最后刘惜君的经纪人把我躲到集装箱里，引开人群再带走。那一刻我就知道——歌红了。</p>
 <p class="luo"><b>罗永浩</b>：你们这些娇滴滴的男明星，差点被一群疯狂女粉丝撕裂。</p>
 <p class="guest"><b>仁科</b>：想起来还有点后怕。后面我就开始戴帽子、口罩——光戴墨镜不够，因为我被公众熟知的形象就是戴墨镜的。我尽量戴普通的蓝色口罩，不戴明星那种黑口罩。这跟我的&quot;杀手理论&quot;很像：<mark class="hl">你看阿兰·德龙演《独行杀手》很酷，但现在的杀手应该是非常正常、没有存在感的，人群中一扫就发现一个黑口罩，完了。所以我越普通越好，直接&quot;隐入大众&quot;。</mark></p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="9" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.09</span><span class="byline">仁科</span><span class="chip">心态切换法</span></div><h2 class="title">旅行的心情：同一条街，换成游客或领导视察，体验全变</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“我在北京路看到那些白人旅行团在逛，我就想：他逛的跟我是同一条街，为什么他是旅行、我就不是？为什么人家那么愉快？我也愉快——我就把这叫“旅行的心情”。所以我后来在石牌东那条路，就经常以旅行的心情去走；甚至特意走一些平时没走过的路，换成游客的心态去看，或者换成“领导视察”的心情，到那儿就觉得“这个搞得不太好”。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>处境改不了就改框架——把通勤的老路当成第一次来的游客或来视察的领导走一遍，同一条街能刷出全新的体验。</p></div><div class="reacts" data-cardid="renke:9"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">[01:00:00]｜《对话稿》十一、旅行的心情与“时光列车”（对话稿第204—220行；金句在第208行）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我看你的书和访谈，感觉你到哪儿都能比较放松，包括贫穷困难的时候，也能活出一种旅游式的心态。这是与生俱来的能力，还是后来调整出来的？</p>
+<div class="slide" data-kind="card" data-no="9" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.09</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">心态切换法</span><div class="blk"><div class="lab">观点</div><h2 class="title">旅行的心情：同一条街，换成游客或领导视察，体验全变</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“我在北京路看到那些白人旅行团在逛，我就想：他逛的跟我是同一条街，为什么他是旅行、我就不是？为什么人家那么愉快？我也愉快——我就把这叫“旅行的心情”。所以我后来在石牌东那条路，就经常以旅行的心情去走；甚至特意走一些平时没走过的路，换成游客的心态去看，或者换成“领导视察”的心情，到那儿就觉得“这个搞得不太好”。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>处境改不了就改框架——把通勤的老路当成第一次来的游客或来视察的领导走一遍，同一条街能刷出全新的体验。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:9"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">[01:00:00]｜《对话稿》十一、旅行的心情与“时光列车”（对话稿第204—220行；金句在第208行）</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我看你的书和访谈，感觉你到哪儿都能比较放松，包括贫穷困难的时候，也能活出一种旅游式的心态。这是与生俱来的能力，还是后来调整出来的？</p>
 <p class="guest"><b>仁科</b>：这也是我最早在广州的时候——阿茂他们都去旅行了，我没钱只能待这里。<mark class="hl">我在北京路看到那些白人旅行团在逛，我就想：他逛的跟我是同一条街，为什么他是旅行、我就不是？为什么人家那么愉快？我也愉快——我就把这叫“旅行的心情”。所以我后来在石牌东那条路，就经常以旅行的心情去走；甚至特意走一些平时没走过的路，换成游客的心态去看，或者换成“领导视察”的心情，到那儿就觉得“这个搞得不太好”。</mark></p>
 <p class="luo"><b>罗永浩</b>：你的问题其实你已经回答了。</p>
 <p class="guest"><b>仁科</b>：我再说一个：时光列车。有些人会聊“如果你能回到那个时间，你会怎么样”。我在想——比如一个人三十岁想回到十七岁，没毛病；但如果你五十多岁想回到三十九岁，是不可能的。但我可能：我现在三十九，假设我已经八十多了，想回到三十九怎么办？我先回来——此刻我已经回来，正在跟你聊天。</p>
 <p class="luo"><b>罗永浩</b>：听起来像是一个思维游戏。</p>
 <p class="guest"><b>仁科</b>：对。我经常这样想，逛街的时候经常想，很有意思、很愉快。所以我那时候待在那里这样想，我就帅了。</p>
 <p class="luo"><b>罗永浩</b>：感觉你应该学物理去。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="10" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.10</span><span class="byline">仁科</span><span class="chip">审美筛选</span></div><h2 class="title">失败者美学：生平悲惨的曲子就练，生活富裕的就跳过</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“我买古典吉他的曲谱，每首曲子前面有作者介绍，生平很悲惨的我就要练一下，生活很富裕的我就跳过——有一种&quot;失败者美学&quot;。你看海明威的采访，人家问艺术家早年要什么，他说&quot;一个悲惨的童年&quot;，可能随口说，但有他道理。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>把模糊的审美偏好外化成一条可执行的筛选规则，挑学习对象时也能用——你信什么是养分，就让它当你的过滤器。</p></div><div class="reacts" data-cardid="renke:10"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">00:25:00｜《对话稿》七、音乐启蒙：崔健、平克·弗洛伊德与&quot;失败者美学&quot;</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你听音乐有个倾向——文艺青年常有的——喜欢那种跟主流社会保持隔阂、很有才但怀才不遇、很凄凉很苦闷的人。</p>
+<div class="slide" data-kind="card" data-no="10" data-theme="心态"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.10</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">审美筛选</span><div class="blk"><div class="lab">观点</div><h2 class="title">失败者美学：生平悲惨的曲子就练，生活富裕的就跳过</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“我买古典吉他的曲谱，每首曲子前面有作者介绍，生平很悲惨的我就要练一下，生活很富裕的我就跳过——有一种&quot;失败者美学&quot;。你看海明威的采访，人家问艺术家早年要什么，他说&quot;一个悲惨的童年&quot;，可能随口说，但有他道理。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>把模糊的审美偏好外化成一条可执行的筛选规则，挑学习对象时也能用——你信什么是养分，就让它当你的过滤器。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:10"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">00:25:00｜《对话稿》七、音乐启蒙：崔健、平克·弗洛伊德与&quot;失败者美学&quot;</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：你听音乐有个倾向——文艺青年常有的——喜欢那种跟主流社会保持隔阂、很有才但怀才不遇、很凄凉很苦闷的人。</p>
 <p class="guest"><b>仁科</b>：一半有这个因素。<mark class="hl">我买古典吉他的曲谱，每首曲子前面有作者介绍，生平很悲惨的我就要练一下，生活很富裕的我就跳过——有一种&quot;失败者美学&quot;。你看海明威的采访，人家问艺术家早年要什么，他说&quot;一个悲惨的童年&quot;，可能随口说，但有他道理。</mark></p>
 <p class="luo"><b>罗永浩</b>：但不要没苦硬吃。</p>
 <p class="guest"><b>仁科</b>：我知道。其实我也不认为我那个是苦——我们 80 年代后了，再怎么穷，三块钱的炒饭可以吃两顿，非常好吃。我最近还跟一个年轻同事说，珍惜现在穷的日子，是很有趣的。</p>
 <p class="luo"><b>罗永浩</b>：那不一定。如果人家就想踏实过日子，穷的苦的有什么好处呢？</p>
 <p class="guest"><b>仁科</b>：你这样说也是。但我并没有说非要这样来艺术创作。</p></div></div></div></div></div>
-<div class="slide" data-kind="card" data-no="11" data-theme="元认知"><div class="card" data-flip="1"><div class="flip"><div class="face front"><div class="top"><span class="no">No.11</span><span class="byline">仁科</span><span class="chip">沟通/元认知</span></div><h2 class="title">故意胡说八道：很多答案是为听者定制的，不是为求真</h2><div class="qwrap"><div class="qlab">仁科 原话</div><blockquote class="quote">“我有时候会故意胡说八道，不是为了胡说八道，是为了说一个对方能接受的答案。但在你面前，我尽量说出那个真的答案。”</blockquote></div><div class="take"><div class="tlab">搬给你</div><p>听别人讲话时先分清：他在给你「能接受的答案」还是「真的答案」——很多漂亮回答只是为你量身定制的。</p></div><div class="reacts" data-cardid="renke:11"><button class="rx" data-r="meh">😐<span>无感</span></button><button class="rx" data-r="interesting">✨<span>有点意思</span></button><button class="rx" data-r="think">🤔<span>值得思考</span></button></div><div class="ftip">👆 点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">🔎 访谈原文 · 罗永浩 × 仁科</span><span class="bback">↩ 翻回</span></div><div class="bmeta">04:33:00｜《对话稿》二十九、收尾：一切都是偶然，感情留到下次</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我问题基本结束了。你有没有自己主动想说的话题？</p>
+<div class="slide" data-kind="card" data-no="11" data-theme="元认知"><div class="card" data-flip="1"><div class="flip"><div class="face front"><span class="sealmark"></span><div class="top"><span class="no">No.11</span><span class="byline">仁科 · 十字路口</span></div><div class="sp"></div><span class="chip">沟通/元认知</span><div class="blk"><div class="lab">观点</div><h2 class="title">故意胡说八道：很多答案是为听者定制的，不是为求真</h2></div><div class="blk"><div class="lab">仁科 原话</div><blockquote class="quote">“我有时候会故意胡说八道，不是为了胡说八道，是为了说一个对方能接受的答案。但在你面前，我尽量说出那个真的答案。”</blockquote></div><div class="blk take"><div class="lab red">搬给你</div><p>听别人讲话时先分清：他在给你「能接受的答案」还是「真的答案」——很多漂亮回答只是为你量身定制的。</p></div><div class="sp"></div><div class="reacts" data-cardid="renke:11"><button class="rx" data-r="meh"><span>无感</span><i class="rxseal"></i></button><button class="rx" data-r="interesting"><span>有点意思</span><i class="rxseal"></i></button><button class="rx" data-r="think"><span>值得思考</span><i class="rxseal"></i></button></div><div class="ftip">点卡片翻面 · 看访谈原文</div></div><div class="face back"><div class="bhead"><span class="bh">访谈原文 · 罗永浩 × 仁科</span><span class="bback">翻回</span></div><div class="bmeta">04:33:00｜《对话稿》二十九、收尾：一切都是偶然，感情留到下次</div><div class="bbody scene"><p class="luo"><b>罗永浩</b>：我问题基本结束了。你有没有自己主动想说的话题？</p>
 <p class="guest"><b>仁科</b>：我说一句。因为你是我很喜欢的一个人，所以我来了——<mark class="hl">我有时候会故意胡说八道，不是为了胡说八道，是为了说一个对方能接受的答案。但在你面前，我尽量说出那个真的答案。</mark>事实上我觉得今天可能说得并不清晰，有些问题我自己可能还没有能力想清楚，以后会更清晰一点，因为我也在思考。</p>
 <p class="luo"><b>罗永浩</b>：今天非常好。因为我们录得足够长、足够丰富，中间有跑题、东拉西扯、欲言又止又莫名其妙停掉，这些可以剪掉。咱们录了六个小时以上，剪三到四个小时基本上很完美。</p>
 <p class="guest"><b>仁科</b>：很多问题是没有答案的，我自己没有答案。我也是想通过跟朋友聊，看有没有答案——如果聊出一个答案也很好，它就像&quot;长出来的一个答案&quot;；如果没有，我就遵循自己现在的感受……</p>
@@ -167,26 +195,35 @@ background:linear-gradient(95deg,#ffd34d,#f59e0b);-webkit-background-clip:text;b
 </div>
 <button class="nav prev" id="prev">❮</button>
 <button class="nav next" id="next">❯</button>
+<div class="rehint" id="rehint"><span>已回到第 <b id="rehint-n"></b> 张</span><button id="rehint-restart">从头读 ↺</button></div>
 <div class="botbar">
-<span class="bt on">🃏<b>速刷</b></span>
-<a class="bt" href="../../shoucang/">⭐<b>收藏</b><i class="badge" id="badge" style="display:none;font-style:normal"></i></a>
+<a class="bt" href="../../../">速刷</a>
+<a class="bt" href="../../shoucang/">★ 收藏</a>
 </div>
 <script>
+var root=document.documentElement;
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t)}
+setTheme(localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+var tb=document.getElementById('tbtn');
+if(tb)tb.onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+
 var feed=document.getElementById('feed');
 var slides=Array.prototype.slice.call(feed.children);
 function load(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}}}
 function save(k,o){localStorage.setItem(k,JSON.stringify(o))}
-var REACT=load('vp-reactions'),SEEN=load('vp-seen');
+var REACT=load('vp-reactions'),SEEN=load('vp-seen'),POS=load('vp-pos');
+var RESUME_AT=POS[location.pathname];   // 进页时先读出"上次读到第几张"(供询问弹窗用)
+var SEAL={meh:'yue',interesting:'qu',think:'si'};   // 反应→印章图文件名(../../_seal/<x>.png)
+function sealurl(r){return 'url(../../_seal/'+SEAL[r]+'.png)'}
 function vis(){return slides.filter(function(s){return s.style.display!=='none'})}
 function idx(){return feed.clientWidth?Math.round(feed.scrollLeft/feed.clientWidth):0}
-function badge(){var n=Object.keys(REACT).length;var b=document.getElementById('badge');
- b.style.display=n?'block':'none';b.textContent=n}
 function update(){var v=vis();if(!v.length)return;var i=Math.max(0,Math.min(idx(),v.length-1));var s=v[i];
  var c=document.getElementById('counter');
  c.textContent=(s.dataset.kind==='cover')?'封面':i+'/'+(v.length-1);
  document.getElementById('prog').style.width=(v.length>1?i/(v.length-1)*100:0)+'%';
  if(s.dataset.kind==='card'){var id=s.querySelector('.reacts').dataset.cardid;
-  if(!SEEN[id]){SEEN[id]=1;save('vp-seen',SEEN)}}}
+  if(!SEEN[id]){SEEN[id]=1;save('vp-seen',SEEN)}
+  POS[location.pathname]=parseInt(s.dataset.no,10);save('vp-pos',POS)}}
 var t;feed.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(update,80)});
 /* 箭头：同步 scrollLeft 瞬切（铁律：不能用 css smooth / scrollTo smooth） */
 function go(d){var v=vis();if(!v.length)return;var i=Math.max(0,Math.min(v.length-1,idx()+d));feed.scrollLeft=v[i].offsetLeft;update()}
@@ -208,24 +245,59 @@ Array.prototype.forEach.call(document.querySelectorAll('.card[data-flip]'),funct
  card.addEventListener('click',function(e){
   if(e.target.closest('.rx')||e.target.closest('a'))return;
   card.classList.toggle('flipped')})});
+/* 标记动效：盖章按压 + 墨红星芒 */
+function burst(btn){var r=btn.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+ for(var i=0;i<6;i++){var s=document.createElement('span');s.className='spark';
+  s.textContent=i%2?'✦':'✧';
+  var a=Math.PI*2*i/6+Math.random()*.9,d=26+Math.random()*26;
+  s.style.left=cx+'px';s.style.top=cy+'px';
+  s.style.fontSize=(0.65+Math.random()*0.5)+'rem';
+  s.style.setProperty('--dx',(Math.cos(a)*d).toFixed(1)+'px');
+  s.style.setProperty('--dy',(Math.sin(a)*d-12).toFixed(1)+'px');
+  s.style.setProperty('--sc',(0.7+Math.random()*0.7).toFixed(2));
+  s.style.setProperty('--rt',(Math.random()*140-70).toFixed(0)+'deg');
+  document.body.appendChild(s);
+  s.addEventListener('animationend',function(){this.remove()})}}
 /* 反应（铁律：pointer 事件全 stopPropagation 防误翻卡） */
 Array.prototype.forEach.call(document.querySelectorAll('.rx'),function(b){
  ['pointerdown','pointermove','pointerup'].forEach(function(ev){
   b.addEventListener(ev,function(e){e.stopPropagation()})});
  b.addEventListener('click',function(e){e.stopPropagation();
   var wrap=b.closest('.reacts'),id=wrap.dataset.cardid,r=b.dataset.r;
-  if(REACT[id]===r){delete REACT[id]}else{REACT[id]=r}
-  save('vp-reactions',REACT);paint(wrap);badge()})});
-function paint(wrap){var id=wrap.dataset.cardid;
+  var setOn=REACT[id]!==r;
+  if(setOn){REACT[id]=r;burst(b)}else{delete REACT[id]}
+  save('vp-reactions',REACT);paint(wrap);
+  if(setOn)stampIn(wrap)})});
+function paint(wrap){var id=wrap.dataset.cardid,r=REACT[id];
  Array.prototype.forEach.call(wrap.querySelectorAll('.rx'),function(x){
-  x.classList.toggle('on',REACT[id]===x.dataset.r)})}
+  var on=r===x.dataset.r;x.classList.toggle('on',on);
+  x.querySelector('.rxseal').style.backgroundImage=on?sealurl(r):'none'});
+ var sm=wrap.closest('.face').querySelector('.sealmark');
+ if(r){sm.style.backgroundImage=sealurl(r);sm.classList.add('show')}
+ else{sm.classList.remove('show','in');sm.style.backgroundImage='none'}}
+function stampIn(wrap){
+ var sm=wrap.closest('.face').querySelector('.sealmark');
+ var rs=wrap.querySelector('.rx.on .rxseal');
+ [sm,rs].forEach(function(el){if(!el)return;el.classList.remove('in');void el.offsetWidth;el.classList.add('in')})}
 Array.prototype.forEach.call(document.querySelectorAll('.reacts'),paint);
-badge();
 /* #c<No.> 深链直达（立即跳一次 + load 后补跳一次，防布局未完成时 scrollLeft 被吞） */
 function jump(){var m=location.hash.match(/^#c(\d+)$/);if(!m)return;
  var tg=slides.filter(function(s){return s.dataset.no===m[1]})[0];
  if(tg&&tg.offsetLeft){feed.scrollLeft=tg.offsetLeft;update()}}
 jump();window.addEventListener('load',jump);window.addEventListener('hashchange',jump);
 update();
+/* 记忆:默认直接续读到上次那张 + 顶部轻提示条(点"从头读"才跳第1张,4.5秒自动消失;深链#c优先) */
+(function(){
+ if(/^#c\d+$/.test(location.hash))return;
+ if(!RESUME_AT||RESUME_AT<2)return;
+ function goNo(no){var t=slides.filter(function(s){return s.dataset.no===String(no)})[0];
+  if(t){feed.scrollLeft=t.offsetLeft;update()}}
+ goNo(RESUME_AT);                                  // 默认续读
+ var h=document.getElementById('rehint');if(!h)return;
+ document.getElementById('rehint-n').textContent=RESUME_AT;
+ h.classList.add('show');
+ var timer=setTimeout(function(){h.classList.remove('show')},4500);
+ document.getElementById('rehint-restart').onclick=function(){clearTimeout(timer);h.classList.remove('show');goNo(1)};
+})();
 </script>
 </body></html>
